@@ -80,7 +80,7 @@ Public Class ДопФорма
         Dim strsql As String = "UPDATE РейсыКлиента SET ПоИнотерр='" & TextBox3.Text & "', ПоТеррРБ='" & TextBox4.Text & "',
 ДатаАкта='" & MaskedTextBox2.Text & "', НомерСМР='" & TextBox10.Text & "', ЗаявкаКлиента='" & TextBox6.Text & "', НомерЗаявки='" & TextBox5.Text & "',
 ДатаЗаявки='" & MaskedTextBox1.Text & "' WHERE НомерРейса=" & Рейс.НомРес & ""
-        Updates(strsql)
+        Updates3(strsql)
         MessageBox.Show("Данные внесены в базу!", Рик)
         If MessageBox.Show("Изменить данные в файле эксель?", Рик, MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
             Рейс.СлРейс = Nothing

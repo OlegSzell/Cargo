@@ -11,8 +11,10 @@ Public Class ВодитДан
 
         Dim strsql As String = "SELECT DISTINCT НомерАвтомобиля FROM РейсыПеревозчика WHERE НазвОрганизации='" & Рейс.ComboBox4.Text & "'"
         Dim strsql1 As String = "SELECT DISTINCT Водитель FROM РейсыПеревозчика WHERE НазвОрганизации='" & Рейс.ComboBox4.Text & "' ORDER BY Водитель"
-        Dim ds As DataTable = Selects(strsql)
-        Dim ds1 As DataTable = Selects(strsql1)
+        'Dim ds As DataTable = Selects3(strsql)
+        'Dim ds1 As DataTable = Selects3(strsql1)
+        Dim ds As DataTable = Selects3(strsql)
+        Dim ds1 As DataTable = Selects3(strsql1)
         Label2.Text = Рейс.ComboBox4.Text
 
         Me.ComboBox1.AutoCompleteCustomSource.Clear()
@@ -49,5 +51,9 @@ Public Class ВодитДан
         ComboBox2.Text = ""
         ComboBox1.Text = ""
         Me.Close()
+    End Sub
+
+    Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
+
     End Sub
 End Class

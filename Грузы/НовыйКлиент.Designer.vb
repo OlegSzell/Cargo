@@ -68,6 +68,7 @@ Partial Class НовыйКлиент
         Me.ComboBox3 = New System.Windows.Forms.ComboBox()
         Me.Label18 = New System.Windows.Forms.Label()
         Me.Button2 = New System.Windows.Forms.Button()
+        Me.ComboBox4 = New System.Windows.Forms.ComboBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
@@ -251,12 +252,13 @@ Partial Class НовыйКлиент
         '
         'ListBox1
         '
+        Me.ListBox1.BackColor = System.Drawing.Color.Khaki
         Me.ListBox1.FormattingEnabled = True
         Me.ListBox1.ItemHeight = 17
-        Me.ListBox1.Location = New System.Drawing.Point(801, 46)
+        Me.ListBox1.Location = New System.Drawing.Point(801, 97)
         Me.ListBox1.Name = "ListBox1"
         Me.ListBox1.ScrollAlwaysVisible = True
-        Me.ListBox1.Size = New System.Drawing.Size(354, 650)
+        Me.ListBox1.Size = New System.Drawing.Size(354, 599)
         Me.ListBox1.TabIndex = 22
         '
         'Label12
@@ -361,7 +363,7 @@ Partial Class НовыйКлиент
         Me.GroupBox1.Controls.Add(Me.RichTextBox1)
         Me.GroupBox1.Location = New System.Drawing.Point(12, 49)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(783, 644)
+        Me.GroupBox1.Size = New System.Drawing.Size(783, 647)
         Me.GroupBox1.TabIndex = 31
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Организация"
@@ -514,11 +516,23 @@ Partial Class НовыйКлиент
         Me.Button2.Text = "Удалить"
         Me.Button2.UseVisualStyleBackColor = False
         '
+        'ComboBox4
+        '
+        Me.ComboBox4.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.ComboBox4.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.ComboBox4.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
+        Me.ComboBox4.FormattingEnabled = True
+        Me.ComboBox4.Location = New System.Drawing.Point(801, 66)
+        Me.ComboBox4.Name = "ComboBox4"
+        Me.ComboBox4.Size = New System.Drawing.Size(351, 25)
+        Me.ComboBox4.TabIndex = 33
+        '
         'НовыйКлиент
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 17.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1165, 704)
+        Me.Controls.Add(Me.ComboBox4)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Label18)
         Me.Controls.Add(Me.ComboBox3)
@@ -594,4 +608,5 @@ Partial Class НовыйКлиент
     Friend WithEvents ComboBox3 As ComboBox
     Friend WithEvents Label18 As Label
     Friend WithEvents Button2 As Button
+    Friend WithEvents ComboBox4 As ComboBox
 End Class

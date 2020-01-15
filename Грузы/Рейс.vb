@@ -1,8 +1,12 @@
 ﻿Option Explicit On
 Imports System.Data.OleDb
-
+Imports System.Threading
+Imports System.IO
 
 Public Class Рейс
+    Dim file26(), file36() As String
+    Dim ПутьПолный As String
+    Dim b As New Thread(AddressOf ЗапускБыстро)
     Dim strsql As String
     Dim ds As DataTable
     Public СлРейс As Integer
@@ -15,82 +19,274 @@ Public Class Рейс
     Dim Пров As Integer
     Dim ПрИзмНазКл As Boolean = False, ПрИзмНазПер As Boolean = False
     Dim ДогПор, ДогПорЭксп, ПорЭксп As String
+    Private Delegate Sub comb38()
+    Private Delegate Sub comb3()
+    Private Delegate Sub comb11()
+    Private Delegate Sub comb1d()
+    Private Delegate Sub comb2d()
+    Private Delegate Sub comb3d()
+    Private Delegate Sub comb4d()
+    Private Delegate Sub comb5d()
+    Private Delegate Sub comb5dd()
+    Public ШтрафКлиент As Boolean = False
+    Public ШтрафПер As Boolean = False
+    Public ЧастичнаяОплатаПеревозчик, ЧастичнаяОплатаКлиент As String
+    Public comdjx1 As String
 
+
+    Public Sub COM4()
+
+        If ComboBox4.InvokeRequired Then
+            Me.Invoke(New comb38(AddressOf COM4))
+        Else
+            Me.ComboBox4.AutoCompleteCustomSource.Clear()
+            Me.ComboBox4.Items.Clear()
+            If dtПеревозчики Is Nothing Then
+                Awai()
+            End If
+            For Each r As DataRow In dtПеревозчики.Rows 'заполняем список перевозчиков
+                Me.ComboBox4.AutoCompleteCustomSource.Add(r.Item(0).ToString())
+                Me.ComboBox4.Items.Add(r(0).ToString)
+            Next
+        End If
+    End Sub
+    Private Async Sub Awai()
+        Await Task.Delay(2000)
+    End Sub
+
+    Private Sub COM3()
+        'Dim strsql1 As String
+        'Dim ds1 As DataTable
+        If ComboBox3.InvokeRequired Then
+            Me.Invoke(New comb3(AddressOf COM3))
+        Else
+            'strsql1 = "SELECT НазваниеОрганизации FROM Клиент ORDER BY НазваниеОрганизации"
+            'ds1 = Selects3(strsql1)
+
+            Me.ComboBox3.AutoCompleteCustomSource.Clear()
+            Me.ComboBox3.Items.Clear()
+            For Each r As DataRow In dtКлиенты.Rows
+                Me.ComboBox3.AutoCompleteCustomSource.Add(r.Item(0).ToString())
+                Me.ComboBox3.Items.Add(r(0).ToString)
+            Next
+        End If
+
+    End Sub
+
+    Private Sub COM11()
+        Dim strsql1 As String
+        Dim ds1 As DataTable
+        If ComboBox11.InvokeRequired Then
+            Me.Invoke(New comb11(AddressOf COM11))
+        Else
+            'strsql1 = "SELECT ТипАвто FROM ТипАвто ORDER BY ТипАвто"
+            'ds1 = Selects3(strsql1)
+
+            Me.ComboBox11.AutoCompleteCustomSource.Clear()
+            Me.ComboBox11.Items.Clear()
+            For Each r As DataRow In dtТипАвтоAll.Rows
+                Me.ComboBox11.AutoCompleteCustomSource.Add(r.Item(1).ToString())
+                Me.ComboBox11.Items.Add(r(1).ToString)
+            Next
+        End If
+
+    End Sub
+    Private Sub COM12()
+
+        Dim d() As String
+        If ComboBox1.InvokeRequired Then
+            Me.Invoke(New comb1d(AddressOf COM12))
+        Else
+            ComboBox1.Items.Clear()
+            d = {Now.Year, Now.Year - 1, Now.Year - 2, Now.Year - 3, Now.Year - 4}
+            ComboBox1.Items.AddRange(d)
+            ComboBox1.Text = Now.Year
+        End If
+
+    End Sub
+    Private Sub COM13()
+
+        Dim d1() As String
+        If ComboBox5.InvokeRequired Or ComboBox6.InvokeRequired Then
+            Me.Invoke(New comb2d(AddressOf COM13))
+        Else
+            ComboBox5.Items.Clear()
+            ComboBox6.Items.Clear()
+            d1 = {"Рубль", "Евро", "Доллар", "Росс.рубль"}
+            ComboBox5.Items.AddRange(d1)
+            ComboBox6.Items.AddRange(d1)
+
+        End If
+
+    End Sub
+    Private Sub COM14()
+
+        Dim d1() As String
+        If ComboBox7.InvokeRequired Or ComboBox8.InvokeRequired Then
+            Me.Invoke(New comb3d(AddressOf COM14))
+        Else
+            ComboBox7.Items.Clear()
+            ComboBox7.Enabled = False
+            ComboBox8.Items.Clear()
+            ComboBox8.Enabled = False
+            d1 = {"$", "€", "RUS", "BYN"}
+            ComboBox8.Items.AddRange(d1)
+            ComboBox7.Items.AddRange(d1)
+
+        End If
+
+    End Sub
+    Private Sub COM15()
+
+        Dim d1() As String
+        If ComboBox12.InvokeRequired Or ComboBox13.InvokeRequired Then
+            Me.Invoke(New comb4d(AddressOf COM15))
+        Else
+            d1 = {"Поручение с экспедицией", "Договор-поручение", "Договор-поручение эксп"}
+            ComboBox12.Items.AddRange(d1)
+            ComboBox13.Items.AddRange(d1)
+
+        End If
+
+    End Sub
+    Private Sub COM16()
+
+        Dim d1() As String
+        If ComboBox9.InvokeRequired Or ComboBox10.InvokeRequired Then
+            Me.Invoke(New comb5d(AddressOf COM16))
+        Else
+            d1 = {"БанкПоДок", "КалПоДок", "БанкПоВыг", "КалПоВыг"}
+            ComboBox10.Items.AddRange(d1)
+            ComboBox9.Items.AddRange(d1)
+            ПерегрЛист1()
+        End If
+
+    End Sub
+
+
+
+    Private Sub ЗапускБыстро()
+
+        Dim y4 As New Thread(AddressOf COM4)
+        y4.IsBackground = True
+        y4.Start()
+
+        Dim x3 As New Thread(AddressOf COM3)
+        x3.IsBackground = True
+        x3.Start()
+
+        Dim x1 As New Thread(AddressOf COM11)
+        x1.IsBackground = True
+        x1.Start()
+
+        Dim x4 As New Thread(AddressOf COM12)
+        x4.IsBackground = True
+        x4.Start()
+
+        Dim x5 As New Thread(AddressOf COM13)
+        x5.IsBackground = True
+        x5.Start()
+
+        Dim x6 As New Thread(AddressOf COM14)
+        x6.IsBackground = True
+        x6.Start()
+
+        Dim x7 As New Thread(AddressOf COM15)
+        x7.IsBackground = True
+        x7.Start()
+
+        Dim x8 As New Thread(AddressOf COM16)
+        x8.IsBackground = True
+        x8.Start()
+
+        'Dim x9 As New Thread(AddressOf dtVyborka)
+        'x9.IsBackground = True
+        'x9.Start()
+
+    End Sub
     Private Sub Рейс_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.MdiParent = MDIParent1
-        conn = New OleDbConnection
-        conn.ConnectionString = ConString
-        Try
-            conn.Open()
-        Catch ex As Exception
-            MessageBox.Show("Не подключен диск U")
-        End Try
-
-        strsql = "SELECT Названиеорганизации FROM ПЕревозчики ORDER BY Названиеорганизации"
-        ds = Selects(strsql)
-
-        Me.ComboBox4.AutoCompleteCustomSource.Clear()
-        Me.ComboBox4.Items.Clear()
-        For Each r As DataRow In ds.Rows
-            Me.ComboBox4.AutoCompleteCustomSource.Add(r.Item(0).ToString())
-            Me.ComboBox4.Items.Add(r(0).ToString)
-        Next
-
-        Dim strsql1 As String = "SELECT НазваниеОрганизации FROM Клиент ORDER BY НазваниеОрганизации"
-        Dim ds1 As DataTable = Selects(strsql1)
-
-        Me.ComboBox3.AutoCompleteCustomSource.Clear()
-        Me.ComboBox3.Items.Clear()
-        For Each r As DataRow In ds1.Rows
-            Me.ComboBox3.AutoCompleteCustomSource.Add(r.Item(0).ToString())
-            Me.ComboBox3.Items.Add(r(0).ToString)
-        Next
-        ComboBox1.Items.Clear()
-        ComboBox5.Items.Clear()
-        ComboBox6.Items.Clear()
-        ComboBox7.Items.Clear()
-        ComboBox7.Enabled = False
-        ComboBox8.Items.Clear()
-        ComboBox8.Enabled = False
-        Dim d() As String = {Now.Year, Now.Year - 1, Now.Year - 2, Now.Year - 3, Now.Year - 4}
-        ComboBox1.Items.AddRange(d)
-        ComboBox1.Text = Now.Year
-
-        Dim d1() As String = {"Рубль", "Евро", "Доллар", "Росс.рубль"}
-        ComboBox5.Items.AddRange(d1)
-        ComboBox6.Items.AddRange(d1)
-
-        Dim d2() As String = {"$", "€", "RUS", "BYN"}
-        ComboBox8.Items.AddRange(d2)
-        ComboBox7.Items.AddRange(d2)
-
-        Dim d3() As String = {"Поручение с экспедицией", "Договор-поручение", "Договор-поручение эксп"}
-        ComboBox12.Items.AddRange(d3)
-        ComboBox13.Items.AddRange(d3)
 
 
-        Dim d4() As String = {"БанкПоДок", "КалПоДок", "БанкПоВыг", "КалПоВыг"}
-        ComboBox10.Items.AddRange(d4)
-        ComboBox9.Items.AddRange(d4)
-
+        b.IsBackground = True
+        b.Start()
 
         TextBox5.Text = Now.ToShortDateString
         MaskedTextBox3.Text = "09:00"
         TextBox6.Text = Now.ToShortDateString
         MaskedTextBox4.Text = "09:00"
-
-        Dim strsql2 As String = "SELECT ТипАвто FROM ТипАвто ORDER BY ТипАвто"
-        Dim ds2 As DataTable = Selects(strsql2)
-        Me.ComboBox11.AutoCompleteCustomSource.Clear()
-        Me.ComboBox11.Items.Clear()
-        For Each r As DataRow In ds2.Rows
-            Me.ComboBox11.AutoCompleteCustomSource.Add(r.Item(0).ToString())
-            Me.ComboBox11.Items.Add(r(0).ToString)
-        Next
-
         MaskedTextBox1.Text = Now.ToShortDateString
+        comdjx1 = ComboBox1.Text
+
+
+        'Me.ComboBox4.AutoCompleteCustomSource.Clear()
+        'Me.ComboBox4.Items.Clear()
+        'For Each r As DataRow In dtПеревозчики.Rows 'заполняем список перевозчиков
+        '    Me.ComboBox4.AutoCompleteCustomSource.Add(r.Item(0).ToString())
+        '    Me.ComboBox4.Items.Add(r(0).ToString)
+        'Next
+
+
+        'Me.ComboBox3.AutoCompleteCustomSource.Clear()
+        'Me.ComboBox3.Items.Clear()
+        'For Each r As DataRow In dtКлиенты.Rows
+        '    Me.ComboBox3.AutoCompleteCustomSource.Add(r.Item(0).ToString())
+        '    Me.ComboBox3.Items.Add(r(0).ToString)
+        'Next
+
+        'Me.ComboBox11.AutoCompleteCustomSource.Clear()
+        'Me.ComboBox11.Items.Clear()
+        'For Each r As DataRow In dtТипАвтоAll.Rows
+        '    Me.ComboBox11.AutoCompleteCustomSource.Add(r.Item(1).ToString())
+        '    Me.ComboBox11.Items.Add(r(1).ToString)
+        'Next
+
+        'Dim d(), d1(), d2(), d3(), d4() As String
+        'ComboBox1.Items.Clear()
+        'd = {Now.Year, Now.Year - 1, Now.Year - 2, Now.Year - 3, Now.Year - 4}
+        'ComboBox1.Items.AddRange(d)
+        'ComboBox1.Text = Now.Year
+
+        'ComboBox5.Items.Clear()
+        'ComboBox6.Items.Clear()
+        'd1 = {"Рубль", "Евро", "Доллар", "Росс.рубль"}
+        'ComboBox5.Items.AddRange(d1)
+        'ComboBox6.Items.AddRange(d1)
+
+        'ComboBox7.Items.Clear()
+        'ComboBox7.Enabled = False
+        'ComboBox8.Items.Clear()
+        'ComboBox8.Enabled = False
+        'd2 = {"$", "€", "RUS", "BYN"}
+        'ComboBox8.Items.AddRange(d1)
+        'ComboBox7.Items.AddRange(d1)
+
+
+        'd3 = {"Поручение с экспедицией", "Договор-поручение", "Договор-поручение эксп"}
+        'ComboBox12.Items.AddRange(d1)
+        'ComboBox13.Items.AddRange(d1)
+
+        'd4 = {"БанкПоДок", "КалПоДок", "БанкПоВыг", "КалПоВыг"}
+        'ComboBox10.Items.AddRange(d1)
+        'ComboBox9.Items.AddRange(d1)
+
+
+
 
     End Sub
+
+
+    'Public Sub dtVyborka()
+
+    '    'If ComboBox9.InvokeRequired Or ComboBox10.InvokeRequired Then
+    '    '    Me.Invoke(New comb5dd(AddressOf dtVyborka))
+    '    'Else
+    '    dtZak = New DataTable()
+    '    dtZak = Selects3(StrSql:="SELECT * FROM РейсыКлиента")
+    '    dtPer = New DataTable()
+    '    dtPer = Selects3(StrSql:="SELECT * FROM РейсыПеревозчика")
+    '    'End If
+    'End Sub
+
     Private Sub ИзменЭксел(ByVal strsql As String, ByVal t As Integer, ByVal n As Integer, ByVal g As Integer)
 
 
@@ -98,7 +294,10 @@ Public Class Рейс
         Dim xlapp As Microsoft.Office.Interop.Excel.Application
         xlapp = New Microsoft.Office.Interop.Excel.Application
 
-        Dim XXX = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=U:\Офис\Рикманс\ДанныеРикманс.accdb; Persist Security Info=False;"
+        'Dim XXX = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=U:\Офис\Рикманс\ДанныеРикманс.accdb; Persist Security Info=False;"
+        'Dim XXX = "Provider='SQLOLEDB';Data Source=45.14.50.13\723\SQLEXPRESS,1433;Network Library=DBMSSOCN;Initial Catalog=Rickmans;User ID=userOleg;Password=Zf6VpP37Ol"
+        Dim XXX = "Provider='SQLOLEDB';Data Source=45.14.50.142\2749\SQLEXPRESS,1433;Network Library=DBMSSOCN;Initial Catalog=Rickmans;User ID=userOleg1;Password=Zf6VpP37Ol"
+
         Dim CON As New ADODB.Connection
         Dim RS As New ADODB.Recordset
 
@@ -130,10 +329,10 @@ Public Class Рейс
     Public Sub ИзменВДействРейсе(ByVal d As String)
         Me.Cursor = Cursors.WaitCursor
         Dim strsql As String = "SELECT * FROM РейсыКлиента WHERE НомерРейса=" & НомРес & ""
-        Dim ds As DataTable = Selects(strsql)
+        Dim ds As DataTable = Selects3(strsql)
 
         Dim strsql1 As String = "SELECT * FROM РейсыПеревозчика WHERE НомерРейса=" & НомРес & ""
-        Dim ds1 As DataTable = Selects(strsql1)
+        Dim ds1 As DataTable = Selects3(strsql1)
 
         Select Case d
             Case "Клиент"
@@ -143,22 +342,27 @@ Public Class Рейс
         End Select
         MessageBox.Show("Данные удачно изменены в файле эксель!", Рик)
         ПерегрЛист1()
+        ПерегрДанныхИзБазы()
 
         Me.Cursor = Cursors.Default
 
     End Sub
-
+    Private Sub ПерегрДанныхИзБазы()
+        dtVyborkaS()
+        dtVyborkaS1()
+        Перевозчики()
+        Клиенты()
+    End Sub
 
     Private Sub ПерегрЛист1()
         ListBox1.Items.Clear()
         Справки(CType(ComboBox1.Text, Integer))
-        ListBox1.Items.AddRange(Files3)
-        ListBox1.Text = Files3.Last
-    End Sub
-    Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
-        ПерегрЛист1()
-    End Sub
+        If Files3.Count > 0 Then
+            ListBox1.Items.AddRange(Files3)
+            ListBox1.Text = Files3.Last
+        End If
 
+    End Sub
     Private Sub ListBox1_DoubleClick(sender As Object, e As EventArgs) Handles ListBox1.DoubleClick
         If ListBox1.SelectedIndex = -1 Then
             MessageBox.Show("Выберите документ для просмотра!", Рик, MessageBoxButtons.OK)
@@ -177,96 +381,218 @@ Public Class Рейс
 
         End If
     End Sub
-    Private Sub Вставка()
-        strsql = ""
-        strsql = "SELECT * FROM РейсыКлиента WHERE НомерРейса=" & НомРес & ""
-        Dim ds1 As DataTable = Selects(strsql)
+    Private Async Function КонтЛицоТел(ByVal ds As DataTable) As Task(Of String)
+        Dim strsql As String = "SELECT [Контактное лицо], Телефон FROM Перевозчики WHERE Названиеорганизации='" & ds.Rows(0).Item(1).ToString & "'"
+        Dim ds1 As DataTable = Selects3(strsql)
+        Await Task.Delay(0)
+        Return Trim(ds1.Rows(0).Item(0).ToString & " " & ds1.Rows(0).Item(1).ToString)
+    End Function
 
-        Dim strsql2 As String = "SELECT * FROM РейсыПеревозчика WHERE НомерРейса=" & НомРес & ""
-        Dim ds2 As DataTable = Selects(strsql2)
+    Private Async Sub Вставка()
         Очистка()
+        'strsql = ""
+        'strsql = "SELECT * FROM РейсыКлиента WHERE НомерРейса=" & НомРес & ""
+        'Dim ds1 As DataTable = Selects3(strsql)
+
+        'Dim strsql2 As String = "SELECT * FROM РейсыПеревозчика WHERE НомерРейса=" & НомРес & ""
+        'Dim ds2 As DataTable = Selects3(strsql2)
+
+
+
+        'Dim task As Task(Of String) = КонтЛицоТел(ds2)
+        'RichTextBox11.Text = Await task
+
+        If IsDBNull(dtZak) Or IsDBNull(dtPer) Then
+            Me.Cursor = Cursors.WaitCursor
+            Await Task.Delay(3000)
+            Me.Cursor = Cursors.Default
+        End If
+
+        Dim rowzak = dtZak.Select("НомерРейса=" & НомРес & "")
+        Dim rowper = dtPer.Select("НомерРейса=" & НомРес & "")
+        'Dim rowzak As DataRow = (From column In dtZak.Rows Where column("НомерРейса") = НомРес).FirstOrDefault()
+        'Dim rowper As DataRow = (From column In dtPer.Rows Where column("НомерРейса") = НомРес).FirstOrDefault()
+
         Try
-            ds1.Rows(0).Item(1).ToString()
+            Dim st As String = rowzak(0).Item(1).ToString
         Catch ex As Exception
             Exit Sub
         End Try
 
+        ComboBox3.Text = rowzak(0).Item(1).ToString
+        ComboBox4.Text = rowper(0).Item(1).ToString
+        TextBox1.Text = rowzak(0).Item(17).ToString
+        TextBox2.Text = rowper(0).Item(17).ToString
+        ComboBox5.Text = rowzak(0).Item(18).ToString
+        ComboBox6.Text = rowper(0).Item(18).ToString
+        ComboBox8.Text = rowzak(0).Item(19).ToString
+        ComboBox7.Text = rowper(0).Item(19).ToString
+        TextBox4.Text = rowzak(0).Item(20).ToString
 
-        ComboBox3.Text = ds1.Rows(0).Item(1).ToString
-        ComboBox4.Text = ds2.Rows(0).Item(1).ToString
-        TextBox1.Text = ds1.Rows(0).Item(17).ToString
-        TextBox2.Text = ds2.Rows(0).Item(17).ToString
-        ComboBox5.Text = ds1.Rows(0).Item(18).ToString
-        ComboBox6.Text = ds2.Rows(0).Item(18).ToString
-        ComboBox8.Text = ds1.Rows(0).Item(19).ToString
-        ComboBox7.Text = ds2.Rows(0).Item(19).ToString
-        TextBox4.Text = ds1.Rows(0).Item(20).ToString
-        TextBox3.Text = ds2.Rows(0).Item(20).ToString
-        MaskedTextBox1.Text = ds1.Rows(0).Item(24).ToString
-        If ds1.Rows(0).Item(33).ToString = "1" Then
+        If rowzak(0).Item(39).ToString <> "" Then 'клиент
+            Button7.BackColor = Color.Red
+            ЧастичнаяОплатаКлиент = rowzak(0).Item(39).ToString
+        End If
+        If rowper(0).Item(35).ToString <> "" Then 'перевозчик
+            Button2.BackColor = Color.Red
+            ЧастичнаяОплатаПеревозчик = rowper(0).Item(35).ToString
+        End If
+        TextBox3.Text = rowper(0).Item(20).ToString
+        MaskedTextBox1.Text = rowzak(0).Item(24).ToString
+        If rowzak(0).Item(33).ToString = "1" Then
             ComboBox10.Text = "БанкПоДок"
-        ElseIf ds1.Rows(0).Item(33).ToString = "3" Then
+        ElseIf rowzak(0).Item(33).ToString = "3" Then
             ComboBox10.Text = "БанкПоВыг"
         Else
-            ComboBox10.Text = ds1.Rows(0).Item(33).ToString
+            ComboBox10.Text = rowzak(0).Item(33).ToString
         End If
 
-        If ds2.Rows(0).Item(30).ToString = "1" Then
+        If rowper(0).Item(30).ToString = "1" Then
             ComboBox9.Text = "БанкПоДок"
-        ElseIf ds2.Rows(0).Item(30).ToString = "3" Then
+        ElseIf rowper(0).Item(30).ToString = "3" Then
             ComboBox9.Text = "БанкПоВыг"
         Else
-            ComboBox9.Text = ds2.Rows(0).Item(30).ToString
+            ComboBox9.Text = rowper(0).Item(30).ToString
         End If
 
-        If ds1.Rows(0).Item(22).ToString = "1" Then
+        If rowzak(0).Item(22).ToString = "1" Then
             ComboBox12.Text = "Договор-поручение"
-        ElseIf ds1.Rows(0).Item(23).ToString = "1" Then
+        ElseIf rowzak(0).Item(23).ToString = "1" Then
             ComboBox12.Text = "Договор-поручение эксп"
-        ElseIf ds1.Rows(0).Item(25).ToString = "1" Then
+        ElseIf rowzak(0).Item(25).ToString = "1" Then
             ComboBox12.Text = "Поручение с экспедицией"
         Else
             ComboBox12.Text = ""
         End If
 
-        If ds2.Rows(0).Item(22).ToString = "1" Then
+        If rowper(0).Item(22).ToString = "1" Then
             ComboBox13.Text = "Договор-поручение"
-        ElseIf ds2.Rows(0).Item(23).ToString = "1" Then
+        ElseIf rowper(0).Item(23).ToString = "1" Then
             ComboBox13.Text = "Договор-поручение эксп"
-        ElseIf ds2.Rows(0).Item(25).ToString = "1" Then
+        ElseIf rowper(0).Item(25).ToString = "1" Then
             ComboBox13.Text = "Поручение с экспедицией"
         Else
             ComboBox13.Text = ""
         End If
 
-        RichTextBox1.Text = ds1.Rows(0).Item(21).ToString
-        RichTextBox2.Text = ds2.Rows(0).Item(21).ToString
+        RichTextBox1.Text = rowzak(0).Item(21).ToString
+        RichTextBox2.Text = rowper(0).Item(21).ToString
 
-        RichTextBox10.Text = ds1.Rows(0).Item(4).ToString
-        TextBox5.Text = ds1.Rows(0).Item(5).ToString
-        MaskedTextBox3.Text = ds1.Rows(0).Item(6).ToString
-        TextBox6.Text = ds1.Rows(0).Item(7).ToString
-        MaskedTextBox4.Text = ds1.Rows(0).Item(8).ToString
+        RichTextBox10.Text = rowzak(0).Item(4).ToString
+        TextBox5.Text = rowzak(0).Item(5).ToString
+        MaskedTextBox3.Text = rowzak(0).Item(6).ToString
+        TextBox6.Text = rowzak(0).Item(7).ToString
+        MaskedTextBox4.Text = rowzak(0).Item(8).ToString
 
-        RichTextBox3.Text = ds2.Rows(0).Item(9).ToString
-        RichTextBox4.Text = ds2.Rows(0).Item(10).ToString
-        RichTextBox7.Text = ds2.Rows(0).Item(11).ToString
-        ComboBox11.Text = ds1.Rows(0).Item(12).ToString
-        RichTextBox8.Text = ds2.Rows(0).Item(13).ToString
-        RichTextBox9.Text = ds2.Rows(0).Item(14).ToString
-        RichTextBox6.Text = ds2.Rows(0).Item(16).ToString
-        RichTextBox5.Text = ds2.Rows(0).Item(15).ToString
+        RichTextBox3.Text = rowper(0).Item(9).ToString
+        RichTextBox4.Text = rowper(0).Item(10).ToString
+        RichTextBox7.Text = rowper(0).Item(11).ToString
+        ComboBox11.Text = rowzak(0).Item(12).ToString
+        RichTextBox8.Text = rowper(0).Item(13).ToString
+        RichTextBox9.Text = rowper(0).Item(14).ToString
+        RichTextBox6.Text = rowper(0).Item(16).ToString
+        RichTextBox5.Text = rowper(0).Item(15).ToString
 
-        ДопФорма.TextBox4.Text = ds1.Rows(0).Item(27).ToString
-        ДопФорма.TextBox3.Text = ds1.Rows(0).Item(26).ToString
+        ДопФорма.TextBox4.Text = rowzak(0).Item(27).ToString
+        ДопФорма.TextBox3.Text = rowzak(0).Item(26).ToString
 
-        ДопФорма.TextBox6.Text = ds1.Rows(0).Item(30).ToString
-        ДопФорма.TextBox5.Text = ds1.Rows(0).Item(31).ToString
-        ДопФорма.MaskedTextBox1.Text = ds1.Rows(0).Item(32).ToString
+        ДопФорма.TextBox6.Text = rowzak(0).Item(30).ToString
+        ДопФорма.TextBox5.Text = rowzak(0).Item(31).ToString
+        ДопФорма.MaskedTextBox1.Text = rowzak(0).Item(32).ToString
 
-        ДопФорма.MaskedTextBox2.Text = ds1.Rows(0).Item(28).ToString
-        ДопФорма.TextBox10.Text = ds1.Rows(0).Item(29).ToString
+        ДопФорма.MaskedTextBox2.Text = rowzak(0).Item(28).ToString
+        ДопФорма.TextBox10.Text = rowzak(0).Item(29).ToString
 
+
+
+
+        'ComboBox3.Text = ds1.Rows(0).Item(1).ToString
+        'ComboBox4.Text = ds2.Rows(0).Item(1).ToString
+        'TextBox1.Text = ds1.Rows(0).Item(17).ToString
+        'TextBox2.Text = ds2.Rows(0).Item(17).ToString
+        'ComboBox5.Text = ds1.Rows(0).Item(18).ToString
+        'ComboBox6.Text = ds2.Rows(0).Item(18).ToString
+        'ComboBox8.Text = ds1.Rows(0).Item(19).ToString
+        'ComboBox7.Text = ds2.Rows(0).Item(19).ToString
+        'TextBox4.Text = ds1.Rows(0).Item(20).ToString
+
+        'If ds1.Rows(0).Item(39).ToString <> "" Then 'клиент
+        '    Button7.BackColor = Color.Red
+        '    ЧастичнаяОплатаКлиент = ds1.Rows(0).Item(39).ToString
+        'End If
+        'If ds2.Rows(0).Item(35).ToString <> "" Then 'перевозчик
+        '    Button2.BackColor = Color.Red
+        '    ЧастичнаяОплатаПеревозчик = ds2.Rows(0).Item(35).ToString
+        'End If
+        'TextBox3.Text = ds2.Rows(0).Item(20).ToString
+        'MaskedTextBox1.Text = ds1.Rows(0).Item(24).ToString
+        'If ds1.Rows(0).Item(33).ToString = "1" Then
+        '    ComboBox10.Text = "БанкПоДок"
+        'ElseIf ds1.Rows(0).Item(33).ToString = "3" Then
+        '    ComboBox10.Text = "БанкПоВыг"
+        'Else
+        '    ComboBox10.Text = ds1.Rows(0).Item(33).ToString
+        'End If
+
+        'If ds2.Rows(0).Item(30).ToString = "1" Then
+        '    ComboBox9.Text = "БанкПоДок"
+        'ElseIf ds2.Rows(0).Item(30).ToString = "3" Then
+        '    ComboBox9.Text = "БанкПоВыг"
+        'Else
+        '    ComboBox9.Text = ds2.Rows(0).Item(30).ToString
+        'End If
+
+        'If ds1.Rows(0).Item(22).ToString = "1" Then
+        '    ComboBox12.Text = "Договор-поручение"
+        'ElseIf ds1.Rows(0).Item(23).ToString = "1" Then
+        '    ComboBox12.Text = "Договор-поручение эксп"
+        'ElseIf ds1.Rows(0).Item(25).ToString = "1" Then
+        '    ComboBox12.Text = "Поручение с экспедицией"
+        'Else
+        '    ComboBox12.Text = ""
+        'End If
+
+        'If ds2.Rows(0).Item(22).ToString = "1" Then
+        '    ComboBox13.Text = "Договор-поручение"
+        'ElseIf ds2.Rows(0).Item(23).ToString = "1" Then
+        '    ComboBox13.Text = "Договор-поручение эксп"
+        'ElseIf ds2.Rows(0).Item(25).ToString = "1" Then
+        '    ComboBox13.Text = "Поручение с экспедицией"
+        'Else
+        '    ComboBox13.Text = ""
+        'End If
+
+        'RichTextBox1.Text = ds1.Rows(0).Item(21).ToString
+        'RichTextBox2.Text = ds2.Rows(0).Item(21).ToString
+
+        'RichTextBox10.Text = ds1.Rows(0).Item(4).ToString
+        'TextBox5.Text = ds1.Rows(0).Item(5).ToString
+        'MaskedTextBox3.Text = ds1.Rows(0).Item(6).ToString
+        'TextBox6.Text = ds1.Rows(0).Item(7).ToString
+        'MaskedTextBox4.Text = ds1.Rows(0).Item(8).ToString
+
+        'RichTextBox3.Text = ds2.Rows(0).Item(9).ToString
+        'RichTextBox4.Text = ds2.Rows(0).Item(10).ToString
+        'RichTextBox7.Text = ds2.Rows(0).Item(11).ToString
+        'ComboBox11.Text = ds1.Rows(0).Item(12).ToString
+        'RichTextBox8.Text = ds2.Rows(0).Item(13).ToString
+        'RichTextBox9.Text = ds2.Rows(0).Item(14).ToString
+        'RichTextBox6.Text = ds2.Rows(0).Item(16).ToString
+        'RichTextBox5.Text = ds2.Rows(0).Item(15).ToString
+
+        'ДопФорма.TextBox4.Text = ds1.Rows(0).Item(27).ToString
+        'ДопФорма.TextBox3.Text = ds1.Rows(0).Item(26).ToString
+
+        'ДопФорма.TextBox6.Text = ds1.Rows(0).Item(30).ToString
+        'ДопФорма.TextBox5.Text = ds1.Rows(0).Item(31).ToString
+        'ДопФорма.MaskedTextBox1.Text = ds1.Rows(0).Item(32).ToString
+
+        'ДопФорма.MaskedTextBox2.Text = ds1.Rows(0).Item(28).ToString
+        'ДопФорма.TextBox10.Text = ds1.Rows(0).Item(29).ToString
+
+
+    End Sub
+    Private Async Sub Вставка2()
 
     End Sub
     Private Sub ListBox1_Click(sender As Object, e As EventArgs) Handles ListBox1.Click
@@ -274,6 +600,16 @@ Public Class Рейс
             Try
                 НомРес = CType(Strings.Left(ListBox1.SelectedItem.ToString, 3), Integer)
                 ПутьРейса = ListBox1.SelectedItem.ToString
+                Dim k As Integer = ListBox1.SelectedIndex
+
+                For n As Integer = 0 To FilesПолнПуть.Length - 1
+                    If n = k Then
+                        ПутьПолный = FilesПолнПуть(n)
+                    End If
+                Next
+
+
+
             Catch ex As Exception
 
             End Try
@@ -315,30 +651,31 @@ Public Class Рейс
     End Sub
 
     Private Sub ComboBox5_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox5.SelectedIndexChanged
-        Select Case ComboBox5.SelectedItem
-            Case "евро"
+        Select Case ComboBox5.Text
+            Case "Евро"
                 ComboBox8.Enabled = True
-            Case "доллар"
+            Case "Доллар"
                 ComboBox8.Enabled = True
-            Case "росс.рубль"
+            Case "Росс.рубль"
                 ComboBox8.Enabled = True
-            Case "рубль"
+            Case "Рубль"
                 ComboBox8.Enabled = False
         End Select
 
     End Sub
 
     Private Sub ComboBox6_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox6.SelectedIndexChanged
-        Select Case ComboBox6.SelectedItem
-            Case "евро"
+        Select Case ComboBox6.Text
+            Case "Евро"
                 ComboBox7.Enabled = True
-            Case "доллар"
+            Case "Доллар"
                 ComboBox7.Enabled = True
-            Case "росс.рубль"
+            Case "Росс.рубль"
                 ComboBox7.Enabled = True
-            Case "рубль"
+            Case "Рубль"
                 ComboBox7.Enabled = False
         End Select
+
     End Sub
 
     Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox1.CheckedChanged
@@ -569,12 +906,12 @@ Public Class Рейс
         End If
     End Sub
 
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        If ComboBox3.Text = "" Or TextBox1.Text = "" Then
-            MessageBox.Show("Выберите рейс!", Рик)
-            Exit Sub
-        End If
-        ДопФорма.ShowDialog()
+    Private Sub Button2_Click(sender As Object, e As EventArgs)
+        'If ComboBox3.Text = "" Or TextBox1.Text = "" Then
+        '    MessageBox.Show("Выберите рейс!", Рик)
+        '    Exit Sub
+        'End If
+        'ДопФорма.ShowDialog()
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
@@ -683,17 +1020,17 @@ Public Class Рейс
         End Try
 
         Dim strsql5 As String = "SELECT Договор,Дата,Должность,ФИОРуководителя FROM Клиент WHERE НазваниеОрганизации='" & ComboBox3.Text & "'"
-        Dim ds5 As DataTable = Selects(strsql5)
+        Dim ds5 As DataTable = Selects3(strsql5)
 
 
 
 
         If ComboBox3.Text = "Виталюр" Then
             strsql = "SELECT MAX(КоличРейсов) FROM РейсыКлиента WHERE НазвОрганизации = 'Виталюр'  AND ДатаПодачиПодЗагрузку Like '%" & Now.Year & "%' GROUP BY НазвОрганизации "
-            ds = Selects(strsql)
+            ds = Selects3(strsql)
         Else
             strsql1 = "SELECT MAX(КоличРейсов) FROM [РейсыКлиента] WHERE НазвОрганизации = '" & ComboBox3.Text & "' GROUP BY НазвОрганизации "
-            ds = Selects(strsql1)
+            ds = Selects3(strsql1)
         End If
 
 
@@ -739,11 +1076,11 @@ Public Class Рейс
     Private Sub ПровСледРейсПер()
 
         Dim strsql6 As String = "SELECT Договор,Дата,Должность,ФИОРуководителя FROM Перевозчики WHERE Названиеорганизации='" & ComboBox4.Text & "'"
-        Dim ds6 As DataTable = Selects(strsql6)
+        Dim ds6 As DataTable = Selects3(strsql6)
 
 
         Dim strsql2 As String = "SELECT MAX(КоличРейсов) FROM РейсыПеревозчика WHERE НазвОрганизации = '" & ComboBox4.Text & "' GROUP BY НазвОрганизации"
-        Dim ds2 As DataTable = Selects(strsql2)
+        Dim ds2 As DataTable = Selects3(strsql2)
 
         Try
             СлПорРейсПер = ds2.Rows(0).Item(0) + 1
@@ -841,8 +1178,20 @@ Public Class Рейс
         End If
     End Sub
     Private Sub НовыйРейс()
-        Dim strsql, strsql3 As String
+        Dim strsql, strsql3, штрафкл, штрафпр As String
         Dim ds1 As DataTable
+
+        'If ШтрафКлиент = True Then
+        '    штрафкл = "100 евро"
+        'Else
+        '    штрафкл = "20 %"
+        'End If
+
+        'If ШтрафПер = True Then
+        '    штрафпр = "100 евро"
+        'Else
+        '    штрафпр = "20 %"
+        'End If
 
         ПровСледРейсКлиент()
         If Отмена = 1 Then Exit Sub
@@ -850,7 +1199,7 @@ Public Class Рейс
         Пров = 0
         strsql = ""
         strsql = "SELECT MAX(НомерРейса) FROM РейсыКлиента"
-        ds1 = Selects(strsql)
+        ds1 = Selects3(strsql)
 
         СлРейс = ds1.Rows(0).Item(0) + 1
 
@@ -861,23 +1210,23 @@ Public Class Рейс
         strsql3 = "INSERT INTO РейсыПеревозчика(НазвОрганизации,НомерРейса,КоличРейсов,Маршрут,ДатаПодачиПодЗагрузку,ВремяПодачи,ДатаПодачиПодРастаможку,
 ВремяПодачиВыгРаст,ТочныйАдресЗагрузки,АдресЗатаможки,НаименованиеГруза,ТипТрСредства,НомерАвтомобиля,Водитель,
 ТочнАдресРаста,ТочнАдресРазгр,СтоимостьФрахта,Валюта,ВалютаПлатежа,СрокОплаты,ДопУсловия,
-ДогПор,ДогПорЭксп,ДатаПоручения,ПорЭксп,УсловияОплаты)
+ДогПор,ДогПорЭксп,ДатаПоручения,ПорЭксп,УсловияОплаты,РазмерШтрафаЗаСрыв,Предоплата)
 VALUES('" & ComboBox4.Text & "'," & СлРейс & "," & СлПорРейсПер & ",'" & Trim(RichTextBox10.Text) & "','" & TextBox5.Text & "','" & MaskedTextBox3.Text & "','" & TextBox6.Text & "',
 '" & MaskedTextBox4.Text & "','" & Trim(RichTextBox3.Text) & "','" & Trim(RichTextBox4.Text) & "','" & Trim(RichTextBox7.Text) & "','" & ComboBox11.Text & "','" & Trim(RichTextBox8.Text) & "','" & Trim(RichTextBox9.Text) & "',
 '" & Trim(RichTextBox5.Text) & "','" & Trim(RichTextBox6.Text) & "','" & TextBox2.Text & "','" & ComboBox6.Text & "','" & ComboBox7.Text & "','" & TextBox3.Text & "','" & Trim(RichTextBox2.Text) & "',
-'" & ДогПор & "','" & ДогПорЭксп & "','" & MaskedTextBox1.Text & "','" & ПорЭксп & "','" & ComboBox9.Text & "')"
-        Updates(strsql3)
+'" & ДогПор & "','" & ДогПорЭксп & "','" & MaskedTextBox1.Text & "','" & ПорЭксп & "','" & ComboBox9.Text & "','" & ШтрафКлиент & "','" & ЧастичнаяОплатаПеревозчик & "')"
+        Updates3(strsql3)
 
         ComB12()
         Dim strsql4 As String = "INSERT INTO РейсыКлиента(НазвОрганизации,НомерРейса,КоличРейсов,Маршрут,ДатаПодачиПодЗагрузку,ВремяПодачи,ДатаПодачиПодРастаможку,
 ВремяПодачиВыгРаст,ТочныйАдресЗагрузки,АдресЗатаможки,НаименованиеГруза,ТипТрСредства,НомерАвтомобиля,Водитель,
 ТочнАдресРаста,ТочнАдресРазгр,СтоимостьФрахта,Валюта,ВалютаПлатежа,СрокОплаты,ДопУсловия,
-ДогПор,ДогПорЭксп,ДатаПоручения,ПорЭксп,УсловияОплаты,Год)
+ДогПор,ДогПорЭксп,ДатаПоручения,ПорЭксп,УсловияОплаты,Год,РазмерШтрафаЗаСрыв,Предоплата)
 VALUES('" & ComboBox3.Text & "'," & СлРейс & "," & СлПорРейсКл & ",'" & Trim(RichTextBox10.Text) & "','" & TextBox5.Text & "','" & MaskedTextBox3.Text & "','" & TextBox6.Text & "',
 '" & MaskedTextBox4.Text & "','" & Trim(RichTextBox3.Text) & "','" & Trim(RichTextBox4.Text) & "','" & Trim(RichTextBox7.Text) & "','" & ComboBox11.Text & "','" & Trim(RichTextBox8.Text) & "','" & Trim(RichTextBox9.Text) & "',
 '" & Trim(RichTextBox5.Text) & "','" & Trim(RichTextBox6.Text) & "','" & TextBox1.Text & "','" & ComboBox5.Text & "','" & ComboBox8.Text & "','" & TextBox4.Text & "','" & Trim(RichTextBox1.Text) & "',
-'" & ДогПор & "','" & ДогПорЭксп & "','" & MaskedTextBox1.Text & "','" & ПорЭксп & "','" & ComboBox10.Text & "','" & Now.ToShortDateString & "')"
-        Updates(strsql4)
+'" & ДогПор & "','" & ДогПорЭксп & "','" & MaskedTextBox1.Text & "','" & ПорЭксп & "','" & ComboBox10.Text & "','" & Now.ToShortDateString & "','" & ШтрафПер & "','" & ЧастичнаяОплатаКлиент & "')"
+        Updates3(strsql4)
 
 
     End Sub
@@ -896,7 +1245,10 @@ VALUES('" & ComboBox3.Text & "'," & СлРейс & "," & СлПорРейсКл 
         'xlworkbook = xlapp.Workbooks.Add("Z:\RICKMANS\496 Ивановский_8 - Петровский_1.xlsm")
         'xlworksheet = xlworkbook.Worksheets("ЗАК")
 
-        Dim XXX = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=U:\Офис\Рикманс\ДанныеРикманс.accdb; Persist Security Info=False;"
+        'Dim XXX = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=U:\Офис\Рикманс\ДанныеРикманс.accdb; Persist Security Info=False;"
+        'Dim XXX = "Provider='SQLOLEDB';Data Source=45.14.50.13\723\SQLEXPRESS,1433;Network Library=DBMSSOCN;Initial Catalog=Rickmans;User ID=userOleg;Password=Zf6VpP37Ol"
+        Dim XXX = "Provider='SQLOLEDB';Data Source=45.14.50.142\2749\SQLEXPRESS,1433;Network Library=DBMSSOCN;Initial Catalog=Rickmans;User ID=userOleg1;Password=Zf6VpP37Ol"
+
         Dim CON As New ADODB.Connection
         Dim RS As New ADODB.Recordset
         Dim RS1 As New ADODB.Recordset
@@ -973,9 +1325,16 @@ VALUES('" & ComboBox3.Text & "'," & СлРейс & "," & СлПорРейсКл 
 
     Private Sub РедакцияСтарогоРейса()
         Dim strsql, strsql1, strsql2, strsql3 As String
-        strsql = "SELECT НазвОрганизации FROM РейсыКлиента WHERE НомерРейса=" & НомРес & ""
-        Dim ds As DataTable = Selects(strsql)
-        If Not ds.Rows(0).Item(0).ToString = ComboBox3.Text Then
+
+        'strsql = "SELECT НазвОрганизации FROM РейсыКлиента WHERE НомерРейса=" & НомРес & ""
+        'Dim ds24 As DataTable = Selects3(strsql)
+        'Dim ghj As String = ds24.Rows(0).Item(0).ToString
+
+        Dim ds As DataRow() = РейсыКлиента(НомРес)
+
+
+
+        If Not ds(0).Item(1).ToString = ComboBox3.Text Then
             ПровСледРейсКлиент()
             If Отмена = 1 Then Exit Sub
             ComB12()
@@ -984,9 +1343,9 @@ VALUES('" & ComboBox3.Text & "'," & СлРейс & "," & СлПорРейсКл 
 ТочныйАдресЗагрузки='" & Trim(RichTextBox3.Text) & "', АдресЗатаможки='" & Trim(RichTextBox4.Text) & "', НаименованиеГруза='" & Trim(RichTextBox7.Text) & "', ТипТрСредства='" & ComboBox11.Text & "',
 НомерАвтомобиля='" & Trim(RichTextBox8.Text) & "',Водитель ='" & Trim(RichTextBox9.Text) & "', ТочнАдресРаста='" & Trim(RichTextBox5.Text) & "', ТочнАдресРазгр='" & Trim(RichTextBox6.Text) & "',
 СтоимостьФрахта='" & TextBox1.Text & "', Валюта='" & ComboBox5.Text & "', ВалютаПлатежа='" & ComboBox8.Text & "', СрокОплаты='" & TextBox4.Text & "', УсловияОплаты='" & ComboBox10.Text & "',
-ДогПор='" & ДогПор & "',ДогПорЭксп='" & ДогПорЭксп & "',ПорЭксп= '" & ПорЭксп & "', ДопУсловия='" & Trim(RichTextBox1.Text) & "', ДатаПоручения='" & MaskedTextBox1.Text & "'
+ДогПор='" & ДогПор & "',ДогПорЭксп='" & ДогПорЭксп & "',ПорЭксп= '" & ПорЭксп & "', ДопУсловия='" & Trim(RichTextBox1.Text) & "', ДатаПоручения='" & MaskedTextBox1.Text & "',РазмерШтрафаЗаСрыв='" & ШтрафКлиент & "',Предоплата='" & ЧастичнаяОплатаКлиент & "'
 WHERE НомерРейса=" & НомРес & ""
-            Updates(strsql1)
+            Updates3(strsql1)
             ПрИзмНазКл = True
         Else
             ComB12()
@@ -995,14 +1354,17 @@ WHERE НомерРейса=" & НомРес & ""
 ТочныйАдресЗагрузки='" & Trim(RichTextBox3.Text) & "', АдресЗатаможки='" & Trim(RichTextBox4.Text) & "', НаименованиеГруза='" & Trim(RichTextBox7.Text) & "', ТипТрСредства='" & ComboBox11.Text & "',
 НомерАвтомобиля='" & Trim(RichTextBox8.Text) & "',Водитель ='" & Trim(RichTextBox9.Text) & "', ТочнАдресРаста='" & Trim(RichTextBox5.Text) & "', ТочнАдресРазгр='" & Trim(RichTextBox6.Text) & "',
 СтоимостьФрахта='" & TextBox1.Text & "', Валюта='" & ComboBox5.Text & "', ВалютаПлатежа='" & ComboBox8.Text & "', СрокОплаты='" & TextBox4.Text & "', УсловияОплаты='" & ComboBox10.Text & "',
-ДогПор='" & ДогПор & "', ДогПорЭксп='" & ДогПорЭксп & "',ПорЭксп= '" & ПорЭксп & "', ДопУсловия='" & Trim(RichTextBox1.Text) & "', ДатаПоручения='" & MaskedTextBox1.Text & "'
+ДогПор='" & ДогПор & "', ДогПорЭксп='" & ДогПорЭксп & "',ПорЭксп= '" & ПорЭксп & "', ДопУсловия='" & Trim(RichTextBox1.Text) & "', ДатаПоручения='" & MaskedTextBox1.Text & "',РазмерШтрафаЗаСрыв='" & ШтрафКлиент & "',Предоплата='" & ЧастичнаяОплатаКлиент & "'
 WHERE НомерРейса=" & НомРес & ""
-            Updates(strsql1)
+            Updates3(strsql1)
         End If
 
-        strsql2 = "SELECT НазвОрганизации FROM РейсыПеревозчика WHERE НомерРейса=" & НомРес & ""
-        Dim ds1 As DataTable = Selects(strsql2)
-        If Not ds1.Rows(0).Item(0).ToString = ComboBox4.Text Then
+        'strsql2 = "SELECT НазвОрганизации FROM РейсыПеревозчика WHERE НомерРейса=" & НомРес & ""
+        'Dim ds1 As DataTable = Selects3(strsql2)
+
+        Dim ds1 As DataRow() = РейсыПеревозчик(НомРес)
+
+        If Not ds1(0).Item(1).ToString = ComboBox4.Text Then
             ПровСледРейсПер()
             If Отмена = 1 Then Exit Sub
             ComB13()
@@ -1011,9 +1373,9 @@ WHERE НомерРейса=" & НомРес & ""
 ТочныйАдресЗагрузки='" & Trim(RichTextBox3.Text) & "', АдресЗатаможки='" & Trim(RichTextBox4.Text) & "', НаименованиеГруза='" & Trim(RichTextBox7.Text) & "', ТипТрСредства='" & ComboBox11.Text & "',
 НомерАвтомобиля='" & Trim(RichTextBox8.Text) & "',Водитель ='" & Trim(RichTextBox9.Text) & "', ТочнАдресРаста='" & Trim(RichTextBox5.Text) & "', ТочнАдресРазгр='" & Trim(RichTextBox6.Text) & "',
 СтоимостьФрахта='" & TextBox2.Text & "', Валюта='" & ComboBox6.Text & "', ВалютаПлатежа='" & ComboBox7.Text & "', СрокОплаты='" & TextBox3.Text & "', УсловияОплаты='" & ComboBox9.Text & "',
-ДогПор='" & ДогПор & "', ДогПорЭксп='" & ДогПорЭксп & "',ПорЭксп= '" & ПорЭксп & "', ДопУсловия='" & Trim(RichTextBox2.Text) & "', ДатаПоручения='" & MaskedTextBox1.Text & "'
+ДогПор='" & ДогПор & "', ДогПорЭксп='" & ДогПорЭксп & "',ПорЭксп= '" & ПорЭксп & "', ДопУсловия='" & Trim(RichTextBox2.Text) & "', ДатаПоручения='" & MaskedTextBox1.Text & "',РазмерШтрафаЗаСрыв='" & ШтрафПер & "',Предоплата='" & ЧастичнаяОплатаПеревозчик & "'
 WHERE НомерРейса=" & НомРес & ""
-            Updates(strsql3)
+            Updates3(strsql3)
             ПрИзмНазПер = True
         Else
             ComB13()
@@ -1022,12 +1384,277 @@ WHERE НомерРейса=" & НомРес & ""
 ТочныйАдресЗагрузки='" & Trim(RichTextBox3.Text) & "', АдресЗатаможки='" & Trim(RichTextBox4.Text) & "', НаименованиеГруза='" & Trim(RichTextBox7.Text) & "', ТипТрСредства='" & ComboBox11.Text & "',
 НомерАвтомобиля='" & Trim(RichTextBox8.Text) & "',Водитель ='" & Trim(RichTextBox9.Text) & "', ТочнАдресРаста='" & Trim(RichTextBox5.Text) & "', ТочнАдресРазгр='" & Trim(RichTextBox6.Text) & "',
 СтоимостьФрахта='" & TextBox2.Text & "', Валюта='" & ComboBox6.Text & "', ВалютаПлатежа='" & ComboBox7.Text & "', СрокОплаты='" & TextBox3.Text & "', УсловияОплаты='" & ComboBox9.Text & "',
-ДогПор='" & ДогПор & "', ДогПорЭксп='" & ДогПорЭксп & "',ПорЭксп= '" & ПорЭксп & "', ДопУсловия='" & Trim(RichTextBox2.Text) & "', ДатаПоручения='" & MaskedTextBox1.Text & "'
+ДогПор='" & ДогПор & "', ДогПорЭксп='" & ДогПорЭксп & "',ПорЭксп= '" & ПорЭксп & "', ДопУсловия='" & Trim(RichTextBox2.Text) & "', ДатаПоручения='" & MaskedTextBox1.Text & "',РазмерШтрафаЗаСрыв='" & ШтрафПер & "',Предоплата='" & ЧастичнаяОплатаПеревозчик & "'
 WHERE НомерРейса=" & НомРес & ""
-            Updates(strsql3)
+            Updates3(strsql3)
         End If
         СлРейс = НомРес
         ДокиОбновление()
+
+    End Sub
+
+    Private Sub Button7_Click(sender As Object, e As EventArgs)
+        'If НомРес = Nothing Then
+        '    MessageBox.Show("Выберите рейс!", Рик)
+        '    Exit Sub
+        'End If
+        'bl = False
+        'Отчет.ShowDialog()
+
+
+
+    End Sub
+
+    Private Sub Button8_Click(sender As Object, e As EventArgs)
+        'Сводная_по_рейсам.Show()
+
+    End Sub
+
+    Private Sub ListBox1_MouseDown(sender As Object, e As MouseEventArgs) Handles ListBox1.MouseDown
+        If e.Button = MouseButtons.Right Then
+            ContextMenuStrip1.Show(MousePosition, ToolStripDropDownDirection.Right)
+        End If
+    End Sub
+    Private Sub Запускэксель(ByVal d As String)
+        Dim xlapp1 As Microsoft.Office.Interop.Excel.Application
+        Dim xlworkbook1 As Microsoft.Office.Interop.Excel.Workbook
+        Dim xlworksheet1 As Microsoft.Office.Interop.Excel.Worksheet
+        'Dim misvalue As Object = Reflection.Missing.Value
+        xlapp1 = New Microsoft.Office.Interop.Excel.Application With {
+            .Visible = False
+        }
+        'xlworkbook = xlapp.Workbooks.Add(misvalue)
+        xlworkbook1 = xlapp1.Workbooks.Open(ПутьПолный,, True)
+
+        xlworksheet1 = xlworkbook1.Sheets(d)
+        xlworksheet1.PrintOutEx(,, 1)
+        xlworkbook1.Close(False)
+        xlapp1.Quit()
+
+        releaseobject(xlapp1)
+        releaseobject(xlworkbook1)
+        releaseobject(xlworksheet1)
+    End Sub
+
+    Private Sub ПоручениеПеревозчикпечататьToolStripMenuItem_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub ОбаПечататьToolStripMenuItem_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub ЛистокпечататьToolStripMenuItem_Click(sender As Object, e As EventArgs)
+
+
+    End Sub
+
+    Private Sub ОбаЛистокпечататьToolStripMenuItem_Click(sender As Object, e As EventArgs)
+
+        Запускэксель("ЗАК")
+        Запускэксель("ПЕР")
+        Запускэксель("РЕЙС")
+    End Sub
+
+    Private Sub ПоручениеКлиентпечататьToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ПоручениеКлиентпечататьToolStripMenuItem1.Click
+        Dim d As New Thread(Sub() Запускэксель("ЗАК"))
+        d.IsBackground = True
+        d.Start()
+    End Sub
+
+    Private Sub ПоручениеПеревозчикпечататьToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ПоручениеПеревозчикпечататьToolStripMenuItem1.Click
+        Dim d As New Thread(Sub() Запускэксель("ПЕР"))
+        d.IsBackground = True
+        d.Start()
+
+    End Sub
+
+    Private Sub ОбапечататьToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ОбапечататьToolStripMenuItem1.Click
+        Dim d As New Thread(Sub() Запускэксель("ПЕР"))
+        d.IsBackground = True
+        d.Start()
+        Dim d1 As New Thread(Sub() Запускэксель("ЗАК"))
+        d1.IsBackground = True
+        d1.Start()
+        'Запускэксель("ЗАК")
+        'Запускэксель("ПЕР")
+    End Sub
+
+    Private Sub ЛистокпечататьToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ЛистокпечататьToolStripMenuItem1.Click
+        Dim d As New Thread(Sub() Запускэксель("РЕЙС"))
+        d.IsBackground = True
+        d.Start()
+    End Sub
+
+    Private Sub ОбаЛистокпечататьToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ОбаЛистокпечататьToolStripMenuItem1.Click
+        Dim d As New Thread(Sub() Запускэксель("ПЕР"))
+        d.IsBackground = True
+        d.Start()
+        Dim d1 As New Thread(Sub() Запускэксель("ЗАК"))
+        d1.IsBackground = True
+        d1.Start()
+        Dim d2 As New Thread(Sub() Запускэксель("РЕЙС"))
+        d2.IsBackground = True
+        d2.Start()
+    End Sub
+
+    Private Sub ОткрытьToolStripMenuItem_Click(sender As Object, e As EventArgs)
+        numberRe(1)
+        'For i As Integer = 0 To file36.Count - 1
+        '    Process.Start(file36(i))
+        'Next
+
+    End Sub
+    Private Sub numberRe(ByVal tu As Integer)
+        Dim f() As String = {"РейсыПеревозчика", "РейсыКлиента"}
+        Dim dr As New Thread(AddressOf Сбор)
+        dr.IsBackground = True
+        Dim dict As New Dictionary(Of String, String)
+
+
+
+        Try
+            Dim ds As DataTable = Selects3(StrSql:="SELECT НазвОрганизации FROM " & f(tu) & " WHERE НомерРейса=" & НомРес & "")
+            dict.Add(f(tu), ds.Rows(0).Item(0).ToString)
+            dr.Start(dict)
+            'Return ds.Rows(0).Item(0).ToString
+        Catch ex As Exception
+            'Return 0
+        End Try
+
+    End Sub
+
+    Private Sub СводнаяToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles СводнаяToolStripMenuItem.Click
+        Сводная_по_рейсам.Show()
+    End Sub
+
+    Private Sub ОплатаToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ОплатаToolStripMenuItem.Click
+        If НомРес = Nothing Then
+            MessageBox.Show("Выберите рейс!", Рик)
+            Exit Sub
+        End If
+        bl = False
+        Отчет.ShowDialog()
+    End Sub
+
+    Private Sub ШтрафыToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ШтрафыToolStripMenuItem.Click
+        Штрафы.ShowDialog()
+    End Sub
+
+    Private Sub АктСчетИРазбивкаToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles АктСчетИРазбивкаToolStripMenuItem.Click
+        If ComboBox3.Text = "" Or TextBox1.Text = "" Then
+            MessageBox.Show("Выберите рейс!", Рик)
+            Exit Sub
+        End If
+        ДопФорма.ShowDialog()
+    End Sub
+
+    Private Sub ПеревозчикToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ПеревозчикToolStripMenuItem1.Click
+        НовыйКлиент.ShowDialog()
+    End Sub
+
+    Private Sub ПеревозчикToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles ПеревозчикToolStripMenuItem2.Click
+        НовыйПеревоз.ShowDialog()
+    End Sub
+
+    Private Sub ОткрытьToolStripMenuItem1_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub КлиентToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles КлиентToolStripMenuItem.Click
+        numberRe(1)
+    End Sub
+
+    Private Sub ПеревозчикToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ПеревозчикToolStripMenuItem.Click
+        numberRe(0)
+    End Sub
+
+    Private Sub Button7_Click_1(sender As Object, e As EventArgs) Handles Button7.Click
+        ПредоплатаКлиент.ShowDialog()
+    End Sub
+
+    Private Sub ToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem2.Click
+        Dim d As New Thread(Sub() Запускэксель("СФ"))
+        d.IsBackground = True
+        d.Start()
+    End Sub
+
+    Private Sub ToolStripMenuItem3_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem3.Click
+
+        Dim d As New Thread(Sub() Запускэксель("СФ"))
+        d.IsBackground = True
+        d.Start()
+
+        Dim d1 As New Thread(Sub() Запускэксель("СФ"))
+        d1.IsBackground = True
+        d1.Start()
+
+
+    End Sub
+
+    Private Sub ToolStripMenuItem4_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem4.Click
+        Dim d As New Thread(Sub() Запускэксель("АКТ"))
+        d.IsBackground = True
+        d.Start()
+    End Sub
+
+    Private Sub ToolStripMenuItem5_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem5.Click
+        Dim d As New Thread(Sub() Запускэксель("АКТ"))
+        d.IsBackground = True
+        d.Start()
+
+        Dim d1 As New Thread(Sub() Запускэксель("АКТ"))
+        d1.IsBackground = True
+        d1.Start()
+    End Sub
+
+    Private Sub Button8_Click_1(sender As Object, e As EventArgs) Handles Button8.Click
+        comdjx1 = ComboBox1.Text
+        ПоискВРейсах.ShowDialog()
+
+    End Sub
+
+    Private Sub СчетактToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles СчетактToolStripMenuItem.Click
+        If ComboBox3.Text = "" Or TextBox1.Text = "" Then
+            MessageBox.Show("Выберите рейс!", Рик)
+            Exit Sub
+        End If
+        ДопФорма.ShowDialog()
+    End Sub
+
+    Private Sub Button2_Click_1(sender As Object, e As EventArgs) Handles Button2.Click
+        ПредоплатаПеревозчик.ShowDialog()
+    End Sub
+
+    Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
+        ПерегрЛист1()
+    End Sub
+
+    Private Sub Button9_Click(sender As Object, e As EventArgs)
+        Штрафы.ShowDialog()
+    End Sub
+
+    Private Sub Сбор(ByVal Ном As Dictionary(Of String, String))
+        'Dim mas() = {file3, file2}
+
+
+
+        If Not Ном Is Nothing Then
+            If Ном.ContainsKey("РейсыПеревозчика") Then
+                file26 = IO.Directory.GetFiles("Z:\RICKMANS\", "*" & "ДОГОВОР" & "*" & Ном("РейсыПеревозчика") & "*", IO.SearchOption.AllDirectories)
+                For i As Integer = 0 To file26.Count - 1
+                    Process.Start(file26(i))
+                Next
+            Else
+                file36 = IO.Directory.GetFiles("Z:\RICKMANS\", "*" & "ДОГОВОР" & "*" & Ном("РейсыКлиента") & "*", IO.SearchOption.AllDirectories)
+                For i As Integer = 0 To file36.Count - 1
+                    Process.Start(file36(i))
+                Next
+            End If
+
+
+        End If
+
 
     End Sub
     Public Sub ДокиОбновление()
@@ -1035,7 +1662,9 @@ WHERE НомерРейса=" & НомРес & ""
         Dim xlapp As Microsoft.Office.Interop.Excel.Application
         xlapp = New Microsoft.Office.Interop.Excel.Application
 
-        Dim XXX = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=U:\Офис\Рикманс\ДанныеРикманс.accdb; Persist Security Info=False;"
+        'Dim XXX = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=U:\Офис\Рикманс\ДанныеРикманс.accdb; Persist Security Info=False;"
+        'Dim XXX = "Provider='SQLOLEDB';Data Source=45.14.50.13\723\SQLEXPRESS,1433;Network Library=DBMSSOCN;Initial Catalog=Rickmans;User ID=userOleg;Password=Zf6VpP37Ol"
+        Dim XXX = "Provider='SQLOLEDB';Data Source=45.14.50.142\2749\SQLEXPRESS,1433;Network Library=DBMSSOCN;Initial Catalog=Rickmans;User ID=userOleg1;Password=Zf6VpP37Ol"
         Dim CON As New ADODB.Connection
         Dim RS As New ADODB.Recordset
         Dim RS1 As New ADODB.Recordset
@@ -1061,8 +1690,8 @@ WHERE НомерРейса=" & НомРес & ""
         xlapp.Workbooks(ПутьРейса).Worksheets("ЗАК").Range("L5").CopyFromRecordset(RS3)
         xlapp.Workbooks(ПутьРейса).Close(True)
 
-        Dim ds1 As DataTable = Selects(strSQL)
-        Dim ds2 As DataTable = Selects(strSQL1)
+        Dim ds1 As DataTable = Selects3(strSQL)
+        Dim ds2 As DataTable = Selects3(strSQL1)
 
         If ПрИзмНазКл = True Then
             Dim G As String = ПутьРейса
@@ -1118,15 +1747,21 @@ WHERE НомерРейса=" & НомРес & ""
             Exit Sub
         End If
 
-        Dim strsql As String = "DELETE * FROM РейсыПеревозчика WHERE НомерРейса=" & НомРес & ""
-        Updates(strsql)
+        Dim strsql As String = "DELETE FROM РейсыПеревозчика WHERE НомерРейса=" & НомРес & ""
+        Updates3(strsql)
 
-        Dim strsql1 As String = "DELETE * FROM РейсыКлиента WHERE НомерРейса=" & НомРес & ""
-        Updates(strsql1)
+        Dim strsql1 As String = "DELETE FROM РейсыКлиента WHERE НомерРейса=" & НомРес & ""
+        Updates3(strsql1)
+
+        If Not IO.Directory.Exists("Z:\RICKMANS\" & ComboBox1.Text & "\СОРВАННЫЕ ЗАГРУЗКИ\") Then
+            IO.Directory.CreateDirectory("Z:\RICKMANS\" & ComboBox1.Text & "\СОРВАННЫЕ ЗАГРУЗКИ\")
+        End If
+
         IO.File.Copy("Z:\RICKMANS\" & ComboBox1.Text & "\" & ПутьРейса, "Z:\RICKMANS\" & ComboBox1.Text & "\СОРВАННЫЕ ЗАГРУЗКИ\" & ПутьРейса)
         IO.File.Delete("Z:\RICKMANS\" & ComboBox1.Text & "\" & ПутьРейса)
 
         MessageBox.Show("Рейс полностью удалён!", Рик)
+        ПерегрДанныхИзБазы()
         Очистка()
         ПерегрЛист1()
     End Sub
@@ -1148,6 +1783,7 @@ WHERE НомерРейса=" & НомРес & ""
                     Exit Sub
                 End If
                 MessageBox.Show("Рейс изменен!", Рик)
+                ПерегрДанныхИзБазы()
                 ПерегрЛист1()
             End If
             If Res = DialogResult.Cancel Then
@@ -1161,13 +1797,15 @@ WHERE НомерРейса=" & НомРес & ""
             Очистка()
             ПерезагрЛист1 = 0
         End If
-
+        Button2.BackColor = Color.LightBlue
+        Button7.BackColor = Color.LightBlue
         Me.Cursor = Cursors.Default
     End Sub
     Private Sub НовыйРейсГлавная()
         НовыйРейс()
         If Отмена = 1 Then Exit Sub
         Доки()
+        ПерегрДанныхИзБазы()
         MessageBox.Show("Рейс оформлен!", Рик)
         If ПерезагрЛист1 = 0 Then
             ПерегрЛист1()

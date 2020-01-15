@@ -48,10 +48,10 @@ Public Class ПорНомер
 
             If pro = 1 Then
                 strsql = "UPDATE Клиент SET Должность='" & RichTextBox1.Text & "', ФИОРуководителя='" & RichTextBox2.Text & "' WHERE НазваниеОрганизации='" & Рейс.ComboBox3.Text & "'"
-                Updates(strsql)
+                Updates3(strsql)
             Else
                 strsql = "UPDATE Перевозчики SET Должность='" & RichTextBox1.Text & "', ФИОРуководителя='" & RichTextBox2.Text & "' WHERE Названиеорганизации='" & Рейс.ComboBox4.Text & "'"
-                Updates(strsql)
+                Updates3(strsql)
 
             End If
         End If
@@ -64,10 +64,10 @@ Public Class ПорНомер
 
             If pro = 1 Then
                 Dim strsql As String = "UPDATE Клиент SET Договор='" & RichTextBox4.Text & "', Дата='" & MaskedTextBox1.Text & "' WHERE НазваниеОрганизации='" & Рейс.ComboBox3.Text & "'"
-                Updates(strsql)
+                Updates3(strsql)
             Else
                 Dim strsql As String = "UPDATE Перевозчики SET Договор='" & RichTextBox4.Text & "', Дата='" & MaskedTextBox1.Text & "' WHERE Названиеорганизации='" & Рейс.ComboBox4.Text & "'"
-                Updates(strsql)
+                Updates3(strsql)
             End If
         End If
 

@@ -1,84 +1,101 @@
 ﻿Option Explicit On
 Imports System.ComponentModel
 Imports System.Data.OleDb
+Imports System.Threading
 
 
 Public Class ДобавитьПеревозчика
     Public Da As New OleDbDataAdapter 'Адаптер
     Public Ds As New DataSet 'Пустой набор записей
-    Dim tbl As New DataTable
-    Dim cb As OleDb.OleDbCommandBuilder
-    Dim Рик As String = "ООО Рикманс"
+    Private Delegate Sub com2()
+    Private Delegate Sub com3()
+    Private Delegate Sub com4()
+    Private Delegate Sub comb22()
+    'Dim tbl As New DataTable
+    'Dim cb As OleDb.OleDbCommandBuilder
 
-    Private Sub ДобавитьПеревозчика_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        If ДобПер = 0 Then
-            Me.MdiParent = MDIParent1
-            Me.WindowState = FormWindowState.Maximized
+    Private Sub com11()
+        Dim ds As DataTable
+        Dim StrSql As String
+        If ComboBox1.InvokeRequired Then
+            Me.Invoke(New com2(AddressOf com11))
         Else
-            Me.WindowState = FormWindowState.Normal
-            Me.StartPosition = FormStartPosition.CenterParent
-
+            StrSql = "SELECT DISTINCT [Наименование фирмы] FROM ПеревозчикиБаза ORDER BY [Наименование фирмы]"
+            ds = Selects3(StrSql)
+            Me.ComboBox1.AutoCompleteCustomSource.Clear()
+            Me.ComboBox1.Items.Clear()
+            For Each r As DataRow In ds.Rows
+                Me.ComboBox1.AutoCompleteCustomSource.Add(r.Item(0).ToString())
+                Me.ComboBox1.Items.Add(r(0).ToString)
+            Next
+            ComboBox1.Focus()
         End If
+    End Sub
+    Private Sub comb2()
+        'Dim ds As DataTable
+        Dim StrSql As String
+        If ComboBox2.InvokeRequired Then
+            Me.Invoke(New comb22(AddressOf comb2))
+        Else
+            Dim ds As DataTable = Selects3(StrSql:="SELECT ПолноеНазвание,Сокращенное FROM ФормаСобств ORDER BY ПолноеНазвание")
+            Me.ComboBox2.AutoCompleteCustomSource.Clear()
+            Me.ComboBox2.Items.Clear()
+            Me.ComboBox3.Items.Clear()
+            For Each r As DataRow In ds.Rows
+                Me.ComboBox2.AutoCompleteCustomSource.Add(r.Item(0).ToString())
+                Me.ComboBox2.Items.Add(r(0).ToString)
+                Me.ComboBox3.Items.Add(r(1).ToString)
+            Next
+            ComboBox2.Focus()
+        End If
+    End Sub
+
+    Private Sub com12()
+        Dim ds As DataTable
+        Dim StrSql As String
+        If ListBox1.InvokeRequired Then
+            Me.Invoke(New com3(AddressOf com12))
+        Else
+            StrSql = "SELECT DISTINCT Страна FROM Страна ORDER BY Страна"
+            ds = Selects3(StrSql)
+            ListBox1.Items.Clear()
+            For Each r As DataRow In ds.Rows
+                ListBox1.Items.Add(r(0).ToString)
+            Next
+        End If
+    End Sub
+    Private Sub com13()
+        Dim ds As DataTable
+        Dim StrSql As String
+        If ListBox2.InvokeRequired Then
+            Me.Invoke(New com4(AddressOf com13))
+        Else
+            StrSql = "SELECT DISTINCT Регионы FROM РегионыРоссии ORDER BY Регионы"
+            ds = Selects3(StrSql)
+            Me.ListBox2.Items.Clear()
+            For Each r As DataRow In ds.Rows
+                Me.ListBox2.Items.Add(r(0).ToString)
+            Next
+        End If
+    End Sub
+    Private Sub ДобавитьПеревозчика_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         Очист()
 
-        conn = New OleDbConnection
-        conn.ConnectionString = ConString
-        Try
-            conn.Open()
-        Catch ex As Exception
-            MessageBox.Show("Не подключен диск U")
-        End Try
         Dim Год As Integer = Year(Now)
 
-        Dim StrSql As String
-        StrSql = "SELECT DISTINCT Страна FROM Страна ORDER BY Страна"
-        Dim c As New OleDbCommand With {
-            .Connection = conn,
-            .CommandText = StrSql
-        }
-        Dim ds As New DataTable
-        Dim da As New OleDbDataAdapter(c)
-        da.Fill(ds)
-        Me.ListBox1.Items.Clear()
-        For Each r As DataRow In ds.Rows
-            Me.ListBox1.Items.Add(r(0).ToString)
-        Next
-
-        Dim StrSql2 As String
-        StrSql2 = "SELECT DISTINCT Регионы FROM РегионыРоссии ORDER BY Регионы"
-        Dim c2 As New OleDbCommand With {
-            .Connection = conn,
-            .CommandText = StrSql2
-        }
-        Dim ds2 As New DataTable
-        Dim da2 As New OleDbDataAdapter(c2)
-        da2.Fill(ds2)
-        Me.ListBox2.Items.Clear()
-        For Each r As DataRow In ds2.Rows
-            Me.ListBox2.Items.Add(r(0).ToString)
-        Next
-
-
-        Dim StrSql3 As String
-        StrSql3 = "SELECT DISTINCT [Наименование фирмы] FROM ПеревозчикиБаза ORDER BY [Наименование фирмы]"
-        Dim c3 As New OleDbCommand With {
-            .Connection = conn,
-            .CommandText = StrSql3
-        }
-        Dim ds3 As New DataTable
-        Dim da3 As New OleDbDataAdapter(c3)
-        da3.Fill(ds3)
-        Me.ComboBox1.AutoCompleteCustomSource.Clear()
-        Me.ComboBox1.Items.Clear()
-        For Each r As DataRow In ds3.Rows
-            Me.ComboBox1.AutoCompleteCustomSource.Add(r.Item(0).ToString())
-            Me.ComboBox1.Items.Add(r(0).ToString)
-        Next
-
-        ComboBox1.Focus()
-
-
+        Dim d As New Thread(AddressOf com11)
+        Dim d1 As New Thread(AddressOf com12)
+        Dim d2 As New Thread(AddressOf com13)
+        Dim d3 As New Thread(AddressOf comb2)
+        d.IsBackground = True
+        d1.IsBackground = True
+        d2.IsBackground = True
+        d3.IsBackground = True
+        d.Start()
+        d1.Start()
+        d2.Start()
+        d3.Start()
 
     End Sub
     Private Sub Очист()
@@ -95,12 +112,15 @@ Public Class ДобавитьПеревозчика
     End Sub
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         insertbaza()
-        Me.Close()
     End Sub
     Private Sub insertbaza()
 
         If ComboBox1.Text = "" Then
             MessageBox.Show("Выберите перевозчика!", Рик, MessageBoxButtons.OK)
+            Exit Sub
+        End If
+        If ComboBox2.Text = "" Then
+            MessageBox.Show("Выберите форму собственности перевозчика!", Рик, MessageBoxButtons.OK)
             Exit Sub
         End If
 
@@ -132,13 +152,10 @@ Public Class ДобавитьПеревозчика
         End If
 
         Dim StrSql5 As String = "INSERT INTO ПеревозчикиБаза([Наименование фирмы],[Контактное лицо],Телефоны,[Страны перевозок],Регионы,ADR,[Кол-во авто],
-[Вид_авто],Тоннаж,Объем,Ставка,Примечание)
+[Вид_авто],Тоннаж,Объем,Ставка,Примечание,[Форма собственности])
 VALUES('" & Me.ComboBox1.Text & "','" & Me.TextBox2.Text & "','" & Me.TextBox3.Text & "','" & country & "','" & country2 & "','" & Me.TextBox9.Text & "',
-'" & Me.TextBox4.Text & "', '" & Me.TextBox10.Text & "','" & Me.TextBox5.Text & "','" & Me.TextBox6.Text & "','" & Me.TextBox7.Text & "','" & Me.TextBox8.Text & "')"
-        Dim c25 As New OleDbCommand
-        c25.Connection = conn
-        c25.CommandText = StrSql5
-        c25.ExecuteNonQuery()
+'" & Me.TextBox4.Text & "', '" & Me.TextBox10.Text & "','" & Me.TextBox5.Text & "','" & Me.TextBox6.Text & "','" & Me.TextBox7.Text & "','" & Me.TextBox8.Text & "','" & ComboBox3.Text & "')"
+        Updates3(StrSql5)
 
         MessageBox.Show("Перевозчик добавлен!", Рик, MessageBoxButtons.OK, MessageBoxIcon.Information)
 
@@ -241,12 +258,18 @@ VALUES('" & Me.ComboBox1.Text & "','" & Me.TextBox2.Text & "','" & Me.TextBox3.T
 
         End If
     End Sub
-
-    Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
+    Private Sub ДобавитьПеревозчика_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+        If ОбнПер = 1 Then
+            Очист()
+            ПоискПеревозчиков.Запуск()
+        Else
+            Очист()
+        End If
 
     End Sub
 
-    Private Sub ДобавитьПеревозчика_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
-        Очист()
+    Private Sub ComboBox2_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox2.SelectedIndexChanged
+        ComboBox3.Text = ComboBox3.Items.Item(ComboBox2.SelectedIndex) 'подчиненные комбобокс
+
     End Sub
 End Class

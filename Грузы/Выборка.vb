@@ -1,15 +1,17 @@
 ﻿Option Explicit On
 Imports System.Data.OleDb
-
+Imports System.Data.SqlClient
+Imports System.Threading
 Public Class Выборка
 
-    Public Da As New OleDbDataAdapter 'Адаптер
-    Public Ds As New DataSet 'Пустой набор записей
-    Dim tbl As New DataTable
-    Dim cb As OleDb.OleDbCommandBuilder
-    Dim Рик As String = "ООО Рикманс"
+    'Public Da As New OleDbDataAdapter 'Адаптер
+    'Public Ds As New DataSet 'Пустой набор записей
+    'Dim tbl As New DataTable
+    'Dim cb As OleDb.OleDbCommandBuilder
+    'Dim Рик As String = "ООО Рикманс"
     Dim загр As String
-
+    Private Delegate Sub com1()
+    Private Delegate Sub com2()
     Public СтрПоиска As String
 
 
@@ -29,16 +31,26 @@ Public Class Выборка
         Dim d2 As Date = Now
         d = d.AddDays(-10)
         d2 = d2.AddDays(10)
-        Dim времянач1 As String = Format(d2, "MM\/dd\/yyyy")
-        Dim времякон1 As String = Format(d, "MM\/dd\/yyyy")
 
-        tbl.Clear()
+        'Dim времянач1 As String = Format(d2, "yyyy\/MM\/dd")
+        'Dim времякон1 As String = Format(d, "yyyy\/MM\/dd")
+
+
+
+        'Dim времянач1 As String = Replace(Format(d2, "yyyy\/MM\/dd"), "/", "")
+        'Dim времякон1 As String = Replace(Format(d, "yyyy\/MM\/dd"), "/", "")
+
+
+
 
         If CheckBox3.Checked = True And TextBox2.Text = "" Then
+            'StrSql = "SELECT * From ГрузыКлиентов WHERE Дата BETWEEN @d1 AND @d2 ORDER BY Организация"
+
             StrSql = "SELECT Организация, Дата, Груз, СтранаЗагрузки as [Страна загрузки], СтранаВыгрузки as [Страна выгрузки],
-ГородЗагрузки as [Город загрузки], ГородВыгрузки as [город выгрузки], Ставка, Код, СтавкаПеревозу as [Ставка перевозчику], Состояние
-From ГрузыКлиентов
-Where Экспедитор='" & Экспедитор & "' AND Дата Between #" & времянач1 & "# And #" & времякон1 & "# ORDER BY Организация"
+            ГородЗагрузки as [Город загрузки], ГородВыгрузки as [город выгрузки], Ставка, Код, СтавкаПеревозу as [Ставка перевозчику], Состояние
+            From ГрузыКлиентов Where Экспедитор ='" & Экспедитор & "' AND Дата BETWEEN @d1 AND @d2 ORDER BY Организация"
+
+            'Where Экспедитор ='" & Экспедитор & "' AND Дата BETWEEN " & времянач1 & " AND " & времякон1 & " ORDER BY Организация" 'BETWEEN #" & времянач1 & "# AND #" & времякон1 & "# ORDER BY Организация
 
         ElseIf CheckBox3.Checked = False And TextBox2.Text = "" And CheckBox4.Checked = False Then
             StrSql = "SELECT Организация, Дата, Груз, СтранаЗагрузки as [Страна загрузки], СтранаВыгрузки as [Страна выгрузки],
@@ -51,7 +63,7 @@ Where Организация = '" & Организ & "' AND Экспедитор
             StrSql = "SELECT Организация, Дата, Груз, СтранаЗагрузки as [Страна загрузки], СтранаВыгрузки as [Страна выгрузки],
 ГородЗагрузки as [Город загрузки], ГородВыгрузки as [город выгрузки], Ставка, Код, СтавкаПеревозу as [Ставка перевозчику], Состояние
 From ГрузыКлиентов
-Where Экспедитор='" & Экспедитор & "' AND Дата Between #" & времянач1 & "# And #" & времякон1 & "# AND Груз Like '%" & TextBox2.Text & "%' ORDER BY Организация"
+Where Экспедитор='" & Экспедитор & "' AND Дата BETWEEN @d1 AND @d2 AND Груз Like '%" & TextBox2.Text & "%' ORDER BY Организация"
 
 
         ElseIf ComboBox1.Text <> "" And TextBox2.Text <> "" Then
@@ -75,6 +87,41 @@ From ГрузыКлиентов Where Груз Like '%" & TextBox2.Text & "%' OR
 
         End If
 
+        'Dim tbl As DataTable = Selects3(StrSql)
+        'Dim tbl As DataTable = Selects3(StrSql)
+
+        Dim list As New List(Of Date)() From {d, d2}
+        Dim tbl As DataTable = Selects3(StrSql, list)
+
+        'Dim conn3 As New SqlConnection(ConString)
+        'If conn3.State = ConnectionState.Closed Then
+        '    conn3.Open()
+        'End If
+
+        'Dim c As New SqlCommand(StrSql, conn3)
+
+        'c.Parameters.Add("@d2", SqlDbType.Date).Value = d2 'DateTimePicker1.Value
+        'c.Parameters.Add("@d1", SqlDbType.Date).Value = d 'DateTimePicker2.Value
+
+        'Dim dst As New DataTable
+        'Dim da As New SqlDataAdapter(c)
+        'Try
+        '    da.Fill(dst)
+        '    Dim gf As Object = dst.Rows(0).Item(0)
+        '    Dim m As String = c.ExecuteScalar().ToString()
+        '    If conn3.State = ConnectionState.Open Then
+        '        conn3.Close()
+        '    End If
+
+        'Catch ex As Exception
+        '    errds = 1
+        '    If conn3.State = ConnectionState.Open Then
+        '        conn3.Close()
+        '    End If
+
+        'End Try
+
+        'Dim tbl As DataTable = dst
 
 
 
@@ -92,13 +139,7 @@ From ГрузыКлиентов Where Груз Like '%" & TextBox2.Text & "%' OR
 
 
 
-        Dim c As New OleDbCommand
-        c.Connection = conn
-        c.CommandText = StrSql
-        'Dim ds As New DataSet
-        Dim da As New OleDbDataAdapter(c)
-        'da.Fill(ds, "Сотрудники")
-        da.Fill(tbl)
+
         Grid1.DataSource = tbl
         'Grid1.Columns(0).FillWeight = 70
         'Grid1.Columns(1).FillWeight = 50
@@ -116,56 +157,71 @@ From ГрузыКлиентов Where Груз Like '%" & TextBox2.Text & "%' OR
         Next
 
     End Sub
+    Private Sub com11()
+        Dim ds As DataTable
+        Dim StrSql As String
+        If ComboBox1.InvokeRequired Then
+            Me.Invoke(New com1(AddressOf com11))
+        Else
+            StrSql = "SELECT DISTINCT Организация FROM ГрузыКлиентов ORDER BY Организация"
+            'ds = Selects3(StrSql)
+            ds = Selects3(StrSql)
+            Me.ComboBox1.AutoCompleteCustomSource.Clear()
+            Me.ComboBox1.Items.Clear()
+            For Each r As DataRow In ds.Rows
+                Me.ComboBox1.AutoCompleteCustomSource.Add(r.Item(0).ToString())
+                Me.ComboBox1.Items.Add(r(0).ToString)
+            Next
+            ComboBox1.Text = ""
+
+        End If
+    End Sub
+
+    Private Sub com21()
+        Dim ds As DataTable
+        Dim StrSql As String
+        If ComboBox2.InvokeRequired Then
+            Me.Invoke(New com2(AddressOf com21))
+        Else
+            StrSql = "SELECT DISTINCT СтранаЗагрузки FROM ГрузыКлиентов ORDER BY СтранаЗагрузки"
+            'ds = Selects3(StrSql)
+            ds = Selects3(StrSql)
+            Me.ComboBox2.AutoCompleteCustomSource.Clear()
+            Me.ComboBox2.Items.Clear()
+            For Each r As DataRow In ds.Rows
+                Me.ComboBox2.AutoCompleteCustomSource.Add(r.Item(0).ToString())
+                Me.ComboBox2.Items.Add(r(0).ToString)
+            Next
+            ComboBox2.Text = ""
+            ComboBox2.Enabled = False
+
+        End If
+    End Sub
+
+
 
     Private Sub Выборка_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.MdiParent = MDIParent1
-        Me.WindowState = FormWindowState.Maximized
-        conn = New OleDbConnection
-        conn.ConnectionString = ConString
-        Try
-            conn.Open()
-        Catch ex As Exception
-            MessageBox.Show("Не подключен диск U")
-        End Try
+
+        'conn = New OleDbConnection
+        'conn.ConnectionString = ConString
+        'Try
+        '    conn.Open()
+        'Catch ex As Exception
+        '    MessageBox.Show("Не подключен диск U")
+        'End Try
         Dim Год As Integer = Year(Now)
 
         'If Me.Прием_Load = vbTrue Then Form1.Load = False
 
         TextBox1.Text = DateTime.Now.ToString("dd.MM.yyyy")
 
-        Dim StrSql As String
-        StrSql = "SELECT DISTINCT Организация FROM ГрузыКлиентов ORDER BY Организация"
-        Dim c As New OleDbCommand With {
-            .Connection = conn,
-            .CommandText = StrSql
-        }
-        Dim ds As New DataTable
-        Dim da As New OleDbDataAdapter(c)
-        da.Fill(ds)
-        Me.ComboBox1.AutoCompleteCustomSource.Clear()
-        Me.ComboBox1.Items.Clear()
-        For Each r As DataRow In ds.Rows
-            Me.ComboBox1.AutoCompleteCustomSource.Add(r.Item(0).ToString())
-            Me.ComboBox1.Items.Add(r(0).ToString)
-        Next
-
-        Dim StrSql1 As String
-        StrSql1 = "SELECT DISTINCT СтранаЗагрузки FROM ГрузыКлиентов ORDER BY СтранаЗагрузки"
-        Dim c1 As New OleDbCommand With {
-            .Connection = conn,
-            .CommandText = StrSql1
-        }
-        Dim ds1 As New DataTable
-        Dim da1 As New OleDbDataAdapter(c1)
-        da1.Fill(ds1)
-        Me.ComboBox2.AutoCompleteCustomSource.Clear()
-        Me.ComboBox2.Items.Clear()
-        For Each r As DataRow In ds1.Rows
-            Me.ComboBox2.AutoCompleteCustomSource.Add(r.Item(0).ToString())
-            Me.ComboBox2.Items.Add(r(0).ToString)
-        Next
-        ComboBox2.Enabled = False
-
+        Dim fg As New Thread(AddressOf com11)
+        fg.IsBackground = True
+        fg.Start()
+        Dim fg1 As New Thread(AddressOf com21)
+        fg1.IsBackground = True
+        fg1.Start()
+        DateTimePicker2.Value = Now.Date.AddDays(-50)
     End Sub
 
     Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
@@ -247,6 +303,21 @@ From ГрузыКлиентов Where Груз Like '%" & TextBox2.Text & "%' OR
 
             РабочаяФормаСостояние.TextBox1.Text = Grid1.CurrentRow.Cells("Организация").Value
             РабочаяФормаСостояние.TextBox2.Text = Grid1.CurrentRow.Cells("Груз").Value
+            'Dim ds As DataTable = Selects3(StrSql:="SELECT ОрганизКонтакт FROM ГрузыКлиентов WHERE Организация='" & Grid1.CurrentRow.Cells("Организация").Value & "'")
+            Dim ds As DataTable = Selects3(StrSql:="SELECT ОрганизКонтакт FROM ГрузыКлиентов WHERE Организация='" & Grid1.CurrentRow.Cells("Организация").Value & "'")
+            Dim b As String
+            For Each d As DataRow In ds.Rows
+                If Not IsDBNull(d.Item(0)) Or d.Item(0).ToString <> "" Then
+                    b = d.Item(0).ToString
+                    Exit For
+                End If
+            Next
+
+            If b <> "" Then
+                РабочаяФормаСостояние.RichTextBox1.Text = b
+            Else
+                РабочаяФормаСостояние.RichTextBox1.Text = "Нет конт телефона"
+            End If
 
             РабочаяФормаСостояние.ShowDialog()
 

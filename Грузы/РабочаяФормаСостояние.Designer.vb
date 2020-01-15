@@ -35,6 +35,8 @@ Partial Class РабочаяФормаСостояние
         Me.Label5 = New System.Windows.Forms.Label()
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.TextBox4 = New System.Windows.Forms.TextBox()
+        Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
+        Me.Label6 = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'TextBox1
@@ -127,7 +129,7 @@ Partial Class РабочаяФормаСостояние
         'CheckBox1
         '
         Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Location = New System.Drawing.Point(12, 225)
+        Me.CheckBox1.Location = New System.Drawing.Point(12, 346)
         Me.CheckBox1.Name = "CheckBox1"
         Me.CheckBox1.Size = New System.Drawing.Size(98, 21)
         Me.CheckBox1.TabIndex = 10
@@ -136,17 +138,36 @@ Partial Class РабочаяФормаСостояние
         '
         'TextBox4
         '
-        Me.TextBox4.Location = New System.Drawing.Point(12, 249)
+        Me.TextBox4.Location = New System.Drawing.Point(12, 370)
         Me.TextBox4.Multiline = True
         Me.TextBox4.Name = "TextBox4"
         Me.TextBox4.Size = New System.Drawing.Size(281, 98)
         Me.TextBox4.TabIndex = 11
         '
+        'RichTextBox1
+        '
+        Me.RichTextBox1.Location = New System.Drawing.Point(12, 256)
+        Me.RichTextBox1.Name = "RichTextBox1"
+        Me.RichTextBox1.Size = New System.Drawing.Size(277, 84)
+        Me.RichTextBox1.TabIndex = 12
+        Me.RichTextBox1.Text = ""
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(9, 236)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(96, 17)
+        Me.Label6.TabIndex = 13
+        Me.Label6.Text = "Конт телефон:"
+        '
         'РабочаяФормаСостояние
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 17.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(449, 360)
+        Me.ClientSize = New System.Drawing.Size(462, 478)
+        Me.Controls.Add(Me.Label6)
+        Me.Controls.Add(Me.RichTextBox1)
         Me.Controls.Add(Me.TextBox4)
         Me.Controls.Add(Me.CheckBox1)
         Me.Controls.Add(Me.Label5)
@@ -184,4 +205,6 @@ Partial Class РабочаяФормаСостояние
     Friend WithEvents Label5 As Label
     Friend WithEvents CheckBox1 As CheckBox
     Friend WithEvents TextBox4 As TextBox
+    Friend WithEvents RichTextBox1 As RichTextBox
+    Friend WithEvents Label6 As Label
 End Class

@@ -8,15 +8,15 @@ Public Class КлиентДанные
         End If
 
         Dim strsql As String = "SELECT * FROM ГрузыКлиентов WHERE Организация='" & ComboBox1.Text & "'"
-        Dim ds As DataTable = Selects(strsql)
+        Dim ds As DataTable = Selects3(strsql)
 
         If errds = 1 Then
             Dim strsql1 As String = "INSERT INTO ГрузыКлиентов(Организация,ОрганизКонтакт) VALUES('" & ComboBox1.Text & "', '" & RichTextBox2.Text & "')"
-            Updates(strsql1)
+            Updates3(strsql1)
             MessageBox.Show("Новый клиент добавлен!", Рик)
         Else
             Dim strsql2 As String = "UPDATE ГрузыКлиентов SET ОрганизКонтакт='" & RichTextBox2.Text & "' WHERE Организация='" & ComboBox1.Text & "'"
-            Updates(strsql2)
+            Updates3(strsql2)
             MessageBox.Show("Данные обновлены!", Рик)
         End If
         RichTextBox2.Text = ""
@@ -26,7 +26,7 @@ Public Class КлиентДанные
 
     Private Sub КлиентДанные_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim strsql As String = "SELECT DISTINCT Организация FROM ГрузыКлиентов"
-        Dim ds As DataTable = Selects(strsql)
+        Dim ds As DataTable = Selects3(strsql)
         ComboBox1.AutoCompleteCustomSource.Clear()
         ComboBox1.Items.Clear()
         For Each r As DataRow In ds.Rows
@@ -38,7 +38,7 @@ Public Class КлиентДанные
 
     Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
         Dim strsql As String = "SELECT ОрганизКонтакт FROM ГрузыКлиентов WHERE Организация='" & ComboBox1.Text & "'"
-        Dim ds As DataTable = Selects(strsql)
+        Dim ds As DataTable = Selects3(strsql)
         RichTextBox2.Text = ""
         RichTextBox2.Text = ds.Rows(0).Item(0).ToString
     End Sub

@@ -67,6 +67,7 @@ Partial Class НовыйПеревоз
         Me.Label1 = New System.Windows.Forms.Label()
         Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
         Me.ListBox1 = New System.Windows.Forms.ListBox()
+        Me.ComboBox4 = New System.Windows.Forms.ComboBox()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
@@ -486,7 +487,7 @@ Partial Class НовыйПеревоз
         '
         'RichTextBox1
         '
-        Me.RichTextBox1.Location = New System.Drawing.Point(190, 63)
+        Me.RichTextBox1.Location = New System.Drawing.Point(190, 62)
         Me.RichTextBox1.Name = "RichTextBox1"
         Me.RichTextBox1.Size = New System.Drawing.Size(580, 35)
         Me.RichTextBox1.TabIndex = 0
@@ -494,19 +495,32 @@ Partial Class НовыйПеревоз
         '
         'ListBox1
         '
+        Me.ListBox1.BackColor = System.Drawing.Color.Khaki
         Me.ListBox1.FormattingEnabled = True
         Me.ListBox1.ItemHeight = 17
-        Me.ListBox1.Location = New System.Drawing.Point(801, 43)
+        Me.ListBox1.Location = New System.Drawing.Point(801, 94)
         Me.ListBox1.Name = "ListBox1"
         Me.ListBox1.ScrollAlwaysVisible = True
-        Me.ListBox1.Size = New System.Drawing.Size(354, 650)
+        Me.ListBox1.Size = New System.Drawing.Size(354, 599)
         Me.ListBox1.TabIndex = 45
+        '
+        'ComboBox4
+        '
+        Me.ComboBox4.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.ComboBox4.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.ComboBox4.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
+        Me.ComboBox4.FormattingEnabled = True
+        Me.ComboBox4.Location = New System.Drawing.Point(801, 63)
+        Me.ComboBox4.Name = "ComboBox4"
+        Me.ComboBox4.Size = New System.Drawing.Size(354, 25)
+        Me.ComboBox4.TabIndex = 58
         '
         'НовыйПеревоз
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 17.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1169, 701)
+        Me.Controls.Add(Me.ComboBox4)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Label18)
         Me.Controls.Add(Me.ComboBox3)
@@ -581,4 +595,5 @@ Partial Class НовыйПеревоз
     Friend WithEvents RichTextBox1 As RichTextBox
     Friend WithEvents ListBox1 As ListBox
     Friend WithEvents CheckBox2 As CheckBox
+    Friend WithEvents ComboBox4 As ComboBox
 End Class

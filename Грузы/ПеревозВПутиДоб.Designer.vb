@@ -28,9 +28,9 @@ Partial Class ПеревозВПутиДоб
         Me.Label5 = New System.Windows.Forms.Label()
         Me.TextBox5 = New System.Windows.Forms.TextBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
         Me.MaskedTextBox1 = New System.Windows.Forms.MaskedTextBox()
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -81,6 +81,14 @@ Partial Class ПеревозВПутиДоб
         Me.GroupBox2.TabIndex = 11
         Me.GroupBox2.TabStop = False
         '
+        'RichTextBox1
+        '
+        Me.RichTextBox1.Location = New System.Drawing.Point(9, 73)
+        Me.RichTextBox1.Name = "RichTextBox1"
+        Me.RichTextBox1.Size = New System.Drawing.Size(468, 130)
+        Me.RichTextBox1.TabIndex = 9
+        Me.RichTextBox1.Text = ""
+        '
         'MaskedTextBox1
         '
         Me.MaskedTextBox1.Location = New System.Drawing.Point(112, 15)
@@ -99,14 +107,6 @@ Partial Class ПеревозВПутиДоб
         Me.Button1.TabIndex = 12
         Me.Button1.Text = "Сохранить"
         Me.Button1.UseVisualStyleBackColor = True
-        '
-        'RichTextBox1
-        '
-        Me.RichTextBox1.Location = New System.Drawing.Point(9, 73)
-        Me.RichTextBox1.Name = "RichTextBox1"
-        Me.RichTextBox1.Size = New System.Drawing.Size(468, 130)
-        Me.RichTextBox1.TabIndex = 9
-        Me.RichTextBox1.Text = ""
         '
         'ПеревозВПутиДоб
         '

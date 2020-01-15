@@ -1,17 +1,21 @@
 ﻿Option Explicit On
 Imports System.Data.OleDb
-
+Imports System.Threading
 Public Class РабочаяФорма
     Dim tbl As New DataTable
     Dim tbl2 As New DataTable
     Dim strsql, strsql2, strsql3 As String
+    Private Delegate Sub comb38(ByVal ds As DataGridView)
+    Private Delegate Sub com4()
+    Private Delegate Sub com41(ByVal ds As DataGridView)
+
 
 
 
     Private Sub Подборка()
 
         Dim strsql As String = "SELECT Примечание FROM ИтогГрузПеревоз WHERE IDПеревоз=" & IDПеревоза & " AND IDГруз=" & IDГруз & ""
-        Dim ds As DataTable = Selects(strsql)
+        Dim ds As DataTable = Selects3(strsql)
         If errds = 1 Then
             Exit Sub
         Else
@@ -41,25 +45,18 @@ Public Class РабочаяФорма
     Public Sub Клик()
         IDПеревоза = Grid2.CurrentRow.Cells("ID").Value
         Grid2.SelectionMode = DataGridViewSelectionMode.FullRowSelect
-        strsql3 = "SELECT Примечание, Дата FROM ИтогГрузПеревоз WHERE IDПеревоз=" & IDПеревоза & " AND IDГруз=" & IDГруз & ""
-        Dim c3 As New OleDbCommand With {
-            .Connection = conn,
-            .CommandText = strsql3
-        }
-        Dim ds3 As New DataTable
-        Dim da3 As New OleDbDataAdapter(c3)
-        Try
-            da3.Fill(ds3)
-            Me.ListBox1.Items.Clear()
+        Dim ds3 As DataTable = Selects3(StrSql:="SELECT Примечание, Дата FROM ИтогГрузПеревоз WHERE IDПеревоз=" & IDПеревоза & " AND IDГруз=" & IDГруз & "")
+
+
+        Me.ListBox1.Items.Clear()
+        If errds = 0 Then
+
             For Each r As DataRow In ds3.Rows
                 Me.ListBox1.Items.Add(r(0).ToString)
             Next
             Me.ListBox1.Items.Add("Дата переговоров - " & ds3.Rows(0).Item(1).ToString)
+        End If
 
-        Catch ex As Exception
-            'MessageBox.Show("С перевозчиком не велись переговоры по этому грузу")
-        End Try
-        'Grid2Refresh(1)
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
@@ -75,36 +72,45 @@ Public Class РабочаяФорма
 
 
     End Sub
-
+    Private Sub Загр1()
+        If RichTextBox1.InvokeRequired Then
+            Me.Invoke(New com4(AddressOf Загр1))
+        Else
+            strsql = "SELECT Организация, Дата, Груз, СтранаЗагрузки as [Страна загр], СтранаВыгрузки as [Страна выгр], ГородЗагрузки as [Город загр],
+ГородВыгрузки as [Город выгр], Ставка, ОрганизКонтакт, Код
+From ГрузыКлиентов Where Код=" & IDГруз & ""
+            Dim tbl As DataTable = Selects3(strsql)
+            RichTextBox1.Text = tbl.Rows(0).Item(8).ToString
+            Grid1.DataSource = tbl
+            'Grid1.Columns(0).FillWeight = 70
+            'Grid1.Columns(1).FillWeight = 50
+            Grid1.Columns(2).FillWeight = 750
+            Grid1.Columns(8).Visible = False
+            Grid1.Columns(9).Visible = False
+            Grid1.SelectionMode = DataGridViewSelectionMode.FullRowSelect
+        End If
+    End Sub
     Private Sub РабочаяФорма_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.MdiParent = MDIParent1
         Me.WindowState = FormWindowState.Maximized
-        conn = New OleDbConnection
-        conn.ConnectionString = ConString
-        Try
-            conn.Open()
-        Catch ex As Exception
-            MessageBox.Show("Не подключен диск U")
-        End Try
+        'conn = New OleDbConnection
+        'conn.ConnectionString = ConString
+        'Try
+        '    conn.Open()
+        'Catch ex As Exception
+        '    MessageBox.Show("Не подключен диск U")
+        'End Try
+        Dim k As New Thread(AddressOf Загр1)
+        k.IsBackground = True
+        'k.SetApartmentState(ApartmentState.STA)
+        k.Start()
 
-        strsql = "SELECT Организация, Дата, Груз, СтранаЗагрузки as [Страна загр], СтранаВыгрузки as [Страна выгр], ГородЗагрузки as [Город загр],
-ГородВыгрузки as [Город выгр], Ставка, ОрганизКонтакт
-From ГрузыКлиентов Where Код=" & IDГруз & ""
 
-        Dim c As New OleDbCommand
-        c.Connection = conn
-        c.CommandText = strsql
-        'Dim ds As New DataSet
-        Dim da As New OleDbDataAdapter(c)
-        'da.Fill(ds, "Сотрудники")
-        da.Fill(tbl)
-        RichTextBox1.Text = tbl.Rows(0).Item(8).ToString
-        Grid1.DataSource = tbl
-        'Grid1.Columns(0).FillWeight = 70
-        'Grid1.Columns(1).FillWeight = 50
-        Grid1.Columns(2).FillWeight = 750
-        Grid1.Columns(8).Visible = False
-        Grid1.SelectionMode = DataGridViewSelectionMode.FullRowSelect
+
+        'Dim k1 As New Thread(AddressOf Grid2Refresh)
+        'k1.IsBackground = True
+        ''k1.SetApartmentState(ApartmentState.STA)
+        'k1.Start(0)
 
         Grid2Refresh(0)
     End Sub
@@ -124,7 +130,7 @@ From ГрузыКлиентов Where Код=" & IDГруз & ""
 
     Private Sub Отбор()
         Dim strsql As String = "SELECT IDПеревоз, Примечание FROM ИтогГрузПеревоз WHERE IDГруз=" & IDГруз & ""
-        Dim ds As DataTable = Selects(strsql)
+        Dim ds As DataTable = Selects3(strsql)
         If errds = 1 Then
             Exit Sub
         End If
@@ -137,6 +143,25 @@ From ГрузыКлиентов Where Код=" & IDГруз & ""
             Next
         Next
     End Sub
+
+    Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
+        Grid2.ClearSelection()
+        For Each r As DataGridViewRow In Grid2.Rows
+            For Each cell As DataGridViewCell In r.Cells
+                If (cell.FormattedValue).Contains(Me.ComboBox1.Text) Then
+                    r.Selected = True
+                    Grid2.FirstDisplayedScrollingRowIndex = r.Index
+                End If
+            Next
+        Next
+    End Sub
+
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        ДанныеДляВставкиСкайпа = New Tuple(Of String, String, String, String, Integer)(Grid1.Rows(0).Cells(0).Value, Grid1.Rows(0).Cells(6).Value, Grid1.Rows(0).Cells(2).Value, Grid1.Rows(0).Cells(3).Value, Grid1.Rows(0).Cells(9).Value)
+        ДляСкайпаРабочаяФорма.ShowDialog()
+
+    End Sub
+
     Public Sub Grid2Refresh(ByVal d As Integer)
         Dim df As String
         If d = 0 Then
@@ -144,45 +169,146 @@ From ГрузыКлиентов Where Код=" & IDГруз & ""
         Else
             df = Grid1.Rows(0).Cells(3).Value
         End If
+        'If Not IsDBNull(tbl2) Then
+        '    tbl2.Clear()
+        'End If
 
-        strsql2 = "SELECT ПеревозчикиБаза.[Наименование фирмы], ПеревозчикиБаза.[Контактное лицо],
-        ПеревозчикиБаза.Телефоны, ПеревозчикиБаза.[Страны перевозок], ПеревозчикиБаза.Регионы, ПеревозчикиБаза.ADR,
-        ПеревозчикиБаза.[Кол-во авто], ПеревозчикиБаза.Вид_авто, ПеревозчикиБаза.Тоннаж, ПеревозчикиБаза.Объем, ПеревозчикиБаза.Ставка,
-        ПеревозчикиБаза.Примечание, ПеревозчикиБаза.ID
-        From ПеревозчикиБаза Where ПеревозчикиБаза.[Страны перевозок] LIKE '%" & df & "%' ORDER BY [Наименование фирмы]"
+        'Select Case[Наименование фирмы], [Контактное лицо], Телефоны,[Страны перевозок],Регионы, ADR,[Кол-во авто], Вид_авто, Тоннаж, Объем, Ставка,
+        'Примечание, ID
+
+        Dim strsql2 As String = "SELECT [Наименование фирмы],[Контактное лицо],Телефоны,[Страны перевозок],Регионы, ADR,[Кол-во авто],Вид_авто,Тоннаж,Объем,Ставка,Примечание,ID
+FROM ПеревозчикиБаза
+Where [Страны перевозок] LIKE '%" & df & "%' 
+ORDER BY [Наименование фирмы]"
+        Dim tbl2 As DataTable = Selects3(StrSql:=strsql2)
+
+        'If d = 0 Then
+        '    tbl2.Columns.Add("Переговоры", Type.GetType("System.String"))
+        'End If
 
 
-        Dim c1 As New OleDbCommand
-        c1.Connection = conn
-        c1.CommandText = strsql2
-        'Dim ds As New DataSet
-        Dim da1 As New OleDbDataAdapter(c1)
-        'da.Fill(ds, "Сотрудники")
-        tbl2.Clear()
-        da1.Fill(tbl2)
-        If d = 0 Then
-            tbl2.Columns.Add("Переговоры", Type.GetType("System.String"))
-        End If
-        Отбор()
-        Grid2.DataSource = tbl2
-        Grid2.Columns(12).Visible = False
-        Grid2.Columns(0).FillWeight = 200
-        Grid2.Columns(1).FillWeight = 200
-        Grid2.Columns(2).FillWeight = 200
-        Grid2.Columns(3).FillWeight = 200
-        Grid2.Columns(11).FillWeight = 200
-        Grid2.Columns(13).FillWeight = 250
-        Grid2.SelectionMode = DataGridViewSelectionMode.FullRowSelect
+        tbl2.Columns.Add("Переговоры", Type.GetType("System.String"))
 
-        Grid2.ClearSelection() 'Поиск в Grid1
-        For Each row As DataGridViewRow In Grid2.Rows
-            For Each cell As DataGridViewCell In row.Cells
-                If (cell.FormattedValue).Contains(IDПеревоза) Then
-                    row.Selected = True
-                    Grid2.FirstDisplayedScrollingRowIndex = row.Index
-                End If
-            Next
+        For x As Integer = 0 To tbl2.Rows.Count - 1
+            Dim f As Integer = tbl2.Rows(x).Item(7).ToString.Length
+            If f = 0 Then Continue For
+            tbl2.Rows(x).Item(7) = Strings.UCase(Strings.Left(tbl2.Rows(x).Item(7).ToString, 1)) & Strings.Right(tbl2.Rows(x).Item(7).ToString, f - 1)
         Next
+
+        Dim dst As DataTable = Selects3(StrSql:="SELECT DISTINCT Вид_авто From ПеревозчикиБаза Where [Страны перевозок] LIKE '%" & df & "%'")
+
+        For y As Integer = 0 To dst.Rows.Count - 1
+            Dim f As Integer = dst.Rows(y).Item(0).ToString.Length
+            If f = 0 Then Continue For
+            dst.Rows(y).Item(0) = Strings.UCase(Strings.Left(dst.Rows(y).Item(0).ToString, 1)) & Strings.Right(dst.Rows(y).Item(0).ToString, f - 1)
+        Next
+
+        Dim row As DataRow = dst.NewRow
+        row("Вид_авто") = "Все авто"
+        dst.Rows.Add(row)
+
+
+        ComboBox2.AutoCompleteCustomSource.Clear()
+        ComboBox2.Items.Clear()
+        For i As Integer = 0 To dst.Rows.Count - 1
+            Me.ComboBox2.AutoCompleteCustomSource.Add(dst.Rows(i).Item(0).ToString)
+            Me.ComboBox2.Items.Add(dst.Rows(i).Item(0).ToString)
+        Next
+
+
+
+
+        Отбор()
+        grid2start(tbl2)
+
+
+
+        Dim g As New Thread(AddressOf com1)
+            g.IsBackground = True
+            g.Start(Grid2)
+
+    End Sub
+    Private Sub grid2start(ByVal ds As DataTable)
+
+
+        Grid2.DataSource = ds
+        Dim f As New Thread(Sub() grid2selected(Grid2))
+        f.IsBackground = True
+        f.Start()
+
+        'Grid2.Columns(12).Visible = False
+        Grid2.Columns(0).FillWeight = 200
+            Grid2.Columns(1).FillWeight = 200
+            Grid2.Columns(2).FillWeight = 200
+            Grid2.Columns(3).FillWeight = 200
+            Grid2.Columns(11).FillWeight = 200
+            Grid2.Columns(13).FillWeight = 250
+            Grid2.SelectionMode = DataGridViewSelectionMode.FullRowSelect
+
+        'Grid2.ClearSelection() 'Поиск в Grid1
+        'For Each row As DataGridViewRow In Grid2.Rows
+        '    For Each cell As DataGridViewCell In row.Cells
+        '        If (cell.FormattedValue).Contains(IDПеревоза) Then
+        '            row.Selected = True
+        '            Grid2.FirstDisplayedScrollingRowIndex = row.Index
+        '        End If
+        '    Next
+        'Next
+
+
+
+    End Sub
+
+    Private Sub ComboBox2_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox2.SelectedIndexChanged
+        If ComboBox2.Text = "Все авто" Then
+            Отбор()
+            grid2start(tbl2)
+            Exit Sub
+        End If
+
+        Dim ds As New DataTable
+        ds = tbl2.Copy()
+
+        For f As Integer = 0 To ds.Rows.Count - 1
+            If Not ds.Rows(f).Item(7).ToString.Contains(ComboBox2.Text) Then
+                ds.Rows(f).Delete()
+            End If
+        Next
+        grid2start(ds)
+
+
+    End Sub
+
+    Private Sub grid2selected(ByVal ds As DataGridView)
+        If Grid2.InvokeRequired Then
+            Me.Invoke(New com41(AddressOf grid2selected), ds)
+        Else
+            Grid2.ClearSelection()
+            For Each row As DataGridViewRow In Grid2.Rows
+                For Each cell As DataGridViewCell In row.Cells
+                    If (cell.FormattedValue).Contains(IDПеревоза) Then
+                        row.Selected = True
+                        Grid2.FirstDisplayedScrollingRowIndex = row.Index
+                    End If
+                Next
+            Next
+        End If
+
+    End Sub
+    Private Sub com1(ByVal ds As DataGridView)
+
+        If ComboBox1.InvokeRequired Then
+            Me.Invoke(New comb38(AddressOf com1), ds)
+        Else
+            ComboBox1.AutoCompleteCustomSource.Clear()
+            ComboBox1.Items.Clear()
+            For i As Integer = 0 To ds.Rows.Count - 1
+                Me.ComboBox1.AutoCompleteCustomSource.Add(ds.Rows(i).Cells(0).Value.ToString)
+                Me.ComboBox1.Items.Add(ds.Rows(i).Cells(0).Value.ToString)
+            Next
+        End If
+
+
 
 
     End Sub

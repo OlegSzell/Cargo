@@ -4,16 +4,10 @@ Imports System.Data.OleDb
 Public Class Напоминание
     Dim ds As DataTable
     Private Sub Напоминание_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        conn = New OleDbConnection
-        conn.ConnectionString = ConString
-        Try
-            conn.Open()
-        Catch ex As Exception
-            MessageBox.Show("Не подключен диск U")
-        End Try
+
 
         Dim strsql As String = "SELECT DISTINCT Клиент FROM ПереговорыКлиент ORDER BY Клиент"
-        Dim ds As DataTable = Selects(strsql)
+        Dim ds As DataTable = Selects3(strsql)
 
         Me.ComboBox1.AutoCompleteCustomSource.Clear()
         Me.ComboBox1.Items.Clear()
@@ -25,20 +19,20 @@ Public Class Напоминание
 
     Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
         Try
-            ds.clear
+            ds.Clear()
         Catch ex As Exception
 
         End Try
         Dim strsql As String = "SELECT ДатаПереговоров as [Дата переговоров], ТекстПереговора as [Текст переговора], ДатаНапоминания as [Дата напоминания],
 ТекстНапоминания as [Текст напоминания], ОЧемДоговорВсплывФорма as [Последние переговоры], ДатаОчемДоговорилис as [Дата последних переговоров] 
 FROM ПереговорыКлиент WHERE Клиент='" & ComboBox1.Text & "'"
-        ds = Selects(strsql)
+        ds = Selects3(strsql)
         Grid1.DataSource = ds
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Try
-            ds.clear
+            ds.Clear()
         Catch ex As Exception
 
         End Try
@@ -46,7 +40,7 @@ FROM ПереговорыКлиент WHERE Клиент='" & ComboBox1.Text & "
         Dim strsql As String = "SELECT Клиент as [Клиент], ДатаПереговоров as [Дата переговоров], ТекстПереговора as [Текст переговора], ДатаНапоминания as [Дата напоминания],
 ТекстНапоминания as [Текст напоминания], ОЧемДоговорВсплывФорма as [Последние переговоры], ДатаОчемДоговорилис as [Дата последних переговоров] 
 FROM ПереговорыКлиент WHERE Экспедитор='" & Экспедитор & "' ORDER BY Клиент"
-        ds = Selects(strsql)
+        ds = Selects3(strsql)
         Grid1.DataSource = ds
     End Sub
 End Class

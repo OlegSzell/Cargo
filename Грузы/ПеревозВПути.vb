@@ -5,15 +5,9 @@ Public Class ПеревозВПути
     Dim ds, ds2 As New DataTable
     Private Sub ПеревозВПути_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         запГрид()
-        strsql = "SELECT [Наименование фирмы], ID
-FROM ПеревозчикиБаза ORDER BY [Наименование фирмы]"
-        Dim c As New OleDbCommand With {
-            .Connection = conn,
-            .CommandText = strsql
-        }
+        Dim ds As DataTable = Selects3(StrSql:="SELECT [Наименование фирмы], ID
+FROM ПеревозчикиБаза ORDER BY [Наименование фирмы]")
 
-        Dim da As New OleDbDataAdapter(c)
-        da.Fill(ds)
         Me.ComboBox1.AutoCompleteCustomSource.Clear()
         Me.ComboBox1.Items.Clear()
         Me.ComboBox2.Items.Clear()
@@ -30,9 +24,6 @@ FROM ПеревозчикиБаза ORDER BY [Наименование фирм�
         d = d.AddDays(15)
         времянач = Format(d, "MM\/dd\/yyyy")
         Dim времякон As String = DateTime.Now.ToString("MM\/dd\/yyyy")
-
-
-        ds2.Clear()
 
         If CheckBox1.Checked = True And TextBox1.Text = "" Then
 
@@ -54,13 +45,7 @@ WHERE ДатаВыгр Between #" & времянач & "# And #" & времяк�
 
         End If
 
-        Dim c As New OleDbCommand With {
-            .Connection = conn,
-            .CommandText = strsql
-        }
-
-        Dim da As New OleDbDataAdapter(c)
-        da.Fill(ds2)
+        Dim ds2 As DataTable = Selects3(StrSql:=strsql)
         Grid1.DataSource = ds2
 
         Grid1.Columns(0).FillWeight = 100

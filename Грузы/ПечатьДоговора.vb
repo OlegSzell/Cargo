@@ -104,18 +104,9 @@ Public Class ПечатьДоговора
 
 
     Private Sub ПечатьДоговора_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        conn = New OleDbConnection
-        conn.ConnectionString = ConString
-        Try
-            conn.Open()
-        Catch ex As Exception
-            MessageBox.Show("Не подключен диск U")
-
-        End Try
-
 
         strsql = "SELECT НазваниеОрганизации FROM Клиент ORDER BY НазваниеОрганизации"
-        ds = Selects(strsql)
+        ds = Selects3(strsql)
 
         Me.ComboBox1.AutoCompleteCustomSource.Clear()
         Me.ComboBox1.Items.Clear()
@@ -125,7 +116,7 @@ Public Class ПечатьДоговора
         Next
 
         strsql1 = "SELECT Названиеорганизации FROM Перевозчики ORDER BY Названиеорганизации"
-        ds1 = Selects(strsql1)
+        ds1 = Selects3(strsql1)
 
         Me.ComboBox2.AutoCompleteCustomSource.Clear()
         Me.ComboBox2.Items.Clear()

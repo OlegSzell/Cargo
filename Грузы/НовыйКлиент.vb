@@ -1,5 +1,6 @@
 ﻿Option Explicit On
 Imports System.Data.OleDb
+Imports System.Threading
 Public Class НовыйКлиент
     Dim strsql As String
     Dim ds As DataTable
@@ -7,40 +8,82 @@ Public Class НовыйКлиент
     Dim кол As Integer
 
 
+
     Private Sub НовыйКлиент_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        conn = New OleDbConnection
-        conn.ConnectionString = ConString
-        Try
-            conn.Open()
-        Catch ex As Exception
-            MessageBox.Show("Не подключен диск U")
-        End Try
+        ''conn = New OleDbConnection
+        ''conn.ConnectionString = ConString
+        ''Try
+        ''    conn.Open()
+        ''Catch ex As Exception
+        ''    MessageBox.Show("Не подключен диск U")
+        ''End Try
 
-        strsql = "SELECT ПолноеНазвание FROM ФормаСобств ORDER BY ПолноеНазвание"
-        ds = Selects(strsql)
+        'strsql = "SELECT ПолноеНазвание FROM ФормаСобств ORDER BY ПолноеНазвание"
+        'ds = Selects3(strsql)
 
-        Me.ComboBox1.AutoCompleteCustomSource.Clear()
-        Me.ComboBox1.Items.Clear()
-        For Each r As DataRow In ds.Rows
-            Me.ComboBox1.AutoCompleteCustomSource.Add(r.Item(0).ToString())
-            Me.ComboBox1.Items.Add(r(0).ToString)
-        Next
+        'Me.ComboBox1.AutoCompleteCustomSource.Clear()
+        'Me.ComboBox1.Items.Clear()
+        'For Each r As DataRow In ds.Rows
+        '    Me.ComboBox1.AutoCompleteCustomSource.Add(r.Item(0).ToString())
+        '    Me.ComboBox1.Items.Add(r(0).ToString)
+        'Next
 
-        'ComboBox2.Items.Clear()
-        'Dim d() As String = {Now.Year, Now.Year - 1, Now.Year - 2, Now.Year - 3, Now.Year - 4}
-        'ComboBox2.Items.AddRange(d)
+
         ComboBox3.Text = "1"
 
-        Dim strsql1 As String = "SELECT НазваниеОрганизации FROM Клиент ORDER BY НазваниеОрганизации"
-        Dim ds1 As DataTable = Selects(strsql1)
+        'Dim strsql1 As String = "SELECT НазваниеОрганизации FROM Клиент ORDER BY НазваниеОрганизации"
+        'Dim ds1 As DataTable = Selects3(strsql1)
 
 
-        Me.ListBox1.Items.Clear()
-        For Each r As DataRow In ds1.Rows
-            Me.ListBox1.Items.Add(r(0).ToString)
+        'Me.ListBox1.Items.Clear()
+        'For Each r As DataRow In ds1.Rows
+        '    Me.ListBox1.Items.Add(r(0).ToString)
+        'Next
+
+        ComboBox4.Items.Clear()
+        ComboBox4.AutoCompleteCustomSource.Clear()
+        ListBox1.Items.Clear()
+        For Each r As DataRow In dtКлиенты.Rows
+            ListBox1.Items.Add(r(0).ToString)
+            ComboBox4.Items.Add(r(0).ToString)
+            ComboBox4.AutoCompleteCustomSource.Add(r(0).ToString)
         Next
+
+
+
+
+
+        'Dim lv() As ComboBox = {ComboBox4}
+
+        'Dim f As New Thread(Sub() Listxt(Me, "SELECT НазваниеОрганизации FROM Клиент ORDER BY НазваниеОрганизации", ListBox1, ComboBox4))
+        'f.IsBackground = True
+        'f.Start()
+        'Dim f1 As New Thread(Sub() COMxt(Me, "SELECT ПолноеНазвание FROM ФормаСобств ORDER BY ПолноеНазвание", ComboBox1))
+        'f1.IsBackground = True
+        'f1.Start()
+
+
+        Dim c = From x In dtФормаСобствAll Order By x.Item("ПолноеНазвание").ToString Select x.Item("ПолноеНазвание")
+
+        ComboBox1.AutoCompleteCustomSource.Clear()
+        ComboBox1.Items.Clear()
+        For Each r In c
+            ComboBox1.AutoCompleteCustomSource.Add(r.ToString)
+            ComboBox1.Items.Add(r.ToString)
+        Next
+
+
+
+
+
+
+        'Listxt(Me, "SELECT ПолноеНазвание FROM ФормаСобств ORDER BY ПолноеНазвание", ListBox1)
+        'COMxt(Me, "SELECT ПолноеНазвание FROM ФормаСобств ORDER BY ПолноеНазвание", ComboBox1)
+
+
         MaskedTextBox1.Text = Now.ToShortDateString
     End Sub
+
 
     Private Sub очистка()
         ComboBox1.Text = ""
@@ -59,34 +102,41 @@ Public Class НовыйКлиент
         RichTextBox13.Text = ""
 
     End Sub
-    Private Sub ВставкаКлиент(ByVal ds As DataTable)
+    Private Sub ВставкаКлиент(ByVal ds() As DataRow)
 
 
-        ComboBox1.Text = ds.Rows(0).Item(1).ToString
-        RichTextBox1.Text = ds.Rows(0).Item(0).ToString
-        RichTextBox2.Text = ds.Rows(0).Item(2).ToString
-        RichTextBox3.Text = ds.Rows(0).Item(3).ToString
-        RichTextBox4.Text = ds.Rows(0).Item(7).ToString
-        RichTextBox5.Text = ds.Rows(0).Item(6).ToString
-        RichTextBox6.Text = ds.Rows(0).Item(4).ToString
-        RichTextBox7.Text = ds.Rows(0).Item(9).ToString & " " & ds.Rows(0).Item(10).ToString
-        RichTextBox8.Text = ds.Rows(0).Item(8).ToString
-        RichTextBox9.Text = ds.Rows(0).Item(5).ToString
-        RichTextBox10.Text = ds.Rows(0).Item(14).ToString
-        RichTextBox12.Text = ds.Rows(0).Item(15).ToString
-        RichTextBox11.Text = ds.Rows(0).Item(19).ToString
-        RichTextBox13.Text = ds.Rows(0).Item(13).ToString
-        RichTextBox14.Text = ds.Rows(0).Item(20).ToString
+        ComboBox1.Text = ds(0).Item(1).ToString
+        RichTextBox1.Text = ds(0).Item(0).ToString
+        RichTextBox2.Text = ds(0).Item(2).ToString
+        RichTextBox3.Text = ds(0).Item(3).ToString
+        RichTextBox4.Text = ds(0).Item(7).ToString
+        RichTextBox5.Text = ds(0).Item(6).ToString
+        RichTextBox6.Text = ds(0).Item(4).ToString
+        RichTextBox7.Text = ds(0).Item(9).ToString & " " & ds(0).Item(10).ToString
+        RichTextBox8.Text = ds(0).Item(8).ToString
+        RichTextBox9.Text = ds(0).Item(5).ToString
+        RichTextBox10.Text = ds(0).Item(14).ToString
+        RichTextBox12.Text = ds(0).Item(15).ToString
+        RichTextBox11.Text = ds(0).Item(19).ToString
+        RichTextBox13.Text = ds(0).Item(13).ToString
+        RichTextBox14.Text = ds(0).Item(20).ToString
     End Sub
     Private Sub ListBox1_Click(sender As Object, e As EventArgs) Handles ListBox1.Click
+        ListBox1R()
+    End Sub
+    Private Sub ListBox1R()
         If Not ListBox1.SelectedIndex = -1 Then
             Try
                 очистка()
-                strsql = ""
-                strsql = "SELECT * FROM Клиент WHERE НазваниеОрганизации='" & ListBox1.SelectedItem & "'"
-                Dim ds As DataTable = Selects(strsql)
+                'strsql = ""
+                'strsql = "SELECT * FROM Клиент WHERE НазваниеОрганизации='" & ListBox1.SelectedItem & "'"
+                'Dim ds As DataTable = Selects3(StrSql:="SELECT * FROM Клиент WHERE НазваниеОрганизации='" & ListBox1.SelectedItem & "'")
+                Dim ds = dtКлиенты.Select("НазваниеОрганизации='" & ListBox1.SelectedItem & "'")
+
+
                 ВставкаКлиент(ds)
-                КодДляУдал = ds.Rows(0).Item(0).ToString
+                КодДляУдал = ds(0).Item(0).ToString
+                ComboBox4.Text = ""
             Catch ex As Exception
 
             End Try
@@ -123,19 +173,23 @@ Public Class НовыйКлиент
         Return 0
     End Function
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        If Проверка() = 1 Then Exit Sub
-        errds = 0
-        Dim strsql1 As String = "SELECT [РасчСчетРоссРубли] FROM Клиент WHERE НазваниеОрганизации='" & RichTextBox1.Text & "'"
-        Dim ds As DataTable = Selects(strsql1)
+        Me.Cursor = Cursors.WaitCursor
+        If Проверка() = 1 Then
+            Me.Cursor = Cursors.Default
+            Exit Sub
+        End If
 
-        If errds = 1 Then
+        'Dim strsql1 As String = "SELECT [РасчСчетРоссРубли] FROM Клиент WHERE НазваниеОрганизации='" & RichTextBox1.Text & "'"
+        'Dim ds As DataTable = Selects3(strsql1)
 
+        Dim ds = dtКлиенты.Select("НазваниеОрганизации='" & RichTextBox1.Text & "'")
+
+        If ds.Length = 0 Then
             Dim strsql As String = "INSERT INTO Клиент(НазваниеОрганизации,[Форма собственности],[Адрес организации],[Почтовый адрес],РасчСчетРубли,РасчСчетРоссРубли,
             РасчСчетДоллар,РасчСчетЕвро,[Адрес банка],[Контактное лицо],Должность,НаОснЧегоДейств,ФИОРуководителя,ФИОРодПадеж,ДолжРодПадеж,Договор,Дата) VALUES('" & Trim(RichTextBox1.Text) & "','" & ComboBox1.Text & "','" & Trim(RichTextBox2.Text) & "',
             '" & Trim(RichTextBox3.Text) & "','" & Trim(RichTextBox6.Text) & "','" & Trim(RichTextBox9.Text) & "','" & Trim(RichTextBox5.Text) & "','" & Trim(RichTextBox4.Text) & "','" & Trim(RichTextBox8.Text) & "',
             '" & Trim(RichTextBox7.Text) & "','" & Trim(RichTextBox13.Text) & "','" & Trim(RichTextBox10.Text) & "','" & Trim(RichTextBox12.Text) & "','" & Trim(RichTextBox11.Text) & "','" & Trim(RichTextBox14.Text) & "','" & НомерДог() & "', '" & MaskedTextBox1.Text & "')"
-            Updates(strsql)
-
+            Updates3(strsql)
 
         Else
             Dim strsql As String = "UPDATE Клиент SET [Форма собственности]='" & ComboBox1.Text & "',[Адрес организации]='" & Trim(RichTextBox2.Text) & "',
@@ -143,16 +197,63 @@ Public Class НовыйКлиент
         РасчСчетЕвро='" & Trim(RichTextBox4.Text) & "',[Адрес банка]='" & Trim(RichTextBox8.Text) & "',[Контактное лицо]='" & Trim(RichTextBox7.Text) & "',Должность ='" & Trim(RichTextBox13.Text) & "', 
         НаОснЧегоДейств='" & Trim(RichTextBox10.Text) & "',ФИОРуководителя ='" & Trim(RichTextBox12.Text) & "',ФИОРодПадеж ='" & Trim(RichTextBox11.Text) & "',ДолжРодПадеж='" & Trim(RichTextBox14.Text) & "',Дата='" & MaskedTextBox1.Text & "'
         WHERE НазваниеОрганизации='" & RichTextBox1.Text & "'"
-            Updates(strsql)
+            Updates3(strsql)
         End If
+        КлиентыRunMoving()
+        'Dim d2 As New Thread(AddressOf Клиенты)
+        'd2.IsBackground = True
+        'd2.Start()
+
+
         If CheckBox4.Checked = True Then
             Доки()
-            MessageBox.Show("Договор сформирован и идет печать!", Рик)
         Else
-            MessageBox.Show("Данные изменены!", Рик)
+            MessageBox.Show("Данные внесены!", Рик)
         End If
+
+        ComboBox4.Items.Clear()
+        ComboBox4.AutoCompleteCustomSource.Clear()
+        ListBox1.Items.Clear()
+        For Each r As DataRow In dtКлиенты.Rows
+            ListBox1.Items.Add(r(0).ToString)
+            ComboBox4.Items.Add(r(0).ToString)
+            ComboBox4.AutoCompleteCustomSource.Add(r(0).ToString)
+        Next
+
+
+
+        'Dim lv() As ComboBox = {ComboBox4} 'обновляем данные
+
+        'Dim f5 As New Thread(Sub() Listxt(Me, "SELECT Названиеорганизации FROM Перевозчики ORDER BY НазваниеОрганизации", ListBox1, ComboBox4))
+        'f5.IsBackground = True
+        'f5.Start()
+        Me.Cursor = Cursors.Default
+
+        'Dim f1 As New Thread(Sub() COMxt(Me, "SELECT ПолноеНазвание FROM ФормаСобств ORDER BY ПолноеНазвание", ComboBox1))
+        'f1.IsBackground = True
+        'f1.Start()
+
+
+
+        Dim c = From x In dtФормаСобствAll Order By x.Item("ПолноеНазвание").ToString Select x.Item("ПолноеНазвание")
+
+        ComboBox1.AutoCompleteCustomSource.Clear()
+        ComboBox1.Items.Clear()
+        For Each r In c
+            ComboBox1.AutoCompleteCustomSource.Add(r.ToString)
+            ComboBox1.Items.Add(r.ToString)
+        Next
+
+
+
+
+
     End Sub
     Private Function НомерДог()
+        If Not IO.Directory.Exists("Z:\RICKMANS\" & Now.Year & "\ДОГОВОР З\") Then
+            IO.Directory.CreateDirectory("Z:\RICKMANS\" & Now.Year & "\ДОГОВОР З\")
+        End If
+
         Dim Files() As String = IO.Directory.GetFiles("Z:\RICKMANS\" & Now.Year & "\ДОГОВОР З\", "*", IO.SearchOption.TopDirectoryOnly)
         кол = Nothing
         кол = Files.Length + 1
@@ -171,14 +272,16 @@ Public Class НовыйКлиент
             End If
         Next
 
-        Dim strsql2 As String = "SELECT Договор, Дата FROM Клиент WHERE НазваниеОрганизации='" & RichTextBox1.Text & "'"
-        Dim ds As DataTable = Selects(strsql2)
+        'Dim strsql2 As String = "SELECT Договор, Дата FROM Клиент WHERE НазваниеОрганизации='" & RichTextBox1.Text & "'"
+        'Dim ds As DataTable = Selects3(strsql2)
+
+        Dim ds = dtКлиенты.Select("НазваниеОрганизации='" & RichTextBox1.Text & "'")
 
         Dim oWord As Microsoft.Office.Interop.Word.Application
         Dim oWordDoc As Microsoft.Office.Interop.Word.Document
         'Dim oWordPara As Microsoft.Office.Interop.Word.Paragraph
 
-        KillProc()
+        'KillProc()
 
         oWord = CreateObject("Word.Application")
         oWord.Visible = False
@@ -208,8 +311,8 @@ Public Class НовыйКлиент
 
 
         With oWordDoc.Bookmarks
-            .Item("Кл1").Range.Text = ds.Rows(0).Item(0).ToString
-            .Item("Кл2").Range.Text = ds.Rows(0).Item(1).ToString & "г."
+            .Item("Кл1").Range.Text = ds(0).Item("Договор").ToString
+            .Item("Кл2").Range.Text = ds(0).Item("Дата").ToString & "г."
             If ComboBox1.Text = "Индивидуальный предприниматель" Then
                 .Item("Кл3").Range.Text = ComboBox1.Text & " " & RichTextBox1.Text
                 .Item("Кл6").Range.Text = ComboBox1.Text
@@ -241,13 +344,36 @@ Public Class НовыйКлиент
             End If
 
         End With
+
+        Dim NumdeReysa As String = ds(0).Item("Договор").ToString
+
+        NumdeReysa = Strings.Left(ds(0).Item("Договор").ToString, CType(CType(NumdeReysa.Length, Integer) - 5, String))
+
+        If Not IO.Directory.Exists("Z:\RICKMANS\" & Now.Year & "\ДОГОВОР З\") Then
+            IO.Directory.CreateDirectory("Z:\RICKMANS\" & Now.Year & "\ДОГОВОР З\")
+        End If
+
+        Dim dog As String = "Z:\RICKMANS\" & Now.Year & "\ДОГОВОР З\ДОГОВОР З - " & кол & " " & RichTextBox1.Text & ".doc"
+        Dim dog1 As String = "Z:\RICKMANS\" & Now.Year & "\ДОГОВОР З\ДОГОВОР З - " & NumdeReysa & " " & RichTextBox1.Text & ".doc"
         Try
-            oWordDoc.SaveAs2("Z:\RICKMANS\" & Now.Year & "\ДОГОВОР З\ДОГОВОР З - " & кол & " " & RichTextBox1.Text & ".doc",,,,,, False)
+            If кол = 0 Then
+                oWordDoc.SaveAs2(dog1,,,,,, False)
+            Else
+                oWordDoc.SaveAs2(dog,,,,,, False)
+            End If
+
         Catch ex As Exception
             MessageBox.Show(ex.Message)
         End Try
 
-        Dim СохрЗак As String = "Z:\RICKMANS\" & Now.Year & "\ДОГОВОР З\ДОГОВОР З - " & кол & " " & RichTextBox1.Text & ".doc"
+        Dim СохрЗак As String
+
+        If кол = 0 Then
+            СохрЗак = dog1
+        Else
+            СохрЗак = dog
+        End If
+
 
         'Try
         '    IO.File.Copy("C:\Users\Public\Documents\Рик\" & ДПодНом & " " & TextBox1.Text & " от " & MaskedTextBox6.Text & "(Договор подряда)" & ".doc", "U:\Офис\Финансовый\6. Бух.услуги\Кадры\" & Клиент & "\Договор подряда\" & Год & "\" & ДПодНом & " " & TextBox1.Text & " от " & MaskedTextBox6.Text & "(Договор подряда)" & ".doc")
@@ -260,7 +386,10 @@ Public Class НовыйКлиент
 
         oWordDoc.Close(True)
         oWord.Quit(True)
-        ПечатьДоков(СохрЗак, CType(ComboBox3.Text, Integer))
+        If MessageBox.Show("Договор оформлен.Распечатать?", Рик, MessageBoxButtons.OKCancel, MessageBoxIcon.Question) = DialogResult.OK Then
+            ПечатьДоков(СохрЗак, CType(ComboBox3.Text, Integer))
+        End If
+
 
     End Sub
 
@@ -371,16 +500,21 @@ Public Class НовыйКлиент
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         If MessageBox.Show("Удалить клиента " & КодДляУдал & " ?", Рик, MessageBoxButtons.OKCancel, MessageBoxIcon.Question) = DialogResult.OK Then
-            Dim strsql As String = "DELETE * FROM Клиент WHERE НазваниеОрганизации='" & КодДляУдал & "'"
-            Updates(strsql)
+            Dim strsql As String = "DELETE FROM Клиент WHERE НазваниеОрганизации='" & КодДляУдал & "'"
+            Updates3(strsql)
             очистка()
+            КлиентыRunMoving()
 
-            Dim strsql1 As String = "SELECT НазваниеОрганизации FROM Клиент ORDER BY НазваниеОрганизации"
-            Dim ds1 As DataTable = Selects(strsql1)
+
+            'Dim strsql1 As String = "SELECT НазваниеОрганизации FROM Клиент ORDER BY НазваниеОрганизации"
+            'Dim ds1 As DataTable = Selects3(strsql1)
+
             Me.ListBox1.Items.Clear()
-            For Each r As DataRow In ds1.Rows
+            For Each r As DataRow In dtКлиенты.Rows
                 Me.ListBox1.Items.Add(r(0).ToString)
+
             Next
+            Me.ListBox1.SelectedIndex = 1
         End If
 
     End Sub
@@ -407,5 +541,34 @@ Public Class НовыйКлиент
         sender.text = StrConv(sender.text, VbStrConv.ProperCase)
         sender.SelectionStart = sender.text.Length
         Me.RichTextBox11.Text = Me.RichTextBox12.Text
+    End Sub
+
+    Private Sub ComboBox4_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox4.SelectedIndexChanged
+        For I As Integer = 0 To ListBox1.Items.Count - 1
+            If ListBox1.Items(I) = ComboBox4.Text Then
+                ListBox1.SelectedIndex = I
+                ListBox1R()
+            End If
+        Next
+    End Sub
+
+    Private Sub RichTextBox1_TextChanged(sender As Object, e As EventArgs) Handles RichTextBox1.TextChanged
+        RichTextBox1.Font = New Font(RichTextBox1.Text, 10)
+    End Sub
+
+    Private Sub RichTextBox2_TextChanged(sender As Object, e As EventArgs) Handles RichTextBox2.TextChanged
+        RichTextBox2.Font = New Font(RichTextBox2.Text, 10)
+    End Sub
+
+    Private Sub RichTextBox3_TextChanged(sender As Object, e As EventArgs) Handles RichTextBox3.TextChanged
+        RichTextBox3.Font = New Font(RichTextBox3.Text, 10)
+    End Sub
+
+    Private Sub RichTextBox8_TextChanged(sender As Object, e As EventArgs) Handles RichTextBox8.TextChanged
+        RichTextBox8.Font = New Font(RichTextBox8.Text, 10)
+    End Sub
+
+    Private Sub RichTextBox10_TextChanged(sender As Object, e As EventArgs) Handles RichTextBox10.TextChanged
+        RichTextBox10.Font = New Font(RichTextBox10.Text, 10)
     End Sub
 End Class

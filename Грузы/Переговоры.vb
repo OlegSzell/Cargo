@@ -1,4 +1,5 @@
 ﻿Option Explicit On
+Imports System.ComponentModel
 Imports System.Data.OleDb
 Public Class ПереговорыКлиент
     Dim код As Integer
@@ -8,7 +9,7 @@ Public Class ПереговорыКлиент
     Friend Sub комб1()
         MaskedTextBox1.Text = Now.ToShortDateString
         Dim strsql As String = "SELECT DISTINCT Клиент FROM ПереговорыКлиент"
-        Dim ds As DataTable = Selects(strsql)
+        Dim ds As DataTable = Selects3(strsql)
 
         Me.ComboBox1.AutoCompleteCustomSource.Clear()
         Me.ComboBox1.Items.Clear()
@@ -28,14 +29,13 @@ Public Class ПереговорыКлиент
         ComboBox2.Enabled = False
         Label7.Enabled = False
     End Sub
-
-    Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
+    Public Sub com1()
         чист()
         Dim strsql As String = "SELECT Клиент FROM ПереговорыКлиент WHERE Клиент='" & ComboBox1.Text & "'"
-        Dim ds As DataTable = Selects(strsql)
+        Dim ds As DataTable = Selects3(strsql)
 
         Dim strsql1 As String = "SELECT КонтДанные FROM ПереговорыКлиент WHERE Клиент='" & ComboBox1.Text & "'"
-        Dim ds1 As DataTable = Selects(strsql1)
+        Dim ds1 As DataTable = Selects3(strsql1)
 
         ComboBox3.Items.Clear()
         For Each r As DataRow In ds1.Rows
@@ -50,9 +50,13 @@ Public Class ПереговорыКлиент
             Первыйраз()
         End If
     End Sub
+
+    Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
+        com1()
+    End Sub
     Private Sub Первыйраз()
         Dim strsql As String = "SELECT * FROM ПереговорыКлиент WHERE Клиент='" & ComboBox1.Text & "' AND Экспедитор='" & Экспедитор & "'"
-        Dim ds As DataTable = Selects(strsql)
+        Dim ds As DataTable = Selects3(strsql)
         If errds = 1 Then Exit Sub
         RichTextBox3.Text = ds.Rows(0).Item(6).ToString
         MaskedTextBox1.Text = ComboBox2.Text
@@ -62,7 +66,7 @@ Public Class ПереговорыКлиент
     End Sub
     Private Sub вставка()
         Dim strsql As String = "SELECT ДатаПереговоров FROM ПереговорыКлиент WHERE Клиент='" & ComboBox1.Text & "' AND Экспедитор='" & Экспедитор & "'"
-        Dim ds As DataTable = Selects(strsql)
+        Dim ds As DataTable = Selects3(strsql)
 
         Me.ComboBox2.Items.Clear()
         For Each r As DataRow In ds.Rows
@@ -72,7 +76,7 @@ Public Class ПереговорыКлиент
 
     Private Sub ComboBox2_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox2.SelectedIndexChanged
         Dim strsql As String = "SELECT * FROM ПереговорыКлиент WHERE Клиент='" & ComboBox1.Text & "' and ДатаПереговоров = #" & Format(CDate(ComboBox2.Text), "MM\/dd\/yyyy") & "# AND Экспедитор='" & Экспедитор & "'"
-        Dim ds As DataTable = Selects(strsql)
+        Dim ds As DataTable = Selects3(strsql)
         код = Nothing
         код = ds.Rows(0).Item(0)
         RichTextBox3.Text = ds.Rows(0).Item(6).ToString
@@ -110,16 +114,30 @@ Public Class ПереговорыКлиент
 
     End Sub
     Private Sub Обновл()
-        Dim strsql As String = "UPDATE ПереговорыКлиент SET ДатаПереговоров='" & MaskedTextBox1.Text & "', ТекстПереговора='" & RichTextBox1.Text & "',
+        Dim strsql As String
+        If MaskedTextBox2.MaskCompleted = False Then
+            strsql = "UPDATE ПереговорыКлиент SET ДатаПереговоров='" & MaskedTextBox1.Text & "', ТекстПереговора='" & RichTextBox1.Text & "', 
+КонтДанные='" & RichTextBox3.Text & "', Экспедитор='" & Экспедитор & "'
+WHERE Код=" & код & ""
+        Else
+            strsql = "UPDATE ПереговорыКлиент SET ДатаПереговоров='" & MaskedTextBox1.Text & "', ТекстПереговора='" & RichTextBox1.Text & "',
 ДатаНапоминания='" & MaskedTextBox2.Text & "',ТекстНапоминания='" & RichTextBox2.Text & "', КонтДанные='" & RichTextBox3.Text & "', Экспедитор='" & Экспедитор & "'
 WHERE Код=" & код & ""
-        Updates(strsql)
+        End If
+
+
+        Updates3(strsql)
     End Sub
     Private Sub Новый()
-        Dim strsql As String = "INSERT INTO ПереговорыКлиент(Клиент,ДатаПереговоров,ТекстПереговора,ДатаНапоминания,ТекстНапоминания,КонтДанные,Экспедитор) VALUES('" & ComboBox1.Text & "',
+        Dim strsql As String
+        If MaskedTextBox2.MaskCompleted = False Then
+            strsql = "INSERT INTO ПереговорыКлиент(Клиент,ДатаПереговоров,ТекстПереговора,КонтДанные,Экспедитор) VALUES('" & ComboBox1.Text & "',
+'" & MaskedTextBox1.Text & "','" & RichTextBox1.Text & "','" & RichTextBox3.Text & "','" & Экспедитор & "')"
+        Else
+            strsql = "INSERT INTO ПереговорыКлиент(Клиент,ДатаПереговоров,ТекстПереговора,ДатаНапоминания,ТекстНапоминания,КонтДанные,Экспедитор) VALUES('" & ComboBox1.Text & "',
 '" & MaskedTextBox1.Text & "','" & RichTextBox1.Text & "','" & MaskedTextBox2.Text & "','" & RichTextBox2.Text & "','" & RichTextBox3.Text & "','" & Экспедитор & "')"
-
-        Updates(strsql)
+        End If
+        Updates3(strsql)
     End Sub
 
     Private Sub ComboBox3_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox3.SelectedIndexChanged
@@ -128,5 +146,18 @@ WHERE Код=" & код & ""
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         ДобОргДляПерегов.ShowDialog()
+    End Sub
+
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        Dim strsql As String = "SELECT "
+        ДобОргДляПерегов.ShowDialog()
+    End Sub
+
+    Private Sub ПереговорыКлиент_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+        чист()
+    End Sub
+
+    Private Sub GroupBox1_Enter(sender As Object, e As EventArgs) Handles GroupBox1.Enter
+
     End Sub
 End Class

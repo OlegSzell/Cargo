@@ -4,22 +4,13 @@ Imports System.Data.OleDb
 Public Class ЧерныйСписок
     Public g As Integer = 0
     Private Sub ЧерныйСписок_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        conn = New OleDbConnection
-        conn.ConnectionString = ConString
-        Try
-            conn.Open()
-        Catch ex As Exception
-            MessageBox.Show("Не подключен диск U")
-        End Try
 
         refgrid1()
-
-
     End Sub
 
     Public Sub refgrid1()
         Dim strsql As String = "SELECT DISTINCT Организация FROM ЧерныйСписок"
-        Dim ds As DataTable = Selects(strsql)
+        Dim ds As DataTable = Selects3(strsql)
 
         Me.ComboBox1.AutoCompleteCustomSource.Clear()
         Me.ComboBox1.Items.Clear()
@@ -31,7 +22,7 @@ Public Class ЧерныйСписок
 
     Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
         Dim strsql As String = "SELECT * FROM ЧерныйСписок WHERE Организация='" & ComboBox1.Text & "'"
-        Dim ds As DataTable = Selects(strsql)
+        Dim ds As DataTable = Selects3(strsql)
 
         Grid1.DataSource = ds
         Grid1.Columns(0).Visible = False
@@ -44,7 +35,7 @@ Public Class ЧерныйСписок
             Exit Sub
         End If
         Dim strsql As String = "SELECT * FROM ЧерныйСписок WHERE Примечание Like '%" & TextBox1.Text & "%'"
-        Dim ds As DataTable = Selects(strsql)
+        Dim ds As DataTable = Selects3(strsql)
 
         If errds = 1 Then
             MessageBox.Show("Нет такого номреа в Черном списке!", Рик)
@@ -65,7 +56,7 @@ Public Class ЧерныйСписок
     Private Sub Grid1_CellMouseDoubleClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles Grid1.CellMouseDoubleClick
         Dim d As Integer = Grid1.CurrentRow.Cells(0).Value
         Dim strsql As String = "SELECT * FROM ЧерныйСписок WHERE Код=" & d & ""
-        Dim ds As DataTable = Selects(strsql)
+        Dim ds As DataTable = Selects3(strsql)
         g = 1
         ДобЧернСписок.TextBox1.Text = ""
         ДобЧернСписок.RichTextBox1.Text = ""

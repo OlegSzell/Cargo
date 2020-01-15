@@ -54,6 +54,9 @@ Partial Class Данные
         Me.RichTextBox2 = New System.Windows.Forms.RichTextBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Button5 = New System.Windows.Forms.Button()
+        Me.RichTextBox3 = New System.Windows.Forms.RichTextBox()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.Button6 = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
@@ -181,7 +184,7 @@ Partial Class Данные
         '
         'ComboBox1
         '
-        Me.ComboBox1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.ComboBox1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
         Me.ComboBox1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
         Me.ComboBox1.FormattingEnabled = True
         Me.ComboBox1.Location = New System.Drawing.Point(181, 95)
@@ -191,7 +194,7 @@ Partial Class Данные
         '
         'ComboBox2
         '
-        Me.ComboBox2.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.ComboBox2.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
         Me.ComboBox2.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
         Me.ComboBox2.FormattingEnabled = True
         Me.ComboBox2.Location = New System.Drawing.Point(181, 241)
@@ -201,7 +204,7 @@ Partial Class Данные
         '
         'ComboBox3
         '
-        Me.ComboBox3.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.ComboBox3.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
         Me.ComboBox3.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
         Me.ComboBox3.FormattingEnabled = True
         Me.ComboBox3.Location = New System.Drawing.Point(182, 303)
@@ -228,7 +231,7 @@ Partial Class Данные
         Me.ListBox2.Location = New System.Drawing.Point(672, 95)
         Me.ListBox2.MultiColumn = True
         Me.ListBox2.Name = "ListBox2"
-        Me.ListBox2.Size = New System.Drawing.Size(383, 395)
+        Me.ListBox2.Size = New System.Drawing.Size(554, 395)
         Me.ListBox2.TabIndex = 21
         '
         'Button2
@@ -260,7 +263,7 @@ Partial Class Данные
         '
         'ComboBox4
         '
-        Me.ComboBox4.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.ComboBox4.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
         Me.ComboBox4.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
         Me.ComboBox4.FormattingEnabled = True
         Me.ComboBox4.Location = New System.Drawing.Point(182, 272)
@@ -351,12 +354,43 @@ Partial Class Данные
         Me.Button5.Text = "Клиент данные"
         Me.Button5.UseVisualStyleBackColor = True
         '
+        'RichTextBox3
+        '
+        Me.RichTextBox3.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.RichTextBox3.Location = New System.Drawing.Point(901, 516)
+        Me.RichTextBox3.Name = "RichTextBox3"
+        Me.RichTextBox3.Size = New System.Drawing.Size(325, 69)
+        Me.RichTextBox3.TabIndex = 36
+        Me.RichTextBox3.Text = ""
+        '
+        'Label11
+        '
+        Me.Label11.Location = New System.Drawing.Point(898, 493)
+        Me.Label11.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(114, 20)
+        Me.Label11.TabIndex = 37
+        Me.Label11.Text = "Контактное лицо"
+        '
+        'Button6
+        '
+        Me.Button6.BackColor = System.Drawing.SystemColors.Highlight
+        Me.Button6.Location = New System.Drawing.Point(594, 493)
+        Me.Button6.Name = "Button6"
+        Me.Button6.Size = New System.Drawing.Size(39, 19)
+        Me.Button6.TabIndex = 38
+        Me.Button6.UseVisualStyleBackColor = False
+        '
         'Данные
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 17.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(1067, 729)
+        Me.ClientSize = New System.Drawing.Size(1238, 729)
+        Me.Controls.Add(Me.Button6)
+        Me.Controls.Add(Me.Label11)
+        Me.Controls.Add(Me.RichTextBox3)
         Me.Controls.Add(Me.Button5)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.RichTextBox2)
@@ -391,6 +425,7 @@ Partial Class Данные
         Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "Данные"
         Me.Text = "Грузы"
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
@@ -413,14 +448,11 @@ Partial Class Данные
     Friend WithEvents Label8 As Label
     Friend WithEvents Button1 As Button
     Friend WithEvents ComboBox1 As ComboBox
-    Friend WithEvents ComboBox2 As ComboBox
-    Friend WithEvents ComboBox3 As ComboBox
     Friend WithEvents ListBox1 As ListBox
     Friend WithEvents ListBox2 As ListBox
     Friend WithEvents Button2 As Button
     Friend WithEvents Button3 As Button
     Friend WithEvents Label9 As Label
-    Friend WithEvents ComboBox4 As ComboBox
     Friend WithEvents Button4 As Button
     Friend WithEvents TextBox1 As TextBox
     Friend WithEvents GroupBox1 As GroupBox
@@ -430,4 +462,10 @@ Partial Class Данные
     Friend WithEvents RichTextBox2 As RichTextBox
     Friend WithEvents Label10 As Label
     Friend WithEvents Button5 As Button
+    Friend WithEvents RichTextBox3 As RichTextBox
+    Friend WithEvents Label11 As Label
+    Private WithEvents ComboBox2 As ComboBox
+    Private WithEvents ComboBox4 As ComboBox
+    Private WithEvents ComboBox3 As ComboBox
+    Friend WithEvents Button6 As Button
 End Class

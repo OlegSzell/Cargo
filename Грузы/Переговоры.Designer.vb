@@ -39,10 +39,11 @@ Partial Class ПереговорыКлиент
         Me.Label3 = New System.Windows.Forms.Label()
         Me.RichTextBox3 = New System.Windows.Forms.RichTextBox()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.ComboBox3 = New System.Windows.Forms.ComboBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.ComboBox2 = New System.Windows.Forms.ComboBox()
-        Me.ComboBox3 = New System.Windows.Forms.ComboBox()
-        Me.Label8 = New System.Windows.Forms.Label()
+        Me.Button3 = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -209,6 +210,23 @@ Partial Class ПереговорыКлиент
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Организация"
         '
+        'Label8
+        '
+        Me.Label8.Location = New System.Drawing.Point(6, 53)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(101, 34)
+        Me.Label8.TabIndex = 41
+        Me.Label8.Text = "Все данные по организации"
+        '
+        'ComboBox3
+        '
+        Me.ComboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBox3.FormattingEnabled = True
+        Me.ComboBox3.Location = New System.Drawing.Point(113, 57)
+        Me.ComboBox3.Name = "ComboBox3"
+        Me.ComboBox3.Size = New System.Drawing.Size(630, 25)
+        Me.ComboBox3.TabIndex = 40
+        '
         'Label7
         '
         Me.Label7.AutoSize = True
@@ -230,28 +248,24 @@ Partial Class ПереговорыКлиент
         Me.ComboBox2.Size = New System.Drawing.Size(174, 25)
         Me.ComboBox2.TabIndex = 38
         '
-        'ComboBox3
+        'Button3
         '
-        Me.ComboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBox3.FormattingEnabled = True
-        Me.ComboBox3.Location = New System.Drawing.Point(113, 57)
-        Me.ComboBox3.Name = "ComboBox3"
-        Me.ComboBox3.Size = New System.Drawing.Size(630, 25)
-        Me.ComboBox3.TabIndex = 40
-        '
-        'Label8
-        '
-        Me.Label8.Location = New System.Drawing.Point(6, 53)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(101, 34)
-        Me.Label8.TabIndex = 41
-        Me.Label8.Text = "Все данные по организации"
+        Me.Button3.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.Button3.Font = New System.Drawing.Font("Times New Roman", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.Button3.Location = New System.Drawing.Point(25, 102)
+        Me.Button3.Margin = New System.Windows.Forms.Padding(4)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(167, 46)
+        Me.Button3.TabIndex = 39
+        Me.Button3.Text = "Изменить данные организации"
+        Me.Button3.UseVisualStyleBackColor = False
         '
         'ПереговорыКлиент
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 17.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(977, 532)
+        Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
@@ -295,4 +309,5 @@ Partial Class ПереговорыКлиент
     Friend WithEvents ComboBox2 As ComboBox
     Friend WithEvents Label8 As Label
     Friend WithEvents ComboBox3 As ComboBox
+    Friend WithEvents Button3 As Button
 End Class

@@ -1,99 +1,109 @@
 ﻿Option Explicit On
 Imports System.Data.OleDb
+Imports System.Threading
 Public Class ПоискПеревозчиков
     Public Da As New OleDbDataAdapter 'Адаптер
     Public Ds As New DataSet 'Пустой набор записей
     Dim tbl As New DataTable
-    Dim cb As OleDb.OleDbCommandBuilder
-    Dim Рик As String = "ООО Рикманс"
     Dim загр As String
     Dim ind As Boolean = False
     Dim удал As Integer
+    Private Delegate Sub comb2()
+    Private Delegate Sub comb31()
+    Private Delegate Sub comb32()
+    Private Sub COM4()
 
+        If ComboBox1.InvokeRequired Then
+            Me.Invoke(New comb2(AddressOf COM4))
+        Else
+            Dim strsql As String = "SELECT DISTINCT Страна FROM Страна ORDER BY Страна"
+            Dim ds As DataTable = Selects3(strsql)
+            Me.ComboBox1.AutoCompleteCustomSource.Clear()
+            Me.ComboBox1.Items.Clear()
+            For Each r As DataRow In ds.Rows
+                Me.ComboBox1.AutoCompleteCustomSource.Add(r.Item(0).ToString())
+                Me.ComboBox1.Items.Add(r(0).ToString)
+            Next
+        End If
+    End Sub
+    Private Sub COM5()
+
+        If ComboBox3.InvokeRequired Then
+            Me.Invoke(New comb31(AddressOf COM5))
+        Else
+            Dim strsql As String = "SELECT DISTINCT [Наименование фирмы] FROM ПеревозчикиБаза ORDER BY [Наименование фирмы]"
+            Dim ds As DataTable = Selects3(strsql)
+            Me.ComboBox3.AutoCompleteCustomSource.Clear()
+            Me.ComboBox3.Items.Clear()
+            For Each r As DataRow In ds.Rows
+                Me.ComboBox3.AutoCompleteCustomSource.Add(r.Item(0).ToString())
+                Me.ComboBox3.Items.Add(r(0).ToString)
+            Next
+        End If
+    End Sub
+    Public Sub Запуск()
+        If TextBox1.InvokeRequired Then
+            Me.Invoke(New comb32(AddressOf Запуск))
+        Else
+            TextBox1.Text = DateTime.Now.ToString("dd.MM.yyyy")
+        End If
+        Dim h As New Thread(AddressOf УскорЗагр)
+        h.IsBackground = True
+        h.SetApartmentState(ApartmentState.STA)
+        h.Start()
+    End Sub
     Private Sub ПоискПеревозчиков_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.MdiParent = MDIParent1
-        Me.WindowState = FormWindowState.Maximized
-        conn = New OleDbConnection
-        conn.ConnectionString = ConString
-        Try
-            conn.Open()
-        Catch ex As Exception
-            MessageBox.Show("Не подключен диск U")
-        End Try
-        Dim Год As Integer = Year(Now)
+        Запуск()
 
-        'If Me.Прием_Load = vbTrue Then Form1.Load = False
-
-        TextBox1.Text = DateTime.Now.ToString("dd.MM.yyyy")
-
-        Dim StrSql As String
-        StrSql = "SELECT DISTINCT Страна FROM Страна ORDER BY Страна"
-        Dim c As New OleDbCommand With {
-            .Connection = conn,
-            .CommandText = StrSql
-        }
-        Dim ds As New DataTable
-        Dim da As New OleDbDataAdapter(c)
-        da.Fill(ds)
-        Me.ComboBox1.AutoCompleteCustomSource.Clear()
-        Me.ComboBox1.Items.Clear()
-        For Each r As DataRow In ds.Rows
-            Me.ComboBox1.AutoCompleteCustomSource.Add(r.Item(0).ToString())
-            Me.ComboBox1.Items.Add(r(0).ToString)
-        Next
-
-        Dim StrSql2 As String
-        StrSql2 = "SELECT DISTINCT [Наименование фирмы] FROM ПеревозчикиБаза ORDER BY [Наименование фирмы]"
-        Dim c2 As New OleDbCommand With {
-            .Connection = conn,
-            .CommandText = StrSql2
-        }
-        Dim ds2 As New DataTable
-        Dim da2 As New OleDbDataAdapter(c2)
-        da2.Fill(ds2)
-        Me.ComboBox3.AutoCompleteCustomSource.Clear()
-        Me.ComboBox3.Items.Clear()
-        For Each r As DataRow In ds2.Rows
-            Me.ComboBox3.AutoCompleteCustomSource.Add(r.Item(0).ToString())
-            Me.ComboBox3.Items.Add(r(0).ToString)
-        Next
-
-
-
-
-
+    End Sub
+    Private Sub УскорЗагр()
+        Dim bn As New Thread(AddressOf COM4)
+        Dim bn1 As New Thread(AddressOf COM5)
+        bn.IsBackground = True
+        bn1.IsBackground = True
+        bn.Start()
+        bn1.Start()
 
 
     End Sub
-    Public Sub ОбнКом1()
-        tbl.Clear()
-        ComboBox2.Text = ""
 
+
+    Public Sub ОбнКом1()
+
+        If Not IsDBNull(tbl) Then
+            tbl.Clear()
+        End If
+
+        ComboBox2.Text = ""
         CheckBox1.Checked = False
+
+
+
         Dim StrSql3 As String
         StrSql3 = "SELECT DISTINCT Регионы
 FROM РегионыРоссии INNER JOIN Страна ON РегионыРоссии.Страны = Страна.Код
 Where Страна.Страна = '" & ComboBox1.Text & "'"
-        Dim ds2 As DataTable = Selects(StrSql3)
+        Dim fg As New Thread(Sub() COMxt(Me, StrSql3, ComboBox2))
+        fg.IsBackground = True
+        fg.Start()
 
-        ComboBox2.Items.Clear()
-        ComboBox2.AutoCompleteCustomSource.Clear()
+        'ComboBox2.Items.Clear()
+        'ComboBox2.AutoCompleteCustomSource.Clear()
 
-        For Each r As DataRow In ds2.Rows
-            Me.ComboBox2.AutoCompleteCustomSource.Add(r.Item(0).ToString())
-            Me.ComboBox2.Items.Add(r(0).ToString)
-        Next
+        'For Each r As DataRow In ds2.Rows
+        '    Me.ComboBox2.AutoCompleteCustomSource.Add(r.Item(0).ToString())
+        '    Me.ComboBox2.Items.Add(r(0).ToString)
+        'Next
 
         refreshgrid()
     End Sub
-    Private Sub ComboBox1_SelectedValueChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedValueChanged
-        ОбнКом1()
-
-        'ComboBox4.Text = ""
-    End Sub
     Private Sub refreshgrid()
+        Me.Cursor = Cursors.WaitCursor
+        If Not IsDBNull(tbl) Then
+            tbl.Clear()
+        End If
 
-        tbl.Clear()
+
 
         Dim StrSql2 As String
 
@@ -111,28 +121,23 @@ From ПеревозчикиБаза Where ПеревозчикиБаза.[Стр
 ПеревозчикиБаза.Примечание, ПеревозчикиБаза.ID
 From ПеревозчикиБаза Where ПеревозчикиБаза.[Страны перевозок] LIKE '%" & ComboBox1.Text & "%' AND ПеревозчикиБаза.Регионы LIKE '%" & ComboBox2.Text & "%'"
         End If
-        'Страна INNER Join ПеревозчикиNew On Страна.Код = ПеревозчикиNew.[Страны перевозок].Value
-        Dim c1 As New OleDbCommand
-        c1.Connection = conn
-        c1.CommandText = StrSql2
-        'Dim ds As New DataSet
-        Dim da1 As New OleDbDataAdapter(c1)
-        'da.Fill(ds, "Сотрудники")
-        da1.Fill(tbl)
+        tbl = Selects3(StrSql2)
 
         Grid1.DataSource = tbl
-        'Grid1.Item(0, 0).Style.Font = New Font("Calibri", 12)
-        'cb = New OleDb.OleDbCommandBuilder(da1)
+        GridView(Grid1)
         Grid1.Columns(12).Visible = False
         Grid1.SelectionMode = DataGridViewSelectionMode.FullRowSelect
 
-        Grid1.Columns(0).Width = 250
-        Grid1.Columns(1).Width = 250
+        Grid1.Columns(0).Width = 150
+        Grid1.Columns(1).Width = 150
         Grid1.Columns(2).Width = 150
-        Grid1.Columns(11).Width = 320
+        Grid1.Columns(4).Width = 150
+        Grid1.Columns(11).Width = 300
+        Me.Cursor = Cursors.Default
     End Sub
 
     Private Sub ComboBox2_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox2.SelectedIndexChanged
+
         CheckBox1.Checked = False
         refreshgrid()
 
@@ -160,7 +165,7 @@ From ПеревозчикиБаза Where ПеревозчикиБаза.[Стр
 From ПеревозчикиБаза
 Where ПеревозчикиБаза.ADR='" & adr & "'"
 
-            tbl = Selects(StrSql2)
+            tbl = Selects3(StrSql2)
 
             Grid1.DataSource = tbl
             Grid1.Columns(12).Visible = False
@@ -184,14 +189,7 @@ Where ПеревозчикиБаза.ADR='" & adr & "'"
 From ПеревозчикиБаза
 Where ПеревозчикиБаза.[Наименование фирмы] ='" & ComboBox3.Text & "'"
 
-        'Страна INNER Join ПеревозчикиNew On Страна.Код = ПеревозчикиNew.[Страны перевозок].Value
-        Dim c6 As New OleDbCommand
-        c6.Connection = conn
-        c6.CommandText = StrSql6
-        'Dim ds As New DataSet
-        Dim da6 As New OleDbDataAdapter(c6)
-        'da.Fill(ds, "Сотрудники")
-        da6.Fill(tbl)
+        tbl = Selects3(StrSql:=StrSql6)
         Grid1.DataSource = tbl
         Grid1.Columns(12).Visible = False
         Grid1.Columns(0).Width = 250
@@ -225,11 +223,8 @@ Where ПеревозчикиБаза.[Наименование фирмы] ='" &
         Dim StrSql6 As String
         If MessageBox.Show("Удалить перевозчика?", Рик, MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.No Then Exit Sub
         If Not удал = Nothing Then
-            StrSql6 = "DELETE * FROM ПеревозчикиБаза Where ID =" & удал & ""
-            Dim c6 As New OleDbCommand
-            c6.Connection = conn
-            c6.CommandText = StrSql6
-            c6.ExecuteNonQuery()
+            StrSql6 = "DELETE FROM ПеревозчикиБаза Where ID =" & удал & ""
+            Updates3(stroka:=StrSql6)
             comb3()
         Else
             MessageBox.Show("Для удаления выберите перевозчика в таблице!", Рик)
@@ -241,5 +236,18 @@ Where ПеревозчикиБаза.[Наименование фирмы] ='" &
         For Each column As DataGridViewColumn In Grid1.Columns
             column.SortMode = DataGridViewColumnSortMode.NotSortable
         Next
+    End Sub
+
+    Private Sub ComboBox1_SelectedValueChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedValueChanged
+        ОбнКом1()
+
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        ДобПер = 1
+        ОбнПер = 1
+        ДобавитьПеревозчика.WindowState = 0
+        ДобавитьПеревозчика.StartPosition = FormStartPosition.CenterScreen
+        ДобавитьПеревозчика.ShowDialog()
     End Sub
 End Class

@@ -33,11 +33,7 @@ Public Class РабочаяФормаСостояние
             all = ComboBox1.Text
         End If
 
-        Dim strsql As String = "UPDATE ГрузыКлиентов SET Состояние='" & all & "',Груз='" & TextBox2.Text & "' WHERE Код=" & IDГруз & ""
-        Dim c1 As New OleDbCommand
-        c1.Connection = conn
-        c1.CommandText = strsql
-        c1.ExecuteNonQuery()
+        Updates3(stroka:="UPDATE ГрузыКлиентов SET Состояние='" & all & "',Груз='" & TextBox2.Text & "' WHERE Код=" & IDГруз & "")
         Me.Close()
         Выборка.Refreshgrid()
 

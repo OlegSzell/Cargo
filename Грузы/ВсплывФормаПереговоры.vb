@@ -36,13 +36,13 @@
         RichTextBox4.Text = dgh.Rows(int - 1).Item(8).ToString
     End Sub
 
-    Private Async Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         Try
             Dim strsql As String = "UPDATE ПереговорыКлиент SET ТекстНапоминания='" & RichTextBox2.Text & "', ОЧемДоговорВсплывФорма='" & RichTextBox4.Text & "', 
 ДатаОчемДоговорилис='" & RichTextBox3.Text & "'
 WHERE Код=" & f & ""
-            Updates(strsql)
-            Dim df As DataTable = Await MDIParent1.Провер()
+            Updates3(strsql)
+            Dim df As DataTable = MDIParent1.Провер()
             dgh = df
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
@@ -50,4 +50,6 @@ WHERE Код=" & f & ""
         MessageBox.Show("Данные внесены!", Рик)
 
     End Sub
+
+
 End Class

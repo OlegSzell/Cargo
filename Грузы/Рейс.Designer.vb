@@ -22,11 +22,13 @@ Partial Class Рейс
     'Не изменяйте ее в редакторе исходного кода.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Рейс))
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.ComboBox3 = New System.Windows.Forms.ComboBox()
+        Me.КлиентBindingSource2 = New System.Windows.Forms.BindingSource(Me.components)
         Me.ComboBox4 = New System.Windows.Forms.ComboBox()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
@@ -44,17 +46,36 @@ Partial Class Рейс
         Me.Label6 = New System.Windows.Forms.Label()
         Me.ComboBox10 = New System.Windows.Forms.ComboBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Button7 = New System.Windows.Forms.Button()
         Me.Button4 = New System.Windows.Forms.Button()
         Me.ComboBox12 = New System.Windows.Forms.ComboBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.Button5 = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.ComboBox13 = New System.Windows.Forms.ComboBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.RichTextBox2 = New System.Windows.Forms.RichTextBox()
         Me.ListBox1 = New System.Windows.Forms.ListBox()
+        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ПечатьToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ПоручениеКлиентпечататьToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ПоручениеПеревозчикпечататьToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ОбапечататьToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ЛистокпечататьToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ОбаЛистокпечататьToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.СчетToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.АктToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem4 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem5 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ДоговораToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.КлиентToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ПеревозчикToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.СчетактToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.MaskedTextBox3 = New System.Windows.Forms.MaskedTextBox()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
@@ -76,19 +97,35 @@ Partial Class Рейс
         Me.RichTextBox7 = New System.Windows.Forms.RichTextBox()
         Me.ComboBox11 = New System.Windows.Forms.ComboBox()
         Me.GroupBox11 = New System.Windows.Forms.GroupBox()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.Label11 = New System.Windows.Forms.Label()
         Me.RichTextBox8 = New System.Windows.Forms.RichTextBox()
         Me.GroupBox12 = New System.Windows.Forms.GroupBox()
         Me.RichTextBox9 = New System.Windows.Forms.RichTextBox()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.CheckBox2 = New System.Windows.Forms.CheckBox()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.GroupBox13 = New System.Windows.Forms.GroupBox()
         Me.Button6 = New System.Windows.Forms.Button()
         Me.MaskedTextBox1 = New System.Windows.Forms.MaskedTextBox()
         Me.Label9 = New System.Windows.Forms.Label()
+        Me.GroupBox14 = New System.Windows.Forms.GroupBox()
+        Me.RichTextBox11 = New System.Windows.Forms.RichTextBox()
+        Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
+        Me.ToolStripSplitButton1 = New System.Windows.Forms.ToolStripSplitButton()
+        Me.СводнаяToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ОплатаToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ШтрафыToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.АктСчетИРазбивкаToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ДоговораToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ПеревозчикToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ПеревозчикToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Button8 = New System.Windows.Forms.Button()
+        Me.КлиентBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.КлиентBindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
+        CType(Me.КлиентBindingSource2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
+        Me.ContextMenuStrip1.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
@@ -99,13 +136,16 @@ Partial Class Рейс
         Me.GroupBox10.SuspendLayout()
         Me.GroupBox11.SuspendLayout()
         Me.GroupBox12.SuspendLayout()
-        Me.GroupBox13.SuspendLayout()
+        Me.GroupBox14.SuspendLayout()
+        Me.ToolStrip1.SuspendLayout()
+        CType(Me.КлиентBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.КлиентBindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'ComboBox1
         '
         Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(1134, 35)
+        Me.ComboBox1.Location = New System.Drawing.Point(1177, 36)
         Me.ComboBox1.Name = "ComboBox1"
         Me.ComboBox1.Size = New System.Drawing.Size(92, 25)
         Me.ComboBox1.TabIndex = 0
@@ -113,7 +153,7 @@ Partial Class Рейс
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(1097, 39)
+        Me.Label1.Location = New System.Drawing.Point(1140, 40)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(31, 17)
         Me.Label1.TabIndex = 1
@@ -122,7 +162,7 @@ Partial Class Рейс
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(1020, 42)
+        Me.Label2.Location = New System.Drawing.Point(1020, 41)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(48, 17)
         Me.Label2.TabIndex = 3
@@ -137,6 +177,10 @@ Partial Class Рейс
         Me.ComboBox3.Name = "ComboBox3"
         Me.ComboBox3.Size = New System.Drawing.Size(356, 25)
         Me.ComboBox3.TabIndex = 4
+        '
+        'КлиентBindingSource2
+        '
+        Me.КлиентBindingSource2.DataMember = "Клиент"
         '
         'ComboBox4
         '
@@ -242,15 +286,15 @@ Partial Class Рейс
         '
         Me.TextBox3.Location = New System.Drawing.Point(660, 24)
         Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(76, 25)
+        Me.TextBox3.Size = New System.Drawing.Size(59, 25)
         Me.TextBox3.TabIndex = 21
         Me.TextBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'TextBox4
         '
-        Me.TextBox4.Location = New System.Drawing.Point(660, 24)
+        Me.TextBox4.Location = New System.Drawing.Point(660, 25)
         Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.Size = New System.Drawing.Size(76, 25)
+        Me.TextBox4.Size = New System.Drawing.Size(59, 25)
         Me.TextBox4.TabIndex = 20
         Me.TextBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -287,6 +331,7 @@ Partial Class Рейс
         'GroupBox1
         '
         Me.GroupBox1.BackColor = System.Drawing.SystemColors.ActiveBorder
+        Me.GroupBox1.Controls.Add(Me.Button7)
         Me.GroupBox1.Controls.Add(Me.Button4)
         Me.GroupBox1.Controls.Add(Me.ComboBox12)
         Me.GroupBox1.Controls.Add(Me.Label3)
@@ -304,6 +349,17 @@ Partial Class Рейс
         Me.GroupBox1.TabIndex = 26
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Клиент"
+        '
+        'Button7
+        '
+        Me.Button7.BackColor = System.Drawing.SystemColors.InactiveCaption
+        Me.Button7.Font = New System.Drawing.Font("Times New Roman", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.Button7.Location = New System.Drawing.Point(719, 25)
+        Me.Button7.Name = "Button7"
+        Me.Button7.Size = New System.Drawing.Size(23, 22)
+        Me.Button7.TabIndex = 33
+        Me.Button7.Text = "п"
+        Me.Button7.UseVisualStyleBackColor = False
         '
         'Button4
         '
@@ -347,6 +403,7 @@ Partial Class Рейс
         'GroupBox2
         '
         Me.GroupBox2.BackColor = System.Drawing.SystemColors.ActiveBorder
+        Me.GroupBox2.Controls.Add(Me.Button2)
         Me.GroupBox2.Controls.Add(Me.Button5)
         Me.GroupBox2.Controls.Add(Me.Button3)
         Me.GroupBox2.Controls.Add(Me.ComboBox13)
@@ -365,6 +422,17 @@ Partial Class Рейс
         Me.GroupBox2.TabIndex = 27
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Перевозчик"
+        '
+        'Button2
+        '
+        Me.Button2.BackColor = System.Drawing.SystemColors.InactiveCaption
+        Me.Button2.Font = New System.Drawing.Font("Times New Roman", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.Button2.Location = New System.Drawing.Point(719, 25)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(23, 22)
+        Me.Button2.TabIndex = 32
+        Me.Button2.Text = "п"
+        Me.Button2.UseVisualStyleBackColor = False
         '
         'Button5
         '
@@ -420,6 +488,7 @@ Partial Class Рейс
         '
         Me.ListBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.ListBox1.ContextMenuStrip = Me.ContextMenuStrip1
         Me.ListBox1.FormattingEnabled = True
         Me.ListBox1.ItemHeight = 17
         Me.ListBox1.Location = New System.Drawing.Point(1023, 73)
@@ -427,6 +496,112 @@ Partial Class Рейс
         Me.ListBox1.ScrollAlwaysVisible = True
         Me.ListBox1.Size = New System.Drawing.Size(353, 242)
         Me.ListBox1.TabIndex = 28
+        '
+        'ContextMenuStrip1
+        '
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ПечатьToolStripMenuItem, Me.ДоговораToolStripMenuItem, Me.СчетактToolStripMenuItem})
+        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(181, 92)
+        '
+        'ПечатьToolStripMenuItem
+        '
+        Me.ПечатьToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ПоручениеКлиентпечататьToolStripMenuItem1, Me.ПоручениеПеревозчикпечататьToolStripMenuItem1, Me.ОбапечататьToolStripMenuItem1, Me.ЛистокпечататьToolStripMenuItem1, Me.ОбаЛистокпечататьToolStripMenuItem1, Me.СчетToolStripMenuItem, Me.АктToolStripMenuItem})
+        Me.ПечатьToolStripMenuItem.Name = "ПечатьToolStripMenuItem"
+        Me.ПечатьToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ПечатьToolStripMenuItem.Text = "Печать"
+        '
+        'ПоручениеКлиентпечататьToolStripMenuItem1
+        '
+        Me.ПоручениеКлиентпечататьToolStripMenuItem1.Name = "ПоручениеКлиентпечататьToolStripMenuItem1"
+        Me.ПоручениеКлиентпечататьToolStripMenuItem1.Size = New System.Drawing.Size(262, 22)
+        Me.ПоручениеКлиентпечататьToolStripMenuItem1.Text = "Поручение клиент(печатать)"
+        '
+        'ПоручениеПеревозчикпечататьToolStripMenuItem1
+        '
+        Me.ПоручениеПеревозчикпечататьToolStripMenuItem1.Name = "ПоручениеПеревозчикпечататьToolStripMenuItem1"
+        Me.ПоручениеПеревозчикпечататьToolStripMenuItem1.Size = New System.Drawing.Size(262, 22)
+        Me.ПоручениеПеревозчикпечататьToolStripMenuItem1.Text = "Поручение перевозчик (печатать)"
+        '
+        'ОбапечататьToolStripMenuItem1
+        '
+        Me.ОбапечататьToolStripMenuItem1.Name = "ОбапечататьToolStripMenuItem1"
+        Me.ОбапечататьToolStripMenuItem1.Size = New System.Drawing.Size(262, 22)
+        Me.ОбапечататьToolStripMenuItem1.Text = "Оба (печатать)"
+        '
+        'ЛистокпечататьToolStripMenuItem1
+        '
+        Me.ЛистокпечататьToolStripMenuItem1.Name = "ЛистокпечататьToolStripMenuItem1"
+        Me.ЛистокпечататьToolStripMenuItem1.Size = New System.Drawing.Size(262, 22)
+        Me.ЛистокпечататьToolStripMenuItem1.Text = "Листок(печатать)"
+        '
+        'ОбаЛистокпечататьToolStripMenuItem1
+        '
+        Me.ОбаЛистокпечататьToolStripMenuItem1.Name = "ОбаЛистокпечататьToolStripMenuItem1"
+        Me.ОбаЛистокпечататьToolStripMenuItem1.Size = New System.Drawing.Size(262, 22)
+        Me.ОбаЛистокпечататьToolStripMenuItem1.Text = "Оба + листок (печатать)"
+        '
+        'СчетToolStripMenuItem
+        '
+        Me.СчетToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem2, Me.ToolStripMenuItem3})
+        Me.СчетToolStripMenuItem.Name = "СчетToolStripMenuItem"
+        Me.СчетToolStripMenuItem.Size = New System.Drawing.Size(262, 22)
+        Me.СчетToolStripMenuItem.Text = "Счет"
+        '
+        'ToolStripMenuItem2
+        '
+        Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
+        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(80, 22)
+        Me.ToolStripMenuItem2.Text = "1"
+        '
+        'ToolStripMenuItem3
+        '
+        Me.ToolStripMenuItem3.Name = "ToolStripMenuItem3"
+        Me.ToolStripMenuItem3.Size = New System.Drawing.Size(80, 22)
+        Me.ToolStripMenuItem3.Text = "2"
+        '
+        'АктToolStripMenuItem
+        '
+        Me.АктToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem4, Me.ToolStripMenuItem5})
+        Me.АктToolStripMenuItem.Name = "АктToolStripMenuItem"
+        Me.АктToolStripMenuItem.Size = New System.Drawing.Size(262, 22)
+        Me.АктToolStripMenuItem.Text = "Акт"
+        '
+        'ToolStripMenuItem4
+        '
+        Me.ToolStripMenuItem4.Name = "ToolStripMenuItem4"
+        Me.ToolStripMenuItem4.Size = New System.Drawing.Size(80, 22)
+        Me.ToolStripMenuItem4.Text = "1"
+        '
+        'ToolStripMenuItem5
+        '
+        Me.ToolStripMenuItem5.Name = "ToolStripMenuItem5"
+        Me.ToolStripMenuItem5.Size = New System.Drawing.Size(80, 22)
+        Me.ToolStripMenuItem5.Text = "2"
+        '
+        'ДоговораToolStripMenuItem
+        '
+        Me.ДоговораToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.КлиентToolStripMenuItem, Me.ПеревозчикToolStripMenuItem})
+        Me.ДоговораToolStripMenuItem.Name = "ДоговораToolStripMenuItem"
+        Me.ДоговораToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ДоговораToolStripMenuItem.Text = "Договор"
+        '
+        'КлиентToolStripMenuItem
+        '
+        Me.КлиентToolStripMenuItem.Name = "КлиентToolStripMenuItem"
+        Me.КлиентToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.КлиентToolStripMenuItem.Text = "Клиент"
+        '
+        'ПеревозчикToolStripMenuItem
+        '
+        Me.ПеревозчикToolStripMenuItem.Name = "ПеревозчикToolStripMenuItem"
+        Me.ПеревозчикToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ПеревозчикToolStripMenuItem.Text = "Перевозчик"
+        '
+        'СчетактToolStripMenuItem
+        '
+        Me.СчетактToolStripMenuItem.Name = "СчетактToolStripMenuItem"
+        Me.СчетактToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.СчетактToolStripMenuItem.Text = "Счет,акт."
         '
         'Button1
         '
@@ -619,7 +794,7 @@ Partial Class Рейс
         Me.ComboBox11.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.ComboBox11.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
         Me.ComboBox11.FormattingEnabled = True
-        Me.ComboBox11.Location = New System.Drawing.Point(10, 34)
+        Me.ComboBox11.Location = New System.Drawing.Point(108, 14)
         Me.ComboBox11.Name = "ComboBox11"
         Me.ComboBox11.Size = New System.Drawing.Size(161, 25)
         Me.ComboBox11.TabIndex = 31
@@ -627,18 +802,37 @@ Partial Class Рейс
         'GroupBox11
         '
         Me.GroupBox11.BackColor = System.Drawing.Color.DarkKhaki
+        Me.GroupBox11.Controls.Add(Me.Label13)
+        Me.GroupBox11.Controls.Add(Me.Label11)
         Me.GroupBox11.Controls.Add(Me.RichTextBox8)
         Me.GroupBox11.Controls.Add(Me.ComboBox11)
         Me.GroupBox11.Location = New System.Drawing.Point(772, 489)
         Me.GroupBox11.Name = "GroupBox11"
-        Me.GroupBox11.Size = New System.Drawing.Size(431, 81)
+        Me.GroupBox11.Size = New System.Drawing.Size(356, 81)
         Me.GroupBox11.TabIndex = 45
         Me.GroupBox11.TabStop = False
-        Me.GroupBox11.Text = "Тип, объем и тоннаж транспортного средства и номер"
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Location = New System.Drawing.Point(17, 51)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(85, 17)
+        Me.Label13.TabIndex = 34
+        Me.Label13.Text = "Номер авто:"
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(17, 17)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(66, 17)
+        Me.Label11.TabIndex = 33
+        Me.Label11.Text = "Тип авто:"
         '
         'RichTextBox8
         '
-        Me.RichTextBox8.Location = New System.Drawing.Point(177, 34)
+        Me.RichTextBox8.Location = New System.Drawing.Point(107, 45)
         Me.RichTextBox8.Name = "RichTextBox8"
         Me.RichTextBox8.Size = New System.Drawing.Size(236, 26)
         Me.RichTextBox8.TabIndex = 32
@@ -691,25 +885,6 @@ Partial Class Рейс
         Me.CheckBox2.Text = "Очистить"
         Me.CheckBox2.UseVisualStyleBackColor = True
         '
-        'Button2
-        '
-        Me.Button2.BackColor = System.Drawing.SystemColors.HotTrack
-        Me.Button2.Location = New System.Drawing.Point(6, 19)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(35, 16)
-        Me.Button2.TabIndex = 49
-        Me.Button2.UseVisualStyleBackColor = False
-        '
-        'GroupBox13
-        '
-        Me.GroupBox13.Controls.Add(Me.Button2)
-        Me.GroupBox13.Location = New System.Drawing.Point(260, 9)
-        Me.GroupBox13.Name = "GroupBox13"
-        Me.GroupBox13.Size = New System.Drawing.Size(47, 47)
-        Me.GroupBox13.TabIndex = 51
-        Me.GroupBox13.TabStop = False
-        Me.GroupBox13.Text = "Доп"
-        '
         'Button6
         '
         Me.Button6.BackColor = System.Drawing.Color.Tomato
@@ -741,15 +916,122 @@ Partial Class Рейс
         Me.Label9.TabIndex = 54
         Me.Label9.Text = "Дата поручения"
         '
+        'GroupBox14
+        '
+        Me.GroupBox14.BackColor = System.Drawing.Color.DarkKhaki
+        Me.GroupBox14.Controls.Add(Me.RichTextBox11)
+        Me.GroupBox14.Location = New System.Drawing.Point(1134, 489)
+        Me.GroupBox14.Name = "GroupBox14"
+        Me.GroupBox14.Size = New System.Drawing.Size(243, 81)
+        Me.GroupBox14.TabIndex = 46
+        Me.GroupBox14.TabStop = False
+        Me.GroupBox14.Text = "Конт.лицо(перевозчика)"
+        '
+        'RichTextBox11
+        '
+        Me.RichTextBox11.Location = New System.Drawing.Point(7, 17)
+        Me.RichTextBox11.Name = "RichTextBox11"
+        Me.RichTextBox11.Size = New System.Drawing.Size(229, 58)
+        Me.RichTextBox11.TabIndex = 32
+        Me.RichTextBox11.Text = ""
+        '
+        'ToolStrip1
+        '
+        Me.ToolStrip1.Dock = System.Windows.Forms.DockStyle.None
+        Me.ToolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripSplitButton1})
+        Me.ToolStrip1.Location = New System.Drawing.Point(244, 30)
+        Me.ToolStrip1.Name = "ToolStrip1"
+        Me.ToolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
+        Me.ToolStrip1.Size = New System.Drawing.Size(35, 25)
+        Me.ToolStrip1.TabIndex = 56
+        Me.ToolStrip1.Text = "ToolStrip1"
+        '
+        'ToolStripSplitButton1
+        '
+        Me.ToolStripSplitButton1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.ToolStripSplitButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripSplitButton1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.СводнаяToolStripMenuItem, Me.ОплатаToolStripMenuItem, Me.ШтрафыToolStripMenuItem, Me.АктСчетИРазбивкаToolStripMenuItem, Me.ДоговораToolStripMenuItem1})
+        Me.ToolStripSplitButton1.Image = Global.Грузы.My.Resources.Resources.check
+        Me.ToolStripSplitButton1.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripSplitButton1.Name = "ToolStripSplitButton1"
+        Me.ToolStripSplitButton1.Size = New System.Drawing.Size(32, 22)
+        Me.ToolStripSplitButton1.Text = "Сводная"
+        '
+        'СводнаяToolStripMenuItem
+        '
+        Me.СводнаяToolStripMenuItem.Name = "СводнаяToolStripMenuItem"
+        Me.СводнаяToolStripMenuItem.Size = New System.Drawing.Size(186, 22)
+        Me.СводнаяToolStripMenuItem.Text = "Сводная"
+        '
+        'ОплатаToolStripMenuItem
+        '
+        Me.ОплатаToolStripMenuItem.Name = "ОплатаToolStripMenuItem"
+        Me.ОплатаToolStripMenuItem.Size = New System.Drawing.Size(186, 22)
+        Me.ОплатаToolStripMenuItem.Text = "Оплата"
+        '
+        'ШтрафыToolStripMenuItem
+        '
+        Me.ШтрафыToolStripMenuItem.Name = "ШтрафыToolStripMenuItem"
+        Me.ШтрафыToolStripMenuItem.Size = New System.Drawing.Size(186, 22)
+        Me.ШтрафыToolStripMenuItem.Text = "Штрафы"
+        '
+        'АктСчетИРазбивкаToolStripMenuItem
+        '
+        Me.АктСчетИРазбивкаToolStripMenuItem.Name = "АктСчетИРазбивкаToolStripMenuItem"
+        Me.АктСчетИРазбивкаToolStripMenuItem.Size = New System.Drawing.Size(186, 22)
+        Me.АктСчетИРазбивкаToolStripMenuItem.Text = "Акт, счет и разбивка"
+        '
+        'ДоговораToolStripMenuItem1
+        '
+        Me.ДоговораToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ПеревозчикToolStripMenuItem1, Me.ПеревозчикToolStripMenuItem2})
+        Me.ДоговораToolStripMenuItem1.Name = "ДоговораToolStripMenuItem1"
+        Me.ДоговораToolStripMenuItem1.Size = New System.Drawing.Size(186, 22)
+        Me.ДоговораToolStripMenuItem1.Text = "Договора"
+        '
+        'ПеревозчикToolStripMenuItem1
+        '
+        Me.ПеревозчикToolStripMenuItem1.Name = "ПеревозчикToolStripMenuItem1"
+        Me.ПеревозчикToolStripMenuItem1.Size = New System.Drawing.Size(140, 22)
+        Me.ПеревозчикToolStripMenuItem1.Text = "Клиент"
+        '
+        'ПеревозчикToolStripMenuItem2
+        '
+        Me.ПеревозчикToolStripMenuItem2.Name = "ПеревозчикToolStripMenuItem2"
+        Me.ПеревозчикToolStripMenuItem2.Size = New System.Drawing.Size(140, 22)
+        Me.ПеревозчикToolStripMenuItem2.Text = "Перевозчик"
+        '
+        'Button8
+        '
+        Me.Button8.BackColor = System.Drawing.Color.PaleGoldenrod
+        Me.Button8.Font = New System.Drawing.Font("Times New Roman", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.Button8.Location = New System.Drawing.Point(1065, 36)
+        Me.Button8.Margin = New System.Windows.Forms.Padding(4)
+        Me.Button8.Name = "Button8"
+        Me.Button8.Size = New System.Drawing.Size(68, 26)
+        Me.Button8.TabIndex = 57
+        Me.Button8.Text = "Поиск"
+        Me.Button8.UseVisualStyleBackColor = False
+        '
+        'КлиентBindingSource
+        '
+        Me.КлиентBindingSource.DataMember = "Клиент"
+        '
+        'КлиентBindingSource1
+        '
+        Me.КлиентBindingSource1.DataMember = "Клиент"
+        '
         'Рейс
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 17.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1423, 758)
+        Me.Controls.Add(Me.Button8)
+        Me.Controls.Add(Me.ToolStrip1)
+        Me.Controls.Add(Me.GroupBox14)
         Me.Controls.Add(Me.Label9)
         Me.Controls.Add(Me.MaskedTextBox1)
         Me.Controls.Add(Me.Button6)
-        Me.Controls.Add(Me.GroupBox13)
         Me.Controls.Add(Me.CheckBox2)
         Me.Controls.Add(Me.CheckBox1)
         Me.Controls.Add(Me.Label8)
@@ -779,13 +1061,14 @@ Partial Class Рейс
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "Рейс"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Рейс"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
+        CType(Me.КлиентBindingSource2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
+        Me.ContextMenuStrip1.ResumeLayout(False)
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
         Me.GroupBox4.ResumeLayout(False)
@@ -797,8 +1080,13 @@ Partial Class Рейс
         Me.GroupBox9.ResumeLayout(False)
         Me.GroupBox10.ResumeLayout(False)
         Me.GroupBox11.ResumeLayout(False)
+        Me.GroupBox11.PerformLayout()
         Me.GroupBox12.ResumeLayout(False)
-        Me.GroupBox13.ResumeLayout(False)
+        Me.GroupBox14.ResumeLayout(False)
+        Me.ToolStrip1.ResumeLayout(False)
+        Me.ToolStrip1.PerformLayout()
+        CType(Me.КлиентBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.КлиентBindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -860,12 +1148,51 @@ Partial Class Рейс
     Friend WithEvents CheckBox1 As CheckBox
     Friend WithEvents RichTextBox10 As RichTextBox
     Friend WithEvents CheckBox2 As CheckBox
-    Friend WithEvents Button2 As Button
-    Friend WithEvents GroupBox13 As GroupBox
     Friend WithEvents Button3 As Button
     Friend WithEvents Button4 As Button
     Friend WithEvents Button5 As Button
     Friend WithEvents Button6 As Button
     Friend WithEvents MaskedTextBox1 As MaskedTextBox
     Friend WithEvents Label9 As Label
+    Friend WithEvents Label13 As Label
+    Friend WithEvents Label11 As Label
+    Friend WithEvents GroupBox14 As GroupBox
+    Friend WithEvents RichTextBox11 As RichTextBox
+    Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
+    Friend WithEvents ПечатьToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ПоручениеКлиентпечататьToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents ПоручениеПеревозчикпечататьToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents ОбапечататьToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents ЛистокпечататьToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents ОбаЛистокпечататьToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents ДоговораToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents КлиентToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ПеревозчикToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ToolStrip1 As ToolStrip
+    Friend WithEvents ToolStripSplitButton1 As ToolStripSplitButton
+    Friend WithEvents СводнаяToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ОплатаToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ШтрафыToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents АктСчетИРазбивкаToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ДоговораToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents ПеревозчикToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents ПеревозчикToolStripMenuItem2 As ToolStripMenuItem
+    Friend WithEvents Button7 As Button
+    Friend WithEvents Button2 As Button
+    Friend WithEvents СчетToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem2 As ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem3 As ToolStripMenuItem
+    Friend WithEvents АктToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem4 As ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem5 As ToolStripMenuItem
+    Friend WithEvents Button8 As Button
+    Friend WithEvents СчетактToolStripMenuItem As ToolStripMenuItem
+
+    Friend WithEvents КлиентBindingSource As BindingSource
+
+    Friend WithEvents КлиентBindingSource1 As BindingSource
+
+
+    Friend WithEvents КлиентBindingSource2 As BindingSource
+
 End Class

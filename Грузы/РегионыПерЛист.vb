@@ -4,22 +4,8 @@ Public Class РегионыПерЛист
     Dim strsql As String
     Dim Рик As String = "ООО Рикманс"
     Private Sub РегионыПерЛист_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        conn = New OleDbConnection
-        conn.ConnectionString = ConString
-        Try
-            conn.Open()
-        Catch ex As Exception
-            MessageBox.Show("Не подключен диск U")
-        End Try
 
-        strsql = "SELECT Регионы FROM РегионыРоссии ORDER BY Регионы"
-        Dim c6 As New OleDbCommand
-        c6.Connection = conn
-        c6.CommandText = strsql
-        Dim ds As New DataTable
-        Dim da6 As New OleDbDataAdapter(c6)
-        da6.Fill(ds)
-
+        Dim ds As DataTable = Selects3(StrSql:="SELECT Регионы FROM РегионыРоссии ORDER BY Регионы")
         ListBox1.Items.Clear()
 
         For Each r As DataRow In ds.Rows
@@ -42,13 +28,8 @@ Public Class РегионыПерЛист
             country = ListBox1.SelectedItems(i).ToString & ", " & country
         Next
 
-        strsql = ""
-        strsql = "UPDATE ПеревозчикиБаза SET [Регионы]='" & country & "' WHERE ПеревозчикиБаза.ID = " & idtabl & ""
-        Dim c25 As New OleDbCommand
-        c25.Connection = conn
-        c25.CommandText = strsql
-        c25.ExecuteNonQuery()
 
+        Updates3(stroka:="UPDATE ПеревозчикиБаза SET [Регионы]='" & country & "' WHERE ПеревозчикиБаза.ID = " & idtabl & "")
 
     End Sub
 

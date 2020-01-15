@@ -10,13 +10,7 @@ Public Class ИзменПеревоз
     Dim ind As Boolean = False
 
     Private Sub ИзменПеревоз_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        conn = New OleDbConnection
-        conn.ConnectionString = ConString
-        Try
-            conn.Open()
-        Catch ex As Exception
-            MessageBox.Show("Не подключен диск U")
-        End Try
+
         TextBox5.Enabled = False
         TextBox4.Enabled = False
 
@@ -28,13 +22,8 @@ Public Class ИзменПеревоз
     End Sub
 
     Public Sub дан()
-        strsql = "SELECT * FROM ПЕревозчикиБаза WHERE ID=" & idtabl & ""
-        Dim c6 As New OleDbCommand
-        c6.Connection = conn
-        c6.CommandText = strsql
-        Dim ds As New DataTable
-        Dim da6 As New OleDbDataAdapter(c6)
-        da6.Fill(ds)
+        Dim ds As DataTable = Selects3(StrSql:="SELECT * FROM ПЕревозчикиБаза WHERE ID=" & idtabl & "")
+
 
         TextBox1.Text = ds.Rows(0).Item(1).ToString
         TextBox2.Text = ds.Rows(0).Item(2).ToString
@@ -81,15 +70,12 @@ Public Class ИзменПеревоз
             Me.Close()
         End If
 
-        strsql = "UPDATE ПеревозчикиБаза SET [Форма собственности]='" & TextBox1.Text & "', [Наименование фирмы]='" & TextBox2.Text & "',
+        Updates3(stroka:="UPDATE ПеревозчикиБаза SET [Форма собственности]='" & TextBox1.Text & "', [Наименование фирмы]='" & TextBox2.Text & "',
 [Контактное лицо]='" & TextBox3.Text & "',[Телефоны]='" & TextBox6.Text & "',[Города]='" & TextBox12.Text & "',
 [ADR]='" & TextBox11.Text & "',[Кол-во авто]='" & TextBox10.Text & "',[Вид_авто]='" & TextBox9.Text & "',
 [Тоннаж]='" & TextBox8.Text & "',[Объем]='" & TextBox7.Text & "',[Ставка]='" & TextBox14.Text & "',[Примечание]='" & TextBox13.Text & "'
-WHERE ID=" & idtabl & ""
-        Dim c25 As New OleDbCommand
-        c25.Connection = conn
-        c25.CommandText = strsql
-        c25.ExecuteNonQuery()
+WHERE ID=" & idtabl & "")
+
 
     End Sub
 

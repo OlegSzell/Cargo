@@ -37,6 +37,11 @@ Partial Class РабочаяФорма
         Me.Button2 = New System.Windows.Forms.Button()
         Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
         Me.Label2 = New System.Windows.Forms.Label()
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Button3 = New System.Windows.Forms.Button()
+        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
+        Me.Label4 = New System.Windows.Forms.Label()
         CType(Me.Grid1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Grid2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
@@ -63,7 +68,7 @@ Partial Class РабочаяФорма
         DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.Grid1.RowsDefaultCellStyle = DataGridViewCellStyle2
         Me.Grid1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.Grid1.Size = New System.Drawing.Size(1089, 106)
+        Me.Grid1.Size = New System.Drawing.Size(1301, 106)
         Me.Grid1.TabIndex = 0
         '
         'Grid2
@@ -82,7 +87,7 @@ Partial Class РабочаяФорма
         Me.Grid2.ReadOnly = True
         DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.Grid2.RowsDefaultCellStyle = DataGridViewCellStyle3
-        Me.Grid2.Size = New System.Drawing.Size(1089, 410)
+        Me.Grid2.Size = New System.Drawing.Size(1301, 410)
         Me.Grid2.TabIndex = 1
         '
         'GroupBox1
@@ -94,7 +99,7 @@ Partial Class РабочаяФорма
         Me.GroupBox1.Controls.Add(Me.Grid1)
         Me.GroupBox1.Location = New System.Drawing.Point(0, 123)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(1103, 134)
+        Me.GroupBox1.Size = New System.Drawing.Size(1315, 134)
         Me.GroupBox1.TabIndex = 3
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Груз"
@@ -107,7 +112,7 @@ Partial Class РабочаяФорма
         Me.GroupBox2.Controls.Add(Me.Grid2)
         Me.GroupBox2.Location = New System.Drawing.Point(0, 263)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(1103, 434)
+        Me.GroupBox2.Size = New System.Drawing.Size(1315, 434)
         Me.GroupBox2.TabIndex = 4
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Перевозчики"
@@ -122,17 +127,15 @@ Partial Class РабочаяФорма
         Me.ListBox1.ItemHeight = 17
         Me.ListBox1.Location = New System.Drawing.Point(6, 21)
         Me.ListBox1.Name = "ListBox1"
-        Me.ListBox1.Size = New System.Drawing.Size(769, 72)
+        Me.ListBox1.Size = New System.Drawing.Size(693, 72)
         Me.ListBox1.TabIndex = 5
         '
         'GroupBox3
         '
-        Me.GroupBox3.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox3.Controls.Add(Me.ListBox1)
         Me.GroupBox3.Location = New System.Drawing.Point(322, 10)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(781, 107)
+        Me.GroupBox3.Size = New System.Drawing.Size(705, 107)
         Me.GroupBox3.TabIndex = 6
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Результат переговоров"
@@ -172,7 +175,7 @@ Partial Class РабочаяФорма
         '
         Me.RichTextBox1.Location = New System.Drawing.Point(67, 46)
         Me.RichTextBox1.Name = "RichTextBox1"
-        Me.RichTextBox1.Size = New System.Drawing.Size(249, 71)
+        Me.RichTextBox1.Size = New System.Drawing.Size(249, 57)
         Me.RichTextBox1.TabIndex = 33
         Me.RichTextBox1.Text = ""
         '
@@ -185,11 +188,66 @@ Partial Class РабочаяФорма
         Me.Label2.TabIndex = 34
         Me.Label2.Text = "Телефон клиента"
         '
+        'ComboBox1
+        '
+        Me.ComboBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.ComboBox1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.ComboBox1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.Location = New System.Drawing.Point(1036, 39)
+        Me.ComboBox1.Name = "ComboBox1"
+        Me.ComboBox1.Size = New System.Drawing.Size(272, 25)
+        Me.ComboBox1.TabIndex = 35
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(1033, 15)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(128, 17)
+        Me.Label3.TabIndex = 36
+        Me.Label3.Text = "Найти перевозчика"
+        '
+        'Button3
+        '
+        Me.Button3.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.Button3.Location = New System.Drawing.Point(1036, 88)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(96, 29)
+        Me.Button3.TabIndex = 37
+        Me.Button3.Text = "Для скайпа"
+        Me.Button3.UseVisualStyleBackColor = False
+        '
+        'ComboBox2
+        '
+        Me.ComboBox2.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.ComboBox2.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.ComboBox2.FormattingEnabled = True
+        Me.ComboBox2.Location = New System.Drawing.Point(1185, 91)
+        Me.ComboBox2.Name = "ComboBox2"
+        Me.ComboBox2.Size = New System.Drawing.Size(123, 25)
+        Me.ComboBox2.TabIndex = 38
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(1139, 94)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(40, 17)
+        Me.Label4.TabIndex = 39
+        Me.Label4.Text = "Авто"
+        '
         'РабочаяФорма
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 17.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1103, 709)
+        Me.ClientSize = New System.Drawing.Size(1315, 709)
+        Me.Controls.Add(Me.Label4)
+        Me.Controls.Add(Me.ComboBox2)
+        Me.Controls.Add(Me.Button3)
+        Me.Controls.Add(Me.Label3)
+        Me.Controls.Add(Me.ComboBox1)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.RichTextBox1)
         Me.Controls.Add(Me.Button2)
@@ -226,4 +284,9 @@ Partial Class РабочаяФорма
     Friend WithEvents Button2 As Button
     Friend WithEvents RichTextBox1 As RichTextBox
     Friend WithEvents Label2 As Label
+    Friend WithEvents ComboBox1 As ComboBox
+    Friend WithEvents Label3 As Label
+    Friend WithEvents Button3 As Button
+    Friend WithEvents ComboBox2 As ComboBox
+    Friend WithEvents Label4 As Label
 End Class

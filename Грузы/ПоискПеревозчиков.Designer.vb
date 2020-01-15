@@ -37,6 +37,7 @@ Partial Class ПоискПеревозчиков
         Me.Label5 = New System.Windows.Forms.Label()
         Me.ComboBox4 = New System.Windows.Forms.ComboBox()
         Me.Button1 = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
         CType(Me.Grid1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -169,11 +170,21 @@ Partial Class ПоискПеревозчиков
         Me.Button1.Text = "Удалить перевозчика"
         Me.Button1.UseVisualStyleBackColor = True
         '
+        'Button2
+        '
+        Me.Button2.Location = New System.Drawing.Point(1091, 48)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(158, 24)
+        Me.Button2.TabIndex = 13
+        Me.Button2.Text = "Добавить перевозчика"
+        Me.Button2.UseVisualStyleBackColor = True
+        '
         'ПоискПеревозчиков
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 17.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1289, 588)
+        Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.ComboBox4)
@@ -198,8 +209,6 @@ Partial Class ПоискПеревозчиков
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents ComboBox1 As ComboBox
     Friend WithEvents ComboBox2 As ComboBox
     Friend WithEvents Label1 As Label
     Friend WithEvents Label2 As Label
@@ -212,4 +221,6 @@ Partial Class ПоискПеревозчиков
     Friend WithEvents Label5 As Label
     Friend WithEvents ComboBox4 As ComboBox
     Friend WithEvents Button1 As Button
+    Public WithEvents ComboBox1 As ComboBox
+    Friend WithEvents Button2 As Button
 End Class

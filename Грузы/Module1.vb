@@ -1,18 +1,82 @@
 ﻿Imports System.Data.OleDb
-
+Imports System.Threading
+Imports System.Data.SqlClient
 Module Module1
     Public conn As OleDbConnection
+    Public conn3 As SqlConnection
     Public conn1 As OleDbConnection
     Public Отдел, Nm As String
     Public idtabl, errds, pro, pr2 As Integer
     Public IDГруз, Отмена As Integer
     Public IDПеревоза, ОтКогоИзмен As Integer
     Public Экспедитор, NameПеревоза As String
-    Public ConString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=U:\Офис\Рикманс\ДанныеРикманс.accdb; Persist Security Info=False;"
-    Public ДобПер As Integer
+    'Public ConString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=U:\Офис\Рикманс\ДанныеРикманс.accdb; Persist Security Info=False;"
+    Public ConString1 As String = "Data Source=45.14.50.13\723\SQLEXPRESS,1433;Network Library=DBMSSOCN;Initial Catalog=Rickmans;User ID=userOleg;Password=Zf6VpP37Ol"
+    Public ConString As String = "Data Source=45.14.50.142\2749\SQLEXPRESS,1433;Network Library=DBMSSOCN;Initial Catalog=Rickmans;User ID=userOleg1;Password=Zf6VpP37Ol"
+    Public ДобПер, ОбнПер As Integer
     Public Рик As String = "ООО Рикманс"
     Public Files3() As String
+    Public FilesПолнПуть() As String
+    Public НомерРейса3 As String
+    Public НомРейса As Integer
+    Public bl As Boolean
+    Public fall As New Thread(AddressOf Сводная_по_рейсам.ALL)
+    Public Delegate Sub coxt(ByVal form As Form, ByVal strsql As String, ByVal c As ComboBox)
+    Public Delegate Sub coxt1(ByVal form As Form, ByVal strsql As String, ByVal c As ListBox, ByVal com As ComboBox)
+    Public Delegate Sub coxt2()
+    Public Delegate Sub coxt3()
+    Public Delegate Sub coxt4()
+    Public Delegate Sub coxt5()
+    Public ДанныеДляВставкиСкайпа As Tuple(Of String, String, String, String, Integer)
+    Public ПодтверждениеПароля As Boolean
+    Public dtPer As DataTable
+    Public dtZak As DataTable
+    Public dtПеревозчики As DataTable
+    Public dtКлиенты, dtФормаСобствAll As DataTable
+    Public dtТипАвтоAll As DataTable
 
+
+
+
+
+    Public Sub COMxt(ByVal form As Form, ByVal strsql As String, ByVal c As ComboBox)
+        'Dim strsql As String = "SELECT DISTINCT Страна FROM Страна ORDER BY Страна"
+        'Dim sty As String = form.Name
+        'Dim c1 As ComboBox = form.Controls("ComboBox" & c)
+
+
+        If c.InvokeRequired Then
+            form.Invoke(New coxt(AddressOf COMxt), form, strsql, c)
+        Else
+            Dim ds As DataTable = Selects3(strsql)
+            c.AutoCompleteCustomSource.Clear()
+            c.Items.Clear()
+            For Each r As DataRow In ds.Rows
+                c.AutoCompleteCustomSource.Add(r.Item(0).ToString())
+                c.Items.Add(r(0).ToString)
+            Next
+        End If
+    End Sub
+    Public Sub Listxt(ByVal form As Form, ByVal strsql As String, ByVal c As ListBox, ByVal com As ComboBox)
+        'Dim strsql As String = "SELECT DISTINCT Страна FROM Страна ORDER BY Страна"
+        'Dim sty As String = form.Name
+        'Dim c1 As ComboBox = form.Controls("ComboBox" & c)
+
+
+        If c.InvokeRequired Then
+            form.Invoke(New coxt1(AddressOf Listxt), form, strsql, c, com)
+        Else
+            Dim ds As DataTable = Selects3(strsql)
+            com.Items.Clear()
+            com.AutoCompleteCustomSource.Clear()
+            c.Items.Clear()
+            For Each r As DataRow In ds.Rows
+                c.Items.Add(r(0).ToString)
+                com.Items.Add(r(0).ToString)
+                com.AutoCompleteCustomSource.Add(r(0).ToString)
+            Next
+        End If
+    End Sub
     Public Sub Updates(ByVal stroka As String)
         Dim c As New OleDbCommand
         c.Connection = conn
@@ -21,6 +85,24 @@ Module Module1
             c.ExecuteNonQuery()
         Catch ex As Exception
             MessageBox.Show(ex.Message)
+        End Try
+    End Sub
+    Public Sub Updates3(ByVal stroka As String)
+        Dim conn4 As New SqlConnection(ConString)
+        If conn4.State = ConnectionState.Closed Then
+            conn4.Open()
+        End If
+        Dim c As New SqlCommand(stroka, conn4)
+        Try
+            c.ExecuteNonQuery()
+            If conn4.State = ConnectionState.Open Then
+                conn4.Close()
+            End If
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+            If conn4.State = ConnectionState.Open Then
+                conn4.Close()
+            End If
         End Try
     End Sub
     Public Function Selects(ByVal StrSql As String) As DataTable
@@ -41,14 +123,104 @@ Module Module1
         End Try
 
     End Function
+    Public Function Selects3(ByVal StrSql As String) As DataTable
+        errds = 0
+        Dim conn3 As New SqlConnection(ConString)
+        If conn3.State = ConnectionState.Closed Then
+            conn3.Open()
+        End If
 
+        Dim c As New SqlCommand(StrSql, conn3)
+
+        Dim dst As New DataTable
+
+        Dim da As New SqlDataAdapter(c)
+        Try
+            da.Fill(dst)
+            Dim gf As Object = dst.Rows(0).Item(0)
+
+            If conn3.State = ConnectionState.Open Then
+                conn3.Close()
+            End If
+            Return dst
+        Catch ex As Exception
+            errds = 1
+            If conn3.State = ConnectionState.Open Then
+                conn3.Close()
+            End If
+            Return dst
+        End Try
+
+    End Function
+    Public Function Selects3(ByVal StrSql As String, ByVal Par As List(Of Date)) As DataTable
+        errds = 0
+        Dim conn3 As New SqlConnection(ConString)
+        If conn3.State = ConnectionState.Closed Then
+            conn3.Open()
+        End If
+        Dim c As New SqlCommand(StrSql, conn3)
+
+        If Par.Count > 0 Then
+            For x As Integer = 0 To Par.Count - 1
+                c.Parameters.AddWithValue("@d" & x + 1, Par(x))
+            Next
+        End If
+        Dim dst As New DataTable
+
+        Dim da As New SqlDataAdapter(c)
+        Try
+            da.Fill(dst)
+            Dim gf As Object = dst.Rows(0).Item(0)
+
+            If conn3.State = ConnectionState.Open Then
+                conn3.Close()
+            End If
+            Return dst
+        Catch ex As Exception
+            errds = 1
+            If conn3.State = ConnectionState.Open Then
+                conn3.Close()
+            End If
+            Return dst
+        End Try
+
+    End Function
+    Public Function SelectsAsync(ByVal StrSql As String) As DataTable
+        errds = 0
+        Dim conn3 As New SqlConnection(ConString)
+        If conn3.State = ConnectionState.Closed Then
+            conn3.Open()
+        End If
+
+        Dim c As New SqlCommand(StrSql, conn3)
+
+        Dim dst As New DataTable
+
+        Dim da As New SqlDataAdapter(c)
+        Try
+            da.Fill(dst)
+            Dim gf As Object = dst.Rows(0).Item(0)
+
+            If conn3.State = ConnectionState.Open Then
+                conn3.Close()
+            End If
+            Return dst
+        Catch ex As Exception
+            errds = 1
+            If conn3.State = ConnectionState.Open Then
+                conn3.Close()
+            End If
+            Return dst
+        End Try
+
+    End Function
     Public Sub Справки(ByVal год As Integer)
 
 
         Dim gth3 As String
 
         Try
-
+            FilesПолнПуть = (IO.Directory.GetFiles("Z:\RICKMANS\" & год, "*.xls*", IO.SearchOption.TopDirectoryOnly))
             Files3 = (IO.Directory.GetFiles("Z:\RICKMANS\" & год, "*.xls*", IO.SearchOption.TopDirectoryOnly))
             For n As Integer = 0 To Files3.Length - 1
                 gth3 = ""
@@ -58,7 +230,9 @@ Module Module1
 
 
         Catch ex As Exception
-
+            If Not IO.Directory.Exists("Z:\RICKMANS\" & год) Then
+                IO.Directory.CreateDirectory("Z:\RICKMANS\" & год)
+            End If
         End Try
 
 
@@ -67,7 +241,7 @@ Module Module1
 
     Public Sub KillProc()
         Try
-            If IO.Directory.Exists("c:\Users\Public\Documents\Рикманс") Then
+            If IO.Directory.Exists("c: \Users\Public\Documents\Рикманс") Then
                 IO.Directory.Delete("c:\Users\Public\Documents\Рикманс", True)
                 IO.Directory.CreateDirectory("c:\Users\Public\Documents\Рикманс")
             Else
@@ -207,7 +381,95 @@ Module Module1
 
     End Function
 
+    Public Sub GridView(ByVal d As DataGridView)
+        d.EnableHeadersVisualStyles = False
+        d.ColumnHeadersDefaultCellStyle.BackColor = Color.LightGreen
+        d.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Raised
+        d.SelectionMode = DataGridViewSelectionMode.FullRowSelect
+        d.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        d.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+    End Sub
+    Public Function РейсыКлиента(ByVal num As Integer) As DataRow()
+        Dim rowzak = dtZak.Select("НомерРейса=" & num & "")
+        Return rowzak
+    End Function
 
+    Public Function РейсыПеревозчик(ByVal num As Integer) As DataRow()
+        Dim rowper = dtPer.Select("НомерРейса=" & num & "")
+        Return rowper
+    End Function
+    'Public Function dtVyborka() As Task
+    '    Return Task.Run(Sub() RunMoving())
+    'End Function
+    Public Sub RunMoving()
+        dtZak = SelectsAsync(StrSql:="SELECT * FROM РейсыКлиента") 'Рейсы клиента
+    End Sub
+    'Public Function dtVyborka1() As Task
+    '    Return Task.Run(Sub() RunMoving1())
+    'End Function
+    Public Sub RunMoving1()
+        'dtPer = New DataTable()
+        dtPer = SelectsAsync(StrSql:="SELECT * FROM РейсыПеревозчика") 'Рейсы перевозчика
+    End Sub
+
+    'Public Function Перевозчики() As Task
+    '    Return Task.Run(Sub() ПеревозчикиRunMoving())
+    'End Function
+    Public Sub ПеревозчикиRunMoving()
+        dtПеревозчики = Selects3(StrSql:="SELECT * FROM Перевозчики ORDER BY Названиеорганизации") 'данные по перевозчику
+    End Sub
+
+    'Public Function Клиенты() As Task
+    '    Return Task.Run(Sub() КлиентыRunMoving())
+    'End Function
+    Public Sub КлиентыRunMoving()
+        dtКлиенты = Selects3(StrSql:="SELECT * FROM Клиент ORDER BY НазваниеОрганизации") 'данные по клиенту
+    End Sub
+
+    'Public Function ТипАвтоAll() As Task
+    '    Return Task.Run(Sub() ТипАвтоAllRunMoving())
+    'End Function
+    Public Sub ТипАвтоAllRunMoving()
+        dtТипАвтоAll = Selects3(StrSql:="SELECT * FROM ТипАвто ORDER BY ТипАвто")
+    End Sub
+
+    Public Sub RunMoving10()
+        dtФормаСобствAll = Selects3(StrSql:="SELECT * FROM ФормаСобств") 'ФормаСобств
+    End Sub
+
+    Public Async Sub dtSФормаСобств()
+        Await Task.Run(Sub() RunMoving10())
+    End Sub
+
+
+
+
+
+
+    Public Async Sub dtVyborkaS()
+        Await Task.Run((Sub() RunMoving()))
+    End Sub
+    Public Async Sub dtVyborkaS1()
+        Await Task.Run((Sub() RunMoving1()))
+    End Sub
+    Public Async Sub ТипАвтоAll()
+        Await Task.Run((Sub() ТипАвтоAllRunMoving()))
+    End Sub
+    Public Async Sub Клиенты()
+        Await Task.Run((Sub() КлиентыRunMoving()))
+    End Sub
+    Public Async Sub Перевозчики()
+        Await Task.Run((Sub() ПеревозчикиRunMoving()))
+    End Sub
+
+    Public Sub ALL()
+        dtVyborkaS1()
+        Перевозчики()
+        dtVyborkaS()
+        Клиенты()
+        ТипАвтоAll()
+        dtSФормаСобств()
+    End Sub
 
 
 

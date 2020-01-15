@@ -39,6 +39,7 @@ Partial Class Выборка
         Me.CheckBox3 = New System.Windows.Forms.CheckBox()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.CheckBox4 = New System.Windows.Forms.CheckBox()
+        Me.DateTimePicker2 = New System.Windows.Forms.DateTimePicker()
         CType(Me.Grid1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
@@ -84,11 +85,10 @@ Partial Class Выборка
         'DateTimePicker1
         '
         Me.DateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.DateTimePicker1.Location = New System.Drawing.Point(744, 22)
+        Me.DateTimePicker1.Location = New System.Drawing.Point(731, 22)
         Me.DateTimePicker1.Name = "DateTimePicker1"
-        Me.DateTimePicker1.Size = New System.Drawing.Size(94, 25)
+        Me.DateTimePicker1.Size = New System.Drawing.Size(107, 25)
         Me.DateTimePicker1.TabIndex = 4
-        Me.DateTimePicker1.Visible = False
         '
         'Grid1
         '
@@ -193,11 +193,20 @@ Partial Class Выборка
         Me.CheckBox4.Text = "Все грузы"
         Me.CheckBox4.UseVisualStyleBackColor = True
         '
+        'DateTimePicker2
+        '
+        Me.DateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.DateTimePicker2.Location = New System.Drawing.Point(1168, 65)
+        Me.DateTimePicker2.Name = "DateTimePicker2"
+        Me.DateTimePicker2.Size = New System.Drawing.Size(107, 25)
+        Me.DateTimePicker2.TabIndex = 14
+        '
         'Выборка
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 17.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1333, 440)
+        Me.Controls.Add(Me.DateTimePicker2)
         Me.Controls.Add(Me.CheckBox4)
         Me.Controls.Add(Me.TextBox2)
         Me.Controls.Add(Me.CheckBox3)
@@ -214,7 +223,9 @@ Partial Class Выборка
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "Выборка"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Выборка"
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         CType(Me.Grid1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
@@ -237,4 +248,5 @@ Partial Class Выборка
     Friend WithEvents CheckBox3 As CheckBox
     Friend WithEvents TextBox2 As TextBox
     Friend WithEvents CheckBox4 As CheckBox
+    Friend WithEvents DateTimePicker2 As DateTimePicker
 End Class

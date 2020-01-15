@@ -1,13 +1,14 @@
 ﻿Option Explicit On
 Imports System.Data.OleDb
+Imports System.Data.SqlClient
 
 Public Class РабочаяФормаМодал
     Private Sub Удаление()
         If IDГруз = Nothing Or IDПеревоза = Nothing Then
             Exit Sub
         End If
-        Dim strsql As String = "DELETE * FROM ИтогГрузПеревоз WHERE IDГруз=" & IDГруз & " AND IDПеревоз=" & IDПеревоза & ""
-        Updates(strsql)
+        Dim strsql As String = "DELETE FROM ИтогГрузПеревоз WHERE IDГруз=" & IDГруз & " AND IDПеревоз=" & IDПеревоза & ""
+        Updates3(strsql)
     End Sub
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
@@ -23,24 +24,35 @@ Public Class РабочаяФормаМодал
         If Label1.Text = "0" Then
             strsql = "INSERT INTO ИтогГрузПеревоз(IDПеревоз, IDГруз, Примечание, Дата) VALUES(" & IDПеревоза & ",
 " & IDГруз & ", '" & TextBox1.Text & "','" & TextBox2.Text & "')"
-            Dim c As New OleDbCommand
+            Dim conn As New SqlConnection
+            conn.ConnectionString = ConString
+            If conn.State = ConnectionState.Closed Then
+                conn.Open()
+            End If
+            Dim c As New SqlCommand
             c.Connection = conn
             c.CommandText = strsql
             Try
                 c.ExecuteNonQuery()
             Catch ex As Exception
                 MessageBox.Show("Не Сохранено!")
+                If conn.State = ConnectionState.Open Then
+                    conn.Close()
+                End If
                 Exit Sub
             End Try
             MessageBox.Show("Сохранено!")
             РабочаяФорма.Клик()
             РабочаяФорма.Grid2Refresh(1)
             TextBox1.Text = ""
+            If conn.State = ConnectionState.Open Then
+                conn.Close()
+            End If
             Me.Close()
 
         Else
             strsql = "UPDATE ИтогГрузПеревоз SET Примечание='" & TextBox1.Text & "' WHERE IDПеревоз=" & IDПеревоза & " AND IDГруз=" & IDГруз & ""
-            Updates(strsql)
+            Updates3(strsql)
             MessageBox.Show("Изменено!")
             РабочаяФорма.Клик()
             РабочаяФорма.Grid2Refresh(1)
