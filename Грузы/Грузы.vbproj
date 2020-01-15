@@ -1,0 +1,516 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{96900727-D4AB-43AD-B0E9-27C937FC6241}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>Грузы.My.MyApplication</StartupObject>
+    <RootNamespace>Грузы</RootNamespace>
+    <AssemblyName>Грузы</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>WindowsForms</MyType>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <PublishUrl>ftp://os2trahw.beget.tech/VS/</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>1</UpdateInterval>
+    <UpdateIntervalUnits>Hours</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <InstallUrl>http://2trans.by/VS/</InstallUrl>
+    <UpdateUrl>http://2trans.by/VS/</UpdateUrl>
+    <ProductName>Экспедиция</ProductName>
+    <PublisherName>Рикманс</PublisherName>
+    <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
+    <WebPage>publish.htm</WebPage>
+    <TrustUrlParameters>true</TrustUrlParameters>
+    <ApplicationRevision>43</ApplicationRevision>
+    <ApplicationVersion>1.1.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>Грузы.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>Грузы.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>3918A8040F8C8B4119F4BC28DB0988C1C16A19AB</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>Грузы_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DocumentationFile>Грузы.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DocumentationFile>Грузы.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="adodb, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\..\..\..\..\..\Windows\assembly\GAC_MSIL\Microsoft.Office.Interop.Excel\15.0.0.0__71e9bce111e9429c\Microsoft.Office.Interop.Excel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Word, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\..\..\..\..\..\Windows\assembly\GAC_MSIL\Microsoft.Office.Interop.Word\15.0.0.0__71e9bce111e9429c\Microsoft.Office.Interop.Word.dll</HintPath>
+    </Reference>
+    <Reference Include="office, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\..\..\..\..\..\Windows\assembly\GAC_MSIL\office\15.0.0.0__71e9bce111e9429c\office.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+    <Import Include="System.Threading.Tasks" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="MDIParent1.Designer.vb">
+      <DependentUpon>MDIParent1.vb</DependentUpon>
+    </Compile>
+    <Compile Include="MDIParent1.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Module1.vb" />
+    <Compile Include="ВодитДан.Designer.vb">
+      <DependentUpon>ВодитДан.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ВодитДан.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ВсплывФормаПереговоры.Designer.vb">
+      <DependentUpon>ВсплывФормаПереговоры.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ВсплывФормаПереговоры.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Выборка.Designer.vb">
+      <DependentUpon>Выборка.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Выборка.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ГрузРассылка.Designer.vb">
+      <DependentUpon>ГрузРассылка.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ГрузРассылка.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Данные.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Данные.Designer.vb">
+      <DependentUpon>Данные.vb</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ДобавитьПеревозчика.Designer.vb">
+      <DependentUpon>ДобавитьПеревозчика.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ДобавитьПеревозчика.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ДобОргДляПерегов.Designer.vb">
+      <DependentUpon>ДобОргДляПерегов.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ДобОргДляПерегов.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ДобЧернСписок.Designer.vb">
+      <DependentUpon>ДобЧернСписок.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ДобЧернСписок.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ДопФорма.Designer.vb">
+      <DependentUpon>ДопФорма.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ДопФорма.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Древо.Designer.vb">
+      <DependentUpon>Древо.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Древо.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ИзменПеревоз.Designer.vb">
+      <DependentUpon>ИзменПеревоз.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ИзменПеревоз.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ИзменПорНомКлиент.Designer.vb">
+      <DependentUpon>ИзменПорНомКлиент.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ИзменПорНомКлиент.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="КлиентДанные.Designer.vb">
+      <DependentUpon>КлиентДанные.vb</DependentUpon>
+    </Compile>
+    <Compile Include="КлиентДанные.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Напоминание.Designer.vb">
+      <DependentUpon>Напоминание.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Напоминание.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="НовыйКлиент.Designer.vb">
+      <DependentUpon>НовыйКлиент.vb</DependentUpon>
+    </Compile>
+    <Compile Include="НовыйКлиент.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="НовыйПеревоз.Designer.vb">
+      <DependentUpon>НовыйПеревоз.vb</DependentUpon>
+    </Compile>
+    <Compile Include="НовыйПеревоз.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Пароль.Designer.vb">
+      <DependentUpon>Пароль.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Пароль.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ПеревозВПути.Designer.vb">
+      <DependentUpon>ПеревозВПути.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ПеревозВПути.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ПеревозВПутиДоб.Designer.vb">
+      <DependentUpon>ПеревозВПутиДоб.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ПеревозВПутиДоб.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Переговоры.Designer.vb">
+      <DependentUpon>Переговоры.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Переговоры.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ПечатьДоговора.Designer.vb">
+      <DependentUpon>ПечатьДоговора.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ПечатьДоговора.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ПечатьРейсы.Designer.vb">
+      <DependentUpon>ПечатьРейсы.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ПечатьРейсы.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ПоискПеревозчиков.Designer.vb">
+      <DependentUpon>ПоискПеревозчиков.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ПоискПеревозчиков.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ПорНомер.Designer.vb">
+      <DependentUpon>ПорНомер.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ПорНомер.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="РабочаяФормаМодал.Designer.vb">
+      <DependentUpon>РабочаяФормаМодал.vb</DependentUpon>
+    </Compile>
+    <Compile Include="РабочаяФормаМодал.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="РабочаяФорма.Designer.vb">
+      <DependentUpon>РабочаяФорма.vb</DependentUpon>
+    </Compile>
+    <Compile Include="РабочаяФорма.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="РабочаяФормаСостояние.Designer.vb">
+      <DependentUpon>РабочаяФормаСостояние.vb</DependentUpon>
+    </Compile>
+    <Compile Include="РабочаяФормаСостояние.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="РегионыПерЛист.Designer.vb">
+      <DependentUpon>РегионыПерЛист.vb</DependentUpon>
+    </Compile>
+    <Compile Include="РегионыПерЛист.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Рейс.Designer.vb">
+      <DependentUpon>Рейс.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Рейс.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Сводная.Designer.vb">
+      <DependentUpon>Сводная.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Сводная.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="СтраныПерЛист.Designer.vb">
+      <DependentUpon>СтраныПерЛист.vb</DependentUpon>
+    </Compile>
+    <Compile Include="СтраныПерЛист.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ЧерныйСписок.Designer.vb">
+      <DependentUpon>ЧерныйСписок.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ЧерныйСписок.vb">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MDIParent1.resx">
+      <DependentUpon>MDIParent1.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ВодитДан.resx">
+      <DependentUpon>ВодитДан.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ВсплывФормаПереговоры.resx">
+      <DependentUpon>ВсплывФормаПереговоры.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Выборка.resx">
+      <DependentUpon>Выборка.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ГрузРассылка.resx">
+      <DependentUpon>ГрузРассылка.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Данные.resx">
+      <DependentUpon>Данные.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ДобавитьПеревозчика.resx">
+      <DependentUpon>ДобавитьПеревозчика.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ДобОргДляПерегов.resx">
+      <DependentUpon>ДобОргДляПерегов.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ДобЧернСписок.resx">
+      <DependentUpon>ДобЧернСписок.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ДопФорма.resx">
+      <DependentUpon>ДопФорма.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Древо.resx">
+      <DependentUpon>Древо.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ИзменПеревоз.resx">
+      <DependentUpon>ИзменПеревоз.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ИзменПорНомКлиент.resx">
+      <DependentUpon>ИзменПорНомКлиент.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="КлиентДанные.resx">
+      <DependentUpon>КлиентДанные.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Напоминание.resx">
+      <DependentUpon>Напоминание.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="НовыйКлиент.resx">
+      <DependentUpon>НовыйКлиент.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="НовыйПеревоз.resx">
+      <DependentUpon>НовыйПеревоз.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Пароль.resx">
+      <DependentUpon>Пароль.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ПеревозВПути.resx">
+      <DependentUpon>ПеревозВПути.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ПеревозВПутиДоб.resx">
+      <DependentUpon>ПеревозВПутиДоб.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Переговоры.resx">
+      <DependentUpon>Переговоры.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ПечатьДоговора.resx">
+      <DependentUpon>ПечатьДоговора.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ПечатьРейсы.resx">
+      <DependentUpon>ПечатьРейсы.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ПоискПеревозчиков.resx">
+      <DependentUpon>ПоискПеревозчиков.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ПорНомер.resx">
+      <DependentUpon>ПорНомер.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="РабочаяФормаМодал.resx">
+      <DependentUpon>РабочаяФормаМодал.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="РабочаяФорма.resx">
+      <DependentUpon>РабочаяФорма.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="РабочаяФормаСостояние.resx">
+      <DependentUpon>РабочаяФормаСостояние.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="РегионыПерЛист.resx">
+      <DependentUpon>РегионыПерЛист.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Рейс.resx">
+      <DependentUpon>Рейс.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Сводная.resx">
+      <DependentUpon>Сводная.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="СтраныПерЛист.resx">
+      <DependentUpon>СтраныПерЛист.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ЧерныйСписок.resx">
+      <DependentUpon>ЧерныйСписок.vb</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\app.manifest" />
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="App.config" />
+    <None Include="Грузы_TemporaryKey.pfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.6.1 %28x86 и x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="favicon.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+</Project>
