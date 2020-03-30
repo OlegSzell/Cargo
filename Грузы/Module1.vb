@@ -402,14 +402,14 @@ Module Module1
     '    Return Task.Run(Sub() RunMoving())
     'End Function
     Public Sub RunMoving()
-        dtZak = SelectsAsync(StrSql:="SELECT * FROM РейсыКлиента") 'Рейсы клиента
+        'dtZak = SelectsAsync(StrSql:="SELECT * FROM РейсыКлиента") 'Рейсы клиента
     End Sub
     'Public Function dtVyborka1() As Task
     '    Return Task.Run(Sub() RunMoving1())
     'End Function
     Public Sub RunMoving1()
         'dtPer = New DataTable()
-        dtPer = SelectsAsync(StrSql:="SELECT * FROM РейсыПеревозчика") 'Рейсы перевозчика
+        'dtPer = SelectsAsync(StrSql:="SELECT * FROM РейсыПеревозчика") 'Рейсы перевозчика
     End Sub
 
     'Public Function Перевозчики() As Task
@@ -455,20 +455,21 @@ Module Module1
     Public Async Sub ТипАвтоAll()
         Await Task.Run((Sub() ТипАвтоAllRunMoving()))
     End Sub
-    Public Async Sub Клиенты()
+    Public Async Sub Клиенты2()
         Await Task.Run((Sub() КлиентыRunMoving()))
     End Sub
-    Public Async Sub Перевозчики()
+    Public Async Sub Перевозчики2()
         Await Task.Run((Sub() ПеревозчикиRunMoving()))
     End Sub
 
     Public Sub ALL()
         dtVyborkaS1()
-        Перевозчики()
+        Перевозчики2()
         dtVyborkaS()
-        Клиенты()
+        Клиенты2()
         ТипАвтоAll()
         dtSФормаСобств()
+
     End Sub
 
 
