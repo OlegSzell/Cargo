@@ -263,6 +263,12 @@
     <Compile Include="ДобЧернСписок.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ДопПроц.Designer.vb">
+      <DependentUpon>ДопПроц.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ДопПроц.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ДопФорма.Designer.vb">
       <DependentUpon>ДопФорма.vb</DependentUpon>
     </Compile>
@@ -533,6 +539,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ДобЧернСписок.resx">
       <DependentUpon>ДобЧернСписок.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ДопПроц.resx">
+      <DependentUpon>ДопПроц.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ДопФорма.resx">
       <DependentUpon>ДопФорма.vb</DependentUpon>

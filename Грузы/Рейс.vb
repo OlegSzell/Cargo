@@ -969,7 +969,7 @@ Public Class Рейс
         'ДопФорма.ShowDialog()
     End Sub
 
-    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+    Private Sub Button3_Click(sender As Object, e As EventArgs)
         ВодитДан.ShowDialog()
     End Sub
     Private Function Проверка()
@@ -1265,11 +1265,11 @@ Public Class Рейс
         strsql3 = "INSERT INTO РейсыПеревозчика(НазвОрганизации,НомерРейса,КоличРейсов,Маршрут,ДатаПодачиПодЗагрузку,ВремяПодачи,ДатаПодачиПодРастаможку,
 ВремяПодачиВыгРаст,ТочныйАдресЗагрузки,АдресЗатаможки,НаименованиеГруза,ТипТрСредства,НомерАвтомобиля,Водитель,
 ТочнАдресРаста,ТочнАдресРазгр,СтоимостьФрахта,Валюта,ВалютаПлатежа,СрокОплаты,ДопУсловия,
-ДогПор,ДогПорЭксп,ДатаПоручения,ПорЭксп,УсловияОплаты,РазмерШтрафаЗаСрыв,Предоплата)
+ДогПор,ДогПорЭксп,ДатаПоручения,ПорЭксп,УсловияОплаты,РазмерШтрафаЗаСрыв,Предоплата,СрывЗагр20Проц)
 VALUES('" & ComboBox4.Text & "'," & СлРейс & "," & СлПорРейсПер & ",'" & Trim(RichTextBox10.Text) & "','" & TextBox5.Text & "','" & MaskedTextBox3.Text & "','" & TextBox6.Text & "',
 '" & MaskedTextBox4.Text & "','" & Trim(RichTextBox3.Text) & "','" & Trim(RichTextBox4.Text) & "','" & Trim(RichTextBox7.Text) & "','" & ComboBox11.Text & "','" & Trim(RichTextBox8.Text) & "','" & Trim(RichTextBox9.Text) & "',
 '" & Trim(RichTextBox5.Text) & "','" & Trim(RichTextBox6.Text) & "','" & TextBox2.Text & "','" & ComboBox6.Text & "','" & ComboBox7.Text & "','" & TextBox3.Text & "','" & Trim(RichTextBox2.Text) & "',
-'" & ДогПор & "','" & ДогПорЭксп & "','" & MaskedTextBox1.Text & "','" & ПорЭксп & "','" & ComboBox9.Text & "','" & ШтрафКлиент & "','" & ЧастичнаяОплатаПеревозчик & "')"
+'" & ДогПор & "','" & ДогПорЭксп & "','" & MaskedTextBox1.Text & "','" & ПорЭксп & "','" & ComboBox9.Text & "','" & ШтрафКлиент & "','" & ЧастичнаяОплатаПеревозчик & "', '" & Procenty20 & "')"
         Updates3(strsql3)
 
         ComB12()
@@ -1422,14 +1422,23 @@ WHERE НомерРейса=" & НомРес & ""
         'Dim ds1 As DataTable = Selects3(strsql2)
 
         'Dim ds1 As DataRow() = РейсыПеревозчик(НомРес)
-        Dim ds1 As String
+        Dim ds1 As РейсыПеревозчика
         Using db As New dbAllDataContext()
-            ds1 = db.РейсыПеревозчика.Where(Function(x) x.НомерРейса = НомРес).Select(Function(x) x.НазвОрганизации).FirstOrDefault()
-            If ds1 Is Nothing Then Exit Sub
+            ds1 = (From x In db.РейсыПеревозчика
+                   Where x.НомерРейса = НомРес
+                   Select x).FirstOrDefault()
+
+            If ds1 IsNot Nothing Then
+                If ds1.СрывЗагр20Проц = "True" Then
+                    Procenty20 = "True"
+                End If
+            Else
+                Exit Sub
+            End If
         End Using
 
 
-        If Not ds1 = ComboBox4.Text Then
+        If Not ds1.НазвОрганизации = ComboBox4.Text Then
             ПровСледРейсПер()
             If Отмена = 1 Then Exit Sub
             ComB13()
@@ -1438,7 +1447,8 @@ WHERE НомерРейса=" & НомРес & ""
 ТочныйАдресЗагрузки='" & Trim(RichTextBox3.Text) & "', АдресЗатаможки='" & Trim(RichTextBox4.Text) & "', НаименованиеГруза='" & Trim(RichTextBox7.Text) & "', ТипТрСредства='" & ComboBox11.Text & "',
 НомерАвтомобиля='" & Trim(RichTextBox8.Text) & "',Водитель ='" & Trim(RichTextBox9.Text) & "', ТочнАдресРаста='" & Trim(RichTextBox5.Text) & "', ТочнАдресРазгр='" & Trim(RichTextBox6.Text) & "',
 СтоимостьФрахта='" & TextBox2.Text & "', Валюта='" & ComboBox6.Text & "', ВалютаПлатежа='" & ComboBox7.Text & "', СрокОплаты='" & TextBox3.Text & "', УсловияОплаты='" & ComboBox9.Text & "',
-ДогПор='" & ДогПор & "', ДогПорЭксп='" & ДогПорЭксп & "',ПорЭксп= '" & ПорЭксп & "', ДопУсловия='" & Trim(RichTextBox2.Text) & "', ДатаПоручения='" & MaskedTextBox1.Text & "',РазмерШтрафаЗаСрыв='" & ШтрафПер & "',Предоплата='" & ЧастичнаяОплатаПеревозчик & "'
+ДогПор='" & ДогПор & "', ДогПорЭксп='" & ДогПорЭксп & "',ПорЭксп= '" & ПорЭксп & "', ДопУсловия='" & Trim(RichTextBox2.Text) & "',
+ДатаПоручения='" & MaskedTextBox1.Text & "',РазмерШтрафаЗаСрыв='" & ШтрафПер & "',Предоплата='" & ЧастичнаяОплатаПеревозчик & "',СрывЗагр20Проц='" & Procenty20 & "'
 WHERE НомерРейса=" & НомРес & ""
             Updates3(strsql3)
             ПрИзмНазПер = True
@@ -1449,7 +1459,8 @@ WHERE НомерРейса=" & НомРес & ""
 ТочныйАдресЗагрузки='" & Trim(RichTextBox3.Text) & "', АдресЗатаможки='" & Trim(RichTextBox4.Text) & "', НаименованиеГруза='" & Trim(RichTextBox7.Text) & "', ТипТрСредства='" & ComboBox11.Text & "',
 НомерАвтомобиля='" & Trim(RichTextBox8.Text) & "',Водитель ='" & Trim(RichTextBox9.Text) & "', ТочнАдресРаста='" & Trim(RichTextBox5.Text) & "', ТочнАдресРазгр='" & Trim(RichTextBox6.Text) & "',
 СтоимостьФрахта='" & TextBox2.Text & "', Валюта='" & ComboBox6.Text & "', ВалютаПлатежа='" & ComboBox7.Text & "', СрокОплаты='" & TextBox3.Text & "', УсловияОплаты='" & ComboBox9.Text & "',
-ДогПор='" & ДогПор & "', ДогПорЭксп='" & ДогПорЭксп & "',ПорЭксп= '" & ПорЭксп & "', ДопУсловия='" & Trim(RichTextBox2.Text) & "', ДатаПоручения='" & MaskedTextBox1.Text & "',РазмерШтрафаЗаСрыв='" & ШтрафПер & "',Предоплата='" & ЧастичнаяОплатаПеревозчик & "'
+ДогПор='" & ДогПор & "', ДогПорЭксп='" & ДогПорЭксп & "',ПорЭксп= '" & ПорЭксп & "', ДопУсловия='" & Trim(RichTextBox2.Text) & "',
+ДатаПоручения='" & MaskedTextBox1.Text & "',РазмерШтрафаЗаСрыв='" & ШтрафПер & "',Предоплата='" & ЧастичнаяОплатаПеревозчик & "',СрывЗагр20Проц='" & Procenty20 & "'
 WHERE НомерРейса=" & НомРес & ""
             Updates3(strsql3)
         End If
@@ -1693,6 +1704,14 @@ WHERE НомерРейса=" & НомРес & ""
 
     Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
         ПерегрЛист1()
+    End Sub
+
+    Private Sub ВодительToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ВодительToolStripMenuItem.Click
+        ВодитДан.ShowDialog()
+    End Sub
+
+    Private Sub Условия20ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles Условия20ToolStripMenuItem.Click
+        ДопПроц.ShowDialog()
     End Sub
 
     Private Sub Button9_Click(sender As Object, e As EventArgs)

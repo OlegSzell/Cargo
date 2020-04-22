@@ -34,6 +34,7 @@ Module Module1
     Public dtПеревозчики As DataTable
     Public dtКлиенты, dtФормаСобствAll As DataTable
     Public dtТипАвтоAll As DataTable
+    Public Procenty20 As String = "False"
 
 
 

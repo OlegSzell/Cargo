@@ -28,7 +28,6 @@ Partial Class Рейс
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.ComboBox3 = New System.Windows.Forms.ComboBox()
-        Me.КлиентBindingSource2 = New System.Windows.Forms.BindingSource(Me.components)
         Me.ComboBox4 = New System.Windows.Forms.ComboBox()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
@@ -54,7 +53,6 @@ Partial Class Рейс
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Button5 = New System.Windows.Forms.Button()
-        Me.Button3 = New System.Windows.Forms.Button()
         Me.ComboBox13 = New System.Windows.Forms.ComboBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.RichTextBox2 = New System.Windows.Forms.RichTextBox()
@@ -111,6 +109,8 @@ Partial Class Рейс
         Me.GroupBox14 = New System.Windows.Forms.GroupBox()
         Me.RichTextBox11 = New System.Windows.Forms.RichTextBox()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
+        Me.Button8 = New System.Windows.Forms.Button()
+        Me.ToolStrip2 = New System.Windows.Forms.ToolStrip()
         Me.ToolStripSplitButton1 = New System.Windows.Forms.ToolStripSplitButton()
         Me.СводнаяToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ОплатаToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -119,10 +119,12 @@ Partial Class Рейс
         Me.ДоговораToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ПеревозчикToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ПеревозчикToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.Button8 = New System.Windows.Forms.Button()
+        Me.ToolStripDropDownButton1 = New System.Windows.Forms.ToolStripDropDownButton()
+        Me.ВодительToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Условия20ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.КлиентBindingSource2 = New System.Windows.Forms.BindingSource(Me.components)
         Me.КлиентBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.КлиентBindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
-        CType(Me.КлиентBindingSource2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.ContextMenuStrip1.SuspendLayout()
@@ -138,6 +140,8 @@ Partial Class Рейс
         Me.GroupBox12.SuspendLayout()
         Me.GroupBox14.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
+        Me.ToolStrip2.SuspendLayout()
+        CType(Me.КлиентBindingSource2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.КлиентBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.КлиентBindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -177,10 +181,6 @@ Partial Class Рейс
         Me.ComboBox3.Name = "ComboBox3"
         Me.ComboBox3.Size = New System.Drawing.Size(356, 25)
         Me.ComboBox3.TabIndex = 4
-        '
-        'КлиентBindingSource2
-        '
-        Me.КлиентBindingSource2.DataMember = "Клиент"
         '
         'ComboBox4
         '
@@ -403,9 +403,9 @@ Partial Class Рейс
         'GroupBox2
         '
         Me.GroupBox2.BackColor = System.Drawing.SystemColors.ActiveBorder
+        Me.GroupBox2.Controls.Add(Me.ToolStrip2)
         Me.GroupBox2.Controls.Add(Me.Button2)
         Me.GroupBox2.Controls.Add(Me.Button5)
-        Me.GroupBox2.Controls.Add(Me.Button3)
         Me.GroupBox2.Controls.Add(Me.ComboBox13)
         Me.GroupBox2.Controls.Add(Me.Label4)
         Me.GroupBox2.Controls.Add(Me.ComboBox9)
@@ -443,17 +443,6 @@ Partial Class Рейс
         Me.Button5.TabIndex = 31
         Me.Button5.Text = "Button5"
         Me.Button5.UseVisualStyleBackColor = False
-        '
-        'Button3
-        '
-        Me.Button3.BackColor = System.Drawing.SystemColors.InactiveCaption
-        Me.Button3.Font = New System.Drawing.Font("Times New Roman", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.Button3.Location = New System.Drawing.Point(77, 86)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(24, 22)
-        Me.Button3.TabIndex = 31
-        Me.Button3.Text = "Button3"
-        Me.Button3.UseVisualStyleBackColor = False
         '
         'ComboBox13
         '
@@ -501,13 +490,13 @@ Partial Class Рейс
         '
         Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ПечатьToolStripMenuItem, Me.ДоговораToolStripMenuItem, Me.СчетактToolStripMenuItem})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(181, 92)
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(124, 70)
         '
         'ПечатьToolStripMenuItem
         '
         Me.ПечатьToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ПоручениеКлиентпечататьToolStripMenuItem1, Me.ПоручениеПеревозчикпечататьToolStripMenuItem1, Me.ОбапечататьToolStripMenuItem1, Me.ЛистокпечататьToolStripMenuItem1, Me.ОбаЛистокпечататьToolStripMenuItem1, Me.СчетToolStripMenuItem, Me.АктToolStripMenuItem})
         Me.ПечатьToolStripMenuItem.Name = "ПечатьToolStripMenuItem"
-        Me.ПечатьToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ПечатьToolStripMenuItem.Size = New System.Drawing.Size(123, 22)
         Me.ПечатьToolStripMenuItem.Text = "Печать"
         '
         'ПоручениеКлиентпечататьToolStripMenuItem1
@@ -582,25 +571,25 @@ Partial Class Рейс
         '
         Me.ДоговораToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.КлиентToolStripMenuItem, Me.ПеревозчикToolStripMenuItem})
         Me.ДоговораToolStripMenuItem.Name = "ДоговораToolStripMenuItem"
-        Me.ДоговораToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ДоговораToolStripMenuItem.Size = New System.Drawing.Size(123, 22)
         Me.ДоговораToolStripMenuItem.Text = "Договор"
         '
         'КлиентToolStripMenuItem
         '
         Me.КлиентToolStripMenuItem.Name = "КлиентToolStripMenuItem"
-        Me.КлиентToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.КлиентToolStripMenuItem.Size = New System.Drawing.Size(140, 22)
         Me.КлиентToolStripMenuItem.Text = "Клиент"
         '
         'ПеревозчикToolStripMenuItem
         '
         Me.ПеревозчикToolStripMenuItem.Name = "ПеревозчикToolStripMenuItem"
-        Me.ПеревозчикToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ПеревозчикToolStripMenuItem.Size = New System.Drawing.Size(140, 22)
         Me.ПеревозчикToolStripMenuItem.Text = "Перевозчик"
         '
         'СчетактToolStripMenuItem
         '
         Me.СчетактToolStripMenuItem.Name = "СчетактToolStripMenuItem"
-        Me.СчетактToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.СчетактToolStripMenuItem.Size = New System.Drawing.Size(123, 22)
         Me.СчетактToolStripMenuItem.Text = "Счет,акт."
         '
         'Button1
@@ -947,6 +936,30 @@ Partial Class Рейс
         Me.ToolStrip1.TabIndex = 56
         Me.ToolStrip1.Text = "ToolStrip1"
         '
+        'Button8
+        '
+        Me.Button8.BackColor = System.Drawing.Color.PaleGoldenrod
+        Me.Button8.Font = New System.Drawing.Font("Times New Roman", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.Button8.Location = New System.Drawing.Point(1065, 36)
+        Me.Button8.Margin = New System.Windows.Forms.Padding(4)
+        Me.Button8.Name = "Button8"
+        Me.Button8.Size = New System.Drawing.Size(68, 26)
+        Me.Button8.TabIndex = 57
+        Me.Button8.Text = "Поиск"
+        Me.Button8.UseVisualStyleBackColor = False
+        '
+        'ToolStrip2
+        '
+        Me.ToolStrip2.Dock = System.Windows.Forms.DockStyle.None
+        Me.ToolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
+        Me.ToolStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripDropDownButton1})
+        Me.ToolStrip2.Location = New System.Drawing.Point(98, 83)
+        Me.ToolStrip2.Name = "ToolStrip2"
+        Me.ToolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
+        Me.ToolStrip2.Size = New System.Drawing.Size(63, 25)
+        Me.ToolStrip2.TabIndex = 33
+        Me.ToolStrip2.Text = "ToolStrip2"
+        '
         'ToolStripSplitButton1
         '
         Me.ToolStripSplitButton1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
@@ -1001,17 +1014,32 @@ Partial Class Рейс
         Me.ПеревозчикToolStripMenuItem2.Size = New System.Drawing.Size(140, 22)
         Me.ПеревозчикToolStripMenuItem2.Text = "Перевозчик"
         '
-        'Button8
+        'ToolStripDropDownButton1
         '
-        Me.Button8.BackColor = System.Drawing.Color.PaleGoldenrod
-        Me.Button8.Font = New System.Drawing.Font("Times New Roman", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.Button8.Location = New System.Drawing.Point(1065, 36)
-        Me.Button8.Margin = New System.Windows.Forms.Padding(4)
-        Me.Button8.Name = "Button8"
-        Me.Button8.Size = New System.Drawing.Size(68, 26)
-        Me.Button8.TabIndex = 57
-        Me.Button8.Text = "Поиск"
-        Me.Button8.UseVisualStyleBackColor = False
+        Me.ToolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripDropDownButton1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ВодительToolStripMenuItem, Me.Условия20ToolStripMenuItem})
+        Me.ToolStripDropDownButton1.Image = CType(resources.GetObject("ToolStripDropDownButton1.Image"), System.Drawing.Image)
+        Me.ToolStripDropDownButton1.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.ToolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripDropDownButton1.Name = "ToolStripDropDownButton1"
+        Me.ToolStripDropDownButton1.Size = New System.Drawing.Size(29, 22)
+        Me.ToolStripDropDownButton1.Text = "ToolStripDropDownButton1"
+        '
+        'ВодительToolStripMenuItem
+        '
+        Me.ВодительToolStripMenuItem.Name = "ВодительToolStripMenuItem"
+        Me.ВодительToolStripMenuItem.Size = New System.Drawing.Size(145, 22)
+        Me.ВодительToolStripMenuItem.Text = "Водитель"
+        '
+        'Условия20ToolStripMenuItem
+        '
+        Me.Условия20ToolStripMenuItem.Name = "Условия20ToolStripMenuItem"
+        Me.Условия20ToolStripMenuItem.Size = New System.Drawing.Size(145, 22)
+        Me.Условия20ToolStripMenuItem.Text = "Условия 20%"
+        '
+        'КлиентBindingSource2
+        '
+        Me.КлиентBindingSource2.DataMember = "Клиент"
         '
         'КлиентBindingSource
         '
@@ -1063,7 +1091,6 @@ Partial Class Рейс
         Me.Name = "Рейс"
         Me.Text = "Рейс"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
-        CType(Me.КлиентBindingSource2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
@@ -1085,6 +1112,9 @@ Partial Class Рейс
         Me.GroupBox14.ResumeLayout(False)
         Me.ToolStrip1.ResumeLayout(False)
         Me.ToolStrip1.PerformLayout()
+        Me.ToolStrip2.ResumeLayout(False)
+        Me.ToolStrip2.PerformLayout()
+        CType(Me.КлиентBindingSource2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.КлиентBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.КлиентBindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
@@ -1148,7 +1178,6 @@ Partial Class Рейс
     Friend WithEvents CheckBox1 As CheckBox
     Friend WithEvents RichTextBox10 As RichTextBox
     Friend WithEvents CheckBox2 As CheckBox
-    Friend WithEvents Button3 As Button
     Friend WithEvents Button4 As Button
     Friend WithEvents Button5 As Button
     Friend WithEvents Button6 As Button
@@ -1194,5 +1223,8 @@ Partial Class Рейс
 
 
     Friend WithEvents КлиентBindingSource2 As BindingSource
-
+    Friend WithEvents ToolStrip2 As ToolStrip
+    Friend WithEvents ToolStripDropDownButton1 As ToolStripDropDownButton
+    Friend WithEvents ВодительToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents Условия20ToolStripMenuItem As ToolStripMenuItem
 End Class

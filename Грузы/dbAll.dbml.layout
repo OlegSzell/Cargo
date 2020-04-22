@@ -20,24 +20,24 @@
         <elementListCompartment Id="862738d6-a7f3-40ab-bd21-8c70126777df" absoluteBounds="9.515, 1.71, 1.9700000000000002, 7.941446940104167" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(8.75 : 5.54885986328125); (9.5 : 5.54885986328125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(8.75 : 5.54885986328125); (9.5 : 5.54885986328125)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/dbAllDataContext/Клиент/Клиент_РейсыКлиента" />
       <nodes>
         <classShapeMoniker Id="6f49d648-1fd6-431e-9199-04314b51bad2" />
         <classShapeMoniker Id="7f609f62-8bc0-4662-b349-b72b0f5bb979" />
       </nodes>
     </associationConnector>
-    <classShape Id="c8a7c05a-c83b-46b8-8648-c01f31dcfce2" absoluteBounds="3.5, 1.25, 2, 7.7322412109375">
+    <classShape Id="e9d56d29-81a6-44fe-b668-b0f4a4f9296b" absoluteBounds="3.375, 0.75, 2, 7.9245426432291648">
       <DataClassMoniker Name="/dbAllDataContext/РейсыПеревозчика" />
       <nestedChildShapes>
-        <elementListCompartment Id="98710aac-384a-41d3-9ac4-91492c1fc742" absoluteBounds="3.5150000000000006, 1.71, 1.9700000000000002, 7.1722412109375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="5c90a763-95b5-451e-8afb-141e32e2adbe" absoluteBounds="3.3899999999999997, 1.21, 1.9700000000000002, 7.3645426432291661" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(2.75 : 5.02001057942708); (3.5 : 5.02001057942708)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.75 : 5.02001057942708); (3.375 : 5.02001057942708)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/dbAllDataContext/Перевозчики/Перевозчики_РейсыПеревозчика" />
       <nodes>
         <classShapeMoniker Id="862c201e-a1f8-4faa-ab60-36eacd190e25" />
-        <classShapeMoniker Id="c8a7c05a-c83b-46b8-8648-c01f31dcfce2" />
+        <classShapeMoniker Id="e9d56d29-81a6-44fe-b668-b0f4a4f9296b" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>

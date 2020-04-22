@@ -136,6 +136,7 @@
       <Column Name="ОстатокОплаты" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="РазмерШтрафаЗаСрыв" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="Предоплата" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="СрывЗагр20Проц" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Association Name="Перевозчики_РейсыПеревозчика" Member="Перевозчики" ThisKey="НазвОрганизации" OtherKey="Названиеорганизации" Type="Перевозчики" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
