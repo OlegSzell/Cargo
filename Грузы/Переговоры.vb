@@ -1,7 +1,7 @@
 ﻿Option Explicit On
 Imports System.ComponentModel
 Imports System.Data.OleDb
-Public Class ПереговорыКлиент
+Public Class ПереговорыКлиентФорма
     Dim код As Integer
     Private Sub ПереговорыКлиент_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         комб1()
@@ -77,8 +77,8 @@ Public Class ПереговорыКлиент
     Private Sub ComboBox2_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox2.SelectedIndexChanged
         Dim strsql As String = "SELECT * FROM ПереговорыКлиент WHERE Клиент='" & ComboBox1.Text & "' and ДатаПереговоров = #" & Format(CDate(ComboBox2.Text), "MM\/dd\/yyyy") & "# AND Экспедитор='" & Экспедитор & "'"
         Dim ds As DataTable = Selects3(strsql)
-        код = Nothing
-        код = ds.Rows(0).Item(0)
+        Код = Nothing
+        Код = ds.Rows(0).Item(0)
         RichTextBox3.Text = ds.Rows(0).Item(6).ToString
         MaskedTextBox1.Text = ComboBox2.Text
         RichTextBox1.Text = ds.Rows(0).Item(3).ToString
@@ -118,11 +118,11 @@ Public Class ПереговорыКлиент
         If MaskedTextBox2.MaskCompleted = False Then
             strsql = "UPDATE ПереговорыКлиент SET ДатаПереговоров='" & MaskedTextBox1.Text & "', ТекстПереговора='" & RichTextBox1.Text & "', 
 КонтДанные='" & RichTextBox3.Text & "', Экспедитор='" & Экспедитор & "'
-WHERE Код=" & код & ""
+WHERE Код=" & Код & ""
         Else
             strsql = "UPDATE ПереговорыКлиент SET ДатаПереговоров='" & MaskedTextBox1.Text & "', ТекстПереговора='" & RichTextBox1.Text & "',
 ДатаНапоминания='" & MaskedTextBox2.Text & "',ТекстНапоминания='" & RichTextBox2.Text & "', КонтДанные='" & RichTextBox3.Text & "', Экспедитор='" & Экспедитор & "'
-WHERE Код=" & код & ""
+WHERE Код=" & Код & ""
         End If
 
 

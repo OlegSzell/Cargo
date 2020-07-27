@@ -186,11 +186,32 @@ BY>B
         'ds.Tables("Сохранение").Rows.Add(dsNewRow)
         'da.Update(ds, "Сохранение")
 
+        Using db As New dbAllDataContext()
+            Dim var As New ГрузыКлиентов
+            var.Организация = ComboBox1.Text
+            var.Дата = TextBox8.Text
+            var.Груз = TextBox2.Text
+            var.СтранаЗагрузки = ComboBox2.Text
+            var.СтранаВыгрузки = ComboBox3.Text
+            var.ГородЗагрузки = TextBox5.Text
+            var.ГородВыгрузки = TextBox6.Text
+            var.Ставка = TextBox7.Text
+            var.регионЗагрузки = ComboBox4.Text
+            var.Экспедитор = Экспедитор
+            var.СтавкаПеревозу = TextBox1.Text
+            var.Состояние = "Груз в работе"
+            var.ДляСкайпа = RichTextBox2.Text
+            var.ОрганизКонтакт = RichTextBox3.Text
+            db.ГрузыКлиентов.InsertOnSubmit(var)
+            db.SubmitChanges()
+        End Using
 
-        Updates3(stroka:="INSERT INTO ГрузыКлиентов(Организация,Дата,Груз,СтранаЗагрузки,СтранаВыгрузки,ГородЗагрузки,ГородВыгрузки,Ставка,регионЗагрузки,
-Экспедитор,СтавкаПеревозу,Состояние,ДляСкайпа,ОрганизКонтакт) VALUES('" & ComboBox1.Text & "','" & TextBox8.Text & "','" & TextBox2.Text & "','" & ComboBox2.Text & "',
-'" & ComboBox3.Text & "','" & TextBox5.Text & "','" & TextBox6.Text & "','" & TextBox7.Text & "','" & ComboBox4.Text & "','" & Экспедитор & "',
-'" & TextBox1.Text & "','Груз в работе','" & RichTextBox2.Text & "','" & RichTextBox3.Text & "')")
+
+        '        Updates3(stroka:="INSERT INTO ГрузыКлиентов(Организация,Дата,Груз,СтранаЗагрузки,СтранаВыгрузки,
+        'ГородЗагрузки,ГородВыгрузки,Ставка,регионЗагрузки,
+        'Экспедитор,СтавкаПеревозу,Состояние,ДляСкайпа,ОрганизКонтакт) VALUES('" & ComboBox1.Text & "','" & TextBox8.Text & "','" & TextBox2.Text & "','" & ComboBox2.Text & "',
+        ''" & ComboBox3.Text & "','" & TextBox5.Text & "','" & TextBox6.Text & "','" & TextBox7.Text & "','" & ComboBox4.Text & "','" & Экспедитор & "',
+        ''" & TextBox1.Text & "','Груз в работе','" & RichTextBox2.Text & "','" & RichTextBox3.Text & "')")
 
 
         MessageBox.Show("Сохранено!")
@@ -339,6 +360,7 @@ FROM ГрузыКлиентов WHERE ГрузыКлиентов.Организ�
 
     Private Sub ListBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListBox1.SelectedIndexChanged
         ListBox2.SelectedIndex = ListBox1.SelectedIndex
+
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
@@ -459,40 +481,67 @@ Where Страна.Страна = '" & ComboBox2.Text & "'")
             Exit Sub
         End If
 
-        'Dim df As String = Format(DateTimePicker1.Value, "MM\/dd\/yyyy")
-        Dim dt, dt1, dt2, dt3 As String
-        dt = Strings.Left(ListBox1.SelectedItem, 5)
-        dt1 = Strings.Left(dt, 2)
-        dt2 = Strings.Right(dt, 2)
-        dt3 = Strings.Right(ListBox1.SelectedItem, 4)
-        dt = dt2 & "/" & dt1 & "/" & dt3
+        ''Dim df As String = Format(DateTimePicker1.Value, "MM\/dd\/yyyy")
+        'Dim dt, dt1, dt2, dt3 As String
+        'dt = Strings.Left(ListBox1.SelectedItem, 5)
+        'dt1 = Strings.Left(dt, 2)
+        'dt2 = Strings.Right(dt, 2)
+        'dt3 = Strings.Right(ListBox1.SelectedItem, 4)
+        'dt = dt2 & "/" & dt1 & "/" & dt3
 
 
 
 
+        ''Dim ds As DataTable = Selects3(StrSql:="SELECT * FROM ГрузыКлиентов WHERE Организация='" & ComboBox1.Text & "' AND Дата= #" & dt & "#  AND Груз='" & ListBox2.SelectedItem & "'")
         'Dim ds As DataTable = Selects3(StrSql:="SELECT * FROM ГрузыКлиентов WHERE Организация='" & ComboBox1.Text & "' AND Дата= #" & dt & "#  AND Груз='" & ListBox2.SelectedItem & "'")
-        Dim ds As DataTable = Selects3(StrSql:="SELECT * FROM ГрузыКлиентов WHERE Организация='" & ComboBox1.Text & "' AND Дата= #" & dt & "#  AND Груз='" & ListBox2.SelectedItem & "'")
-
-        idClient = Nothing
-        Try
-            idClient = ds.Rows(0).Item(0)
-            TextBox2.Text = ds.Rows(0).Item(3).ToString
-            ComboBox2.Text = ds.Rows(0).Item(4).ToString
-            ComboBox4.Text = ds.Rows(0).Item(9).ToString
-            ComboBox3.Text = ds.Rows(0).Item(5).ToString
-            TextBox5.Text = ds.Rows(0).Item(6).ToString
-            TextBox6.Text = ds.Rows(0).Item(7).ToString
-            TextBox7.Text = ds.Rows(0).Item(8).ToString
-            TextBox8.Text = Strings.Left(ds.Rows(0).Item(2).ToString, 10)
-            TextBox1.Text = ds.Rows(0).Item(11).ToString
-            RichTextBox2.Text = ds.Rows(0).Item(13).ToString
-            RichTextBox3.Text = ds.Rows(0).Item(14).ToString
-            hg = 1
-        Catch ex As Exception
-            MessageBox.Show("Выберите организацию!", рик)
-        End Try
 
 
+
+
+
+
+
+        'idClient = Nothing
+        'Try
+        '    idClient = ds.Rows(0).Item(0)
+        '    TextBox2.Text = ds.Rows(0).Item(3).ToString
+        '    ComboBox2.Text = ds.Rows(0).Item(4).ToString
+        '    ComboBox4.Text = ds.Rows(0).Item(9).ToString
+        '    ComboBox3.Text = ds.Rows(0).Item(5).ToString
+        '    TextBox5.Text = ds.Rows(0).Item(6).ToString
+        '    TextBox6.Text = ds.Rows(0).Item(7).ToString
+        '    TextBox7.Text = ds.Rows(0).Item(8).ToString
+        '    TextBox8.Text = Strings.Left(ds.Rows(0).Item(2).ToString, 10)
+        '    TextBox1.Text = ds.Rows(0).Item(11).ToString
+        '    RichTextBox2.Text = ds.Rows(0).Item(13).ToString
+        '    RichTextBox3.Text = ds.Rows(0).Item(14).ToString
+        '    hg = 1
+        'Catch ex As Exception
+        '    MessageBox.Show("Выберите организацию!", рик)
+        'End Try
+
+        Dim sf As String = ListBox1.SelectedItem
+        Dim sf2 As String = ListBox2.SelectedItem
+        Using db As New dbAllDataContext()
+            Dim var = (From x In db.ГрузыКлиентов
+                       Where x.Организация = ComboBox1.Text And x.Дата = sf And x.Груз = sf2
+                       Select x).FirstOrDefault()
+            If var IsNot Nothing Then
+                idClient = var.Код
+                TextBox2.Text = var.Груз
+                ComboBox2.Text = var.СтранаЗагрузки
+                ComboBox4.Text = var.регионЗагрузки
+                ComboBox3.Text = var.СтранаВыгрузки
+                TextBox5.Text = var.ГородЗагрузки
+                TextBox6.Text = var.ГородВыгрузки
+                TextBox7.Text = var.Ставка
+                TextBox8.Text = var.Дата
+                TextBox1.Text = var.СтавкаПеревозу
+                RichTextBox2.Text = var.ДляСкайпа
+                RichTextBox3.Text = var.ОрганизКонтакт
+                hg = 1
+            End If
+        End Using
 
 
 

@@ -1,32 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Rickmans" Class="dbAllDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=45.14.50.142;Initial Catalog=Rickmans;Persist Security Info=True;User ID=userOleg1" SettingsObjectName="Грузы.My.MySettings" SettingsPropertyName="RickmansConnectionString2" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.Перевозчики" Member="Перевозчики">
-    <Type Name="Перевозчики">
-      <Column Name="Названиеорганизации" Type="System.String" DbType="NVarChar(255) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="[Форма собственности]" Member="Форма_собственности" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="[Адрес организации]" Member="Адрес_организации" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="[Почтовый адрес]" Member="Почтовый_адрес" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="РасчСчетРубли" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="РасчСчетРоссРубли" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="РасчСчетДоллар" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="РасчСчетЕвро" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="[Адрес банка]" Member="Адрес_банка" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="[Контактное лицо]" Member="Контактное_лицо" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="Телефон" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="Договор" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="Дата" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="Должность" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="НаОснЧегоДейств" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="ФИОРуководителя" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="ДогСНерез" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="СтарыеДанные" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="ПорНомРейса" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="ФИОРодпадеж" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="ПерЭкспедитор" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="ДолжРодПадеж" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Association Name="Перевозчики_РейсыПеревозчика" Member="РейсыПеревозчика" ThisKey="Названиеорганизации" OtherKey="НазвОрганизации" Type="РейсыПеревозчика" />
-    </Type>
-  </Table>
+  <Connection Mode="AppSettings" ConnectionString="Data Source=178.124.211.175,52891;Initial Catalog=Rickmans;Persist Security Info=True;User ID=Rickmans" SettingsObjectName="Грузы.My.MySettings" SettingsPropertyName="RickmansConnectionString3" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Клиент" Member="Клиент">
     <Type Name="Клиент">
       <Column Name="НазваниеОрганизации" Type="System.String" DbType="NVarChar(255) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -51,6 +24,13 @@
       <Column Name="ФИОРодПадеж" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="ДолжРодПадеж" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Association Name="Клиент_РейсыКлиента" Member="РейсыКлиента" ThisKey="НазваниеОрганизации" OtherKey="НазвОрганизации" Type="РейсыКлиента" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ФормаСобств" Member="ФормаСобств">
+    <Type Name="ФормаСобств">
+      <Column Name="Код" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ПолноеНазвание" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Сокращенное" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.РейсыКлиента" Member="РейсыКлиента">
@@ -95,7 +75,61 @@
       <Column Name="ОстатокОплаты" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="РазмерШтрафаЗаСрыв" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="Предоплата" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="ОплатаПоКурсу" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="ОплатаПоКурсуКурс" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Association Name="Клиент_РейсыКлиента" Member="Клиент" ThisKey="НазвОрганизации" OtherKey="НазваниеОрганизации" Type="Клиент" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ТипАвто" Member="ТипАвто">
+    <Type Name="ТипАвто">
+      <Column Name="Код" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ТипАвто" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Перевозчики" Member="Перевозчики">
+    <Type Name="Перевозчики">
+      <Column Name="Названиеорганизации" Type="System.String" DbType="NVarChar(255) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="[Форма собственности]" Member="Форма_собственности" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="[Адрес организации]" Member="Адрес_организации" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="[Почтовый адрес]" Member="Почтовый_адрес" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="РасчСчетРубли" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="РасчСчетРоссРубли" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="РасчСчетДоллар" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="РасчСчетЕвро" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="[Адрес банка]" Member="Адрес_банка" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="[Контактное лицо]" Member="Контактное_лицо" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Телефон" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Договор" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Дата" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Должность" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="НаОснЧегоДейств" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="ФИОРуководителя" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="ДогСНерез" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="СтарыеДанные" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="ПорНомРейса" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="ФИОРодпадеж" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="ПерЭкспедитор" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="ДолжРодПадеж" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="Перевозчики_РейсыПеревозчика" Member="РейсыПеревозчика" ThisKey="Названиеорганизации" OtherKey="НазвОрганизации" Type="РейсыПеревозчика" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ГрузыКлиентов" Member="ГрузыКлиентов">
+    <Type Name="ГрузыКлиентов">
+      <Column Name="Код" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Организация" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Дата" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Груз" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="СтранаЗагрузки" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="СтранаВыгрузки" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="ГородЗагрузки" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="ГородВыгрузки" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Ставка" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="регионЗагрузки" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Экспедитор" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="СтавкаПеревозу" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Состояние" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="ДляСкайпа" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="ОрганизКонтакт" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.РейсыПеревозчика" Member="РейсыПеревозчика">
@@ -138,6 +172,60 @@
       <Column Name="Предоплата" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="СрывЗагр20Проц" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Association Name="Перевозчики_РейсыПеревозчика" Member="Перевозчики" ThisKey="НазвОрганизации" OtherKey="Названиеорганизации" Type="Перевозчики" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.КалендарьНапоминание" Member="КалендарьНапоминание">
+    <Type Name="КалендарьНапоминание">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ДатаНапоминания" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="ВремяНапоминания" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ТекстНапоминания" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Пользователь" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ПереговорыКлиент" Member="ПереговорыКлиент">
+    <Type Name="ПереговорыКлиент">
+      <Column Name="Код" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Клиент" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="ДатаПереговоров" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ТекстПереговора" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="ДатаНапоминания" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ТекстНапоминания" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="КонтДанные" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Экспедитор" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="ОЧемДоговорВсплывФорма" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="ДатаОчемДоговорилис" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Календарь_Даты" Member="Календарь_Даты">
+    <Type Name="Календарь_Даты">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Дата" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="[0.00]" Member="_0_00" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="[1.00]" Member="_1_00" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="[2.00]" Member="_2_00" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="[3.00]" Member="_3_00" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="[4.00]" Member="_4_00" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="[5.00]" Member="_5_00" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="[6.00]" Member="_6_00" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="[7.00]" Member="_7_00" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="[8.00]" Member="_8_00" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="[9.00]" Member="_9_00" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="[10.00]" Member="_10_00" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="[11.00]" Member="_11_00" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="[12.00]" Member="_12_00" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="[13.00]" Member="_13_00" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="[14.00]" Member="_14_00" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="[15.00]" Member="_15_00" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="[16.00]" Member="_16_00" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="[17.00]" Member="_17_00" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="[18.00]" Member="_18_00" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="[19.00]" Member="_19_00" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="[20.00]" Member="_20_00" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="[21.00]" Member="_21_00" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="[22.00]" Member="_22_00" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="[23.00]" Member="_23_00" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Выполнение" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
     </Type>
   </Table>
 </Database>

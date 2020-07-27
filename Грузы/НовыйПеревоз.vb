@@ -16,30 +16,58 @@ Public Class НовыйПеревоз
         '    Me.ListBox1.Items.Add(r(0).ToString)
         'Next
 
-        ComboBox4.Items.Clear()
-        ComboBox4.AutoCompleteCustomSource.Clear()
-        ListBox1.Items.Clear()
-        For Each r As DataRow In dtПеревозчики.Rows
-            ListBox1.Items.Add(r(0).ToString)
-            ComboBox4.Items.Add(r(0).ToString)
-            ComboBox4.AutoCompleteCustomSource.Add(r(0).ToString)
-        Next
 
-        Dim c = From x In dtФормаСобствAll Order By x.Item("ПолноеНазвание").ToString Select x.Item("ПолноеНазвание")
+
+
 
         ComboBox1.AutoCompleteCustomSource.Clear()
         ComboBox1.Items.Clear()
-        For Each r In c
-            ComboBox1.AutoCompleteCustomSource.Add(r.ToString)
-            ComboBox1.Items.Add(r.ToString)
-        Next
+
+        ComboBox4.Items.Clear()
+        ComboBox4.AutoCompleteCustomSource.Clear()
+        ListBox1.Items.Clear()
+        Using db As New dbAllDataContext
+            Dim var = db.Перевозчики.OrderBy(Function(x) x.Названиеорганизации).Select(Function(x) x.Названиеорганизации).ToList
+            If var.Count > 0 Then
+                For Each k In var
+                    ListBox1.Items.Add(k)
+                    ComboBox4.Items.Add(k)
+                    ComboBox4.AutoCompleteCustomSource.Add(k)
+                Next
+            End If
+
+            Dim var1 = db.ФормаСобств.OrderBy(Function(x) x.ПолноеНазвание).Select(Function(x) x.ПолноеНазвание).ToList()
+            If var1.Count > 0 Then
+                For Each f In var1
+                    ComboBox1.AutoCompleteCustomSource.Add(f)
+                    ComboBox1.Items.Add(f)
+                Next
+            End If
+        End Using
+
+
+
+        'For Each r As DataRow In dtПеревозчики.Rows
+        '    ListBox1.Items.Add(r(0).ToString)
+        '    ComboBox4.Items.Add(r(0).ToString)
+        '    ComboBox4.AutoCompleteCustomSource.Add(r(0).ToString)
+        'Next
+
+        'Dim c = From x In dtФормаСобствAll Order By x.Item("ПолноеНазвание").ToString Select x.Item("ПолноеНазвание")
+
+        'ComboBox1.AutoCompleteCustomSource.Clear()
+        'ComboBox1.Items.Clear()
+        'For Each r In c
+        '    ComboBox1.AutoCompleteCustomSource.Add(r.ToString)
+        '    ComboBox1.Items.Add(r.ToString)
+        'Next
 
 
 
 
-        'Dim f1 As New Thread(Sub() COMxt(Me, "SELECT ПолноеНазвание FROM ФормаСобств ORDER BY ПолноеНазвание", ComboBox1))
-        'f1.IsBackground = True
-        'f1.Start()
+        ''Dim f1 As New Thread(Sub() COMxt(Me, "SELECT ПолноеНазвание FROM ФормаСобств ORDER BY ПолноеНазвание", ComboBox1))
+        ''f1.IsBackground = True
+        ''f1.Start()
 
         MaskedTextBox1.Text = Now.ToShortDateString
     End Sub

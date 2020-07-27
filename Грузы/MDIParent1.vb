@@ -1,11 +1,13 @@
 ﻿Imports System.Windows.Forms
 Imports System.Threading
+Imports System.Net
+
 Public Class MDIParent1
 
     Dim dgh As DataTable
 
 
-    Private Sub ShowNewForm(ByVal sender As Object, ByVal e As EventArgs) 
+    Private Sub ShowNewForm(ByVal sender As Object, ByVal e As EventArgs)
         ' Создать новый экземпляр дочерней формы.
         Dim ChildForm As New System.Windows.Forms.Form
         ' Сделать ее дочерней для данной формы MDI перед отображением.
@@ -17,7 +19,7 @@ Public Class MDIParent1
         ChildForm.Show()
     End Sub
 
-    Private Sub OpenFile(ByVal sender As Object, ByVal e As EventArgs) 
+    Private Sub OpenFile(ByVal sender As Object, ByVal e As EventArgs)
         Dim OpenFileDialog As New OpenFileDialog
         OpenFileDialog.InitialDirectory = My.Computer.FileSystem.SpecialDirectories.MyDocuments
         OpenFileDialog.Filter = "Текстовые файлы (*.txt)|*.txt|Все файлы (*.*)|*.*"
@@ -151,6 +153,125 @@ Public Class MDIParent1
 
 
     End Sub
+    Private Sub КалендарьНапоминание()
+        Dim listes As New Dictionary(Of String, String)
+        Using db As New dbAllDataContext()
+
+            Dim var2 = db.КалендарьНапоминание.Where(Function(x) x.ДатаНапоминания = Now.Date And x.Пользователь = Экспедитор).Select(Function(x) x).ToList()
+            If var2.Count > 0 Then
+                For Each r In var2
+                    If listes.ContainsKey(r.ВремяНапоминания) Then Continue For
+                    listes.Add(r.ВремяНапоминания, r.ТекстНапоминания)
+                Next
+
+                'If var2._0_00 IsNot Nothing Then
+                '    listes.Add(0, var2._0_00)
+                'End If
+
+                'If var2._1_00 IsNot Nothing Then
+                '    listes.Add(1, var2._1_00)
+                'End If
+
+                'If var2._2_00 IsNot Nothing Then
+                '    listes.Add(2, var2._2_00)
+                'End If
+
+                'If var2._3_00 IsNot Nothing Then
+                '    listes.Add(3, var2._3_00)
+                'End If
+
+                'If var2._4_00 IsNot Nothing Then
+                '    listes.Add(4, var2._4_00)
+                'End If
+
+                'If var2._5_00 IsNot Nothing Then
+                '    listes.Add(5, var2._5_00)
+                'End If
+
+                'If var2._6_00 IsNot Nothing Then
+                '    listes.Add(6, var2._6_00)
+                'End If
+
+                'If var2._7_00 IsNot Nothing Then
+                '    listes.Add(7, var2._7_00)
+                'End If
+
+                'If var2._8_00 IsNot Nothing Then
+                '    listes.Add(8, var2._8_00)
+                'End If
+
+                'If var2._9_00 IsNot Nothing Then
+                '    listes.Add(9, var2._9_00)
+                'End If
+
+                'If var2._10_00 IsNot Nothing Then
+                '    listes.Add(10, var2._10_00)
+                'End If
+
+                'If var2._11_00 IsNot Nothing Then
+                '    listes.Add(11, var2._11_00)
+                'End If
+
+                'If var2._12_00 IsNot Nothing Then
+                '    listes.Add(12, var2._12_00)
+                'End If
+
+                'If var2._13_00 IsNot Nothing Then
+                '    listes.Add(13, var2._13_00)
+                'End If
+
+                'If var2._14_00 IsNot Nothing Then
+                '    listes.Add(14, var2._14_00)
+                'End If
+
+                'If var2._15_00 IsNot Nothing Then
+                '    listes.Add(15, var2._15_00)
+                'End If
+
+                'If var2._16_00 IsNot Nothing Then
+                '    listes.Add(16, var2._16_00)
+                'End If
+
+                'If var2._17_00 IsNot Nothing Then
+                '    listes.Add(17, var2._17_00)
+                'End If
+
+                'If var2._18_00 IsNot Nothing Then
+                '    listes.Add(18, var2._18_00)
+                'End If
+
+                'If var2._19_00 IsNot Nothing Then
+                '    listes.Add(19, var2._19_00)
+                'End If
+
+                'If var2._20_00 IsNot Nothing Then
+                '    listes.Add(20, var2._20_00)
+                'End If
+
+                'If var2._21_00 IsNot Nothing Then
+                '    listes.Add(21, var2._21_00)
+                'End If
+
+                'If var2._22_00 IsNot Nothing Then
+                '    listes.Add(22, var2._22_00)
+                'End If
+
+                'If var2._23_00 IsNot Nothing Then
+                '    listes.Add(23, var2._23_00)
+                'End If
+
+            End If
+        End Using
+        If listes.Count > 0 Then
+            Dim f As New PublicClass(listes)
+        End If
+
+
+
+    End Sub
+    Public Async Sub КалендарьНапоминаниеAsync()
+        Await Task.Run(Sub() КалендарьНапоминание())
+    End Sub
 
     Private Sub MDIParent1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -158,12 +279,13 @@ Public Class MDIParent1
         ALL()
 
 
+
         'Dim str As String = Await too()
         'MsgBox(str)
 
         Пароль.ShowDialog()
         Getst()
-
+        КалендарьНапоминаниеAsync()
 
         Me.Cursor = Cursors.Default
     End Sub
@@ -268,30 +390,48 @@ Public Class MDIParent1
         ЧерныйСписок.ShowDialog()
     End Sub
 
-    Public Function Провер() As DataTable
-        Dim DateEx As String = Format(Now.Date, "MM\/dd\/yyyy")
-        Dim strsql As String = "SELECT * FROM ПереговорыКлиент WHERE ДатаНапоминания=#" & DateEx & "# and Экспедитор='" & Экспедитор & "'"
+    Public Function Провер() As List(Of ПереговорыКлиент)
+        Dim var As List(Of ПереговорыКлиент)
+        Using db As New dbAllDataContext()
+            var = db.ПереговорыКлиент.Where(Function(x) x.ДатаНапоминания = Now.Date And x.Экспедитор = Экспедитор).Select(Function(x) x).ToList()
+
+        End Using
+        If var.Count > 0 Then
+            Return var
+        Else
+            Dim g As New List(Of ПереговорыКлиент)
+            Return g
+        End If
+
+
+        'Dim DateEx As String = Format(Now.Date, "MM\/dd\/yyyy")
+        'Dim strsql As String = "SELECT * FROM ПереговорыКлиент WHERE ДатаНапоминания=#" & DateEx & "# and Экспедитор='" & Экспедитор & "'"
+        ''Dim ds As DataTable = Selects3(strsql)
         'Dim ds As DataTable = Selects3(strsql)
-        Dim ds As DataTable = Selects3(strsql)
-        Return ds
+        'Return ds
     End Function
     Private Sub Getst()
-        Dim df As DataTable = Провер()
-        If df.Rows.Count = 1 Then
-            ВсплывФормаПереговоры.RichTextBox1.Text = ""
-            ВсплывФормаПереговоры.RichTextBox2.Text = ""
-            ВсплывФормаПереговоры.RichTextBox3.Text = ""
-            ВсплывФормаПереговоры.RichTextBox1.Text = df.Rows(0).Item(1).ToString
-            ВсплывФормаПереговоры.RichTextBox2.Text = df.Rows(0).Item(5).ToString
-            ВсплывФормаПереговоры.RichTextBox3.Text = Strings.Left(df.Rows(0).Item(4).ToString, 10)
-            ВсплывФормаПереговоры.ShowDialog()
-        ElseIf df.Rows.Count > 1 Then
-            ВсплывФормаПереговоры.GroupBox1.Visible = True
-            ВсплывФормаПереговоры.Label4.Text = df.Rows.Count.ToString
-            ВсплывФормаПереговоры.Label5.Text = df.Rows.Count.ToString
-            ВсплывФормаПереговоры.Label5.Visible = True
-            ВсплывФормаПереговоры.Загр(df)
-            ВсплывФормаПереговоры.ShowDialog()
+        Dim df As List(Of ПереговорыКлиент) = Провер()
+        If df.Count = 1 Then
+            Dim f As New ВсплывФормаПереговоры()
+
+            f.RichTextBox1.Text = ""
+            f.RichTextBox2.Text = ""
+            f.RichTextBox3.Text = ""
+            f.RichTextBox1.Text = df(0).Клиент
+            f.RichTextBox2.Text = df(0).ТекстНапоминания
+            If df(0).ДатаНапоминания IsNot Nothing Then
+                f.RichTextBox3.Text = Strings.Left(df(0).ДатаНапоминания.ToString, 10)
+            End If
+            f.ShowDialog()
+        ElseIf df.Count > 1 Then
+            Dim f As New ВсплывФормаПереговоры()
+            f.GroupBox1.Visible = True
+            f.Label4.Text = df.Count
+            f.Label5.Text = df.Count
+            f.Label5.Visible = True
+            f.Загр(df)
+            f.ShowDialog()
         Else
             Exit Sub
         End If
@@ -306,7 +446,7 @@ Public Class MDIParent1
     End Sub
 
     Private Sub ПоОрганизацииToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ПоОрганизацииToolStripMenuItem.Click
-        ПереговорыКлиент.ShowDialog()
+        ПереговорыКлиентФорма.ShowDialog()
     End Sub
 
     Private Sub ВсеПереговорыToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ВсеПереговорыToolStripMenuItem.Click
@@ -334,6 +474,17 @@ Public Class MDIParent1
     End Sub
 
     Private Sub РейсToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles РейсToolStripMenuItem.Click
+
+    End Sub
+
+    Private Sub КалендарьToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles КалендарьToolStripMenuItem.Click
+        If ActiveMdiChild IsNot Nothing Then
+            ActiveMdiChild.Close()
+        End If
+
+        If My.Computer.Name.ToString = "OLEGLAPTOP" Then
+            Календарь.Show()
+        End If
 
     End Sub
 End Class

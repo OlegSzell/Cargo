@@ -29,10 +29,6 @@ Public Class ДопФорма
 
     End Sub
 
-    Private Sub ДопФорма_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-    End Sub
-
     Private Sub TextBox6_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox6.KeyDown
         If e.KeyCode = Keys.Enter Then
             e.SuppressKeyPress = True
@@ -69,18 +65,42 @@ Public Class ДопФорма
         TextBox5.Text = ""
         TextBox6.Text = ""
         TextBox10.Text = ""
+        TextBox7.Text = ""
 
         MaskedTextBox1.Clear()
         MaskedTextBox2.Clear()
+
 
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Me.Cursor = Cursors.WaitCursor
-        Dim strsql As String = "UPDATE РейсыКлиента SET ПоИнотерр='" & TextBox3.Text & "', ПоТеррРБ='" & TextBox4.Text & "',
-ДатаАкта='" & MaskedTextBox2.Text & "', НомерСМР='" & TextBox10.Text & "', ЗаявкаКлиента='" & TextBox6.Text & "', НомерЗаявки='" & TextBox5.Text & "',
-ДатаЗаявки='" & MaskedTextBox1.Text & "' WHERE НомерРейса=" & Рейс.НомРес & ""
-        Updates3(strsql)
+        Using db As New dbAllDataContext()
+            Dim var = db.РейсыКлиента.Where(Function(x) x.НомерРейса = Рейс.НомРес).Select(Function(x) x).FirstOrDefault()
+            If var IsNot Nothing Then
+
+                var.ПоИнотерр = TextBox3.Text
+                var.ПоТеррРБ = TextBox4.Text
+                var.ДатаАкта = MaskedTextBox2.Text
+                var.НомерСМР = TextBox10.Text
+                var.ЗаявкаКлиента = TextBox6.Text
+                var.НомерЗаявки = TextBox5.Text
+                var.ДатаЗаявки = MaskedTextBox1.Text
+
+                If TextBox7.Visible = True Then
+                    var.ОплатаПоКурсуКурс = TextBox7.Text
+                End If
+                db.SubmitChanges()
+
+                End If
+        End Using
+
+
+        '        Dim strsql As String = "UPDATE РейсыКлиента SET ПоИнотерр='" & TextBox3.Text & "', ПоТеррРБ='" & TextBox4.Text & "',
+        'ДатаАкта='" & MaskedTextBox2.Text & "', НомерСМР='" & TextBox10.Text & "', ЗаявкаКлиента='" & TextBox6.Text & "', НомерЗаявки='" & TextBox5.Text & "',
+        'ДатаЗаявки='" & MaskedTextBox1.Text & "' 
+        'WHERE НомерРейса=" & Рейс.НомРес & ""
+        '        Updates3(strsql)
         MessageBox.Show("Данные внесены в базу!", Рик)
         If MessageBox.Show("Изменить данные в файле эксель?", Рик, MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
             Рейс.СлРейс = Nothing
@@ -94,6 +114,10 @@ Public Class ДопФорма
         End If
         Me.Cursor = Cursors.Default
         Me.Close()
+
+    End Sub
+
+    Private Sub ДопФорма_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
 End Class

@@ -40,6 +40,8 @@ Partial Class ДопФорма
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.TextBox7 = New System.Windows.Forms.TextBox()
+        Me.Label5 = New System.Windows.Forms.Label()
         Me.MaskedTextBox2 = New System.Windows.Forms.MaskedTextBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.TextBox10 = New System.Windows.Forms.TextBox()
@@ -218,6 +220,8 @@ Partial Class ДопФорма
         'GroupBox3
         '
         Me.GroupBox3.BackColor = System.Drawing.SystemColors.ButtonShadow
+        Me.GroupBox3.Controls.Add(Me.TextBox7)
+        Me.GroupBox3.Controls.Add(Me.Label5)
         Me.GroupBox3.Controls.Add(Me.MaskedTextBox2)
         Me.GroupBox3.Controls.Add(Me.Label9)
         Me.GroupBox3.Controls.Add(Me.TextBox10)
@@ -228,6 +232,24 @@ Partial Class ДопФорма
         Me.GroupBox3.TabIndex = 10
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Акт"
+        '
+        'TextBox7
+        '
+        Me.TextBox7.Location = New System.Drawing.Point(499, 23)
+        Me.TextBox7.Margin = New System.Windows.Forms.Padding(4)
+        Me.TextBox7.Name = "TextBox7"
+        Me.TextBox7.Size = New System.Drawing.Size(96, 25)
+        Me.TextBox7.TabIndex = 12
+        Me.TextBox7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(318, 24)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(174, 17)
+        Me.Label5.TabIndex = 11
+        Me.Label5.Text = "Курс валюты на дату акта"
         '
         'MaskedTextBox2
         '
@@ -341,4 +363,6 @@ Partial Class ДопФорма
     Friend WithEvents MaskedTextBox1 As MaskedTextBox
     Friend WithEvents MaskedTextBox2 As MaskedTextBox
     Friend WithEvents Button2 As Button
+    Friend WithEvents TextBox7 As TextBox
+    Friend WithEvents Label5 As Label
 End Class

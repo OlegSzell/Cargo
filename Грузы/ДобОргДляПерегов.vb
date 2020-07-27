@@ -40,7 +40,7 @@ Public Class ДобОргДляПерегов
         End If
 
         Me.Close()
-        ПереговорыКлиент.комб1()
+        ПереговорыКлиентФорма.комб1()
         RichTextBox1.Text = ""
         RichTextBox2.Text = ""
         ComboBox1.Items.Clear()

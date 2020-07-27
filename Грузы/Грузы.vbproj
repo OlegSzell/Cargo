@@ -15,7 +15,7 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <IsWebBootstrapper>true</IsWebBootstrapper>
-    <PublishUrl>B:\_РАБОЧАЯ ПАПКА\Рикманс Сохраненные изменения Visual Studio\VS\</PublishUrl>
+    <PublishUrl>B:\_РАБОЧАЯ ПАПКА\Рикманс Сохраненные изменения Visual Studio\VS64\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Web</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
@@ -25,15 +25,15 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>http://2trans.by/VS/</InstallUrl>
-    <UpdateUrl>http://2trans.by/VS/</UpdateUrl>
+    <InstallUrl>http://2trans.by/VS64/</InstallUrl>
+    <UpdateUrl>http://2trans.by/VS64/</UpdateUrl>
     <ProductName>Экспедиция</ProductName>
     <PublisherName>Рикманс</PublisherName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <TrustUrlParameters>true</TrustUrlParameters>
-    <ApplicationRevision>17</ApplicationRevision>
+    <ApplicationRevision>36</ApplicationRevision>
     <ApplicationVersion>1.2.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -181,6 +181,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Module1.vb" />
+    <Compile Include="PublicClass.vb" />
     <Compile Include="ВодитДан.Designer.vb">
       <DependentUpon>ВодитДан.vb</DependentUpon>
     </Compile>
@@ -291,6 +292,18 @@
       <DependentUpon>ИзменПорНомКлиент.vb</DependentUpon>
     </Compile>
     <Compile Include="ИзменПорНомКлиент.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Календарь.Designer.vb">
+      <DependentUpon>Календарь.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Календарь.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="КалендарьМодалноеОкно.Designer.vb">
+      <DependentUpon>КалендарьМодалноеОкно.vb</DependentUpon>
+    </Compile>
+    <Compile Include="КалендарьМодалноеОкно.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="КлиентДанные.Designer.vb">
@@ -557,6 +570,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ИзменПорНомКлиент.resx">
       <DependentUpon>ИзменПорНомКлиент.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Календарь.resx">
+      <DependentUpon>Календарь.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="КалендарьМодалноеОкно.resx">
+      <DependentUpon>КалендарьМодалноеОкно.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="КлиентДанные.resx">
       <DependentUpon>КлиентДанные.vb</DependentUpon>

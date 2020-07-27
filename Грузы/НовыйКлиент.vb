@@ -40,14 +40,43 @@ Public Class НовыйКлиент
         '    Me.ListBox1.Items.Add(r(0).ToString)
         'Next
 
+        ComboBox1.AutoCompleteCustomSource.Clear()
+        ComboBox1.Items.Clear()
+
         ComboBox4.Items.Clear()
         ComboBox4.AutoCompleteCustomSource.Clear()
-        ListBox1.Items.Clear()
-        For Each r As DataRow In dtКлиенты.Rows
-            ListBox1.Items.Add(r(0).ToString)
-            ComboBox4.Items.Add(r(0).ToString)
-            ComboBox4.AutoCompleteCustomSource.Add(r(0).ToString)
-        Next
+
+        Using db As New dbAllDataContext
+            Dim var = db.Клиент.OrderBy(Function(x) x.НазваниеОрганизации).Select(Function(x) x.НазваниеОрганизации).ToList()
+            If var.Count > 0 Then
+                For Each r In var
+                    ListBox1.Items.Add(r)
+                    ComboBox4.Items.Add(r)
+                    ComboBox4.AutoCompleteCustomSource.Add(r)
+                Next
+
+            End If
+            Dim var1 = db.ФормаСобств.OrderBy(Function(x) x.ПолноеНазвание).Select(Function(x) x.ПолноеНазвание).ToList()
+            If var1.Count > 0 Then
+                For Each f In var1
+                    ComboBox1.AutoCompleteCustomSource.Add(f)
+                    ComboBox1.Items.Add(f)
+                Next
+            End If
+        End Using
+
+
+
+
+
+        'ComboBox4.Items.Clear()
+        'ComboBox4.AutoCompleteCustomSource.Clear()
+        'ListBox1.Items.Clear()
+        'For Each r As DataRow In dtКлиенты.Rows
+        '    ListBox1.Items.Add(r(0).ToString)
+        '    ComboBox4.Items.Add(r(0).ToString)
+        '    ComboBox4.AutoCompleteCustomSource.Add(r(0).ToString)
+        'Next
 
 
 
@@ -63,22 +92,14 @@ Public Class НовыйКлиент
         'f1.Start()
 
 
-        Dim c = From x In dtФормаСобствAll Order By x.Item("ПолноеНазвание").ToString Select x.Item("ПолноеНазвание")
+        'Dim c = From x In dtФормаСобствAll Order By x.Item("ПолноеНазвание").ToString Select x.Item("ПолноеНазвание")
 
-        ComboBox1.AutoCompleteCustomSource.Clear()
-        ComboBox1.Items.Clear()
-        For Each r In c
-            ComboBox1.AutoCompleteCustomSource.Add(r.ToString)
-            ComboBox1.Items.Add(r.ToString)
-        Next
-
-
-
-
-
-
-        'Listxt(Me, "SELECT ПолноеНазвание FROM ФормаСобств ORDER BY ПолноеНазвание", ListBox1)
-        'COMxt(Me, "SELECT ПолноеНазвание FROM ФормаСобств ORDER BY ПолноеНазвание", ComboBox1)
+        'ComboBox1.AutoCompleteCustomSource.Clear()
+        'ComboBox1.Items.Clear()
+        'For Each r In c
+        '    ComboBox1.AutoCompleteCustomSource.Add(r.ToString)
+        '    ComboBox1.Items.Add(r.ToString)
+        'Next
 
 
         MaskedTextBox1.Text = Now.ToShortDateString

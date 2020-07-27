@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class ПереговорыКлиент
+Partial Class ПереговорыКлиентФорма
     Inherits System.Windows.Forms.Form
 
     'Форма переопределяет dispose для очистки списка компонентов.
@@ -22,7 +22,7 @@ Partial Class ПереговорыКлиент
     'Не изменяйте ее в редакторе исходного кода.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ПереговорыКлиент))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ПереговорыКлиентФорма))
         Me.MaskedTextBox1 = New System.Windows.Forms.MaskedTextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
@@ -260,7 +260,7 @@ Partial Class ПереговорыКлиент
         Me.Button3.Text = "Изменить данные организации"
         Me.Button3.UseVisualStyleBackColor = False
         '
-        'ПереговорыКлиент
+        'ПереговорыКлиентФорма
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 17.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -276,7 +276,7 @@ Partial Class ПереговорыКлиент
         Me.Margin = New System.Windows.Forms.Padding(4)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "ПереговорыКлиент"
+        Me.Name = "ПереговорыКлиентФорма"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Переговоры с клиентом"
         Me.GroupBox1.ResumeLayout(False)
