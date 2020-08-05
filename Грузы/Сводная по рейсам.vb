@@ -2,6 +2,8 @@
 Imports System.Data.OleDb
 Imports System.Threading
 Imports System.Linq
+Imports System.Collections.ObjectModel
+
 Public Class Сводная_по_рейсам
     Dim dsper As DataTable
     Dim fr As New Thread(AddressOf Перевоз)
@@ -12,11 +14,18 @@ Public Class Сводная_по_рейсам
     Dim dp3, dp4 As New Dictionary(Of Integer, Integer)
     Dim толькоДобавлНомераРейсов As DataTable
     Dim lts As New List(Of Integer)()
+    Public Property observ As ObservableCollection(Of ДанныеГрида)
+
+    ' Declare a variable to store the index of a row being edited. 
+    ' A value of -1 indicates that there is no row currently in edit. 
+    Private rowInEdit As Integer = -1
 
 
 
     Private Sub Сводная_по_рейсам_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.MdiParent = MDIParent1
+
+        Grid2.VirtualMode = True
 
         If fall.IsAlive Then
             fall.Join()
@@ -32,6 +41,7 @@ Public Class Сводная_по_рейсам
             Запуск(dsall)
         End If
 
+       
     End Sub
     Private Sub Ref()
         Dim StrSql As String
@@ -357,7 +367,7 @@ Public Class Сводная_по_рейсам
 
 
                 dm.Rows.Add(row)
-                End If
+            End If
 
 
         Next
@@ -370,43 +380,72 @@ Public Class Сводная_по_рейсам
 
     End Sub
     Private Sub Запуск(ByVal ds As DataTable)
+
         Me.Cursor = Cursors.WaitCursor
         'ds.DefaultView.Sort = "Рейс" & " ASC" 'сортировка datatable
         ds.DefaultView.Sort = "Рейс" & " DESC"
-        Grid1.DataSource = ds
-        GridView(Grid1)
 
-        Grid1.RowsDefaultCellStyle.BackColor = Color.Lavender
-        Grid1.AlternatingRowsDefaultCellStyle.BackColor = Color.LightBlue
+        observ = New ObservableCollection(Of ДанныеГрида)
+
+
+        For Each f As DataRow In ds.Rows
+            Dim g As ДанныеГрида = New ДанныеГрида() With {.Номер = f.Item(0), .Клиент = f.Item(1).ToString, .Маршрут = f.Item(2).ToString, .Фрахт = f.Item(3).ToString, .Валюта = f.Item(4).ToString,
+                .СрокОплаты = f.Item(5).ToString, .ДатаОплаты = f.Item(6).ToString, .Сумма = f.Item(7).ToString, .Перевозчик = f.Item(8).ToString, .ПеревозФрахт = f.Item(9).ToString, .ВалютаПер = f.Item(10).ToString, .СрокОплатыПер = f.Item(11).ToString, .ДатаОплатыПер = f.Item(12).ToString,
+                .СуммаОплатыПер = f.Item(13).ToString, .Дельта = f.Item(14).ToString}
+
+            observ.Add(g)
+        Next
+
+
+
+        'Grid1.DoubleBuferGrid = True
+        'Dim dbgrid As New DoubleBuferGrid
+        'dbgrid.DataSource = ds
+
+        'Grid1.DoubleBuferGrid = True
+
+        Dim _db As New BindingSource
+        '_db.DataSource = Nothing
+        _db.DataSource = ds
+
+        Grid2.DataSource = _db
+
+
+
+        'GridView(Grid2)
+
+        Grid2.RowsDefaultCellStyle.BackColor = Color.Lavender
+        Grid2.AlternatingRowsDefaultCellStyle.BackColor = Color.LightBlue
         'gridselect()
 
 
 
 
-        Grid1.BorderStyle = BorderStyle.Fixed3D
-        Dim font As New Font(Grid1.DefaultCellStyle.Font.FontFamily, 11, FontStyle.Bold)
-        Grid1.Columns(6).DefaultCellStyle.Font = font
-        Grid1.Columns(7).DefaultCellStyle.ForeColor = Color.DarkRed
-        Grid1.Columns(7).DefaultCellStyle.Font = font
-        Grid1.Columns(12).DefaultCellStyle.Font = font
-        Grid1.Columns(13).DefaultCellStyle.ForeColor = Color.DarkRed
-        Grid1.Columns(13).DefaultCellStyle.Font = font
-        Grid1.Columns(0).DefaultCellStyle.Font = font
+        Grid2.BorderStyle = BorderStyle.Fixed3D
+        Dim font As New Font(Grid2.DefaultCellStyle.Font.FontFamily, 11, FontStyle.Bold)
+        Grid2.Columns(6).DefaultCellStyle.Font = font
+        Grid2.Columns(7).DefaultCellStyle.ForeColor = Color.DarkRed
+        Grid2.Columns(7).DefaultCellStyle.Font = font
+        Grid2.Columns(12).DefaultCellStyle.Font = font
+        Grid2.Columns(13).DefaultCellStyle.ForeColor = Color.DarkRed
+        Grid2.Columns(13).DefaultCellStyle.Font = font
+        Grid2.Columns(0).DefaultCellStyle.Font = font
         'Grid1.Columns(7).DefaultCellStyle.WrapMode = DataGridViewCellBorderStyle.SunkenVertical
 
+        Grid2.Columns(0).Width = 60
+        Grid2.Columns(1).Width = 160
+        Grid2.Columns(2).Width = 260
+        Grid2.Columns(8).Width = 160
 
-        Grid1.Columns(0).Width = 60
-        Grid1.Columns(1).Width = 160
-        Grid1.Columns(2).Width = 260
-        Grid1.Columns(8).Width = 160
+
         Me.Cursor = Cursors.Default
     End Sub
 
     Private Sub gridselect()
 
         For Each item As Integer In lts
-            For i As Integer = 0 To Grid1.Rows.Count - 1
-                For Each rf As DataGridViewRow In Grid1.Rows
+            For i As Integer = 0 To Grid2.Rows.Count - 1
+                For Each rf As DataGridViewRow In Grid2.Rows
                     'If DataGridView1.Rows(i).Cells(0).Value = item Then
                     '    DataGridView1.DefaultCellStyle.ForeColor = Color.Gold
                     '    rf.DefaultCellStyle.BackColor = Color.Gray
@@ -415,7 +454,7 @@ Public Class Сводная_по_рейсам
                 Next
             Next
 
-            Next
+        Next
 
 
     End Sub
@@ -462,8 +501,8 @@ Public Class Сводная_по_рейсам
         Return ds
     End Function
 
-    Private Sub Grid1_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles Grid1.CellDoubleClick
-        НомРейса = Grid1.SelectedCells(0).Value
+    Private Sub Grid1_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs)
+        НомРейса = Grid2.SelectedCells(0).Value
         bl = True
         Выбор.ShowDialog()
 
@@ -477,4 +516,187 @@ Public Class Сводная_по_рейсам
         ALL()
         Запуск(dsall)
     End Sub
+
+    'Private Sub Grid2_CellValueNeeded(sender As Object, e As DataGridViewCellValueEventArgs) Handles Grid2.CellValueNeeded
+    '    If e.RowIndex = Grid2.RowCount - 1 Then
+    '        Return
+    '    End If
+
+
+
+    'End Sub
+End Class
+Public Class ДанныеГрида
+    Inherits OnPropertyChangedClass
+
+    Private _Номер As Integer
+    Public Property Номер As Integer
+        Get
+            Return _Номер
+        End Get
+        Set(value As Integer)
+            _Номер = value
+            OnPropertyChanged("Номер")
+        End Set
+    End Property
+
+    Private _Клиент As String
+    Public Property Клиент As String
+        Get
+            Return _Клиент
+        End Get
+        Set(value As String)
+            _Клиент = value
+            OnPropertyChanged("Клиент")
+        End Set
+    End Property
+
+    Private _Маршрут As String
+    Public Property Маршрут As String
+        Get
+            Return _Маршрут
+        End Get
+        Set(value As String)
+            _Маршрут = value
+            OnPropertyChanged("Маршрут")
+        End Set
+    End Property
+
+    Private _Фрахт As String
+    Public Property Фрахт As String
+        Get
+            Return _Фрахт
+        End Get
+        Set(value As String)
+            _Фрахт = value
+            OnPropertyChanged("Фрахт")
+        End Set
+    End Property
+
+
+    Private _Валюта As String
+    Public Property Валюта As String
+        Get
+            Return _Валюта
+        End Get
+        Set(value As String)
+            _Валюта = value
+            OnPropertyChanged("Валюта")
+        End Set
+    End Property
+
+    Private _СрокОплаты As String
+    Public Property СрокОплаты As String
+        Get
+            Return _СрокОплаты
+        End Get
+        Set(value As String)
+            _СрокОплаты = value
+            OnPropertyChanged("СрокОплаты")
+        End Set
+    End Property
+
+    Private _ДатаОплаты As String
+    Public Property ДатаОплаты As String
+        Get
+            Return _ДатаОплаты
+        End Get
+        Set(value As String)
+            _ДатаОплаты = value
+            OnPropertyChanged("ДатаОплаты")
+        End Set
+    End Property
+
+    Private _Сумма As String
+    Public Property Сумма As String
+        Get
+            Return _Сумма
+        End Get
+        Set(value As String)
+            _Сумма = value
+            OnPropertyChanged("Сумма")
+        End Set
+    End Property
+
+    Private _Перевозчик As String
+    Public Property Перевозчик As String
+        Get
+            Return _Перевозчик
+        End Get
+        Set(value As String)
+            _Перевозчик = value
+            OnPropertyChanged("Перевозчик")
+        End Set
+    End Property
+
+    Private _ПеревозФрахт As String
+    Public Property ПеревозФрахт As String
+        Get
+            Return _ПеревозФрахт
+        End Get
+        Set(value As String)
+            _ПеревозФрахт = value
+            OnPropertyChanged("ПеревозФрахт")
+        End Set
+    End Property
+
+    Private _ВалютаПер As String
+    Public Property ВалютаПер As String
+        Get
+            Return _ВалютаПер
+        End Get
+        Set(value As String)
+            _ВалютаПер = value
+            OnPropertyChanged("ВалютаПер")
+        End Set
+    End Property
+
+    Private _СрокОплатыПер As String
+    Public Property СрокОплатыПер As String
+        Get
+            Return _СрокОплатыПер
+        End Get
+        Set(value As String)
+            _СрокОплатыПер = value
+            OnPropertyChanged("СрокОплатыПер")
+        End Set
+    End Property
+
+    Private _ДатаОплатыПер As String
+    Public Property ДатаОплатыПер As String
+        Get
+            Return _ДатаОплатыПер
+        End Get
+        Set(value As String)
+            _ДатаОплатыПер = value
+            OnPropertyChanged("ДатаОплатыПер")
+        End Set
+    End Property
+
+    Private _СуммаОплатыПер As String
+    Public Property СуммаОплатыПер As String
+        Get
+            Return _СуммаОплатыПер
+        End Get
+        Set(value As String)
+            _СуммаОплатыПер = value
+            OnPropertyChanged("СуммаОплатыПер")
+        End Set
+    End Property
+
+    Private _Дельта As String
+    Public Property Дельта As String
+        Get
+            Return _Дельта
+        End Get
+        Set(value As String)
+            _Дельта = value
+            OnPropertyChanged("Дельта")
+        End Set
+    End Property
+
+
+
+
+
 End Class

@@ -487,4 +487,14 @@ Public Class MDIParent1
         End If
 
     End Sub
+
+    Private Sub ОтчетToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ОтчетToolStripMenuItem1.Click
+        If ActiveMdiChild IsNot Nothing Then
+            ActiveMdiChild.Close()
+        End If
+
+        If My.Computer.Name.ToString = "OLEGLAPTOP" Then
+            ГотовыйОтчет.Show()
+        End If
+    End Sub
 End Class

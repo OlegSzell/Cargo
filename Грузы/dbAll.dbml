@@ -77,6 +77,7 @@
       <Column Name="Предоплата" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="ОплатаПоКурсу" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
       <Column Name="ОплатаПоКурсуКурс" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="РейсыКлиента_ОплатыКлиент" Member="ОплатыКлиент" ThisKey="Код" OtherKey="IDКлиента" Type="ОплатыКлиент" />
       <Association Name="Клиент_РейсыКлиента" Member="Клиент" ThisKey="НазвОрганизации" OtherKey="НазваниеОрганизации" Type="Клиент" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
@@ -171,6 +172,7 @@
       <Column Name="РазмерШтрафаЗаСрыв" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="Предоплата" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="СрывЗагр20Проц" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="РейсыПеревозчика_ОплатыПер" Member="ОплатыПер" ThisKey="Код" OtherKey="IDПер" Type="ОплатыПер" />
       <Association Name="Перевозчики_РейсыПеревозчика" Member="Перевозчики" ThisKey="НазвОрганизации" OtherKey="Названиеорганизации" Type="Перевозчики" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
@@ -226,6 +228,60 @@
       <Column Name="[22.00]" Member="_22_00" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="[23.00]" Member="_23_00" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="Выполнение" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ОтчетРаботыСотрудникаСводная" Member="ОтчетРаботыСотрудникаСводная">
+    <Type Name="ОтчетРаботыСотрудникаСводная">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IDОтчетРабСотрудн" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="счет" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="заказчик" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="Загрузка" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="Выгрузка" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="ДатаЗагрузки" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="ДатаВыгрузки" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="ВалютаЗак" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="КурсЗак" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ИтогоЗакБелРуб" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="ДатаОплатыЗак" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="ВалютаПер" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="КурсПер" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ИтогоПерБелРуб" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="КомиссияЗаПеревод" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="СтрахованиеГруза" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ДатаОплатыПер" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Дельта" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ИтогоОбщая" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ИтогоСотрудник" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="ОтчетРаботыСотрудника_ОтчетРаботыСотрудникаСводная" Member="ОтчетРаботыСотрудника" ThisKey="IDОтчетРабСотрудн" OtherKey="ID" Type="ОтчетРаботыСотрудника" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ОтчетРаботыСотрудника" Member="ОтчетРаботыСотрудника">
+    <Type Name="ОтчетРаботыСотрудника">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Год" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Месяц" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="ОтчетРаботыСотрудника_ОтчетРаботыСотрудникаСводная" Member="ОтчетРаботыСотрудникаСводная" ThisKey="ID" OtherKey="IDОтчетРабСотрудн" Type="ОтчетРаботыСотрудникаСводная" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ОплатыКлиент" Member="ОплатыКлиент">
+    <Type Name="ОплатыКлиент">
+      <Column Name="Код" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IDКлиента" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Рейс" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ДатаОплаты" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Сумма" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Association Name="РейсыКлиента_ОплатыКлиент" Member="РейсыКлиента" ThisKey="IDКлиента" OtherKey="Код" Type="РейсыКлиента" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ОплатыПер" Member="ОплатыПер">
+    <Type Name="ОплатыПер">
+      <Column Name="Код" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IDПер" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Рейс" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ДатаОплаты" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Сумма" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Association Name="РейсыПеревозчика_ОплатыПер" Member="РейсыПеревозчика" ThisKey="IDПер" OtherKey="Код" Type="РейсыПеревозчика" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
 </Database>

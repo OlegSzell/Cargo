@@ -69,5 +69,15 @@ Namespace My.Resources
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
+        
+        '''<summary>
+        '''  Поиск локализованного ресурса типа System.Byte[].
+        '''</summary>
+        Friend ReadOnly Property Report() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Report", resourceCulture)
+                Return CType(obj,Byte())
+            End Get
+        End Property
     End Module
 End Namespace

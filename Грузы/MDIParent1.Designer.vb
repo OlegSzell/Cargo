@@ -42,17 +42,18 @@ Partial Class MDIParent1
         Me.СвободныйТранспортToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ЛИToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ОтчетToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.КалендарьToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.РейсToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.СоздатьToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ПечатьToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.РейсToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ДоговораToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ОтчетToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ЧерныйСписокToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ПоискToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StatusStrip = New System.Windows.Forms.StatusStrip()
         Me.ToolStripStatusLabel = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolTip = New System.Windows.Forms.ToolTip(Me.components)
-        Me.КалендарьToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip.SuspendLayout()
         Me.StatusStrip.SuspendLayout()
         Me.SuspendLayout()
@@ -97,25 +98,25 @@ Partial Class MDIParent1
         '
         Me.ДобавитьToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ПолныйToolStripMenuItem, Me.БыстроToolStripMenuItem})
         Me.ДобавитьToolStripMenuItem.Name = "ДобавитьToolStripMenuItem"
-        Me.ДобавитьToolStripMenuItem.Size = New System.Drawing.Size(126, 22)
+        Me.ДобавитьToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.ДобавитьToolStripMenuItem.Text = "Добавить"
         '
         'ПолныйToolStripMenuItem
         '
         Me.ПолныйToolStripMenuItem.Name = "ПолныйToolStripMenuItem"
-        Me.ПолныйToolStripMenuItem.Size = New System.Drawing.Size(120, 22)
+        Me.ПолныйToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.ПолныйToolStripMenuItem.Text = "Полный"
         '
         'БыстроToolStripMenuItem
         '
         Me.БыстроToolStripMenuItem.Name = "БыстроToolStripMenuItem"
-        Me.БыстроToolStripMenuItem.Size = New System.Drawing.Size(120, 22)
+        Me.БыстроToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.БыстроToolStripMenuItem.Text = "Быстро"
         '
         'НайтиToolStripMenuItem
         '
         Me.НайтиToolStripMenuItem.Name = "НайтиToolStripMenuItem"
-        Me.НайтиToolStripMenuItem.Size = New System.Drawing.Size(126, 22)
+        Me.НайтиToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.НайтиToolStripMenuItem.Text = "Найти"
         '
         'КлиентToolStripMenuItem1
@@ -168,9 +169,15 @@ Partial Class MDIParent1
         Me.ОтчетToolStripMenuItem.Size = New System.Drawing.Size(198, 22)
         Me.ОтчетToolStripMenuItem.Text = "Отчет"
         '
+        'КалендарьToolStripMenuItem
+        '
+        Me.КалендарьToolStripMenuItem.Name = "КалендарьToolStripMenuItem"
+        Me.КалендарьToolStripMenuItem.Size = New System.Drawing.Size(198, 22)
+        Me.КалендарьToolStripMenuItem.Text = "Календарь"
+        '
         'РейсToolStripMenuItem
         '
-        Me.РейсToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.СоздатьToolStripMenuItem, Me.ПечатьToolStripMenuItem})
+        Me.РейсToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.СоздатьToolStripMenuItem, Me.ПечатьToolStripMenuItem, Me.ОтчетToolStripMenuItem1})
         Me.РейсToolStripMenuItem.Name = "РейсToolStripMenuItem"
         Me.РейсToolStripMenuItem.Size = New System.Drawing.Size(45, 19)
         Me.РейсToolStripMenuItem.Text = "Рейс"
@@ -200,6 +207,12 @@ Partial Class MDIParent1
         Me.ДоговораToolStripMenuItem1.Size = New System.Drawing.Size(137, 22)
         Me.ДоговораToolStripMenuItem1.Text = "Документы"
         '
+        'ОтчетToolStripMenuItem1
+        '
+        Me.ОтчетToolStripMenuItem1.Name = "ОтчетToolStripMenuItem1"
+        Me.ОтчетToolStripMenuItem1.Size = New System.Drawing.Size(201, 22)
+        Me.ОтчетToolStripMenuItem1.Text = "Отчет"
+        '
         'ЧерныйСписокToolStripMenuItem
         '
         Me.ЧерныйСписокToolStripMenuItem.Name = "ЧерныйСписокToolStripMenuItem"
@@ -227,12 +240,6 @@ Partial Class MDIParent1
         Me.ToolStripStatusLabel.Name = "ToolStripStatusLabel"
         Me.ToolStripStatusLabel.Size = New System.Drawing.Size(66, 17)
         Me.ToolStripStatusLabel.Text = "Состояние"
-        '
-        'КалендарьToolStripMenuItem
-        '
-        Me.КалендарьToolStripMenuItem.Name = "КалендарьToolStripMenuItem"
-        Me.КалендарьToolStripMenuItem.Size = New System.Drawing.Size(198, 22)
-        Me.КалендарьToolStripMenuItem.Text = "Календарь"
         '
         'MDIParent1
         '
@@ -287,4 +294,5 @@ Partial Class MDIParent1
     Friend WithEvents ЛИToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ОтчетToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents КалендарьToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ОтчетToolStripMenuItem1 As ToolStripMenuItem
 End Class

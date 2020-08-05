@@ -1,0 +1,14 @@
+﻿Imports System.ComponentModel
+Imports System.Runtime.CompilerServices
+
+Public MustInherit Class OnPropertyChangedClass
+    Implements INotifyPropertyChanged
+
+    Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
+
+
+
+    Public Sub OnPropertyChanged(<CallerMemberName> ByVal Optional propertyName As String = Nothing)
+        RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
+    End Sub
+End Class
