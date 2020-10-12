@@ -266,45 +266,111 @@ Public Class НовыйПеревоз
 
         'Dim strsql1 As String = "SELECT РасчСчетРубли FROM Перевозчики WHERE Названиеорганизации='" & RichTextBox1.Text & "'"
         'Dim ds As DataTable = Selects3(strsql1)
+        Dim naz As String = RichTextBox1.Text
+        Using db As New dbAllDataContext
+            Dim f1 = db.Перевозчики.Where(Function(x) x.Названиеорганизации = naz).Select(Function(x) x).FirstOrDefault()
 
-        Dim ds = dtПеревозчики.Select("Названиеорганизации='" & RichTextBox1.Text & "'")
+            Dim f As String
+            Dim i As Integer
 
-        If ds.Length = 0 Then
-            errds = 1
-        Else
-            errds = 0
-        End If
+            If CheckBox2.Checked = True Then
+                f = "Да"
+                i = 1
+            Else
+                f = ""
+                i = 0
+            End If
+
+            If f1 IsNot Nothing Then
+                With f1
+                    .Форма_собственности = ComboBox1.Text
+                    .Адрес_организации = Trim(RichTextBox2.Text)
+                    .Почтовый_адрес = Trim(RichTextBox3.Text)
+                    .РасчСчетРубли = Trim(RichTextBox6.Text)
+                    .РасчСчетРоссРубли = Trim(RichTextBox9.Text)
+                    .РасчСчетДоллар = Trim(RichTextBox5.Text)
+                    .РасчСчетЕвро = Trim(RichTextBox4.Text)
+                    .Адрес_банка = Trim(RichTextBox8.Text)
+                    .Контактное_лицо = Trim(RichTextBox7.Text)
+                    .Должность = Trim(RichTextBox13.Text)
+                    .НаОснЧегоДейств = Trim(RichTextBox10.Text)
+                    .ФИОРуководителя = Trim(RichTextBox12.Text)
+                    .ФИОРодпадеж = Trim(RichTextBox11.Text)
+                    .ДолжРодПадеж = Trim(RichTextBox14.Text)
+                    .ПерЭкспедитор = f
+                    .Дата = MaskedTextBox1.Text
+                End With
+                db.SubmitChanges()
+            Else
+                Dim f2 As New Перевозчики
+                With f2
+                    .Названиеорганизации = Trim(RichTextBox1.Text)
+                    .Форма_собственности = ComboBox1.Text
+                    .Адрес_организации = Trim(RichTextBox2.Text)
+                    .Почтовый_адрес = Trim(RichTextBox3.Text)
+                    .РасчСчетРубли = Trim(RichTextBox6.Text)
+                    .РасчСчетРоссРубли = Trim(RichTextBox9.Text)
+                    .РасчСчетДоллар = Trim(RichTextBox5.Text)
+                    .РасчСчетЕвро = Trim(RichTextBox4.Text)
+                    .Адрес_банка = Trim(RichTextBox8.Text)
+                    .Контактное_лицо = Trim(RichTextBox7.Text)
+                    .Должность = Trim(RichTextBox13.Text)
+                    .НаОснЧегоДейств = Trim(RichTextBox10.Text)
+                    .ФИОРуководителя = Trim(RichTextBox12.Text)
+                    .ФИОРодпадеж = Trim(RichTextBox11.Text)
+                    .ДолжРодПадеж = Trim(RichTextBox14.Text)
+                    .ПерЭкспедитор = f
+                    .Договор = НомерДог(i)
+                    .Дата = MaskedTextBox1.Text
+
+                End With
+                db.Перевозчики.InsertOnSubmit(f2)
+                db.SubmitChanges()
+            End If
+        End Using
 
 
 
 
-        Dim f As String
-        Dim i As Integer
-        If CheckBox2.Checked = True Then
-            f = "Да"
-            i = 1
-        Else
-            f = ""
-            i = 0
-        End If
+        'Dim ds = dtПеревозчики.Select("Названиеорганизации='" & RichTextBox1.Text & "'")
+
+        'If ds.Length = 0 Then
+        '    errds = 1
+        'Else
+        '    errds = 0
+        'End If
+
+
+
+
+        'Dim f As String
+        'Dim i As Integer
+        'If CheckBox2.Checked = True Then
+        '    f = "Да"
+        '    i = 1
+        'Else
+        '    f = ""
+        '    i = 0
+        'End If
 
         'Dim list As New Dictionary(Of String, Object)
         'list.Add("@",)
-        If errds = 1 Then
-            Dim strsql As String = "INSERT INTO Перевозчики(Названиеорганизации,[Форма собственности],[Адрес организации],[Почтовый адрес],РасчСчетРубли,РасчСчетРоссРубли,
-        РасчСчетДоллар,РасчСчетЕвро,[Адрес банка],[Контактное лицо],Должность,НаОснЧегоДейств,ФИОРуководителя,ФИОРодПадеж,ДолжРодПадеж,ПерЭкспедитор,Договор,Дата)  VALUES('" & Trim(RichTextBox1.Text) & "','" & ComboBox1.Text & "','" & Trim(RichTextBox2.Text) & "',
-        '" & Trim(RichTextBox3.Text) & "','" & Trim(RichTextBox6.Text) & "','" & Trim(RichTextBox9.Text) & "','" & Trim(RichTextBox5.Text) & "','" & Trim(RichTextBox4.Text) & "','" & Trim(RichTextBox8.Text) & "',
-        '" & Trim(RichTextBox7.Text) & "','" & Trim(RichTextBox13.Text) & "','" & Trim(RichTextBox10.Text) & "','" & Trim(RichTextBox12.Text) & "','" & Trim(RichTextBox11.Text) & "','" & Trim(RichTextBox14.Text) & "', '" & f & "', '" & НомерДог(i) & "','" & MaskedTextBox1.Text & "')"
-            Updates3(strsql)
-        Else
-            Dim strsql As String = "UPDATE Перевозчики SET [Форма собственности]='" & ComboBox1.Text & "',[Адрес организации]='" & Trim(RichTextBox2.Text) & "',
-        [Почтовый адрес]='" & Trim(RichTextBox3.Text) & "',[РасчСчетРубли]='" & Trim(RichTextBox6.Text) & "',[РасчСчетРоссРубли]='" & Trim(RichTextBox9.Text) & "',[РасчСчетДоллар]='" & Trim(RichTextBox5.Text) & "',
-        РасчСчетЕвро='" & Trim(RichTextBox4.Text) & "',[Адрес банка]='" & Trim(RichTextBox8.Text) & "',[Контактное лицо]='" & Trim(RichTextBox7.Text) & "',Должность ='" & Trim(RichTextBox13.Text) & "', 
-        НаОснЧегоДейств='" & Trim(RichTextBox10.Text) & "',ФИОРуководителя ='" & Trim(RichTextBox12.Text) & "',ФИОРодПадеж ='" & Trim(RichTextBox11.Text) & "',ДолжРодПадеж='" & Trim(RichTextBox14.Text) & "', ПерЭкспедитор='" & f & "', Дата='" & MaskedTextBox1.Text & "'
-        WHERE Названиеорганизации='" & RichTextBox1.Text & "'"
-            Updates3(strsql)
-        End If
-        Parallel.Invoke(Sub() ПеревозчикиRunMoving())
+        'If errds = 1 Then
+        '    Dim strsql As String = "INSERT INTO Перевозчики(Названиеорганизации,[Форма собственности],[Адрес организации],[Почтовый адрес],РасчСчетРубли,РасчСчетРоссРубли,
+        'РасчСчетДоллар,РасчСчетЕвро,[Адрес банка],[Контактное лицо],Должность,НаОснЧегоДейств,ФИОРуководителя,ФИОРодПадеж,ДолжРодПадеж,ПерЭкспедитор,Договор,Дата)  VALUES('" & Trim(RichTextBox1.Text) & "','" & ComboBox1.Text & "','" & Trim(RichTextBox2.Text) & "',
+        ''" & Trim(RichTextBox3.Text) & "','" & Trim(RichTextBox6.Text) & "','" & Trim(RichTextBox9.Text) & "','" & Trim(RichTextBox5.Text) & "','" & Trim(RichTextBox4.Text) & "','" & Trim(RichTextBox8.Text) & "',
+        ''" & Trim(RichTextBox7.Text) & "','" & Trim(RichTextBox13.Text) & "','" & Trim(RichTextBox10.Text) & "','" & Trim(RichTextBox12.Text) & "','" & Trim(RichTextBox11.Text) & "','" & Trim(RichTextBox14.Text) & "', '" & f & "', '" & НомерДог(i) & "','" & MaskedTextBox1.Text & "')"
+        '    Updates3(strsql)
+        'Else
+        '    Dim strsql As String = "UPDATE Перевозчики SET [Форма собственности]='" & ComboBox1.Text & "',[Адрес организации]='" & Trim(RichTextBox2.Text) & "',
+        '[Почтовый адрес]='" & Trim(RichTextBox3.Text) & "',[РасчСчетРубли]='" & Trim(RichTextBox6.Text) & "',[РасчСчетРоссРубли]='" & Trim(RichTextBox9.Text) & "',[РасчСчетДоллар]='" & Trim(RichTextBox5.Text) & "',
+        'РасчСчетЕвро='" & Trim(RichTextBox4.Text) & "',[Адрес банка]='" & Trim(RichTextBox8.Text) & "',[Контактное лицо]='" & Trim(RichTextBox7.Text) & "',Должность ='" & Trim(RichTextBox13.Text) & "', 
+        'НаОснЧегоДейств='" & Trim(RichTextBox10.Text) & "',ФИОРуководителя ='" & Trim(RichTextBox12.Text) & "',ФИОРодПадеж ='" & Trim(RichTextBox11.Text) & "',ДолжРодПадеж='" & Trim(RichTextBox14.Text) & "', ПерЭкспедитор='" & f & "', Дата='" & MaskedTextBox1.Text & "'
+        'WHERE Названиеорганизации='" & RichTextBox1.Text & "'"
+        '    Updates3(strsql)
+        'End If
+
+        ПеревозчикиRunMoving()
 
         If CheckBox4.Checked = True And CheckBox2.Checked = False Then
             ДокиПер()
@@ -389,30 +455,28 @@ Public Class НовыйПеревоз
 
 
 
-        'Dim strsql2 As String = "SELECT Договор,Дата FROM Перевозчики WHERE  Названиеорганизации='" & RichTextBox1.Text & "'"
-        'Dim ds As DataTable = Selects3(strsql2)
+        Dim nam As String = RichTextBox1.Text
+        Dim ds As Перевозчики
+        'Dim ds = dtПеревозчики.Select("Названиеорганизации='" & RichTextBox1.Text & "'")
+        Using db As New dbAllDataContext
+            Dim f = db.Перевозчики.Where(Function(x) x.Названиеорганизации = nam).Select(Function(x) x).FirstOrDefault()
+            If f IsNot Nothing Then
+                ds = f
+            Else
+                ds = Nothing
+            End If
+        End Using
 
-        Dim ds = dtПеревозчики.Select("Названиеорганизации='" & RichTextBox1.Text & "'")
-
+        If ds Is Nothing Then Return
 
         Dim oWord As Microsoft.Office.Interop.Word.Application
         Dim oWordDoc As Microsoft.Office.Interop.Word.Document
-        'Dim oWordPara As Microsoft.Office.Interop.Word.Paragraph
 
-        'KillProc()
 
         oWord = CreateObject("Word.Application")
         oWord.Visible = False
 
-        'Try
-        '    IO.File.Copy("U:\Офис\Финансовый\6. Бух.услуги\ОБЩДОКИ\General\ДПодряда.doc", "C:\Users\Public\Documents\Рик\ДПодряда.doc")
-        'Catch ex As Exception
-        '    'If "Заявление.doc" <> "" Then IO.File.Delete("C:\Users\Public\Documents\Рик\Заявление.doc")
-        '    If Not IO.Directory.Exists("c:\Users\Public\Documents\Рик") Then
-        '        IO.Directory.CreateDirectory("c:\Users\Public\Documents\Рик")
-        '    End If
-        '    IO.File.Copy("U:\Офис\Финансовый\6. Бух.услуги\ОБЩДОКИ\General\ДПодряда.doc", "C:\Users\Public\Documents\Рик\ДПодряда.doc")
-        'End Try
+
         Dim d As String = ""
         Select Case ComboBox2.Text
             Case "Евро"
@@ -429,8 +493,8 @@ Public Class НовыйПеревоз
 
 
         With oWordDoc.Bookmarks
-            .Item("П1").Range.Text = ds(0).Item("Договор").ToString
-            .Item("П2").Range.Text = ds(0).Item("Дата").ToString & "г."
+            .Item("П1").Range.Text = ds.Договор
+            .Item("П2").Range.Text = ds.Дата & "г."
             If ComboBox1.Text = "Индивидуальный предприниматель" Then
                 .Item("П3").Range.Text = ComboBox1.Text & " " & RichTextBox1.Text
                 .Item("П6").Range.Text = ComboBox1.Text
@@ -462,9 +526,12 @@ Public Class НовыйПеревоз
 
         End With
 
-        Dim NumdeReysa As String = ds(0).Item("Договор").ToString
+        Dim NumdeReysa As String = ds.Договор
 
-        NumdeReysa = Strings.Left(ds(0).Item("Договор").ToString, CType(CType(NumdeReysa.Length, Integer) - 5, String))
+        If NumdeReysa IsNot Nothing Then
+            NumdeReysa = Strings.Left(ds.Договор, CType(CType(NumdeReysa.Length, Integer) - 5, String))
+        End If
+
 
         If Not IO.Directory.Exists("Z:\RICKMANS\" & Now.Year & "\ДОГОВОР П\") Then
             IO.Directory.CreateDirectory("Z:\RICKMANS\" & Now.Year & "\ДОГОВОР П\")

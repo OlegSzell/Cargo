@@ -1,10 +1,31 @@
-﻿Imports System.IO
+﻿Imports System.Collections.ObjectModel
+Imports System.ComponentModel
+Imports System.IO
+Imports System.Runtime.CompilerServices
 Imports System.Web.ApplicationServices
 Imports Microsoft.Office.Interop
 Imports Microsoft.VisualBasic.CompilerServices
 
 Public Class ГотовыйОтчет
+    Implements INotifyPropertyChanged
 
+    Private _LS1 As ObservableCollection(Of String)
+    Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
+    Public Sub OnPropertyChanged(<CallerMemberName> ByVal Optional propertyName As String = Nothing)
+        RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
+    End Sub
+    Public Property LS1 As ObservableCollection(Of String)
+        Get
+            Return _LS1
+        End Get
+        Set(value As ObservableCollection(Of String))
+            _LS1 = value
+            OnPropertyChanged("LS1")
+        End Set
+    End Property
+
+    Dim LS2 As New List(Of String)
+    Dim bs As New BindingSource
     Private Sub ГотовыйОтчет_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.MdiParent = MDIParent1
 
@@ -20,18 +41,57 @@ Public Class ГотовыйОтчет
 
         ComboBox2.DisplayMember = "Text"
 
-        ListBox1.Items.Clear()
+        'ListBox1.Items.Clear()
 
         Using db As New dbAllDataContext()
             Dim f = (From x In db.ОтчетРаботыСотрудника
-                     Join y In db.ОтчетРаботыСотрудникаСводная On x.ID Equals y.IDОтчетРабСотрудн
-                     Where x.Год = Now.Year And x.Месяц = MonthName(Now.Month)
+                     Order By x.Год
                      Select x).ToList()
             If f.Count > 0 Then
                 For Each b In f
-                    ListBox1.Items.Add(b.ID & " - " & b.Год & ", " & b.Месяц)
+                    Dim idname As String
+                    If b.ID.ToString.Length = 1 Then
+                        idname = "00" & b.ID
+                    ElseIf b.ID.ToString.Length = 2 Then
+                        idname = "0" & b.ID
+                    Else
+                        idname = b.ID
+                    End If
+                    LS2.Add(idname & " - " & b.Год & ", " & b.Месяц)
                 Next
 
+            End If
+            bs.DataSource = LS2
+
+
+            ListBox1.DataSource = bs
+        End Using
+
+
+
+
+
+    End Sub
+    Private Sub UpdList1()
+        LS2.Clear()
+
+        Using db As New dbAllDataContext()
+            Dim f = (From x In db.ОтчетРаботыСотрудника
+                     Order By x.Год
+                     Select x).ToList()
+            If f.Count > 0 Then
+                For Each b In f
+                    Dim idname As String
+                    If b.ID.ToString.Length = 1 Then
+                        idname = "00" & b.ID
+                    ElseIf b.ID.ToString.Length = 2 Then
+                        idname = "0" & b.ID
+                    Else
+                        idname = b.ID
+                    End If
+                    LS2.Add(idname & " - " & b.Год & ", " & b.Месяц)
+                Next
+                bs.ResetBindings(True)
             End If
         End Using
 
@@ -42,10 +102,44 @@ Public Class ГотовыйОтчет
             Return
         End If
 
+        Me.Cursor = Cursors.WaitCursor
+
+        'проверяем, надо ли пересобирать сборку
+        If CheckBox1.Checked = False Then
+            'проверяем,есть ли отчет в базе?
+            Using db As New dbAllDataContext()
+                Dim fb = (From x In db.ОтчетРаботыСотрудника
+                          Join y In db.ОтчетРаботыСотрудникаСводная On x.ID Equals y.IDОтчетРабСотрудн
+                          Where x.Год = ComboBox1.Text And x.Месяц = ComboBox2.Text
+                          Select x, y).ToList()
+
+                Dim collection1 As New List(Of GridReport)
+                If fb.Count > 0 Then
+                    For Each client In fb
+                        Dim g = New GridReport With {.Счет = client.y.счет, .Заказчик = client.y.заказчик, .Загрузка = client.y.Загрузка, .ДатаЗагрузки = client.y.ДатаЗагрузки,
+                        .ДатаВыгрузки = client.y.ДатаВыгрузки, .BYR = client.y.ИтогоЗакБелРуб, .Валюта = client.y.ВалютаЗак, .Курс = client.y.КурсЗак,
+                        .ДатаОплаты = client.y.ДатаОплатыЗак, .Перевозчик = client.y.Перевозчик, .BYRПер = client.y.ИтогоПерБелРуб,
+                        .ВалютаПер = client.y.ВалютаПер, .КурсПер = client.y.КурсПер, .Дельта = client.y.Дельта}
+                        collection1.Add(g)
+                    Next
+
+                    ExcelTable(collection1)
+                    Me.Cursor = Cursors.Default
+                    Exit Sub
+                End If
+            End Using
+
+        End If
+
+
+
+
+
+
         Dim startDate = New DateTime(ComboBox1.Text, ComboBox2.SelectedIndex + 1, 1)
         Dim enddate = startDate.AddMonths(1).AddDays(-1)
 
-        Me.Cursor = Cursors.WaitCursor
+
 
 
 
@@ -320,15 +414,64 @@ Public Class ГотовыйОтчет
 
         Next
 
+        'Добавляем отчет в базу или обновляем
+        Using db As New dbAllDataContext()
+            Dim fb = (From x In db.ОтчетРаботыСотрудника
+                      Where x.Год = ComboBox1.Text And x.Месяц = ComboBox2.Text
+                      Select x).FirstOrDefault()
+            ' удаляем старые данные добавляем новые
+            If fb IsNot Nothing Then
+                db.ОтчетРаботыСотрудника.DeleteOnSubmit(fb)
+                db.SubmitChanges()
+            End If
 
 
+            Dim f As New ОтчетРаботыСотрудника
+            f.Год = ComboBox1.Text
+            f.Месяц = ComboBox2.Text
+            db.ОтчетРаботыСотрудника.InsertOnSubmit(f)
+            db.SubmitChanges()
+
+            Dim ID As Integer = f.ID
+
+            Dim f3 As New List(Of ОтчетРаботыСотрудникаСводная)
+            For Each cv In КоллекцияГотовая
+                Dim f2 As New ОтчетРаботыСотрудникаСводная
+                With f2
+                    .IDОтчетРабСотрудн = ID
+                    .счет = cv.Счет
+                    .заказчик = cv.Заказчик
+                    .Загрузка = cv.Загрузка
+                    .ДатаЗагрузки = cv.ДатаЗагрузки
+                    .ДатаВыгрузки = cv.ДатаВыгрузки
+                    .ИтогоЗакБелРуб = cv.BYR
+                    .ВалютаЗак = cv.Валюта
+                    .КурсЗак = cv.Курс
+                    .ДатаОплатыЗак = cv.ДатаОплаты
+                    .Перевозчик = cv.Перевозчик
+                    .ИтогоПерБелРуб = cv.BYRПер
+                    .ВалютаПер = cv.ВалютаПер
+                    .КурсПер = cv.КурсПер
+                    .Дельта = cv.Дельта
+                End With
+                f3.Add(f2)
+
+            Next
+            db.ОтчетРаботыСотрудникаСводная.InsertAllOnSubmit(f3)
+            db.SubmitChanges()
+
+        End Using
 
 
 
 
 
         ExcelTable(КоллекцияГотовая)
+        UpdList1()
         Me.Cursor = Cursors.Default
+        CheckBox1.Checked = False
+        ComboBox1.Text = String.Empty
+        ComboBox2.Text = String.Empty
         Exit Sub
 
 
@@ -431,6 +574,7 @@ Public Class ГотовыйОтчет
     End Sub
 
     Private Sub ExcelTable(ByVal ListClient As List(Of GridReport))
+
         Me.Cursor = Cursors.WaitCursor
 
         Dim op As New ПутьЗапускаПрограммы
@@ -885,6 +1029,40 @@ Public Class ГотовыйОтчет
 
 
 
+    End Sub
+    Public Property ListSelect As String
+    Private Sub ListBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListBox1.SelectedIndexChanged
+        ListSelect = ListBox1.SelectedItem
+
+    End Sub
+
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        If ListSelect.Length > 0 Then
+            Me.Cursor = Cursors.WaitCursor
+            ComboBox1.Text = String.Empty
+            ComboBox2.Text = String.Empty
+
+            Using db As New dbAllDataContext()
+                Dim fb = (From x In db.ОтчетРаботыСотрудника
+                          Join y In db.ОтчетРаботыСотрудникаСводная On x.ID Equals y.IDОтчетРабСотрудн
+                          Where x.ID = CDbl(Strings.Left(ListSelect, 3))
+                          Select x, y).ToList()
+                Dim collection1 As New List(Of GridReport)
+                If fb.Count > 0 Then
+                    For Each client In fb
+                        Dim g = New GridReport With {.Счет = client.y.счет, .Заказчик = client.y.заказчик, .Загрузка = client.y.Загрузка, .ДатаЗагрузки = client.y.ДатаЗагрузки,
+                        .ДатаВыгрузки = client.y.ДатаВыгрузки, .BYR = client.y.ИтогоЗакБелРуб, .Валюта = client.y.ВалютаЗак, .Курс = client.y.КурсЗак,
+                        .ДатаОплаты = client.y.ДатаОплатыЗак, .Перевозчик = client.y.Перевозчик, .BYRПер = client.y.ИтогоПерБелРуб,
+                        .ВалютаПер = client.y.ВалютаПер, .КурсПер = client.y.КурсПер, .Дельта = client.y.Дельта}
+                        collection1.Add(g)
+                    Next
+
+                    ExcelTable(collection1)
+                    Me.Cursor = Cursors.Default
+
+                End If
+            End Using
+        End If
     End Sub
 End Class
 Public Class MonthItem

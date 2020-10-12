@@ -33,7 +33,7 @@
     <WebPage>publish.htm</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <TrustUrlParameters>true</TrustUrlParameters>
-    <ApplicationRevision>40</ApplicationRevision>
+    <ApplicationRevision>47</ApplicationRevision>
     <ApplicationVersion>1.2.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -331,12 +331,6 @@
     <Compile Include="КлиентДанные.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ЛардиТранс.Designer.vb">
-      <DependentUpon>ЛардиТранс.vb</DependentUpon>
-    </Compile>
-    <Compile Include="ЛардиТранс.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Напоминание.Designer.vb">
       <DependentUpon>Напоминание.vb</DependentUpon>
     </Compile>
@@ -603,9 +597,6 @@
     <EmbeddedResource Include="КлиентДанные.resx">
       <DependentUpon>КлиентДанные.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ЛардиТранс.resx">
-      <DependentUpon>ЛардиТранс.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Напоминание.resx">
       <DependentUpon>Напоминание.vb</DependentUpon>
     </EmbeddedResource>
@@ -742,17 +733,6 @@
     <Content Include="authors.xml" />
     <Content Include="favicon.ico" />
     <None Include="Resources\check.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <COMReference Include="MSHTML">
-      <Guid>{3050F1C5-98B5-11CF-BB82-00AA00BDCE0B}</Guid>
-      <VersionMajor>4</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>primary</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />

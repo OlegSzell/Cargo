@@ -282,8 +282,9 @@ Public Class MDIParent1
 
         'Dim str As String = Await too()
         'MsgBox(str)
+        Dim f As New Пароль
+        f.ShowDialog()
 
-        Пароль.ShowDialog()
         Getst()
         КалендарьНапоминаниеAsync()
 
@@ -493,8 +494,7 @@ Public Class MDIParent1
             ActiveMdiChild.Close()
         End If
 
-        If My.Computer.Name.ToString = "OLEGLAPTOP" Then
-            ГотовыйОтчет.Show()
-        End If
+        ГотовыйОтчет.Show()
+
     End Sub
 End Class

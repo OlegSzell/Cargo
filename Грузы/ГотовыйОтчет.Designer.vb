@@ -34,6 +34,9 @@ Partial Class ГотовыйОтчет
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
+        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Button3 = New System.Windows.Forms.Button()
         Me.Grid1 = New Грузы.DoubleBuferGrid()
         CType(Me.Grid1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -74,7 +77,7 @@ Partial Class ГотовыйОтчет
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(213, 96)
+        Me.Button1.Location = New System.Drawing.Point(213, 124)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(119, 31)
         Me.Button1.TabIndex = 4
@@ -85,9 +88,9 @@ Partial Class ГотовыйОтчет
         '
         Me.ListBox1.FormattingEnabled = True
         Me.ListBox1.ItemHeight = 18
-        Me.ListBox1.Location = New System.Drawing.Point(12, 154)
+        Me.ListBox1.Location = New System.Drawing.Point(12, 208)
         Me.ListBox1.Name = "ListBox1"
-        Me.ListBox1.Size = New System.Drawing.Size(320, 274)
+        Me.ListBox1.Size = New System.Drawing.Size(320, 220)
         Me.ListBox1.TabIndex = 5
         '
         'OpenFileDialog1
@@ -121,6 +124,34 @@ Partial Class ГотовыйОтчет
         Me.Label4.TabIndex = 9
         Me.Label4.Text = "С"
         '
+        'CheckBox1
+        '
+        Me.CheckBox1.AutoSize = True
+        Me.CheckBox1.Location = New System.Drawing.Point(114, 96)
+        Me.CheckBox1.Name = "CheckBox1"
+        Me.CheckBox1.Size = New System.Drawing.Size(110, 22)
+        Me.CheckBox1.TabIndex = 10
+        Me.CheckBox1.Text = "Пересобрать"
+        Me.CheckBox1.UseVisualStyleBackColor = True
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(9, 187)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(111, 18)
+        Me.Label5.TabIndex = 11
+        Me.Label5.Text = "Готовые отчеты:"
+        '
+        'Button3
+        '
+        Me.Button3.Location = New System.Drawing.Point(213, 442)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(119, 31)
+        Me.Button3.TabIndex = 12
+        Me.Button3.Text = "Открыть"
+        Me.Button3.UseVisualStyleBackColor = True
+        '
         'Grid1
         '
         Me.Grid1.AllowUserToAddRows = False
@@ -136,14 +167,17 @@ Partial Class ГотовыйОтчет
         Me.Grid1.ReadOnly = True
         DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.Grid1.RowsDefaultCellStyle = DataGridViewCellStyle1
-        Me.Grid1.Size = New System.Drawing.Size(705, 382)
+        Me.Grid1.Size = New System.Drawing.Size(705, 427)
         Me.Grid1.TabIndex = 6
         '
         'ГотовыйОтчет
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 18.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1082, 440)
+        Me.ClientSize = New System.Drawing.Size(1082, 485)
+        Me.Controls.Add(Me.Button3)
+        Me.Controls.Add(Me.Label5)
+        Me.Controls.Add(Me.CheckBox1)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Button2)
@@ -178,4 +212,7 @@ Partial Class ГотовыйОтчет
     Friend WithEvents Button2 As Button
     Friend WithEvents Label3 As Label
     Friend WithEvents Label4 As Label
+    Friend WithEvents CheckBox1 As CheckBox
+    Friend WithEvents Label5 As Label
+    Friend WithEvents Button3 As Button
 End Class
