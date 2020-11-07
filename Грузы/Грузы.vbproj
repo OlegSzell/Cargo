@@ -15,7 +15,7 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <IsWebBootstrapper>true</IsWebBootstrapper>
-    <PublishUrl>B:\_РАБОЧАЯ ПАПКА\Рикманс Сохраненные изменения Visual Studio\VS64\</PublishUrl>
+    <PublishUrl>B:\_РАБОЧАЯ ПАПКА\Рикманс Сохраненные изменения Visual Studio\VS\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Web</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
@@ -25,15 +25,15 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>http://2trans.by/VS64/</InstallUrl>
-    <UpdateUrl>http://2trans.by/VS64/</UpdateUrl>
+    <InstallUrl>http://2trans.by/VS/</InstallUrl>
+    <UpdateUrl>http://2trans.by/VS/</UpdateUrl>
     <ProductName>Экспедиция</ProductName>
     <PublisherName>Рикманс</PublisherName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <TrustUrlParameters>true</TrustUrlParameters>
-    <ApplicationRevision>47</ApplicationRevision>
+    <ApplicationRevision>56</ApplicationRevision>
     <ApplicationVersion>1.2.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -176,6 +176,8 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AllClass.vb" />
+    <Compile Include="AllUpd.vb" />
     <Compile Include="dbAll.designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -301,16 +303,29 @@
     <Compile Include="Древо.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Журнал.Designer.vb">
+      <DependentUpon>Журнал.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Журнал.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ЖурналClass.vb" />
+    <Compile Include="ЖурналДобавитьГруз.Designer.vb">
+      <DependentUpon>ЖурналДобавитьГруз.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ЖурналДобавитьГруз.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ИзменПеревоз.Designer.vb">
       <DependentUpon>ИзменПеревоз.vb</DependentUpon>
     </Compile>
     <Compile Include="ИзменПеревоз.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ИзменПорНомКлиент.Designer.vb">
-      <DependentUpon>ИзменПорНомКлиент.vb</DependentUpon>
+    <Compile Include="ИзменПорНомерКлиента2.Designer.vb">
+      <DependentUpon>ИзменПорНомерКлиента2.vb</DependentUpon>
     </Compile>
-    <Compile Include="ИзменПорНомКлиент.vb">
+    <Compile Include="ИзменПорНомерКлиента2.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Календарь.Designer.vb">
@@ -581,12 +596,18 @@
       <DependentUpon>Древо.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Журнал.resx">
+      <DependentUpon>Журнал.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ЖурналДобавитьГруз.resx">
+      <DependentUpon>ЖурналДобавитьГруз.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ИзменПеревоз.resx">
       <DependentUpon>ИзменПеревоз.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="ИзменПорНомКлиент.resx">
-      <DependentUpon>ИзменПорНомКлиент.vb</DependentUpon>
+    <EmbeddedResource Include="ИзменПорНомерКлиента2.resx">
+      <DependentUpon>ИзменПорНомерКлиента2.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Календарь.resx">
       <DependentUpon>Календарь.vb</DependentUpon>
@@ -732,6 +753,7 @@
   <ItemGroup>
     <Content Include="authors.xml" />
     <Content Include="favicon.ico" />
+    <None Include="Resources\downGreen.png" />
     <None Include="Resources\check.png" />
   </ItemGroup>
   <ItemGroup>

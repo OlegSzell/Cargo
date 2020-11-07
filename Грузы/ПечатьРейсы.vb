@@ -58,11 +58,16 @@ Public Class ПечатьРейсы
 
     Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
         ComboBox2.Items.Clear()
+        ComboBox2.AutoCompleteCustomSource.Clear()
         Справки(ComboBox1.SelectedItem)
-        ComboBox2.Items.AddRange(Files3)
-        ComboBox2.Text = Files3.Last
-        Me.ComboBox2.AutoCompleteCustomSource.Clear()
-        ComboBox2.AutoCompleteCustomSource.AddRange(Files3)
+        For Each b In Files3
+            ComboBox2.Items.Add(b.Путь)
+            ComboBox2.AutoCompleteCustomSource.Add(b.Путь)
+        Next
+        'ComboBox2.Items.AddRange(Files3)
+        'ComboBox2.Text = Files3.Select(Function(x) x).LastOrDefault()
+        'Me.ComboBox2.AutoCompleteCustomSource.Clear()
+        'ComboBox2.AutoCompleteCustomSource.AddRange(Files3)
     End Sub
 
     Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox1.CheckedChanged

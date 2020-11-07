@@ -1,7 +1,18 @@
 ﻿Option Explicit On
 Imports System.Data.OleDb
 Public Class ДопФорма
+    Public Num As Integer
+    Private txt1 As String
+    Public ОбнвлExcel As Boolean = False
+    Sub New(ByVal _num As Integer, ByVal _txt1 As String)
+        Num = _num
+        txt1 = _txt1
+        ' Этот вызов является обязательным для конструктора.
+        InitializeComponent()
 
+        ' Добавить код инициализации после вызова InitializeComponent().
+
+    End Sub
 
     Private Sub TextBox1_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox1.KeyDown
 
@@ -11,7 +22,7 @@ Public Class ДопФорма
             Dim a As Double = CDbl(TextBox1.Text)
             TextBox2.Text = Math.Round((100 - a), 2)
             TextBox4.Text = Math.Round(CType((Рейс.TextBox1.Text), Integer) * a / 100)
-            TextBox3.Text = CType(CType((Рейс.TextBox1.Text), Integer) - CType((TextBox4.Text), Integer), String)
+            TextBox3.Text = CType(CType((IIf(txt1 = String.Empty, 0, txt1)), Integer) - CType((TextBox4.Text), Integer), String)
             MaskedTextBox2.Focus()
         End If
     End Sub
@@ -76,9 +87,8 @@ Public Class ДопФорма
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Me.Cursor = Cursors.WaitCursor
         Using db As New dbAllDataContext()
-            Dim var = db.РейсыКлиента.Where(Function(x) x.НомерРейса = Рейс.НомРес).Select(Function(x) x).FirstOrDefault()
+            Dim var = db.РейсыКлиента.Where(Function(x) x.НомерРейса = Num).Select(Function(x) x).FirstOrDefault()
             If var IsNot Nothing Then
-
                 var.ПоИнотерр = TextBox3.Text
                 var.ПоТеррРБ = TextBox4.Text
                 var.ДатаАкта = MaskedTextBox2.Text
@@ -92,21 +102,19 @@ Public Class ДопФорма
                 End If
                 db.SubmitChanges()
 
-                End If
+            End If
         End Using
 
 
-        '        Dim strsql As String = "UPDATE РейсыКлиента SET ПоИнотерр='" & TextBox3.Text & "', ПоТеррРБ='" & TextBox4.Text & "',
-        'ДатаАкта='" & MaskedTextBox2.Text & "', НомерСМР='" & TextBox10.Text & "', ЗаявкаКлиента='" & TextBox6.Text & "', НомерЗаявки='" & TextBox5.Text & "',
-        'ДатаЗаявки='" & MaskedTextBox1.Text & "' 
-        'WHERE НомерРейса=" & Рейс.НомРес & ""
-        '        Updates3(strsql)
         MessageBox.Show("Данные внесены в базу!", Рик)
         If MessageBox.Show("Изменить данные в файле эксель?", Рик, MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
-            Рейс.СлРейс = Nothing
-            Рейс.СлРейс = Рейс.НомРес
-
-            Рейс.ДокиОбновление()
+            'Рейс.СлРейс = Nothing
+            'Рейс.СлРейс = Рейс.НомРес
+            'Dim f4 As Рейс
+            'f4.СлРейс = Num
+            'f4.ДокиОбновление()
+            'f4.ДокиОбновление(Num)
+            ОбнвлExcel = True
             Me.Cursor = Cursors.Default
             MessageBox.Show("Данные в файле эксель изменены!", Рик)
             Me.Close()
@@ -118,6 +126,43 @@ Public Class ДопФорма
     End Sub
 
     Private Sub ДопФорма_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Dim mo As New AllUpd
+        Do While AllClass.РейсыКлиента Is Nothing
+            mo.РейсыКлиентаAll()
+        Loop
+        Do While AllClass.РейсыПеревозчика Is Nothing
+            mo.РейсыПеревозчикаAll()
+        Loop
+
+        Dim f1 = (From x In AllClass.РейсыКлиента
+                  Where x.НомерРейса = Num
+                  Select x).FirstOrDefault()
+
+        Dim f2 = (From x In AllClass.РейсыПеревозчика
+                  Where x.НомерРейса = Num
+                  Select x).FirstOrDefault()
+
+        TextBox4.Text = f1.ПоТеррРБ
+        TextBox3.Text = f1.ПоИнотерр
+
+        TextBox6.Text = f1.ЗаявкаКлиента
+        TextBox5.Text = f1.НомерЗаявки
+        MaskedTextBox1.Text = f1.ДатаЗаявки
+
+        MaskedTextBox2.Text = f1.ДатаАкта
+        TextBox10.Text = f1.НомерСМР
+
+        If f1.ОплатаПоКурсу = "True" Then
+            Label5.Visible = True
+            TextBox7.Visible = True
+            TextBox7.Text = f1.ОплатаПоКурсуКурс
+        Else
+            Label5.Visible = False
+            TextBox7.Visible = False
+
+        End If
+
+
 
     End Sub
 End Class

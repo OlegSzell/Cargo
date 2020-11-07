@@ -277,9 +277,16 @@ Public Class MDIParent1
 
         Me.Cursor = Cursors.WaitCursor
         ALL()
-
-
-
+        Dim mo As New AllUpd
+        mo.КлиентAllAsync()
+        mo.ПеревозчикиAllAsync()
+        mo.ПаролиAllAsync()
+        mo.РейсыКлиентаAllAsync()
+        mo.ОтчетРаботыСотрудникаAllAsync()
+        mo.ОтчетРаботыСотрудникаСводнаяAllAsync()
+        mo.ОплатыКлиентAllAsync()
+        mo.ОплатыПерAllAsync()
+        mo.РейсыПеревозчикаAllAsync()
         'Dim str As String = Await too()
         'MsgBox(str)
         Dim f As New Пароль
@@ -356,8 +363,9 @@ Public Class MDIParent1
 
         Dim f As Form
         f = ActiveMdiChild
-        Рейс.MdiParent = Me
-        Рейс.Show()
+        Dim f1 As New Рейс
+        f1.MdiParent = Me
+        f1.Show()
         ПровФормы(f, "Рейс")
 
     End Sub
@@ -493,8 +501,16 @@ Public Class MDIParent1
         If ActiveMdiChild IsNot Nothing Then
             ActiveMdiChild.Close()
         End If
+        Dim f As New ГотовыйОтчет
+        f.Show()
 
-        ГотовыйОтчет.Show()
+    End Sub
 
+    Private Sub ЖурналToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ЖурналToolStripMenuItem.Click
+        If ActiveMdiChild IsNot Nothing Then
+            ActiveMdiChild.Close()
+        End If
+        Dim f As New Журнал
+        f.Show()
     End Sub
 End Class

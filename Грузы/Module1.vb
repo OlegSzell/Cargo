@@ -16,7 +16,7 @@ Module Module1
     Public ConString As String = "Data Source=178.124.211.175,52891;Initial Catalog=Rickmans;Persist Security Info=True;User ID=Rickmans;Password=Zf6VpP37Ol"
     Public ДобПер, ОбнПер As Integer
     Public Рик As String = "ООО Рикманс"
-    Public Files3() As String
+    Public Files3 As List(Of ПутиДоков)
     Public FilesПолнПуть() As String
     Public НомерРейса3 As String
     Public НомРейса As Integer
@@ -219,19 +219,15 @@ Module Module1
     End Function
     Public Sub Справки(ByVal год As Integer)
 
-
-        Dim gth3 As String
-
         Try
             FilesПолнПуть = (IO.Directory.GetFiles("Z:\RICKMANS\" & год, "*.xls*", IO.SearchOption.TopDirectoryOnly))
-            Files3 = (IO.Directory.GetFiles("Z:\RICKMANS\" & год, "*.xls*", IO.SearchOption.TopDirectoryOnly))
-            For n As Integer = 0 To Files3.Length - 1
-                gth3 = ""
-                gth3 = IO.Path.GetFileName(Files3(n))
-                Files3(n) = gth3
+            'Files3 = (IO.Directory.GetFiles("Z:\RICKMANS\" & год, "*.xls*", IO.SearchOption.TopDirectoryOnly))
+            Files3 = New List(Of ПутиДоков)
+
+            For Each b In FilesПолнПуть
+                Dim f As New ПутиДоков With {.Путь = IO.Path.GetFileName(b), .ПолныйПуть = b}
+                Files3.Add(f)
             Next
-
-
         Catch ex As Exception
             If Not IO.Directory.Exists("Z:\RICKMANS\" & год) Then
                 IO.Directory.CreateDirectory("Z:\RICKMANS\" & год)
@@ -242,29 +238,29 @@ Module Module1
     End Sub
 
 
-    Public Sub KillProc()
-        Try
-            If IO.Directory.Exists("c: \Users\Public\Documents\Рикманс") Then
-                IO.Directory.Delete("c:\Users\Public\Documents\Рикманс", True)
-                IO.Directory.CreateDirectory("c:\Users\Public\Documents\Рикманс")
-            Else
-                IO.Directory.CreateDirectory("c:\Users\Public\Documents\Рикманс")
-            End If
-        Catch ex As Exception
+    'Public Sub KillProc()
+    '    Try
+    '        If IO.Directory.Exists("c: \Users\Public\Documents\Рикманс") Then
+    '            IO.Directory.Delete("c:\Users\Public\Documents\Рикманс", True)
+    '            IO.Directory.CreateDirectory("c:\Users\Public\Documents\Рикманс")
+    '        Else
+    '            IO.Directory.CreateDirectory("c:\Users\Public\Documents\Рикманс")
+    '        End If
+    '    Catch ex As Exception
 
-            For Each p As Process In Process.GetProcessesByName("winword")
-                p.Kill()
-                p.WaitForExit()
-            Next
-            If IO.Directory.Exists("c:\Users\Public\Documents\Рикманс") Then
-                IO.Directory.Delete("c:\Users\Public\Documents\Рикманс", True)
-                IO.Directory.CreateDirectory("c:\Users\Public\Documents\Рикманс")
-            Else
-                IO.Directory.CreateDirectory("c:\Users\Public\Documents\Рикманс")
-            End If
+    '        For Each p As Process In Process.GetProcessesByName("winword")
+    '            p.Kill()
+    '            p.WaitForExit()
+    '        Next
+    '        If IO.Directory.Exists("c:\Users\Public\Documents\Рикманс") Then
+    '            IO.Directory.Delete("c:\Users\Public\Documents\Рикманс", True)
+    '            IO.Directory.CreateDirectory("c:\Users\Public\Documents\Рикманс")
+    '        Else
+    '            IO.Directory.CreateDirectory("c:\Users\Public\Documents\Рикманс")
+    '        End If
 
-        End Try
-    End Sub
+    '    End Try
+    'End Sub
 
     Public Sub releaseobject(ByVal obj As Object)
         Try

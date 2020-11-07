@@ -504,7 +504,8 @@ Public Class Сводная_по_рейсам
     Private Sub Grid1_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs)
         НомРейса = Grid2.SelectedCells(0).Value
         bl = True
-        Выбор.ShowDialog()
+        Dim f As New Выбор
+        f.ShowDialog()
 
     End Sub
 
