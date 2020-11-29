@@ -17,6 +17,7 @@ Public Class ПоискВРейсах
     Private lst1sort As List(Of Listbx1Class)
     Private bslst1 As BindingSource
     Public NumbCor As String
+    Public Годс As Integer
     Sub New(ByVal _год As String)
         Год = _год
         ' Этот вызов является обязательным для конструктора.
@@ -63,17 +64,17 @@ Public Class ПоискВРейсах
             mo.ПеревозчикиAll()
         Loop
     End Sub
-
-    Private Sub ПоискВРейсах_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.Cursor = Cursors.WaitCursor
-        ПредзагрузкаAsync()
-        lst1 = New List(Of Listbx1Class)
-        lst1sort = New List(Of Listbx1Class)
-        bslst1 = New BindingSource
-        bslst1.DataSource = lst1sort
-        ListBox1.DataSource = bslst1
-        ListBox1.DisplayMember = "КорПуть"
-
+    Private Sub COM1()
+        ComboBox1.Items.Clear()
+        For x As Integer = 2018 To Now.Year
+            ComboBox1.Items.Add(x)
+        Next
+        ComboBox1.Text = Now.Year
+    End Sub
+    Private Async Sub LoadLstAsync(ByVal cm1 As String)
+        Await Task.Run(Sub() LoadLst(cm1))
+    End Sub
+    Private Sub LoadLst(ByVal cm1 As String)
         Dim mo As New AllUpd
         Do While AllClass.РейсыКлиента Is Nothing
             mo.РейсыКлиентаAll()
@@ -88,9 +89,11 @@ Public Class ПоискВРейсах
             mo.ПеревозчикиAll()
         Loop
 
+        If lst1 IsNot Nothing Then
+            lst1.Clear()
+        End If
 
-
-        Dim f = Directory.GetFiles("Z:\RICKMANS\" & Год, "*.xls*", IO.SearchOption.AllDirectories).OrderBy(Function(x) x).ToList()
+        Dim f = Directory.GetFiles("Z:\RICKMANS\" & cm1, "*.xls*", IO.SearchOption.TopDirectoryOnly).OrderBy(Function(x) x).ToList()
         Dim f3 = f.Select(Function(x) Strings.Left(Path.GetFileName(x), 3))
 
         If f IsNot Nothing Then
@@ -103,11 +106,14 @@ Public Class ПоискВРейсах
 
                 inu = Strings.Left(Path.GetFileName(b), 3)
                 If inu Is Nothing Then Continue For
+                If IsNumeric(inu) = False Then
+                    Continue For
+                End If
 
-                f4 = AllClass.РейсыПеревозчика.Where(Function(x) x.НомерРейса = inu).Select(Function(x) x).FirstOrDefault()
+                f4 = AllClass.РейсыПеревозчика.Where(Function(x) x.НомерРейса = CType(inu, Integer)).Select(Function(x) x).FirstOrDefault()
                 If f4 Is Nothing Then Continue For
 
-                f5 = AllClass.РейсыКлиента.Where(Function(x) x.НомерРейса IsNot Nothing And x.НомерРейса = inu).Select(Function(x) x).FirstOrDefault()
+                f5 = AllClass.РейсыКлиента.Where(Function(x) x.НомерРейса IsNot Nothing And x.НомерРейса = CType(inu, Integer)).Select(Function(x) x).FirstOrDefault()
                 If f5 Is Nothing Then Continue For
 
                 f41 = AllClass.Перевозчики.Where(Function(x) x.Названиеорганизации IsNot Nothing And x.Названиеорганизации = f4.НазвОрганизации).Select(Function(x) x).FirstOrDefault()
@@ -120,10 +126,25 @@ Public Class ПоискВРейсах
                                       .КлиентТелефон = f51.Контактное_лицо & " - " & f51.Телефон}
                 lst1.Add(f2)
             Next
-
-
-
         End If
+    End Sub
+
+    Private Sub ПоискВРейсах_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Me.Cursor = Cursors.WaitCursor
+        ПредзагрузкаAsync()
+        lst1 = New List(Of Listbx1Class)
+        lst1sort = New List(Of Listbx1Class)
+        bslst1 = New BindingSource
+        bslst1.DataSource = lst1sort
+        ListBox1.DataSource = bslst1
+        ListBox1.DisplayMember = "КорПуть"
+
+        COM1()
+        Dim cm1 As String = ComboBox1.SelectedItem
+
+
+        LoadLst(cm1)
+
 
         Me.Cursor = Cursors.Default
     End Sub
@@ -396,9 +417,7 @@ Public Class ПоискВРейсах
             Next
         Next
 
-        'If TextBox1.Text = "" And TextBox2.Text = "" And TextBox3.Text = "" And TextBox4.Text = "" Then
-        '    ВесьСписок()
-        'End If
+
         If ListBox1.SelectedIndex = -1 Then Return
 
         Dim f1 = lst1sort.ElementAt(ListBox1.SelectedIndex)
@@ -476,9 +495,26 @@ Public Class ПоискВРейсах
             MessageBox.Show("Выберите рейс!", Рик)
             Return
         End If
-
+        Dim f1 As Integer = CType(ComboBox1.Text, Integer)
+        If f1 < 2019 Then Return
+        Годс = f1
         Dim f = lst1sort.ElementAt(ListBox1.SelectedIndex)
         NumbCor = f.КорПуть
         Close()
+    End Sub
+
+
+    Private Sub ComboBox1_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles ComboBox1.SelectionChangeCommitted
+        TextBox1.Text = ""
+        TextBox3.Text = ""
+        TextBox2.Text = ""
+        TextBox4.Text = ""
+        ЧистимРичи()
+        If lst1sort IsNot Nothing Then
+            lst1sort.Clear()
+            bslst1.ResetBindings(False)
+        End If
+        Dim kp As String = ComboBox1.SelectedItem
+        LoadLst(kp)
     End Sub
 End Class

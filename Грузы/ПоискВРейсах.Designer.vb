@@ -66,9 +66,12 @@ Partial Class ПоискВРейсах
         Me.Label17 = New System.Windows.Forms.Label()
         Me.TextBox4 = New System.Windows.Forms.TextBox()
         Me.Button4 = New System.Windows.Forms.Button()
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
+        Me.GroupBox4.SuspendLayout()
         Me.SuspendLayout()
         '
         'TextBox1
@@ -477,12 +480,31 @@ Partial Class ПоискВРейсах
         Me.Button4.Text = "Выбрать"
         Me.Button4.UseVisualStyleBackColor = False
         '
+        'ComboBox1
+        '
+        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.Location = New System.Drawing.Point(6, 16)
+        Me.ComboBox1.Name = "ComboBox1"
+        Me.ComboBox1.Size = New System.Drawing.Size(109, 26)
+        Me.ComboBox1.TabIndex = 71
+        '
+        'GroupBox4
+        '
+        Me.GroupBox4.Controls.Add(Me.ComboBox1)
+        Me.GroupBox4.Location = New System.Drawing.Point(28, 7)
+        Me.GroupBox4.Name = "GroupBox4"
+        Me.GroupBox4.Size = New System.Drawing.Size(121, 48)
+        Me.GroupBox4.TabIndex = 72
+        Me.GroupBox4.TabStop = False
+        Me.GroupBox4.Text = "Год:"
+        '
         'ПоискВРейсах
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 18.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.DarkKhaki
         Me.ClientSize = New System.Drawing.Size(1127, 674)
+        Me.Controls.Add(Me.GroupBox4)
         Me.Controls.Add(Me.Button4)
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.Label17)
@@ -514,6 +536,7 @@ Partial Class ПоискВРейсах
         Me.GroupBox3.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
+        Me.GroupBox4.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -562,4 +585,6 @@ Partial Class ПоискВРейсах
     Friend WithEvents Label4 As Label
     Friend WithEvents RichTextBox12 As RichTextBox
     Friend WithEvents Button4 As Button
+    Friend WithEvents ComboBox1 As ComboBox
+    Friend WithEvents GroupBox4 As GroupBox
 End Class

@@ -164,102 +164,6 @@ Public Class MDIParent1
                     listes.Add(r.ВремяНапоминания, r.ТекстНапоминания)
                 Next
 
-                'If var2._0_00 IsNot Nothing Then
-                '    listes.Add(0, var2._0_00)
-                'End If
-
-                'If var2._1_00 IsNot Nothing Then
-                '    listes.Add(1, var2._1_00)
-                'End If
-
-                'If var2._2_00 IsNot Nothing Then
-                '    listes.Add(2, var2._2_00)
-                'End If
-
-                'If var2._3_00 IsNot Nothing Then
-                '    listes.Add(3, var2._3_00)
-                'End If
-
-                'If var2._4_00 IsNot Nothing Then
-                '    listes.Add(4, var2._4_00)
-                'End If
-
-                'If var2._5_00 IsNot Nothing Then
-                '    listes.Add(5, var2._5_00)
-                'End If
-
-                'If var2._6_00 IsNot Nothing Then
-                '    listes.Add(6, var2._6_00)
-                'End If
-
-                'If var2._7_00 IsNot Nothing Then
-                '    listes.Add(7, var2._7_00)
-                'End If
-
-                'If var2._8_00 IsNot Nothing Then
-                '    listes.Add(8, var2._8_00)
-                'End If
-
-                'If var2._9_00 IsNot Nothing Then
-                '    listes.Add(9, var2._9_00)
-                'End If
-
-                'If var2._10_00 IsNot Nothing Then
-                '    listes.Add(10, var2._10_00)
-                'End If
-
-                'If var2._11_00 IsNot Nothing Then
-                '    listes.Add(11, var2._11_00)
-                'End If
-
-                'If var2._12_00 IsNot Nothing Then
-                '    listes.Add(12, var2._12_00)
-                'End If
-
-                'If var2._13_00 IsNot Nothing Then
-                '    listes.Add(13, var2._13_00)
-                'End If
-
-                'If var2._14_00 IsNot Nothing Then
-                '    listes.Add(14, var2._14_00)
-                'End If
-
-                'If var2._15_00 IsNot Nothing Then
-                '    listes.Add(15, var2._15_00)
-                'End If
-
-                'If var2._16_00 IsNot Nothing Then
-                '    listes.Add(16, var2._16_00)
-                'End If
-
-                'If var2._17_00 IsNot Nothing Then
-                '    listes.Add(17, var2._17_00)
-                'End If
-
-                'If var2._18_00 IsNot Nothing Then
-                '    listes.Add(18, var2._18_00)
-                'End If
-
-                'If var2._19_00 IsNot Nothing Then
-                '    listes.Add(19, var2._19_00)
-                'End If
-
-                'If var2._20_00 IsNot Nothing Then
-                '    listes.Add(20, var2._20_00)
-                'End If
-
-                'If var2._21_00 IsNot Nothing Then
-                '    listes.Add(21, var2._21_00)
-                'End If
-
-                'If var2._22_00 IsNot Nothing Then
-                '    listes.Add(22, var2._22_00)
-                'End If
-
-                'If var2._23_00 IsNot Nothing Then
-                '    listes.Add(23, var2._23_00)
-                'End If
-
             End If
         End Using
         If listes.Count > 0 Then
@@ -276,7 +180,7 @@ Public Class MDIParent1
     Private Sub MDIParent1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         Me.Cursor = Cursors.WaitCursor
-        ALL()
+        'ALL()
         Dim mo As New AllUpd
         mo.КлиентAllAsync()
         mo.ПеревозчикиAllAsync()
@@ -287,8 +191,7 @@ Public Class MDIParent1
         mo.ОплатыКлиентAllAsync()
         mo.ОплатыПерAllAsync()
         mo.РейсыПеревозчикаAllAsync()
-        'Dim str As String = Await too()
-        'MsgBox(str)
+
         Dim f As New Пароль
         f.ShowDialog()
 
@@ -352,7 +255,8 @@ Public Class MDIParent1
 
     Private Sub БыстроToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles БыстроToolStripMenuItem.Click
         ДобПер = 1
-        ДобавитьПеревозчика.ShowDialog()
+        Dim f As New ДобавитьПеревозчика
+        f.ShowDialog()
     End Sub
 
     Private Sub ТранспортToolStripMenuItem_Click(sender As Object, e As EventArgs) 
@@ -512,5 +416,16 @@ Public Class MDIParent1
         End If
         Dim f As New Журнал
         f.Show()
+
+    End Sub
+
+    Private Sub ExcelFilesAddToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExcelFilesAddToolStripMenuItem.Click
+        Dim f As New ExcelAddToDatabase
+        f.ShowDialog()
+    End Sub
+
+    Private Sub ПоискToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ПоискToolStripMenuItem.Click
+        Dim f9 As New ПоискПолный()
+        f9.Show()
     End Sub
 End Class

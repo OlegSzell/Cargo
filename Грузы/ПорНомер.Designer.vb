@@ -88,7 +88,7 @@ Partial Class ПорНомер
         Me.Button1.Location = New System.Drawing.Point(445, 17)
         Me.Button1.Margin = New System.Windows.Forms.Padding(4)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(112, 31)
+        Me.Button1.Size = New System.Drawing.Size(112, 25)
         Me.Button1.TabIndex = 30
         Me.Button1.Text = "Записать"
         Me.Button1.UseVisualStyleBackColor = False
@@ -200,7 +200,7 @@ Partial Class ПорНомер
         Me.Button2.Location = New System.Drawing.Point(565, 17)
         Me.Button2.Margin = New System.Windows.Forms.Padding(4)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(112, 31)
+        Me.Button2.Size = New System.Drawing.Size(112, 25)
         Me.Button2.TabIndex = 41
         Me.Button2.Text = "Отмена"
         Me.Button2.UseVisualStyleBackColor = False

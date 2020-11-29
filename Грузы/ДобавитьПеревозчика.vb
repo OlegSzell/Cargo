@@ -151,11 +151,38 @@ Public Class ДобавитьПеревозчика
             country2 = ""
         End If
 
-        Dim StrSql5 As String = "INSERT INTO ПеревозчикиБаза([Наименование фирмы],[Контактное лицо],Телефоны,[Страны перевозок],Регионы,ADR,[Кол-во авто],
-[Вид_авто],Тоннаж,Объем,Ставка,Примечание,[Форма собственности])
-VALUES('" & Me.ComboBox1.Text & "','" & Me.TextBox2.Text & "','" & Me.TextBox3.Text & "','" & country & "','" & country2 & "','" & Me.TextBox9.Text & "',
-'" & Me.TextBox4.Text & "', '" & Me.TextBox10.Text & "','" & Me.TextBox5.Text & "','" & Me.TextBox6.Text & "','" & Me.TextBox7.Text & "','" & Me.TextBox8.Text & "','" & ComboBox3.Text & "')"
-        Updates3(StrSql5)
+        Using db As New dbAllDataContext()
+            Dim f As New ПеревозчикиБаза
+            With f
+                .Наименование_фирмы = ComboBox1.Text
+                .Контактное_лицо = TextBox2.Text
+                .Телефоны = TextBox3.Text
+                .Страны_перевозок = country
+                .Регионы = country2
+                .ADR = TextBox9.Text
+                .Кол_во_авто = TextBox4.Text
+                .Вид_авто = TextBox10.Text
+                .Тоннаж = TextBox5.Text
+                .Объем = TextBox6.Text
+                .Ставка = TextBox7.Text
+                .Примечание = TextBox8.Text
+                .Форма_собственности = ComboBox3.Text
+
+            End With
+            db.ПеревозчикиБаза.InsertOnSubmit(f)
+            db.SubmitChanges()
+            Dim mo As New AllUpd
+            mo.ПеревозчикиБазаAllAsync()
+        End Using
+
+
+
+
+        '        Dim StrSql5 As String = "INSERT INTO ПеревозчикиБаза([Наименование фирмы],[Контактное лицо],Телефоны,[Страны перевозок],Регионы,ADR,[Кол-во авто],
+        '[Вид_авто],Тоннаж,Объем,Ставка,Примечание,[Форма собственности])
+        'VALUES('" & Me.ComboBox1.Text & "','" & Me.TextBox2.Text & "','" & Me.TextBox3.Text & "','" & country & "','" & country2 & "','" & Me.TextBox9.Text & "',
+        ''" & Me.TextBox4.Text & "', '" & Me.TextBox10.Text & "','" & Me.TextBox5.Text & "','" & Me.TextBox6.Text & "','" & Me.TextBox7.Text & "','" & Me.TextBox8.Text & "','" & ComboBox3.Text & "')"
+        '        Updates3(StrSql5)
 
         MessageBox.Show("Перевозчик добавлен!", Рик, MessageBoxButtons.OK, MessageBoxIcon.Information)
 

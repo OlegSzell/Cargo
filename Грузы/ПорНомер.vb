@@ -1,31 +1,56 @@
 ﻿Option Explicit On
 Imports System.ComponentModel
-Imports System.Data.OleDb
+Imports System.IO
 Public Class ПорНомер
     Dim Files() As String
     Dim gl As Integer = 0
+    Private Naz As String = Nothing
+    Public SledPorRejsPer As Integer
+    Public SledPorRejsClient As Integer
+    Private list1 As BindingList(Of Путь)
+    Private bslist1 As BindingSource
+
+    Sub New()
+
+        ' Этот вызов является обязательным для конструктора.
+        InitializeComponent()
+
+        ' Добавить код инициализации после вызова InitializeComponent().
+
+    End Sub
+    Sub New(ByVal _Naz As String)
+        Naz = _Naz
+        ' Этот вызов является обязательным для конструктора.
+        InitializeComponent()
+
+        ' Добавить код инициализации после вызова InitializeComponent().
+
+    End Sub
     Private Sub ПорНомер_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         Отмена = 0
-        Files = IO.Directory.GetFiles("Z:\RICKMANS\", "*" & Nm & "*", IO.SearchOption.AllDirectories)
-        Dim gth4 As String
-        Dim FilesList() As String = IO.Directory.GetFiles("Z:\RICKMANS\", "*" & Nm & "*", IO.SearchOption.AllDirectories)
-        For n As Integer = 0 To FilesList.Length - 1
-            gth4 = ""
-            gth4 = IO.Path.GetFileName(FilesList(n))
-            FilesList(n) = gth4
-            'TextBox44.Text &= gth + vbCrLf
-        Next
+        list1 = New BindingList(Of Путь)
+        bslist1 = New BindingSource
+        bslist1.DataSource = list1
+        ListBox1.DataSource = bslist1
+        ListBox1.DisplayMember = "Название"
 
-        ListBox1.Items.Clear()
+        Dim f = Directory.GetFiles("Z:\RICKMANS\", "*" & Naz & "*", IO.SearchOption.AllDirectories).ToList()
+        If f IsNot Nothing Then
+            For Each b In f
+                Dim m As New Путь With {.Название = Path.GetFileName(b), .ПолныйПуть = b}
+                list1.Add(m)
+            Next
 
-        For i = 0 To FilesList.Length - 1 ' Распечатываем весь получившийся массив
-            ListBox1.Items.Add(FilesList(i)) ' На ListBox2
-        Next
+        End If
 
-        Label1.Text = Nm
+        Label1.Text = Naz
 
     End Sub
+    Public Class Путь
+        Public Property ПолныйПуть As String
+        Public Property Название As String
+    End Class
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         If TextBox1.Enabled = True And TextBox1.Text = "" Then
@@ -33,44 +58,86 @@ Public Class ПорНомер
             Exit Sub
         ElseIf TextBox1.Enabled = True And TextBox1.Text <> "" Then
             If pro = 1 Then
-                Рейс.СлПорРейсКл = CType((TextBox1.Text), Integer) + 1
+                SledPorRejsClient = CType((TextBox1.Text), Integer) + 1
             Else
-                Рейс.СлПорРейсПер = CType((TextBox1.Text), Integer) + 1
+                SledPorRejsPer = CType((TextBox1.Text), Integer) + 1
             End If
         End If
+        Dim mo As New AllUpd
+        Using db As New dbAllDataContext()
+            If GroupBox2.Enabled = True Then
+                Dim strsql As String
+                If RichTextBox1.Text = "" Or RichTextBox2.Text = "" Then
+                    MessageBox.Show("Заполните Должность и фамилию руководителя!", Рик)
+                    Exit Sub
+                End If
 
-        If GroupBox2.Enabled = True Then
-            Dim strsql As String
-            If RichTextBox1.Text = "" Or RichTextBox2.Text = "" Then
-                MessageBox.Show("Заполните Должность и фамилию руководителя!", Рик)
-                Exit Sub
+                If pro = 1 Then
+                    Dim f = db.Клиент.Where(Function(x) x.НазваниеОрганизации = Naz).Select(Function(x) x).FirstOrDefault()
+                    If f IsNot Nothing Then
+                        With f
+                            .Должность = RichTextBox1.Text
+                            .ФИОРуководителя = RichTextBox2.Text
+                        End With
+                        db.SubmitChanges()
+                        mo.КлиентAllAsync()
+                    End If
+                    'strsql = "UPDATE Клиент SET Должность='" & RichTextBox1.Text & "', ФИОРуководителя='" & RichTextBox2.Text & "' WHERE НазваниеОрганизации='" & Рейс.ComboBox3.Text & "'"
+                    'Updates3(strsql)
+                Else
+                    Dim f1 = db.Перевозчики.Where(Function(x) x.Названиеорганизации = Naz).Select(Function(x) x).FirstOrDefault()
+                    If f1 IsNot Nothing Then
+                        With f1
+                            .Должность = RichTextBox1.Text
+                            .ФИОРуководителя = RichTextBox2.Text
+                        End With
+                        db.SubmitChanges()
+                        mo.ПеревозчикиAllAsync()
+                    End If
+
+                    'strsql = "UPDATE Перевозчики SET Должность='" & RichTextBox1.Text & "', ФИОРуководителя='" & RichTextBox2.Text & "' WHERE Названиеорганизации='" & Рейс.ComboBox4.Text & "'"
+                    'Updates3(strsql)
+
+                End If
+
+
             End If
 
-            If pro = 1 Then
-                strsql = "UPDATE Клиент SET Должность='" & RichTextBox1.Text & "', ФИОРуководителя='" & RichTextBox2.Text & "' WHERE НазваниеОрганизации='" & Рейс.ComboBox3.Text & "'"
-                Updates3(strsql)
-            Else
-                strsql = "UPDATE Перевозчики SET Должность='" & RichTextBox1.Text & "', ФИОРуководителя='" & RichTextBox2.Text & "' WHERE Названиеорганизации='" & Рейс.ComboBox4.Text & "'"
-                Updates3(strsql)
+            If GroupBox1.Enabled = True Then
+                If RichTextBox4.Text = "" Or MaskedTextBox1.MaskCompleted = False Then
+                    MessageBox.Show("Заполните номер и дату договора!", Рик)
+                    Exit Sub
+                End If
 
+                If pro = 1 Then
+                    Dim f2 = db.Клиент.Where(Function(x) x.НазваниеОрганизации = Naz).Select(Function(x) x).FirstOrDefault()
+                    If f2 IsNot Nothing Then
+                        With f2
+                            .Договор = RichTextBox4.Text
+                            .Дата = MaskedTextBox1.Text
+                        End With
+                        db.SubmitChanges()
+                        mo.КлиентAllAsync()
+                    End If
+
+
+                    'Dim strsql As String = "UPDATE Клиент SET Договор='" & RichTextBox4.Text & "', Дата='" & MaskedTextBox1.Text & "' WHERE НазваниеОрганизации='" & Рейс.ComboBox3.Text & "'"
+                    'Updates3(strsql)
+                Else
+                    Dim f3 = db.Перевозчики.Where(Function(x) x.Названиеорганизации = Naz).Select(Function(x) x).FirstOrDefault()
+                    If f3 IsNot Nothing Then
+                        With f3
+                            .Договор = RichTextBox4.Text
+                            .Дата = MaskedTextBox1.Text
+                        End With
+                        db.SubmitChanges()
+                        mo.ПеревозчикиAllAsync()
+                    End If
+                    'Dim strsql As String = "UPDATE Перевозчики SET Договор='" & RichTextBox4.Text & "', Дата='" & MaskedTextBox1.Text & "' WHERE Названиеорганизации='" & Рейс.ComboBox4.Text & "'"
+                    'Updates3(strsql)
+                End If
             End If
-        End If
-
-        If GroupBox1.Enabled = True Then
-            If RichTextBox4.Text = "" Or MaskedTextBox1.MaskCompleted = False Then
-                MessageBox.Show("Заполните номер и дату договора!", Рик)
-                Exit Sub
-            End If
-
-            If pro = 1 Then
-                Dim strsql As String = "UPDATE Клиент SET Договор='" & RichTextBox4.Text & "', Дата='" & MaskedTextBox1.Text & "' WHERE НазваниеОрганизации='" & Рейс.ComboBox3.Text & "'"
-                Updates3(strsql)
-            Else
-                Dim strsql As String = "UPDATE Перевозчики SET Договор='" & RichTextBox4.Text & "', Дата='" & MaskedTextBox1.Text & "' WHERE Названиеорганизации='" & Рейс.ComboBox4.Text & "'"
-                Updates3(strsql)
-            End If
-        End If
-
+        End Using
         ListBox1.Enabled = False
         GroupBox1.Enabled = False
         GroupBox2.Enabled = False
@@ -91,17 +158,17 @@ Public Class ПорНомер
             MessageBox.Show("Выберите документ для просмотра!", Рик, MessageBoxButtons.OK)
             Exit Sub
         End If
+        Process.Start(list1.ElementAt(ListBox1.SelectedIndex).ПолныйПуть)
+        'Dim ff As ListBox.SelectedIndexCollection = ListBox1.SelectedIndices
 
-        Dim ff As ListBox.SelectedIndexCollection = ListBox1.SelectedIndices
 
+        'If Not ListBox1.SelectedIndex = -1 Then
 
-        If Not ListBox1.SelectedIndex = -1 Then
+        '    For Each p As Integer In ff
+        '        Process.Start(Files(p))
+        '    Next
 
-            For Each p As Integer In ff
-                Process.Start(Files(p))
-            Next
-
-        End If
+        'End If
 
     End Sub
 

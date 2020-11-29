@@ -316,5 +316,82 @@
             End If
         End Using
     End Sub
+    Public Async Sub СтранаAllAsync()
+        Await Task.Run(Sub() СтранаAll())
+    End Sub
+
+    Public Sub СтранаAll()
+        Using db As New dbAllDataContext()
+            Dim m = db.Страна.Select(Function(x) x).ToList()
+            If m.Count > 0 Then
+                Страна = New List(Of Страна)
+                Страна = m
+            Else
+                Dim k As New List(Of Страна)
+                Страна = k
+            End If
+        End Using
+    End Sub
+    Public Async Sub РегионыРоссииAllAsync()
+        Await Task.Run(Sub() РегионыРоссииAll())
+    End Sub
+
+    Public Sub РегионыРоссииAll()
+        Using db As New dbAllDataContext()
+            Dim m = db.РегионыРоссии.Select(Function(x) x).ToList()
+            If m.Count > 0 Then
+                РегионыРоссии = New List(Of РегионыРоссии)
+                РегионыРоссии = m
+            Else
+                Dim k As New List(Of РегионыРоссии)
+                РегионыРоссии = k
+            End If
+        End Using
+    End Sub
+    Public Async Sub ЖурналПеревозчикAllAsync()
+        Await Task.Run(Sub() ЖурналПеревозчикAll())
+    End Sub
+    Public Sub ЖурналПеревозчикAll()
+        Using db As New dbAllDataContext()
+            Dim m = db.ЖурналПеревозчик.Select(Function(x) x).ToList()
+            If m.Count > 0 Then
+                ЖурналПеревозчик = New List(Of ЖурналПеревозчик)
+                ЖурналПеревозчик = m
+            Else
+                Dim k As New List(Of ЖурналПеревозчик)
+                ЖурналПеревозчик = k
+            End If
+        End Using
+    End Sub
+    Public Async Sub ПеревозчикиБазаAllAsync()
+        Await Task.Run(Sub() ПеревозчикиБазаAll())
+    End Sub
+    Public Sub ПеревозчикиБазаAll()
+        Using db As New dbAllDataContext()
+            Dim m = db.ПеревозчикиБаза.Select(Function(x) x).ToList()
+            If m.Count > 0 Then
+                ПеревозчикиБаза = New List(Of ПеревозчикиБаза)
+                ПеревозчикиБаза = m
+            Else
+                Dim k As New List(Of ПеревозчикиБаза)
+                ПеревозчикиБаза = k
+            End If
+        End Using
+    End Sub
+    Public Async Sub ФайлыExcelВсеAllAsync()
+        Await Task.Run(Sub() ФайлыExcelВсеAll())
+    End Sub
+    Public Sub ФайлыExcelВсеAll()
+        Using db As New dbAllDataContext()
+            Dim m = db.ФайлыExcelВсе.Select(Function(x) x).ToList()
+            If m.Count > 0 Then
+                ФайлыExcelВсе = New List(Of ФайлыExcelВсе)
+                ФайлыExcelВсе = m
+            Else
+                Dim k As New List(Of ФайлыExcelВсе)
+                ФайлыExcelВсе = k
+            End If
+        End Using
+    End Sub
 
 End Class

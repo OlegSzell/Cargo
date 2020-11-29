@@ -18,6 +18,11 @@
     Public Shared Property ЖурналКлиентГруз As List(Of ЖурналКлиентГруз)
     Public Shared Property ЖурналКлиентМаршрут As List(Of ЖурналКлиентМаршрут)
     Public Shared Property ЖурналКлиентСписок As List(Of ЖурналКлиентСписок)
+    Public Shared Property РегионыРоссии As List(Of РегионыРоссии)
+    Public Shared Property Страна As List(Of Страна)
+    Public Shared Property ЖурналПеревозчик As List(Of ЖурналПеревозчик)
+    Public Shared Property ПеревозчикиБаза As List(Of ПеревозчикиБаза)
+    Public Shared Property ФайлыExcelВсе As List(Of ФайлыExcelВсе)
 
 
 

@@ -82,63 +82,132 @@ Public Class Отчет
             mo.РейсыПеревозчикаAll()
         Loop
 
+        Do While AllClass.ОплатыКлиент Is Nothing
+            mo.ОплатыКлиентAll()
+        Loop
+        Do While AllClass.ОплатыПер Is Nothing
+            mo.ОплатыПерAll()
+        Loop
 
         Dim f = (From x In AllClass.РейсыКлиента
+                 Join y In AllClass.ОплатыКлиент On x.Код Equals y.IDКлиента
                  Where x.НомерРейса = НомРейса
-                 Select x).FirstOrDefault()
-
+                 Select x, y).ToList()
         If f IsNot Nothing Then
-            If f.ОстатокОплаты Is Nothing Then
+            If f.Count > 0 Then
+
+
+                Dim f4 = (From x In f
+                          Group x By Keys = New With {Key x.x.СтоимостьФрахта}
+                             Into Group
+                          Select New With {Keys.СтоимостьФрахта, .Оплачено = (From b In Group
+                                                                              Select b.y.Сумма).ToList()}).FirstOrDefault()
+
+
+                If f4.Оплачено Is Nothing Then
+                    Label9.Text = "Рейс не оплачен!"
+                    Label9.ForeColor = Color.Red
+                Else
+                    Dim opl = CDbl(f4.СтоимостьФрахта) - f4.Оплачено.Select(Function(x) CDbl(x)).Sum()
+                    If opl = 0 Then
+                        Label9.Text = "Рейс оплачен!"
+                        Label9.ForeColor = Color.Green
+                    Else
+                        If opl = CDbl(f4.СтоимостьФрахта) Then
+                            Label9.Text = "Рейс не оплачен!"
+                            Label9.ForeColor = Color.Red
+                        Else
+                            Label9.Text = opl
+                            Label9.ForeColor = Color.Green
+                        End If
+
+                    End If
+
+                End If
+            Else
                 Label9.Text = "Рейс не оплачен!"
                 Label9.ForeColor = Color.Red
-            ElseIf f.ОстатокОплаты = 0 Then
-                Label9.Text = "Рейс оплачен!"
-                Label9.ForeColor = Color.Green
             End If
+        Else
+            Label9.Text = "Рейс не оплачен!"
+            Label9.ForeColor = Color.Red
         End If
 
-        'рейс перевозчика
-        Dim f1 = AllClass.РейсыПеревозчика.Where(Function(x) x.НомерРейса = НомРейса).Select(Function(x) x).FirstOrDefault()
 
-        If f1 IsNot Nothing Then
-            If f1.ОстатокОплаты Is Nothing Then
+
+        'рейс перевозчика
+
+
+        Dim f5 = (From x In AllClass.РейсыПеревозчика
+                  Join y In AllClass.ОплатыПер On x.Код Equals y.IDПер
+                  Where x.НомерРейса = НомРейса
+                  Select x, y).ToList()
+        If f5 IsNot Nothing Then
+            If f5.Count > 0 Then
+                Dim f7 = (From x In f5
+                          Group x By Keys = New With {Key x.x.СтоимостьФрахта}
+                             Into Group
+                          Select New With {Keys.СтоимостьФрахта, .Оплачено = Group.Select(Function(x) x.y.Сумма).ToList()}).FirstOrDefault()
+
+
+                If f7.Оплачено Is Nothing Then
+                    Label8.Text = "Рейс не оплачен!"
+                    Label8.ForeColor = Color.Red
+                Else
+                    Dim opl = CDbl(f7.СтоимостьФрахта) - f7.Оплачено.Select(Function(x) CDbl(x)).Sum()
+
+
+                    If opl = 0 Then
+                        Label8.Text = "Рейс оплачен!"
+                        Label8.ForeColor = Color.Green
+                    Else
+                        If opl = CDbl(f7.СтоимостьФрахта) Then
+                            Label8.Text = "Рейс не оплачен!"
+                            Label8.ForeColor = Color.Red
+                        Else
+                            Label8.Text = opl
+                            Label8.ForeColor = Color.Green
+                        End If
+                    End If
+                End If
+            Else
                 Label8.Text = "Рейс не оплачен!"
                 Label8.ForeColor = Color.Red
-            ElseIf f1.ОстатокОплаты = 0 Then
-                Label8.Text = "Рейс оплачен!"
-                Label8.ForeColor = Color.Green
+
             End If
+
+        Else
+            Label8.Text = "Рейс не оплачен!"
+            Label8.ForeColor = Color.Red
         End If
 
 
 
-        '    Dim strsql As String = "SELECT ОстатокОплаты,СтоимостьФрахта,Валюта FROM РейсыКлиента WHERE НомерРейса=" & НомРейса & ""
-        'Dim ds As DataTable = Selects3(strsql)
 
-        'If ds.Rows(0).Item(0).ToString = "" Then
 
-        'ElseIf ds.Rows(0).Item(0).ToString = "0" Then
-        '    Label9.Text = "Рейс оплачен!"
-        '    Label9.ForeColor = Color.Green
-        'Else
-        '    Label9.Text = ds.Rows(0).Item(0).ToString & " " & ds.Rows(0).Item(2).ToString
+
+
+
+
+
+
+
+
+
+
+
+
+        'Dim f1 = AllClass.РейсыПеревозчика.Where(Function(x) x.НомерРейса = НомРейса).Select(Function(x) x).FirstOrDefault()
+
+        'If f1 IsNot Nothing Then
+        '    If f1.ОстатокОплаты Is Nothing Then
+        '        Label8.Text = "Рейс не оплачен!"
+        '        Label8.ForeColor = Color.Red
+        '    ElseIf f1.ОстатокОплаты = 0 Then
+        '        Label8.Text = "Рейс оплачен!"
+        '        Label8.ForeColor = Color.Green
+        '    End If
         'End If
-
-        'рейс перевозчика
-        'Dim strsql1 As String = "SELECT ОстатокОплаты,СтоимостьФрахта,Валюта FROM РейсыПеревозчика WHERE НомерРейса=" & НомРейса & ""
-        'Dim ds1 As DataTable = Selects3(strsql1)
-
-        'If ds1.Rows(0).Item(0).ToString = "" Then
-        '    Label8.Text = "Рейс не оплачен!"
-        '    Label8.ForeColor = Color.Red
-        'ElseIf ds1.Rows(0).Item(0).ToString = "0" Then
-        '    Label8.Text = "Рейс оплачен!"
-        '    Label8.ForeColor = Color.Green
-        'Else
-
-        '    Label8.Text = ds1.Rows(0).Item(0).ToString & " " & ds1.Rows(0).Item(2).ToString
-        'End If
-
 
     End Sub
     Private Sub UpdateGrid()
@@ -210,23 +279,28 @@ Public Class Отчет
         UpdateGrid()
     End Sub
     Private Sub СортКлиент()
-        Dim strsql, strsql1, str As String
-        Dim ds As DataTable
-        Dim d As Integer
-        Dim df As Double
+
+        Dim mo As New AllUpd
+        Do While AllClass.РейсыКлиента Is Nothing
+            mo.РейсыКлиентаAll()
+        Loop
+
 
         If MaskedTextBox2.MaskCompleted = True Then
-            strsql = "SELECT СрокОплаты, УсловияОплаты FROM РейсыКлиента WHERE НомерРейса=" & НомРейса & ""
-            ds = Selects3(strsql)
-            str = ds.Rows(0).Item(0).ToString
-            Dim dat As Date = MaskedTextBox2.Text
+
+            Dim f = (From x In AllClass.РейсыКлиента
+                     Where x.НомерРейса = НомРейса
+                     Select x).FirstOrDefault()
+            If f Is Nothing Then Return
+
+            Dim str As String = Trim(f.СрокОплаты)
+            Dim d As Integer
 
             If str.Length > 2 Then 'отбираем количество дней оплаты
                 If str.Length > 5 Then 'если цифр больше 5
                     MessageBox.Show("Число цифр больше 5, сообщите администратору!")
-                    Exit Sub
+                    Return
                 End If
-
                 If str.Length = 3 Then
                     d = CType(Strings.Right(str, 1), Integer)
                 Else
@@ -235,21 +309,81 @@ Public Class Отчет
             Else
                 d = CType(str, Integer)
             End If
-
-            If ds.Rows(0).Item(1).ToString = "БанкПоДок" Or ds.Rows(0).Item(1).ToString = "БанкПоВыг" Then
-
-                If d <= 5 Then 'отсортировываем календарные и рабочие дни
-                    d += 2
-                Else
-                    df = Math.Round(d / 5)
-                    d += (df * 2)
-                End If
+            If f.УсловияОплаты = "БанкПоДок" Or f.УсловияОплаты = "БанкПоВыг" Then
+                Dim dt = AddWorkDays(MaskedTextBox2.Text, d)
+                Using db As New dbAllDataContext()
+                    Dim f4 = db.РейсыКлиента.Where(Function(x) x.НомерРейса = НомРейса).Select(Function(x) x).FirstOrDefault()
+                    If f4 IsNot Nothing Then
+                        With f4
+                            .ДатаОплаты = dt
+                            .ДатаОтправкиДоков = MaskedTextBox2.Text
+                            db.SubmitChanges()
+                            mo.РейсыКлиентаAllAsync()
+                        End With
+                    End If
+                End Using
+            Else
+                Dim ml = CDate(MaskedTextBox2.Text).AddDays(d)
+                Using db As New dbAllDataContext()
+                    Dim f4 = db.РейсыКлиента.Where(Function(x) x.НомерРейса = НомРейса).Select(Function(x) x).FirstOrDefault()
+                    If f4 IsNot Nothing Then
+                        With f4
+                            .ДатаОплаты = ml
+                            .ДатаОтправкиДоков = MaskedTextBox2.Text
+                            db.SubmitChanges()
+                            mo.РейсыКлиентаAllAsync()
+                        End With
+                    End If
+                End Using
             End If
 
-            dat = dat.AddDays(d)
-            strsql1 = "UPDATE РейсыКлиента SET ДатаОплаты='" & dat & "', ДатаОтправкиДоков='" & MaskedTextBox2.Text & "' WHERE НомерРейса=" & НомРейса & ""
-            Updates3(strsql1)
+
+
+
         End If
+
+
+
+        'Dim strsql, strsql1, str As String
+        'Dim ds As DataTable
+        'Dim d As Integer
+        'Dim df As Double
+
+        'If MaskedTextBox2.MaskCompleted = True Then
+        '    strsql = "SELECT СрокОплаты, УсловияОплаты FROM РейсыКлиента WHERE НомерРейса=" & НомРейса & ""
+        '    ds = Selects3(strsql)
+        '    str = ds.Rows(0).Item(0).ToString
+        '    Dim dat As Date = MaskedTextBox2.Text
+
+        '    If str.Length > 2 Then 'отбираем количество дней оплаты
+        '        If str.Length > 5 Then 'если цифр больше 5
+        '            MessageBox.Show("Число цифр больше 5, сообщите администратору!")
+        '            Exit Sub
+        '        End If
+
+        '        If str.Length = 3 Then
+        '            d = CType(Strings.Right(str, 1), Integer)
+        '        Else
+        '            d = CType(Strings.Right(str, 2), Integer)
+        '        End If
+        '    Else
+        '        d = CType(str, Integer)
+        '    End If
+
+        '    If ds.Rows(0).Item(1).ToString = "БанкПоДок" Or ds.Rows(0).Item(1).ToString = "БанкПоВыг" Then
+
+        '        If d <= 5 Then 'отсортировываем календарные и рабочие дни
+        '            d += 2
+        '        Else
+        '            df = Math.Round(d / 5)
+        '            d += (df * 2)
+        '        End If
+        '    End If
+
+        '    dat = dat.AddDays(d)
+        '    strsql1 = "UPDATE РейсыКлиента SET ДатаОплаты='" & dat & "', ДатаОтправкиДоков='" & MaskedTextBox2.Text & "' WHERE НомерРейса=" & НомРейса & ""
+        '    Updates3(strsql1)
+        'End If
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click

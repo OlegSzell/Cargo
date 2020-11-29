@@ -117,17 +117,32 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="check" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\check.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="downGreen" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\downGreen.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Report" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Report.xlsx;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="update2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\update2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <metadata name="ContextMenuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>24, 9</value>
+  </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAD////////////////////////////////+/v7/5+fn/3uKiv8tiIj/EXJy/xJTU/8nWVn/Z3Z2/87O
+        zv/5+fn////////////////////////////+/v7/2NjY/yiCgv8C7u7/IYeH/6Kiov/V1NT/vby8/1Ry
+        cv8tTk7/x8bG////////////////////////////+vr6/zuBgf8B/Pz/CLKy/7Kysv/8/Pz//v7+////
+        ///9/f3/en9//6urq////////////////////////////7q5uf8Ez8//AP7+/y+AgP/o6Oj//v7+////
+        //////////////z8/P/t7e3///////////////////////7+/v9+k5P/Af39/wD+/v9Td3f/8vLy////
+        /////////////////////////////3Nzz/9XWb3/V1u1/1datf9YWMD/KlCX/wD+/v8Bxen/ISyH/1RX
+        sv9XWb7/xMTq///////////////////////7+/3/amzC/wANcf8ADHT/nZ3c/4uWlv8B6vP/ACiZ/wAN
+        cf8BC3v/pKTd//39/v////////////z8/P/x8fH//////4SGz/8ADXH/AAx3/76+6P/U1NT/BTSP/wAN
+        cv8ADHP/Y2W8//7+/v////////////7+/v+oqKj/hoaG//////+Ehs//AA1x/wAMd/++vuj/rKzg/wAL
+        ev8ADXH/AheH/5aWnf/z8/P//v7+//7+/v/09PT/O319/3p8fP//////hIbP/wANcf8ADHf/oKDe/xQa
+        j/8ADXH/AAl8/wOuz/8ahob/ioqK/83Nzf+8vLz/THZ2/wTQ0P96fHz//////4SGz/8ADXH/AAx1/xkb
+        pf8PFo3/AAt3/w8Vjf80PXv/Mo2N/w1zcv8QR0f/Jk5O/2yFhf9qdHT/goKC//////+Ehs//AA1x/wAM
+        d/+9vej//Pz9/4WF0P8ADHX/AAt3/5aX1v/x8fH/7e3t//r6+v/9/f3/+Pj4//Pz8///////hIbP/wAN
+        cf8ADHf/vr7o///////v7/n/AQmC/wANcf8+Q6f//v7+/////////////////////////////////4SG
+        z/8ADXH/AAx3/76+6P//////5ub2/wAJgP8ADXH/SEyt//7+/v////////////////////////////7+
+        /v99fsr/AA1x/wAMd/+zs+X/5eX1/2NkwP8ADHP/Awx+/7a25P/+/v7/////////////////////////
+        //9wcM7/KSuq/x8llv8fJZj/ICKo/yEjpf8tMZ//U1az/7y85v/+/v7/////////////////////////
+        ////////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAA==
+</value>
   </data>
 </root>

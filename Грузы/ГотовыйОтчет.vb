@@ -1,5 +1,6 @@
 ﻿Imports System.Collections.ObjectModel
 Imports System.ComponentModel
+Imports System.Globalization
 Imports System.IO
 Imports System.Runtime.CompilerServices
 Imports System.Web.ApplicationServices
@@ -96,6 +97,17 @@ Public Class ГотовыйОтчет
         End Using
 
     End Sub
+    Public Class Отчет
+        Inherits ОтчетРаботыСотрудникаСводная
+        Public Property ID1 As Integer
+
+        Public Property Год As System.Nullable(Of Integer)
+
+        Public Property Месяц As String
+
+        Public Property Экспедитор1 As String
+    End Class
+
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         If ComboBox1.Text.Length = 0 Or ComboBox2.Text.Length = 0 Then
@@ -131,19 +143,43 @@ Public Class ГотовыйОтчет
         'проверяем, надо ли пересобирать сборку
         If CheckBox1.Checked = False Then
             'проверяем,есть ли отчет в базе?
-            Dim fb = (From x In AllClass.ОтчетРаботыСотрудника
+
+            Dim fb As New List(Of Отчет)
+            If Экспедитор = "Олег" Then
+                fb = (From x In AllClass.ОтчетРаботыСотрудника
                       Join y In AllClass.ОтчетРаботыСотрудникаСводная On x.ID Equals y.IDОтчетРабСотрудн
                       Where x.Год = ComboBox1.Text And x.Месяц = ComboBox2.Text
-                      Select x, y).ToList()
+                      Select New Отчет With {.ID = y.ID, .IDОтчетРабСотрудн = y.IDОтчетРабСотрудн, .ВалютаЗак = y.ВалютаЗак, .ВалютаПер = y.ВалютаПер,
+                          .Выгрузка = y.Выгрузка, .ДатаВыгрузки = y?.ДатаВыгрузки, .ДатаЗагрузки = y.ДатаЗагрузки, .ДатаОплатыЗак = y.ДатаОплатыЗак,
+                          .ДатаОплатыПер = y.ДатаОплатыПер, .ДатаСоздания = y?.ДатаСоздания, .Дельта = y.Дельта, .Загрузка = y.Загрузка, .заказчик = y.заказчик,
+                          .ИтогоЗакБелРуб = y.ИтогоЗакБелРуб, .ИтогоОбщая = y.ИтогоОбщая, .ИтогоПерБелРуб = y.ИтогоПерБелРуб, .ИтогоСотрудник = y.ИтогоСотрудник,
+                          .КомиссияЗаПеревод = y.КомиссияЗаПеревод, .КурсЗак = y.КурсЗак, .КурсПер = y.КурсПер, .Перевозчик = y.Перевозчик, .СтрахованиеГруза = y.СтрахованиеГруза,
+                          .счет = y.счет, .Экспедитор = y.Экспедитор, .ID1 = x.ID, .Год = x.Год, .Месяц = x.Месяц, .Экспедитор1 = x.Экспедитор}).ToList()
+            Else
+                fb = (From x In AllClass.ОтчетРаботыСотрудника
+                      Join y In AllClass.ОтчетРаботыСотрудникаСводная On x.ID Equals y.IDОтчетРабСотрудн
+                      Where x.Год = ComboBox1.Text And x.Месяц = ComboBox2.Text And x.Экспедитор = Экспедитор
+                      Select New Отчет With {.ID = y.ID, .IDОтчетРабСотрудн = y.IDОтчетРабСотрудн, .ВалютаЗак = y.ВалютаЗак, .ВалютаПер = y.ВалютаПер,
+                          .Выгрузка = y.Выгрузка, .ДатаВыгрузки = y?.ДатаВыгрузки, .ДатаЗагрузки = y.ДатаЗагрузки, .ДатаОплатыЗак = y.ДатаОплатыЗак,
+                          .ДатаОплатыПер = y.ДатаОплатыПер, .ДатаСоздания = y?.ДатаСоздания, .Дельта = y.Дельта, .Загрузка = y.Загрузка, .заказчик = y.заказчик,
+                          .ИтогоЗакБелРуб = y.ИтогоЗакБелРуб, .ИтогоОбщая = y.ИтогоОбщая, .ИтогоПерБелРуб = y.ИтогоПерБелРуб, .ИтогоСотрудник = y.ИтогоСотрудник,
+                          .КомиссияЗаПеревод = y.КомиссияЗаПеревод, .КурсЗак = y.КурсЗак, .КурсПер = y.КурсПер, .Перевозчик = y.Перевозчик, .СтрахованиеГруза = y.СтрахованиеГруза,
+                          .счет = y.счет, .Экспедитор = y.Экспедитор, .ID1 = x.ID, .Год = x.Год, .Месяц = x.Месяц, .Экспедитор1 = x.Экспедитор}).ToList()
+
+            End If
+            'Dim fb = (From x In AllClass.ОтчетРаботыСотрудника
+            '          Join y In AllClass.ОтчетРаботыСотрудникаСводная On x.ID Equals y.IDОтчетРабСотрудн
+            '          Where x.Год = ComboBox1.Text And x.Месяц = ComboBox2.Text And x.Экспедитор = Экспедитор
+            '          Select New ).ToList()
 
             Dim collection1 As New List(Of GridReport)
             If fb IsNot Nothing Then
                 If fb.Count > 0 Then
                     For Each client In fb
-                        Dim g = New GridReport With {.Счет = client.y.счет, .Заказчик = client.y.заказчик, .Загрузка = client.y.Загрузка, .ДатаЗагрузки = client.y.ДатаЗагрузки,
-                        .ДатаВыгрузки = client.y.ДатаВыгрузки, .BYR = client.y.ИтогоЗакБелРуб, .Валюта = client.y.ВалютаЗак, .Курс = client.y.КурсЗак,
-                        .ДатаОплаты = client.y.ДатаОплатыЗак, .Перевозчик = client.y.Перевозчик, .BYRПер = client.y.ИтогоПерБелРуб,
-                        .ВалютаПер = client.y.ВалютаПер, .КурсПер = client.y.КурсПер, .Дельта = client.y.Дельта}
+                        Dim g = New GridReport With {.Счет = client.счет, .Заказчик = client.заказчик, .Загрузка = client.Загрузка, .ДатаЗагрузки = client.ДатаЗагрузки,
+                        .ДатаВыгрузки = client.ДатаВыгрузки, .BYR = client.ИтогоЗакБелРуб, .Валюта = client.ВалютаЗак, .Курс = client.КурсЗак,
+                        .ДатаОплаты = client.ДатаОплатыЗак, .Перевозчик = client.Перевозчик, .BYRПер = client.ИтогоПерБелРуб,
+                        .ВалютаПер = client.ВалютаПер, .КурсПер = client.КурсПер, .Дельта = client.Дельта}
                         collection1.Add(g)
                     Next
 
@@ -176,17 +212,16 @@ Public Class ГотовыйОтчет
 
         'выгружаем данные всех рейсов клиентов в коллекцию
         Dim obser As New List(Of РейсыКлиента)
+        obser.AddRange(AllClass.РейсыКлиента)
+
         Dim ObserSelect As New List(Of РейсыКлиента)
 
-        Dim f7 = AllClass.РейсыКлиента.Select(Function(x) x)
-        If f7 IsNot Nothing Then
-            For Each x In f7
-                obser.Add(x)
-            Next
-        End If
 
 
-        Dim AllPayClient As List(Of ОплатыКлиент)
+
+
+
+        Dim AllPayClient As New List(Of ОплатыКлиент)
         Dim list8 As New List(Of NumberReysSort) 'отобранные фрахты перевозчика, если валютные оплачены полностью то попадают в белках в отчет, иначе в валюте
         Dim list5 As New List(Of NumberReysSort) 'отобранные рейсы которые были полностью оплачены в выбранном месяце и попали в отчет
         Dim list2 As New List(Of NumberReysSort)
@@ -196,370 +231,339 @@ Public Class ГотовыйОтчет
         'выбираем олпаты от клиентов за выбранный месяц и год
 
 
-        AllPayClient = AllClass.ОплатыКлиент.Select(Function(x) x).ToList()
+        AllPayClient.AddRange(AllClass.ОплатыКлиент)
 
-        Dim f = (From x In (From y In AllClass.ОплатыКлиент
+        Dim f = (From x In (From y In AllPayClient
                             Where (CType(y.ДатаОплаты, Date)).Year = ComboBox1.Text
                             Select y).ToList()
                  Where MonthName(Month(x.ДатаОплаты)) = ComboBox2.Text
                  Select x).ToList()
         If f.Count > 0 Then
-                'выбираем рейсы безповтора
-                Dim f1 = f.Select(Function(x) x.Рейс).Distinct().ToList()
-            ' Dim f2 = f.GroupBy(Function(x) x.Рейс, Function(x) x.Сумма, Function(_nom, suma) (Nm:=_nom, salsum:=suma.Sum()))
+            'выбираем рейсы безповтора
+            Dim f1 = f.Select(Function(x) x.Рейс).Distinct().ToList()
+
 
             'все оплаты клиентов до выбранной даты
-            Dim f2 = AllClass.ОплатыКлиент.Where(Function(c) c.ДатаОплаты <= enddate).Select(Function(c) c).ToList()
+            Dim f2 = AllPayClient.Where(Function(c) c.ДатаОплаты <= enddate).Select(Function(c) c).ToList()
 
             'группируем и сумируем оплаты с нарастающим итогом до выбранной даты
             Dim f3 = (From x In f2
-                          Group x By Keys = New With {Key x.Рейс}
+                      Group x By Keys = New With {Key x.Рейс}
                              Into Group
-                          Select New With {.Рейс = Keys.Рейс, .Сумма = Group.Sum(Function(t) t.Сумма)}).OrderBy(Function(x) x.Рейс).ToList()
+                      Select New With {.Рейс = Keys.Рейс, .Сумма = Group.Sum(Function(t) t.Сумма), .Дата = Group}).OrderBy(Function(x) x.Рейс).ToList()
 
 
 
 
-                'отбираем только рейсы выбранного месяца в коллекцию
-                For Each u In f1
-                    For Each b In f3
-                        If b.Рейс.ToString.Contains(u) Then
-                            list2.Add(New NumberReysSort With {.НомерРейса = b.Рейс, .СуммаПоступления = b.Сумма})
-
+            'отбираем только рейсы выбранного месяца в коллекцию
+            For Each u In f1
+                For Each b In f3
+                    If b.Рейс.ToString.Contains(u) Then
+                        Dim dataOpaty As String = Nothing
+                        If b.Дата IsNot Nothing Then
+                            dataOpaty = b.Дата.OrderBy(Function(x) x.ДатаОплаты).Select(Function(x) x.ДатаОплаты).LastOrDefault()
                         End If
-                    Next
-                Next
 
+                        list2.Add(New NumberReysSort With {.НомерРейса = b.Рейс, .СуммаПоступления = b.Сумма, .ДатаОплаты = dataOpaty})
 
-
-                'сравнивает стоимость оплаты с фрахтом по каждому рейсу
-                For Each r In obser
-                    For Each z In list2
-                        'если оплата в белках
-                        If r.НомерРейса = z.НомерРейса And r.СтоимостьФрахта = z.СуммаПоступления And (r.Валюта = "Рубль") Then
-                            list5.Add(New NumberReysSort With {.НомерРейса = z.НомерРейса, .СуммаПоступления = z.СуммаПоступления})
-                        ElseIf r.НомерРейса = z.НомерРейса And Not r.Валюта = "Рубль" Then 'если была оплата  в белках по курсу
-
-                            'если оплата в белках по курсу
-                            If r.ВалютаПлатежа = "BYN" Then
-                                Dim Obsr2 = f2.Where(Function(x) x.Рейс = z.НомерРейса).Select(Function(x) x).ToList()
-                                Dim валюта As String = r.Валюта
-                                Dim summa As Double = 0
-                                Dim курс As Double
-                                For Each x In Obsr2
-                                    ' получаем курс валюты
-                                    Dim m As New NbRbClassNew()
-                                    курс = Replace(m.Курс(x.ДатаОплаты, валюта), ".", ",")
-                                    'делим сумму прихода на курс получаем в валюте
-                                    summa += x.Сумма / курс
-
-                                Next
-                                'если полученная стоимость равна фрахту в рейсе то попадает в список
-                                If Math.Round(summa, 0) = CDbl(r.СтоимостьФрахта) Then
-                                    list5.Add(New NumberReysSort With {.НомерРейса = z.НомерРейса, .СуммаПоступления = summa})
-                                End If
-
-                            Else
-                                'если опалта в валюте
-                                If r.СтоимостьФрахта = z.СуммаПоступления Then
-                                    list5.Add(New NumberReysSort With {.НомерРейса = z.НомерРейса, .СуммаПоступления = z.СуммаПоступления})
-                                End If
-
-                            End If
-                        End If
-                    Next
-                Next
-
-
-            End If
-
-        'проверяем оплату перевозчика
-
-        'все рейсы перевозчика
-
-        Dim f14 = AllClass.РейсыПеревозчика.Select(Function(x) x)
-        If f IsNot Nothing Then
-                For Each x In f14
-                    ObserSelectПер1.Add(x)
-                Next
-            End If
-
-        Dim pl = AllClass.ОплатыПер.Select(Function(c) c).ToList()
-
-        For Each x In ObserSelectПер1
-                For Each y In list2
-                    'если номер рейса нашли и оплата белки
-                    If x.НомерРейса = y.НомерРейса And x.Валюта = "Рубль" Then
-                        list8.Add(New NumberReysSort With {.НомерРейса = x.НомерРейса, .СуммаПоступления = x.СтоимостьФрахта})
-                    Else
-
-                        For Each n In pl
-
-                            'если оплата по этому рейсу произведена, то
-                            If x.НомерРейса = n.Рейс Then
-
-                            'выбираем все оплаты по этому рейсу перевозчика
-                            Dim f9 = AllClass.ОплатыПер.Where(Function(b) b.Рейс = x.НомерРейса).Select(Function(b) b).ToList()
-                            'если валюта платежа белки по курсу
-                            If x.ВалютаПлатежа = "BYN" Then
-
-                                    Dim валюта As String = x.Валюта
-                                    Dim summa As Double = 0
-                                    Dim курс As Double
-                                    For Each x1 In f9
-                                        Dim m As New NbRbClassNew()
-                                        курс = Replace(m.Курс(x1.ДатаОплаты, валюта), ".", ",")
-
-                                        summa += x1.Сумма / курс
-
-                                    Next
-
-                                    'если оплата была полной, то добалвяем в список
-                                    If Math.Round(summa, 0) = CDbl(x.СтоимостьФрахта) Then
-                                        list8.Add(New NumberReysSort With {.НомерРейса = x.НомерРейса, .СуммаПоступления = summa})
-                                    End If
-
-                                End If
-                            End If
-                            Exit For
-                        Next
                     End If
                 Next
             Next
 
 
 
-        'Using db As New dbAllDataContext()
+            'сравнивает стоимость оплаты с фрахтом по каждому рейсу
 
-        '    AllPayClient = db.ОплатыКлиент.Select(Function(x) x).ToList()
+            For Each z In list2
+                Dim mk = obser.Where(Function(z5) CType(z5?.НомерРейса?.ToString, Integer) = z?.НомерРейса).Select(Function(z5) z5).FirstOrDefault()
+                Dim newCl As New List(Of DannZakaz) 'специальный класс что бы создавать коллекции
+                If mk IsNot Nothing Then
 
-        '    Dim f = (From x In (From y In db.ОплатыКлиент
-        '                        Where (CType(y.ДатаОплаты, Date)).Year = ComboBox1.Text
-        '                        Select y).ToList()
-        '             Where MonthName(Month(x.ДатаОплаты)) = ComboBox2.Text
-        '             Select x).ToList()
-        '    If f.Count > 0 Then
-        '        'выбираем рейсы безповтора
-        '        Dim f1 = f.Select(Function(x) x.Рейс).Distinct().ToList()
-        '        ' Dim f2 = f.GroupBy(Function(x) x.Рейс, Function(x) x.Сумма, Function(_nom, suma) (Nm:=_nom, salsum:=suma.Sum()))
+                    'если оплата в белках
+                    If mk.СтоимостьФрахта = z.СуммаПоступления And (mk.Валюта = "Рубль") Then
+                        Dim msd = AllPayClient.Where(Function(v) v.Рейс?.ToString = z.НомерРейса).ToList()
+                        If msd IsNot Nothing Then
+                            For Each b In msd
+                                Dim m As New DannZakaz With {.ДатыОплатЗак = b.ДатаОплаты, .КурсВалЗак = "1", .СуммаПоступленияЗак = b.Сумма}
+                                newCl.Add(m)
+                            Next
+                        End If
 
-        '        'все оплаты клиентов до выбранной даты
-        '        Dim f2 = db.ОплатыКлиент.Where(Function(c) c.ДатаОплаты <= enddate).Select(Function(c) c).ToList()
+                    ElseIf Not mk.Валюта = "Рубль" Then 'если была оплата  в белках по курсу
 
-        '        'группируем и сумируем оплаты с нарастающим итогом до выбранной даты
-        '        Dim f3 = (From x In f2
-        '                  Group x By Keys = New With {Key x.Рейс}
-        '                     Into Group
-        '                  Select New With {.Рейс = Keys.Рейс, .Сумма = Group.Sum(Function(t) t.Сумма)}).OrderBy(Function(x) x.Рейс).ToList()
+                        'если оплата в белках по курсу
+                        If mk.ВалютаПлатежа = "BYN" Then
+                            Dim Obsr2 = f2.Where(Function(x) x.Рейс = z.НомерРейса).Select(Function(x) x).ToList()
+                            Dim валюта As String = mk.Валюта
+                            Dim summa As Double = 0
+                            Dim курс As Double
 
+                            Dim lst As New List(Of String)
+                            For Each x In Obsr2
+                                ' получаем курс валюты
+                                Dim m As New NbRbClassNew()
+                                курс = Replace(m.Курс(x.ДатаОплаты, валюта), ".", ",")
 
+                                'делим сумму прихода на курс получаем в валюте
+                                lst.Add(Math.Round(x.Сумма / курс, 2))
+                                summa += x.Сумма / курс
 
+                                Dim m2 As New DannZakaz With {.ДатыОплатЗак = x.ДатаОплаты, .КурсВалЗак = CType(курс, String), .СуммаПоступленияЗак = x.Сумма}
+                                newCl.Add(m2)
+                            Next
+                            'если полученная стоимость равна фрахту в рейсе то попадает в список
+                            If Math.Round(summa, 0) = Not CDbl(mk.СтоимостьФрахта) Then
+                                newCl = Nothing
+                            End If
 
-        '        'отбираем только рейсы выбранного месяца в коллекцию
-        '        For Each u In f1
-        '            For Each b In f3
-        '                If b.Рейс.ToString.Contains(u) Then
-        '                    list2.Add(New NumberReysSort With {.НомерРейса = b.Рейс, .СуммаПоступления = b.Сумма})
+                        Else
+                            'если опалта в валюте
+                            If mk.СтоимостьФрахта = z.СуммаПоступления Then
+                                Dim msd1 = AllPayClient.Where(Function(v) v.Рейс?.ToString = z.НомерРейса).ToList()
+                                If msd1 IsNot Nothing Then
+                                    For Each b In msd1
+                                        Dim m As New DannZakaz With {.ДатыОплатЗак = b.ДатаОплаты, .КурсВалЗак = "1", .СуммаПоступленияЗак = b.Сумма}
+                                        newCl.Add(m)
+                                    Next
+                                End If
+                            End If
 
-        '                End If
-        '            Next
-        '        Next
-
-
-
-        '        'сравнивает стоимость оплаты с фрахтом по каждому рейсу
-        '        For Each r In obser
-        '            For Each z In list2
-        '                'если оплата в белках
-        '                If r.НомерРейса = z.НомерРейса And r.СтоимостьФрахта = z.СуммаПоступления And (r.Валюта = "Рубль") Then
-        '                    list5.Add(New NumberReysSort With {.НомерРейса = z.НомерРейса, .СуммаПоступления = z.СуммаПоступления})
-        '                ElseIf r.НомерРейса = z.НомерРейса And Not r.Валюта = "Рубль" Then 'если была оплата  в белках по курсу
-
-        '                    'если оплата в белках по курсу
-        '                    If r.ВалютаПлатежа = "BYN" Then
-        '                        Dim Obsr2 = f2.Where(Function(x) x.Рейс = z.НомерРейса).Select(Function(x) x).ToList()
-        '                        Dim валюта As String = r.Валюта
-        '                        Dim summa As Double = 0
-        '                        Dim курс As Double
-        '                        For Each x In Obsr2
-        '                            ' получаем курс валюты
-        '                            Dim m As New NbRbClassNew()
-        '                            курс = Replace(m.Курс(x.ДатаОплаты, валюта), ".", ",")
-        '                            'делим сумму прихода на курс получаем в валюте
-        '                            summa += x.Сумма / курс
-
-        '                        Next
-        '                        'если полученная стоимость равна фрахту в рейсе то попадает в список
-        '                        If Math.Round(summa, 0) = CDbl(r.СтоимостьФрахта) Then
-        '                            list5.Add(New NumberReysSort With {.НомерРейса = z.НомерРейса, .СуммаПоступления = summa})
-        '                        End If
-
-        '                    Else
-        '                        'если опалта в валюте
-        '                        If r.СтоимостьФрахта = z.СуммаПоступления Then
-        '                            list5.Add(New NumberReysSort With {.НомерРейса = z.НомерРейса, .СуммаПоступления = z.СуммаПоступления})
-        '                        End If
-
-        '                    End If
-        '                End If
-        '            Next
-        '        Next
+                        End If
+                    End If
 
 
-        '    End If
+                End If
+                If newCl IsNot Nothing Then
+                    If newCl.Count > 0 Then
+                        list5.Add(New NumberReysSort With {.НомерРейса = z.НомерРейса, .lstZakaz = newCl, .ФрахтЗак = mk.СтоимостьФрахта})
+                    End If
 
-        '    'проверяем оплату перевозчика
+                End If
 
-        '    'все рейсы перевозчика
-
-        '    Dim f14 = db.РейсыПеревозчика.Select(Function(x) x)
-        '    If f IsNot Nothing Then
-        '        For Each x In f14
-        '            ObserSelectПер1.Add(x)
-        '        Next
-        '    End If
-
-        '    Dim pl = db.ОплатыПер.Select(Function(c) c).ToList()
-
-        '    For Each x In ObserSelectПер1
-        '        For Each y In list2
-        '            'если номер рейса нашли и оплата белки
-        '            If x.НомерРейса = y.НомерРейса And x.Валюта = "Рубль" Then
-        '                list8.Add(New NumberReysSort With {.НомерРейса = x.НомерРейса, .СуммаПоступления = x.СтоимостьФрахта})
-        '            Else
-
-        '                For Each n In pl
-
-        '                    'если оплата по этому рейсу произведена, то
-        '                    If x.НомерРейса = n.Рейс Then
-
-        '                        'выбираем все оплаты по этому рейсу перевозчика
-        '                        Dim f9 = db.ОплатыПер.Where(Function(b) b.Рейс = x.НомерРейса).Select(Function(b) b).ToList()
-        '                        'если валюта платежа белки по курсу
-        '                        If x.ВалютаПлатежа = "BYN" Then
-
-        '                            Dim валюта As String = x.Валюта
-        '                            Dim summa As Double = 0
-        '                            Dim курс As Double
-        '                            For Each x1 In f9
-        '                                Dim m As New NbRbClassNew()
-        '                                курс = Replace(m.Курс(x1.ДатаОплаты, валюта), ".", ",")
-
-        '                                summa += x1.Сумма / курс
-
-        '                            Next
-
-        '                            'если оплата была полной, то добалвяем в список
-        '                            If Math.Round(summa, 0) = CDbl(x.СтоимостьФрахта) Then
-        '                                list8.Add(New NumberReysSort With {.НомерРейса = x.НомерРейса, .СуммаПоступления = summa})
-        '                            End If
-
-        '                        End If
-        '                    End If
-        '                    Exit For
-        '                Next
-        '            End If
-        '        Next
-        '    Next
+            Next
 
 
-        'End Using
+
+        End If
+
+        'проверяем оплату перевозчика
+
+        Dim f14 = AllClass.РейсыПеревозчика.Select(Function(x) x).ToList()
+        If f IsNot Nothing Then
+            ObserSelectПер1.AddRange(f14)
+        End If
+
+        Dim pl = AllClass.ОплатыПер.Select(Function(c) c).ToList()
+
+        For Each y1 In list2
+            Dim m1 = AllClass.ОплатыПер.Where(Function(x) x.Рейс = y1.НомерРейса).ToList() 'выбираем все оплаты по этому рейсу
+            Dim m2 = AllClass.РейсыПеревозчика.Where(Function(x) x.НомерРейса = y1.НомерРейса).FirstOrDefault() 'выбираем валюту платежа по этому рейсу
+            Dim newCl1 As New List(Of DannPerev)
+            'если оплата поступила
+
+            If m1?.Count > 0 Then 'если оплата была
+                If m2.Валюта = "Рубль" Then
+
+                    Dim mv As New DannPerev With {.СуммаПоступленияПер = m2.СтоимостьФрахта, .КурсВалПер = "1"}
+                    newCl1.Add(mv)
+
+
+                    'list8.Add(New NumberReysSort With {.НомерРейса = y1.НомерРейса, .СуммаПоступления = m2.СтоимостьФрахта})
+                ElseIf m2.ВалютаПлатежа = "BYN" Then
+
+
+                    For Each b8 In m1
+                        Dim mantht1 As String = b8.ДатаОплаты?.ToShortDateString
+                        Dim валюта As String = m2.Валюта
+                        Dim summa As Double = 0
+                        Dim курс As Double
+                        Dim m As New NbRbClassNew()
+                        курс = Replace(m.Курс(mantht1, валюта), ".", ",")
+                        summa = Math.Round(CDbl(b8.Сумма?.ToString) / курс, 2)
+
+                        Dim msx As New DannPerev With {.СуммаПоступленияПер = b8.Сумма, .ДатыОплатПер = b8.ДатаОплаты, .КурсВалПер = курс}
+                        newCl1.Add(msx)
+
+                        If summa = Not m2.СтоимостьФрахта Then 'Если оплатили перевозу не всю сумму
+                            Dim delta = m2.СтоимостьФрахта - summa 'разница
+                            'узнаем курс на последнее число месяца
+                            Dim mantht2 = DateTime.DaysInMonth(CDate(y1.ДатаОплаты).Year, CDate(y1.ДатаОплаты).Month) & "." & CDate(y1.ДатаОплаты).Month & "." & CDate(y1.ДатаОплаты).Year 'вычисляем последнее число месяца
+                            If mantht2.Length = 0 Then
+                                mantht2 = Now.ToShortDateString
+                            End If
+
+                            Dim валюта2 As String = m2.Валюта
+                            Dim summa2 As Double = 0
+                            Dim курс2 As Double
+                            Dim m3 As New NbRbClassNew()
+                            курс2 = Replace(m3.Курс(mantht2, валюта2), ".", ",")
+                            summa2 = Math.Round(delta * курс2, 2)
+
+                            Dim msx1 As New DannPerev With {.СуммаПоступленияПер = summa2, .ДатыОплатПер = mantht2, .КурсВалПер = курс2}
+                            newCl1.Add(msx1)
+
+                        End If
+
+                    Next
+
+
+
+                End If
+
+            Else 'если оплата не произведена и валюта плтаежа по курсу то берем курс на последнее число месяца
+
+                If m2 IsNot Nothing Then
+                    If m2.ВалютаПлатежа = "BYN" Or m2.ВалютаПлатежа = "€" Then
+                        'Dim clnt = AllClass.ОплатыКлиент
+                        Dim mantht As String
+                        If y1.ДатаОплаты IsNot Nothing Then 'если есть дата последней оплаты клиенту
+
+                            mantht = DateTime.DaysInMonth(CDate(y1.ДатаОплаты).Year, CDate(y1.ДатаОплаты).Month) & "." & CDate(y1.ДатаОплаты).Month & "." & CDate(y1.ДатаОплаты).Year 'вычисляем последнее число месяца
+
+                            If mantht.Length = 0 Then
+                                mantht = Now.ToShortDateString
+                            End If
+
+                            Dim валюта As String = m2.Валюта
+                            Dim summa As Double = 0
+                            Dim курс As Double
+                            Dim m As New NbRbClassNew()
+                            курс = Replace(m.Курс(mantht, валюта), ".", ",")
+                            summa = m2.СтоимостьФрахта * курс
+
+                            Dim msx2 As New DannPerev With {.СуммаПоступленияПер = summa, .ДатыОплатПер = mantht, .КурсВалПер = курс}
+                            newCl1.Add(msx2)
+
+                        End If
+                    Else
+
+
+
+
+                    End If
+                ElseIf m2.Валюта = "Рубль" Then
+                    Dim msx2 As New DannPerev With {.СуммаПоступленияПер = m2.СтоимостьФрахта, .КурсВалПер = "1"}
+                    newCl1.Add(msx2)
+
+                End If
+                If m1.Count = 0 And m2.ВалютаПлатежа = "" Then
+                    Dim msx2 As New DannPerev With {.СуммаПоступленияПер = m2.СтоимостьФрахта, .КурсВалПер = "1"}
+                    newCl1.Add(msx2)
+                End If
+
+            End If
+            list8.Add(New NumberReysSort With {.НомерРейса = y1.НомерРейса, .ФрахтПер = m2.СтоимостьФрахта, .lstPerev = newCl1})
+        Next
+
+
+
+
+
+
 
         'Отбираем все данные в конечную коллекцию для вставки в эксель
         Dim КоллекцияГотовая As New List(Of GridReport)
         Dim Готовый As GridReport
         For Each x In list5
 
-            Dim Driver = ObserSelectПер1.Where(Function(c) c.НомерРейса = x.НомерРейса).Select(Function(c) c).FirstOrDefault()
+            Dim Driver = ObserSelectПер1.Where(Function(c) c.НомерРейса?.ToString = x.НомерРейса).Select(Function(c) c).FirstOrDefault()
+            Dim client = obser.Where(Function(c) c.НомерРейса?.ToString = x.НомерРейса).Select(Function(c) c).FirstOrDefault()
+            Dim dltZak As Double = 0
+            Dim dltPer As Double = 0
 
-            Dim client As РейсыКлиента
-            Using db As New dbAllDataContext
-                client = db.РейсыКлиента.Where(Function(c) c.НомерРейса = x.НомерРейса).Select(Function(c) c).FirstOrDefault()
-            End Using
-
-
-            Dim фрахт As Double
-            Dim курс As Double
-            Dim белки As Double
+            Dim фрахт As String = Nothing
+            Dim курс As String = Nothing
+            Dim белки As String = Nothing
 
             If client Is Nothing Then Continue For
 
-            If client.Валюта = "Рубль" Then
-                фрахт = x.СуммаПоступления
-                курс = 1
-                белки = x.СуммаПоступления
-            Else
-                'выбираею даты поступления денег от заказчика при оплате в белках по курсу
-                Dim ku As List(Of ОплатыКлиент)
-                If client.ВалютаПлатежа = "BYN" Then
-                    Using db As New dbAllDataContext()
-                        ku = db.ОплатыКлиент.Where(Function(c) c.Рейс = x.НомерРейса).Select(Function(c) c).ToList()
-                    End Using
-                    If ku.Count > 0 Then
-                        For Each b In ku
-                            Dim fk = CDbl(b.Сумма)
-                            белки += fk
-                        Next
+            If client.Валюта = "Рубль" Then 'оплата в белках
 
+                For Each b2 In x.lstZakaz
+                    If белки Is Nothing Then
+                        курс = Replace(b2.КурсВалЗак, ",", ".")
+                        белки = b2.СуммаПоступленияЗак
+                        dltZak = CDbl(Replace(b2.СуммаПоступленияЗак, ".", ","))
+                    Else
+                        курс = курс & vbCrLf & b2.КурсВалЗак
+                        белки = белки & vbCrLf & b2.СуммаПоступленияЗак
+                        dltZak += CDbl(Replace(b2.СуммаПоступленияЗак, ".", ","))
                     End If
-                End If
 
+                Next
+                фрахт = x.ФрахтЗак
+            Else
 
-
-
-                'сумма оплаты делим на сумму в валюте
-
-                фрахт = client.СтоимостьФрахта
-                курс = Math.Round(белки / фрахт, 4)
+                For Each b7 In x.lstZakaz
+                    If белки Is Nothing Then
+                        курс = Replace(b7.КурсВалЗак, ",", ".")
+                        белки = b7.СуммаПоступленияЗак
+                        dltZak = CDbl(Replace(b7.СуммаПоступленияЗак, ".", ","))
+                    Else
+                        курс = курс & vbCrLf & b7.КурсВалЗак
+                        белки = белки & vbCrLf & b7.СуммаПоступленияЗак
+                        dltZak += CDbl(Replace(b7.СуммаПоступленияЗак, ".", ","))
+                    End If
+                Next
+                фрахт = x.ФрахтЗак
 
             End If
 
             'выбираем даты оплат
-            Dim ДатаОплаты As String = Nothing
-            If AllPayClient.Count > 0 Then
-                Dim fg = AllPayClient.Where(Function(b) b.Рейс = client.НомерРейса).Select(Function(b) b).ToList()
-                If fg.Count > 0 Then
-                    For Each l In fg
-                        ДатаОплаты &= Strings.Left(l.ДатаОплаты & vbCrLf, 10)
-                    Next
 
+            Dim ДатаОплаты As String = Nothing
+            For Each b4 In x.lstZakaz
+                If ДатаОплаты Is Nothing Then
+                    ДатаОплаты = b4.ДатыОплатЗак
+                Else
+                    ДатаОплаты = ДатаОплаты & vbCrLf & b4.ДатыОплатЗак
                 End If
-            End If
+
+            Next
+
 
             'выбираем оплаты перевозчику и фрахт
-            Dim фрахтПер As Double
-            Dim курсПер As Double
-            Dim белкиПер As Double
+            Dim f9 = list8.Where(Function(c) c.НомерРейса = x.НомерРейса).Select(Function(c) c).FirstOrDefault()
 
-            If Driver.Валюта = "Рубль" Then
-                фрахтПер = Driver.СтоимостьФрахта
-                курсПер = 1
-                белкиПер = Driver.СтоимостьФрахта
-            Else
-                If Driver.ВалютаПлатежа = "BYN" Then
-                    'сумма оплаты делим на сумму в валюте, если оплата в белках
-                    Dim nm As List(Of ОплатыПер)
-                    Using db As New dbAllDataContext()
-                        nm = db.ОплатыПер.Where(Function(c) c.Рейс = x.НомерРейса).Select(Function(c) c).ToList()
-                    End Using
-                    If nm.Count > 0 Then
-                        For Each vx In nm
-                            белкиПер += vx.Сумма
-                        Next
+            Dim фрахтПер As String = Nothing
+            Dim курсПер As String = Nothing
+            Dim белкиПер As String = Nothing
+            If f9 Is Nothing Then Continue For
 
-                    End If
-                    фрахтПер = Driver.СтоимостьФрахта
-                    курсПер = Math.Round(белкиПер / фрахтПер, 4)
-                Else
-                    фрахтПер = Driver.СтоимостьФрахта
-                    курсПер = 1
-                    белкиПер = Driver.СтоимостьФрахта
-                End If
-
-
+            If x.НомерРейса = 547 Then
+                Dim mf As String = ""
             End If
 
-            Dim Дельта As Double = Math.Round(белки - белкиПер)
+            For Each b2 In f9.lstPerev
+                If белкиПер Is Nothing Then
+                    курсПер = Replace(b2.КурсВалПер, ",", ".")
+                    белкиПер = Replace(b2.СуммаПоступленияПер, ",", ".")
+                    dltPer = CDbl(Replace(b2.СуммаПоступленияПер, ".", ","))
+                Else
+                    курсПер = курсПер & vbCrLf & Replace(b2.КурсВалПер, ",", ".")
+                    белкиПер = белкиПер & vbCrLf & Replace(b2.СуммаПоступленияПер, ",", ".")
+                    dltPer += CDbl(Replace(b2.СуммаПоступленияПер, ".", ","))
+                End If
+
+            Next
+
+
+            Dim Расч As String = Nothing
+            If Driver.Валюта = "Рубль" Then
+                фрахтПер = f9.ФрахтПер
+                Расч = f9.ФрахтПер
+            Else
+                фрахтПер = f9.ФрахтПер
+                Расч = dltPer
+            End If
+
+
+
+
+
+
+
+            Dim Дельта As Double = Math.Round(dltZak - CDbl(Replace(Расч, ".", ",")))
 
 
 
@@ -637,111 +641,9 @@ Public Class ГотовыйОтчет
         CheckBox1.Checked = False
         ComboBox1.Text = String.Empty
         ComboBox2.Text = String.Empty
-        Exit Sub
 
 
 
-
-
-
-        '------------------------------------------------------------------   раздел перевозчика
-
-        Dim list3 As New List(Of NumberReysSort) 'сгрупированные и сумированные рейсы по выбранному месяцу но без проверки с фрахтом рейса
-        Dim list4 As New List(Of NumberReysSort) 'отобранные рейсы которые были полностью оплачены в выбранном месяце и попали в отчет
-        'выгружаем данные всех рейсов перевозчиков в коллекцию
-        Dim obserПер As New List(Of РейсыПеревозчика)
-        Dim ObserSelectПер As New List(Of РейсыПеревозчика)
-
-        Dim f18 = AllClass.РейсыПеревозчика.Select(Function(x) x)
-        If f18 IsNot Nothing Then
-            For Each x In f18
-                obserПер.Add(x)
-            Next
-        End If
-
-        'Using db As New dbAllDataContext()
-        '    Dim f = db.РейсыПеревозчика.Select(Function(x) x)
-        '    If f IsNot Nothing Then
-        '        For Each x In f
-        '            obserПер.Add(x)
-        '        Next
-        '    End If
-        'End Using
-
-        'выбираем олпаты перевозчикам за выбранный месяц и год
-        'Using db As New dbAllDataContext()
-        Dim f19 = (From x In (From y In AllClass.ОплатыПер
-                              Where (CType(y.ДатаОплаты, Date)).Year = ComboBox1.Text
-                              Select y).ToList()
-                   Where MonthName(Month(x.ДатаОплаты)) = ComboBox2.Text
-                   Select x).ToList()
-        If f19.Count > 0 Then
-            'выбираем рейсы безповтора
-            Dim f1 = f19.Select(Function(x) x.Рейс).Distinct().ToList()
-            ' Dim f2 = f.GroupBy(Function(x) x.Рейс, Function(x) x.Сумма, Function(_nom, suma) (Nm:=_nom, salsum:=suma.Sum()))
-
-
-            ' выбираем все оплаты до конца даты выбранного месяца
-            Dim f2 = AllClass.ОплатыПер.Where(Function(c) c.ДатаОплаты <= enddate).Select(Function(c) c).ToList()
-
-
-            'групируем и складываем суммы оплат всех рейсов
-            Dim f3 = (From x In f2
-                      Group x By Keys = New With {Key x.Рейс}
-                             Into Group
-                      Select New With {.Рейс = Keys.Рейс, .Сумма = Group.Sum(Function(t) t.Сумма)}).OrderBy(Function(x) x.Рейс).ToList()
-
-
-            'отбираем только рейсы выбранного месяца в коллекцию
-            For Each u In f1
-                For Each b In f3
-                    If b.Рейс.ToString.Contains(u) Then
-                        list3.Add(New NumberReysSort With {.НомерРейса = b.Рейс, .СуммаПоступления = b.Сумма})
-
-                    End If
-                Next
-            Next
-
-
-            ' проаеряем вся-ли стоимость оплачена перевозчику (сверяем со cтоимостью указанной в рейсе  - фрахт)
-            For Each r In obserПер
-                For Each z In list3
-                    'если оплата в белках
-                    If r.НомерРейса = z.НомерРейса And r.СтоимостьФрахта = z.СуммаПоступления And (r.Валюта = "Рубль") Then
-                        list4.Add(New NumberReysSort With {.НомерРейса = z.НомерРейса, .СуммаПоступления = z.СуммаПоступления})
-                    ElseIf r.НомерРейса = z.НомерРейса And Not r.Валюта = "Рубль" Then 'если была оплата перевозу в белках по валютному рейсу
-
-                        'если оплата в белках по курсу
-                        If r.ВалютаПлатежа = "BYN" Then
-                            Dim Obsr2 = f2.Where(Function(x) x.Рейс = z.НомерРейса).Select(Function(x) x).ToList()
-                            Dim валюта As String = r.Валюта
-                            Dim summa As Double = 0
-                            Dim курс As Double
-                            For Each x In Obsr2
-                                Dim m As New NbRbClassNew()
-                                курс = Replace(m.Курс(x.ДатаОплаты, валюта), ".", ",")
-
-                                summa += x.Сумма / курс
-
-                            Next
-
-                            If Math.Round(summa, 0) = CDbl(r.СтоимостьФрахта) Then
-                                list4.Add(New NumberReysSort With {.НомерРейса = z.НомерРейса, .СуммаПоступления = summa})
-                            End If
-
-                        Else
-                            'если опалта в валюте
-                            If r.СтоимостьФрахта = z.СуммаПоступления Then
-                                list4.Add(New NumberReysSort With {.НомерРейса = z.НомерРейса, .СуммаПоступления = z.СуммаПоступления})
-                            End If
-
-                        End If
-                    End If
-                Next
-            Next
-
-        End If
-        'End Using
 
 
 
@@ -1030,7 +932,7 @@ Public Class ГотовыйОтчет
             End With
 
             With ecx.ws.Range("p" & 4 + n)
-                .Value = ListClient(n).BYRПер.ToString
+                .Value = ListClient(n).BYRПер?.ToString
                 .ColumnWidth = 8
                 .HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter
                 .VerticalAlignment = Excel.XlHAlign.xlHAlignCenter
@@ -1243,9 +1145,25 @@ Public Class MonthItem
     Public Property Id As Integer
     Public Property Text As String
 End Class
+Public Class DannPerev
+    Public Property КурсВалПер As String
+    Public Property СуммаПоступленияПер As String
+    Public Property ДатыОплатПер As String
+End Class
+Public Class DannZakaz
+    Public Property КурсВалЗак As String
+    Public Property СуммаПоступленияЗак As String
+    Public Property ДатыОплатЗак As String
+End Class
 Public Class NumberReysSort
     Public Property НомерРейса As Integer
     Public Property СуммаПоступления As String
+    Public Property ДатаОплаты As String
+    Public Property ФрахтПер As String
+    Public Property ФрахтЗак As String
+    Public Property lstZakaz As List(Of DannZakaz)
+    Public Property lstPerev As List(Of DannPerev)
+
 End Class
 Public Class XmlVypiskaBankClass
     Public Property Номер As Integer
@@ -1268,23 +1186,23 @@ Public Class GridReport
     Public Property ДатаЗагрузки As String
     Public Property ДатаВыгрузки As String
 
-    Public Property Валюта As Double
-    Public Property Курс As Double
-    Public Property BYR As Double
+    Public Property Валюта As String
+    Public Property Курс As String
+    Public Property BYR As String
     Public Property ДатаОплаты As String
 
     Public Property Перевозчик As String
 
-    Public Property ВалютаПер As Double
-    Public Property КурсПер As Double
-    Public Property BYRПер As Double
+    Public Property ВалютаПер As String
+    Public Property КурсПер As String
+    Public Property BYRПер As String
 
     Public Property Комиссия As String
     Public Property Страхование As String
     Public Property Дельта As Double
 
-    Public Property Итого As Double
-    Public Property ЗП As Double
+    Public Property Итого As String
+    Public Property ЗП As String
 
     'Public Property Страхование As String
 

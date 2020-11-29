@@ -1020,13 +1020,13 @@ Partial Class Рейс
         'ПеревозчикToolStripMenuItem1
         '
         Me.ПеревозчикToolStripMenuItem1.Name = "ПеревозчикToolStripMenuItem1"
-        Me.ПеревозчикToolStripMenuItem1.Size = New System.Drawing.Size(140, 22)
+        Me.ПеревозчикToolStripMenuItem1.Size = New System.Drawing.Size(180, 22)
         Me.ПеревозчикToolStripMenuItem1.Text = "Клиент"
         '
         'ПеревозчикToolStripMenuItem2
         '
         Me.ПеревозчикToolStripMenuItem2.Name = "ПеревозчикToolStripMenuItem2"
-        Me.ПеревозчикToolStripMenuItem2.Size = New System.Drawing.Size(140, 22)
+        Me.ПеревозчикToolStripMenuItem2.Size = New System.Drawing.Size(180, 22)
         Me.ПеревозчикToolStripMenuItem2.Text = "Перевозчик"
         '
         'Button8
