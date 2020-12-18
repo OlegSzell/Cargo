@@ -142,8 +142,9 @@ Public Class MDIParent1
 
         Dim f As Form
         f = ActiveMdiChild
-        ПоискПеревозчиков.MdiParent = Me
-        ПоискПеревозчиков.Show()
+        Dim f1 As New ПоискПеревозчиков
+        f1.MdiParent = Me
+        f1.Show()
         ПровФормы(f, "ПоискПеревозчиков")
 
     End Sub
@@ -179,6 +180,9 @@ Public Class MDIParent1
 
     Private Sub MDIParent1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+
+
+
         Me.Cursor = Cursors.WaitCursor
         'ALL()
         Dim mo As New AllUpd
@@ -195,35 +199,47 @@ Public Class MDIParent1
         Dim f As New Пароль
         f.ShowDialog()
 
+        If f.flg = False Then
+            Return
+        End If
+
         Getst()
         КалендарьНапоминаниеAsync()
-
+        Reys()
         Me.Cursor = Cursors.Default
     End Sub
-    Private Async Function too() As Task(Of String)
-        'Dim d As New List(Of Task)()
-        'd.Add(Task.Run(dtVyborka1, dtVyborka))
-        '        Task.WhenAll(New Task(New Action(Sub() dtVyborka1())), New Task(New Action(Sub() Перевозчики())), New Task(New Action(Sub() Клиенты())),
-        'New Task(New Action(Sub() ТипАвтоAll())))
-        'Await dtVyborka()
-        'Await dtVyborka1()
-        'Await Перевозчики()
-        'Await Клиенты()
-        'Await ТипАвтоAll()
+    Private Sub Reys()
+        Dim f As Form
+        f = ActiveMdiChild
+        Dim f1 As New Рейс
+        f1.MdiParent = Me
+        f1.Show()
+        ПровФормы(f, "Рейс")
+    End Sub
+    'Private Function too() As Task(Of String)
+    '    'Dim d As New List(Of Task)()
+    '    'd.Add(Task.Run(dtVyborka1, dtVyborka))
+    '    '        Task.WhenAll(New Task(New Action(Sub() dtVyborka1())), New Task(New Action(Sub() Перевозчики())), New Task(New Action(Sub() Клиенты())),
+    '    'New Task(New Action(Sub() ТипАвтоAll())))
+    '    'Await dtVyborka()
+    '    'Await dtVyborka1()
+    '    'Await Перевозчики()
+    '    'Await Клиенты()
+    '    'Await ТипАвтоAll()
 
-        'Dim m As Task
-        'm.Run(New Action(Sub() dtVyborka()))
-        'm.GetAwaiter()
+    '    'Dim m As Task
+    '    'm.Run(New Action(Sub() dtVyborka()))
+    '    'm.GetAwaiter()
 
-        'Await Task.Run(New Action(Sub() dtVyborka1()))
-        'Await Task.Run(New Action(Sub() Перевозчики()))
-        'Await Task.Run(New Action(Sub() Клиенты()))
-        'Await Task.Run(New Action(Sub() ТипАвтоAll()))
-
-
+    '    'Await Task.Run(New Action(Sub() dtVyborka1()))
+    '    'Await Task.Run(New Action(Sub() Перевозчики()))
+    '    'Await Task.Run(New Action(Sub() Клиенты()))
+    '    'Await Task.Run(New Action(Sub() ТипАвтоAll()))
 
 
-    End Function
+
+
+    'End Function
     Public Sub CheckForUpdate()
         Dim verFile As String = Application.StartupPath & "\version.txt"
         Dim curVer As String = My.Application.Info.Version.ToString
@@ -243,11 +259,10 @@ Public Class MDIParent1
         Dim f As Form
         'ActiveMdiChild.Hide()
         f = ActiveMdiChild
-
-        ДобавитьПеревозчика.MdiParent = Me
+        Dim f1 As New ДобавитьПеревозчика
+        f1.MdiParent = Me
         ДобПер = 0
-
-        ДобавитьПеревозчика.Show()
+        f1.Show()
 
         ПровФормы(f, "ДобавитьПеревозчика")
 
@@ -275,12 +290,14 @@ Public Class MDIParent1
     End Sub
 
     Private Sub КлиентToolStripMenuItem_Click(sender As Object, e As EventArgs)
+        Dim f As New НовыйКлиент
+        f.ShowDialog()
 
-        НовыйКлиент.ShowDialog()
     End Sub
 
     Private Sub ПеревозчикToolStripMenuItem_Click(sender As Object, e As EventArgs)
-        НовыйПеревоз.ShowDialog()
+        Dim f As New НовыйПеревоз
+        f.ShowDialog()
     End Sub
 
     Private Sub ПечатьToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ПечатьToolStripMenuItem.Click
@@ -288,11 +305,13 @@ Public Class MDIParent1
     End Sub
 
     Private Sub РейсToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles РейсToolStripMenuItem1.Click
-        ПечатьРейсы.ShowDialog()
+        Dim f As New ПечатьРейсы
+        f.ShowDialog()
     End Sub
 
     Private Sub ДоговораToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ДоговораToolStripMenuItem1.Click
-        ПечатьДоговора.ShowDialog()
+        Dim f As New ПечатьДоговора
+        f.ShowDialog()
     End Sub
 
     Private Sub ПереговорыToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ПереговорыToolStripMenuItem.Click
@@ -300,7 +319,8 @@ Public Class MDIParent1
     End Sub
 
     Private Sub ЧерныйСписокToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ЧерныйСписокToolStripMenuItem.Click
-        ЧерныйСписок.ShowDialog()
+        Dim f As New ЧерныйСписок
+        f.ShowDialog()
     End Sub
 
     Public Function Провер() As List(Of ПереговорыКлиент)
@@ -351,15 +371,19 @@ Public Class MDIParent1
     End Sub
 
     Private Sub НапоминаниеToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles НапоминаниеToolStripMenuItem.Click
-        Напоминание.ShowDialog()
+        Dim f As New Напоминание
+        f.ShowDialog()
     End Sub
 
     Private Sub СвободныйТранспортToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles СвободныйТранспортToolStripMenuItem.Click
-        ПеревозВПути.ShowDialog()
+        Dim f As New ПеревозВПути
+        f.ShowDialog()
     End Sub
 
     Private Sub ПоОрганизацииToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ПоОрганизацииToolStripMenuItem.Click
-        ПереговорыКлиентФорма.ShowDialog()
+        Dim f As New ПереговорыКлиентФорма
+        f.ShowDialog()
+
     End Sub
 
     Private Sub ВсеПереговорыToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ВсеПереговорыToolStripMenuItem.Click
@@ -368,27 +392,22 @@ Public Class MDIParent1
         Catch ex As Exception
 
         End Try
-        ПереговорыВсе.Show()
-    End Sub
-
-    Private Sub ЛИToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ЛИToolStripMenuItem.Click
-        'ЛардиТранс.ShowDialog()
-    End Sub
-
-    Private Sub ДоговораToolStripMenuItem_Click(sender As Object, e As EventArgs)
+        Dim f As New ПереговорыВсе
+        f.Show()
 
     End Sub
+
+
 
     Private Sub ОтчетToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ОтчетToolStripMenuItem.Click
-        Паролик.ShowDialog()
+        Dim f As New Паролик
+        f.ShowDialog()
         If ПодтверждениеПароля = True Then
-            ОтчетДляОлега.Show()
+            Dim f1 As New ОтчетДляОлега
+            f1.Show()
         End If
     End Sub
 
-    Private Sub РейсToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles РейсToolStripMenuItem.Click
-
-    End Sub
 
     Private Sub КалендарьToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles КалендарьToolStripMenuItem.Click
         If ActiveMdiChild IsNot Nothing Then
@@ -396,7 +415,9 @@ Public Class MDIParent1
         End If
 
         If My.Computer.Name.ToString = "OLEGLAPTOP" Then
-            Календарь.Show()
+            Dim f As New Календарь
+            f.MdiParent = Me
+            f.Show()
         End If
 
     End Sub
@@ -426,6 +447,25 @@ Public Class MDIParent1
 
     Private Sub ПоискToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ПоискToolStripMenuItem.Click
         Dim f9 As New ПоискПолный()
+        f9.MdiParent = Me
+        f9.WindowState = FormWindowState.Maximized
         f9.Show()
+
+    End Sub
+
+    Private Sub SQLDepToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SQLDepToolStripMenuItem.Click
+        Dim f As New SQLDependency2
+        f.ShowDialog()
+    End Sub
+
+    Private Sub ImageToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ImageToolStripMenuItem.Click
+        Dim f As New ImageForm
+        f.ShowDialog()
+    End Sub
+
+    Private Sub БраузерToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles БраузерToolStripMenuItem.Click
+        Dim f As New Браузер
+        f.MdiParent = Me
+        f.Show()
     End Sub
 End Class

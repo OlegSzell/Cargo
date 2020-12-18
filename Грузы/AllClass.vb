@@ -23,7 +23,9 @@
     Public Shared Property ЖурналПеревозчик As List(Of ЖурналПеревозчик)
     Public Shared Property ПеревозчикиБаза As List(Of ПеревозчикиБаза)
     Public Shared Property ФайлыExcelВсе As List(Of ФайлыExcelВсе)
-
+    Public Shared Property ПаролиВвод As List(Of ПаролиВвод)
+    Public Shared Property SkypeКлиентПредложение As List(Of SkypeКлиентПредложение)
+    Public Shared Property SkypeПеревозчикПредложение As List(Of SkypeПеревозчикПредложение)
 
 
 

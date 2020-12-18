@@ -69,6 +69,7 @@ Partial Class НовыйКлиент
         Me.Label18 = New System.Windows.Forms.Label()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.ComboBox4 = New System.Windows.Forms.ComboBox()
+        Me.CheckBox5 = New System.Windows.Forms.CheckBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
@@ -387,9 +388,10 @@ Partial Class НовыйКлиент
         'Label16
         '
         Me.Label16.AutoSize = True
-        Me.Label16.Location = New System.Drawing.Point(812, 12)
+        Me.Label16.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.Label16.Location = New System.Drawing.Point(845, 1)
         Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(39, 17)
+        Me.Label16.Size = New System.Drawing.Size(34, 15)
         Me.Label16.TabIndex = 33
         Me.Label16.Text = "Дата"
         '
@@ -418,9 +420,9 @@ Partial Class НовыйКлиент
         'CheckBox2
         '
         Me.CheckBox2.AutoSize = True
-        Me.CheckBox2.Location = New System.Drawing.Point(159, 13)
+        Me.CheckBox2.Location = New System.Drawing.Point(61, 15)
         Me.CheckBox2.Name = "CheckBox2"
-        Me.CheckBox2.Size = New System.Drawing.Size(71, 21)
+        Me.CheckBox2.Size = New System.Drawing.Size(65, 19)
         Me.CheckBox2.TabIndex = 36
         Me.CheckBox2.Text = "Россия"
         Me.CheckBox2.UseVisualStyleBackColor = True
@@ -428,9 +430,9 @@ Partial Class НовыйКлиент
         'CheckBox3
         '
         Me.CheckBox3.AutoSize = True
-        Me.CheckBox3.Location = New System.Drawing.Point(107, 13)
+        Me.CheckBox3.Location = New System.Drawing.Point(9, 15)
         Me.CheckBox3.Name = "CheckBox3"
-        Me.CheckBox3.Size = New System.Drawing.Size(46, 21)
+        Me.CheckBox3.Size = New System.Drawing.Size(39, 19)
         Me.CheckBox3.TabIndex = 37
         Me.CheckBox3.Text = "ЕС"
         Me.CheckBox3.UseVisualStyleBackColor = True
@@ -440,9 +442,10 @@ Partial Class НовыйКлиент
         Me.GroupBox2.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.GroupBox2.Controls.Add(Me.CheckBox3)
         Me.GroupBox2.Controls.Add(Me.CheckBox2)
-        Me.GroupBox2.Location = New System.Drawing.Point(302, 3)
+        Me.GroupBox2.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.GroupBox2.Location = New System.Drawing.Point(541, 1)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(231, 40)
+        Me.GroupBox2.Size = New System.Drawing.Size(133, 40)
         Me.GroupBox2.TabIndex = 38
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Нерезидет"
@@ -450,47 +453,51 @@ Partial Class НовыйКлиент
         'CheckBox4
         '
         Me.CheckBox4.AutoSize = True
+        Me.CheckBox4.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
         Me.CheckBox4.Location = New System.Drawing.Point(151, 3)
         Me.CheckBox4.Name = "CheckBox4"
-        Me.CheckBox4.Size = New System.Drawing.Size(145, 21)
+        Me.CheckBox4.Size = New System.Drawing.Size(133, 19)
         Me.CheckBox4.TabIndex = 38
         Me.CheckBox4.Text = "Оформить договор"
         Me.CheckBox4.UseVisualStyleBackColor = True
         '
         'ComboBox2
         '
+        Me.ComboBox2.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
         Me.ComboBox2.FormattingEnabled = True
         Me.ComboBox2.Items.AddRange(New Object() {"Евро", "Доллар", "Российский рубль"})
-        Me.ComboBox2.Location = New System.Drawing.Point(645, 11)
+        Me.ComboBox2.Location = New System.Drawing.Point(692, 17)
         Me.ComboBox2.Name = "ComboBox2"
-        Me.ComboBox2.Size = New System.Drawing.Size(150, 25)
+        Me.ComboBox2.Size = New System.Drawing.Size(150, 23)
         Me.ComboBox2.TabIndex = 39
         '
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(539, 16)
+        Me.Label11.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.Label11.Location = New System.Drawing.Point(689, -1)
         Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(103, 17)
+        Me.Label11.Size = New System.Drawing.Size(86, 15)
         Me.Label11.TabIndex = 40
         Me.Label11.Text = "Наш расч.счет"
         '
         'MaskedTextBox1
         '
-        Me.MaskedTextBox1.Location = New System.Drawing.Point(857, 11)
+        Me.MaskedTextBox1.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.MaskedTextBox1.Location = New System.Drawing.Point(848, 17)
         Me.MaskedTextBox1.Mask = "00/00/0000"
         Me.MaskedTextBox1.Name = "MaskedTextBox1"
-        Me.MaskedTextBox1.Size = New System.Drawing.Size(88, 25)
+        Me.MaskedTextBox1.Size = New System.Drawing.Size(88, 23)
         Me.MaskedTextBox1.TabIndex = 41
         Me.MaskedTextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         Me.MaskedTextBox1.ValidatingType = GetType(Date)
         '
         'ComboBox3
         '
-        Me.ComboBox3.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.ComboBox3.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
         Me.ComboBox3.FormattingEnabled = True
         Me.ComboBox3.Items.AddRange(New Object() {"1", "2"})
-        Me.ComboBox3.Location = New System.Drawing.Point(214, 24)
+        Me.ComboBox3.Location = New System.Drawing.Point(482, 18)
         Me.ComboBox3.Name = "ComboBox3"
         Me.ComboBox3.Size = New System.Drawing.Size(53, 23)
         Me.ComboBox3.TabIndex = 42
@@ -498,9 +505,10 @@ Partial Class НовыйКлиент
         'Label18
         '
         Me.Label18.AutoSize = True
-        Me.Label18.Location = New System.Drawing.Point(154, 27)
+        Me.Label18.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.Label18.Location = New System.Drawing.Point(479, 0)
         Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(54, 17)
+        Me.Label18.Size = New System.Drawing.Size(49, 15)
         Me.Label18.TabIndex = 43
         Me.Label18.Text = "Кол.экз"
         '
@@ -527,11 +535,23 @@ Partial Class НовыйКлиент
         Me.ComboBox4.Size = New System.Drawing.Size(351, 25)
         Me.ComboBox4.TabIndex = 33
         '
+        'CheckBox5
+        '
+        Me.CheckBox5.AutoSize = True
+        Me.CheckBox5.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.CheckBox5.Location = New System.Drawing.Point(151, 26)
+        Me.CheckBox5.Name = "CheckBox5"
+        Me.CheckBox5.Size = New System.Drawing.Size(325, 19)
+        Me.CheckBox5.TabIndex = 45
+        Me.CheckBox5.Text = "Оформить новый договор, с действующим клиентом."
+        Me.CheckBox5.UseVisualStyleBackColor = True
+        '
         'НовыйКлиент
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 17.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1165, 704)
+        Me.Controls.Add(Me.CheckBox5)
         Me.Controls.Add(Me.ComboBox4)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Label18)
@@ -609,4 +629,5 @@ Partial Class НовыйКлиент
     Friend WithEvents Label18 As Label
     Friend WithEvents Button2 As Button
     Friend WithEvents ComboBox4 As ComboBox
+    Friend WithEvents CheckBox5 As CheckBox
 End Class

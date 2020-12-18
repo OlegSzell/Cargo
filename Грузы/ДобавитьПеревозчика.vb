@@ -11,6 +11,7 @@ Public Class ДобавитьПеревозчика
     Private Delegate Sub com3()
     Private Delegate Sub com4()
     Private Delegate Sub comb22()
+    Private Property Imagese As Byte() = Nothing
     'Dim tbl As New DataTable
     'Dim cb As OleDb.OleDbCommandBuilder
 
@@ -108,7 +109,7 @@ Public Class ДобавитьПеревозчика
         TextBox6.Text = ""
         TextBox4.Text = ""
         TextBox7.Text = ""
-        TextBox8.Text = ""
+        RichTextBox1.Text = ""
     End Sub
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         insertbaza()
@@ -152,25 +153,54 @@ Public Class ДобавитьПеревозчика
         End If
 
         Using db As New dbAllDataContext()
-            Dim f As New ПеревозчикиБаза
-            With f
-                .Наименование_фирмы = ComboBox1.Text
-                .Контактное_лицо = TextBox2.Text
-                .Телефоны = TextBox3.Text
-                .Страны_перевозок = country
-                .Регионы = country2
-                .ADR = TextBox9.Text
-                .Кол_во_авто = TextBox4.Text
-                .Вид_авто = TextBox10.Text
-                .Тоннаж = TextBox5.Text
-                .Объем = TextBox6.Text
-                .Ставка = TextBox7.Text
-                .Примечание = TextBox8.Text
-                .Форма_собственности = ComboBox3.Text
+            Dim f1 = db.ПеревозчикиБаза.Where(Function(x) x.Наименование_фирмы = ComboBox1.Text).FirstOrDefault()
+            If f1 IsNot Nothing Then
 
-            End With
-            db.ПеревозчикиБаза.InsertOnSubmit(f)
-            db.SubmitChanges()
+                With f1
+                    .Контактное_лицо = TextBox2.Text
+                    .Телефоны = TextBox3.Text
+                    .Страны_перевозок = country
+                    .Регионы = country2
+                    .ADR = TextBox9.Text
+                    .Кол_во_авто = TextBox4.Text
+                    .Вид_авто = TextBox10.Text
+                    .Тоннаж = TextBox5.Text
+                    .Объем = TextBox6.Text
+                    .Ставка = TextBox7.Text
+                    .Примечание = RichTextBox1.Text
+                    .Форма_собственности = ComboBox3.Text
+                    .ФотоДанные = Imagese
+                    .ДатаИзменения = Now
+                End With
+                db.SubmitChanges()
+                MessageBox.Show("Данные перевозчика измененеы!", Рик, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Else
+                Dim f As New ПеревозчикиБаза
+                With f
+                    .Наименование_фирмы = ComboBox1.Text
+                    .Контактное_лицо = TextBox2.Text
+                    .Телефоны = TextBox3.Text
+                    .Страны_перевозок = country
+                    .Регионы = country2
+                    .ADR = TextBox9.Text
+                    .Кол_во_авто = TextBox4.Text
+                    .Вид_авто = TextBox10.Text
+                    .Тоннаж = TextBox5.Text
+                    .Объем = TextBox6.Text
+                    .Ставка = TextBox7.Text
+                    .Примечание = RichTextBox1.Text
+                    .Форма_собственности = ComboBox3.Text
+                    .ФотоДанные = Imagese
+                    .ДатаИзменения = Now
+
+                End With
+                db.ПеревозчикиБаза.InsertOnSubmit(f)
+                db.SubmitChanges()
+            End If
+            MessageBox.Show("Перевозчик добавлен!", Рик, MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+
+
             Dim mo As New AllUpd
             mo.ПеревозчикиБазаAllAsync()
         End Using
@@ -181,10 +211,10 @@ Public Class ДобавитьПеревозчика
         '        Dim StrSql5 As String = "INSERT INTO ПеревозчикиБаза([Наименование фирмы],[Контактное лицо],Телефоны,[Страны перевозок],Регионы,ADR,[Кол-во авто],
         '[Вид_авто],Тоннаж,Объем,Ставка,Примечание,[Форма собственности])
         'VALUES('" & Me.ComboBox1.Text & "','" & Me.TextBox2.Text & "','" & Me.TextBox3.Text & "','" & country & "','" & country2 & "','" & Me.TextBox9.Text & "',
-        ''" & Me.TextBox4.Text & "', '" & Me.TextBox10.Text & "','" & Me.TextBox5.Text & "','" & Me.TextBox6.Text & "','" & Me.TextBox7.Text & "','" & Me.TextBox8.Text & "','" & ComboBox3.Text & "')"
+        ''" & Me.TextBox4.Text & "', '" & Me.TextBox10.Text & "','" & Me.TextBox5.Text & "','" & Me.TextBox6.Text & "','" & Me.TextBox7.Text & "','" & Me.RichTextBox1.text & "','" & ComboBox3.Text & "')"
         '        Updates3(StrSql5)
 
-        MessageBox.Show("Перевозчик добавлен!", Рик, MessageBoxButtons.OK, MessageBoxIcon.Information)
+
 
     End Sub
 
@@ -255,7 +285,7 @@ Public Class ДобавитьПеревозчика
     Private Sub TextBox7_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox7.KeyDown
         If e.KeyCode = Keys.Enter Then
             e.SuppressKeyPress = True
-            TextBox8.Focus()
+            RichTextBox1.Focus()
 
 
         End If
@@ -277,7 +307,7 @@ Public Class ДобавитьПеревозчика
         End If
     End Sub
 
-    Private Sub TextBox8_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox8.KeyDown
+    Private Sub TextBox8_KeyDown(sender As Object, e As KeyEventArgs)
         If e.KeyCode = Keys.Enter Then
             e.SuppressKeyPress = True
 
@@ -298,5 +328,11 @@ Public Class ДобавитьПеревозчика
     Private Sub ComboBox2_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox2.SelectedIndexChanged
         ComboBox3.Text = ComboBox3.Items.Item(ComboBox2.SelectedIndex) 'подчиненные комбобокс
 
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        Dim f As New ImageForm(True)
+        f.ShowDialog()
+        Imagese = f.Imagese
     End Sub
 End Class

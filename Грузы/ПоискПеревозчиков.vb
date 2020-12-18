@@ -11,6 +11,48 @@ Public Class ПоискПеревозчиков
     Private Delegate Sub comb2()
     Private Delegate Sub comb31()
     Private Delegate Sub comb32()
+
+
+    Private com1all As List(Of Com1Class)
+    Private bs1com As BindingSource
+
+    Private com2all As List(Of IDNaz)
+    Private bs2com As BindingSource
+
+    Private com3all As List(Of IDNaz)
+    Private bs3com As BindingSource
+
+    Private Grid1all As List(Of Grid1Class)
+    Private bsGrid1all As BindingSource
+    Sub New()
+
+        ' Этот вызов является обязательным для конструктора.
+        InitializeComponent()
+        ПредзагрузкаAsync()
+        ' Добавить код инициализации после вызова InitializeComponent().
+
+    End Sub
+    Public Class Grid1Class
+        Public Property Номер As Integer
+        Public Property Организация As String
+        Public Property Контакт As String
+        Public Property Телефон As String
+        Public Property Страны As String
+        Public Property Регионы As String
+        Public Property ADR As String
+        Public Property КоличАвто As String
+        Public Property ТипАвто As String
+        Public Property Тоннаж As String
+        Public Property Объем As String
+        Public Property Ставка As String
+        Public Property Примечание As String
+        Public Property IDПеревоз As String
+
+    End Class
+    Public Class Com1Class
+        Public Property Naz As String
+        Public Property lst As List(Of String)
+    End Class
     Private Sub COM4()
 
         If ComboBox1.InvokeRequired Then
@@ -52,7 +94,107 @@ Public Class ПоискПеревозчиков
         h.SetApartmentState(ApartmentState.STA)
         h.Start()
     End Sub
+    Private Sub com1Metod()
+        Dim mo As New AllUpd
+        Do While AllClass.Страна Is Nothing
+            mo.СтранаAll()
+        Loop
+
+        Dim f = (From b In (From x In AllClass.Страна
+                            Join y In AllClass.РегионыРоссии On x.Код Equals y.Страны
+                            Order By x.Страна).ToList
+                 Group b By Keys = New With {Key b.x.Страна}
+                      Into Group
+                 Select New Com1Class With {.Naz = Keys.Страна, .lst = (From c In Group
+                                                                        Order By c.y.Регионы
+                                                                        Select c.y.Регионы).ToList()}).ToList()
+        If com1all IsNot Nothing Then
+            com1all.Clear()
+        End If
+
+
+        If f IsNot Nothing Then
+            com1all.AddRange(f)
+            bs1com.ResetBindings(False)
+        End If
+
+        ComboBox1.Text = String.Empty
+
+    End Sub
+    Private Sub com3Metod()
+        Dim mo As New AllUpd
+        Do While AllClass.ПеревозчикиБаза Is Nothing
+            mo.ПеревозчикиБазаAll()
+        Loop
+        If com3all IsNot Nothing Then
+            com3all.Clear()
+        End If
+        Dim f = AllClass.ПеревозчикиБаза.OrderBy(Function(x) x.Наименование_фирмы).Select(Function(x) x.Наименование_фирмы).Distinct.ToList()
+        If f IsNot Nothing Then
+            For Each b In f
+                Dim m As New IDNaz With {.Naz = b}
+                com3all.Add(m)
+            Next
+            bs3com.ResetBindings(False)
+        End If
+    End Sub
+    Private Async Sub ПредзагрузкаAsync()
+        Await Task.Run(Sub() Предзагрузка())
+    End Sub
+    Private Sub Предзагрузка()
+        Dim mo As New AllUpd
+        Do While AllClass.Страна Is Nothing
+            mo.СтранаAll()
+        Loop
+
+        Do While AllClass.ПеревозчикиБаза Is Nothing
+            mo.ПеревозчикиБазаAll()
+        Loop
+        Do While AllClass.РегионыРоссии Is Nothing
+            mo.РегионыРоссииAll()
+        Loop
+    End Sub
+
     Private Sub ПоискПеревозчиков_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        com1all = New List(Of Com1Class)
+        bs1com = New BindingSource
+        bs1com.DataSource = com1all
+        ComboBox1.DataSource = bs1com
+        ComboBox1.DisplayMember = "Naz"
+
+        com2all = New List(Of IDNaz)
+        bs2com = New BindingSource
+        bs2com.DataSource = com2all
+        ComboBox2.DataSource = bs2com
+        ComboBox2.DisplayMember = "Naz"
+
+        com3all = New List(Of IDNaz)
+        bs3com = New BindingSource
+        bs3com.DataSource = com3all
+        ComboBox3.DataSource = bs3com
+        ComboBox3.DisplayMember = "Naz"
+
+        Grid1all = New List(Of Grid1Class)
+        bsGrid1all = New BindingSource
+        bsGrid1all.DataSource = Grid1all
+        Grid1.DataSource = bsGrid1all
+        GridView(Grid1)
+        Grid1.Columns(12).Visible = False
+        Grid1.SelectionMode = DataGridViewSelectionMode.FullRowSelect
+
+        Grid1.Columns(0).Width = 150
+        Grid1.Columns(1).Width = 150
+        Grid1.Columns(2).Width = 150
+        Grid1.Columns(4).Width = 150
+        Grid1.Columns(11).Width = 300
+
+        TextBox1.Text = DateTime.Now.ToString("dd.MM.yyyy")
+
+
+        ComboBox1.BeginInvoke(New MethodInvoker(Sub() com1Metod()))
+
+
+
         Запуск()
 
     End Sub
@@ -203,21 +345,21 @@ Where ПеревозчикиБаза.[Наименование фирмы] ='" &
 
     End Sub
 
-    Private Sub Grid1_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles Grid1.CellDoubleClick
-        idtabl = Nothing
-        idtabl = Grid1.CurrentRow.Cells(12).Value
-        ИзменПеревоз.Show()
+    'Private Sub Grid1_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs)
+    '    idtabl = Nothing
+    '    idtabl = Grid1.CurrentRow.Cells(12).Value
+    '    ИзменПеревоз.Show()
 
-    End Sub
-    Private Sub Grid1_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles Grid1.CellClick
+    'End Sub
+    'Private Sub Grid1_CellClick(sender As Object, e As DataGridViewCellEventArgs)
 
 
-        If IsDBNull(e) Then
-            Exit Sub
-        End If
-        удал = Nothing
-        удал = Grid1.CurrentRow.Cells(12).Value
-    End Sub
+    '    If IsDBNull(e) Then
+    '        Exit Sub
+    '    End If
+    '    удал = Nothing
+    '    удал = Grid1.CurrentRow.Cells(12).Value
+    'End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Dim StrSql6 As String
@@ -232,16 +374,11 @@ Where ПеревозчикиБаза.[Наименование фирмы] ='" &
 
     End Sub
 
-    Private Sub Grid1_ColumnHeaderMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles Grid1.ColumnHeaderMouseClick
-        For Each column As DataGridViewColumn In Grid1.Columns
-            column.SortMode = DataGridViewColumnSortMode.NotSortable
-        Next
-    End Sub
-
-    Private Sub ComboBox1_SelectedValueChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedValueChanged
-        ОбнКом1()
-
-    End Sub
+    'Private Sub Grid1_ColumnHeaderMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs)
+    '    For Each column As DataGridViewColumn In Grid1.Columns
+    '        column.SortMode = DataGridViewColumnSortMode.NotSortable
+    '    Next
+    'End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         ДобПер = 1
@@ -249,5 +386,30 @@ Where ПеревозчикиБаза.[Наименование фирмы] ='" &
         ДобавитьПеревозчика.WindowState = 0
         ДобавитьПеревозчика.StartPosition = FormStartPosition.CenterScreen
         ДобавитьПеревозчика.ShowDialog()
+    End Sub
+
+    Private Sub Grid1_ColumnHeaderMouseClick_1(sender As Object, e As DataGridViewCellMouseEventArgs) Handles Grid1.ColumnHeaderMouseClick
+        For Each column As DataGridViewColumn In Grid1.Columns
+            column.SortMode = DataGridViewColumnSortMode.NotSortable
+        Next
+    End Sub
+
+    Private Sub Grid1_CellClick_1(sender As Object, e As DataGridViewCellEventArgs) Handles Grid1.CellClick
+        If IsDBNull(e) Then
+            Exit Sub
+        End If
+        удал = Nothing
+        удал = Grid1.CurrentRow.Cells(12).Value
+    End Sub
+
+    Private Sub Grid1_CellDoubleClick_1(sender As Object, e As DataGridViewCellEventArgs) Handles Grid1.CellDoubleClick
+        idtabl = Nothing
+        idtabl = Grid1.CurrentRow.Cells(12).Value
+        Dim f As New ИзменПеревоз
+        f.Show()
+    End Sub
+
+    Private Sub ComboBox1_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles ComboBox1.SelectionChangeCommitted
+        ОбнКом1()
     End Sub
 End Class

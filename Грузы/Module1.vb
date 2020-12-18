@@ -80,16 +80,16 @@ Module Module1
             Next
         End If
     End Sub
-    Public Sub Updates(ByVal stroka As String)
-        Dim c As New OleDbCommand
-        c.Connection = conn
-        c.CommandText = stroka
-        Try
-            c.ExecuteNonQuery()
-        Catch ex As Exception
-            MessageBox.Show(ex.Message)
-        End Try
-    End Sub
+    'Public Sub Updates(ByVal stroka As String)
+    '    Dim c As New OleDbCommand
+    '    c.Connection = conn
+    '    c.CommandText = stroka
+    '    Try
+    '        c.ExecuteNonQuery()
+    '    Catch ex As Exception
+    '        MessageBox.Show(ex.Message)
+    '    End Try
+    'End Sub
     Public Sub Updates3(ByVal stroka As String)
         Dim conn4 As New SqlConnection(ConString)
         If conn4.State = ConnectionState.Closed Then

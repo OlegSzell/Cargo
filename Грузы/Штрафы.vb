@@ -1,5 +1,7 @@
 ﻿
 Public Class Штрафы
+    Public ШтрафКлиент1 As Boolean = False
+    Public ШтрафПер1 As Boolean = False
 
     Private Sub Штрафы_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         CheckBox1.Checked = True
@@ -8,10 +10,12 @@ Public Class Штрафы
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         If CheckBox1.Checked = False Then
-            Рейс.ШтрафКлиент = True
+            'Рейс.ШтрафКлиент = True
+            ШтрафКлиент1 = True
         End If
         If CheckBox4.Checked = False Then
-            Рейс.ШтрафПер = True
+            'Рейс.ШтрафПер = True
+            ШтрафПер1 = True
         End If
         Me.Close()
     End Sub

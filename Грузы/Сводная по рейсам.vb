@@ -509,6 +509,12 @@ Public Class Сводная_по_рейсам
 
     End Sub
 
+
+
+    Private Sub Grid2_Scroll(sender As Object, e As ScrollEventArgs) Handles Grid2.Scroll
+        GetType(DataGridView).InvokeMember("DoubleBuffered", Reflection.BindingFlags.Instance Or Reflection.BindingFlags.NonPublic Or Reflection.BindingFlags.SetProperty, Nothing, Me.Grid2, New Object() {True})
+    End Sub
+
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         dc.Clear()
         dp.Clear()

@@ -206,6 +206,11 @@ Public Class НовыйКлиент
             MessageBox.Show("Необходимо выбрать количество экземпляров договора!", Рик)
             Return 1
         End If
+        If CheckBox5.Checked = True Then
+            If MessageBox.Show("Создать новый догововр с действующим клиентом?", Рик, MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.No Then
+                Return 1
+            End If
+        End If
 
         Return 0
     End Function
@@ -225,6 +230,7 @@ Public Class НовыйКлиент
         Dim ds = AllClass.Клиент.Where(Function(x) x.НазваниеОрганизации = RichTextBox1.Text).Select(Function(x) x).FirstOrDefault()
 
         If ds IsNot Nothing Then
+            Dim nom2 As String = Nothing
             Using db As New dbAllDataContext
                 Dim f = db.Клиент.Where(Function(x) x.НазваниеОрганизации = RichTextBox1.Text).Select(Function(x) x).FirstOrDefault()
                 With f
@@ -243,6 +249,10 @@ Public Class НовыйКлиент
                     .ФИОРодПадеж = Trim(RichTextBox11.Text)
                     .ДолжРодПадеж = Trim(RichTextBox14.Text)
                     .Дата = MaskedTextBox1.Text
+                    If CheckBox5.Checked = True Then
+                        nom2 = НомерДог()
+                        .Договор = nom2
+                    End If
                 End With
                 db.SubmitChanges()
             End Using
@@ -265,6 +275,9 @@ Public Class НовыйКлиент
                 .ФИОРодПадеж = Trim(RichTextBox11.Text)
                 .ДолжРодПадеж = Trim(RichTextBox14.Text)
                 .Дата = MaskedTextBox1.Text
+                If CheckBox5.Checked = True Then
+                    .Договор = nom2
+                End If
             End With
             bslistbx1.ResetBindings(False)
 
@@ -285,6 +298,10 @@ Public Class НовыйКлиент
                 .ФИОРодПадеж = Trim(RichTextBox11.Text)
                 .ДолжРодПадеж = Trim(RichTextBox14.Text)
                 .Дата = MaskedTextBox1.Text
+                If CheckBox5.Checked = True Then
+                    .Договор = nom2
+                End If
+
             End With
             bscom4.ResetBindings(False)
 

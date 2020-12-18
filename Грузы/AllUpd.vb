@@ -394,4 +394,52 @@
         End Using
     End Sub
 
+    Public Async Sub ПаролиВводAllAsync()
+        Await Task.Run(Sub() ПаролиВводAll())
+    End Sub
+    Public Sub ПаролиВводAll()
+        Using db As New dbAllDataContext()
+            Dim m = db.ПаролиВвод.Select(Function(x) x).ToList()
+            If m.Count > 0 Then
+                ПаролиВвод = New List(Of ПаролиВвод)
+                ПаролиВвод = m
+            Else
+                Dim k As New List(Of ПаролиВвод)
+                ПаролиВвод = k
+            End If
+        End Using
+    End Sub
+
+    Public Async Sub SkypeКлиентПредложениеAllAsync()
+        Await Task.Run(Sub() SkypeКлиентПредложениеAll())
+    End Sub
+    Public Sub SkypeКлиентПредложениеAll()
+        Using db As New dbAllDataContext()
+            Dim m = db.SkypeКлиентПредложение.Select(Function(x) x).ToList()
+            If m.Count > 0 Then
+                SkypeКлиентПредложение = New List(Of SkypeКлиентПредложение)
+                SkypeКлиентПредложение = m
+            Else
+                Dim k As New List(Of SkypeКлиентПредложение)
+                SkypeКлиентПредложение = k
+            End If
+        End Using
+    End Sub
+
+    Public Async Sub SkypeПеревозчикПредложениеAllAsync()
+        Await Task.Run(Sub() SkypeПеревозчикПредложениеAll())
+    End Sub
+    Public Sub SkypeПеревозчикПредложениеAll()
+        Using db As New dbAllDataContext()
+            Dim m = db.SkypeПеревозчикПредложение.Select(Function(x) x).ToList()
+            If m.Count > 0 Then
+                SkypeПеревозчикПредложение = New List(Of SkypeПеревозчикПредложение)
+                SkypeПеревозчикПредложение = m
+            Else
+                Dim k As New List(Of SkypeПеревозчикПредложение)
+                SkypeПеревозчикПредложение = k
+            End If
+        End Using
+    End Sub
+
 End Class

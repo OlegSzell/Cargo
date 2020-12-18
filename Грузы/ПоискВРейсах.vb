@@ -2,6 +2,7 @@
 'Imports Microsoft.Office.Interop.Excel
 Imports System.IO
 Imports System.Data.Linq.SqlClient
+Imports System.ComponentModel
 
 Public Class ПоискВРейсах
     Private Delegate Sub comb11()
@@ -516,5 +517,12 @@ Public Class ПоискВРейсах
         End If
         Dim kp As String = ComboBox1.SelectedItem
         LoadLst(kp)
+    End Sub
+
+    Private Sub ПоискВРейсах_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+        Годс = CType(ComboBox1.Text, Integer)
+        If Годс = 0 Then
+            Годс = Now.Year
+        End If
     End Sub
 End Class

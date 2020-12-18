@@ -4,7 +4,7 @@ End Class
 Public Class ГрузыClass
     Public Property Номер As Integer
     Public Property Наименование As String
-    Public Property Вес As Integer
+    Public Property Вес As String
     Public Property Обьем As String
     Public Property Длина As String
     Public Property Ширина As String
@@ -33,7 +33,7 @@ End Class
 Public Class AllClientClass
     Inherits МаршрутыClass
     Public Property Наименование As String
-    Public Property Вес As Integer
+    Public Property Вес As String
     Public Property Обьем As String
     Public Property Длина As String
     Public Property Ширина As String
@@ -77,10 +77,15 @@ Public Class Com1ЖурналClass
 
     Public Property КонтЛицо As String
     Public Property КонтТелефон As String
+    Public Property Результат As String
+    Public Property ДатаРезультата As String
     Public Property lstPer As List(Of Grid1ЖурналClass)
 
 End Class
 Public Class Grid1ЖурналClass
+    Implements ISkype
+    Dim sk As Long
+    Dim sk1 As String
     Public Property Номер As Integer
     Public Property Перевозчик As String
     Public Property Контакт As String
@@ -89,8 +94,28 @@ Public Class Grid1ЖурналClass
     Public Property Ставка As String
     Public Property ДопИнформация As String
     Public Property КодПеревозчика As Integer
-
+    Public Property КодЖурналПеревозчик As Integer
+    Public Property Skype As String Implements ISkype.Skype
+    '    Get
+    '        Return sk
+    '    End Get
+    '    Set(value As Long)
+    '        sk = value
+    '    End Set
+    'End Property
+    Public Property SkypeDate As String Implements ISkype.SkypeDate
+    '    Get
+    '        Return sk1
+    '    End Get
+    '    Set(value As String)
+    '        sk1 = value
+    '    End Set
+    'End Property
 End Class
+Public Interface ISkype
+    Property Skype As String
+    Property SkypeDate As String
+End Interface
 Public Class Grid3ЖурналClass
     Public Property Номер As Integer
     Public Property КодПеревозчика As Integer

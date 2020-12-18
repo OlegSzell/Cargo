@@ -68,6 +68,7 @@ Partial Class НовыйПеревоз
         Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
         Me.ListBox1 = New System.Windows.Forms.ListBox()
         Me.ComboBox4 = New System.Windows.Forms.ComboBox()
+        Me.CheckBox3 = New System.Windows.Forms.CheckBox()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
@@ -87,7 +88,7 @@ Partial Class НовыйПеревоз
         'Label18
         '
         Me.Label18.AutoSize = True
-        Me.Label18.Location = New System.Drawing.Point(154, 25)
+        Me.Label18.Location = New System.Drawing.Point(374, 6)
         Me.Label18.Name = "Label18"
         Me.Label18.Size = New System.Drawing.Size(56, 18)
         Me.Label18.TabIndex = 56
@@ -98,17 +99,18 @@ Partial Class НовыйПеревоз
         Me.ComboBox3.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
         Me.ComboBox3.FormattingEnabled = True
         Me.ComboBox3.Items.AddRange(New Object() {"1", "2"})
-        Me.ComboBox3.Location = New System.Drawing.Point(214, 22)
+        Me.ComboBox3.Location = New System.Drawing.Point(434, 3)
         Me.ComboBox3.Name = "ComboBox3"
         Me.ComboBox3.Size = New System.Drawing.Size(53, 23)
         Me.ComboBox3.TabIndex = 55
         '
         'MaskedTextBox1
         '
-        Me.MaskedTextBox1.Location = New System.Drawing.Point(857, 8)
+        Me.MaskedTextBox1.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.MaskedTextBox1.Location = New System.Drawing.Point(876, 22)
         Me.MaskedTextBox1.Mask = "00/00/0000"
         Me.MaskedTextBox1.Name = "MaskedTextBox1"
-        Me.MaskedTextBox1.Size = New System.Drawing.Size(88, 26)
+        Me.MaskedTextBox1.Size = New System.Drawing.Size(88, 23)
         Me.MaskedTextBox1.TabIndex = 54
         Me.MaskedTextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         Me.MaskedTextBox1.ValidatingType = GetType(Date)
@@ -116,7 +118,7 @@ Partial Class НовыйПеревоз
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(539, 14)
+        Me.Label11.Location = New System.Drawing.Point(704, 1)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(97, 18)
         Me.Label11.TabIndex = 53
@@ -124,19 +126,21 @@ Partial Class НовыйПеревоз
         '
         'ComboBox2
         '
+        Me.ComboBox2.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
         Me.ComboBox2.FormattingEnabled = True
         Me.ComboBox2.Items.AddRange(New Object() {"Евро", "Доллар", "Российский рубль"})
-        Me.ComboBox2.Location = New System.Drawing.Point(645, 8)
+        Me.ComboBox2.Location = New System.Drawing.Point(707, 22)
         Me.ComboBox2.Name = "ComboBox2"
-        Me.ComboBox2.Size = New System.Drawing.Size(150, 26)
+        Me.ComboBox2.Size = New System.Drawing.Size(150, 23)
         Me.ComboBox2.TabIndex = 52
         '
         'CheckBox4
         '
         Me.CheckBox4.AutoSize = True
-        Me.CheckBox4.Location = New System.Drawing.Point(151, 0)
+        Me.CheckBox4.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.CheckBox4.Location = New System.Drawing.Point(151, 2)
         Me.CheckBox4.Name = "CheckBox4"
-        Me.CheckBox4.Size = New System.Drawing.Size(148, 22)
+        Me.CheckBox4.Size = New System.Drawing.Size(133, 19)
         Me.CheckBox4.TabIndex = 50
         Me.CheckBox4.Text = "Оформить договор"
         Me.CheckBox4.UseVisualStyleBackColor = True
@@ -145,7 +149,7 @@ Partial Class НовыйПеревоз
         '
         Me.GroupBox2.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.GroupBox2.Controls.Add(Me.CheckBox2)
-        Me.GroupBox2.Location = New System.Drawing.Point(341, 4)
+        Me.GroupBox2.Location = New System.Drawing.Point(493, 3)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(192, 42)
         Me.GroupBox2.TabIndex = 51
@@ -187,7 +191,7 @@ Partial Class НовыйПеревоз
         'Label16
         '
         Me.Label16.AutoSize = True
-        Me.Label16.Location = New System.Drawing.Point(812, 10)
+        Me.Label16.Location = New System.Drawing.Point(873, 0)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(38, 18)
         Me.Label16.TabIndex = 47
@@ -515,11 +519,23 @@ Partial Class НовыйПеревоз
         Me.ComboBox4.Size = New System.Drawing.Size(354, 26)
         Me.ComboBox4.TabIndex = 58
         '
+        'CheckBox3
+        '
+        Me.CheckBox3.AutoSize = True
+        Me.CheckBox3.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.CheckBox3.Location = New System.Drawing.Point(151, 27)
+        Me.CheckBox3.Name = "CheckBox3"
+        Me.CheckBox3.Size = New System.Drawing.Size(332, 19)
+        Me.CheckBox3.TabIndex = 59
+        Me.CheckBox3.Text = "Оформить новый договор, с действующим перевозом."
+        Me.CheckBox3.UseVisualStyleBackColor = True
+        '
         'НовыйПеревоз
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 18.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1169, 742)
+        Me.Controls.Add(Me.CheckBox3)
         Me.Controls.Add(Me.ComboBox4)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Label18)
@@ -596,4 +612,5 @@ Partial Class НовыйПеревоз
     Friend WithEvents ListBox1 As ListBox
     Friend WithEvents CheckBox2 As CheckBox
     Friend WithEvents ComboBox4 As ComboBox
+    Friend WithEvents CheckBox3 As CheckBox
 End Class

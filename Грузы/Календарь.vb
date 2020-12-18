@@ -1,6 +1,9 @@
 ﻿
 
 
+Imports System.ComponentModel
+Imports System.Globalization
+Imports System.Reflection
 Imports System.Runtime.CompilerServices
 
 Public Class Календарь
@@ -9,11 +12,184 @@ Public Class Календарь
     Private Property eColumn As Integer
     Private Property eRow As Integer
     Private Property NewColor As Color
+    Private grid2all As List(Of Grid2Class)
+    Private bsgrid2 As BindingSource
+    Private SelWeek As String
     Private Sub Календарь_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.MdiParent = MDIParent1
+
         NewColor = Color.FromArgb(203, 153, 81)
 
+        grid2all = New List(Of Grid2Class)
+        bsgrid2 = New BindingSource
+        bsgrid2.DataSource = grid2all
+        Grid2.DataSource = bsgrid2
+        GridView(Grid2)
+        Grid2.Columns(0).Width = 60
+        Grid2.SelectionMode = DataGridViewSelectionMode.CellSelect
     End Sub
+    Public Class Grid2Class
+        Public Property Время As String
+        Public Property Понедельник As String
+        Public Property Вторник As String
+        Public Property Среда As String
+        Public Property Четверг As String
+        Public Property Пятница As String
+        Public Property Суббота As String
+        Public Property Воскресенье As String
+
+
+    End Class
+    Private Sub grid2sel(ByVal d As String)
+        Dim mo As New AllUpd
+        Do While AllClass.Календарь_Даты Is Nothing
+            mo.Календарь_ДатыAll()
+        Loop
+
+        'номер недели по дате
+
+        'Dim cal As New GregorianCalendar()
+        'Dim weekNumber = cal.GetWeekOfYear(d, CalendarWeekRule.FirstFullWeek, DayOfWeek.Monday)
+
+        Dim m As FEndDateWeekClass = FEndDateWeek(d)
+        If m Is Nothing Then Return
+        If grid2all IsNot Nothing Then
+            grid2all.Clear()
+        End If
+        Dim f1 As New Grid2Class With {.Понедельник = m.FierstDay.ToShortDateString, .Вторник = m.FierstDay.AddDays(1).ToShortDateString,
+            .Среда = m.FierstDay.AddDays(2).ToShortDateString, .Четверг = m.FierstDay.AddDays(3).ToShortDateString, .Пятница = m.FierstDay.AddDays(4).ToShortDateString,
+            .Суббота = m.FierstDay.AddDays(5).ToShortDateString, .Воскресенье = m.FierstDay.AddDays(6).ToShortDateString}
+
+        grid2all.Add(f1)
+
+        For i As Integer = 0 To 23
+            grid2all.Add(New Grid2Class With {.Время = i & ".00"})
+        Next
+        bsgrid2.ResetBindings(False)
+        Dim f = (From x In AllClass.Календарь_Даты
+                 Order By x?.Дата
+                 Where x?.Дата >= m?.FierstDay And x?.Дата <= m?.EndDay
+                 Select x).ToList
+
+        If f IsNot Nothing Then
+
+            ''название столбцов в классе
+            'Dim mh1 = f(0).GetType
+            'Dim mkl1 As New List(Of Object)
+            'For Each b2 In mh.GetFields(BindingFlags.Instance Or BindingFlags.NonPublic)
+            '    mkl1.Add(b2.Name)
+            'Next
+            'mkl1.Remove("_ID")
+            'mkl1.Remove("_Дата")
+            'mkl1.Remove("_Выполнение")
+            'mkl1.Remove("_Неделя")
+            'mkl1.Remove("PropertyChangingEvent")
+            'mkl1.Remove("PropertyChangedEvent")
+
+
+
+            For Each b In f
+
+                Dim dta = CDate(b.Дата).DayOfWeek  'день недели
+
+                'название столбцов в классе
+                Dim mh = b.GetType
+                Dim mkl As New List(Of Сборка)
+                For Each b2 In mh.GetFields(BindingFlags.Instance Or BindingFlags.NonPublic)
+                    mkl.Add(New Сборка With {.Время = b2.Name, .Значение = b2?.GetValue(b)?.ToString})
+                Next
+                mkl.RemoveRange(0, 2)
+                mkl.RemoveRange(24, 4)
+
+
+
+                SortFunc(dta, mkl, grid2all)
+            Next
+
+        End If
+
+
+    End Sub
+    Public Class Сборка
+        Public Property Время As String
+        Public Property Значение As String
+    End Class
+    Private Sub SortFunc(ByVal Column As String, ByVal Dann As List(Of Сборка), ByVal p As List(Of Grid2Class))
+        Select Case Column 'день недели
+            Case 1
+                Dim i As Integer = 1
+                For Each b1 In Dann
+                    p(i).Понедельник = b1.Значение
+                    i += 1
+                Next
+
+            Case 2
+                Dim i As Integer = 1
+                For Each b1 In Dann
+                    p(i).Вторник = b1.Значение
+                    i += 1
+                Next
+            Case 3
+                Dim i As Integer = 1
+                For Each b1 In Dann
+                    p(i).Среда = b1.Значение
+                    i += 1
+                Next
+            Case 4
+                Dim i As Integer = 1
+                For Each b1 In Dann
+                    p(i).Четверг = b1.Значение
+                    i += 1
+                Next
+            Case 5
+                Dim i As Integer = 1
+                For Each b1 In Dann
+                    p(i).Пятница = b1.Значение
+                    i += 1
+                Next
+            Case 6
+                Dim i As Integer = 1
+                For Each b1 In Dann
+                    p(i).Суббота = b1.Значение
+                    i += 1
+                Next
+            Case 7
+                Dim i As Integer = 1
+                For Each b1 In Dann
+                    p(i).Воскресенье = b1.Значение
+                    i += 1
+                Next
+
+        End Select
+        bsgrid2.ResetBindings(False)
+    End Sub
+    Private Function FEndDateWeek(ByVal d As String) As FEndDateWeekClass
+        Dim f = CDate(d).DayOfWeek
+        Dim f1 = CDate(d)
+        Select Case f
+            Case 1
+                Return New FEndDateWeekClass With {.FierstDay = f1, .EndDay = f1.AddDays(6)}
+            Case 2
+                Return New FEndDateWeekClass With {.FierstDay = f1.AddDays(-1), .EndDay = f1.AddDays(5)}
+            Case 3
+                Return New FEndDateWeekClass With {.FierstDay = f1.AddDays(-2), .EndDay = f1.AddDays(4)}
+            Case 4
+                Return New FEndDateWeekClass With {.FierstDay = f1.AddDays(-3), .EndDay = f1.AddDays(3)}
+            Case 5
+                Return New FEndDateWeekClass With {.FierstDay = f1.AddDays(-4), .EndDay = f1.AddDays(2)}
+            Case 6
+                Return New FEndDateWeekClass With {.FierstDay = f1.AddDays(-5), .EndDay = f1.AddDays(1)}
+            Case 7
+                Return New FEndDateWeekClass With {.FierstDay = f1.AddDays(-6), .EndDay = f1}
+            Case Else
+                Return Nothing
+        End Select
+
+    End Function
+    Public Class FEndDateWeekClass
+        Public Property FierstDay As DateTime
+        Public Property EndDay As DateTime
+    End Class
+
     Private Sub GridUpdate(ByVal d As String)
 
         If Grid1.InvokeRequired Then
@@ -341,8 +517,27 @@ Public Class Календарь
     Private Sub Calendar1_DateSelected(sender As Object, e As DateRangeEventArgs) Handles Calendar1.DateSelected
         Label2.Text = e.Start.ToShortDateString()
         MaskedTextBox1.Text = e.Start.ToShortDateString()
-        GridUpdateAsync(e.Start.ToShortDateString())
-        Grid2Update(e.Start.ToShortDateString())
+
+        'Dim myCI As New CultureInfo("ru-RU")
+        'Dim myCal As Calendar = myCI.Calendar
+
+        '' Gets the DTFI properties required by GetWeekOfYear.
+        'Dim myCWR As CalendarWeekRule = myCI.DateTimeFormat.CalendarWeekRule
+        'Dim myFirstDOW As DayOfWeek = myCI.DateTimeFormat.FirstDayOfWeek
+        'Dim SelWeek = myCal.GetWeekOfYear(e.Start, myCWR, myFirstDOW)
+
+        grid2sel(e.Start.ToShortDateString())
+
+        'по недели ищем начало недли число
+        'Dim firstDay As New DateTime(e.Start.Year, 1, 1)
+        'While firstDay.DayOfWeek <> DayOfWeek.Monday
+        '    firstDay = firstDay.AddDays(-1)
+        'End While
+        'Dim k = firstDay.AddDays(7 * (f - 1))
+
+        'GridUpdateAsync(e.Start.ToShortDateString())
+
+        'Grid2Update(e.Start.ToShortDateString())
 
     End Sub
     Private Sub InsertData()
@@ -660,7 +855,7 @@ Public Class Календарь
                     RichTextBox1.Text = Strings.Left(RichTextBox1.Text, lit)
                 End If
             Else
-                    RichTextBox1.Text = ""
+                RichTextBox1.Text = ""
 
             End If
             ComboBox2.Text = ComboBox1.Text
@@ -686,19 +881,19 @@ Public Class Календарь
     End Sub
 
     Private Sub Grid2_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles Grid2.CellClick
-        If e.ColumnIndex = -1 Then Exit Sub
-        If e.ColumnIndex = 0 Then Exit Sub
-        If Grid2.CurrentRow.Cells(e.ColumnIndex).Value IsNot Nothing And IsDBNull(Grid2.CurrentRow.Cells(e.ColumnIndex).Value) = False Then
-            Dim ml As String = Trim(Grid2.CurrentRow.Cells(e.ColumnIndex).Value)
-            'RichTextBox1.Text.Trim(ml)
-            'Dim kl = RichTextBox1.Text
+        'If e.ColumnIndex = -1 Then Exit Sub
+        'If e.ColumnIndex = 0 Then Exit Sub
+        'If Grid2.CurrentRow.Cells(e.ColumnIndex).Value IsNot Nothing And IsDBNull(Grid2.CurrentRow.Cells(e.ColumnIndex).Value) = False Then
+        '    Dim ml As String = Trim(Grid2.CurrentRow.Cells(e.ColumnIndex).Value)
+        '    'RichTextBox1.Text.Trim(ml)
+        '    'Dim kl = RichTextBox1.Text
 
-            MaskedTextBox1.Text = Strings.Left(Grid2.Columns(e.ColumnIndex).HeaderText, 10)
-            ComboBox2.Text = Grid2.CurrentRow.Cells(0).Value
+        '    MaskedTextBox1.Text = Strings.Left(Grid2.Columns(e.ColumnIndex).HeaderText, 10)
+        '    ComboBox2.Text = Grid2.CurrentRow.Cells(0).Value
 
-            Label2.Text = Strings.Left(Grid2.Columns(e.ColumnIndex).HeaderText, 10)
-            ComboBox1.Text = Grid2.CurrentRow.Cells(0).Value
-        End If
+        '    Label2.Text = Strings.Left(Grid2.Columns(e.ColumnIndex).HeaderText, 10)
+        '    ComboBox1.Text = Grid2.CurrentRow.Cells(0).Value
+        'End If
 
     End Sub
 
@@ -706,24 +901,24 @@ Public Class Календарь
         GetType(DataGridView).InvokeMember("DoubleBuffered", Reflection.BindingFlags.Instance Or Reflection.BindingFlags.NonPublic Or Reflection.BindingFlags.SetProperty, Nothing, Me.Grid2, New Object() {True})
     End Sub
 
-    Private Sub Grid1_Scroll(sender As Object, e As ScrollEventArgs) Handles Grid1.Scroll
+    Private Sub Grid1_Scroll(sender As Object, e As ScrollEventArgs) Handles Grid1.Scroll 'скрол без бликов  datagrid grid1
         GetType(DataGridView).InvokeMember("DoubleBuffered", Reflection.BindingFlags.Instance Or Reflection.BindingFlags.NonPublic Or Reflection.BindingFlags.SetProperty, Nothing, Me.Grid1, New Object() {True})
     End Sub
 
 
 
 
-    Private Sub Grid2_CellMouseDown(sender As Object, e As DataGridViewCellMouseEventArgs) Handles Grid2.CellMouseDown
-        If e.RowIndex = -1 Then Exit Sub
-        If Grid2.Rows(e.RowIndex).Cells(e.ColumnIndex).Value.ToString <> "" Then
-            If e.Button = MouseButtons.Right Then
-                ContextMenuStrip1.Show(MousePosition, ToolStripDropDownDirection.Right)
-                eRow = e.RowIndex
-                eColumn = e.ColumnIndex
-            End If
-        End If
+    'Private Sub Grid2_CellMouseDown(sender As Object, e As DataGridViewCellMouseEventArgs) Handles Grid2.CellMouseDown
+    '    If e.RowIndex = -1 Then Exit Sub
+    '    If Grid2.Rows(e.RowIndex).Cells(e.ColumnIndex).Value.ToString <> "" Then
+    '        If e.Button = MouseButtons.Right Then
+    '            ContextMenuStrip1.Show(MousePosition, ToolStripDropDownDirection.Right)
+    '            eRow = e.RowIndex
+    '            eColumn = e.ColumnIndex
+    '        End If
+    '    End If
 
-    End Sub
+    'End Sub
 
     Private Sub ВыполненоToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ВыполненоToolStripMenuItem.Click
 
@@ -802,4 +997,192 @@ Public Class Календарь
         End If
 
     End Sub
+    Private Sub AddDatabase(ByVal dat As String, ByVal int As Integer, ByVal Valu As String)
+        Dim dat1 As New Date
+        If dat IsNot Nothing Then
+            dat1 = CDate(dat)
+        End If
+        Dim mo As New AllUpd
+        Using db As New dbAllDataContext
+            Dim f = db.Календарь_Даты.Where(Function(x) CDate(x.Дата) = dat1).FirstOrDefault()
+            If f IsNot Nothing Then
+                Select Case int
+                    Case 0
+                        f._0_00 = Valu
+                    Case 1
+                        f._1_00 = Valu
+                    Case 2
+                        f._2_00 = Valu
+                    Case 3
+                        f._3_00 = Valu
+                    Case 4
+                        f._4_00 = Valu
+                    Case 5
+                        f._5_00 = Valu
+                    Case 6
+                        f._6_00 = Valu
+                    Case 7
+                        f._7_00 = Valu
+                    Case 8
+                        f._8_00 = Valu
+                    Case 9
+                        f._9_00 = Valu
+                    Case 10
+                        f._10_00 = Valu
+                    Case 11
+                        f._11_00 = Valu
+                    Case 12
+                        f._12_00 = Valu
+                    Case 13
+                        f._13_00 = Valu
+                    Case 14
+                        f._14_00 = Valu
+                    Case 15
+                        f._15_00 = Valu
+                    Case 16
+                        f._16_00 = Valu
+                    Case 17
+                        f._17_00 = Valu
+                    Case 18
+                        f._18_00 = Valu
+                    Case 19
+                        f._19_00 = Valu
+                    Case 20
+                        f._20_00 = Valu
+                    Case 21
+                        f._21_00 = Valu
+                    Case 22
+                        f._22_00 = Valu
+                    Case 23
+                        f._23_00 = Valu
+                End Select
+                db.SubmitChanges()
+
+            Else
+                Dim f1 As New Календарь_Даты
+
+                Select Case int
+                    Case 0
+                        f1._0_00 = Valu
+                    Case 1
+                        f1._1_00 = Valu
+                    Case 2
+                        f1._2_00 = Valu
+                    Case 3
+                        f1._3_00 = Valu
+                    Case 4
+                        f1._4_00 = Valu
+                    Case 5
+                        f1._5_00 = Valu
+                    Case 6
+                        f1._6_00 = Valu
+                    Case 7
+                        f1._7_00 = Valu
+                    Case 8
+                        f1._8_00 = Valu
+                    Case 9
+                        f1._9_00 = Valu
+                    Case 10
+                        f1._10_00 = Valu
+                    Case 11
+                        f1._11_00 = Valu
+                    Case 12
+                        f1._12_00 = Valu
+                    Case 13
+                        f1._13_00 = Valu
+                    Case 14
+                        f1._14_00 = Valu
+                    Case 15
+                        f1._15_00 = Valu
+                    Case 16
+                        f1._16_00 = Valu
+                    Case 17
+                        f1._17_00 = Valu
+                    Case 18
+                        f1._18_00 = Valu
+                    Case 19
+                        f1._19_00 = Valu
+                    Case 20
+                        f1._20_00 = Valu
+                    Case 21
+                        f1._21_00 = Valu
+                    Case 22
+                        f1._22_00 = Valu
+                    Case 23
+                        f1._23_00 = Valu
+                End Select
+                f1.Дата = dat1.ToShortDateString
+                db.Календарь_Даты.InsertOnSubmit(f1)
+                db.SubmitChanges()
+
+            End If
+            mo.Календарь_ДатыAll()
+        End Using
+    End Sub
+
+
+
+    Private Sub Grid2_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles Grid2.CellEndEdit
+        If e.RowIndex = -1 Then Return
+        If e.RowIndex = 0 Then Return
+
+        Dim f = e.ColumnIndex
+        Dim dat = selAdd(f)
+        Dim f3 = grid2all.ElementAt(e.RowIndex)
+        Dim f1 = Значение2(f, f3)
+        AddDatabase(dat, e.RowIndex - 1, f1)
+    End Sub
+    Private Function selAdd(ByVal NumbColumn As Integer) As String
+        Select Case NumbColumn
+            Case 1
+                Dim m = grid2all.Select(Function(x) x.Понедельник).FirstOrDefault()
+                Return m
+            Case 2
+                Dim m = grid2all.Select(Function(x) x.Вторник).FirstOrDefault()
+                Return m
+            Case 3
+                Dim m = grid2all.Select(Function(x) x.Среда).FirstOrDefault()
+                Return m
+            Case 4
+                Dim m = grid2all.Select(Function(x) x.Четверг).FirstOrDefault()
+                Return m
+            Case 5
+                Dim m = grid2all.Select(Function(x) x.Пятница).FirstOrDefault()
+                Return m
+            Case 6
+                Dim m = grid2all.Select(Function(x) x.Суббота).FirstOrDefault()
+                Return m
+            Case 7
+                Dim m = grid2all.Select(Function(x) x.Воскресенье).FirstOrDefault()
+                Return m
+        End Select
+        Return Nothing
+    End Function
+    Private Function Значение2(ByVal NumbColumn As Integer, ByVal Grd2 As Grid2Class) As String
+        Select Case NumbColumn
+            Case 1
+                Dim m = Grd2.Понедельник
+                Return m
+            Case 2
+                Dim m = Grd2.Вторник
+                Return m
+            Case 3
+                Dim m = Grd2.Среда
+                Return m
+            Case 4
+                Dim m = Grd2.Четверг
+                Return m
+            Case 5
+                Dim m = Grd2.Пятница
+                Return m
+            Case 6
+                Dim m = Grd2.Суббота
+                Return m
+            Case 7
+                Dim m = Grd2.Воскресенье
+                Return m
+        End Select
+        Return Nothing
+    End Function
+
 End Class

@@ -37,9 +37,6 @@ Partial Class ПоискПолный
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.Button6 = New System.Windows.Forms.Button()
         Me.TextBox6 = New System.Windows.Forms.TextBox()
-        Me.GroupBox7 = New System.Windows.Forms.GroupBox()
-        Me.Button7 = New System.Windows.Forms.Button()
-        Me.TextBox7 = New System.Windows.Forms.TextBox()
         Me.GroupBox8 = New System.Windows.Forms.GroupBox()
         Me.Button4 = New System.Windows.Forms.Button()
         Me.TextBox4 = New System.Windows.Forms.TextBox()
@@ -59,7 +56,6 @@ Partial Class ПоискПолный
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
-        Me.GroupBox7.SuspendLayout()
         Me.GroupBox8.SuspendLayout()
         Me.GroupBox9.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
@@ -179,34 +175,6 @@ Partial Class ПоискПолный
         Me.TextBox6.Size = New System.Drawing.Size(175, 26)
         Me.TextBox6.TabIndex = 6
         '
-        'GroupBox7
-        '
-        Me.GroupBox7.BackColor = System.Drawing.Color.DarkSeaGreen
-        Me.GroupBox7.Controls.Add(Me.Button7)
-        Me.GroupBox7.Controls.Add(Me.TextBox7)
-        Me.GroupBox7.Location = New System.Drawing.Point(12, 441)
-        Me.GroupBox7.Name = "GroupBox7"
-        Me.GroupBox7.Size = New System.Drawing.Size(288, 51)
-        Me.GroupBox7.TabIndex = 8
-        Me.GroupBox7.TabStop = False
-        Me.GroupBox7.Text = "Поиск по адресу выгрузки"
-        '
-        'Button7
-        '
-        Me.Button7.Location = New System.Drawing.Point(191, 19)
-        Me.Button7.Name = "Button7"
-        Me.Button7.Size = New System.Drawing.Size(75, 26)
-        Me.Button7.TabIndex = 5
-        Me.Button7.Text = "Поиск"
-        Me.Button7.UseVisualStyleBackColor = True
-        '
-        'TextBox7
-        '
-        Me.TextBox7.Location = New System.Drawing.Point(10, 19)
-        Me.TextBox7.Name = "TextBox7"
-        Me.TextBox7.Size = New System.Drawing.Size(175, 26)
-        Me.TextBox7.TabIndex = 6
-        '
         'GroupBox8
         '
         Me.GroupBox8.BackColor = System.Drawing.Color.Peru
@@ -269,9 +237,9 @@ Partial Class ПоискПолный
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.ListBox1.FormattingEnabled = True
         Me.ListBox1.ItemHeight = 18
-        Me.ListBox1.Location = New System.Drawing.Point(12, 498)
+        Me.ListBox1.Location = New System.Drawing.Point(12, 441)
         Me.ListBox1.Name = "ListBox1"
-        Me.ListBox1.Size = New System.Drawing.Size(288, 40)
+        Me.ListBox1.Size = New System.Drawing.Size(288, 94)
         Me.ListBox1.TabIndex = 9
         '
         'GroupBox4
@@ -347,7 +315,7 @@ Partial Class ПоискПолный
         Me.Grid1.ReadOnly = True
         DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.Grid1.RowsDefaultCellStyle = DataGridViewCellStyle1
-        Me.Grid1.Size = New System.Drawing.Size(1088, 469)
+        Me.Grid1.Size = New System.Drawing.Size(1088, 466)
         Me.Grid1.TabIndex = 2
         '
         'ПоискПолный
@@ -358,7 +326,6 @@ Partial Class ПоискПолный
         Me.ClientSize = New System.Drawing.Size(1398, 550)
         Me.Controls.Add(Me.GroupBox4)
         Me.Controls.Add(Me.ListBox1)
-        Me.Controls.Add(Me.GroupBox7)
         Me.Controls.Add(Me.GroupBox5)
         Me.Controls.Add(Me.GroupBox9)
         Me.Controls.Add(Me.GroupBox8)
@@ -373,7 +340,6 @@ Partial Class ПоискПолный
         Me.Name = "ПоискПолный"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Поиск"
-        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
@@ -382,8 +348,6 @@ Partial Class ПоискПолный
         Me.GroupBox3.PerformLayout()
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
-        Me.GroupBox7.ResumeLayout(False)
-        Me.GroupBox7.PerformLayout()
         Me.GroupBox8.ResumeLayout(False)
         Me.GroupBox8.PerformLayout()
         Me.GroupBox9.ResumeLayout(False)
@@ -400,7 +364,6 @@ Partial Class ПоискПолный
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents GroupBox3 As GroupBox
     Friend WithEvents GroupBox5 As GroupBox
-    Friend WithEvents GroupBox7 As GroupBox
     Friend WithEvents GroupBox8 As GroupBox
     Friend WithEvents GroupBox9 As GroupBox
     Friend WithEvents ListBox1 As ListBox
@@ -412,8 +375,6 @@ Partial Class ПоискПолный
     Friend WithEvents TextBox3 As TextBox
     Friend WithEvents Button6 As Button
     Friend WithEvents TextBox6 As TextBox
-    Friend WithEvents Button7 As Button
-    Friend WithEvents TextBox7 As TextBox
     Friend WithEvents Button4 As Button
     Friend WithEvents TextBox4 As TextBox
     Friend WithEvents Button5 As Button

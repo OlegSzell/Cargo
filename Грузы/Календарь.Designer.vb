@@ -23,8 +23,8 @@ Partial Class Календарь
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Calendar1 = New System.Windows.Forms.MonthCalendar()
         Me.Grid1 = New System.Windows.Forms.DataGridView()
         Me.Grid2 = New System.Windows.Forms.DataGridView()
@@ -72,13 +72,13 @@ Partial Class Календарь
         Me.Grid1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
         Me.Grid1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.Grid1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.Grid1.Location = New System.Drawing.Point(413, 56)
+        Me.Grid1.Location = New System.Drawing.Point(413, 195)
         Me.Grid1.Margin = New System.Windows.Forms.Padding(4)
         Me.Grid1.Name = "Grid1"
         Me.Grid1.ReadOnly = True
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.Grid1.RowsDefaultCellStyle = DataGridViewCellStyle3
-        Me.Grid1.Size = New System.Drawing.Size(1096, 162)
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Grid1.RowsDefaultCellStyle = DataGridViewCellStyle1
+        Me.Grid1.Size = New System.Drawing.Size(760, 23)
         Me.Grid1.TabIndex = 2
         '
         'Grid2
@@ -91,13 +91,12 @@ Partial Class Календарь
         Me.Grid2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.Grid2.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.Grid2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.Grid2.Location = New System.Drawing.Point(413, 226)
+        Me.Grid2.Location = New System.Drawing.Point(21, 234)
         Me.Grid2.Margin = New System.Windows.Forms.Padding(4)
         Me.Grid2.Name = "Grid2"
-        Me.Grid2.ReadOnly = True
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.Grid2.RowsDefaultCellStyle = DataGridViewCellStyle4
-        Me.Grid2.Size = New System.Drawing.Size(1096, 345)
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Grid2.RowsDefaultCellStyle = DataGridViewCellStyle2
+        Me.Grid2.Size = New System.Drawing.Size(1503, 377)
         Me.Grid2.TabIndex = 3
         '
         'Label2
@@ -114,7 +113,7 @@ Partial Class Календарь
         '
         Me.RichTextBox1.Location = New System.Drawing.Point(9, 51)
         Me.RichTextBox1.Name = "RichTextBox1"
-        Me.RichTextBox1.Size = New System.Drawing.Size(370, 187)
+        Me.RichTextBox1.Size = New System.Drawing.Size(370, 26)
         Me.RichTextBox1.TabIndex = 6
         Me.RichTextBox1.Text = ""
         '
@@ -131,7 +130,7 @@ Partial Class Календарь
         '
         Me.Button1.BackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
         Me.Button1.Font = New System.Drawing.Font("Times New Roman", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.Button1.Location = New System.Drawing.Point(278, 305)
+        Me.Button1.Location = New System.Drawing.Point(656, 80)
         Me.Button1.Margin = New System.Windows.Forms.Padding(4)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(100, 31)
@@ -143,7 +142,7 @@ Partial Class Календарь
         '
         Me.Button2.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer))
         Me.Button2.Font = New System.Drawing.Font("Times New Roman", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.Button2.Location = New System.Drawing.Point(7, 305)
+        Me.Button2.Location = New System.Drawing.Point(385, 80)
         Me.Button2.Margin = New System.Windows.Forms.Padding(4)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(100, 31)
@@ -177,7 +176,7 @@ Partial Class Календарь
         '
         Me.Button3.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
         Me.Button3.Font = New System.Drawing.Font("Times New Roman", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.Button3.Location = New System.Drawing.Point(170, 305)
+        Me.Button3.Location = New System.Drawing.Point(548, 80)
         Me.Button3.Margin = New System.Windows.Forms.Padding(4)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(100, 31)
@@ -215,9 +214,9 @@ Partial Class Календарь
         Me.GroupBox5.Controls.Add(Me.Button2)
         Me.GroupBox5.Controls.Add(Me.Button1)
         Me.GroupBox5.Controls.Add(Me.RichTextBox1)
-        Me.GroupBox5.Location = New System.Drawing.Point(12, 224)
+        Me.GroupBox5.Location = New System.Drawing.Point(412, 56)
         Me.GroupBox5.Name = "GroupBox5"
-        Me.GroupBox5.Size = New System.Drawing.Size(385, 350)
+        Me.GroupBox5.Size = New System.Drawing.Size(761, 126)
         Me.GroupBox5.TabIndex = 39
         Me.GroupBox5.TabStop = False
         Me.GroupBox5.Text = "Событие"
@@ -229,7 +228,7 @@ Partial Class Календарь
         Me.GroupBox1.Controls.Add(Me.ComboBox2)
         Me.GroupBox1.Controls.Add(Me.Label3)
         Me.GroupBox1.Controls.Add(Me.MaskedTextBox1)
-        Me.GroupBox1.Location = New System.Drawing.Point(9, 244)
+        Me.GroupBox1.Location = New System.Drawing.Point(385, 19)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(370, 54)
         Me.GroupBox1.TabIndex = 40
@@ -267,19 +266,19 @@ Partial Class Календарь
         '
         Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ВыполненоToolStripMenuItem})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(181, 48)
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(139, 26)
         '
         'ВыполненоToolStripMenuItem
         '
         Me.ВыполненоToolStripMenuItem.Name = "ВыполненоToolStripMenuItem"
-        Me.ВыполненоToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ВыполненоToolStripMenuItem.Size = New System.Drawing.Size(138, 22)
         Me.ВыполненоToolStripMenuItem.Text = "Выполнено"
         '
         'Календарь
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 18.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1537, 584)
+        Me.ClientSize = New System.Drawing.Size(1537, 624)
         Me.Controls.Add(Me.GroupBox5)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label6)

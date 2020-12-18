@@ -37,29 +37,29 @@ Partial Class Пароль
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(36, 180)
+        Me.Button1.Location = New System.Drawing.Point(32, 171)
         Me.Button1.Margin = New System.Windows.Forms.Padding(4)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(55, 26)
+        Me.Button1.Size = New System.Drawing.Size(67, 25)
         Me.Button1.TabIndex = 1
         Me.Button1.Text = "ОК"
         Me.Button1.UseVisualStyleBackColor = True
         '
         'TextBox1
         '
-        Me.TextBox1.Location = New System.Drawing.Point(11, 22)
+        Me.TextBox1.Location = New System.Drawing.Point(10, 21)
         Me.TextBox1.Margin = New System.Windows.Forms.Padding(4)
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
-        Me.TextBox1.Size = New System.Drawing.Size(184, 26)
+        Me.TextBox1.Size = New System.Drawing.Size(164, 26)
         Me.TextBox1.TabIndex = 2
         '
         'CheckBox1
         '
         Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Location = New System.Drawing.Point(36, 150)
+        Me.CheckBox1.Location = New System.Drawing.Point(32, 142)
         Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(122, 23)
+        Me.CheckBox1.Size = New System.Drawing.Size(117, 22)
         Me.CheckBox1.TabIndex = 3
         Me.CheckBox1.Text = "Отобр.пароль"
         Me.CheckBox1.UseVisualStyleBackColor = True
@@ -69,17 +69,17 @@ Partial Class Пароль
         Me.ComboBox1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.ComboBox1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
         Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(11, 25)
+        Me.ComboBox1.Location = New System.Drawing.Point(10, 24)
         Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(184, 27)
+        Me.ComboBox1.Size = New System.Drawing.Size(164, 26)
         Me.ComboBox1.TabIndex = 4
         '
         'GroupBox1
         '
         Me.GroupBox1.Controls.Add(Me.ComboBox1)
-        Me.GroupBox1.Location = New System.Drawing.Point(25, 14)
+        Me.GroupBox1.Location = New System.Drawing.Point(22, 13)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(206, 58)
+        Me.GroupBox1.Size = New System.Drawing.Size(183, 55)
         Me.GroupBox1.TabIndex = 5
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Логин"
@@ -87,45 +87,47 @@ Partial Class Пароль
         'GroupBox2
         '
         Me.GroupBox2.Controls.Add(Me.TextBox1)
-        Me.GroupBox2.Location = New System.Drawing.Point(25, 78)
+        Me.GroupBox2.Location = New System.Drawing.Point(22, 74)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(207, 55)
+        Me.GroupBox2.Size = New System.Drawing.Size(184, 52)
         Me.GroupBox2.TabIndex = 6
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Пароль"
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(36, 224)
+        Me.Button2.Enabled = False
+        Me.Button2.Location = New System.Drawing.Point(32, 212)
         Me.Button2.Margin = New System.Windows.Forms.Padding(4)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(157, 27)
+        Me.Button2.Size = New System.Drawing.Size(151, 26)
         Me.Button2.TabIndex = 7
         Me.Button2.Text = "Зарегистрироваться"
         Me.Button2.UseVisualStyleBackColor = True
         '
         'Button3
         '
-        Me.Button3.Location = New System.Drawing.Point(123, 180)
+        Me.Button3.Location = New System.Drawing.Point(107, 171)
         Me.Button3.Margin = New System.Windows.Forms.Padding(4)
         Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(70, 26)
+        Me.Button3.Size = New System.Drawing.Size(76, 25)
         Me.Button3.TabIndex = 8
         Me.Button3.Text = "Отмена"
         Me.Button3.UseVisualStyleBackColor = True
         '
         'Пароль
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 19.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 18.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(242, 264)
+        Me.BackColor = System.Drawing.Color.DarkKhaki
+        Me.ClientSize = New System.Drawing.Size(215, 250)
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.CheckBox1)
         Me.Controls.Add(Me.Button1)
-        Me.Font = New System.Drawing.Font("Times New Roman", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(4)
         Me.MaximizeBox = False

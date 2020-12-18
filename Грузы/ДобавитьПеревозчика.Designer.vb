@@ -37,7 +37,6 @@ Partial Class ДобавитьПеревозчика
         Me.Label7 = New System.Windows.Forms.Label()
         Me.TextBox7 = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
-        Me.TextBox8 = New System.Windows.Forms.TextBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.TextBox9 = New System.Windows.Forms.TextBox()
         Me.TextBox10 = New System.Windows.Forms.TextBox()
@@ -51,6 +50,8 @@ Partial Class ДобавитьПеревозчика
         Me.ComboBox2 = New System.Windows.Forms.ComboBox()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.ComboBox3 = New System.Windows.Forms.ComboBox()
+        Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
@@ -174,15 +175,6 @@ Partial Class ДобавитьПеревозчика
         Me.Label8.Size = New System.Drawing.Size(86, 17)
         Me.Label8.TabIndex = 15
         Me.Label8.Text = "Примечание"
-        '
-        'TextBox8
-        '
-        Me.TextBox8.Location = New System.Drawing.Point(258, 317)
-        Me.TextBox8.Margin = New System.Windows.Forms.Padding(4)
-        Me.TextBox8.Multiline = True
-        Me.TextBox8.Name = "TextBox8"
-        Me.TextBox8.Size = New System.Drawing.Size(372, 163)
-        Me.TextBox8.TabIndex = 14
         '
         'Label9
         '
@@ -309,12 +301,31 @@ Partial Class ДобавитьПеревозчика
         Me.ComboBox3.TabIndex = 30
         Me.ComboBox3.Visible = False
         '
+        'RichTextBox1
+        '
+        Me.RichTextBox1.Location = New System.Drawing.Point(258, 320)
+        Me.RichTextBox1.Name = "RichTextBox1"
+        Me.RichTextBox1.Size = New System.Drawing.Size(362, 162)
+        Me.RichTextBox1.TabIndex = 31
+        Me.RichTextBox1.Text = ""
+        '
+        'Button2
+        '
+        Me.Button2.Location = New System.Drawing.Point(372, 12)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(114, 29)
+        Me.Button2.TabIndex = 32
+        Me.Button2.Text = "Добавить фото"
+        Me.Button2.UseVisualStyleBackColor = True
+        '
         'ДобавитьПеревозчика
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 17.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.DarkKhaki
         Me.ClientSize = New System.Drawing.Size(1281, 494)
+        Me.Controls.Add(Me.Button2)
+        Me.Controls.Add(Me.RichTextBox1)
         Me.Controls.Add(Me.ComboBox3)
         Me.Controls.Add(Me.ComboBox2)
         Me.Controls.Add(Me.Label11)
@@ -327,7 +338,6 @@ Partial Class ДобавитьПеревозчика
         Me.Controls.Add(Me.TextBox9)
         Me.Controls.Add(Me.Label9)
         Me.Controls.Add(Me.Label8)
-        Me.Controls.Add(Me.TextBox8)
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.TextBox7)
         Me.Controls.Add(Me.Label6)
@@ -366,7 +376,6 @@ Partial Class ДобавитьПеревозчика
     Friend WithEvents Label7 As Label
     Friend WithEvents TextBox7 As TextBox
     Friend WithEvents Label8 As Label
-    Friend WithEvents TextBox8 As TextBox
     Friend WithEvents Label9 As Label
     Friend WithEvents TextBox9 As TextBox
     Friend WithEvents TextBox10 As TextBox
@@ -380,4 +389,6 @@ Partial Class ДобавитьПеревозчика
     Friend WithEvents ComboBox2 As ComboBox
     Friend WithEvents Label11 As Label
     Friend WithEvents ComboBox3 As ComboBox
+    Friend WithEvents RichTextBox1 As RichTextBox
+    Friend WithEvents Button2 As Button
 End Class

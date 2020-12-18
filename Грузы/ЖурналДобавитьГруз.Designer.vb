@@ -22,12 +22,14 @@ Partial Class ЖурналДобавитьГруз
     'Не изменяйте ее в редакторе исходного кода.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ЖурналДобавитьГруз))
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Button4 = New System.Windows.Forms.Button()
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.ComboBox2 = New System.Windows.Forms.ComboBox()
         Me.Button1 = New System.Windows.Forms.Button()
@@ -52,12 +54,15 @@ Partial Class ЖурналДобавитьГруз
         Me.GroupBox10 = New System.Windows.Forms.GroupBox()
         Me.Button13 = New System.Windows.Forms.Button()
         Me.TextBox4 = New System.Windows.Forms.TextBox()
+        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.УдалитьСтрокуToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         CType(Me.Grid1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Grid2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox10.SuspendLayout()
+        Me.ContextMenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'Label1
@@ -81,6 +86,7 @@ Partial Class ЖурналДобавитьГруз
         'GroupBox1
         '
         Me.GroupBox1.BackColor = System.Drawing.Color.MediumPurple
+        Me.GroupBox1.Controls.Add(Me.Button4)
         Me.GroupBox1.Controls.Add(Me.CheckBox1)
         Me.GroupBox1.Controls.Add(Me.ComboBox2)
         Me.GroupBox1.Controls.Add(Me.Button1)
@@ -99,6 +105,16 @@ Partial Class ЖурналДобавитьГруз
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Организация:"
         '
+        'Button4
+        '
+        Me.Button4.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.Button4.Location = New System.Drawing.Point(359, 126)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(120, 26)
+        Me.Button4.TabIndex = 21
+        Me.Button4.Text = "Удалить груз"
+        Me.Button4.UseVisualStyleBackColor = False
+        '
         'CheckBox1
         '
         Me.CheckBox1.AutoSize = True
@@ -116,7 +132,7 @@ Partial Class ЖурналДобавитьГруз
         Me.ComboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBox2.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.ComboBox2.FormattingEnabled = True
-        Me.ComboBox2.Location = New System.Drawing.Point(19, 98)
+        Me.ComboBox2.Location = New System.Drawing.Point(19, 89)
         Me.ComboBox2.Name = "ComboBox2"
         Me.ComboBox2.Size = New System.Drawing.Size(460, 26)
         Me.ComboBox2.TabIndex = 11
@@ -212,7 +228,7 @@ Partial Class ЖурналДобавитьГруз
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(12, 364)
+        Me.Label7.Location = New System.Drawing.Point(13, 384)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(71, 18)
         Me.Label7.TabIndex = 6
@@ -221,7 +237,7 @@ Partial Class ЖурналДобавитьГруз
         'Button2
         '
         Me.Button2.BackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.Button2.Location = New System.Drawing.Point(1096, 199)
+        Me.Button2.Location = New System.Drawing.Point(1271, 203)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(96, 32)
         Me.Button2.TabIndex = 11
@@ -231,7 +247,7 @@ Partial Class ЖурналДобавитьГруз
         'GroupBox3
         '
         Me.GroupBox3.Controls.Add(Me.MaskedTextBox1)
-        Me.GroupBox3.Location = New System.Drawing.Point(994, 56)
+        Me.GroupBox3.Location = New System.Drawing.Point(1169, 60)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(198, 65)
         Me.GroupBox3.TabIndex = 14
@@ -251,7 +267,7 @@ Partial Class ЖурналДобавитьГруз
         'GroupBox4
         '
         Me.GroupBox4.Controls.Add(Me.MaskedTextBox2)
-        Me.GroupBox4.Location = New System.Drawing.Point(994, 127)
+        Me.GroupBox4.Location = New System.Drawing.Point(1169, 131)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.Size = New System.Drawing.Size(198, 65)
         Me.GroupBox4.TabIndex = 15
@@ -280,7 +296,7 @@ Partial Class ЖурналДобавитьГруз
         Me.Grid1.Name = "Grid1"
         DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.Grid1.RowsDefaultCellStyle = DataGridViewCellStyle1
-        Me.Grid1.Size = New System.Drawing.Size(1180, 114)
+        Me.Grid1.Size = New System.Drawing.Size(1359, 140)
         Me.Grid1.TabIndex = 3
         '
         'Grid2
@@ -291,18 +307,18 @@ Partial Class ЖурналДобавитьГруз
         Me.Grid2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.Grid2.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.Grid2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.Grid2.Location = New System.Drawing.Point(12, 385)
+        Me.Grid2.Location = New System.Drawing.Point(12, 406)
         Me.Grid2.MultiSelect = False
         Me.Grid2.Name = "Grid2"
         DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.Grid2.RowsDefaultCellStyle = DataGridViewCellStyle2
-        Me.Grid2.Size = New System.Drawing.Size(1180, 117)
+        Me.Grid2.Size = New System.Drawing.Size(1359, 141)
         Me.Grid2.TabIndex = 16
         '
         'Button3
         '
         Me.Button3.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.Button3.Location = New System.Drawing.Point(994, 199)
+        Me.Button3.Location = New System.Drawing.Point(1169, 203)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(96, 32)
         Me.Button3.TabIndex = 17
@@ -315,7 +331,7 @@ Partial Class ЖурналДобавитьГруз
         Me.GroupBox10.BackColor = System.Drawing.Color.MediumAquamarine
         Me.GroupBox10.Controls.Add(Me.Button13)
         Me.GroupBox10.Controls.Add(Me.TextBox4)
-        Me.GroupBox10.Location = New System.Drawing.Point(477, 1)
+        Me.GroupBox10.Location = New System.Drawing.Point(656, 1)
         Me.GroupBox10.Name = "GroupBox10"
         Me.GroupBox10.Size = New System.Drawing.Size(715, 49)
         Me.GroupBox10.TabIndex = 20
@@ -339,12 +355,24 @@ Partial Class ЖурналДобавитьГруз
         Me.TextBox4.Size = New System.Drawing.Size(624, 26)
         Me.TextBox4.TabIndex = 0
         '
+        'ContextMenuStrip1
+        '
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.УдалитьСтрокуToolStripMenuItem})
+        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(181, 48)
+        '
+        'УдалитьСтрокуToolStripMenuItem
+        '
+        Me.УдалитьСтрокуToolStripMenuItem.Name = "УдалитьСтрокуToolStripMenuItem"
+        Me.УдалитьСтрокуToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.УдалитьСтрокуToolStripMenuItem.Text = "Удалить строку"
+        '
         'ЖурналДобавитьГруз
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 18.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.DarkKhaki
-        Me.ClientSize = New System.Drawing.Size(1204, 514)
+        Me.ClientSize = New System.Drawing.Size(1383, 555)
         Me.Controls.Add(Me.GroupBox10)
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.Grid2)
@@ -377,6 +405,7 @@ Partial Class ЖурналДобавитьГруз
         CType(Me.Grid2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox10.ResumeLayout(False)
         Me.GroupBox10.PerformLayout()
+        Me.ContextMenuStrip1.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -409,4 +438,7 @@ Partial Class ЖурналДобавитьГруз
     Friend WithEvents GroupBox10 As GroupBox
     Friend WithEvents Button13 As Button
     Friend WithEvents TextBox4 As TextBox
+    Friend WithEvents Button4 As Button
+    Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
+    Friend WithEvents УдалитьСтрокуToolStripMenuItem As ToolStripMenuItem
 End Class

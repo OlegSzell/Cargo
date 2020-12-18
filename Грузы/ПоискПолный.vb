@@ -9,7 +9,7 @@ Public Class ПоискПолный
     Private Flag As String = Nothing
     Private VremGrid1All As List(Of Grid1Class)
     Private Sub ПоискПолный_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.MdiParent = MDIParent1
+
         ПредзагрузкаAsync()
         Grid1All = New BindingList(Of Grid1Class)
         bsGrid1All = New BindingSource
@@ -313,6 +313,15 @@ Public Class ПоискПолный
                 f1 = Grid1All.Where(Function(x) x.Клиент = f.Naz).Select(Function(x) x).FirstOrDefault()
             Case "Груз"
                 f1 = Grid1All.Where(Function(x) x.Клиент = f.Naz).Select(Function(x) x).FirstOrDefault()
+            Case "Телефон"
+                f1 = Grid1All.Where(Function(x) x.Клиент = f.Naz).Select(Function(x) x).FirstOrDefault()
+
+                If f1 Is Nothing Then
+                    f1 = Grid1All.Where(Function(x) x.Перевозчик = f.Naz).Select(Function(x) x).FirstOrDefault()
+                End If
+            Case "АдресЗагрузки"
+                f1 = Grid1All.Where(Function(x) x.ID = f.ID).Select(Function(x) x).FirstOrDefault()
+
         End Select
 
 
@@ -987,99 +996,575 @@ Public Class ПоискПолный
 
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
         Flag = "Телефон"
+        Btn5()
+
         If VremGrid1All IsNot Nothing Then
             VremGrid1All.Clear()
             VremGrid1All.AddRange(Grid1All)
         End If
     End Sub
-
-    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
-        Flag = "АдресЗагрузки"
-        If VremGrid1All IsNot Nothing Then
-            VremGrid1All.Clear()
-            VremGrid1All.AddRange(Grid1All)
+    Private Sub Btn5()
+        If TextBox5.Text.Length = 0 Then
+            Return
         End If
-    End Sub
-
-    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
-        Flag = "АдресВыгрузки"
-        If VremGrid1All IsNot Nothing Then
-            VremGrid1All.Clear()
-            VremGrid1All.AddRange(Grid1All)
+        Cursor = Cursors.WaitCursor
+        If Grid1All IsNot Nothing Then
+            Grid1All.Clear()
         End If
-    End Sub
 
-    Private Sub ОткрытьРейсToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ОткрытьРейсToolStripMenuItem.Click
-        Dim f As Grid1Class = Grid1All.ElementAt(Grid1.CurrentRow.Index)
-        If f IsNot Nothing Then
-            If f.FileOpen IsNot Nothing Then
-                Process.Start(f.FileOpen)
+
+        ClearList1()
+
+        Dim grd As New List(Of Grid1Class)
+
+        Dim mo As New AllUpd
+        Do While AllClass.Клиент Is Nothing
+            mo.КлиентAll()
+        Loop
+        Do While AllClass.Перевозчики Is Nothing
+            mo.ПеревозчикиAll()
+        Loop
+
+        Do While AllClass.ПеревозчикиБаза Is Nothing
+            mo.ПеревозчикиБазаAll()
+        Loop
+
+        Do While AllClass.ФайлыExcelВсе Is Nothing
+            mo.ФайлыExcelВсеAll()
+        Loop
+
+        Dim perV As New List(Of Grid1Class)
+
+        'Dim numb As String = Replace(Replace(Trim(TextBox5.Text), " ", ""), "-", "")
+        Dim numb As String = TextBox5.Text.Replace(" ", "").Replace("-", "")
+
+        'ищем в базе перевозчики
+        Dim f = (From x In AllClass.Перевозчики
+                 Where x.Телефон IsNot Nothing Or x.Контактное_лицо IsNot Nothing
+                 Select New With {.tel = Replace(Replace(Replace(Replace(Trim(Replace(x?.Телефон?.ToUpper, "_", "")), "-", ""), "(", ""), ")", ""), " ", ""), .cont =
+                     Replace(Replace(Replace(Replace(Trim(Replace(x?.Контактное_лицо?.ToUpper, "_", "")), "-", ""), "(", ""), ")", ""), " ", ""), x.Названиеорганизации}).ToList()
+
+
+        If f IsNot Nothing Then 'выбираем рейсы где перевозчки есть с выбранным номером
+            Dim f1 = (From x In f
+                      Where x.tel?.Contains(numb.ToUpper) Or x.cont?.Contains(numb.ToUpper)
+                      Select (From y In AllClass.Перевозчики
+                              Where y.Названиеорганизации = x.Названиеорганизации
+                              Group y By Keys = New With {Key y.Названиеорганизации}
+                                 Into Group
+                              Select New ФайлыExcelВсеClass With {.name = x.Названиеорганизации, .groupsPer = Group.ToList()}).ToList()).ToList()
+
+            If f1 IsNot Nothing Then
+                For Each b In f1
+                    For Each b1 In b
+                        Dim nm As String = Nothing
+                        For Each b2 In b1.groupsPer
+                            If nm Is Nothing Then
+                                nm = b2.Контактное_лицо & vbCrLf & b2.Телефон
+                            Else
+                                nm = nm & "___ ___ __" & vbCrLf & b2.Контактное_лицо & vbCrLf & b2.Телефон
+                            End If
+                        Next
+                        Dim m As New Grid1Class With {.Перевозчик = b1.name, .Контакт = nm}
+                        grd.Add(m)
+                    Next
+
+                Next
             End If
 
         End If
-    End Sub
 
-    Private Sub ОткрытьПолнуюИнформациюToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ОткрытьПолнуюИнформациюToolStripMenuItem.Click
+        'ищем в базе ПеревозчикиБаза
+        Dim f9 = (From x In AllClass.ПеревозчикиБаза
+                  Where x.Телефоны IsNot Nothing Or x.Контактное_лицо IsNot Nothing
+                  Select New With {.tel = Replace(Replace(Replace(Replace(Trim(Replace(x?.Телефоны?.ToUpper, "_", "")), "-", ""), "(", ""), ")", ""), " ", ""), .cont =
+                     Replace(Replace(Replace(Replace(Trim(Replace(x?.Контактное_лицо?.ToUpper, "_", "")), "-", ""), "(", ""), ")", ""), " ", ""), x.Наименование_фирмы}).ToList()
 
-            End Sub
+        If f9 IsNot Nothing Then 'выбираем рейсы где перевозчки есть с выбранным номером
+            Dim f1 = (From x In f9
+                      Where x.tel?.Contains(numb.ToUpper)
+                      Select (From y In AllClass.ПеревозчикиБаза
+                              Where y.Наименование_фирмы = x.Наименование_фирмы
+                              Select New Grid1Class With {.Контакт = y.Контактное_лицо?.ToString & vbCrLf & y.Телефоны?.ToString, .Перевозчик = x.Наименование_фирмы}).ToList()).ToList()
 
-    Private Sub Grid1_MouseDown(sender As Object, e As MouseEventArgs) Handles Grid1.MouseDown
-        If e.Button = MouseButtons.Right Then
-            If Grid1All IsNot Nothing Then
-                If Grid1All.Count > 0 Then
-                    ContextMenuStrip1.Show(MousePosition, ToolStripDropDownDirection.Right)
+            If f1 IsNot Nothing Then
+                For Each b In f1
+                    For Each b1 In b
+                        grd.Add(b1)
+                    Next
+
+                Next
+            End If
+
+        End If
+
+
+
+        Dim grd5 = (From x In grd    'группируем перевозов обьединяя телефоны 
+                    Group x By Keys = New With {Key x.Перевозчик}
+                                 Into Group
+                    Select New ФайлыExcelВсеClass With {.name = Keys.Перевозчик, .groups = Group.ToList()}).ToList()
+
+        grd.Clear()
+        For Each b In grd5
+            Dim mk As String = Nothing
+            For Each b2 In b.groups
+                If mk Is Nothing Then
+
+                    mk = b2.Контакт
+                ElseIf mk?.ToUpper.Contains(b2.Контакт?.ToUpper) = False Then
+
+                    mk = mk & vbCrLf & "___ ___ __" & vbCrLf & b2.Контакт
+
                 End If
+            Next
+            Dim m As New Grid1Class With {.Перевозчик = b.name, .Контакт = mk}
+            grd.Add(m)
 
+        Next
+
+        perV = grd.OrderBy(Function(x) x.Перевозчик).ToList()
+
+        If grd IsNot Nothing Then
+            grd.Clear()
+        End If
+
+
+
+        '//____________________________________
+
+        'ищем в базе клиенты
+        Dim f2 = (From x In AllClass.Клиент
+                  Where x.Телефон IsNot Nothing Or x.Контактное_лицо IsNot Nothing
+                  Select New With {.tel = Replace(Replace(Replace(Replace(Trim(Replace(x?.Телефон?.ToUpper, "_", "")), "-", ""), "(", ""), ")", ""), " ", ""), .cont =
+                     Replace(Replace(Replace(Replace(Trim(Replace(x?.Контактное_лицо?.ToUpper, "_", "")), "-", ""), "(", ""), ")", ""), " ", ""), x.НазваниеОрганизации}).ToList()
+        'Dim f1
+        If f2 IsNot Nothing Then 'выбираем рейсы где перевозчки есть с выбранным номером
+            Dim f3 = (From x In f2
+                      Where x.tel?.Contains(numb.ToUpper) Or x.cont?.Contains(numb.ToUpper)
+                      Select (From y In AllClass.Клиент
+                              Where y.НазваниеОрганизации = x.НазваниеОрганизации
+                              Select New Grid1Class With {.Контакт = y.Контактное_лицо?.ToString & vbCrLf & y.Телефон?.ToString, .Клиент = x.НазваниеОрганизации}).ToList()).ToList()
+
+            If f3 IsNot Nothing Then
+                For Each b In f3
+                    For Each b1 In b
+                        grd.Add(b1)
+                    Next
+
+                Next
             End If
 
         End If
-    End Sub
 
-    Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
-        If TextBox8.Text.Length = 0 Then
-            Return
+        'ищем в базе ФайлыExcelВсе
+
+        Dim f4 = (From x In AllClass.ФайлыExcelВсе
+                  Where x.Телефон IsNot Nothing
+                  Select New With {.tel = x?.Телефон?.ToUpper.Trim.Replace("_", "").Replace("-", "").Replace("(", "").Replace(")", "").Replace(" ", "").Replace("  ", "")}).Distinct.ToList()
+        Dim f5 = (From z In f4
+                  Group z By Keys = New With {Key z.tel}
+                                 Into Group
+                  Select New With {Keys.tel}).ToList()
+
+
+        If f5 IsNot Nothing Then 'выбираем рейсы где клиент есть с выбранным номером
+            Dim f3 = (From x In f5
+                      Where x.tel?.Contains(numb.ToUpper)
+                      Select (From y In AllClass.ФайлыExcelВсе
+                              Where y?.Телефон?.ToUpper.Trim.Replace("_", "").Replace("-", "").Replace("(", "").Replace(")", "").Replace(" ", "").Replace("  ", "") = x.tel
+                              Select New Grid1Class With {.Контакт = y.Телефон?.ToString, .Клиент = y.Клиент}).ToList()).ToList()
+
+
+
+            If f3 IsNot Nothing Then
+                For Each b2 In f3
+                    For Each b In b2
+                        If b.Клиент IsNot Nothing Then
+                            For Each b1 In AllClass.Клиент
+                                If b?.Клиент?.ToString.ToUpper.Contains(b1?.НазваниеОрганизации?.ToString.ToUpper) Then
+                                    b.Клиент = b1.НазваниеОрганизации
+                                End If
+                            Next
+                            If b.Клиент.Length > 80 Then
+                                b.Клиент = b.Клиент.Substring(0, 80)
+                            End If
+                        End If
+                    Next
+
+                Next
+            End If
+
+            Dim f8 As New List(Of ФайлыExcelВсеClass)
+            For Each b In f3
+                Dim k = (From z1 In b
+                         Group z1 By Keys = New With {Key z1.Клиент}
+                                     Into Group
+                         Select New ФайлыExcelВсеClass With {.name = Keys.Клиент, .groups = Group.ToList()}).FirstOrDefault()
+                f8.Add(k)
+            Next
+
+
+
+
+
+            For Each b4 In f8
+                Dim mg As String = Nothing
+                For Each b2 In b4.groups
+                    If mg Is Nothing Then
+
+                        mg = b2.Контакт
+                    ElseIf mg?.ToUpper.Contains(b2.Контакт?.ToUpper) = False Then
+                        mg = b2.Контакт & vbCrLf & "____ _____ __" & vbCrLf & b2.Контакт
+                    End If
+                Next
+
+                Dim m As New Grid1Class With {.Клиент = b4.name, .Контакт = mg}
+                grd.Add(m)
+
+            Next
+
         End If
 
-        If VremGrid1All Is Nothing Then
-            Return
-        End If
+        If grd Is Nothing Then Return
 
-        Grid1All.Clear()
+        'убираем дубли клиентов и перевозов
+        Dim grd2 = (From x In grd
+                    Group x By Keys = New With {Key x.Клиент, Key x.Перевозчик}
+                                     Into Group
+                    Select New With {Keys.Клиент, Keys.Перевозчик, .Контакт = Group}).ToList()
 
-        For Each b In VremGrid1All
-            Dim lst As String() = {b.Выгрузка, b.Груз, b.Загрузка, b.Клиент, b.Контакт, b.Маршрут, b.Перевозчик, b.Примечание}
-            Dim f1 As String = String.Join(" , ", lst)
-            If f1?.ToUpper.Contains(TextBox8.Text.ToUpper) = True Then
-                Grid1All.Add(b)
+        Dim grd3 As New List(Of Grid1Class)
+        For Each b5 In grd2
+
+            Dim mp As String = Nothing
+            For Each b7 In b5.Контакт
+                If mp Is Nothing Then
+
+                    mp = b7.Контакт
+                ElseIf mp?.ToUpper.Contains(b7.Контакт?.ToUpper) = False Then
+                    mp = b7.Контакт & vbCrLf & "____ _____ __" & vbCrLf & b7.Контакт
+                End If
+            Next
+
+            Dim m As New Grid1Class With {.Клиент = b5.Клиент, .Контакт = mp, .Перевозчик = b5.Перевозчик}
+            grd3.Add(m)
+        Next
+
+
+        Dim grd1 = grd3.OrderBy(Function(x) x.Клиент?.ToString).ToList()
+        perV.AddRange(grd1)
+
+        Dim i As Integer = 1
+        For Each b In perV
+            b.ID = i
+            i += 1
+
+            Grid1All.Add(b)
+            If b.Клиент IsNot Nothing Then
+                list1.Add(New IDNaz With {.ID = i, .Naz = b.Клиент})
+            Else
+                list1.Add(New IDNaz With {.ID = i, .Naz = b.Перевозчик})
             End If
         Next
 
+        Cursor = Cursors.Default
     End Sub
+    Public Class ФайлыExcelВсеClass
+        Public Property name As String
+        Public Property groups As List(Of Grid1Class)
+        Public Property groupsPer As List(Of Перевозчики)
+    End Class
 
-    Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
+    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+        Flag = "АдресЗагрузки"
+        Btn6()
+
         If VremGrid1All IsNot Nothing Then
+                VremGrid1All.Clear()
+                VremGrid1All.AddRange(Grid1All)
+            End If
+        End Sub
+
+    Private Sub Btn6()
+        If TextBox6.Text.Length = 0 Then
+            Return
+        End If
+        Cursor = Cursors.WaitCursor
+        If Grid1All IsNot Nothing Then
             Grid1All.Clear()
-            For Each b In VremGrid1All
-                Grid1All.Add(b)
+        End If
+
+
+        ClearList1()
+
+        Dim grd As New List(Of Grid1Class)
+
+        Dim mo As New AllUpd
+        Do While AllClass.Клиент Is Nothing
+            mo.КлиентAll()
+        Loop
+        Do While AllClass.Перевозчики Is Nothing
+            mo.ПеревозчикиAll()
+        Loop
+
+        Do While AllClass.ПеревозчикиБаза Is Nothing
+            mo.ПеревозчикиБазаAll()
+        Loop
+
+        Do While AllClass.ФайлыExcelВсе Is Nothing
+            mo.ФайлыExcelВсеAll()
+        Loop
+
+        Dim txt6 As String = TextBox6.Text
+
+        Dim f = (From x In AllClass.РейсыКлиента
+                 Order By x.НазвОрганизации
+                 Where x.ТочныйАдресЗагрузки?.ToUpper.Contains(txt6.ToUpper)
+                 Select x).ToList()
+
+        Dim f1 = (From x In AllClass.ФайлыExcelВсе
+                  Where x.АдресЗагрузки?.ToUpper.Contains(txt6.ToUpper)
+                  Select x).ToList()
+
+
+        For Each b In AllClass.Клиент
+            If f1 IsNot Nothing Then
+                'короткое название организации
+                Dim f3 = (From x In f1
+                          Where x?.Клиент?.ToString.ToUpper.Contains(b?.НазваниеОрганизации?.ToUpper)
+                          Select x).ToList()
+
+                If f3 IsNot Nothing Then
+                    For Each b1 In f3
+                        f1(f1.IndexOf(b1)).Клиент = b.НазваниеОрганизации
+                    Next
+
+                End If
+            End If
+        Next
+
+
+
+        'первый этап РейсыКлиента
+        Dim i As Integer = 1
+        For Each b1 In f
+
+            Dim put As New Путь
+
+            put = (From x In Пути
+                   Where Strings.Left(x.НазваниеРейса, 3)?.ToUpper.Contains(b1?.НомерРейса.ToString.ToUpper) _
+                       And Strings.Right(x.НазваниеРейса, x.НазваниеРейса.Length - 3)?.ToUpper.Contains(b1?.КоличРейсов.ToString.ToUpper) _
+                       And x.НазваниеРейса?.ToUpper.Contains(b1?.НазвОрганизации.ToUpper)
+                   Select x).FirstOrDefault()
+
+            Dim mars As String = b1.Маршрут?.ToString & vbCrLf & "______" & vbCrLf & put?.НазваниеРейса & " - " & CDate(b1.ДатаПоручения?.ToString).Year.ToString
+            'If put Is Nothing Then
+
+            'End If
+
+
+
+            Dim m As New Grid1Class With {.FileOpen = put?.ПутьПолный, .Выгрузка = Trim(b1.ТочнАдресРазгр?.ToString), .Груз = Trim(b1.НаименованиеГруза?.ToString),
+                .Загрузка = Trim(b1.ТочныйАдресЗагрузки?.ToString), .Клиент = Trim(b1.НазвОрганизации?.ToString), .Контакт = Trim((From x In AllClass.Клиент
+                                                                                                                                   Where x.НазваниеОрганизации?.ToString = b1.НазвОрганизации
+                                                                                                                                   Select x.Контактное_лицо & vbCrLf & x.Телефон).FirstOrDefault()),
+                                                                                                                      .Перевозчик = Trim((From x In AllClass.РейсыПеревозчика
+                                                                                                                                          Where x?.НомерРейса = b1?.НомерРейса
+                                                                                                                                          Select x.НазвОрганизации).FirstOrDefault()),
+                                                                                                                                         .Примечание = Trim(b1.ДопУсловия?.ToString), .Маршрут = mars}
+
+            If m?.Примечание?.Length > 50 Then
+                m.Примечание = m.Примечание.Substring(0, 50) & " ..."
+            End If
+            'If m?.Загрузка?.Length > 50 Then
+            '    m.Загрузка = m.Загрузка.Substring(0, 50) & " ..."
+            'End If
+            If m?.Выгрузка?.Length > 50 Then
+                m.Выгрузка = m.Выгрузка.Substring(0, 50) & " ..."
+            End If
+
+            If m?.Груз?.Length > 150 Then
+                m.Груз = m.Груз.Substring(0, 150) & " ..."
+            End If
+
+
+            grd.Add(m)
+
+        Next
+        'второй этап ФайлыExcelВсе
+        For Each b2 In f1
+            Dim put As New Путь
+
+            put = (From x In Пути
+                   Where x?.НазваниеРейса?.ToString.ToUpper.Contains(Strings.Left(b2?.Рейс.ToUpper, b2?.Рейс.Length - 1))
+                   Select x).FirstOrDefault()
+
+
+
+
+            Dim mars As String = b2.Маршрут?.ToString & vbCrLf & "______" & vbCrLf & put?.НазваниеРейса & " - "
+            If b2.ДатаПоручения IsNot Nothing Then
+                If b2.ДатаПоручения.Length > 10 Then
+                    mars &= CDate(Strings.Left(b2.ДатаПоручения?.ToString, 10)).Year.ToString
+                ElseIf b2.ДатаПоручения.Length = 10 Then
+                    mars &= CDate(b2.ДатаПоручения?.ToString).Year.ToString
+                End If
+            End If
+
+
+
+
+
+            Dim perev As String = b2?.Перевозчик?.ToString
+            If perev IsNot Nothing Then
+                If perev.Length > 50 Then
+                    perev = perev.Substring(0, 50)
+                End If
+            End If
+
+
+            Dim m As New Grid1Class With {.FileOpen = put?.ПутьПолный, .Выгрузка = Trim(b2.АдресВыгрузки?.ToString), .Груз = Trim(b2.Груз?.ToString),
+                 .Загрузка = b2.АдресЗагрузки?.ToString, .Клиент = Trim(b2.Клиент?.ToString), .Контакт = (From x In AllClass.Клиент
+                                                                                                          Where x.НазваниеОрганизации?.ToString = b2.Клиент
+                                                                                                          Select x.Контактное_лицо & vbCrLf & x.Телефон).FirstOrDefault(),
+                                                                                                                      .Перевозчик = Trim(perev),
+                                                                                                                                          .Примечание = Trim(b2.ДопУсловия?.ToString), .Маршрут = mars}
+
+
+
+            If m?.Примечание?.Length > 50 Then
+                m.Примечание = m.Примечание.Substring(0, 50) & " ..."
+            End If
+            'If m?.Загрузка?.Length > 50 Then
+            '    m.Загрузка = m.Загрузка.Substring(0, 50) & " ..."
+            'End If
+            If m?.Выгрузка?.Length > 50 Then
+                m.Выгрузка = m.Выгрузка.Substring(0, 50) & " ..."
+            End If
+            If m?.Груз?.Length > 150 Then
+                m.Груз = m.Груз.Substring(0, 150) & " ..."
+            End If
+
+            If grd IsNot Nothing Then
+                Dim mgj = grd.Where(Function(x) x?.Маршрут?.ToString = m.Маршрут).Select(Function(x) x).FirstOrDefault()
+                If mgj IsNot Nothing Then
+                    Continue For
+                Else
+                    grd.Add(m)
+                End If
+            Else
+                grd.Add(m)
+            End If
+            'grd.Add(m)
+
+        Next
+        Dim mk = grd.OrderBy(Function(x) x.Клиент).Select(Function(x) x).ToList()
+
+        If mk IsNot Nothing Then
+            For Each b7 In mk
+                b7.ID = i
+                b7.Груз = Trim(b7.Груз)
+                b7.Загрузка = Trim(b7.Загрузка)
+                b7.Выгрузка = Trim(b7.Выгрузка)
+                b7.Груз = Trim(b7.Груз)
+
+                Grid1All.Add(b7)
+                list1.Add(New IDNaz With {.Naz = b7.Клиент, .ID = i})
+                i += 1
             Next
+
+            'Dim mkl1 = (From x In mk
+            '            Select x.Маршрут).Distinct().ToList()
+            'If mkl1 IsNot Nothing Then
+            '    Dim lop = mk.Where(Function(x) x.Маршрут).Select(Function(x) x.Маршрут).Intersect(mkl1)
+
+            'End If
+
+
         End If
+        Cursor = Cursors.Default
+
+
     End Sub
 
-    Private Sub TextBox1_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox1.KeyDown
-        If e.KeyCode = Keys.Enter Then
-            Btn1()
-        End If
-    End Sub
+    Private Sub ОткрытьРейсToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ОткрытьРейсToolStripMenuItem.Click
+            Dim f As Grid1Class = Grid1All.ElementAt(Grid1.CurrentRow.Index)
+            If f IsNot Nothing Then
+                If f.FileOpen IsNot Nothing Then
+                    Process.Start(f.FileOpen)
+                End If
 
-    Private Sub TextBox2_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox2.KeyDown
-        If e.KeyCode = Keys.Enter Then
-            Btn2()
-        End If
-    End Sub
+            End If
+        End Sub
 
-    Private Sub TextBox4_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox4.KeyDown
+        Private Sub ОткрытьПолнуюИнформациюToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ОткрытьПолнуюИнформациюToolStripMenuItem.Click
+
+        End Sub
+
+        Private Sub Grid1_MouseDown(sender As Object, e As MouseEventArgs) Handles Grid1.MouseDown
+            If e.Button = MouseButtons.Right Then
+                If Grid1All IsNot Nothing Then
+                    If Grid1All.Count > 0 Then
+                        ContextMenuStrip1.Show(MousePosition, ToolStripDropDownDirection.Right)
+                    End If
+
+                End If
+
+            End If
+        End Sub
+
+        Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
+            If TextBox8.Text.Length = 0 Then
+                Return
+            End If
+
+            If VremGrid1All Is Nothing Then
+                Return
+            End If
+
+            Grid1All.Clear()
+
+            For Each b In VremGrid1All
+                Dim lst As String() = {b.Выгрузка, b.Груз, b.Загрузка, b.Клиент, b.Контакт, b.Маршрут, b.Перевозчик, b.Примечание}
+                Dim f1 As String = String.Join(" , ", lst)
+                If f1?.ToUpper.Contains(TextBox8.Text.ToUpper) = True Then
+                    Grid1All.Add(b)
+                End If
+            Next
+
+        End Sub
+
+        Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
+            If VremGrid1All IsNot Nothing Then
+                Grid1All.Clear()
+                For Each b In VremGrid1All
+                    Grid1All.Add(b)
+                Next
+            End If
+        End Sub
+
+        Private Sub TextBox1_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox1.KeyDown
+            If e.KeyCode = Keys.Enter Then
+                Btn1()
+            End If
+        End Sub
+
+        Private Sub TextBox2_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox2.KeyDown
+            If e.KeyCode = Keys.Enter Then
+                btn2()
+            End If
+        End Sub
+
+        Private Sub TextBox4_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox4.KeyDown
+            If e.KeyCode = Keys.Enter Then
+                Btn4()
+            End If
+        End Sub
+
+    Private Sub TextBox5_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox5.KeyDown
         If e.KeyCode = Keys.Enter Then
-            Btn4()
+            Btn5()
         End If
     End Sub
 End Class

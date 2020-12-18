@@ -22,7 +22,7 @@ Partial Class Сводная_по_рейсам
     'Не изменяйте ее в редакторе исходного кода.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Grid2 = New Грузы.DoubleBuferGrid()
@@ -65,8 +65,8 @@ Partial Class Сводная_по_рейсам
         Me.Grid2.Location = New System.Drawing.Point(30, 39)
         Me.Grid2.Name = "Grid2"
         Me.Grid2.ReadOnly = True
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.Grid2.RowsDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Grid2.RowsDefaultCellStyle = DataGridViewCellStyle2
         Me.Grid2.Size = New System.Drawing.Size(1097, 537)
         Me.Grid2.TabIndex = 32
         '
@@ -78,6 +78,7 @@ Partial Class Сводная_по_рейсам
         Me.Controls.Add(Me.Grid2)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.CheckBox1)
+        Me.DoubleBuffered = True
         Me.Font = New System.Drawing.Font("Times New Roman", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
         Me.Margin = New System.Windows.Forms.Padding(4)
         Me.MaximizeBox = False

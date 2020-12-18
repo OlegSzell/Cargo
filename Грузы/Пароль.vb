@@ -2,15 +2,35 @@
 Imports System.ComponentModel
 Imports System.Data.OleDb
 Imports System.Data.SqlClient
+Imports System.Net.NetworkInformation
+
 Public Class Пароль
     Dim strsql As String
     Dim fd As String
     Dim Flag As Boolean = False
+    Public flg As Boolean = False
+    Dim clicks As Integer = 0
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         ClickOK()
 
     End Sub
     Private Sub ClickOK()
+
+        Dim macAddr = (From nic In NetworkInterface.GetAllNetworkInterfaces()
+                       Where nic.OperationalStatus = OperationalStatus.Up
+                       Select nic.GetPhysicalAddress()).FirstOrDefault().ToString
+
+        Dim nmComp = Environment.MachineName
+
+        'Dim mk As String
+        'For Each b As NetworkInterface In NetworkInterface.GetAllNetworkInterfaces
+        '    If b.OperationalStatus = OperationalStatus.Up Then
+        '        mk = b.GetPhysicalAddress.ToString
+        '    End If
+        'Next
+
+
+
 
         Dim mo As New AllUpd
         Do While AllClass.Пароли Is Nothing
@@ -20,21 +40,100 @@ Public Class Пароль
 
         'Dim ds1 As DataTable = Selects3(StrSql:="SELECT Парол FROM Пароли WHERE Логин='" & ComboBox1.Text & "'")
         Dim par As String = TextBox1.Text
+        If ComboBox1.Text.Length = 0 Then
+            MessageBox.Show("Выберите пользователя!", Рик)
+            Return
+        End If
+
         If f IsNot Nothing Then
             If f.Парол = par Then
                 MessageBox.Show("Пароль принят!")
                 Flag = True
+                flg = True
                 Экспедитор = ComboBox1.Text
                 Me.Close()
                 TextBox1.Text = ""
                 CheckBox1.Checked = False
             Else
+
                 MessageBox.Show("Пароль НЕ принят! Повторите")
+                clicks += 1
+                Using db As New dbAllDataContext()
+                    Dim f7 = db.Пароли.Where(Function(x) x.Логин = ComboBox1.Text).Select(Function(x) x).FirstOrDefault()
+                    If f7 IsNot Nothing Then
+
+
+                        Dim f8 As New ПаролиВвод
+                        With f8
+                            .IDPassword = f7.Код
+                            .ВводПароля = TextBox1.Text
+                            .Логин = f7.Логин
+                            .Дата = Now
+                            .MacAdress = macAddr
+                            .nameComp = nmComp
+                            db.ПаролиВвод.InsertOnSubmit(f8)
+                            db.SubmitChanges()
+                        End With
+
+                    End If
+                End Using
+
                 TextBox1.Text = String.Empty
+
+                If clicks = 3 Then
+                    Using db As New dbAllDataContext()
+                        Dim f5 = db.Пароли.Where(Function(x) x.Логин = ComboBox1.Text).Select(Function(x) x).FirstOrDefault()
+                        If f5 IsNot Nothing Then
+                            f5.Блокировка = "True"
+                            db.SubmitChanges()
+                            MessageBox.Show("Пользователь заблоктирован!" & vbCrLf & " Обратаитесь к администратору")
+                            Close()
+                            MDIParent1.Close()
+                        End If
+                    End Using
+                End If
             End If
         Else
             MessageBox.Show("Пароль НЕ принят! Повторите")
+
+            clicks += 1
+            Using db As New dbAllDataContext()
+                Dim f7 = db.Пароли.Where(Function(x) x.Логин = ComboBox1.Text).Select(Function(x) x).FirstOrDefault()
+                If f7 IsNot Nothing Then
+
+
+                    Dim f8 As New ПаролиВвод
+                    With f8
+                        .IDPassword = f7.Код
+                        .ВводПароля = TextBox1.Text
+                        .Логин = f7.Логин
+                        .Дата = Now
+                        .MacAdress = macAddr
+                        .nameComp = nmComp
+                        db.ПаролиВвод.InsertOnSubmit(f8)
+                        db.SubmitChanges()
+                    End With
+
+                End If
+            End Using
+
             TextBox1.Text = String.Empty
+            If clicks = 3 Then
+
+                Using db As New dbAllDataContext()
+                    Dim f5 = db.Пароли.Where(Function(x) x.Логин = ComboBox1.Text).Select(Function(x) x).FirstOrDefault()
+                    If f5 IsNot Nothing Then
+                        f5.Блокировка = "True"
+                        db.SubmitChanges()
+                        MessageBox.Show("Пользователь заблоктирован!" & vbCrLf & " Обратаитесь к администратору")
+                        Close()
+                        MDIParent1.Close()
+                    End If
+                End Using
+
+
+
+            End If
         End If
 
     End Sub
@@ -74,7 +173,21 @@ Public Class Пароль
         Do While AllClass.Пароли Is Nothing
             mo.ПаролиAll()
         Loop
-        Dim f = AllClass.Пароли.OrderBy(Function(x) x.Логин).Select(Function(x) x.Логин).ToList()
+        Do While AllClass.ПаролиВвод Is Nothing
+            mo.ПаролиВводAll()
+        Loop
+        Dim f As New List(Of String)
+        Try
+            f = (From x In AllClass.Пароли
+                 Where x.Блокировка = "False"
+                 Order By x.Логин
+                 Select x.Логин).ToList()
+        Catch ex As Exception
+            Close()
+            MDIParent1.Close()
+        End Try
+
+
         If f IsNot Nothing Then
             If f.Count > 0 Then
                 Me.ComboBox1.Items.Clear()
@@ -85,6 +198,9 @@ Public Class Пароль
                     Me.ComboBox1.Items.Add(r)
                 Next
             End If
+        Else
+            Close()
+            MDIParent1.Close()
         End If
 
 

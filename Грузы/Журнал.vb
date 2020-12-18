@@ -1,4 +1,5 @@
 ﻿Imports System.ComponentModel
+Imports System.Threading
 
 Public Class Журнал
     'Inherits MetroFramework.Forms.MetroForm
@@ -24,6 +25,10 @@ Public Class Журнал
     Private Grid4all As BindingList(Of Grid3ЖурналClass)
     Private bsgrid4 As BindingSource
     Private Delegate Sub grd1()
+    Private com3All As List(Of IDNaz)
+    Private bscom3 As BindingSource
+    Private com4All As List(Of IDNaz)
+    Private bscom4 As BindingSource
 
     Sub New()
 
@@ -49,6 +54,14 @@ Public Class Журнал
         bsgrid1.DataSource = Grid1all
         Grid1.DataSource = bsgrid1
         GridView(Grid1)
+        Grid1.Columns(0).ReadOnly = True
+        Grid1.Columns(1).ReadOnly = True
+        Grid1.Columns(2).ReadOnly = True
+        Grid1.Columns(3).ReadOnly = True
+        Grid1.Columns(3).Width = 60
+        Grid1.Columns(8).Visible = False
+        Grid1.Columns(9).Visible = False
+        Grid1.Columns(10).Visible = False
         CheckBox1.Checked = True
         Grid1.DefaultCellStyle.Font = New Font("Calibri", 10)
 
@@ -134,6 +147,22 @@ Public Class Журнал
         ComboBox1.DisplayMember = "Naz"
         ComboBox1.Text = String.Empty
 
+
+        com3All = New List(Of IDNaz)
+        bscom3 = New BindingSource
+        bscom3.DataSource = com3All
+        ComboBox3.DataSource = bscom3
+        ComboBox3.DisplayMember = "Naz"
+        ComboBox3.Text = String.Empty
+
+        com4All = New List(Of IDNaz)
+        bscom4 = New BindingSource
+        bscom4.DataSource = com4All
+        ComboBox4.DataSource = bscom4
+        ComboBox4.DisplayMember = "Naz"
+        ComboBox4.Text = String.Empty
+
+
         com2All = New List(Of IDNaz)
         bscom2 = New BindingSource
         bscom2.DataSource = com2All
@@ -153,10 +182,13 @@ Public Class Журнал
         bslistbox1.DataSource = listbox1All
         ListBox1.DataSource = bslistbox1
 
+        ComboBox4.BeginInvoke(New MethodInvoker(Sub() Com4metod())) 'поток параллельно с контролами
 
         grdasync()
 
-        Osnowa()
+        ComboBox1.BeginInvoke(New MethodInvoker(Sub() Osnowa())) 'поток параллельно с контролами
+
+
 
 
         Grid1.Columns(7).Visible = False
@@ -166,11 +198,21 @@ Public Class Журнал
         Grid4.Columns(1).MinimumWidth = 150
 
     End Sub
+    Private Sub Com4metod()
+        For i As Integer = 1 To 12
+            Dim n As New IDNaz With {.ID = i, .Naz = MonthName(i).ToString()}
+            com4All.Add(n)
+        Next
+        bscom4.ResetBindings(False)
+        ComboBox4.Text = String.Empty
+    End Sub
 
 
 
     Private Sub Журнал_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Loaded()
+
+
     End Sub
     Private Sub Osnowa()
         Dim mo As New AllUpd
@@ -211,10 +253,10 @@ Public Class Журнал
                               Where x.Экспедитор = Экспедитор
                               Select x, y, z).ToList())
                   Group b By Keys = New With {Key b.x.Код, Key b.z.Дата,
-                     Key .P = b.z.Дата & ": " & IIf(b.x.НаименованиеГруза Is Nothing, String.Empty, b.x.НаименованиеГруза) & " (" & b.y.СтранаПогрузки & " - " & b.y.СтранаВыгрузки & ")", Key b.x.Клиент}
+                     Key .P = b.z.Дата & ": " & IIf(b.x.НаименованиеГруза Is Nothing, String.Empty, b.x.НаименованиеГруза) & ". Место загрузки: " & b.y.ГородПогрузки & " (" & b.y.СтранаПогрузки & " - " & b.y.СтранаВыгрузки & ")", Key b.x.Клиент}
                       Into Group
                   Select New Com1ЖурналClass With {.СписокДат = Keys.Дата, .КодГруза = Keys.Код, .Организации = Keys.Клиент, .Naz = Keys.P, .Наименование = Group(0).x.НаименованиеГруза, .Вес = Group(0).x.Вес,
-        .Обьем = Group(0).x.Обьем, .Длина = Group(0).x.Длина, .Ширина = Group(0).x.Ширина, .Высота = Group(0).x.Высота,
+        .Обьем = Group(0).x.Обьем, .Длина = Group(0).x.Длина, .Ширина = Group(0).x.Ширина, .Высота = Group(0).x.Высота, .Результат = Group(0).x.РезультатРаботы, .ДатаРезультата = IIf(Group(0)?.x?.ДатаРезультата Is Nothing, String.Empty, Group(0)?.x?.ДатаРезультата),
             .ТипПогрузки = Group(0).x.ТипПогрузки, .ПаллетыШтук = Group(0).x.ПаллетыШтук, .РазмерПаллет = Group(0).x.РазмерПаллет, .ADR = Group(0).x.ADR,
                      .ТипАвто = Group(0).x.ТипАвто, .ДополнитИнформация1 = Group(0).x.ДополнитИнформация, .ДатаЗагрузки = IIf(Group(0).x.ДатаЗагрузки Is Nothing, Nothing, Group(0).x.ДатаЗагрузки), .ДатаВыгрузки = IIf(Group(0).x.ДатаВыгрузки Is Nothing, Nothing, Group(0).x.ДатаВыгрузки),
                       .Lst = (From n In Group
@@ -225,6 +267,7 @@ Public Class Журнал
         Dim f2 = (From x In AllClass.ЖурналДата
                   Join y In AllClass.ЖурналКлиентГруз On x.Код Equals y.КодЖурналДата
                   Where y.Экспедитор = Экспедитор
+                  Order By x.Дата Descending
                   Select x.Дата).Distinct().ToList()
         For Each b In f2
             Dim mk As New IDNaz With {.Naz = b}
@@ -268,6 +311,21 @@ Public Class Журнал
         End If
         bscom1.ResetBindings(False)
         ComboBox1.Text = String.Empty
+
+        Dim f5 = (From x In AllClass.ЖурналКлиентГруз
+                  Where x.Экспедитор = Экспедитор
+                  Order By x.Клиент
+                  Select x.Клиент).Distinct().ToList()
+        If f5 IsNot Nothing Then
+            For Each b In f5
+                Dim f As New IDNaz With {.Naz = b}
+                com3All.Add(f)
+            Next
+            bscom3.ResetBindings(False)
+            ComboBox3.Text = String.Empty
+        End If
+
+
     End Sub
     Private Sub Grid2Met()
         Grid2all = New List(Of Grid2ЖурналClass)
@@ -275,7 +333,7 @@ Public Class Журнал
         bsgrid2.DataSource = Grid2all
         Grid2.DataSource = bsgrid2
         GridView(Grid2)
-        Grid2.Columns(0).Width = 60
+        Grid2.Columns(0).Width = 50
         Grid2.Columns(0).HeaderText = "№"
         Grid2.Columns(2).Width = 80
         Grid2.Columns(3).Width = 80
@@ -299,7 +357,7 @@ Public Class Журнал
         Dim f = (From x In AllClass.ЖурналДата
                  Join y In AllClass.ЖурналКлиентГруз On x.Код Equals y.КодЖурналДата
                  Join z In AllClass.ЖурналКлиентМаршрут On y.Код Equals z.КодЖурналКлиентГруз
-                 Where y.Экспедитор = Экспедитор
+                 Where y.Экспедитор = Экспедитор And y.ОтоброжатьВТаблицеЖурнала Is Nothing
                  Order By x.Дата Descending
                  Select x, y, z).ToList
 
@@ -326,7 +384,7 @@ Public Class Журнал
                 End If
 
             Next
-            Dim f3 As New Grid2ЖурналClass With {.Дата = b.Дата, .ДатаЗагрузки = b.ДатаЗагрузки, .Клиент = b.Клиент, .Номер = i, .Mаршрут = k, .Груз = b.Груз}
+            Dim f3 As New Grid2ЖурналClass With {.Дата = b.Дата, .ДатаЗагрузки = b.ДатаЗагрузки, .Клиент = b.Клиент, .Номер = i, .Mаршрут = k, .Груз = b.Груз, .КодЖурналГруз = b.КодЖурналГруз}
 
             i += 1
             Grid2all.Add(f3)
@@ -423,31 +481,40 @@ Public Class Журнал
             listbox1All.Clear()
         End If
 
+
+        ListBox1.BeginUpdate()
+        'ListBox1.DrawMode = DrawMode.OwnerDrawFixed
         If f2 Is Nothing Then Return
 
         With f2
+            listbox1All.Add("- - ДАННЫЕ ПО ГРУЗУ - -")
             listbox1All.Add("|Наименование груза: " & vbCrLf & .Наименование)
             listbox1All.Add("|Размеры груза: " & vbCrLf & "|Длина: " & .Длина & ", |Ширина: " & .Ширина & ", |Высота: " & .Высота)
             listbox1All.Add("|Дата загрузки: " & .ДатаЗагрузки & "|Дата выгрузки: " & .ДатаВыгрузки)
-            listbox1All.Add(vbCrLf & "----------------------------")
+            listbox1All.Add("|Вес: " & .Вес & " кг." & "|Обем: " & .Обьем & " м3.")
+            listbox1All.Add("|Кол.пал: " & .ПаллетыШтук & " шт., " & "|Размер.пал: " & .РазмерПаллет & " м.")
+            listbox1All.Add("|СТАВКА: " & .Lst(0).Ставка)
+            listbox1All.Add(vbCrLf & "___________________________________" & vbCrLf)
+            listbox1All.Add("- - ДАННЫЕ ПО МЕСТУ ЗАГРУЗКИ - -")
             For Each b In f2.Lst
                 listbox1All.Add("|Место загрузки: " & "(" & b.СтранаПогрузки & ") " & b.ГородПогрузки & " (" & b.КвадратПогрузки & ")")
                 listbox1All.Add("|Место выгрузки: " & "(" & b.СтранаВыгрузки & ") " & b.ГородВыгрузки & " (" & b.КвадратВыгрузки & ")")
                 listbox1All.Add("|Там.отпр: " & vbCrLf & b.ТаможняОтправления)
                 listbox1All.Add("|Там.Назнач: " & vbCrLf & b.ТаможняНазначения)
                 listbox1All.Add("|Доп.информация: " & b.ДополнитИнформация)
-                listbox1All.Add("----------------------------" & vbCrLf)
             Next
             listbox1All.Add(vbCrLf & "___________________________________" & vbCrLf)
-            listbox1All.Add("|Вес: " & .Вес & " кг." & "|Обем: " & .Обьем & " м3.")
-            listbox1All.Add("|Кол.пал: " & .ПаллетыШтук & " шт., " & "|Размер.пал: " & .РазмерПаллет & " м.")
+            listbox1All.Add("- - ДАННЫЕ ПО КЛИЕНТУ - -" & vbCrLf)
+            listbox1All.Add("| РЕЗУЛЬТАТ: " & .Результат & "| ДАТА: " & .ДатаРезультата)
             listbox1All.Add("|Конт.тел: " & .КонтТелефон & ", " & "|Конт.лицо: " & .КонтЛицо)
-            listbox1All.Add("|Ставка: " & .Lst(0).Ставка)
+
 
         End With
 
 
         bslistbox1.ResetBindings(False)
+
+        ListBox1.EndUpdate()
 
         If Grid1all IsNot Nothing Then
             Grid1all.Clear()
@@ -458,8 +525,15 @@ Public Class Журнал
         Dim f3 = AllClass.ЖурналПеревозчик.Where(Function(x) x.КодЖурналКлиентГруз = f2.КодГруза).Select(Function(x) New Grid1ЖурналClass _
                                                                                                          With {.Дата = IIf(x.Дата Is Nothing, Nothing, x.Дата),
                                                                                                          .ДопИнформация = x.ДопИнформация, .Контакт = x.КонтДанные,
-                                                                                                          .Перевозчик = x.Организация,
-                                                                                                         .Состояние = x.Состояние, .Ставка = x.Ставкапервозчика, .КодПеревозчика = x.Кодперевозчик}).ToList()
+                                                                                                         .Перевозчик = x.Организация,
+                                                                                                         .Состояние = x.Состояние, .Ставка = x.Ставкапервозчика,
+                                                                                                         .КодПеревозчика = x.Кодперевозчик, .КодЖурналПеревозчик = x.Код,
+                                                                                                         .Skype = x.Skype?.ToString, .SkypeDate = x.SkypeDate?.ToString}).ToList()
+        For Each b In f3
+            If b.Skype?.Length > 0 Then
+                b.ДопИнформация = b.ДопИнформация & vbCrLf & "Skype +"
+            End If
+        Next
 
         If f3 IsNot Nothing Then
             If f3.Count > 0 Then
@@ -592,26 +666,34 @@ Public Class Журнал
             Return
         End If
 
-        Dim f As New Grid1ЖурналClass With {.Дата = Now, .ДопИнформация = f3.Примечание, .КодПеревозчика = f3.КодПеревозчика, .Контакт = f3.КонтДанные, .Перевозчик = f3.Перевозчик}
-        Grid1all.Add(f)
-        Dim i As Integer = 1
-        For Each b In Grid1all
-            b.Номер = i
-            i += 1
-        Next
-        bsgrid1.ResetBindings(False)
+
+
         If String.IsNullOrEmpty(ComboBox5.Text) = False Then
             Dim f5 As Com1ЖурналClass = ComboBox5.SelectedItem
-            Grid1AddToBaseAsync(f, f5.КодГруза)
+
+
+            Dim f As New Grid1ЖурналClass With {.Дата = Now, .ДопИнформация = f3.Примечание, .КодПеревозчика = f3.КодПеревозчика, .Контакт = f3.КонтДанные, .Перевозчик = f3.Перевозчик}
+            Dim id = Grid1AddToBase(f, f5.КодГруза)
+            f.КодЖурналПеревозчик = id
+            Grid1all.Add(f)
+            Dim i As Integer = 1
+            For Each b In Grid1all
+                b.Номер = i
+                i += 1
+            Next
+
+            bsgrid1.ResetBindings(False)
+
+
         End If
 
 
     End Sub
-    Private Async Sub Grid1AddToBaseAsync(ByVal d As Grid1ЖурналClass, ByVal d1 As Integer)
-        Await Task.Run(Sub() Grid1AddToBase(d, d1))
+    'Private Async Sub Grid1AddToBaseAsync(ByVal d As Grid1ЖурналClass, ByVal d1 As Integer)
+    '    Await Task.Run(Sub() Grid1AddToBase(d, d1))
 
-    End Sub
-    Private Sub Grid1AddToBase(ByVal d As Grid1ЖурналClass, ByVal d1 As Integer)
+    'End Sub
+    Private Function Grid1AddToBase(ByVal d As Grid1ЖурналClass, ByVal d1 As Integer) As Integer
         Using db As New dbAllDataContext()
             Dim f As New ЖурналПеревозчик
             With f
@@ -625,9 +707,10 @@ Public Class Журнал
             db.ЖурналПеревозчик.InsertOnSubmit(f)
             db.SubmitChanges()
             Dim mo As New AllUpd
-            mo.ЖурналПеревозчикAll()
+            mo.ЖурналПеревозчикAllAsync()
+            Return f.Код
         End Using
-    End Sub
+    End Function
     Private Sub ПоискВсе(ByVal kl As String)
         Dim f6 As New List(Of Grid3ЖурналClass)
         f6.AddRange(Grid3all.Where(Function(x) x.КонтДанные.ToUpper.Contains(kl.ToUpper)).Select(Function(x) x).ToList())
@@ -732,17 +815,24 @@ Public Class Журнал
             Return
         End If
 
-        Dim f As New Grid1ЖурналClass With {.Дата = Now, .ДопИнформация = f3.Примечание, .КодПеревозчика = f3.КодПеревозчика, .Контакт = f3.КонтДанные, .Перевозчик = f3.Перевозчик}
-        Grid1all.Add(f)
-        Dim i As Integer = 1
-        For Each b In Grid1all
-            b.Номер = i
-            i += 1
-        Next
-        bsgrid1.ResetBindings(False)
+
+
         If String.IsNullOrEmpty(ComboBox5.Text) = False Then
             Dim f5 As Com1ЖурналClass = ComboBox5.SelectedItem
-            Grid1AddToBaseAsync(f, f5.КодГруза)
+
+
+
+            Dim f As New Grid1ЖурналClass With {.Дата = Now, .ДопИнформация = f3.Примечание, .КодПеревозчика = f3.КодПеревозчика, .Контакт = f3.КонтДанные, .Перевозчик = f3.Перевозчик}
+            Dim id = Grid1AddToBase(f, f5.КодГруза)
+            f.КодЖурналПеревозчик = id
+            Grid1all.Add(f)
+            Dim i As Integer = 1
+            For Each b In Grid1all
+                b.Номер = i
+                i += 1
+            Next
+            bsgrid1.ResetBindings(False)
+
         End If
     End Sub
 
@@ -847,14 +937,11 @@ b1.СтранаПогрузки, b1.ТаможняНазначения, b1.Та�
     End Class
 
     Private Sub Grid2_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles Grid2.CellDoubleClick
-        'Dim m As Grid2ЖурналClass = Grid2all.ElementAt(e.RowIndex)
-        'If m Is Nothing Then Return
-
-
-
-        'Dim p As String = m.Дата & ": " & IIf(m.Груз Is Nothing, String.Empty, m.Груз) & " (" & m.СтранаПогрузки & " - " & m.СтранаВыгрузки & ")"
-        'ComboBox1.Text = m.Дата
-        'Dim f = comALLS.Where(Function(x) x.СписокДат = m.Дата And x.Организации = m.Клиент And x.Naz = p).Select(Function(x) x).ToList()
+        If e.RowIndex = -1 Then Return
+        Dim f = Grid2all.ElementAt(e.RowIndex)
+        If f Is Nothing Then Return
+        Dim k As New ЖурналВсплывДанныеОбщиеДляГрид2(f)
+        k.ShowDialog()
 
 
     End Sub
@@ -885,7 +972,285 @@ b1.СтранаПогрузки, b1.ТаможняНазначения, b1.Та�
 
     Private Sub Button13_Click(sender As Object, e As EventArgs) Handles Button13.Click
         ДобПер = 1
-        Dim f As New ДобавитьПеревозчика
+        Dim f As New ДобавитьПеревозчика()
         f.ShowDialog()
     End Sub
+    Public Property Grid1Clic As Grid1ЖурналClass = Nothing
+
+    Private Sub Grid1_MouseDown(sender As Object, e As MouseEventArgs) Handles Grid1.MouseDown
+        If e.Button = MouseButtons.Right Then
+            ContextMenuStrip1.Show(MousePosition, ToolStripDropDownDirection.Right)
+            Dim k = TryCast(sender, DataGridView)
+            Grid1Clic = Grid1all.ElementAt(k.CurrentCell.RowIndex)
+        End If
+    End Sub
+
+    Private Sub ОткрытьДанныеПеревозчикаToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ОткрытьДанныеПеревозчикаToolStripMenuItem.Click
+        Dim f As Grid1ЖурналClass = Grid1all.ElementAt(Grid1.CurrentRow.Index)
+        Dim mo As New AllUpd
+        Do While AllClass.ПеревозчикиБаза Is Nothing
+            mo.ПеревозчикиБазаAll()
+        Loop
+        If f IsNot Nothing Then
+            Dim m As New ИзменПеревозчика(f)
+            m.ShowDialog()
+
+
+        End If
+    End Sub
+    Private Async Sub addРезультAsync(ByVal d As Integer, ByVal rezult As String)
+        Await Task.Run(Sub() addРезульт(d, rezult))
+        comb5Sel()
+    End Sub
+    Private Sub addРезульт(ByVal d As Integer, ByVal rezult As String)
+        Dim mo As New AllUpd
+        Using db As New dbAllDataContext
+            Dim f = db.ЖурналКлиентГруз.Where(Function(x) x.Код = d).FirstOrDefault()
+            f.РезультатРаботы = rezult
+            f.ДатаРезультата = Now.ToShortDateString
+            db.SubmitChanges()
+        End Using
+        mo.ЖурналКлиентГрузAll()
+    End Sub
+
+    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+        Dim f1 As IDNaz = ComboBox1.SelectedItem
+        Dim f2 As IDNaz = ComboBox2.SelectedItem
+        Dim f5 As Com1ЖурналClass = ComboBox5.SelectedItem
+
+
+        Dim f = (From x In comALLS
+                 Where x.СписокДат = f1.Naz And x.Организации = f2.Naz And x.Naz = f5.Naz
+                 Select x.КодГруза).FirstOrDefault()
+        If f > 0 Then
+            addРезультAsync(f, "КЛИЕНТ САМ ЗАКРЫЛ!")
+        End If
+        MessageBox.Show("Данные приняты!")
+
+        Dim f7 = listbox1All.Where(Function(x) x.Contains("РЕЗУЛЬТАТ:")).FirstOrDefault()
+
+        If f7 IsNot Nothing Then
+            Dim f8 = listbox1All.IndexOf(f7)
+            f7 = "| РЕЗУЛЬТАТ: " & "КЛИЕНТ САМ ЗАКРЫЛ!" & "| ДАТА: " & Now.ToShortDateString
+            listbox1All(f8) = f7
+            ListBox1.BeginUpdate()
+            bslistbox1.ResetBindings(False)
+            ListBox1.EndUpdate()
+        End If
+
+
+
+
+    End Sub
+
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+        Dim f1 As IDNaz = ComboBox1.SelectedItem
+        Dim f2 As IDNaz = ComboBox2.SelectedItem
+        Dim f5 As Com1ЖурналClass = ComboBox5.SelectedItem
+
+        Dim f = (From x In comALLS
+                 Where x.СписокДат = f1.Naz And x.Организации = f2.Naz And x.Naz = f5.Naz
+                 Select x.КодГруза).FirstOrDefault()
+        If f > 0 Then
+            addРезультAsync(f, "КЛИЕНТ ОТМЕНИЛ!")
+        End If
+        MessageBox.Show("Данные приняты!")
+
+        Dim f7 = listbox1All.Where(Function(x) x.Contains("РЕЗУЛЬТАТ:")).FirstOrDefault()
+
+        If f7 IsNot Nothing Then
+            Dim f8 = listbox1All.IndexOf(f7)
+            f7 = "| РЕЗУЛЬТАТ: " & "КЛИЕНТ ОТМЕНИЛ!" & "| ДАТА: " & Now.ToShortDateString
+            listbox1All(f8) = f7
+            ListBox1.BeginUpdate()
+            bslistbox1.ResetBindings(False)
+            ListBox1.EndUpdate()
+        End If
+    End Sub
+
+    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
+        Dim f1 As IDNaz = ComboBox1.SelectedItem
+        Dim f2 As IDNaz = ComboBox2.SelectedItem
+        Dim f5 As Com1ЖурналClass = ComboBox5.SelectedItem
+
+        Dim f = (From x In comALLS
+                 Where x.СписокДат = f1.Naz And x.Организации = f2.Naz And x.Naz = f5.Naz
+                 Select x.КодГруза).FirstOrDefault()
+        If f > 0 Then
+            addРезультAsync(f, "СДЕЛКА СОСТОЯЛАСЬ!")
+        End If
+        MessageBox.Show("Данные приняты!")
+
+        Dim f7 = listbox1All.Where(Function(x) x.Contains("РЕЗУЛЬТАТ:")).FirstOrDefault()
+
+        If f7 IsNot Nothing Then
+            Dim f8 = listbox1All.IndexOf(f7)
+            f7 = "| РЕЗУЛЬТАТ: " & "СДЕЛКА СОСТОЯЛАСЬ!" & "| ДАТА: " & Now.ToShortDateString
+            listbox1All(f8) = f7
+            ListBox1.BeginUpdate()
+            bslistbox1.ResetBindings(False)
+            ListBox1.EndUpdate()
+        End If
+    End Sub
+    Private Sub UpdЖурналПеревозчикиGrid1(ByVal d As Integer, ByVal Sob As Integer, ByVal txt As String)
+        Dim mo As New AllUpd
+        Using db As New dbAllDataContext()
+            Dim f = db.ЖурналПеревозчик.Where(Function(x) x.Код = d).FirstOrDefault()
+            If f IsNot Nothing Then
+                Select Case Sob
+                    Case 4
+                        f.Состояние = txt
+                        db.SubmitChanges()
+                        mo.ЖурналПеревозчикAll()
+                    Case 5
+                        f.Ставкапервозчика = txt
+                        db.SubmitChanges()
+                        mo.ЖурналПеревозчикAll()
+                    Case 6
+                        f.ДопИнформация = txt
+                        db.SubmitChanges()
+                        mo.ЖурналПеревозчикAll()
+                End Select
+            End If
+        End Using
+
+    End Sub
+
+    Private Sub Grid1_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles Grid1.CellValueChanged
+        Dim f = Grid1all.ElementAt(e.RowIndex)
+        Dim Rnd As New Random(245)
+        If e.ColumnIndex = 4 Then 'состояние
+
+
+            Dim thed As New Thread(New ThreadStart(Sub() UpdЖурналПеревозчикиGrid1(f.КодЖурналПеревозчик, 4, f.Состояние)))
+            thed.Name = Rnd.Next.ToString
+            thed.Start()
+        End If
+
+        If e.ColumnIndex = 5 Then 'ставка
+            Dim thed As New Thread(New ThreadStart(Sub() UpdЖурналПеревозчикиGrid1(f.КодЖурналПеревозчик, 5, f.Ставка)))
+            thed.Name = Rnd.Next.ToString
+            thed.Start()
+        End If
+
+        If e.ColumnIndex = 6 Then 'ДопИнформация
+            Dim thed As New Thread(New ThreadStart(Sub() UpdЖурналПеревозчикиGrid1(f.КодЖурналПеревозчик, 6, f.ДопИнформация)))
+            thed.Name = Rnd.Next.ToString
+            thed.Start()
+        End If
+    End Sub
+
+
+    Private Sub ДобавитьToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ДобавитьToolStripMenuItem.Click
+        If Grid1Clic IsNot Nothing Then
+            Dim f As New Skype(Grid1Clic, True)
+            f.ShowDialog()
+        End If
+    End Sub
+
+    Private Sub ПрочитатьToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ПрочитатьToolStripMenuItem.Click
+        If Grid1Clic IsNot Nothing Then
+            Dim f As New Skype(Grid1Clic, False)
+            f.ShowDialog()
+        End If
+    End Sub
+
+    Private Sub ComboBox3_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles ComboBox3.SelectionChangeCommitted
+        Dim f As IDNaz = ComboBox3.SelectedItem
+        If ComboBox1.Text.Length > 0 And ComboBox2.Text.Length > 0 Then
+            Dim f1 As New ЖурналCombo3СводнаяПоКлиентам(f.Naz)
+            f1.ShowDialog()
+        End If
+
+    End Sub
+
+    Private Sub Button15_Click(sender As Object, e As EventArgs) Handles Button15.Click
+        Dim f As New SkypeClientPredloj
+        f.ShowDialog()
+    End Sub
+
+    Private Sub Button14_Click(sender As Object, e As EventArgs) Handles Button14.Click
+        Dim f As New SkypePerevozPredloj
+        f.ShowDialog()
+    End Sub
+
+    Private Sub Button16_Click(sender As Object, e As EventArgs) Handles Button16.Click
+        If My.Computer.Name.ToString = "OLEGLAPTOP" Then
+            Dim f As New Календарь
+            f.WindowState = FormWindowState.Normal
+            f.StartPosition = FormStartPosition.CenterScreen
+            f.ShowDialog()
+        End If
+    End Sub
+
+    Private Sub Button17_Click(sender As Object, e As EventArgs) Handles Button17.Click
+        Dim f9 As New ПоискПолный()
+        f9.WindowState = FormWindowState.Normal
+        f9.StartPosition = FormStartPosition.CenterScreen
+        f9.ShowDialog()
+    End Sub
+
+    Private Sub Grid2_CellClick(sender As Object, e As DataGridViewCellEventArgs)
+
+    End Sub
+    Public Property Grid2Clic As Grid2ЖурналClass = Nothing
+    Private Sub Grid2_MouseDown(sender As Object, e As MouseEventArgs) Handles Grid2.MouseDown
+        If e.Button = MouseButtons.Right Then
+            ContextMenuStrip2.Show(MousePosition, ToolStripDropDownDirection.Right)
+            Dim k = TryCast(sender, DataGridView)
+            Grid2Clic = Grid2all.ElementAt(k.CurrentCell.RowIndex)
+        End If
+    End Sub
+
+    Private Sub УдлаитьРейсИзСпискаToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles УдлаитьРейсИзСпискаToolStripMenuItem.Click
+        УдалитьРейсИзтаблицыAsync()
+        Grid2all.Remove(Grid2Clic)
+        bsgrid2.ResetBindings(False)
+    End Sub
+    Private Async Sub УдалитьРейсИзтаблицыAsync()
+        Await Task.Run(Sub() УдалитьРейсИзтаблицы())
+    End Sub
+    Private Sub УдалитьРейсИзтаблицы()
+        Dim mo As New AllUpd
+        Using db As New dbAllDataContext()
+            Dim f = db.ЖурналКлиентГруз.Where(Function(x) x.Код = Grid2Clic.КодЖурналГруз).FirstOrDefault()
+            If f IsNot Nothing Then
+                f.ОтоброжатьВТаблицеЖурнала = "False"
+                db.SubmitChanges()
+                mo.ЖурналКлиентГрузAll()
+            End If
+        End Using
+
+    End Sub
+
+    Private Sub ДобавитьСобытиеВКалендарьToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ДобавитьСобытиеВКалендарьToolStripMenuItem.Click
+        My.Computer.Clipboard.Clear()
+        Dim comb2x As IDNaz = ComboBox2.SelectedItem
+        Dim comb5x As Com1ЖурналClass = ComboBox5.SelectedItem
+        Dim m As String = Grid1Clic.Перевозчик & vbCrLf & Grid1Clic.Контакт & vbCrLf & " - авто для клиента - " _
+& vbCrLf & comb2x.Naz & " - груз - " & vbCrLf & comb5x.Наименование & vbCrLf & "(" & comb5x.Lst(0).СтранаПогрузки & ")" & vbCrLf & " - тип авто - " & vbCrLf & comb5x.ТипАвто
+
+        My.Computer.Clipboard.SetText(m)
+        MessageBox.Show("Данные в буфере")
+    End Sub
+
+
+
+
+
+    'Private Sub ListBox1_DrawItem(sender As Object, e As DrawItemEventArgs) Handles ListBox1.DrawItem
+    '    'e.DrawBackground()
+    '    'Dim g As Graphics = e.Graphics
+    '    'g.FillRectangle(New SolidBrush(Color.Gray), e.Bounds)
+    '    'Dim lb As ListBox = DirectCast(sender, ListBox)
+    '    'Dim clr As Color = Color.White
+    '    'If e.Index Mod 2 = 1 Then clr = Color.Navy
+    '    'g.DrawString(lb.Items(e.Index).ToString(), e.Font, New SolidBrush(clr), New PointF(e.Bounds.X, e.Bounds.Y))
+    '    'If e.State And DrawItemState.Selected Then
+    '    '    e.Graphics.FillRectangle(SystemBrushes.HotTrack, e.Bounds)
+    '    '    g.DrawString(lb.Items(e.Index).ToString(), e.Font, New SolidBrush(clr), New PointF(e.Bounds.X, e.Bounds.Y))
+    '    'End If
+
+    '    'e.DrawFocusRectangle()
+    'End Sub
 End Class

@@ -132,7 +132,7 @@
         bsGrid1.DataSource = Grid1All
         Grid1.DataSource = bsGrid1
         GridView(Grid1)
-        'Grid1.SelectionMode = DataGridViewSelectionMode.CellSelect
+        Grid1.SelectionMode = DataGridViewSelectionMode.CellSelect
         Grid1.Columns(7).HeaderText = "Тип Погрузки"
         Grid1.Columns(8).HeaderText = "Паллеты штук"
         Grid1.Columns(9).HeaderText = "Размер паллет"
@@ -149,7 +149,7 @@
         bsGrid2.DataSource = Grid2All
         Grid2.DataSource = bsGrid2
         GridView(Grid2)
-        'Grid2.SelectionMode = DataGridViewSelectionMode.CellSelect
+        Grid2.SelectionMode = DataGridViewSelectionMode.CellSelect
         Grid2.Columns(1).HeaderText = "Страна Погрузки"
         Grid2.Columns(2).HeaderText = "Страна Выгрузки"
         Grid2.Columns(3).HeaderText = "Город Погрузки"
@@ -222,6 +222,10 @@
         End If
         If MaskedTextBox2.MaskCompleted = False Then
             MessageBox.Show("Выберите дату выгрузки!", Рик)
+            Return
+        End If
+
+        If MessageBox.Show("Добавить груз?", Рик, MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.No Then
             Return
         End If
 
@@ -431,9 +435,11 @@
                       .ДатаВыгрузки = Group(0).x.ДатаВыгрузки, .Lst = (From b In Group
                                                                        Select b.y).ToList()}).ToList()
 
+
         If f2 IsNot Nothing Then
-            If f2.Count > 0 Then
-                com2.AddRange(f2)
+            Dim k = f2.OrderByDescending(Function(x) x.Naz).ToList()
+            If k.Count > 0 Then
+                com2.AddRange(k)
                 bscom2.ResetBindings(False)
             End If
         End If
@@ -488,15 +494,18 @@
             If Grid2.CurrentRow.Cells(1).Value IsNot Nothing Then
                 Dim stran = Grid2.CurrentRow.Cells(1).Value
                 Dim stran2 = Grid2.CurrentRow.Cells(5).Value
-                Dim k = (From x In AllClass.Страна
-                         Join y In AllClass.РегионыРоссии On x.Код Equals y.Страны
-                         Where x.Страна = stran And y.Регионы.ToUpper.Contains(stran2.ToString.ToUpper)
-                         Select y.Регионы).FirstOrDefault()
-                If k IsNot Nothing Then
-                    If k.Length > 0 Then
-                        Grid2.CurrentCell.Value = k
+                If stran2 IsNot Nothing Then
+                    Dim k = (From x In AllClass.Страна
+                             Join y In AllClass.РегионыРоссии On x.Код Equals y.Страны
+                             Where x.Страна = stran And y?.Регионы?.ToUpper.Contains(stran2?.ToString.ToUpper)
+                             Select y.Регионы).FirstOrDefault()
+                    If k IsNot Nothing Then
+                        If k.Length > 0 Then
+                            Grid2.CurrentCell.Value = k
+                        End If
                     End If
                 End If
+
 
             End If
         End If
@@ -505,15 +514,18 @@
             If Grid2.CurrentRow.Cells(2).Value IsNot Nothing Then
                 Dim stran = Grid2.CurrentRow.Cells(2).Value
                 Dim stran2 = Grid2.CurrentRow.Cells(6).Value
-                Dim k = (From x In AllClass.Страна
-                         Join y In AllClass.РегионыРоссии On x.Код Equals y.Страны
-                         Where x.Страна = stran And y.Регионы.ToUpper.Contains(stran2.ToString.ToUpper)
-                         Select y.Регионы).FirstOrDefault()
-                If k IsNot Nothing Then
-                    If k.Length > 0 Then
-                        Grid2.CurrentCell.Value = k
+                If stran2 IsNot Nothing Then
+                    Dim k = (From x In AllClass.Страна
+                             Join y In AllClass.РегионыРоссии On x.Код Equals y.Страны
+                             Where x.Страна = stran And y?.Регионы?.ToUpper.Contains(stran2?.ToString.ToUpper)
+                             Select y.Регионы).FirstOrDefault()
+                    If k IsNot Nothing Then
+                        If k.Length > 0 Then
+                            Grid2.CurrentCell.Value = k
+                        End If
                     End If
                 End If
+
 
             End If
         End If
@@ -666,5 +678,67 @@
         Dim f4 As New ОбщийПоиск(f2)
         f4.ShowDialog()
 
+    End Sub
+
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+        If ComboBox2.Text.Length = 0 Then
+            MessageBox.Show("Выберите рейс для удаления!", Рик)
+            Return
+        End If
+        If com2.Count = 0 Then
+            MessageBox.Show("Нет данных для удаления!", Рик)
+            Return
+        End If
+        Dim f As Com2ЖурналДобавитьГрузClass = ComboBox2.SelectedItem
+        If MessageBox.Show("Удалить груз - " & f.Naz & "?", Рик, MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.No Then
+            Return
+        End If
+
+        DelГрузAsync(f.КодЖурнГруз)
+        com2.Remove(f)
+        bscom2.ResetBindings(False)
+        MessageBox.Show("Данные удалены!", Рик)
+        ComboBox2.Text = String.Empty
+        Grid1All.Clear()
+        bsGrid1.ResetBindings(False)
+        Grid2All.Clear()
+        bsGrid2.ResetBindings(False)
+        MaskedTextBox1.Text = Nothing
+        MaskedTextBox2.Text = Nothing
+    End Sub
+    Private Async Sub DelГрузAsync(ByVal d As Integer)
+        Await Task.Run(Sub() DelГруз(d))
+    End Sub
+    Private Sub DelГруз(ByVal d As Integer)
+        Using db As New dbAllDataContext()
+            Dim f = db.ЖурналКлиентГруз.Where(Function(x) x.Код = d).FirstOrDefault()
+            If f IsNot Nothing Then
+                db.ЖурналКлиентГруз.DeleteOnSubmit(f)
+                db.SubmitChanges()
+                Dim mo As New AllUpd
+                mo.ЖурналКлиентГрузAll()
+            End If
+        End Using
+    End Sub
+    Public Property DGVsender As DataGridView
+
+    Private Sub Grid2_MouseDown(sender As Object, e As MouseEventArgs) Handles Grid2.MouseDown
+        If e.Button = MouseButtons.Right Then
+            ContextMenuStrip1.Show(MousePosition, ToolStripDropDownDirection.Right)
+            DGVsender = TryCast(sender, DataGridView)
+        End If
+
+
+    End Sub
+
+    Private Sub УдалитьСтрокуToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles УдалитьСтрокуToolStripMenuItem.Click
+
+
+        If MessageBox.Show("Удалить строку?", Рик, MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.No Then
+            Return
+        End If
+
+        Grid2All.RemoveAt(DGVsender.CurrentRow.Index)
+        bsGrid2.ResetBindings(False)
     End Sub
 End Class

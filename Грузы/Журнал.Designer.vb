@@ -22,12 +22,18 @@ Partial Class Журнал
     'Не изменяйте ее в редакторе исходного кода.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Журнал))
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Button17 = New System.Windows.Forms.Button()
+        Me.Button16 = New System.Windows.Forms.Button()
+        Me.GroupBox11 = New System.Windows.Forms.GroupBox()
+        Me.Button15 = New System.Windows.Forms.Button()
+        Me.Button14 = New System.Windows.Forms.Button()
         Me.Button13 = New System.Windows.Forms.Button()
         Me.Button8 = New System.Windows.Forms.Button()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
@@ -48,7 +54,6 @@ Partial Class Журнал
         Me.Button5 = New System.Windows.Forms.Button()
         Me.Button6 = New System.Windows.Forms.Button()
         Me.Button7 = New System.Windows.Forms.Button()
-        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
         Me.Button9 = New System.Windows.Forms.Button()
@@ -66,10 +71,26 @@ Partial Class Журнал
         Me.Grid1 = New Грузы.DoubleBuferGrid()
         Me.Grid4 = New Грузы.DoubleBuferGrid()
         Me.Grid3 = New Грузы.DoubleBuferGrid()
+        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ОткрытьДанныеПеревозчикаToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SkypeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ДобавитьToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ПрочитатьToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ДобавитьСобытиеВКалендарьToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ComboBox3 = New System.Windows.Forms.ComboBox()
+        Me.GroupBox10 = New System.Windows.Forms.GroupBox()
         Me.Grid2 = New Грузы.DoubleBuferGrid()
+        Me.ContextMenuStrip2 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.СделкаToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.КлиентсамЗакрылToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.КлиентОтменилToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.СделкаСостояласьToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.УдлаитьРейсИзСпискаToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Button18 = New System.Windows.Forms.Button()
+        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.ComboBox4 = New System.Windows.Forms.ComboBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
-        Me.GroupBox4.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
         Me.GroupBox7.SuspendLayout()
         Me.GroupBox9.SuspendLayout()
@@ -77,7 +98,11 @@ Partial Class Журнал
         CType(Me.Grid1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Grid4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Grid3, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.ContextMenuStrip1.SuspendLayout()
+        Me.GroupBox10.SuspendLayout()
         CType(Me.Grid2, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.ContextMenuStrip2.SuspendLayout()
+        Me.GroupBox4.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox1
@@ -85,6 +110,11 @@ Partial Class Журнал
         Me.GroupBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox1.BackColor = System.Drawing.Color.MediumPurple
+        Me.GroupBox1.Controls.Add(Me.Button17)
+        Me.GroupBox1.Controls.Add(Me.Button16)
+        Me.GroupBox1.Controls.Add(Me.GroupBox11)
+        Me.GroupBox1.Controls.Add(Me.Button15)
+        Me.GroupBox1.Controls.Add(Me.Button14)
         Me.GroupBox1.Controls.Add(Me.Button13)
         Me.GroupBox1.Controls.Add(Me.Button8)
         Me.GroupBox1.Controls.Add(Me.GroupBox5)
@@ -96,17 +126,71 @@ Partial Class Журнал
         Me.GroupBox1.Controls.Add(Me.Button1)
         Me.GroupBox1.Location = New System.Drawing.Point(12, 12)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(1107, 68)
+        Me.GroupBox1.Size = New System.Drawing.Size(1054, 68)
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Звонки"
         '
+        'Button17
+        '
+        Me.Button17.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.Button17.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.Button17.Location = New System.Drawing.Point(877, 37)
+        Me.Button17.Name = "Button17"
+        Me.Button17.Size = New System.Drawing.Size(106, 25)
+        Me.Button17.TabIndex = 11
+        Me.Button17.Text = "Поиск"
+        Me.Button17.UseVisualStyleBackColor = False
+        '
+        'Button16
+        '
+        Me.Button16.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.Button16.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.Button16.Location = New System.Drawing.Point(877, 10)
+        Me.Button16.Name = "Button16"
+        Me.Button16.Size = New System.Drawing.Size(106, 25)
+        Me.Button16.TabIndex = 10
+        Me.Button16.Text = "Календарь"
+        Me.Button16.UseVisualStyleBackColor = False
+        '
+        'GroupBox11
+        '
+        Me.GroupBox11.BackColor = System.Drawing.Color.White
+        Me.GroupBox11.Location = New System.Drawing.Point(861, 0)
+        Me.GroupBox11.Name = "GroupBox11"
+        Me.GroupBox11.Size = New System.Drawing.Size(10, 68)
+        Me.GroupBox11.TabIndex = 6
+        Me.GroupBox11.TabStop = False
+        '
+        'Button15
+        '
+        Me.Button15.BackColor = System.Drawing.Color.LightSkyBlue
+        Me.Button15.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.Button15.Location = New System.Drawing.Point(398, 10)
+        Me.Button15.Name = "Button15"
+        Me.Button15.Size = New System.Drawing.Size(75, 25)
+        Me.Button15.TabIndex = 9
+        Me.Button15.Text = "Skype"
+        Me.Button15.UseVisualStyleBackColor = False
+        '
+        'Button14
+        '
+        Me.Button14.BackColor = System.Drawing.Color.LightSkyBlue
+        Me.Button14.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.Button14.Location = New System.Drawing.Point(398, 37)
+        Me.Button14.Name = "Button14"
+        Me.Button14.Size = New System.Drawing.Size(75, 25)
+        Me.Button14.TabIndex = 8
+        Me.Button14.Text = "Skype"
+        Me.Button14.UseVisualStyleBackColor = False
+        '
         'Button13
         '
         Me.Button13.BackColor = System.Drawing.Color.Wheat
-        Me.Button13.Location = New System.Drawing.Point(948, 18)
+        Me.Button13.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.Button13.Location = New System.Drawing.Point(688, 37)
         Me.Button13.Name = "Button13"
-        Me.Button13.Size = New System.Drawing.Size(104, 44)
+        Me.Button13.Size = New System.Drawing.Size(167, 25)
         Me.Button13.TabIndex = 7
         Me.Button13.Text = "Добавить перевозчика"
         Me.Button13.UseVisualStyleBackColor = False
@@ -114,9 +198,10 @@ Partial Class Журнал
         'Button8
         '
         Me.Button8.BackColor = System.Drawing.Color.Wheat
-        Me.Button8.Location = New System.Drawing.Point(831, 18)
+        Me.Button8.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.Button8.Location = New System.Drawing.Point(688, 10)
         Me.Button8.Name = "Button8"
-        Me.Button8.Size = New System.Drawing.Size(111, 34)
+        Me.Button8.Size = New System.Drawing.Size(167, 25)
         Me.Button8.TabIndex = 6
         Me.Button8.Text = "Добавить груз"
         Me.Button8.UseVisualStyleBackColor = False
@@ -124,7 +209,7 @@ Partial Class Журнал
         'GroupBox5
         '
         Me.GroupBox5.BackColor = System.Drawing.Color.White
-        Me.GroupBox5.Location = New System.Drawing.Point(815, 0)
+        Me.GroupBox5.Location = New System.Drawing.Point(672, 0)
         Me.GroupBox5.Name = "GroupBox5"
         Me.GroupBox5.Size = New System.Drawing.Size(10, 68)
         Me.GroupBox5.TabIndex = 5
@@ -142,9 +227,10 @@ Partial Class Журнал
         'Button3
         '
         Me.Button3.BackColor = System.Drawing.Color.Thistle
-        Me.Button3.Location = New System.Drawing.Point(641, 18)
+        Me.Button3.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.Button3.Location = New System.Drawing.Point(495, 37)
         Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(168, 34)
+        Me.Button3.Size = New System.Drawing.Size(168, 25)
         Me.Button3.TabIndex = 4
         Me.Button3.Text = "Исходящий Перевозчик"
         Me.Button3.UseVisualStyleBackColor = False
@@ -152,9 +238,10 @@ Partial Class Журнал
         'Button4
         '
         Me.Button4.BackColor = System.Drawing.Color.Thistle
-        Me.Button4.Location = New System.Drawing.Point(495, 18)
+        Me.Button4.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.Button4.Location = New System.Drawing.Point(495, 10)
         Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(140, 34)
+        Me.Button4.Size = New System.Drawing.Size(168, 25)
         Me.Button4.TabIndex = 3
         Me.Button4.Text = "Исходящий Клиент"
         Me.Button4.UseVisualStyleBackColor = False
@@ -162,9 +249,10 @@ Partial Class Журнал
         'Button2
         '
         Me.Button2.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.Button2.Location = New System.Drawing.Point(313, 18)
+        Me.Button2.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.Button2.Location = New System.Drawing.Point(232, 37)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(160, 34)
+        Me.Button2.Size = New System.Drawing.Size(160, 25)
         Me.Button2.TabIndex = 2
         Me.Button2.Text = "Входящий Перевозчик"
         Me.Button2.UseVisualStyleBackColor = False
@@ -172,19 +260,20 @@ Partial Class Журнал
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.Label1.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
         Me.Label1.Location = New System.Drawing.Point(20, 29)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(62, 23)
+        Me.Label1.Size = New System.Drawing.Size(48, 18)
         Me.Label1.TabIndex = 1
         Me.Label1.Text = "Label1"
         '
         'Button1
         '
         Me.Button1.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.Button1.Location = New System.Drawing.Point(168, 18)
+        Me.Button1.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.Button1.Location = New System.Drawing.Point(232, 10)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(139, 34)
+        Me.Button1.Size = New System.Drawing.Size(160, 25)
         Me.Button1.TabIndex = 0
         Me.Button1.Text = "Входящий Клиент"
         Me.Button1.UseVisualStyleBackColor = False
@@ -232,7 +321,7 @@ Partial Class Журнал
         Me.ComboBox5.FormattingEnabled = True
         Me.ComboBox5.Location = New System.Drawing.Point(688, 26)
         Me.ComboBox5.Name = "ComboBox5"
-        Me.ComboBox5.Size = New System.Drawing.Size(412, 26)
+        Me.ComboBox5.Size = New System.Drawing.Size(359, 26)
         Me.ComboBox5.TabIndex = 4
         '
         'GroupBox3
@@ -248,7 +337,7 @@ Partial Class Журнал
         Me.GroupBox3.Controls.Add(Me.ComboBox1)
         Me.GroupBox3.Location = New System.Drawing.Point(12, 141)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(1107, 64)
+        Me.GroupBox3.Size = New System.Drawing.Size(1054, 64)
         Me.GroupBox3.TabIndex = 6
         Me.GroupBox3.TabStop = False
         '
@@ -272,9 +361,10 @@ Partial Class Журнал
         'Button5
         '
         Me.Button5.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.Button5.Location = New System.Drawing.Point(167, 22)
+        Me.Button5.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.Button5.Location = New System.Drawing.Point(387, 108)
         Me.Button5.Name = "Button5"
-        Me.Button5.Size = New System.Drawing.Size(137, 31)
+        Me.Button5.Size = New System.Drawing.Size(130, 27)
         Me.Button5.TabIndex = 8
         Me.Button5.Text = "Клиент отменил"
         Me.Button5.UseVisualStyleBackColor = False
@@ -282,9 +372,10 @@ Partial Class Журнал
         'Button6
         '
         Me.Button6.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.Button6.Location = New System.Drawing.Point(6, 22)
+        Me.Button6.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.Button6.Location = New System.Drawing.Point(387, 80)
         Me.Button6.Name = "Button6"
-        Me.Button6.Size = New System.Drawing.Size(143, 31)
+        Me.Button6.Size = New System.Drawing.Size(130, 27)
         Me.Button6.TabIndex = 7
         Me.Button6.Text = "Клиент сам закрыл"
         Me.Button6.UseVisualStyleBackColor = False
@@ -292,26 +383,13 @@ Partial Class Журнал
         'Button7
         '
         Me.Button7.BackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.Button7.Location = New System.Drawing.Point(328, 22)
+        Me.Button7.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.Button7.Location = New System.Drawing.Point(523, 86)
         Me.Button7.Name = "Button7"
-        Me.Button7.Size = New System.Drawing.Size(137, 31)
+        Me.Button7.Size = New System.Drawing.Size(137, 43)
         Me.Button7.TabIndex = 9
         Me.Button7.Text = "Сделка состоялась"
         Me.Button7.UseVisualStyleBackColor = False
-        '
-        'GroupBox4
-        '
-        Me.GroupBox4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.GroupBox4.BackColor = System.Drawing.SystemColors.GrayText
-        Me.GroupBox4.Controls.Add(Me.Button5)
-        Me.GroupBox4.Controls.Add(Me.Button7)
-        Me.GroupBox4.Controls.Add(Me.Button6)
-        Me.GroupBox4.Location = New System.Drawing.Point(647, 553)
-        Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(472, 59)
-        Me.GroupBox4.TabIndex = 10
-        Me.GroupBox4.TabStop = False
-        Me.GroupBox4.Text = "Результат"
         '
         'Label5
         '
@@ -327,9 +405,9 @@ Partial Class Журнал
         Me.GroupBox6.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox6.Controls.Add(Me.Button9)
         Me.GroupBox6.Controls.Add(Me.TextBox1)
-        Me.GroupBox6.Location = New System.Drawing.Point(622, 86)
+        Me.GroupBox6.Location = New System.Drawing.Point(816, 86)
         Me.GroupBox6.Name = "GroupBox6"
-        Me.GroupBox6.Size = New System.Drawing.Size(497, 49)
+        Me.GroupBox6.Size = New System.Drawing.Size(250, 49)
         Me.GroupBox6.TabIndex = 15
         Me.GroupBox6.TabStop = False
         Me.GroupBox6.Text = "Поиск данных по грузам клиентов"
@@ -337,7 +415,7 @@ Partial Class Журнал
         'Button9
         '
         Me.Button9.BackColor = System.Drawing.Color.FloralWhite
-        Me.Button9.Location = New System.Drawing.Point(417, 17)
+        Me.Button9.Location = New System.Drawing.Point(171, 17)
         Me.Button9.Name = "Button9"
         Me.Button9.Size = New System.Drawing.Size(73, 26)
         Me.Button9.TabIndex = 7
@@ -346,9 +424,10 @@ Partial Class Журнал
         '
         'TextBox1
         '
-        Me.TextBox1.Location = New System.Drawing.Point(6, 17)
+        Me.TextBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TextBox1.Location = New System.Drawing.Point(9, 17)
         Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(405, 26)
+        Me.TextBox1.Size = New System.Drawing.Size(156, 26)
         Me.TextBox1.TabIndex = 0
         '
         'GroupBox7
@@ -363,9 +442,9 @@ Partial Class Журнал
         Me.GroupBox7.Controls.Add(Me.Grid1)
         Me.GroupBox7.Controls.Add(Me.Grid4)
         Me.GroupBox7.Controls.Add(Me.Grid3)
-        Me.GroupBox7.Location = New System.Drawing.Point(532, 215)
+        Me.GroupBox7.Location = New System.Drawing.Point(532, 211)
         Me.GroupBox7.Name = "GroupBox7"
-        Me.GroupBox7.Size = New System.Drawing.Size(587, 329)
+        Me.GroupBox7.Size = New System.Drawing.Size(534, 333)
         Me.GroupBox7.TabIndex = 17
         Me.GroupBox7.TabStop = False
         Me.GroupBox7.Text = "Перевозчики"
@@ -448,7 +527,7 @@ Partial Class Журнал
         '
         Me.Button10.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Button10.BackColor = System.Drawing.Color.FloralWhite
-        Me.Button10.Location = New System.Drawing.Point(507, 21)
+        Me.Button10.Location = New System.Drawing.Point(454, 21)
         Me.Button10.Name = "Button10"
         Me.Button10.Size = New System.Drawing.Size(73, 26)
         Me.Button10.TabIndex = 9
@@ -461,7 +540,7 @@ Partial Class Журнал
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TextBox2.Location = New System.Drawing.Point(349, 21)
         Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(152, 26)
+        Me.TextBox2.Size = New System.Drawing.Size(99, 26)
         Me.TextBox2.TabIndex = 8
         '
         'Grid1
@@ -475,7 +554,7 @@ Partial Class Журнал
         Me.Grid1.Name = "Grid1"
         DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.Grid1.RowsDefaultCellStyle = DataGridViewCellStyle1
-        Me.Grid1.Size = New System.Drawing.Size(575, 270)
+        Me.Grid1.Size = New System.Drawing.Size(522, 270)
         Me.Grid1.TabIndex = 11
         '
         'Grid4
@@ -489,7 +568,7 @@ Partial Class Журнал
         Me.Grid4.Name = "Grid4"
         DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.Grid4.RowsDefaultCellStyle = DataGridViewCellStyle2
-        Me.Grid4.Size = New System.Drawing.Size(575, 270)
+        Me.Grid4.Size = New System.Drawing.Size(522, 270)
         Me.Grid4.TabIndex = 16
         '
         'Grid3
@@ -503,8 +582,63 @@ Partial Class Журнал
         Me.Grid3.Name = "Grid3"
         DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.Grid3.RowsDefaultCellStyle = DataGridViewCellStyle3
-        Me.Grid3.Size = New System.Drawing.Size(575, 270)
+        Me.Grid3.Size = New System.Drawing.Size(522, 270)
         Me.Grid3.TabIndex = 12
+        '
+        'ContextMenuStrip1
+        '
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ОткрытьДанныеПеревозчикаToolStripMenuItem, Me.SkypeToolStripMenuItem, Me.ДобавитьСобытиеВКалендарьToolStripMenuItem})
+        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(246, 70)
+        '
+        'ОткрытьДанныеПеревозчикаToolStripMenuItem
+        '
+        Me.ОткрытьДанныеПеревозчикаToolStripMenuItem.Name = "ОткрытьДанныеПеревозчикаToolStripMenuItem"
+        Me.ОткрытьДанныеПеревозчикаToolStripMenuItem.Size = New System.Drawing.Size(245, 22)
+        Me.ОткрытьДанныеПеревозчикаToolStripMenuItem.Text = "Открыть данные перевозчика"
+        '
+        'SkypeToolStripMenuItem
+        '
+        Me.SkypeToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ДобавитьToolStripMenuItem, Me.ПрочитатьToolStripMenuItem})
+        Me.SkypeToolStripMenuItem.Name = "SkypeToolStripMenuItem"
+        Me.SkypeToolStripMenuItem.Size = New System.Drawing.Size(245, 22)
+        Me.SkypeToolStripMenuItem.Text = "Skype"
+        '
+        'ДобавитьToolStripMenuItem
+        '
+        Me.ДобавитьToolStripMenuItem.Name = "ДобавитьToolStripMenuItem"
+        Me.ДобавитьToolStripMenuItem.Size = New System.Drawing.Size(133, 22)
+        Me.ДобавитьToolStripMenuItem.Text = "Добавить"
+        '
+        'ПрочитатьToolStripMenuItem
+        '
+        Me.ПрочитатьToolStripMenuItem.Name = "ПрочитатьToolStripMenuItem"
+        Me.ПрочитатьToolStripMenuItem.Size = New System.Drawing.Size(133, 22)
+        Me.ПрочитатьToolStripMenuItem.Text = "Прочитать"
+        '
+        'ДобавитьСобытиеВКалендарьToolStripMenuItem
+        '
+        Me.ДобавитьСобытиеВКалендарьToolStripMenuItem.Name = "ДобавитьСобытиеВКалендарьToolStripMenuItem"
+        Me.ДобавитьСобытиеВКалендарьToolStripMenuItem.Size = New System.Drawing.Size(245, 22)
+        Me.ДобавитьСобытиеВКалендарьToolStripMenuItem.Text = "Добавить событие в календарь"
+        '
+        'ComboBox3
+        '
+        Me.ComboBox3.FormattingEnabled = True
+        Me.ComboBox3.Location = New System.Drawing.Point(6, 17)
+        Me.ComboBox3.Name = "ComboBox3"
+        Me.ComboBox3.Size = New System.Drawing.Size(357, 26)
+        Me.ComboBox3.TabIndex = 8
+        '
+        'GroupBox10
+        '
+        Me.GroupBox10.Controls.Add(Me.ComboBox3)
+        Me.GroupBox10.Location = New System.Drawing.Point(12, 86)
+        Me.GroupBox10.Name = "GroupBox10"
+        Me.GroupBox10.Size = New System.Drawing.Size(369, 49)
+        Me.GroupBox10.TabIndex = 18
+        Me.GroupBox10.TabStop = False
+        Me.GroupBox10.Text = "Сводная по клиентам"
         '
         'Grid2
         '
@@ -521,20 +655,93 @@ Partial Class Журнал
         Me.Grid2.ReadOnly = True
         DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.Grid2.RowsDefaultCellStyle = DataGridViewCellStyle4
-        Me.Grid2.Size = New System.Drawing.Size(629, 79)
+        Me.Grid2.Size = New System.Drawing.Size(761, 97)
         Me.Grid2.TabIndex = 13
+        '
+        'ContextMenuStrip2
+        '
+        Me.ContextMenuStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.СделкаToolStripMenuItem, Me.УдлаитьРейсИзСпискаToolStripMenuItem})
+        Me.ContextMenuStrip2.Name = "ContextMenuStrip2"
+        Me.ContextMenuStrip2.Size = New System.Drawing.Size(204, 48)
+        '
+        'СделкаToolStripMenuItem
+        '
+        Me.СделкаToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.КлиентсамЗакрылToolStripMenuItem, Me.КлиентОтменилToolStripMenuItem, Me.СделкаСостояласьToolStripMenuItem})
+        Me.СделкаToolStripMenuItem.Name = "СделкаToolStripMenuItem"
+        Me.СделкаToolStripMenuItem.Size = New System.Drawing.Size(203, 22)
+        Me.СделкаToolStripMenuItem.Text = "Сделка"
+        '
+        'КлиентсамЗакрылToolStripMenuItem
+        '
+        Me.КлиентсамЗакрылToolStripMenuItem.Name = "КлиентсамЗакрылToolStripMenuItem"
+        Me.КлиентсамЗакрылToolStripMenuItem.Size = New System.Drawing.Size(178, 22)
+        Me.КлиентсамЗакрылToolStripMenuItem.Text = "Клиентсам закрыл"
+        '
+        'КлиентОтменилToolStripMenuItem
+        '
+        Me.КлиентОтменилToolStripMenuItem.Name = "КлиентОтменилToolStripMenuItem"
+        Me.КлиентОтменилToolStripMenuItem.Size = New System.Drawing.Size(178, 22)
+        Me.КлиентОтменилToolStripMenuItem.Text = "Клиент отменил"
+        '
+        'СделкаСостояласьToolStripMenuItem
+        '
+        Me.СделкаСостояласьToolStripMenuItem.Name = "СделкаСостояласьToolStripMenuItem"
+        Me.СделкаСостояласьToolStripMenuItem.Size = New System.Drawing.Size(178, 22)
+        Me.СделкаСостояласьToolStripMenuItem.Text = "Сделка состоялась"
+        '
+        'УдлаитьРейсИзСпискаToolStripMenuItem
+        '
+        Me.УдлаитьРейсИзСпискаToolStripMenuItem.Name = "УдлаитьРейсИзСпискаToolStripMenuItem"
+        Me.УдлаитьРейсИзСпискаToolStripMenuItem.Size = New System.Drawing.Size(203, 22)
+        Me.УдлаитьРейсИзСпискаToolStripMenuItem.Text = "Удлаить рейс из списка"
+        '
+        'Button18
+        '
+        Me.Button18.BackColor = System.Drawing.Color.Gainsboro
+        Me.Button18.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.Button18.Location = New System.Drawing.Point(183, 22)
+        Me.Button18.Name = "Button18"
+        Me.Button18.Size = New System.Drawing.Size(91, 26)
+        Me.Button18.TabIndex = 10
+        Me.Button18.Text = "Отобразить"
+        Me.Button18.UseVisualStyleBackColor = False
+        '
+        'GroupBox4
+        '
+        Me.GroupBox4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox4.Controls.Add(Me.ComboBox4)
+        Me.GroupBox4.Controls.Add(Me.Button18)
+        Me.GroupBox4.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.GroupBox4.Location = New System.Drawing.Point(783, 553)
+        Me.GroupBox4.Name = "GroupBox4"
+        Me.GroupBox4.Size = New System.Drawing.Size(284, 56)
+        Me.GroupBox4.TabIndex = 19
+        Me.GroupBox4.TabStop = False
+        Me.GroupBox4.Text = "Отоброзит таблицу по месяцу"
+        '
+        'ComboBox4
+        '
+        Me.ComboBox4.FormattingEnabled = True
+        Me.ComboBox4.Location = New System.Drawing.Point(11, 25)
+        Me.ComboBox4.Name = "ComboBox4"
+        Me.ComboBox4.Size = New System.Drawing.Size(166, 23)
+        Me.ComboBox4.TabIndex = 11
         '
         'Журнал
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 18.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.DarkKhaki
-        Me.ClientSize = New System.Drawing.Size(1131, 640)
+        Me.ClientSize = New System.Drawing.Size(1078, 658)
+        Me.Controls.Add(Me.GroupBox4)
+        Me.Controls.Add(Me.Button7)
+        Me.Controls.Add(Me.Button5)
+        Me.Controls.Add(Me.Button6)
+        Me.Controls.Add(Me.GroupBox10)
         Me.Controls.Add(Me.GroupBox7)
         Me.Controls.Add(Me.GroupBox6)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.Grid2)
-        Me.Controls.Add(Me.GroupBox4)
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.ListBox1)
         Me.Controls.Add(Me.GroupBox1)
@@ -548,7 +755,6 @@ Partial Class Журнал
         Me.GroupBox1.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
-        Me.GroupBox4.ResumeLayout(False)
         Me.GroupBox6.ResumeLayout(False)
         Me.GroupBox6.PerformLayout()
         Me.GroupBox7.ResumeLayout(False)
@@ -560,7 +766,11 @@ Partial Class Журнал
         CType(Me.Grid1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Grid4, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Grid3, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.ContextMenuStrip1.ResumeLayout(False)
+        Me.GroupBox10.ResumeLayout(False)
         CType(Me.Grid2, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.ContextMenuStrip2.ResumeLayout(False)
+        Me.GroupBox4.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -582,7 +792,6 @@ Partial Class Журнал
     Friend WithEvents Button5 As Button
     Friend WithEvents Button6 As Button
     Friend WithEvents Button7 As Button
-    Friend WithEvents GroupBox4 As GroupBox
     Friend WithEvents Grid1 As DoubleBuferGrid
     Friend WithEvents Button8 As Button
     Friend WithEvents GroupBox5 As GroupBox
@@ -606,4 +815,26 @@ Partial Class Журнал
     Friend WithEvents GroupBox9 As GroupBox
     Friend WithEvents Button12 As Button
     Friend WithEvents Button13 As Button
+    Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
+    Friend WithEvents ОткрытьДанныеПеревозчикаToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SkypeToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ДобавитьToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ПрочитатьToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ComboBox3 As ComboBox
+    Friend WithEvents GroupBox10 As GroupBox
+    Friend WithEvents Button15 As Button
+    Friend WithEvents Button14 As Button
+    Friend WithEvents Button16 As Button
+    Friend WithEvents GroupBox11 As GroupBox
+    Friend WithEvents Button17 As Button
+    Friend WithEvents ContextMenuStrip2 As ContextMenuStrip
+    Friend WithEvents СделкаToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents КлиентсамЗакрылToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents КлиентОтменилToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents СделкаСостояласьToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents УдлаитьРейсИзСпискаToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents Button18 As Button
+    Friend WithEvents GroupBox4 As GroupBox
+    Friend WithEvents ComboBox4 As ComboBox
+    Friend WithEvents ДобавитьСобытиеВКалендарьToolStripMenuItem As ToolStripMenuItem
 End Class

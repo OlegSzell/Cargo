@@ -20,7 +20,7 @@
         End If
 
         If IsNumeric(TextBox2.Text) = False Then
-            MessageBox.Show("Введите корректно количество рейсов!", Рик)
+            MessageBox.Show("Введите корректно номер рейса!", Рик)
             Return
         End If
 
@@ -29,7 +29,7 @@
 
 
             If ОтКогоИзмен = 1 Then
-                Dim f = db.РейсыКлиента.Where(Function(x) x.НомерРейса = НомРейса).Select(Function(x) x).FirstOrDefault()
+                Dim f = db.РейсыКлиента.Where(Function(x) x.НомерРейса = НомРес).Select(Function(x) x).FirstOrDefault()
                 f.КоличРейсов = Num
                 db.SubmitChanges()
 
@@ -43,7 +43,7 @@
                 TextBox1.Text = ""
                 TextBox2.Text = ""
             Else
-                Dim f2 = db.РейсыПеревозчика.Where(Function(x) x.НомерРейса = НомРейса).Select(Function(x) x).FirstOrDefault()
+                Dim f2 = db.РейсыПеревозчика.Where(Function(x) x.НомерРейса = НомРес).Select(Function(x) x).FirstOrDefault()
                 f2.КоличРейсов = Num
                 db.SubmitChanges()
 

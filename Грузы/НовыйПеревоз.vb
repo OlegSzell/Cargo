@@ -221,6 +221,11 @@ Public Class НовыйПеревоз
             MessageBox.Show("Необходимо выбрать количество экземпляров договора!", Рик)
             Return 1
         End If
+        If CheckBox3.Checked = True Then
+            If MessageBox.Show("Создать новый догововр с действующим перевозчиков?", Рик, MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.No Then
+                Return 1
+            End If
+        End If
 
         Return 0
     End Function
@@ -331,6 +336,7 @@ Public Class НовыйПеревоз
             End If
 
             If f1 IsNot Nothing Then
+                Dim nom2 As String = Nothing
                 With f1
                     .Форма_собственности = ComboBox1.Text
                     .Адрес_организации = Trim(RichTextBox2.Text)
@@ -348,6 +354,10 @@ Public Class НовыйПеревоз
                     .ДолжРодПадеж = Trim(RichTextBox14.Text)
                     .ПерЭкспедитор = f
                     .Дата = MaskedTextBox1.Text
+                    If CheckBox3.Checked = True Then
+                        nom2 = НомерДог(i)
+                        .Договор = nom2
+                    End If
                 End With
                 db.SubmitChanges()
 
@@ -373,6 +383,9 @@ Public Class НовыйПеревоз
                         .ДолжРодПадеж = Trim(RichTextBox14.Text)
                         .ПерЭкспедитор = f
                         .Дата = MaskedTextBox1.Text
+                        If CheckBox3.Checked = True Then
+                            .Договор = nom2
+                        End If
                     End With
 
                     bslistbx1.ResetBindings(False)
@@ -397,6 +410,9 @@ Public Class НовыйПеревоз
                     .ДолжРодПадеж = Trim(RichTextBox14.Text)
                     .ПерЭкспедитор = f
                     .Дата = MaskedTextBox1.Text
+                    If CheckBox3.Checked = True Then
+                        .Договор = nom2
+                    End If
                 End With
                 bscom4all.ResetBindings(False)
 
