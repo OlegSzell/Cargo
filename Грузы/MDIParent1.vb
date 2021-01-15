@@ -177,6 +177,40 @@ Public Class MDIParent1
     Public Async Sub КалендарьНапоминаниеAsync()
         Await Task.Run(Sub() КалендарьНапоминание())
     End Sub
+    Private Sub Предзагрузка1()
+        Dim mo As New AllUpd
+        mo.ГрузыКлиентовAll()
+        mo.ЖурналДатаAll()
+        mo.ЖурналКлиентГрузAll()
+        mo.ЖурналКлиентМаршрутAll()
+        mo.ЖурналКлиентСписокAll()
+        mo.ЖурналПеревозчикAll()
+        mo.Календарь_ДатыAll()
+        mo.КалендарьНапоминаниеAll()
+        mo.КалендарьРезультатЗвонкаAll()
+        mo.ПеревозчикиБазаAll()
+        mo.ЧерныйСписокAll()
+    End Sub
+    Private Async Sub Предзагрузка1Async()
+        Await Task.Run(Sub() Предзагрузка1())
+    End Sub
+    Private Async Sub ПредзагрузкаAsync()
+        Await Task.Run(Sub() Предзагрузка())
+    End Sub
+    Private Sub Предзагрузка()
+        Dim mo As New AllUpd
+        mo.SkypeКлиентПредложениеAll()
+        mo.SkypeПеревозчикПредложениеAll()
+        mo.КлиентAll()
+        mo.ПеревозчикиAll()
+        mo.ПаролиAll()
+        mo.РейсыКлиентаAll()
+        mo.ОтчетРаботыСотрудникаAll()
+        mo.ОтчетРаботыСотрудникаСводнаяAll()
+        mo.ОплатыКлиентAll()
+        mo.ОплатыПерAll()
+        mo.РейсыПеревозчикаAll()
+    End Sub
 
     Private Sub MDIParent1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -185,16 +219,9 @@ Public Class MDIParent1
 
         Me.Cursor = Cursors.WaitCursor
         'ALL()
-        Dim mo As New AllUpd
-        mo.КлиентAllAsync()
-        mo.ПеревозчикиAllAsync()
-        mo.ПаролиAllAsync()
-        mo.РейсыКлиентаAllAsync()
-        mo.ОтчетРаботыСотрудникаAllAsync()
-        mo.ОтчетРаботыСотрудникаСводнаяAllAsync()
-        mo.ОплатыКлиентAllAsync()
-        mo.ОплатыПерAllAsync()
-        mo.РейсыПеревозчикаAllAsync()
+
+        Предзагрузка1Async()
+        ПредзагрузкаAsync()
 
         Dim f As New Пароль
         f.ShowDialog()
@@ -202,6 +229,11 @@ Public Class MDIParent1
         If f.flg = False Then
             Return
         End If
+
+        If Экспедитор = "Олег" Then
+            ФинанасыTool.Enabled = True
+        End If
+
 
         Getst()
         КалендарьНапоминаниеAsync()
@@ -319,7 +351,7 @@ Public Class MDIParent1
     End Sub
 
     Private Sub ЧерныйСписокToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ЧерныйСписокToolStripMenuItem.Click
-        Dim f As New ЧерныйСписок
+        Dim f As New ЧерныйСписокForm
         f.ShowDialog()
     End Sub
 
@@ -466,6 +498,16 @@ Public Class MDIParent1
     Private Sub БраузерToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles БраузерToolStripMenuItem.Click
         Dim f As New Браузер
         f.MdiParent = Me
+        f.Show()
+    End Sub
+
+    Private Sub ФинанасыTool_Click(sender As Object, e As EventArgs) Handles ФинанасыTool.Click
+        Dim f As New Финансы
+        f.ShowDialog()
+    End Sub
+
+    Private Sub СводнаяОплатToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles СводнаяОплатToolStripMenuItem.Click
+        Dim f As New Сводная
         f.Show()
     End Sub
 End Class

@@ -14,9 +14,27 @@ Public Class Календарь
     Private Property NewColor As Color
     Private grid2all As List(Of Grid2Class)
     Private bsgrid2 As BindingSource
-    Private SelWeek As String
-    Private Sub Календарь_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private grid1all As New List(Of Grid1Class)
+    Private bsgrid1 As New BindingSource
 
+
+    Private SelWeek As String
+    Private Async Sub PreLoadAsync()
+        Await Task.Run(Sub() PreLoad())
+    End Sub
+    Private Sub PreLoad()
+        Dim mo As New AllUpd
+        Do While AllClass.КалендарьРезультатЗвонка Is Nothing
+            mo.КалендарьРезультатЗвонкаAll()
+        Loop
+
+        Do While AllClass.Календарь_Даты Is Nothing
+            mo.Календарь_ДатыAll()
+        Loop
+    End Sub
+
+    Private Sub Календарь_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        PreLoadAsync()
         NewColor = Color.FromArgb(203, 153, 81)
 
         grid2all = New List(Of Grid2Class)
@@ -26,6 +44,11 @@ Public Class Календарь
         GridView(Grid2)
         Grid2.Columns(0).Width = 60
         Grid2.SelectionMode = DataGridViewSelectionMode.CellSelect
+
+        bsgrid1.DataSource = grid1all
+        Grid1.DataSource = bsgrid1
+        GridView(Grid1)
+        Grid1.SelectionMode = DataGridViewSelectionMode.CellSelect
     End Sub
     Public Class Grid2Class
         Public Property Время As String
@@ -36,6 +59,19 @@ Public Class Календарь
         Public Property Пятница As String
         Public Property Суббота As String
         Public Property Воскресенье As String
+
+
+    End Class
+
+    Public Class Grid1Class
+
+        Public Property ПН As String
+        Public Property ВТ As String
+        Public Property СР As String
+        Public Property ЧТ As String
+        Public Property ПТ As String
+        Public Property СБ As String
+        Public Property ВС As String
 
 
     End Class
@@ -118,44 +154,52 @@ Public Class Календарь
             Case 1
                 Dim i As Integer = 1
                 For Each b1 In Dann
-                    p(i).Понедельник = b1.Значение
+                    If i >= 25 Then Continue For
+                    p(i).Понедельник = b1.Значение?.ToString
                     i += 1
                 Next
 
             Case 2
                 Dim i As Integer = 1
                 For Each b1 In Dann
-                    p(i).Вторник = b1.Значение
+                    If i >= 25 Then Continue For
+                    p(i).Вторник = b1.Значение?.ToString
                     i += 1
                 Next
             Case 3
                 Dim i As Integer = 1
                 For Each b1 In Dann
-                    p(i).Среда = b1.Значение
+                    If i >= 25 Then Continue For
+                    p(i).Среда = b1.Значение?.ToString
                     i += 1
                 Next
             Case 4
                 Dim i As Integer = 1
+
                 For Each b1 In Dann
-                    p(i).Четверг = b1.Значение
+                    If i >= 25 Then Continue For
+                    p(i).Четверг = b1.Значение?.ToString
                     i += 1
                 Next
             Case 5
                 Dim i As Integer = 1
                 For Each b1 In Dann
-                    p(i).Пятница = b1.Значение
+                    If i >= 25 Then Continue For
+                    p(i).Пятница = b1.Значение?.ToString
                     i += 1
                 Next
             Case 6
                 Dim i As Integer = 1
                 For Each b1 In Dann
-                    p(i).Суббота = b1.Значение
+                    If i >= 25 Then Continue For
+                    p(i).Суббота = b1.Значение?.ToString
                     i += 1
                 Next
             Case 7
                 Dim i As Integer = 1
                 For Each b1 In Dann
-                    p(i).Воскресенье = b1.Значение
+                    If i >= 25 Then Continue For
+                    p(i).Воскресенье = b1.Значение?.ToString
                     i += 1
                 Next
 
@@ -190,122 +234,122 @@ Public Class Календарь
         Public Property EndDay As DateTime
     End Class
 
-    Private Sub GridUpdate(ByVal d As String)
+    'Private Sub GridUpdate(ByVal d As String)
 
-        If Grid1.InvokeRequired Then
-            Invoke(New Grid1Delegate(AddressOf GridUpdate), d)
-        Else
-
-
-            Using db As New dbAllDataContext()
-                Dim var = db.Календарь_Даты.Where(Function(x) x.Дата >= d).OrderBy(Function(x) x.Дата).Select(Function(x) x).ToList
-                'Dim var2 = db.Календарь_Даты.Where(Function(x) x.Дата = d).Select(Function(x) x).FirstOrDefault()
-                If var.Count > 0 Then
-                    Grid1.DataSource = var
-                    Grid1.Columns(2).HeaderText = "0.00"
-                    Grid1.Columns(3).HeaderText = "1.00"
-                    Grid1.Columns(4).HeaderText = "2.00"
-                    Grid1.Columns(5).HeaderText = "3.00"
-                    Grid1.Columns(6).HeaderText = "4.00"
-                    Grid1.Columns(7).HeaderText = "5.00"
-                    Grid1.Columns(8).HeaderText = "6.00"
-                    Grid1.Columns(9).HeaderText = "7.00"
-                    Grid1.Columns(10).HeaderText = "8.00"
-                    Grid1.Columns(11).HeaderText = "9.00"
-                    Grid1.Columns(12).HeaderText = "10.00"
-                    Grid1.Columns(13).HeaderText = "11.00"
-                    Grid1.Columns(14).HeaderText = "12.00"
-                    Grid1.Columns(15).HeaderText = "13.00"
-                    Grid1.Columns(16).HeaderText = "14.00"
-                    Grid1.Columns(17).HeaderText = "15.00"
-                    Grid1.Columns(18).HeaderText = "16.00"
-                    Grid1.Columns(19).HeaderText = "17.00"
-                    Grid1.Columns(20).HeaderText = "18.00"
-                    Grid1.Columns(21).HeaderText = "19.00"
-                    Grid1.Columns(22).HeaderText = "20.00"
-                    Grid1.Columns(23).HeaderText = "21.00"
-                    Grid1.Columns(24).HeaderText = "22.00"
-                    Grid1.Columns(25).HeaderText = "23.00"
+    '    If Grid1.InvokeRequired Then
+    '        Invoke(New Grid1Delegate(AddressOf GridUpdate), d)
+    '    Else
 
 
+    '        Using db As New dbAllDataContext()
+    '            Dim var = db.Календарь_Даты.Where(Function(x) x.Дата >= d).OrderBy(Function(x) x.Дата).Select(Function(x) x).ToList
+    '            'Dim var2 = db.Календарь_Даты.Where(Function(x) x.Дата = d).Select(Function(x) x).FirstOrDefault()
+    '            If var.Count > 0 Then
+    '                Grid1.DataSource = var
+    '                Grid1.Columns(2).HeaderText = "0.00"
+    '                Grid1.Columns(3).HeaderText = "1.00"
+    '                Grid1.Columns(4).HeaderText = "2.00"
+    '                Grid1.Columns(5).HeaderText = "3.00"
+    '                Grid1.Columns(6).HeaderText = "4.00"
+    '                Grid1.Columns(7).HeaderText = "5.00"
+    '                Grid1.Columns(8).HeaderText = "6.00"
+    '                Grid1.Columns(9).HeaderText = "7.00"
+    '                Grid1.Columns(10).HeaderText = "8.00"
+    '                Grid1.Columns(11).HeaderText = "9.00"
+    '                Grid1.Columns(12).HeaderText = "10.00"
+    '                Grid1.Columns(13).HeaderText = "11.00"
+    '                Grid1.Columns(14).HeaderText = "12.00"
+    '                Grid1.Columns(15).HeaderText = "13.00"
+    '                Grid1.Columns(16).HeaderText = "14.00"
+    '                Grid1.Columns(17).HeaderText = "15.00"
+    '                Grid1.Columns(18).HeaderText = "16.00"
+    '                Grid1.Columns(19).HeaderText = "17.00"
+    '                Grid1.Columns(20).HeaderText = "18.00"
+    '                Grid1.Columns(21).HeaderText = "19.00"
+    '                Grid1.Columns(22).HeaderText = "20.00"
+    '                Grid1.Columns(23).HeaderText = "21.00"
+    '                Grid1.Columns(24).HeaderText = "22.00"
+    '                Grid1.Columns(25).HeaderText = "23.00"
 
-                    GridView(Grid1)
-                    Grid1.SelectionMode = DataGridViewSelectionMode.CellSelect
-                    ВыделениеСтолбца()
-                    'Grid1.AlternatingRowsDefaultCellStyle.BackColor = Color.LightSeaGreen
-                Else
-                    Grid1.DataSource = Nothing
 
-                End If
-            End Using
-        End If
-    End Sub
-    Private Sub ВыделениеСтолбца()
-        Dim f As DateTime = DateTime.Now
-        Dim g = f.ToString("t")
-        If g.Length = 5 Then
-            Dim g1 As String = Strings.Left(g, 2)
-            Select Case g1
-                Case "10"
-                    Grid1.Columns(12).DefaultCellStyle.BackColor = Color.MediumVioletRed
-                    Grid1.Rows(0).Cells("_10_00").Selected = True
-                Case "11"
-                    Grid1.Columns(13).DefaultCellStyle.BackColor = Color.MediumVioletRed
-                Case "12"
-                    Grid1.Columns(14).DefaultCellStyle.BackColor = Color.MediumVioletRed
-                Case "13"
-                    Grid1.Columns(15).DefaultCellStyle.BackColor = Color.MediumVioletRed
-                Case "14"
-                    Grid1.Columns(16).DefaultCellStyle.BackColor = Color.MediumVioletRed
-                Case "15"
-                    Grid1.Columns(17).DefaultCellStyle.BackColor = Color.MediumVioletRed
-                Case "16"
-                    Grid1.Columns(18).DefaultCellStyle.BackColor = Color.MediumVioletRed
-                Case "17"
-                    Grid1.Columns(19).DefaultCellStyle.BackColor = Color.MediumVioletRed
-                Case "18"
-                    Grid1.Columns(20).DefaultCellStyle.BackColor = Color.MediumVioletRed
-                Case "19"
-                    Grid1.Columns(21).DefaultCellStyle.BackColor = Color.MediumVioletRed
-                Case "20"
-                    Grid1.Columns(22).DefaultCellStyle.BackColor = Color.MediumVioletRed
-                Case "21"
-                    Grid1.Columns(23).DefaultCellStyle.BackColor = Color.MediumVioletRed
-                Case "22"
-                    Grid1.Columns(24).DefaultCellStyle.BackColor = Color.MediumVioletRed
-                Case "23"
-                    Grid1.Columns(25).DefaultCellStyle.BackColor = Color.MediumVioletRed
-            End Select
 
-        ElseIf g.Length = 4 Then
+    '                GridView(Grid1)
+    '                Grid1.SelectionMode = DataGridViewSelectionMode.CellSelect
+    '                ВыделениеСтолбца()
+    '                'Grid1.AlternatingRowsDefaultCellStyle.BackColor = Color.LightSeaGreen
+    '            Else
+    '                Grid1.DataSource = Nothing
 
-            Dim g2 As String = Strings.Left(g, 1)
-            Select Case g2
-                Case "0"
-                    Grid1.Columns(2).DefaultCellStyle.BackColor = Color.MediumVioletRed
-                Case "1"
-                    Grid1.Columns(3).DefaultCellStyle.BackColor = Color.MediumVioletRed
-                Case "2"
-                    Grid1.Columns(4).DefaultCellStyle.BackColor = Color.MediumVioletRed
-                Case "3"
-                    Grid1.Columns(5).DefaultCellStyle.BackColor = Color.MediumVioletRed
-                Case "4"
-                    Grid1.Columns(6).DefaultCellStyle.BackColor = Color.MediumVioletRed
-                Case "5"
-                    Grid1.Columns(7).DefaultCellStyle.BackColor = Color.MediumVioletRed
-                Case "6"
-                    Grid1.Columns(8).DefaultCellStyle.BackColor = Color.MediumVioletRed
-                Case "7"
-                    Grid1.Columns(9).DefaultCellStyle.BackColor = Color.MediumVioletRed
-                Case "8"
-                    Grid1.Columns(10).DefaultCellStyle.BackColor = Color.MediumVioletRed
-                Case "9"
-                    Grid1.Columns(11).DefaultCellStyle.BackColor = Color.MediumVioletRed
+    '            End If
+    '        End Using
+    '    End If
+    'End Sub
+    'Private Sub ВыделениеСтолбца()
+    '    Dim f As DateTime = DateTime.Now
+    '    Dim g = f.ToString("t")
+    '    If g.Length = 5 Then
+    '        Dim g1 As String = Strings.Left(g, 2)
+    '        Select Case g1
+    '            Case "10"
+    '                Grid1.Columns(12).DefaultCellStyle.BackColor = Color.MediumVioletRed
+    '                Grid1.Rows(0).Cells("_10_00").Selected = True
+    '            Case "11"
+    '                Grid1.Columns(13).DefaultCellStyle.BackColor = Color.MediumVioletRed
+    '            Case "12"
+    '                Grid1.Columns(14).DefaultCellStyle.BackColor = Color.MediumVioletRed
+    '            Case "13"
+    '                Grid1.Columns(15).DefaultCellStyle.BackColor = Color.MediumVioletRed
+    '            Case "14"
+    '                Grid1.Columns(16).DefaultCellStyle.BackColor = Color.MediumVioletRed
+    '            Case "15"
+    '                Grid1.Columns(17).DefaultCellStyle.BackColor = Color.MediumVioletRed
+    '            Case "16"
+    '                Grid1.Columns(18).DefaultCellStyle.BackColor = Color.MediumVioletRed
+    '            Case "17"
+    '                Grid1.Columns(19).DefaultCellStyle.BackColor = Color.MediumVioletRed
+    '            Case "18"
+    '                Grid1.Columns(20).DefaultCellStyle.BackColor = Color.MediumVioletRed
+    '            Case "19"
+    '                Grid1.Columns(21).DefaultCellStyle.BackColor = Color.MediumVioletRed
+    '            Case "20"
+    '                Grid1.Columns(22).DefaultCellStyle.BackColor = Color.MediumVioletRed
+    '            Case "21"
+    '                Grid1.Columns(23).DefaultCellStyle.BackColor = Color.MediumVioletRed
+    '            Case "22"
+    '                Grid1.Columns(24).DefaultCellStyle.BackColor = Color.MediumVioletRed
+    '            Case "23"
+    '                Grid1.Columns(25).DefaultCellStyle.BackColor = Color.MediumVioletRed
+    '        End Select
 
-            End Select
+    '    ElseIf g.Length = 4 Then
 
-        End If
-    End Sub
+    '        Dim g2 As String = Strings.Left(g, 1)
+    '        Select Case g2
+    '            Case "0"
+    '                Grid1.Columns(2).DefaultCellStyle.BackColor = Color.MediumVioletRed
+    '            Case "1"
+    '                Grid1.Columns(3).DefaultCellStyle.BackColor = Color.MediumVioletRed
+    '            Case "2"
+    '                Grid1.Columns(4).DefaultCellStyle.BackColor = Color.MediumVioletRed
+    '            Case "3"
+    '                Grid1.Columns(5).DefaultCellStyle.BackColor = Color.MediumVioletRed
+    '            Case "4"
+    '                Grid1.Columns(6).DefaultCellStyle.BackColor = Color.MediumVioletRed
+    '            Case "5"
+    '                Grid1.Columns(7).DefaultCellStyle.BackColor = Color.MediumVioletRed
+    '            Case "6"
+    '                Grid1.Columns(8).DefaultCellStyle.BackColor = Color.MediumVioletRed
+    '            Case "7"
+    '                Grid1.Columns(9).DefaultCellStyle.BackColor = Color.MediumVioletRed
+    '            Case "8"
+    '                Grid1.Columns(10).DefaultCellStyle.BackColor = Color.MediumVioletRed
+    '            Case "9"
+    '                Grid1.Columns(11).DefaultCellStyle.BackColor = Color.MediumVioletRed
+
+    '        End Select
+
+    '    End If
+    'End Sub
 
     Private Sub Grid2Update(ByVal d As String)
 
@@ -427,9 +471,9 @@ Public Class Календарь
     Private Async Sub grid2DelegAsync(ByVal f As DataTable, ByVal d As String)
         Await Task.Run(Sub() grid2Deleg(f, d))
     End Sub
-    Private Async Sub GridUpdateAsync(ByVal d As String)
-        Await Task.Run(Sub() GridUpdate(d))
-    End Sub
+    'Private Async Sub GridUpdateAsync(ByVal d As String)
+    '    Await Task.Run(Sub() GridUpdate(d))
+    'End Sub
 
 
     Private Sub grid2Deleg(ByVal f As DataTable, ByVal d As String)
@@ -515,8 +559,8 @@ Public Class Календарь
     End Sub
 
     Private Sub Calendar1_DateSelected(sender As Object, e As DateRangeEventArgs) Handles Calendar1.DateSelected
-        Label2.Text = e.Start.ToShortDateString()
-        MaskedTextBox1.Text = e.Start.ToShortDateString()
+        'Label2.Text = e.Start.ToShortDateString()
+        'MaskedTextBox1.Text = e.Start.ToShortDateString()
 
         'Dim myCI As New CultureInfo("ru-RU")
         'Dim myCal As Calendar = myCI.Calendar
@@ -540,370 +584,358 @@ Public Class Календарь
         'Grid2Update(e.Start.ToShortDateString())
 
     End Sub
-    Private Sub InsertData()
-        Using db As New dbAllDataContext()
-            Dim f = db.Календарь_Даты.Where(Function(x) x.Дата = Label2.Text).Select(Function(x) x).FirstOrDefault()
-            If f IsNot Nothing Then
-                Select Case ComboBox1.Text
-                    Case "0.00"
-                        f._0_00 = RichTextBox1.Text
-                    Case "1.00"
-                        f._1_00 = RichTextBox1.Text
-                    Case "2.00"
-                        f._2_00 = RichTextBox1.Text
-                    Case "3.00"
-                        f._3_00 = RichTextBox1.Text
-                    Case "4.00"
-                        f._4_00 = RichTextBox1.Text
-                    Case "5.00"
-                        f._5_00 = RichTextBox1.Text
-                    Case "6.00"
-                        f._6_00 = RichTextBox1.Text
-                    Case "7.00"
-                        f._7_00 = RichTextBox1.Text
-                    Case "8.00"
-                        f._8_00 = RichTextBox1.Text
-                    Case "9.00"
-                        f._9_00 = RichTextBox1.Text
-                    Case "10.00"
-                        f._10_00 = RichTextBox1.Text
-                    Case "11.00"
-                        f._11_00 = RichTextBox1.Text
-                    Case "12.00"
-                        f._12_00 = RichTextBox1.Text
-                    Case "13.00"
-                        f._13_00 = RichTextBox1.Text
-                    Case "14.00"
-                        f._14_00 = RichTextBox1.Text
+    'Private Sub InsertData()
+    '    Using db As New dbAllDataContext()
+    '        Dim f = db.Календарь_Даты.Where(Function(x) x.Дата = Label2.Text).Select(Function(x) x).FirstOrDefault()
+    '        If f IsNot Nothing Then
+    '            Select Case ComboBox1.Text
+    '                Case "0.00"
+    '                    f._0_00 = RichTextBox1.Text
+    '                Case "1.00"
+    '                    f._1_00 = RichTextBox1.Text
+    '                Case "2.00"
+    '                    f._2_00 = RichTextBox1.Text
+    '                Case "3.00"
+    '                    f._3_00 = RichTextBox1.Text
+    '                Case "4.00"
+    '                    f._4_00 = RichTextBox1.Text
+    '                Case "5.00"
+    '                    f._5_00 = RichTextBox1.Text
+    '                Case "6.00"
+    '                    f._6_00 = RichTextBox1.Text
+    '                Case "7.00"
+    '                    f._7_00 = RichTextBox1.Text
+    '                Case "8.00"
+    '                    f._8_00 = RichTextBox1.Text
+    '                Case "9.00"
+    '                    f._9_00 = RichTextBox1.Text
+    '                Case "10.00"
+    '                    f._10_00 = RichTextBox1.Text
+    '                Case "11.00"
+    '                    f._11_00 = RichTextBox1.Text
+    '                Case "12.00"
+    '                    f._12_00 = RichTextBox1.Text
+    '                Case "13.00"
+    '                    f._13_00 = RichTextBox1.Text
+    '                Case "14.00"
+    '                    f._14_00 = RichTextBox1.Text
 
-                    Case "15.00"
-                        f._15_00 = RichTextBox1.Text
-                    Case "16.00"
-                        f._16_00 = RichTextBox1.Text
-                    Case "17.00"
-                        f._17_00 = RichTextBox1.Text
-                    Case "18.00"
-                        f._18_00 = RichTextBox1.Text
-                    Case "19.00"
-                        f._19_00 = RichTextBox1.Text
-                    Case "20.00"
-                        f._20_00 = RichTextBox1.Text
-                    Case "21.00"
-                        f._21_00 = RichTextBox1.Text
-                    Case "22.00"
-                        f._22_00 = RichTextBox1.Text
-                    Case "23.00"
-                        f._23_00 = RichTextBox1.Text
+    '                Case "15.00"
+    '                    f._15_00 = RichTextBox1.Text
+    '                Case "16.00"
+    '                    f._16_00 = RichTextBox1.Text
+    '                Case "17.00"
+    '                    f._17_00 = RichTextBox1.Text
+    '                Case "18.00"
+    '                    f._18_00 = RichTextBox1.Text
+    '                Case "19.00"
+    '                    f._19_00 = RichTextBox1.Text
+    '                Case "20.00"
+    '                    f._20_00 = RichTextBox1.Text
+    '                Case "21.00"
+    '                    f._21_00 = RichTextBox1.Text
+    '                Case "22.00"
+    '                    f._22_00 = RichTextBox1.Text
+    '                Case "23.00"
+    '                    f._23_00 = RichTextBox1.Text
 
-                End Select
-                db.SubmitChanges()
+    '            End Select
+    '            db.SubmitChanges()
 
-            End If
-        End Using
-    End Sub
-    Private Sub Deletedata()
-        Using db As New dbAllDataContext()
-            Dim f = db.Календарь_Даты.Where(Function(x) x.Дата = Label2.Text).Select(Function(x) x).FirstOrDefault()
-            If f IsNot Nothing Then
-                Select Case ComboBox1.Text
-                    Case "0.00"
-                        f._0_00 = ""
-                    Case "1.00"
-                        f._1_00 = ""
-                    Case "2.00"
-                        f._2_00 = ""
-                    Case "3.00"
-                        f._3_00 = ""
-                    Case "4.00"
-                        f._4_00 = ""
-                    Case "5.00"
-                        f._5_00 = ""
-                    Case "6.00"
-                        f._6_00 = ""
-                    Case "7.00"
-                        f._7_00 = ""
-                    Case "8.00"
-                        f._8_00 = ""
-                    Case "9.00"
-                        f._9_00 = ""
-                    Case "10.00"
-                        f._10_00 = ""
-                    Case "11.00"
-                        f._11_00 = ""
-                    Case "12.00"
-                        f._12_00 = ""
-                    Case "13.00"
-                        f._13_00 = ""
-                    Case "14.00"
-                        f._14_00 = ""
+    '        End If
+    '    End Using
+    'End Sub
+    'Private Sub Deletedata()
+    '    Using db As New dbAllDataContext()
+    '        Dim f = db.Календарь_Даты.Where(Function(x) x.Дата = Label2.Text).Select(Function(x) x).FirstOrDefault()
+    '        If f IsNot Nothing Then
+    '            Select Case ComboBox1.Text
+    '                Case "0.00"
+    '                    f._0_00 = ""
+    '                Case "1.00"
+    '                    f._1_00 = ""
+    '                Case "2.00"
+    '                    f._2_00 = ""
+    '                Case "3.00"
+    '                    f._3_00 = ""
+    '                Case "4.00"
+    '                    f._4_00 = ""
+    '                Case "5.00"
+    '                    f._5_00 = ""
+    '                Case "6.00"
+    '                    f._6_00 = ""
+    '                Case "7.00"
+    '                    f._7_00 = ""
+    '                Case "8.00"
+    '                    f._8_00 = ""
+    '                Case "9.00"
+    '                    f._9_00 = ""
+    '                Case "10.00"
+    '                    f._10_00 = ""
+    '                Case "11.00"
+    '                    f._11_00 = ""
+    '                Case "12.00"
+    '                    f._12_00 = ""
+    '                Case "13.00"
+    '                    f._13_00 = ""
+    '                Case "14.00"
+    '                    f._14_00 = ""
 
-                    Case "15.00"
-                        f._15_00 = ""
-                    Case "16.00"
-                        f._16_00 = ""
-                    Case "17.00"
-                        f._17_00 = ""
-                    Case "18.00"
-                        f._18_00 = ""
-                    Case "19.00"
-                        f._19_00 = ""
-                    Case "20.00"
-                        f._20_00 = ""
-                    Case "21.00"
-                        f._21_00 = ""
-                    Case "22.00"
-                        f._22_00 = ""
-                    Case "23.00"
-                        f._23_00 = ""
+    '                Case "15.00"
+    '                    f._15_00 = ""
+    '                Case "16.00"
+    '                    f._16_00 = ""
+    '                Case "17.00"
+    '                    f._17_00 = ""
+    '                Case "18.00"
+    '                    f._18_00 = ""
+    '                Case "19.00"
+    '                    f._19_00 = ""
+    '                Case "20.00"
+    '                    f._20_00 = ""
+    '                Case "21.00"
+    '                    f._21_00 = ""
+    '                Case "22.00"
+    '                    f._22_00 = ""
+    '                Case "23.00"
+    '                    f._23_00 = ""
 
-                End Select
-                db.SubmitChanges()
+    '            End Select
+    '            db.SubmitChanges()
 
-            End If
-        End Using
-    End Sub
+    '        End If
+    '    End Using
+    'End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        If MessageBox.Show("Сохранить событие?", Рик, MessageBoxButtons.OKCancel, MessageBoxIcon.Question) = DialogResult.Cancel Then
-            Exit Sub
-        End If
+    'Private Sub Button1_Click(sender As Object, e As EventArgs)
+    '    If MessageBox.Show("Сохранить событие?", Рик, MessageBoxButtons.OKCancel, MessageBoxIcon.Question) = DialogResult.Cancel Then
+    '        Exit Sub
+    '    End If
 
-        If Label2.Text = "Дата" Then
-            MessageBox.Show("Выберите дату!", Рик)
-            Exit Sub
-        End If
+    '    If Label2.Text = "Дата" Then
+    '        MessageBox.Show("Выберите дату!", Рик)
+    '        Exit Sub
+    '    End If
 
-        If ComboBox1.Text = "" Then
-            MessageBox.Show("Выберите время!", Рик)
-            Exit Sub
-        End If
+    '    If ComboBox1.Text = "" Then
+    '        MessageBox.Show("Выберите время!", Рик)
+    '        Exit Sub
+    '    End If
 
-        Me.Cursor = Cursors.WaitCursor
-        Using db As New dbAllDataContext()
-            Dim var = db.Календарь_Даты.Where(Function(x) x.Дата = Label2.Text).Select(Function(x) x).FirstOrDefault()
-            If var IsNot Nothing Then
-                InsertData()
-            Else
-                Dim f As New Календарь_Даты
-                f.Дата = Label2.Text
-                db.Календарь_Даты.InsertOnSubmit(f)
-                db.SubmitChanges()
+    '    Me.Cursor = Cursors.WaitCursor
+    '    Using db As New dbAllDataContext()
+    '        Dim var = db.Календарь_Даты.Where(Function(x) x.Дата = Label2.Text).Select(Function(x) x).FirstOrDefault()
+    '        If var IsNot Nothing Then
+    '            InsertData()
+    '        Else
+    '            Dim f As New Календарь_Даты
+    '            f.Дата = Label2.Text
+    '            db.Календарь_Даты.InsertOnSubmit(f)
+    '            db.SubmitChanges()
 
-                InsertData()
-            End If
-        End Using
-
-
-        GridUpdateAsync(Label2.Text)
-        Grid2Update(Label2.Text)
-        НапоминаниеAdd()
-
-        Dim vbd As New MDIParent1
-        vbd.КалендарьНапоминаниеAsync()
-
-        Me.Cursor = Cursors.Default
-        очистка()
+    '            InsertData()
+    '        End If
+    '    End Using
 
 
+    '    GridUpdateAsync(Label2.Text)
+    '    Grid2Update(Label2.Text)
+    '    НапоминаниеAdd()
 
-    End Sub
-    Private Sub НапоминаниеAdd()
-        If MaskedTextBox1.MaskCompleted = True And ComboBox2.Text <> "" Then
+    '    Dim vbd As New MDIParent1
+    '    vbd.КалендарьНапоминаниеAsync()
 
-            Using db As New dbAllDataContext()
-                Dim f As New КалендарьНапоминание
-                f.ДатаНапоминания = MaskedTextBox1.Text
-                f.ВремяНапоминания = ComboBox2.Text
-                f.ТекстНапоминания = RichTextBox1.Text
-                f.Пользователь = Экспедитор
-                db.КалендарьНапоминание.InsertOnSubmit(f)
-                db.SubmitChanges()
-            End Using
-        End If
-    End Sub
-    Private Sub очистка()
-        RichTextBox1.Text = ""
-        MaskedTextBox1.Text = ""
-        ComboBox2.Text = ""
-    End Sub
-
-    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
-        If MessageBox.Show("Изменить событие?", Рик, MessageBoxButtons.OKCancel, MessageBoxIcon.Question) = DialogResult.Cancel Then
-            Exit Sub
-        End If
-
-        If Label2.Text = "Дата" Then
-            MessageBox.Show("Выберите дату!", Рик)
-            Exit Sub
-        End If
-
-        If ComboBox1.Text = "" Then
-            MessageBox.Show("Выберите время!", Рик)
-            Exit Sub
-        End If
-
-        Me.Cursor = Cursors.WaitCursor
-        InsertData()
-        GridUpdateAsync(Label2.Text)
-        Grid2Update(Label2.Text)
-        НапоминаниеUpd()
+    '    Me.Cursor = Cursors.Default
+    '    очистка()
 
 
-        Dim vbd As New MDIParent1 ' запуск напоминания
-        vbd.КалендарьНапоминаниеAsync()
 
-        Me.Cursor = Cursors.Default
-        очистка()
-    End Sub
-    Private Sub НапоминаниеUpd()
-        Using db As New dbAllDataContext()
-            Dim var = db.КалендарьНапоминание.Where(Function(x) x.ДатаНапоминания = CDate(Label2.Text) And x.ВремяНапоминания = ComboBox1.Text And x.Пользователь = Экспедитор).Select(Function(x) x).FirstOrDefault()
+    'End Sub
+    'Private Sub НапоминаниеAdd()
+    '    If MaskedTextBox1.MaskCompleted = True And ComboBox2.Text <> "" Then
 
-            If var IsNot Nothing Then
-                var.ВремяНапоминания = ComboBox2.Text
-                var.ДатаНапоминания = MaskedTextBox1.Text
-                var.ТекстНапоминания = RichTextBox1.Text
-                db.SubmitChanges()
-            End If
-        End Using
-    End Sub
+    '        Using db As New dbAllDataContext()
+    '            Dim f As New КалендарьНапоминание
+    '            f.ДатаНапоминания = MaskedTextBox1.Text
+    '            f.ВремяНапоминания = ComboBox2.Text
+    '            f.ТекстНапоминания = RichTextBox1.Text
+    '            f.Пользователь = Экспедитор
+    '            db.КалендарьНапоминание.InsertOnSubmit(f)
+    '            db.SubmitChanges()
+    '        End Using
+    '    End If
+    'End Sub
+    'Private Sub очистка()
+    '    RichTextBox1.Text = ""
+    '    MaskedTextBox1.Text = ""
+    '    ComboBox2.Text = ""
+    'End Sub
 
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        If MessageBox.Show("Удалить событие?", Рик, MessageBoxButtons.OKCancel, MessageBoxIcon.Question) = DialogResult.Cancel Then
-            Exit Sub
-        End If
+    'Private Sub Button3_Click(sender As Object, e As EventArgs)
+    '    If MessageBox.Show("Изменить событие?", Рик, MessageBoxButtons.OKCancel, MessageBoxIcon.Question) = DialogResult.Cancel Then
+    '        Exit Sub
+    '    End If
 
-        If Label2.Text = "Дата" Then
-            MessageBox.Show("Выберите дату!", Рик)
-            Exit Sub
-        End If
+    '    If Label2.Text = "Дата" Then
+    '        MessageBox.Show("Выберите дату!", Рик)
+    '        Exit Sub
+    '    End If
 
-        If ComboBox1.Text = "" Then
-            MessageBox.Show("Выберите время!", Рик)
-            Exit Sub
-        End If
+    '    If ComboBox1.Text = "" Then
+    '        MessageBox.Show("Выберите время!", Рик)
+    '        Exit Sub
+    '    End If
 
-
-        Me.Cursor = Cursors.WaitCursor
-        Deletedata()
-        GridUpdateAsync(Label2.Text)
-        Grid2Update(Label2.Text)
-        Me.Cursor = Cursors.Default
-        очистка()
-    End Sub
-
-    Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
-        If Label2.Text = "Дата" Or Label2.Text = "Время" Then Exit Sub
-        Using db As New dbAllDataContext()
-            Dim var = db.Календарь_Даты.Where(Function(x) x.Дата = Label2.Text).Select(Function(x) x).FirstOrDefault()
-            If var IsNot Nothing Then
-                Select Case ComboBox1.Text
-                    Case "0.00"
-                        RichTextBox1.Text = var._0_00
-                    Case "1.00"
-                        RichTextBox1.Text = var._1_00
-                    Case "2.00"
-                        RichTextBox1.Text = var._2_00
-                    Case "3.00"
-                        RichTextBox1.Text = var._3_00
-                    Case "4.00"
-                        RichTextBox1.Text = var._4_00
-                    Case "5.00"
-                        RichTextBox1.Text = var._5_00
-                    Case "6.00"
-                        RichTextBox1.Text = var._6_00
-                    Case "7.00"
-                        RichTextBox1.Text = var._7_00
-                    Case "8.00"
-                        RichTextBox1.Text = var._8_00
-                    Case "9.00"
-                        RichTextBox1.Text = var._9_00
-                    Case "10.00"
-                        RichTextBox1.Text = var._10_00
-                    Case "11.00"
-                        RichTextBox1.Text = var._11_00
-                    Case "12.00"
-                        RichTextBox1.Text = var._12_00
-                    Case "13.00"
-                        RichTextBox1.Text = var._13_00
-                    Case "14.00"
-                        RichTextBox1.Text = var._14_00
-
-                    Case "15.00"
-                        RichTextBox1.Text = var._15_00
-                    Case "16.00"
-                        RichTextBox1.Text = var._16_00
-                    Case "17.00"
-                        RichTextBox1.Text = var._17_00
-                    Case "18.00"
-                        RichTextBox1.Text = var._18_00
-                    Case "19.00"
-                        RichTextBox1.Text = var._19_00
-                    Case "20.00"
-                        RichTextBox1.Text = var._20_00
-                    Case "21.00"
-                        RichTextBox1.Text = var._21_00
-                    Case "22.00"
-                        RichTextBox1.Text = var._22_00
-                    Case "23.00"
-                        RichTextBox1.Text = var._23_00
-
-                End Select
-
-                If RichTextBox1.Text.Contains("(True)") Then
-                    Dim lit As Integer = RichTextBox1.Text.Length - 6
-                    RichTextBox1.Text = Strings.Left(RichTextBox1.Text, lit)
-                End If
-            Else
-                RichTextBox1.Text = ""
-
-            End If
-            ComboBox2.Text = ComboBox1.Text
-        End Using
-    End Sub
+    '    Me.Cursor = Cursors.WaitCursor
+    '    InsertData()
+    '    GridUpdateAsync(Label2.Text)
+    '    Grid2Update(Label2.Text)
+    '    НапоминаниеUpd()
 
 
-    Private Sub Grid1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles Grid1.CellContentClick
+    '    Dim vbd As New MDIParent1 ' запуск напоминания
+    '    vbd.КалендарьНапоминаниеAsync()
+
+    '    Me.Cursor = Cursors.Default
+    '    очистка()
+    'End Sub
+    'Private Sub НапоминаниеUpd()
+    '    Using db As New dbAllDataContext()
+    '        Dim var = db.КалендарьНапоминание.Where(Function(x) x.ДатаНапоминания = CDate(Label2.Text) And x.ВремяНапоминания = ComboBox1.Text And x.Пользователь = Экспедитор).Select(Function(x) x).FirstOrDefault()
+
+    '        If var IsNot Nothing Then
+    '            var.ВремяНапоминания = ComboBox2.Text
+    '            var.ДатаНапоминания = MaskedTextBox1.Text
+    '            var.ТекстНапоминания = RichTextBox1.Text
+    '            db.SubmitChanges()
+    '        End If
+    '    End Using
+    'End Sub
+
+    'Private Sub Button2_Click(sender As Object, e As EventArgs)
+    '    If MessageBox.Show("Удалить событие?", Рик, MessageBoxButtons.OKCancel, MessageBoxIcon.Question) = DialogResult.Cancel Then
+    '        Exit Sub
+    '    End If
+
+    '    If Label2.Text = "Дата" Then
+    '        MessageBox.Show("Выберите дату!", Рик)
+    '        Exit Sub
+    '    End If
+
+    '    If ComboBox1.Text = "" Then
+    '        MessageBox.Show("Выберите время!", Рик)
+    '        Exit Sub
+    '    End If
+
+
+    '    Me.Cursor = Cursors.WaitCursor
+    '    Deletedata()
+    '    GridUpdateAsync(Label2.Text)
+    '    Grid2Update(Label2.Text)
+    '    Me.Cursor = Cursors.Default
+    '    очистка()
+    'End Sub
+
+    'Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs)
+    '    If Label2.Text = "Дата" Or Label2.Text = "Время" Then Exit Sub
+    '    Using db As New dbAllDataContext()
+    '        Dim var = db.Календарь_Даты.Where(Function(x) x.Дата = Label2.Text).Select(Function(x) x).FirstOrDefault()
+    '        If var IsNot Nothing Then
+    '            Select Case ComboBox1.Text
+    '                Case "0.00"
+    '                    RichTextBox1.Text = var._0_00
+    '                Case "1.00"
+    '                    RichTextBox1.Text = var._1_00
+    '                Case "2.00"
+    '                    RichTextBox1.Text = var._2_00
+    '                Case "3.00"
+    '                    RichTextBox1.Text = var._3_00
+    '                Case "4.00"
+    '                    RichTextBox1.Text = var._4_00
+    '                Case "5.00"
+    '                    RichTextBox1.Text = var._5_00
+    '                Case "6.00"
+    '                    RichTextBox1.Text = var._6_00
+    '                Case "7.00"
+    '                    RichTextBox1.Text = var._7_00
+    '                Case "8.00"
+    '                    RichTextBox1.Text = var._8_00
+    '                Case "9.00"
+    '                    RichTextBox1.Text = var._9_00
+    '                Case "10.00"
+    '                    RichTextBox1.Text = var._10_00
+    '                Case "11.00"
+    '                    RichTextBox1.Text = var._11_00
+    '                Case "12.00"
+    '                    RichTextBox1.Text = var._12_00
+    '                Case "13.00"
+    '                    RichTextBox1.Text = var._13_00
+    '                Case "14.00"
+    '                    RichTextBox1.Text = var._14_00
+
+    '                Case "15.00"
+    '                    RichTextBox1.Text = var._15_00
+    '                Case "16.00"
+    '                    RichTextBox1.Text = var._16_00
+    '                Case "17.00"
+    '                    RichTextBox1.Text = var._17_00
+    '                Case "18.00"
+    '                    RichTextBox1.Text = var._18_00
+    '                Case "19.00"
+    '                    RichTextBox1.Text = var._19_00
+    '                Case "20.00"
+    '                    RichTextBox1.Text = var._20_00
+    '                Case "21.00"
+    '                    RichTextBox1.Text = var._21_00
+    '                Case "22.00"
+    '                    RichTextBox1.Text = var._22_00
+    '                Case "23.00"
+    '                    RichTextBox1.Text = var._23_00
+
+    '            End Select
+
+    '            If RichTextBox1.Text.Contains("(True)") Then
+    '                Dim lit As Integer = RichTextBox1.Text.Length - 6
+    '                RichTextBox1.Text = Strings.Left(RichTextBox1.Text, lit)
+    '            End If
+    '        Else
+    '            RichTextBox1.Text = ""
+
+    '        End If
+    '        ComboBox2.Text = ComboBox1.Text
+    '    End Using
+    'End Sub
+
+
+    Private Sub Grid1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs)
 
         'RichTextBox1.Text = Grid1.CurrentRow.Cells(e.ColumnIndex).Value
     End Sub
 
-    Private Sub Grid1_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles Grid1.CellClick
-        If e.ColumnIndex = -1 Then Exit Sub
-        RichTextBox1.Text = Grid1.CurrentRow.Cells(e.ColumnIndex).Value
-        MaskedTextBox1.Text = Grid1.CurrentRow.Cells(1).Value
-        ComboBox2.Text = Grid1.Columns(e.ColumnIndex).HeaderText
-        Label2.Text = Grid1.CurrentRow.Cells(1).Value
-        ComboBox1.Text = Grid1.Columns(e.ColumnIndex).HeaderText
+    'Private Sub Grid1_CellClick(sender As Object, e As DataGridViewCellEventArgs)
+    '    If e.ColumnIndex = -1 Then Exit Sub
+    '    RichTextBox1.Text = Grid1.CurrentRow.Cells(e.ColumnIndex).Value
+    '    MaskedTextBox1.Text = Grid1.CurrentRow.Cells(1).Value
+    '    ComboBox2.Text = Grid1.Columns(e.ColumnIndex).HeaderText
+    '    Label2.Text = Grid1.CurrentRow.Cells(1).Value
+    '    ComboBox1.Text = Grid1.Columns(e.ColumnIndex).HeaderText
 
 
 
-    End Sub
+    'End Sub
 
     Private Sub Grid2_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles Grid2.CellClick
-        'If e.ColumnIndex = -1 Then Exit Sub
-        'If e.ColumnIndex = 0 Then Exit Sub
-        'If Grid2.CurrentRow.Cells(e.ColumnIndex).Value IsNot Nothing And IsDBNull(Grid2.CurrentRow.Cells(e.ColumnIndex).Value) = False Then
-        '    Dim ml As String = Trim(Grid2.CurrentRow.Cells(e.ColumnIndex).Value)
-        '    'RichTextBox1.Text.Trim(ml)
-        '    'Dim kl = RichTextBox1.Text
 
-        '    MaskedTextBox1.Text = Strings.Left(Grid2.Columns(e.ColumnIndex).HeaderText, 10)
-        '    ComboBox2.Text = Grid2.CurrentRow.Cells(0).Value
-
-        '    Label2.Text = Strings.Left(Grid2.Columns(e.ColumnIndex).HeaderText, 10)
-        '    ComboBox1.Text = Grid2.CurrentRow.Cells(0).Value
-        'End If
 
     End Sub
 
-    Private Sub Grid2_Scroll(sender As Object, e As ScrollEventArgs) Handles Grid2.Scroll
-        GetType(DataGridView).InvokeMember("DoubleBuffered", Reflection.BindingFlags.Instance Or Reflection.BindingFlags.NonPublic Or Reflection.BindingFlags.SetProperty, Nothing, Me.Grid2, New Object() {True})
-    End Sub
+    'Private Sub Grid2_Scroll(sender As Object, e As ScrollEventArgs) Handles Grid2.Scroll
+    '    GetType(DataGridView).InvokeMember("DoubleBuffered", Reflection.BindingFlags.Instance Or Reflection.BindingFlags.NonPublic Or Reflection.BindingFlags.SetProperty, Nothing, Me.Grid2, New Object() {True})
+    'End Sub
 
-    Private Sub Grid1_Scroll(sender As Object, e As ScrollEventArgs) Handles Grid1.Scroll 'скрол без бликов  datagrid grid1
-        GetType(DataGridView).InvokeMember("DoubleBuffered", Reflection.BindingFlags.Instance Or Reflection.BindingFlags.NonPublic Or Reflection.BindingFlags.SetProperty, Nothing, Me.Grid1, New Object() {True})
-    End Sub
+    'Private Sub Grid1_Scroll(sender As Object, e As ScrollEventArgs)  'скрол без бликов  datagrid grid1
+    '    GetType(DataGridView).InvokeMember("DoubleBuffered", Reflection.BindingFlags.Instance Or Reflection.BindingFlags.NonPublic Or Reflection.BindingFlags.SetProperty, Nothing, Me.Grid1, New Object() {True})
+    'End Sub
 
 
 
@@ -1185,4 +1217,362 @@ Public Class Календарь
         Return Nothing
     End Function
 
+    Private Sub Grid2_CellToolTipTextNeeded(sender As Object, e As DataGridViewCellToolTipTextNeededEventArgs) Handles Grid2.CellToolTipTextNeeded
+        Dim newLine As String = Environment.NewLine
+        If e.RowIndex > -1 Then
+            Dim mo As New AllUpd
+            Do While AllClass.Календарь_Даты Is Nothing
+                mo.Календарь_ДатыAll()
+            Loop
+            Do While AllClass.КалендарьРезультатЗвонка Is Nothing
+                mo.КалендарьРезультатЗвонкаAll()
+            Loop
+
+
+            'Dim f = CDate(Grid2.Rows(0).Cells(Grid2.CurrentCell.ColumnIndex).Value)
+            'Dim f1 = Grid2.CurrentCell.RowIndex - 1
+
+            Dim f1 = Inttool
+            Dim f = datSd
+
+            If f = Nothing Then Return
+
+            Dim f3 = (From x In AllClass.Календарь_Даты
+                      Join y In AllClass.КалендарьРезультатЗвонка On x.ID Equals y.IDCalendar
+                      Where x.Дата = f
+                      Select y).FirstOrDefault()
+            If f3 IsNot Nothing Then
+                Dim mk As String = ReturnРезультат(f3, f1)
+                If mk Is Nothing Then Return
+                If mk.Length = 0 Then Return
+
+                e.ToolTipText = mk
+            End If
+                'If f.ВсплывПримеч IsNot Nothing Then
+                '    If f.ВсплывПримеч.Length > 0 Then
+                '        e.ToolTipText = f.ВсплывПримеч & newLine
+                '    End If
+                'End If
+            End If
+    End Sub
+    Private Property times As Integer
+    Private datd As Date = Nothing
+    Private Sub Grid2_MouseDown(sender As Object, e As MouseEventArgs) Handles Grid2.MouseDown
+
+        If e.Button = MouseButtons.Right Then
+            ContextMenuStrip2.Show(MousePosition, ToolStripDropDownDirection.Right)
+            Dim k = TryCast(sender, DataGridView)
+            If k.CurrentRow.Index = -1 Then Return
+            times = k.CurrentCell.RowIndex - 1
+            datd = CDate(Grid2.Rows(0).Cells(k.CurrentCell.ColumnIndex).Value)
+        End If
+    End Sub
+
+    Private Sub РезультатЗвонкаToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles РезультатЗвонкаToolStripMenuItem.Click
+        If datd = Nothing Then Return
+
+        Dim mo As New AllUpd
+        Do While AllClass.Календарь_Даты Is Nothing
+            mo.Календарь_ДатыAll()
+        Loop
+        Do While AllClass.КалендарьРезультатЗвонка Is Nothing
+            mo.КалендарьРезультатЗвонкаAll()
+        Loop
+
+
+        Dim f = (From x In AllClass.Календарь_Даты
+                 Join y In AllClass.КалендарьРезультатЗвонка On x.ID Equals y.IDCalendar
+                 Where x.Дата = datd
+                 Select x, y).FirstOrDefault()
+        If f Is Nothing Then 'если нет данных, добавляем
+            Dim f1 = (From x In AllClass.Календарь_Даты
+                      Where x.Дата = datd
+                      Select x).FirstOrDefault()
+            If f1 IsNot Nothing Then
+                Dim f3 As New КалендарьРезультат
+                f3.ShowDialog()
+                If f3.Rezul IsNot Nothing Then
+                    РезультатAddAsync(datd, f3.Rezul, times, True)
+                End If
+                MessageBox.Show("Данные добавлены!", Рик)
+            End If
+        Else
+            Dim mk As String = ReturnРезультат(f.y, times)
+
+            If mk Is Nothing Then
+                Dim f3 As New КалендарьРезультат
+                f3.ShowDialog()
+                If f3.Rezul IsNot Nothing Then
+                    РезультатAddAsync(datd, f3.Rezul, times, False)
+                End If
+                MessageBox.Show("Данные добавлены!", Рик)
+            Else
+                If mk.Length > 0 Then
+                    MessageBox.Show("Измените данные!", Рик)
+                End If
+
+            End If
+
+
+
+        End If
+    End Sub
+    Public Async Sub РезультатAddAsync(ByVal d As Date, ByVal Valu As String, ByVal times As Integer, ByVal insert As Boolean)
+        Await Task.Run(Sub() РезультатAdd(d, Valu, times, insert))
+    End Sub
+
+    Public Sub РезультатAdd(ByVal d As Date, ByVal Val As String, ByVal times As Integer, ByVal insert As Boolean)
+        Dim Valu = Val & vbCrLf & "( " & Now & " )"
+        Dim mo As New AllUpd
+        Using db As New dbAllDataContext
+            If insert = False Then
+                Dim f = (From x In db.Календарь_Даты
+                         Join y In db.КалендарьРезультатЗвонка On x.ID Equals y.IDCalendar
+                         Where x.Дата = datd
+                         Select y).FirstOrDefault()
+                If f IsNot Nothing Then
+                    Select Case times
+                        Case 0
+                            f._0 = valu
+                        Case 1
+                            f._1 = valu
+                        Case 2
+                            f._2 = valu
+                        Case 3
+                            f._3 = valu
+                        Case 4
+                            f._4 = valu
+                        Case 5
+                            f._5 = valu
+                        Case 6
+                            f._6 = valu
+                        Case 7
+                            f._7 = valu
+                        Case 8
+                            f._8 = valu
+                        Case 9
+                            f._9 = valu
+                        Case 10
+                            f._10 = valu
+                        Case 11
+                            f._11 = valu
+                        Case 12
+                            f._12 = valu
+                        Case 13
+                            f._13 = valu
+                        Case 14
+                            f._14 = valu
+                        Case 15
+                            f._15 = valu
+                        Case 16
+                            f._16 = valu
+                        Case 17
+                            f._17 = valu
+                        Case 18
+                            f._18 = valu
+                        Case 19
+                            f._19 = valu
+                        Case 20
+                            f._20 = valu
+                        Case 21
+                            f._21 = valu
+                        Case 22
+                            f._22 = valu
+                        Case 23
+                            f._23 = valu
+                    End Select
+
+                    db.SubmitChanges()
+                    mo.КалендарьРезультатЗвонкаAll()
+                End If
+
+            Else
+                Dim f2 = (From x In db.Календарь_Даты
+                          Where x.Дата = datd
+                          Select x.ID).FirstOrDefault()
+                If f2 = 0 Then Return
+
+                Dim f1 As New КалендарьРезультатЗвонка
+
+                Select Case times
+                    Case 0
+                        f1._0 = valu
+                    Case 1
+                        f1._1 = valu
+                    Case 2
+                        f1._2 = valu
+                    Case 3
+                        f1._3 = valu
+                    Case 4
+                        f1._4 = valu
+                    Case 5
+                        f1._5 = valu
+                    Case 6
+                        f1._6 = valu
+                    Case 7
+                        f1._7 = valu
+                    Case 8
+                        f1._8 = valu
+                    Case 9
+                        f1._9 = valu
+                    Case 10
+                        f1._10 = valu
+                    Case 11
+                        f1._11 = valu
+                    Case 12
+                        f1._12 = valu
+                    Case 13
+                        f1._13 = valu
+                    Case 14
+                        f1._14 = valu
+                    Case 15
+                        f1._15 = valu
+                    Case 16
+                        f1._16 = valu
+                    Case 17
+                        f1._17 = valu
+                    Case 18
+                        f1._18 = valu
+                    Case 19
+                        f1._19 = valu
+                    Case 20
+                        f1._20 = valu
+                    Case 21
+                        f1._21 = valu
+                    Case 22
+                        f1._22 = valu
+                    Case 23
+                        f1._23 = valu
+                End Select
+                f1.IDCalendar = f2
+                db.КалендарьРезультатЗвонка.InsertOnSubmit(f1)
+                db.SubmitChanges()
+
+            End If
+            mo.КалендарьРезультатЗвонкаAll()
+        End Using
+
+
+    End Sub
+
+
+    Private Sub ИзменитьРезультатToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ИзменитьРезультатToolStripMenuItem.Click
+        If datd = Nothing Then Return
+
+        Dim mo As New AllUpd
+        Do While AllClass.Календарь_Даты Is Nothing
+            mo.Календарь_ДатыAll()
+        Loop
+        Do While AllClass.КалендарьРезультатЗвонка Is Nothing
+            mo.КалендарьРезультатЗвонкаAll()
+        Loop
+
+
+        Dim f = (From x In AllClass.Календарь_Даты
+                 Join y In AllClass.КалендарьРезультатЗвонка On x.ID Equals y.IDCalendar
+                 Where x.Дата = datd
+                 Select x, y).FirstOrDefault()
+        If f IsNot Nothing Then
+            Dim str = ReturnРезультат(f.y, times)
+            If str Is Nothing Then Return
+
+            Dim f3 As New КалендарьРезультат(str)
+            f3.ShowDialog()
+            If f3.Rezul IsNot Nothing Then
+                РезультатAddAsync(datd, f3.Rezul, times, False)
+            End If
+            MessageBox.Show("Данные добавлены!", Рик)
+        End If
+
+    End Sub
+
+    Public Function ReturnРезультат(ByVal d As КалендарьРезультатЗвонка, ByVal times As Integer)
+        Select Case times
+            Case 0
+                Return d._0
+            Case 1
+                Return d._1
+            Case 2
+                Return d._2
+            Case 3
+                Return d._3
+            Case 4
+                Return d._4
+            Case 5
+                Return d._5
+            Case 6
+                Return d._6
+            Case 7
+                Return d._7
+            Case 8
+                Return d._8
+            Case 9
+                Return d._9
+            Case 10
+                Return d._10
+            Case 11
+                Return d._11
+            Case 12
+                Return d._12
+            Case 13
+                Return d._13
+            Case 14
+                Return d._14
+            Case 15
+                Return d._15
+            Case 16
+                Return d._16
+            Case 17
+                Return d._17
+            Case 18
+                Return d._18
+            Case 19
+                Return d._19
+            Case 20
+                Return d._20
+            Case 21
+                Return d._21
+            Case 22
+                Return d._22
+            Case 23
+                Return d._23
+            Case Else
+                Return Nothing
+        End Select
+
+    End Function
+    Private Inttool As Integer
+    Private datSd As Date
+    Private Sub Grid2_CellMouseEnter(sender As Object, e As DataGridViewCellEventArgs) Handles Grid2.CellMouseEnter
+        If e.RowIndex = -1 Then Return
+        If e.ColumnIndex = -1 Then Return
+        If e.RowIndex = 0 Then Return
+        Inttool = e.RowIndex - 1
+        datSd = CDate(Grid2.Rows(0).Cells(e.ColumnIndex).Value)
+    End Sub
+
+    Private Sub Calendar1_DateChanged(sender As Object, e As DateRangeEventArgs) Handles Calendar1.DateChanged
+
+        ' Grid1Coll(e.Start) 'приостановил 11.01.21 это для формирования по месяцу
+
+    End Sub
+    Private Sub Grid1Coll(d As Date)
+        Dim mo As New AllUpd
+        Do While AllClass.Календарь_Даты Is Nothing
+            mo.Календарь_ДатыAll()
+        Loop
+
+        Do While AllClass.КалендарьРезультатЗвонка Is Nothing
+            mo.КалендарьРезультатЗвонкаAll()
+        Loop
+
+        Dim f = (From x In AllClass.Календарь_Даты
+                 Where IIf(x?.Дата IsNot Nothing, x?.Дата?.Year = d.Year, CDate("01.01.1990")) And IIf(x.Дата IsNot Nothing, x?.Дата.Value.Month = d.Month, CDate("01.01.1990"))
+                 Select x).ToList()
+
+        Dim FirthDay = CDate("01." & d.Month & d.Year).DayOfWeek
+
+
+
+    End Sub
 End Class

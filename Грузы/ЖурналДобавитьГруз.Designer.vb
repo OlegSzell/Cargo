@@ -359,12 +359,12 @@ Partial Class ЖурналДобавитьГруз
         '
         Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.УдалитьСтрокуToolStripMenuItem})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(181, 48)
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(159, 26)
         '
         'УдалитьСтрокуToolStripMenuItem
         '
         Me.УдалитьСтрокуToolStripMenuItem.Name = "УдалитьСтрокуToolStripMenuItem"
-        Me.УдалитьСтрокуToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.УдалитьСтрокуToolStripMenuItem.Size = New System.Drawing.Size(158, 22)
         Me.УдалитьСтрокуToolStripMenuItem.Text = "Удалить строку"
         '
         'ЖурналДобавитьГруз

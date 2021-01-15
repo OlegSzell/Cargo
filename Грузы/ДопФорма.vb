@@ -21,20 +21,20 @@ Public Class ДопФорма
             TextBox1.Text = Replace(TextBox1.Text, ".", ",")
             Dim a As Double = CDbl(TextBox1.Text)
             TextBox2.Text = Math.Round((100 - a), 2)
-            TextBox4.Text = Math.Round(CType((Рейс.TextBox1.Text), Integer) * a / 100)
+            TextBox4.Text = Math.Round(CType((txt1), Integer) * a / 100)
             TextBox3.Text = CType(CType((IIf(txt1 = String.Empty, 0, txt1)), Integer) - CType((TextBox4.Text), Integer), String)
             MaskedTextBox2.Focus()
         End If
     End Sub
 
     Private Sub ДопФорма_Closed(sender As Object, e As EventArgs) Handles Me.Closed
-        TextBox1.Text = ""
-        TextBox2.Text = ""
-        TextBox3.Text = ""
-        TextBox4.Text = ""
-        TextBox5.Text = ""
-        TextBox6.Text = ""
-        TextBox10.Text = ""
+        TextBox1.Text = String.Empty
+        TextBox2.Text = String.Empty
+        TextBox3.Text = String.Empty
+        TextBox4.Text = String.Empty
+        TextBox5.Text = String.Empty
+        TextBox6.Text = String.Empty
+        TextBox10.Text = String.Empty
         MaskedTextBox1.Text = ""
         MaskedTextBox2.Text = ""
 
@@ -69,14 +69,14 @@ Public Class ДопФорма
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        TextBox1.Text = ""
-        TextBox2.Text = ""
-        TextBox3.Text = ""
-        TextBox4.Text = ""
-        TextBox5.Text = ""
-        TextBox6.Text = ""
-        TextBox10.Text = ""
-        TextBox7.Text = ""
+        TextBox1.Text = String.Empty
+        TextBox2.Text = String.Empty
+        TextBox3.Text = String.Empty
+        TextBox4.Text = String.Empty
+        TextBox5.Text = String.Empty
+        TextBox6.Text = String.Empty
+        TextBox10.Text = String.Empty
+        TextBox7.Text = String.Empty
 
         MaskedTextBox1.Clear()
         MaskedTextBox2.Clear()
@@ -86,11 +86,14 @@ Public Class ДопФорма
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Me.Cursor = Cursors.WaitCursor
+        Dim mo As New AllUpd
         Using db As New dbAllDataContext()
             Dim var = db.РейсыКлиента.Where(Function(x) x.НомерРейса = Num).Select(Function(x) x).FirstOrDefault()
             If var IsNot Nothing Then
                 var.ПоИнотерр = TextBox3.Text
                 var.ПоТеррРБ = TextBox4.Text
+                var.ПоТеррРБПроц = TextBox1.Text
+                var.ПоИнотерПроц = TextBox2.Text
                 var.ДатаАкта = MaskedTextBox2.Text
                 var.НомерСМР = TextBox10.Text
                 var.ЗаявкаКлиента = TextBox6.Text
@@ -101,19 +104,14 @@ Public Class ДопФорма
                     var.ОплатаПоКурсуКурс = TextBox7.Text
                 End If
                 db.SubmitChanges()
-
+                mo.РейсыКлиентаAllAsync()
             End If
         End Using
 
 
         MessageBox.Show("Данные внесены в базу!", Рик)
         If MessageBox.Show("Изменить данные в файле эксель?", Рик, MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
-            'Рейс.СлРейс = Nothing
-            'Рейс.СлРейс = Рейс.НомРес
-            'Dim f4 As Рейс
-            'f4.СлРейс = Num
-            'f4.ДокиОбновление()
-            'f4.ДокиОбновление(Num)
+
             ОбнвлExcel = True
             Me.Cursor = Cursors.Default
             MessageBox.Show("Данные в файле эксель изменены!", Рик)
@@ -144,6 +142,8 @@ Public Class ДопФорма
 
         TextBox4.Text = f1.ПоТеррРБ
         TextBox3.Text = f1.ПоИнотерр
+        TextBox1.Text = f1.ПоТеррРБПроц
+        TextBox2.Text = f1.ПоИнотерПроц
 
         TextBox6.Text = f1.ЗаявкаКлиента
         TextBox5.Text = f1.НомерЗаявки

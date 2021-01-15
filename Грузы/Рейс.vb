@@ -640,7 +640,10 @@ Public Class Рейс
         'Dim XXX = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=U:\Офис\Рикманс\ДанныеРикманс.accdb; Persist Security Info=False;"
         'Dim XXX = "Provider='SQLOLEDB';Data Source=45.14.50.13\723\SQLEXPRESS,1433;Network Library=DBMSSOCN;Initial Catalog=Rickmans;User ID=userOleg;Password=Zf6VpP37Ol"
         'Dim XXX = "Provider='SQLOLEDB';Data Source=45.14.50.142\2749\SQLEXPRESS,1433;Network Library=DBMSSOCN;Initial Catalog=Rickmans;User ID=userOleg1;Password=Zf6VpP37Ol"
-        Dim XXX = "Provider='SQLOLEDB';Data Source=178.124.211.175,52891;Network Library=DBMSSOCN;Initial Catalog=Rickmans;User ID=Rickmans;Password=Zf6VpP37Ol"
+        'Dim XXX = "Provider='SQLOLEDB';Data Source=178.124.211.175,52891;Network Library=DBMSSOCN;Initial Catalog=Rickmans;User ID=Rickmans;Password=Zf6VpP37Ol"
+        Dim XXX = "Provider='SQLOLEDB';Data Source=178.172.195.159,52891;Network Library=DBMSSOCN;Initial Catalog=Rickmans;User ID=Rickmans;Password=Zf6VpP37Ol"
+
+
 
         Dim CON As New ADODB.Connection
         Dim RS As New ADODB.Recordset
@@ -699,17 +702,22 @@ Public Class Рейс
     End Sub
 
 
-    Private Sub ПерегрЛист1(Optional f As ПутиДоков = Nothing, Optional com1 As String = Nothing)
+    Private Sub ПерегрЛист1(Optional f As ПутиДоков = Nothing, Optional com1 As String = Nothing, Optional SelYear As String = Nothing)
         If f Is Nothing Then
             Dim cm1 As String
 
-            If arrtcom.Count = 0 And com1 Is Nothing Then
-                cm1 = ComboBox1.Text
-            ElseIf arrtcom.Count > 0 And com1 Is Nothing Then
-                cm1 = arrtcom("ComboBox1")
+            If SelYear Is Nothing Then
+                If arrtcom.Count = 0 And com1 Is Nothing Then
+                    cm1 = ComboBox1.Text
+                ElseIf arrtcom.Count > 0 And com1 Is Nothing Then
+                    cm1 = arrtcom("ComboBox1")
+                Else
+                    cm1 = com1
+                End If
             Else
-                cm1 = com1
+                cm1 = SelYear
             End If
+
             ListBox1.BeginUpdate()
             Справки(CType(cm1, Integer))
 
@@ -724,16 +732,29 @@ Public Class Рейс
 
                 'bslst11.ResetBindings(False)
 
+                If SelYear IsNot Nothing Then
+                    ComboBox1.Text = SelYear
+                End If
 
                 ListBox1.Text = lst1all.Select(Function(x) x.Путь).LastOrDefault()
 
 
             End If
         Else
-            ListBox1.BeginUpdate()
-            lst1all.Add(f)
-            'bslst11.ResetBindings(False)
-            ListBox1.Text = lst1all.Select(Function(x) x.Путь).LastOrDefault()
+            If SelYear Is Nothing Then
+                ListBox1.BeginUpdate()
+                lst1all.Add(f)
+                'bslst11.ResetBindings(False)
+                ListBox1.Text = lst1all.Select(Function(x) x.Путь).LastOrDefault()
+            Else
+                ComboBox1.SelectedItem = SelYear
+
+                ListBox1.BeginUpdate()
+                lst1all.Add(f)
+                'bslst11.ResetBindings(False)
+                ListBox1.Text = lst1all.Select(Function(x) x.Путь).LastOrDefault()
+            End If
+
         End If
 
         ListBox1.EndUpdate()
@@ -1362,11 +1383,16 @@ Public Class Рейс
 
         Dim f2 As Integer
         If com3 = "Виталюр" Then
-            f2 = (From x In AllClass.РейсыКлиента
-                  Order By x.КоличРейсов
-                  Where x.НазвОрганизации = "Виталюр" And Format(x.Год, "yyyy") = Now.Year
-                  Select x.КоличРейсов).LastOrDefault()
 
+            Dim f7 = (From x In AllClass.РейсыКлиента
+                      Order By x?.КоличРейсов
+                      Where x?.НазвОрганизации = "Виталюр" And Format(x?.Год, "yyyy") = Now.Year
+                      Select x).LastOrDefault()
+            If f7 IsNot Nothing Then
+                f2 = f7.КоличРейсов
+            Else
+                f2 = 0
+            End If
         Else
             f2 = AllClass.РейсыКлиента.OrderBy(Function(x) x.КоличРейсов).Where(Function(x) x.НазвОрганизации = com3).Select(Function(x) IIf(x.КоличРейсов Is Nothing, 0, x.КоличРейсов)).LastOrDefault()
 
@@ -1692,7 +1718,7 @@ Public Class Рейс
 
 
 
-    Private Sub НовыйРейс()
+    Private Sub НовыйРейс(Optional ByVal SelYear As String = Nothing)
 
         ПровСледРейсКлиент()
         If Отмена = 1 Then Exit Sub
@@ -1712,7 +1738,12 @@ Public Class Рейс
         ПровСледРейсПер()
         If Отмена = 1 Then Return
 
+
         Dim ya As String = Now.Year.ToString
+        If SelYear IsNot Nothing Then
+            ya = SelYear
+        End If
+
         PutPolnStroka = "Z:\RICKMANS\" & ya & "\" & СлРейс & " " & ComboBox3.Text & " " & СлПорРейсКл & " - " & ComboBox4.Text & " " & СлПорРейсПер & ".xlsm"
         PutCorStroka = СлРейс & " " & ComboBox3.Text & " " & СлПорРейсКл & " - " & ComboBox4.Text & " " & СлПорРейсПер & ".xlsm"
 
@@ -1795,7 +1826,7 @@ Public Class Рейс
             .ДатаПоручения = arrtmask("MaskedTextBox1")
             .ПорЭксп = ПорЭксп
             .УсловияОплаты = arrtcom("ComboBox10")
-            .Год = Now.ToShortDateString
+            .Год = CDate("01." & "01." & ya)
             .РазмерШтрафаЗаСрыв = ШтрафПер
             .Предоплата = ЧастичнаяОплатаКлиент
             .ОплатаПоКурсу = ОплатаПоКурсу
@@ -2334,14 +2365,17 @@ Public Class Рейс
                 Dim mi As New ПутиДоков With {.ПолныйПуть = b, .Путь = IO.Path.GetFileName(b)}
                 lst1all.Add(mi)
             Next
+            If ListBox1.SelectedItem IsNot Nothing Then
+                ListBox1.SelectedItem = lst1all.Last
+            End If
 
-            ListBox1.SelectedItem = lst1all.Last
+
             ListBox1.EndUpdate()
 
 
 
-            MessageBox.Show("Удалены рейсы: " & vbCrLf & m, Рик)
-        End If
+                MessageBox.Show("Удалены рейсы: " & vbCrLf & m, Рик)
+            End If
 
 
 
@@ -2505,7 +2539,8 @@ Public Class Рейс
         f.ShowDialog()
         'UpdListForTime(ComboBox1.Text)  'запуск таймера
         If f.ОбнвлExcel = True Then
-            ДокиОбновление(f.Num)
+            ДокиОбновлениеAsync(f.Num, ComboBox3.Text, ComboBox4.Text, ComboBox1.Text)
+            'ДокиОбновление(f.Num)
         End If
     End Sub
 
@@ -2693,18 +2728,25 @@ Public Class Рейс
 
 
     End Sub
-    Public Sub ДокиОбновление(Optional ByVal Num As Integer = 0)
+    Private Async Sub ДокиОбновлениеAsync(Optional ByVal Num As Integer = 0, Optional com3s As String = Nothing, Optional com4s As String = Nothing, Optional com1s As String = Nothing)
+        Await Task.Run(Sub() ДокиОбновление(Num, com3s, com4s, com1s))
+    End Sub
+    Public Sub ДокиОбновление(Optional ByVal Num As Integer = 0, Optional com3s As String = Nothing, Optional com4s As String = Nothing, Optional com1s As String = Nothing)
         If Num > 0 Then
             СлРейс = Num
         End If
-        Me.Cursor = Cursors.WaitCursor
+
+        If com3s Is Nothing Then
+            Me.Cursor = Cursors.WaitCursor
+        End If
+
         Dim mo As New AllUpd
 
 
         Dim xlapp As Microsoft.Office.Interop.Excel.Application
         xlapp = New Microsoft.Office.Interop.Excel.Application
 
-        Dim XXX = "Provider='SQLOLEDB';Data Source=178.124.211.175,52891;Network Library=DBMSSOCN;Initial Catalog=Rickmans;User ID=Rickmans;Password=Zf6VpP37Ol"
+        Dim XXX = "Provider='SQLOLEDB';Data Source=178.172.195.159,52891;Network Library=DBMSSOCN;Initial Catalog=Rickmans;User ID=Rickmans;Password=Zf6VpP37Ol"
 
         Dim CON As New ADODB.Connection
         Dim RS As New ADODB.Recordset
@@ -2712,8 +2754,18 @@ Public Class Рейс
         Dim RS2 As New ADODB.Recordset
         Dim RS3 As New ADODB.Recordset
 
-        Dim com3 As String = ComboBox3.Text
-        Dim com4 As String = ComboBox4.Text
+        Dim com3 As String = Nothing
+        Dim com4 As String = Nothing
+
+        If com3s Is Nothing Then
+            com3 = ComboBox3.Text
+            com4 = ComboBox4.Text
+        Else
+            com3 = com3s
+            com4 = com4s
+            'Доделать надо передать в метод переменные
+        End If
+
 
         Dim strSQL, strSQL1, strSQL2, strSQL3 As String
         strSQL = "select * from РейсыКлиента WHERE НомерРейса=" & СлРейс & ""
@@ -2728,7 +2780,13 @@ Public Class Рейс
         RS2.Open(strSQL2, CON)
         RS3.Open(strSQL3, CON)
 
-        xlapp.Workbooks.Open("Z:\RICKMANS\" & ComboBox1.Text & "\" & ПутьРейса).Worksheets("ЗАК").Range("L3").CopyFromRecordset(RS)
+        If com1s Is Nothing Then
+            xlapp.Workbooks.Open("Z:\RICKMANS\" & ComboBox1.Text & "\" & ПутьРейса).Worksheets("ЗАК").Range("L3").CopyFromRecordset(RS)
+        Else
+            xlapp.Workbooks.Open("Z:\RICKMANS\" & com1s & "\" & ПутьРейса).Worksheets("ЗАК").Range("L3").CopyFromRecordset(RS)
+            'Доделать надо передать в метод переменные
+        End If
+
         xlapp.Workbooks(ПутьРейса).Worksheets("ЗАК").Range("L6").CopyFromRecordset(RS1)
         xlapp.Workbooks(ПутьРейса).Worksheets("ЗАК").Range("L4").CopyFromRecordset(RS2)
         xlapp.Workbooks(ПутьРейса).Worksheets("ЗАК").Range("L5").CopyFromRecordset(RS3)
@@ -2751,8 +2809,13 @@ Public Class Рейс
             Return
         End If
 
-        Dim com1 As String = ComboBox1.Text
+        Dim com1 As String = Nothing
 
+        If com1s Is Nothing Then
+            com1 = ComboBox1.Text
+        Else
+            com1 = com1s
+        End If
 
 
         If ПрИзмНазКл = True Then
@@ -2792,7 +2855,10 @@ Public Class Рейс
         RS2 = Nothing
         RS3 = Nothing
         CON.Close()
-        Me.Cursor = Cursors.Default
+
+        If com3s Is Nothing Then
+            Me.Cursor = Cursors.Default
+        End If
 
     End Sub
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
@@ -2937,10 +3003,19 @@ Public Class Рейс
         ПредExcelAsync()
         Me.Cursor = Cursors.WaitCursor
         If НомРес > 0 Then
-            If MessageBox.Show("Создать рейс?", Рик, MessageBoxButtons.YesNo) = DialogResult.Yes Then
-
-
+            If MessageBox.Show("Создать новый рейс в " & ComboBox1.Text & " году?", Рик, MessageBoxButtons.YesNo) = DialogResult.Yes Then
                 НовыйРейсГлавная()
+            Else
+                Dim m As New List(Of String)
+                For Each b In ComboBox1.Items
+                    m.Add(b)
+                Next
+                Dim f As New РейсВыборГодаНовый(m)
+                f.ShowDialog()
+                Dim Sl As String = f.Выбор
+                If Sl IsNot Nothing Then
+                    НовыйРейсГлавная(Sl)
+                End If
             End If
         End If
 
@@ -3141,6 +3216,27 @@ Public Class Рейс
 
     End Sub
 
+    Private Sub ДокументыToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ДокументыToolStripMenuItem.Click
+        Dim f As New ДокументыОтправкаПриходДаты(НомРес)
+        f.ShowDialog()
+    End Sub
+
+    Private Sub ОплатаToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles ОплатаToolStripMenuItem2.Click
+        If НомРес = Nothing Then
+            MessageBox.Show("Выберите рейс!", Рик)
+            Exit Sub
+        End If
+        bl = False
+        Dim f As New Отчет(НомРес)
+        f.ShowDialog()
+
+    End Sub
+
+    Private Sub СводнаяОплатToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles СводнаяОплатToolStripMenuItem.Click
+        Dim f As New Сводная
+        f.ShowDialog()
+    End Sub
+
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
         PredzagAsync()
@@ -3217,8 +3313,8 @@ Public Class Рейс
         releaseobject(xlapp, f)
     End Sub
 
-    Private Sub НовыйРейсГлавная()
-        НовыйРейс()
+    Private Sub НовыйРейсГлавная(Optional ByVal SelYear As String = Nothing)
+        НовыйРейс(SelYear)
         If Отмена = 1 Then Exit Sub
 
         Доки()
@@ -3226,7 +3322,7 @@ Public Class Рейс
         'ПерегрДанныхИзБазы()
         MessageBox.Show("Рейс оформлен!", Рик)
         If ПерезагрЛист1 = 0 Then
-            ПерегрЛист1(NewPutForListInNewRejs)
+            ПерегрЛист1(NewPutForListInNewRejs,, SelYear)
         End If
 
     End Sub

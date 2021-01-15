@@ -26,6 +26,12 @@
     Public Shared Property ПаролиВвод As List(Of ПаролиВвод)
     Public Shared Property SkypeКлиентПредложение As List(Of SkypeКлиентПредложение)
     Public Shared Property SkypeПеревозчикПредложение As List(Of SkypeПеревозчикПредложение)
+    Public Shared Property КалендарьРезультатЗвонка As List(Of КалендарьРезультатЗвонка)
+    Public Shared Property ЖурналКлиентДаты As List(Of ЖурналКлиентДаты)
+    Public Shared Property ЖурналПеревозчикСобытия As List(Of ЖурналПеревозчикСобытия)
+    Public Shared Property ЧерныйСписок As List(Of ЧерныйСписок)
+    Public Shared Property СводнаяОплаты As List(Of СводнаяОплаты)
+    Public Shared Property СводнаяОплатыТаблицы As List(Of СводнаяОплатыТаблицы)
 
 
 

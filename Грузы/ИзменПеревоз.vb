@@ -146,6 +146,11 @@ Public Class ИзменПеревоз
         Me.Close()
     End Sub
 
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        Dim f As New ImageForm(False, idtabl, True)
+        f.ShowDialog()
+    End Sub
+
     Private Sub TextBox5_DoubleClick(sender As Object, e As EventArgs) Handles TextBox5.DoubleClick
         TextBox5.Enabled = True
 

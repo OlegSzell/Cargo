@@ -48,6 +48,8 @@ Partial Class MDIParent1
         Me.SQLDepToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SkypeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ImageToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.БраузерToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ФинанасыTool = New System.Windows.Forms.ToolStripMenuItem()
         Me.РейсToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.СоздатьToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ПечатьToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -59,14 +61,14 @@ Partial Class MDIParent1
         Me.StatusStrip = New System.Windows.Forms.StatusStrip()
         Me.ToolStripStatusLabel = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolTip = New System.Windows.Forms.ToolTip(Me.components)
-        Me.БраузерToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.СводнаяОплатToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip.SuspendLayout()
         Me.StatusStrip.SuspendLayout()
         Me.SuspendLayout()
         '
         'MenuStrip
         '
-        Me.MenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ГрузыToolStripMenuItem, Me.ПеревозчикиToolStripMenuItem, Me.КлиентToolStripMenuItem1, Me.РейсToolStripMenuItem, Me.ЧерныйСписокToolStripMenuItem, Me.ПоискToolStripMenuItem})
+        Me.MenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ГрузыToolStripMenuItem, Me.ПеревозчикиToolStripMenuItem, Me.КлиентToolStripMenuItem1, Me.РейсToolStripMenuItem, Me.ЧерныйСписокToolStripMenuItem, Me.ПоискToolStripMenuItem, Me.СводнаяОплатToolStripMenuItem})
         Me.MenuStrip.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip.Name = "MenuStrip"
         Me.MenuStrip.Padding = New System.Windows.Forms.Padding(8, 3, 0, 3)
@@ -110,30 +112,30 @@ Partial Class MDIParent1
         '
         Me.ДобавитьToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ПолныйToolStripMenuItem, Me.БыстроToolStripMenuItem})
         Me.ДобавитьToolStripMenuItem.Name = "ДобавитьToolStripMenuItem"
-        Me.ДобавитьToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ДобавитьToolStripMenuItem.Size = New System.Drawing.Size(126, 22)
         Me.ДобавитьToolStripMenuItem.Text = "Добавить"
         '
         'ПолныйToolStripMenuItem
         '
         Me.ПолныйToolStripMenuItem.Name = "ПолныйToolStripMenuItem"
-        Me.ПолныйToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ПолныйToolStripMenuItem.Size = New System.Drawing.Size(120, 22)
         Me.ПолныйToolStripMenuItem.Text = "Полный"
         '
         'БыстроToolStripMenuItem
         '
         Me.БыстроToolStripMenuItem.Name = "БыстроToolStripMenuItem"
-        Me.БыстроToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.БыстроToolStripMenuItem.Size = New System.Drawing.Size(120, 22)
         Me.БыстроToolStripMenuItem.Text = "Быстро"
         '
         'НайтиToolStripMenuItem
         '
         Me.НайтиToolStripMenuItem.Name = "НайтиToolStripMenuItem"
-        Me.НайтиToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.НайтиToolStripMenuItem.Size = New System.Drawing.Size(126, 22)
         Me.НайтиToolStripMenuItem.Text = "Найти"
         '
         'КлиентToolStripMenuItem1
         '
-        Me.КлиентToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ПереговорыToolStripMenuItem, Me.НапоминаниеToolStripMenuItem, Me.СвободныйТранспортToolStripMenuItem, Me.ЛИToolStripMenuItem, Me.ОтчетToolStripMenuItem, Me.КалендарьToolStripMenuItem, Me.ЖурналToolStripMenuItem, Me.SQLDepToolStripMenuItem, Me.SkypeToolStripMenuItem, Me.ImageToolStripMenuItem, Me.БраузерToolStripMenuItem})
+        Me.КлиентToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ПереговорыToolStripMenuItem, Me.НапоминаниеToolStripMenuItem, Me.СвободныйТранспортToolStripMenuItem, Me.ЛИToolStripMenuItem, Me.ОтчетToolStripMenuItem, Me.КалендарьToolStripMenuItem, Me.ЖурналToolStripMenuItem, Me.SQLDepToolStripMenuItem, Me.SkypeToolStripMenuItem, Me.ImageToolStripMenuItem, Me.БраузерToolStripMenuItem, Me.ФинанасыTool})
         Me.КлиентToolStripMenuItem1.Name = "КлиентToolStripMenuItem1"
         Me.КлиентToolStripMenuItem1.Size = New System.Drawing.Size(88, 19)
         Me.КлиентToolStripMenuItem1.Text = "Переговоры"
@@ -213,6 +215,19 @@ Partial Class MDIParent1
         Me.ImageToolStripMenuItem.Size = New System.Drawing.Size(198, 22)
         Me.ImageToolStripMenuItem.Text = "Image"
         '
+        'БраузерToolStripMenuItem
+        '
+        Me.БраузерToolStripMenuItem.Name = "БраузерToolStripMenuItem"
+        Me.БраузерToolStripMenuItem.Size = New System.Drawing.Size(198, 22)
+        Me.БраузерToolStripMenuItem.Text = "Браузер"
+        '
+        'ФинанасыTool
+        '
+        Me.ФинанасыTool.Enabled = False
+        Me.ФинанасыTool.Name = "ФинанасыTool"
+        Me.ФинанасыTool.Size = New System.Drawing.Size(198, 22)
+        Me.ФинанасыTool.Text = "Финанасы"
+        '
         'РейсToolStripMenuItem
         '
         Me.РейсToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.СоздатьToolStripMenuItem, Me.ПечатьToolStripMenuItem, Me.ОтчетToolStripMenuItem1})
@@ -279,11 +294,11 @@ Partial Class MDIParent1
         Me.ToolStripStatusLabel.Size = New System.Drawing.Size(66, 17)
         Me.ToolStripStatusLabel.Text = "Состояние"
         '
-        'БраузерToolStripMenuItem
+        'СводнаяОплатToolStripMenuItem
         '
-        Me.БраузерToolStripMenuItem.Name = "БраузерToolStripMenuItem"
-        Me.БраузерToolStripMenuItem.Size = New System.Drawing.Size(198, 22)
-        Me.БраузерToolStripMenuItem.Text = "Браузер"
+        Me.СводнаяОплатToolStripMenuItem.Name = "СводнаяОплатToolStripMenuItem"
+        Me.СводнаяОплатToolStripMenuItem.Size = New System.Drawing.Size(100, 19)
+        Me.СводнаяОплатToolStripMenuItem.Text = "Сводная оплат"
         '
         'MDIParent1
         '
@@ -345,4 +360,6 @@ Partial Class MDIParent1
     Friend WithEvents SkypeToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ImageToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents БраузерToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ФинанасыTool As ToolStripMenuItem
+    Friend WithEvents СводнаяОплатToolStripMenuItem As ToolStripMenuItem
 End Class

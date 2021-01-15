@@ -272,6 +272,8 @@ Public Class Оплата
                 End Using
             End If
 
+            MessageBox.Show("Данные приняты!", Рик)
+
         Else 'клиент
                 'это данные для вставки в таблицу
                 Dim f1 As New List(Of ОплатыКлиент)
@@ -323,6 +325,8 @@ Public Class Оплата
 
                 End Using
             End If
+
+            MessageBox.Show("Данные приняты!", Рик)
         End If
 
 

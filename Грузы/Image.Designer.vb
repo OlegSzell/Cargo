@@ -23,7 +23,6 @@ Partial Class ImageForm
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ImageForm))
-        Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
@@ -31,18 +30,16 @@ Partial Class ImageForm
         Me.Button5 = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
+        Me.Button6 = New System.Windows.Forms.Button()
+        Me.TabControl1 = New System.Windows.Forms.TabControl()
+        Me.Фото_1 = New System.Windows.Forms.TabPage()
+        Me.Окно2 = New System.Windows.Forms.TabPage()
+        Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
+        Me.RichTextBox2 = New System.Windows.Forms.RichTextBox()
+        Me.TabControl1.SuspendLayout()
+        Me.Фото_1.SuspendLayout()
+        Me.Окно2.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'RichTextBox1
-        '
-        Me.RichTextBox1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.RichTextBox1.Location = New System.Drawing.Point(5, 43)
-        Me.RichTextBox1.Name = "RichTextBox1"
-        Me.RichTextBox1.Size = New System.Drawing.Size(1371, 679)
-        Me.RichTextBox1.TabIndex = 0
-        Me.RichTextBox1.Text = ""
         '
         'Button1
         '
@@ -78,7 +75,7 @@ Partial Class ImageForm
         'Button4
         '
         Me.Button4.BackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.Button4.Location = New System.Drawing.Point(437, 12)
+        Me.Button4.Location = New System.Drawing.Point(514, 12)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(97, 25)
         Me.Button4.TabIndex = 5
@@ -88,7 +85,7 @@ Partial Class ImageForm
         'Button5
         '
         Me.Button5.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.Button5.Location = New System.Drawing.Point(218, 12)
+        Me.Button5.Location = New System.Drawing.Point(411, 12)
         Me.Button5.Name = "Button5"
         Me.Button5.Size = New System.Drawing.Size(97, 25)
         Me.Button5.TabIndex = 6
@@ -114,12 +111,84 @@ Partial Class ImageForm
         Me.Label2.TabIndex = 8
         Me.Label2.Text = "Label2"
         '
+        'Button6
+        '
+        Me.Button6.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.Button6.Location = New System.Drawing.Point(218, 12)
+        Me.Button6.Name = "Button6"
+        Me.Button6.Size = New System.Drawing.Size(156, 25)
+        Me.Button6.TabIndex = 9
+        Me.Button6.Text = "Добавить к действующей"
+        Me.Button6.UseVisualStyleBackColor = False
+        '
+        'TabControl1
+        '
+        Me.TabControl1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TabControl1.Controls.Add(Me.Фото_1)
+        Me.TabControl1.Controls.Add(Me.Окно2)
+        Me.TabControl1.Location = New System.Drawing.Point(12, 43)
+        Me.TabControl1.Name = "TabControl1"
+        Me.TabControl1.SelectedIndex = 0
+        Me.TabControl1.Size = New System.Drawing.Size(1364, 679)
+        Me.TabControl1.TabIndex = 10
+        '
+        'Фото_1
+        '
+        Me.Фото_1.Controls.Add(Me.RichTextBox1)
+        Me.Фото_1.ForeColor = System.Drawing.Color.Transparent
+        Me.Фото_1.Location = New System.Drawing.Point(4, 23)
+        Me.Фото_1.Name = "Фото_1"
+        Me.Фото_1.Padding = New System.Windows.Forms.Padding(3)
+        Me.Фото_1.Size = New System.Drawing.Size(1356, 652)
+        Me.Фото_1.TabIndex = 0
+        Me.Фото_1.Text = "Фото 1"
+        Me.Фото_1.UseVisualStyleBackColor = True
+        '
+        'Окно2
+        '
+        Me.Окно2.Controls.Add(Me.RichTextBox2)
+        Me.Окно2.Location = New System.Drawing.Point(4, 23)
+        Me.Окно2.Name = "Окно2"
+        Me.Окно2.Padding = New System.Windows.Forms.Padding(3)
+        Me.Окно2.Size = New System.Drawing.Size(1356, 652)
+        Me.Окно2.TabIndex = 1
+        Me.Окно2.Text = "Фото 2"
+        Me.Окно2.UseVisualStyleBackColor = True
+        '
+        'RichTextBox1
+        '
+        Me.RichTextBox1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.RichTextBox1.BackColor = System.Drawing.SystemColors.InactiveBorder
+        Me.RichTextBox1.Location = New System.Drawing.Point(16, 17)
+        Me.RichTextBox1.Name = "RichTextBox1"
+        Me.RichTextBox1.Size = New System.Drawing.Size(1324, 619)
+        Me.RichTextBox1.TabIndex = 1
+        Me.RichTextBox1.Text = ""
+        '
+        'RichTextBox2
+        '
+        Me.RichTextBox2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.RichTextBox2.BackColor = System.Drawing.SystemColors.InactiveBorder
+        Me.RichTextBox2.Location = New System.Drawing.Point(16, 17)
+        Me.RichTextBox2.Name = "RichTextBox2"
+        Me.RichTextBox2.Size = New System.Drawing.Size(1324, 619)
+        Me.RichTextBox2.TabIndex = 2
+        Me.RichTextBox2.Text = ""
+        '
         'ImageForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 14.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.DarkKhaki
         Me.ClientSize = New System.Drawing.Size(1388, 734)
+        Me.Controls.Add(Me.TabControl1)
+        Me.Controls.Add(Me.Button6)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.Button5)
@@ -127,7 +196,6 @@ Partial Class ImageForm
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button1)
-        Me.Controls.Add(Me.RichTextBox1)
         Me.DoubleBuffered = True
         Me.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
@@ -135,12 +203,13 @@ Partial Class ImageForm
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Изображение"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
+        Me.TabControl1.ResumeLayout(False)
+        Me.Фото_1.ResumeLayout(False)
+        Me.Окно2.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents RichTextBox1 As RichTextBox
     Friend WithEvents Button1 As Button
     Friend WithEvents Button2 As Button
     Friend WithEvents Button3 As Button
@@ -148,4 +217,10 @@ Partial Class ImageForm
     Friend WithEvents Button5 As Button
     Friend WithEvents Label1 As Label
     Friend WithEvents Label2 As Label
+    Friend WithEvents Button6 As Button
+    Friend WithEvents TabControl1 As TabControl
+    Friend WithEvents Фото_1 As TabPage
+    Friend WithEvents RichTextBox1 As RichTextBox
+    Friend WithEvents Окно2 As TabPage
+    Friend WithEvents RichTextBox2 As RichTextBox
 End Class

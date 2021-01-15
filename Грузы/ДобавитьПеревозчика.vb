@@ -12,6 +12,7 @@ Public Class ДобавитьПеревозчика
     Private Delegate Sub com4()
     Private Delegate Sub comb22()
     Private Property Imagese As Byte() = Nothing
+    Private Property Imagese2 As Byte() = Nothing
     'Dim tbl As New DataTable
     'Dim cb As OleDb.OleDbCommandBuilder
 
@@ -170,6 +171,7 @@ Public Class ДобавитьПеревозчика
                     .Примечание = RichTextBox1.Text
                     .Форма_собственности = ComboBox3.Text
                     .ФотоДанные = Imagese
+                    .ФотоДанные2 = Imagese2
                     .ДатаИзменения = Now
                 End With
                 db.SubmitChanges()
@@ -191,6 +193,7 @@ Public Class ДобавитьПеревозчика
                     .Примечание = RichTextBox1.Text
                     .Форма_собственности = ComboBox3.Text
                     .ФотоДанные = Imagese
+                    .ФотоДанные2 = Imagese2
                     .ДатаИзменения = Now
 
                 End With
@@ -318,7 +321,7 @@ Public Class ДобавитьПеревозчика
     Private Sub ДобавитьПеревозчика_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
         If ОбнПер = 1 Then
             Очист()
-            ПоискПеревозчиков.Запуск()
+            'ПоискПеревозчиков.Запуск()
         Else
             Очист()
         End If
@@ -334,5 +337,6 @@ Public Class ДобавитьПеревозчика
         Dim f As New ImageForm(True)
         f.ShowDialog()
         Imagese = f.Imagese
+        Imagese2 = f.Imagese2
     End Sub
 End Class

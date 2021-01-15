@@ -441,5 +441,102 @@
             End If
         End Using
     End Sub
+    Public Async Sub КалендарьРезультатЗвонкаAllAsync()
+        Await Task.Run(Sub() КалендарьРезультатЗвонкаAll())
+    End Sub
+    Public Sub КалендарьРезультатЗвонкаAll()
+        Using db As New dbAllDataContext()
+            Dim m = db.КалендарьРезультатЗвонка.Select(Function(x) x).ToList()
+            If m.Count > 0 Then
+                КалендарьРезультатЗвонка = New List(Of КалендарьРезультатЗвонка)
+                КалендарьРезультатЗвонка = m
+            Else
+                Dim k As New List(Of КалендарьРезультатЗвонка)
+                КалендарьРезультатЗвонка = k
+            End If
+        End Using
+    End Sub
+
+    Public Async Sub ЖурналКлиентДатыAllAsync()
+        Await Task.Run(Sub() ЖурналКлиентДатыAll())
+    End Sub
+    Public Sub ЖурналКлиентДатыAll()
+        Using db As New dbAllDataContext()
+            Dim m = db.ЖурналКлиентДаты.Select(Function(x) x).ToList()
+            If m.Count > 0 Then
+                ЖурналКлиентДаты = New List(Of ЖурналКлиентДаты)
+                ЖурналКлиентДаты = m
+            Else
+                Dim k As New List(Of ЖурналКлиентДаты)
+                ЖурналКлиентДаты = k
+            End If
+        End Using
+    End Sub
+    Public Async Sub ЖурналПеревозчикСобытияAllAsync()
+        Await Task.Run(Sub() ЖурналПеревозчикСобытияAll())
+    End Sub
+    Public Sub ЖурналПеревозчикСобытияAll()
+        Using db As New dbAllDataContext()
+            Dim m = db.ЖурналПеревозчикСобытия.Select(Function(x) x).ToList()
+            If m.Count > 0 Then
+                ЖурналПеревозчикСобытия = New List(Of ЖурналПеревозчикСобытия)
+                ЖурналПеревозчикСобытия = m
+            Else
+                Dim k As New List(Of ЖурналПеревозчикСобытия)
+                ЖурналПеревозчикСобытия = k
+            End If
+        End Using
+    End Sub
+
+    Public Async Sub ЧерныйСписокAllAsync()
+        Await Task.Run(Sub() ЧерныйСписокAll())
+    End Sub
+    Public Sub ЧерныйСписокAll()
+        Using db As New dbAllDataContext()
+            Dim m = db.ЧерныйСписок.Select(Function(x) x).ToList()
+            If m.Count > 0 Then
+                ЧерныйСписок = New List(Of ЧерныйСписок)
+                ЧерныйСписок = m
+            Else
+                Dim k As New List(Of ЧерныйСписок)
+                ЧерныйСписок = k
+            End If
+        End Using
+    End Sub
+
+    Public Async Sub СводнаяОплатыAllAsync()
+        Await Task.Run(Sub() СводнаяОплатыAll())
+    End Sub
+    Public Sub СводнаяОплатыAll()
+        Using db As New dbAllDataContext()
+            Dim m = db.СводнаяОплаты.Select(Function(x) x).ToList()
+            If m.Count > 0 Then
+                СводнаяОплаты = New List(Of СводнаяОплаты)
+                СводнаяОплаты = m
+            Else
+                Dim k As New List(Of СводнаяОплаты)
+                СводнаяОплаты = k
+            End If
+        End Using
+    End Sub
+
+    Public Async Sub СводнаяОплатыТаблицыAllAsync()
+        Await Task.Run(Sub() СводнаяОплатыТаблицыAll())
+    End Sub
+    Public Sub СводнаяОплатыТаблицыAll()
+        Using db As New dbAllDataContext()
+            Dim m = db.СводнаяОплатыТаблицы.Select(Function(x) x).ToList()
+            If m.Count > 0 Then
+                СводнаяОплатыТаблицы = New List(Of СводнаяОплатыТаблицы)
+                СводнаяОплатыТаблицы = m
+            Else
+                Dim k As New List(Of СводнаяОплатыТаблицы)
+                СводнаяОплатыТаблицы = k
+            End If
+        End Using
+    End Sub
+
+
+
 
 End Class

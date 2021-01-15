@@ -1,238 +1,365 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 21.875, 23.875" name="dbAll">
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 28.5, 26.625" name="dbAll">
   <DataContextMoniker Name="/dbAllDataContext" />
   <nestedChildShapes>
-    <classShape Id="8a4df802-42d9-4f25-bd71-1445184f2fe6" absoluteBounds="8.75, 3.5, 2, 4.8477197265625032">
-      <DataClassMoniker Name="/dbAllDataContext/Клиент" />
-      <nestedChildShapes>
-        <elementListCompartment Id="463a603e-7550-4375-bcd7-4fe18c79e0cc" absoluteBounds="8.765, 3.9600000000000009, 1.9700000000000002, 4.2877197265625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="93085746-8571-40ce-aaee-05fc39802b0f" absoluteBounds="0.75, 7.75, 2, 1.3862939453124987">
-      <DataClassMoniker Name="/dbAllDataContext/ФормаСобств" />
-      <nestedChildShapes>
-        <elementListCompartment Id="13e537d0-05cf-40b8-8a33-67076e13c5ec" absoluteBounds="0.76500000000000057, 8.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="7efbc8c2-ea18-4251-b409-79b7435d3c30" absoluteBounds="6.75, 9.75, 2, 1.1939925130208344">
-      <DataClassMoniker Name="/dbAllDataContext/ТипАвто" />
-      <nestedChildShapes>
-        <elementListCompartment Id="16a366ba-a5ec-496e-94fe-eccadc6ee385" absoluteBounds="6.7650000000000006, 10.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="4fa5e2d7-45cf-466f-8c23-eda0b792d6ed" absoluteBounds="0.75, 11.875, 2, 5.0400211588541666">
-      <DataClassMoniker Name="/dbAllDataContext/Перевозчики" />
-      <nestedChildShapes>
-        <elementListCompartment Id="5173c65c-ab29-4cf3-beb7-f93d0c3ddeb8" absoluteBounds="0.76500000059604645, 12.33500000089407, 1.9700000000000002, 4.4800211588541661" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="9f02e8b7-abc3-47e8-9ce3-f2126d137e79" absoluteBounds="8.75, 14.75, 2, 3.6939111328125005">
-      <DataClassMoniker Name="/dbAllDataContext/ГрузыКлиентов" />
-      <nestedChildShapes>
-        <elementListCompartment Id="97210b6e-1f13-4b81-8df5-c34642ef0d70" absoluteBounds="8.765, 15.21, 1.9700000000000002, 3.1339111328125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="6fd06d3a-b45c-41cc-bdcf-ee7fa7226073" absoluteBounds="11.75, 14.75, 2, 1.7708968098958309">
-      <DataClassMoniker Name="/dbAllDataContext/КалендарьНапоминание" />
-      <nestedChildShapes>
-        <elementListCompartment Id="f40b8317-8f03-465a-840c-9d3e3ab13847" absoluteBounds="11.765, 15.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="0c4ab859-2b7b-4e59-bd00-31043264582b" absoluteBounds="14.75, 14.75, 2, 2.7324039713541666">
-      <DataClassMoniker Name="/dbAllDataContext/ПереговорыКлиент" />
-      <nestedChildShapes>
-        <elementListCompartment Id="d2b2cac5-aa72-4605-bb48-c3d06b324564" absoluteBounds="14.765, 15.21, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="9f151447-149e-492c-8346-80066fc56880" absoluteBounds="14.25, 5, 2, 1.7708968098958309">
-      <DataClassMoniker Name="/dbAllDataContext/ОплатыКлиент" />
-      <nestedChildShapes>
-        <elementListCompartment Id="ba956948-7d58-486e-a69f-51e88956a943" absoluteBounds="14.265000000596046, 5.46000000089407, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="66350956-31b8-41c2-9b19-47af479ad80c" absoluteBounds="6.25, 13.5, 2, 1.7708968098958344">
-      <DataClassMoniker Name="/dbAllDataContext/ОплатыПер" />
-      <nestedChildShapes>
-        <elementListCompartment Id="3683d7c5-3bf9-4ccf-aef8-413625ec125a" absoluteBounds="6.2650000005960464, 13.96000000089407, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="8211aa9f-3277-499d-9883-582da2a27ca7" absoluteBounds="3.5, 10.25, 2, 8.3091455078125023">
-      <DataClassMoniker Name="/dbAllDataContext/РейсыПеревозчика" />
-      <nestedChildShapes>
-        <elementListCompartment Id="19b47531-cd19-43eb-97f0-e08dfc4d0b72" absoluteBounds="3.5150000005960464, 10.71000000089407, 1.9700000000000002, 7.7491455078125009" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <associationConnector edgePoints="[(5.5 : 14.3854484049479); (6.25 : 14.3854484049479)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/dbAllDataContext/РейсыПеревозчика/РейсыПеревозчика_ОплатыПер" />
-      <nodes>
-        <classShapeMoniker Id="8211aa9f-3277-499d-9883-582da2a27ca7" />
-        <classShapeMoniker Id="66350956-31b8-41c2-9b19-47af479ad80c" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 14.3950105794271); (3.5 : 14.3950105794271)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/dbAllDataContext/Перевозчики/Перевозчики_РейсыПеревозчика" />
-      <nodes>
-        <classShapeMoniker Id="4fa5e2d7-45cf-466f-8c23-eda0b792d6ed" />
-        <classShapeMoniker Id="8211aa9f-3277-499d-9883-582da2a27ca7" />
-      </nodes>
-    </associationConnector>
-    <classShape Id="8f4a5282-e98a-41ac-a728-00cb4aa04ff6" absoluteBounds="11.5, 1.25, 2, 9.27065266927083">
-      <DataClassMoniker Name="/dbAllDataContext/РейсыКлиента" />
-      <nestedChildShapes>
-        <elementListCompartment Id="415a517d-b744-4031-b0a3-309f4881a591" absoluteBounds="11.515000000596046, 1.7100000008940697, 1.9700000000000002, 8.7106526692708321" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <associationConnector edgePoints="[(13.5 : 5.88544840494792); (14.25 : 5.88544840494792)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/dbAllDataContext/РейсыКлиента/РейсыКлиента_ОплатыКлиент" />
-      <nodes>
-        <classShapeMoniker Id="8f4a5282-e98a-41ac-a728-00cb4aa04ff6" />
-        <classShapeMoniker Id="9f151447-149e-492c-8346-80066fc56880" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(10.75 : 5.92385896809896); (11.5 : 5.92385896809896)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/dbAllDataContext/Клиент/Клиент_РейсыКлиента" />
-      <nodes>
-        <classShapeMoniker Id="8a4df802-42d9-4f25-bd71-1445184f2fe6" />
-        <classShapeMoniker Id="8f4a5282-e98a-41ac-a728-00cb4aa04ff6" />
-      </nodes>
-    </associationConnector>
-    <classShape Id="241bb464-44e6-44f4-92c8-f3d18ab7fc8e" absoluteBounds="17.5, 8.125, 2, 5.4246240234374987">
-      <DataClassMoniker Name="/dbAllDataContext/ОтчетРаботыСотрудникаСводная" />
-      <nestedChildShapes>
-        <elementListCompartment Id="f94503b0-2a37-4241-8754-421302b34280" absoluteBounds="17.515000000596046, 8.58500000089407, 1.9700000000000002, 4.8646240234375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="2e604cd1-4a09-41ad-a76c-809f60256441" absoluteBounds="0.75, 4, 2, 1.1939925130208344">
-      <DataClassMoniker Name="/dbAllDataContext/ЖурналДата" />
-      <nestedChildShapes>
-        <elementListCompartment Id="0997894c-2d56-474d-96e8-2caa99258da3" absoluteBounds="0.76500000059604645, 4.46000000089407, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="17b419fe-aa47-49f1-ad8b-239094eac17d" absoluteBounds="16.75, 3.75, 2, 1.5785953776041666">
-      <DataClassMoniker Name="/dbAllDataContext/ЖурналКлиентСписок" />
-      <nestedChildShapes>
-        <elementListCompartment Id="b269e0dd-54bd-4640-a2dd-581203939ee6" absoluteBounds="16.765, 4.21, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="dffff627-2ba9-491d-a7ac-1ab22e3d9f46" absoluteBounds="14.75, 1, 2, 1.1939925130208344">
-      <DataClassMoniker Name="/dbAllDataContext/Страна" />
-      <nestedChildShapes>
-        <elementListCompartment Id="bec61336-da87-4521-8741-1e989fd55afc" absoluteBounds="14.765000000596046, 1.4600000008940697, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="58c2104a-acfe-4538-abae-ec4da7dc5409" absoluteBounds="17.5, 0.875, 2, 1.3862939453124987">
-      <DataClassMoniker Name="/dbAllDataContext/РегионыРоссии" />
-      <nestedChildShapes>
-        <elementListCompartment Id="8155099a-3f9a-4833-821a-969cfb54bd3c" absoluteBounds="17.515000000596046, 1.3350000008940697, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <associationConnector edgePoints="[(16.75 : 1.59699625651042); (17.5 : 1.59699625651042)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/dbAllDataContext/Страна/Страна_РегионыРоссии" />
-      <nodes>
-        <classShapeMoniker Id="dffff627-2ba9-491d-a7ac-1ab22e3d9f46" />
-        <classShapeMoniker Id="58c2104a-acfe-4538-abae-ec4da7dc5409" />
-      </nodes>
-    </associationConnector>
-    <classShape Id="2b749a1b-ed67-494b-8b96-95f711bd4aeb" absoluteBounds="0.75, 19.75, 2, 3.8862125651041666">
-      <DataClassMoniker Name="/dbAllDataContext/ФайлыExcelВсе" />
-      <nestedChildShapes>
-        <elementListCompartment Id="1fe2d48a-6b94-4e92-a652-8bff96c677a1" absoluteBounds="0.76499999999999968, 20.21, 1.9700000000000002, 3.3262125651041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="1a282df9-23b2-414f-adb6-7ac0b28cf313" absoluteBounds="14.75, 10, 2, 1.5785953776041666">
-      <DataClassMoniker Name="/dbAllDataContext/ОтчетРаботыСотрудника" />
-      <nestedChildShapes>
-        <elementListCompartment Id="546a02a1-05d4-453d-9c06-8d716d0635a7" absoluteBounds="14.765, 10.46, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <associationConnector edgePoints="[(16.75 : 10.7892976888021); (17.5 : 10.7892976888021)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/dbAllDataContext/ОтчетРаботыСотрудника/ОтчетРаботыСотрудника_ОтчетРаботыСотрудникаСводная" />
-      <nodes>
-        <classShapeMoniker Id="1a282df9-23b2-414f-adb6-7ac0b28cf313" />
-        <classShapeMoniker Id="241bb464-44e6-44f4-92c8-f3d18ab7fc8e" />
-      </nodes>
-    </associationConnector>
-    <classShape Id="563127e5-2650-40cc-bedb-66df95002238" absoluteBounds="8.75, 12, 2, 1.5785953776041666">
-      <DataClassMoniker Name="/dbAllDataContext/Пароли" />
-      <nestedChildShapes>
-        <elementListCompartment Id="12bf08c3-e5bf-467d-81ba-41b5e2a0e4ea" absoluteBounds="8.765, 12.46, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="799a40f7-f455-4388-8a1f-0b6fbee29771" absoluteBounds="12.25, 11.875, 2, 2.1554996744791666">
-      <DataClassMoniker Name="/dbAllDataContext/ПаролиВвод" />
-      <nestedChildShapes>
-        <elementListCompartment Id="1875bd19-6413-4f68-8ad6-a69b9bc7f2e7" absoluteBounds="12.265, 12.335, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <associationConnector edgePoints="[(10.75 : 12.7892976888021); (12.25 : 12.7892976888021)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/dbAllDataContext/Пароли/Пароли_ПаролиВвод" />
-      <nodes>
-        <classShapeMoniker Id="563127e5-2650-40cc-bedb-66df95002238" />
-        <classShapeMoniker Id="799a40f7-f455-4388-8a1f-0b6fbee29771" />
-      </nodes>
-    </associationConnector>
-    <classShape Id="2c91a4fe-5324-49c3-9a11-39bf344926ba" absoluteBounds="6.25, 3.875, 2, 3.6939111328124996">
-      <DataClassMoniker Name="/dbAllDataContext/ЖурналКлиентМаршрут" />
-      <nestedChildShapes>
-        <elementListCompartment Id="07bbb734-2780-4011-ae56-d3d01831d1b2" absoluteBounds="6.265, 4.335, 1.9700000000000002, 3.1339111328125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="72e5c538-8ec1-4a8e-89d0-789f77fb5857" absoluteBounds="6.25, 0.625, 2, 2.9247054036458331">
-      <DataClassMoniker Name="/dbAllDataContext/ЖурналПеревозчик" />
-      <nestedChildShapes>
-        <elementListCompartment Id="e5cb8b01-a69d-4090-b4cb-153a8b8eb674" absoluteBounds="6.265, 1.085, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="da072412-9317-490e-858e-9697e202aadf" absoluteBounds="19.625, 13.125, 2, 6.1938297526041657">
-      <DataClassMoniker Name="/dbAllDataContext/Календарь_Даты" />
-      <nestedChildShapes>
-        <elementListCompartment Id="c577346c-8738-46e2-be70-cd14d2250e4e" absoluteBounds="19.64, 13.585, 1.9700000000000002, 5.6338297526041661" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="4ed4965c-3729-4195-a5f9-3422ad3f23c0" absoluteBounds="0.75, 0.5, 2, 1.9631982421875">
+    <classShape Id="7fa27e5a-0bb9-4b65-b877-d81454fb1341" absoluteBounds="0.75, 0.75, 2, 1.9631982421875">
       <DataClassMoniker Name="/dbAllDataContext/SkypeКлиентПредложение" />
       <nestedChildShapes>
-        <elementListCompartment Id="7181f741-9feb-41ef-8d3e-5325c52b9b3b" absoluteBounds="0.76499999999999968, 0.96, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="dd5f4f6b-10b1-4325-af35-6573515da8ba" absoluteBounds="0.765, 1.21, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="d3e3d9a0-6e34-4948-a09c-c52de796eb91" absoluteBounds="3, 0.5, 2, 1.9631982421875">
+    <classShape Id="ca8d62d2-9dab-40a3-8721-b2a57dbbc89e" absoluteBounds="0.75, 9.75, 2, 1.9631982421874987">
       <DataClassMoniker Name="/dbAllDataContext/SkypeПеревозчикПредложение" />
       <nestedChildShapes>
-        <elementListCompartment Id="a42e9554-5bbc-43b7-94ac-5af19ffc08d9" absoluteBounds="3.0149999999999997, 0.96, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="b1afa239-4dbd-4ebe-bc2b-88f1f9879ca5" absoluteBounds="0.765, 10.21, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="4aec88fb-5914-4b70-bfe1-43e0079f067e" absoluteBounds="3.5, 3.125, 2, 4.8477197265625">
+    <classShape Id="17ecf30b-a5cc-4131-8351-8441ab820f66" absoluteBounds="14.75, 8.75, 2, 1.3862939453124987">
+      <DataClassMoniker Name="/dbAllDataContext/Водитель" />
+      <nestedChildShapes>
+        <elementListCompartment Id="7b44e7a5-1c94-42f9-b8be-0f509f751330" absoluteBounds="14.765, 9.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="f65f2d78-2978-4288-aff8-3cb3308e0cee" absoluteBounds="6.75, 15.75, 2, 5.0400211588541666">
+      <DataClassMoniker Name="/dbAllDataContext/ВсеРейсы" />
+      <nestedChildShapes>
+        <elementListCompartment Id="73c1c728-cc90-4871-bb0c-623209f0e746" absoluteBounds="6.765, 16.21, 1.9700000000000002, 4.4800211588541661" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="66a0c302-60e0-42fe-a198-fbc876192bc1" absoluteBounds="11.75, 18, 2, 3.6939111328125023">
+      <DataClassMoniker Name="/dbAllDataContext/ГрузыКлиентов" />
+      <nestedChildShapes>
+        <elementListCompartment Id="eff56340-160f-463b-90ad-eed028c3505f" absoluteBounds="11.765, 18.46, 1.9700000000000002, 3.1339111328125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="f2f41b35-4351-4105-b774-021a8005a6e0" absoluteBounds="0.75, 5.75, 2, 1.1939925130208327">
+      <DataClassMoniker Name="/dbAllDataContext/ЖурналДата" />
+      <nestedChildShapes>
+        <elementListCompartment Id="014def7f-ce61-4226-af15-5f5d2dc0087f" absoluteBounds="0.765, 6.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="b46d9e0d-b3c2-46c0-a735-82dc7740ec27" absoluteBounds="3.5, 4, 2, 4.8477197265625005">
       <DataClassMoniker Name="/dbAllDataContext/ЖурналКлиентГруз" />
       <nestedChildShapes>
-        <elementListCompartment Id="b3aaa7de-4bce-470a-a62b-83a33f56033a" absoluteBounds="3.5149999999999997, 3.585, 1.9700000000000002, 4.2877197265625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="0e254c2b-8943-44dc-ae66-4ee07bd45246" absoluteBounds="3.515, 4.46, 1.9700000000000002, 4.2877197265625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(5.5 : 5.72195556640625); (6.25 : 5.72195556640625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/dbAllDataContext/ЖурналКлиентГруз/ЖурналКлиентГруз_ЖурналКлиентМаршрут" />
-      <nodes>
-        <classShapeMoniker Id="4aec88fb-5914-4b70-bfe1-43e0079f067e" />
-        <classShapeMoniker Id="2c91a4fe-5324-49c3-9a11-39bf344926ba" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(5.5 : 3.33735270182292); (6.25 : 3.33735270182292)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/dbAllDataContext/ЖурналКлиентГруз/ЖурналКлиентГруз_ЖурналПеревозчик" />
-      <nodes>
-        <classShapeMoniker Id="4aec88fb-5914-4b70-bfe1-43e0079f067e" />
-        <classShapeMoniker Id="72e5c538-8ec1-4a8e-89d0-789f77fb5857" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 4.59699625651042); (3.5 : 4.59699625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/dbAllDataContext/ЖурналДата/ЖурналДата_ЖурналКлиентГруз" />
-      <nodes>
-        <classShapeMoniker Id="2e604cd1-4a09-41ad-a76c-809f60256441" />
-        <classShapeMoniker Id="4aec88fb-5914-4b70-bfe1-43e0079f067e" />
-      </nodes>
-    </associationConnector>
-    <classShape Id="85524207-1d8e-4f90-9732-e760aadb6fa3" absoluteBounds="14.375, 19, 2, 4.4631168619791666">
+    <classShape Id="ebe744f3-1ff1-4a38-847f-85d749a0c849" absoluteBounds="6.25, 7.75, 2, 3.6939111328124987">
+      <DataClassMoniker Name="/dbAllDataContext/ЖурналКлиентМаршрут" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a8beb7f8-35db-42a7-8e16-4991af5f983a" absoluteBounds="6.265, 8.21, 1.9700000000000002, 3.1339111328125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="8b577fe0-29f1-4348-bfb5-b532b5378cc3" absoluteBounds="16.75, 11.75, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/dbAllDataContext/ЖурналКлиентСписок" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ec6d89c3-1eb8-4fa5-b993-3042676e0603" absoluteBounds="16.765, 12.21, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="ec18957b-500d-476c-80fa-af174d5c2183" absoluteBounds="6.25, 4, 2, 2.9247054036458326">
+      <DataClassMoniker Name="/dbAllDataContext/ЖурналПеревозчик" />
+      <nestedChildShapes>
+        <elementListCompartment Id="f06cb32f-c021-4da1-8075-fef07bb00e9e" absoluteBounds="6.265, 4.46, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="71382980-b219-4712-9f25-578fa9c55cbe" absoluteBounds="9, 4.75, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/dbAllDataContext/ЖурналПеревозчикСобытия" />
+      <nestedChildShapes>
+        <elementListCompartment Id="991329c9-b4a4-43c9-bfce-2d4481ebbb98" absoluteBounds="9.015, 5.21, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="da79cd6d-5379-48b1-94e4-6299fc02e6e0" absoluteBounds="14.5, 1.625, 2, 1.7708968098958329">
+      <DataClassMoniker Name="/dbAllDataContext/ИтогГрузПеревоз" />
+      <nestedChildShapes>
+        <elementListCompartment Id="16978855-7c7c-4a42-9788-66e96ac1d02f" absoluteBounds="14.515, 2.085, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="b7313190-d150-4c06-9f21-e5ec18cb9836" absoluteBounds="0.75, 20.125, 2, 6.1938297526041666">
+      <DataClassMoniker Name="/dbAllDataContext/Календарь_Даты" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e5a4209e-b9ad-487e-a8dc-a439159e57c6" absoluteBounds="0.765, 20.585, 1.9700000000000002, 5.6338297526041661" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="306443af-dae3-4a07-9584-4d5b7e2f8b9a" absoluteBounds="17.75, 7.75, 2, 1.7708968098958335">
+      <DataClassMoniker Name="/dbAllDataContext/КалендарьНапоминание" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a362cbcd-6d7a-4ba2-bffb-d78c96af49c1" absoluteBounds="17.765, 8.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="55a27dbe-f867-4f07-9f6f-242e2b9d1ee5" absoluteBounds="3.5, 20.375, 2, 5.8092268880208309">
+      <DataClassMoniker Name="/dbAllDataContext/КалендарьРезультатЗвонка" />
+      <nestedChildShapes>
+        <elementListCompartment Id="fb2b70b5-bf51-49b2-9b07-93a640e4ed82" absoluteBounds="3.515, 20.835, 1.9700000000000002, 5.249226888020833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="0427caca-8d4b-4d5c-af46-52c2ab3f2416" absoluteBounds="14.75, 17.5, 2, 4.8477197265625023">
+      <DataClassMoniker Name="/dbAllDataContext/Клиент" />
+      <nestedChildShapes>
+        <elementListCompartment Id="7e04badd-6c19-4f71-9298-0c0b9f7db955" absoluteBounds="14.765, 17.96, 1.9700000000000002, 4.2877197265625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="13151b10-b5fa-4854-889e-88a89f77d63f" absoluteBounds="19.75, 10.75, 2, 1.1939925130208344">
+      <DataClassMoniker Name="/dbAllDataContext/НомерАвто" />
+      <nestedChildShapes>
+        <elementListCompartment Id="8cf7752d-c24f-484d-9c6e-83e8b9746ed2" absoluteBounds="19.765, 11.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="73c8de54-c098-48a7-baa9-24b4692060a2" absoluteBounds="20.75, 7.75, 2, 1.9631982421874996">
+      <DataClassMoniker Name="/dbAllDataContext/ОбщаяРейсы" />
+      <nestedChildShapes>
+        <elementListCompartment Id="144ac552-057e-4aa9-b976-a1480d02a308" absoluteBounds="20.765, 8.21, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="92446c1e-5b78-4365-a0d0-a4b8fd3e00ba" absoluteBounds="20.25, 19, 2, 1.7708968098958309">
+      <DataClassMoniker Name="/dbAllDataContext/ОплатыКлиент" />
+      <nestedChildShapes>
+        <elementListCompartment Id="8413a163-bb28-4cd4-bf96-e6a5a7cfb466" absoluteBounds="20.265, 19.46, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="2bc9cfe0-a5cd-460d-844b-411aa85f388d" absoluteBounds="14.25, 11.5, 2, 1.7708968098958344">
+      <DataClassMoniker Name="/dbAllDataContext/ОплатыПер" />
+      <nestedChildShapes>
+        <elementListCompartment Id="3190222f-2f10-4c38-9907-2089d763ffd0" absoluteBounds="14.265, 11.96, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="25c401ba-4bcb-4e94-991f-d26f34cf7235" absoluteBounds="17.75, 3, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/dbAllDataContext/ОтчетРаботыСотрудника" />
+      <nestedChildShapes>
+        <elementListCompartment Id="2d0140ac-0ac1-4b17-95ae-b9087082bd08" absoluteBounds="17.765, 3.46, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="eebfbb6b-c391-4d5d-8f9f-157dbaa5ab1c" absoluteBounds="20.5, 1.125, 2, 5.4246240234374987">
+      <DataClassMoniker Name="/dbAllDataContext/ОтчетРаботыСотрудникаСводная" />
+      <nestedChildShapes>
+        <elementListCompartment Id="2eb5d745-9956-4e26-acdc-2d7a19af27e4" absoluteBounds="20.515, 1.585, 1.9700000000000002, 4.8646240234375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="1af6801a-5fa6-4e1c-a055-3cf1464f1a4a" absoluteBounds="0.75, 16.25, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/dbAllDataContext/Пароли" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ce7240c6-5952-4b95-a39e-cf5ec2e0a927" absoluteBounds="0.765, 16.71, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="a72c4fc9-e297-4e96-9965-aa5d3cb1ea45" absoluteBounds="3.5, 15.875, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/dbAllDataContext/ПаролиВвод" />
+      <nestedChildShapes>
+        <elementListCompartment Id="32cda019-4d92-4a75-ad5c-3825e60a02e4" absoluteBounds="3.515, 16.335, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="2a330951-ae2c-451c-9ff0-1078843e6a46" absoluteBounds="8.75, 9.875, 2, 5.0400211588541666">
+      <DataClassMoniker Name="/dbAllDataContext/Перевозчики" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d17fea01-87e6-4ca9-a155-ce631e51d665" absoluteBounds="8.765, 10.335, 1.9700000000000002, 4.4800211588541661" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="f2a36402-f5be-4d9a-81e3-fc452014f478" absoluteBounds="11.75, 1.125, 2, 4.6554182942708326">
       <DataClassMoniker Name="/dbAllDataContext/ПеревозчикиБаза" />
       <nestedChildShapes>
-        <elementListCompartment Id="2cb1bb40-8a72-4658-9d0a-a9dbf1a9828f" absoluteBounds="14.39, 19.46, 1.9700000000000002, 3.903116861979167" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="0a521ea1-c3be-44e8-8336-4cea96ae20dc" absoluteBounds="11.765, 1.585, 1.9700000000000002, 4.095418294270833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
+    <classShape Id="9b152598-7d93-4a8d-a5d2-25899a9508bc" absoluteBounds="14.5, 4.875, 2, 2.3478011067708344">
+      <DataClassMoniker Name="/dbAllDataContext/ПеревозчикиВПути" />
+      <nestedChildShapes>
+        <elementListCompartment Id="240e14fa-3636-4c11-b972-e1c3b7fe22cc" absoluteBounds="14.515, 5.335, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="430833ab-145b-4969-ba21-8989c60720ca" absoluteBounds="20.75, 12.75, 2, 2.7324039713541666">
+      <DataClassMoniker Name="/dbAllDataContext/ПереговорыКлиент" />
+      <nestedChildShapes>
+        <elementListCompartment Id="b8c54554-0f0e-415c-b1b7-ffd72daa9ccf" absoluteBounds="20.765, 13.21, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="0d1e0315-13a0-480f-ae68-84831eb761aa" absoluteBounds="20.75, 16.75, 2, 1.3862939453125023">
+      <DataClassMoniker Name="/dbAllDataContext/ПорНомРейса" />
+      <nestedChildShapes>
+        <elementListCompartment Id="4402f449-64b5-48be-a3c1-0d76b1c5c2ca" absoluteBounds="20.765, 17.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="b898829a-3664-45aa-83e9-68c6a41cd7bb" absoluteBounds="3.5, 12.875, 2, 1.3862939453124987">
+      <DataClassMoniker Name="/dbAllDataContext/РегионыРоссии" />
+      <nestedChildShapes>
+        <elementListCompartment Id="baeac9fc-393d-4bb3-9ca1-120881f1cf83" absoluteBounds="3.515, 13.335, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="54864872-89a4-43d9-9828-3a0d9a372a80" absoluteBounds="11.5, 8.25, 2, 8.3091455078125023">
+      <DataClassMoniker Name="/dbAllDataContext/РейсыПеревозчика" />
+      <nestedChildShapes>
+        <elementListCompartment Id="1ab305f0-2152-425b-a143-90223f11924f" absoluteBounds="11.515, 8.71, 1.9700000000000002, 7.7491455078125009" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="e887fe51-b298-4ae8-9f23-365f9b73b3f3" absoluteBounds="0.75, 13, 2, 1.1939925130208344">
+      <DataClassMoniker Name="/dbAllDataContext/Страна" />
+      <nestedChildShapes>
+        <elementListCompartment Id="fa55c3da-197a-4f2f-827f-afb8ad67f001" absoluteBounds="0.765, 13.46, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="8dfbd94f-a082-42b1-b9e9-ca82b654d195" absoluteBounds="6.75, 21.75, 2, 1.1939925130208309">
+      <DataClassMoniker Name="/dbAllDataContext/ТипАвто" />
+      <nestedChildShapes>
+        <elementListCompartment Id="7731ec69-e2d3-444c-be52-647c27fdb1fc" absoluteBounds="6.765, 22.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="83281489-1655-44ea-ac26-56c0bb43fc4b" absoluteBounds="20.75, 21.75, 2, 3.8862125651041666">
+      <DataClassMoniker Name="/dbAllDataContext/ФайлыExcelВсе" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e9b070d3-5f23-421b-8b7f-a9f929a16177" absoluteBounds="20.765, 22.21, 1.9700000000000002, 3.3262125651041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="3ccd02e3-e694-47e1-b08f-559e6964508a" absoluteBounds="9.75, 22.75, 2, 1.3862939453125023">
+      <DataClassMoniker Name="/dbAllDataContext/ФормаСобств" />
+      <nestedChildShapes>
+        <elementListCompartment Id="76d8af18-24fd-4661-8c7f-15ead0b39f8f" absoluteBounds="9.765, 23.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.75 : 6.34699625651042); (3.5 : 6.34699625651042)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/dbAllDataContext/ЖурналДата/ЖурналДата_ЖурналКлиентГруз" />
+      <nodes>
+        <classShapeMoniker Id="f2f41b35-4351-4105-b774-021a8005a6e0" />
+        <classShapeMoniker Id="b46d9e0d-b3c2-46c0-a735-82dc7740ec27" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 8.29885986328125); (6.25 : 8.29885986328125)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/dbAllDataContext/ЖурналКлиентГруз/ЖурналКлиентГруз_ЖурналКлиентМаршрут" />
+      <nodes>
+        <classShapeMoniker Id="b46d9e0d-b3c2-46c0-a735-82dc7740ec27" />
+        <classShapeMoniker Id="ebe744f3-1ff1-4a38-847f-85d749a0c849" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 5.46235270182292); (6.25 : 5.46235270182292)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/dbAllDataContext/ЖурналКлиентГруз/ЖурналКлиентГруз_ЖурналПеревозчик" />
+      <nodes>
+        <classShapeMoniker Id="b46d9e0d-b3c2-46c0-a735-82dc7740ec27" />
+        <classShapeMoniker Id="ec18957b-500d-476c-80fa-af174d5c2183" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.25 : 5.53929768880208); (9 : 5.53929768880208)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/dbAllDataContext/ЖурналПеревозчик/ЖурналПеревозчик_ЖурналПеревозчикСобытия" />
+      <nodes>
+        <classShapeMoniker Id="ec18957b-500d-476c-80fa-af174d5c2183" />
+        <classShapeMoniker Id="71382980-b219-4712-9f25-578fa9c55cbe" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(12.75 : 18); (12.75 : 16.8091455078125); (14 : 16.8091455078125); (14 : 2.51044840494792); (14.5 : 2.51044840494792)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/dbAllDataContext/ГрузыКлиентов/ГрузыКлиентов_ИтогГрузПеревоз" />
+      <nodes>
+        <classShapeMoniker Id="66a0c302-60e0-42fe-a198-fbc876192bc1" />
+        <classShapeMoniker Id="da79cd6d-5379-48b1-94e4-6299fc02e6e0" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 23.2796134440104); (3.5 : 23.2796134440104)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/dbAllDataContext/Календарь_Даты/Календарь_Даты_КалендарьРезультатЗвонка" />
+      <nodes>
+        <classShapeMoniker Id="b7313190-d150-4c06-9f21-e5ec18cb9836" />
+        <classShapeMoniker Id="55a27dbe-f867-4f07-9f6f-242e2b9d1ee5" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(19.75 : 3.78929768880208); (20.5 : 3.78929768880208)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/dbAllDataContext/ОтчетРаботыСотрудника/ОтчетРаботыСотрудника_ОтчетРаботыСотрудникаСводная" />
+      <nodes>
+        <classShapeMoniker Id="25c401ba-4bcb-4e94-991f-d26f34cf7235" />
+        <classShapeMoniker Id="eebfbb6b-c391-4d5d-8f9f-157dbaa5ab1c" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 17.0392976888021); (3.5 : 17.0392976888021)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/dbAllDataContext/Пароли/Пароли_ПаролиВвод" />
+      <nodes>
+        <classShapeMoniker Id="1af6801a-5fa6-4e1c-a055-3cf1464f1a4a" />
+        <classShapeMoniker Id="a72c4fc9-e297-4e96-9965-aa5d3cb1ea45" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(13.75 : 2.00522420247396); (14.5 : 2.00522420247396)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/dbAllDataContext/ПеревозчикиБаза/ПеревозчикиБаза_ИтогГрузПеревоз" />
+      <nodes>
+        <classShapeMoniker Id="f2a36402-f5be-4d9a-81e3-fc452014f478" />
+        <classShapeMoniker Id="da79cd6d-5379-48b1-94e4-6299fc02e6e0" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(13.75 : 5.32770914713542); (14.5 : 5.32770914713542)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/dbAllDataContext/ПеревозчикиБаза/ПеревозчикиБаза_ПеревозчикиВПути" />
+      <nodes>
+        <classShapeMoniker Id="f2a36402-f5be-4d9a-81e3-fc452014f478" />
+        <classShapeMoniker Id="9b152598-7d93-4a8d-a5d2-25899a9508bc" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(13.5 : 12.3854484049479); (13.9166666666667 : 12.3854484049479 : JumpStart); (14.0833333333333 : 12.3854484049479 : JumpEnd); (14.25 : 12.3854484049479)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/dbAllDataContext/РейсыПеревозчика/РейсыПеревозчика_ОплатыПер" />
+      <nodes>
+        <classShapeMoniker Id="54864872-89a4-43d9-9828-3a0d9a372a80" />
+        <classShapeMoniker Id="2bc9cfe0-a5cd-460d-844b-411aa85f388d" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(10.75 : 12.3950105794271); (11.5 : 12.3950105794271)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/dbAllDataContext/Перевозчики/Перевозчики_РейсыПеревозчика" />
+      <nodes>
+        <classShapeMoniker Id="2a330951-ae2c-451c-9ff0-1078843e6a46" />
+        <classShapeMoniker Id="54864872-89a4-43d9-9828-3a0d9a372a80" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 13.5969962565104); (3.5 : 13.5969962565104)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/dbAllDataContext/Страна/Страна_РегионыРоссии" />
+      <nodes>
+        <classShapeMoniker Id="e887fe51-b298-4ae8-9f23-365f9b73b3f3" />
+        <classShapeMoniker Id="b898829a-3664-45aa-83e9-68c6a41cd7bb" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="c6eb492e-3d7a-4eb2-a137-34461efe8601" absoluteBounds="3.875, 1.125, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/dbAllDataContext/ЖурналКлиентДаты" />
+      <nestedChildShapes>
+        <elementListCompartment Id="b2dffd29-7da9-4ff3-8b4a-173517a48cb9" absoluteBounds="3.8899999999999997, 1.585, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(4.6875 : 4); (4.6875 : 3.28049967447917)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/dbAllDataContext/ЖурналКлиентГруз/ЖурналКлиентГруз_ЖурналКлиентДаты" />
+      <nodes>
+        <classShapeMoniker Id="b46d9e0d-b3c2-46c0-a735-82dc7740ec27" />
+        <classShapeMoniker Id="c6eb492e-3d7a-4eb2-a137-34461efe8601" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="25068b29-215a-4fd4-b205-e6f4130595f7" absoluteBounds="17.375, 16.5, 2, 9.6552555338541648">
+      <DataClassMoniker Name="/dbAllDataContext/РейсыКлиента" />
+      <nestedChildShapes>
+        <elementListCompartment Id="91af9720-a8ea-465e-9165-492fa9ae9726" absoluteBounds="17.39, 16.96, 1.9700000000000002, 9.0952555338541661" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(19.375 : 19.8854484049479); (20.25 : 19.8854484049479)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/dbAllDataContext/РейсыКлиента/РейсыКлиента_ОплатыКлиент" />
+      <nodes>
+        <classShapeMoniker Id="25068b29-215a-4fd4-b205-e6f4130595f7" />
+        <classShapeMoniker Id="92446c1e-5b78-4365-a0d0-a4b8fd3e00ba" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(16.75 : 19.9238598632813); (17.375 : 19.9238598632813)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/dbAllDataContext/Клиент/Клиент_РейсыКлиента" />
+      <nodes>
+        <classShapeMoniker Id="0427caca-8d4b-4d5c-af46-52c2ab3f2416" />
+        <classShapeMoniker Id="25068b29-215a-4fd4-b205-e6f4130595f7" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="ff548e75-16c8-4d5a-a6ab-4de1b8e813b0" absoluteBounds="26.25, 3.375, 2, 1.3862939453125">
+      <DataClassMoniker Name="/dbAllDataContext/ЧерныйСписок" />
+      <nestedChildShapes>
+        <elementListCompartment Id="4425e1ef-ba7d-45ed-ab76-1e22eb11486a" absoluteBounds="26.265, 3.835, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="21516294-c8a1-47fa-a650-20b1a0757f18" absoluteBounds="7.25, 1.375, 2, 3.3093082682291666">
+      <DataClassMoniker Name="/dbAllDataContext/СводнаяОплатыТаблицы" />
+      <nestedChildShapes>
+        <elementListCompartment Id="c88fc142-3f43-4583-a71c-cccb9c03ccb9" absoluteBounds="7.265, 1.835, 1.9700000000000002, 2.7493082682291665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="a121b5fb-b9f2-4ea0-901d-9a67aaaa8b86" absoluteBounds="10, 2.25, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/dbAllDataContext/СводнаяОплаты" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e0bbca81-df95-4055-a4e8-d62f611ae44f" absoluteBounds="10.015, 2.71, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(10 : 3.03929768880208); (9.25 : 3.03929768880208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/dbAllDataContext/СводнаяОплаты/СводнаяОплаты_СводнаяОплатыТаблицы" />
+      <nodes>
+        <classShapeMoniker Id="a121b5fb-b9f2-4ea0-901d-9a67aaaa8b86" />
+        <classShapeMoniker Id="21516294-c8a1-47fa-a650-20b1a0757f18" />
+      </nodes>
+    </associationConnector>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>

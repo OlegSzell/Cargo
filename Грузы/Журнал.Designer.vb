@@ -23,12 +23,13 @@ Partial Class Журнал
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Журнал))
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Button19 = New System.Windows.Forms.Button()
         Me.Button17 = New System.Windows.Forms.Button()
         Me.Button16 = New System.Windows.Forms.Button()
         Me.GroupBox11 = New System.Windows.Forms.GroupBox()
@@ -49,6 +50,7 @@ Partial Class Журнал
         Me.Label3 = New System.Windows.Forms.Label()
         Me.ComboBox5 = New System.Windows.Forms.ComboBox()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.CheckBox6 = New System.Windows.Forms.CheckBox()
         Me.ComboBox2 = New System.Windows.Forms.ComboBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Button5 = New System.Windows.Forms.Button()
@@ -59,6 +61,8 @@ Partial Class Журнал
         Me.Button9 = New System.Windows.Forms.Button()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.GroupBox7 = New System.Windows.Forms.GroupBox()
+        Me.CheckBox5 = New System.Windows.Forms.CheckBox()
+        Me.CheckBox4 = New System.Windows.Forms.CheckBox()
         Me.GroupBox9 = New System.Windows.Forms.GroupBox()
         Me.CheckBox2 = New System.Windows.Forms.CheckBox()
         Me.Button12 = New System.Windows.Forms.Button()
@@ -68,9 +72,6 @@ Partial Class Журнал
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.Button10 = New System.Windows.Forms.Button()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
-        Me.Grid1 = New Грузы.DoubleBuferGrid()
-        Me.Grid4 = New Грузы.DoubleBuferGrid()
-        Me.Grid3 = New Грузы.DoubleBuferGrid()
         Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ОткрытьДанныеПеревозчикаToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SkypeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -79,30 +80,40 @@ Partial Class Журнал
         Me.ДобавитьСобытиеВКалендарьToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ComboBox3 = New System.Windows.Forms.ComboBox()
         Me.GroupBox10 = New System.Windows.Forms.GroupBox()
-        Me.Grid2 = New Грузы.DoubleBuferGrid()
         Me.ContextMenuStrip2 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.СделкаToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.КлиентсамЗакрылToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.КлиентОтменилToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.СделкаСостояласьToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.АктуальноToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.НеАктульноToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.УдлаитьРейсИзСпискаToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Button18 = New System.Windows.Forms.Button()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.ComboBox4 = New System.Windows.Forms.ComboBox()
+        Me.GroupBox12 = New System.Windows.Forms.GroupBox()
+        Me.ContextMenuStrip3 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ToolStripMenuItem5 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.GroupBox13 = New System.Windows.Forms.GroupBox()
+        Me.TextBox3 = New System.Windows.Forms.TextBox()
+        Me.Button20 = New System.Windows.Forms.Button()
+        Me.Grid1 = New Грузы.DoubleBuferGrid()
+        Me.Grid4 = New Грузы.DoubleBuferGrid()
+        Me.Grid3 = New Грузы.DoubleBuferGrid()
+        Me.Grid2 = New Грузы.DoubleBuferGrid()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
         Me.GroupBox7.SuspendLayout()
         Me.GroupBox9.SuspendLayout()
         Me.GroupBox8.SuspendLayout()
+        Me.ContextMenuStrip1.SuspendLayout()
+        Me.GroupBox10.SuspendLayout()
+        Me.ContextMenuStrip2.SuspendLayout()
+        Me.GroupBox4.SuspendLayout()
+        Me.ContextMenuStrip3.SuspendLayout()
+        Me.GroupBox13.SuspendLayout()
         CType(Me.Grid1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Grid4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Grid3, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.ContextMenuStrip1.SuspendLayout()
-        Me.GroupBox10.SuspendLayout()
         CType(Me.Grid2, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.ContextMenuStrip2.SuspendLayout()
-        Me.GroupBox4.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox1
@@ -110,6 +121,7 @@ Partial Class Журнал
         Me.GroupBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox1.BackColor = System.Drawing.Color.MediumPurple
+        Me.GroupBox1.Controls.Add(Me.Button19)
         Me.GroupBox1.Controls.Add(Me.Button17)
         Me.GroupBox1.Controls.Add(Me.Button16)
         Me.GroupBox1.Controls.Add(Me.GroupBox11)
@@ -126,10 +138,21 @@ Partial Class Журнал
         Me.GroupBox1.Controls.Add(Me.Button1)
         Me.GroupBox1.Location = New System.Drawing.Point(12, 12)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(1054, 68)
+        Me.GroupBox1.Size = New System.Drawing.Size(1210, 68)
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Звонки"
+        '
+        'Button19
+        '
+        Me.Button19.BackColor = System.Drawing.Color.Goldenrod
+        Me.Button19.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.Button19.Location = New System.Drawing.Point(1005, 10)
+        Me.Button19.Name = "Button19"
+        Me.Button19.Size = New System.Drawing.Size(106, 25)
+        Me.Button19.TabIndex = 12
+        Me.Button19.Text = "Сводная"
+        Me.Button19.UseVisualStyleBackColor = False
         '
         'Button17
         '
@@ -290,8 +313,10 @@ Partial Class Журнал
         '
         'ComboBox1
         '
+        Me.ComboBox1.DropDownHeight = 80
         Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(61, 26)
+        Me.ComboBox1.IntegralHeight = False
+        Me.ComboBox1.Location = New System.Drawing.Point(16, 32)
         Me.ComboBox1.Name = "ComboBox1"
         Me.ComboBox1.Size = New System.Drawing.Size(121, 26)
         Me.ComboBox1.TabIndex = 2
@@ -299,7 +324,7 @@ Partial Class Журнал
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(13, 29)
+        Me.Label2.Location = New System.Drawing.Point(13, 11)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(42, 18)
         Me.Label2.TabIndex = 3
@@ -308,7 +333,7 @@ Partial Class Журнал
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(571, 29)
+        Me.Label3.Location = New System.Drawing.Point(685, 11)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(111, 18)
         Me.Label3.TabIndex = 5
@@ -319,9 +344,9 @@ Partial Class Журнал
         Me.ComboBox5.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.ComboBox5.FormattingEnabled = True
-        Me.ComboBox5.Location = New System.Drawing.Point(688, 26)
+        Me.ComboBox5.Location = New System.Drawing.Point(688, 32)
         Me.ComboBox5.Name = "ComboBox5"
-        Me.ComboBox5.Size = New System.Drawing.Size(359, 26)
+        Me.ComboBox5.Size = New System.Drawing.Size(515, 26)
         Me.ComboBox5.TabIndex = 4
         '
         'GroupBox3
@@ -329,6 +354,7 @@ Partial Class Журнал
         Me.GroupBox3.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox3.BackColor = System.Drawing.Color.Peru
+        Me.GroupBox3.Controls.Add(Me.CheckBox6)
         Me.GroupBox3.Controls.Add(Me.ComboBox2)
         Me.GroupBox3.Controls.Add(Me.Label6)
         Me.GroupBox3.Controls.Add(Me.ComboBox5)
@@ -337,14 +363,25 @@ Partial Class Журнал
         Me.GroupBox3.Controls.Add(Me.ComboBox1)
         Me.GroupBox3.Location = New System.Drawing.Point(12, 141)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(1054, 64)
+        Me.GroupBox3.Size = New System.Drawing.Size(1210, 64)
         Me.GroupBox3.TabIndex = 6
         Me.GroupBox3.TabStop = False
+        '
+        'CheckBox6
+        '
+        Me.CheckBox6.AutoSize = True
+        Me.CheckBox6.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.CheckBox6.Location = New System.Drawing.Point(292, 10)
+        Me.CheckBox6.Name = "CheckBox6"
+        Me.CheckBox6.Size = New System.Drawing.Size(153, 19)
+        Me.CheckBox6.TabIndex = 8
+        Me.CheckBox6.Text = "Выборка без учета дат"
+        Me.CheckBox6.UseVisualStyleBackColor = True
         '
         'ComboBox2
         '
         Me.ComboBox2.FormattingEnabled = True
-        Me.ComboBox2.Location = New System.Drawing.Point(260, 26)
+        Me.ComboBox2.Location = New System.Drawing.Point(143, 32)
         Me.ComboBox2.Name = "ComboBox2"
         Me.ComboBox2.Size = New System.Drawing.Size(302, 26)
         Me.ComboBox2.TabIndex = 6
@@ -352,7 +389,7 @@ Partial Class Журнал
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(196, 30)
+        Me.Label6.Location = New System.Drawing.Point(140, 11)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(58, 18)
         Me.Label6.TabIndex = 7
@@ -405,7 +442,7 @@ Partial Class Журнал
         Me.GroupBox6.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox6.Controls.Add(Me.Button9)
         Me.GroupBox6.Controls.Add(Me.TextBox1)
-        Me.GroupBox6.Location = New System.Drawing.Point(816, 86)
+        Me.GroupBox6.Location = New System.Drawing.Point(972, 86)
         Me.GroupBox6.Name = "GroupBox6"
         Me.GroupBox6.Size = New System.Drawing.Size(250, 49)
         Me.GroupBox6.TabIndex = 15
@@ -434,6 +471,8 @@ Partial Class Журнал
         '
         Me.GroupBox7.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox7.Controls.Add(Me.CheckBox5)
+        Me.GroupBox7.Controls.Add(Me.CheckBox4)
         Me.GroupBox7.Controls.Add(Me.GroupBox9)
         Me.GroupBox7.Controls.Add(Me.GroupBox8)
         Me.GroupBox7.Controls.Add(Me.CheckBox1)
@@ -444,10 +483,30 @@ Partial Class Журнал
         Me.GroupBox7.Controls.Add(Me.Grid3)
         Me.GroupBox7.Location = New System.Drawing.Point(532, 211)
         Me.GroupBox7.Name = "GroupBox7"
-        Me.GroupBox7.Size = New System.Drawing.Size(534, 333)
+        Me.GroupBox7.Size = New System.Drawing.Size(690, 333)
         Me.GroupBox7.TabIndex = 17
         Me.GroupBox7.TabStop = False
         Me.GroupBox7.Text = "Перевозчики"
+        '
+        'CheckBox5
+        '
+        Me.CheckBox5.AutoSize = True
+        Me.CheckBox5.Location = New System.Drawing.Point(397, 25)
+        Me.CheckBox5.Name = "CheckBox5"
+        Me.CheckBox5.Size = New System.Drawing.Size(52, 22)
+        Me.CheckBox5.TabIndex = 25
+        Me.CheckBox5.Text = "Реф"
+        Me.CheckBox5.UseVisualStyleBackColor = True
+        '
+        'CheckBox4
+        '
+        Me.CheckBox4.AutoSize = True
+        Me.CheckBox4.Location = New System.Drawing.Point(336, 25)
+        Me.CheckBox4.Name = "CheckBox4"
+        Me.CheckBox4.Size = New System.Drawing.Size(55, 22)
+        Me.CheckBox4.TabIndex = 23
+        Me.CheckBox4.Text = "Тент"
+        Me.CheckBox4.UseVisualStyleBackColor = True
         '
         'GroupBox9
         '
@@ -527,7 +586,7 @@ Partial Class Журнал
         '
         Me.Button10.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Button10.BackColor = System.Drawing.Color.FloralWhite
-        Me.Button10.Location = New System.Drawing.Point(454, 21)
+        Me.Button10.Location = New System.Drawing.Point(610, 21)
         Me.Button10.Name = "Button10"
         Me.Button10.Size = New System.Drawing.Size(73, 26)
         Me.Button10.TabIndex = 9
@@ -538,52 +597,10 @@ Partial Class Журнал
         '
         Me.TextBox2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TextBox2.Location = New System.Drawing.Point(349, 21)
+        Me.TextBox2.Location = New System.Drawing.Point(459, 21)
         Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(99, 26)
+        Me.TextBox2.Size = New System.Drawing.Size(145, 26)
         Me.TextBox2.TabIndex = 8
-        '
-        'Grid1
-        '
-        Me.Grid1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Grid1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.Grid1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
-        Me.Grid1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.Grid1.Location = New System.Drawing.Point(6, 53)
-        Me.Grid1.Name = "Grid1"
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.Grid1.RowsDefaultCellStyle = DataGridViewCellStyle1
-        Me.Grid1.Size = New System.Drawing.Size(522, 270)
-        Me.Grid1.TabIndex = 11
-        '
-        'Grid4
-        '
-        Me.Grid4.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Grid4.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.Grid4.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells
-        Me.Grid4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.Grid4.Location = New System.Drawing.Point(5, 53)
-        Me.Grid4.Name = "Grid4"
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.Grid4.RowsDefaultCellStyle = DataGridViewCellStyle2
-        Me.Grid4.Size = New System.Drawing.Size(522, 270)
-        Me.Grid4.TabIndex = 16
-        '
-        'Grid3
-        '
-        Me.Grid3.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Grid3.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.Grid3.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
-        Me.Grid3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.Grid3.Location = New System.Drawing.Point(6, 53)
-        Me.Grid3.Name = "Grid3"
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.Grid3.RowsDefaultCellStyle = DataGridViewCellStyle3
-        Me.Grid3.Size = New System.Drawing.Size(522, 270)
-        Me.Grid3.TabIndex = 12
         '
         'ContextMenuStrip1
         '
@@ -640,54 +657,30 @@ Partial Class Журнал
         Me.GroupBox10.TabStop = False
         Me.GroupBox10.Text = "Сводная по клиентам"
         '
-        'Grid2
-        '
-        Me.Grid2.AllowUserToAddRows = False
-        Me.Grid2.AllowUserToDeleteRows = False
-        Me.Grid2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Grid2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.Grid2.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
-        Me.Grid2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.Grid2.Location = New System.Drawing.Point(12, 553)
-        Me.Grid2.Name = "Grid2"
-        Me.Grid2.ReadOnly = True
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.Grid2.RowsDefaultCellStyle = DataGridViewCellStyle4
-        Me.Grid2.Size = New System.Drawing.Size(761, 97)
-        Me.Grid2.TabIndex = 13
-        '
         'ContextMenuStrip2
         '
         Me.ContextMenuStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.СделкаToolStripMenuItem, Me.УдлаитьРейсИзСпискаToolStripMenuItem})
         Me.ContextMenuStrip2.Name = "ContextMenuStrip2"
-        Me.ContextMenuStrip2.Size = New System.Drawing.Size(204, 48)
+        Me.ContextMenuStrip2.Size = New System.Drawing.Size(204, 70)
         '
         'СделкаToolStripMenuItem
         '
-        Me.СделкаToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.КлиентсамЗакрылToolStripMenuItem, Me.КлиентОтменилToolStripMenuItem, Me.СделкаСостояласьToolStripMenuItem})
+        Me.СделкаToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.АктуальноToolStripMenuItem, Me.НеАктульноToolStripMenuItem})
         Me.СделкаToolStripMenuItem.Name = "СделкаToolStripMenuItem"
         Me.СделкаToolStripMenuItem.Size = New System.Drawing.Size(203, 22)
         Me.СделкаToolStripMenuItem.Text = "Сделка"
         '
-        'КлиентсамЗакрылToolStripMenuItem
+        'АктуальноToolStripMenuItem
         '
-        Me.КлиентсамЗакрылToolStripMenuItem.Name = "КлиентсамЗакрылToolStripMenuItem"
-        Me.КлиентсамЗакрылToolStripMenuItem.Size = New System.Drawing.Size(178, 22)
-        Me.КлиентсамЗакрылToolStripMenuItem.Text = "Клиентсам закрыл"
+        Me.АктуальноToolStripMenuItem.Name = "АктуальноToolStripMenuItem"
+        Me.АктуальноToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.АктуальноToolStripMenuItem.Text = "Актуально"
         '
-        'КлиентОтменилToolStripMenuItem
+        'НеАктульноToolStripMenuItem
         '
-        Me.КлиентОтменилToolStripMenuItem.Name = "КлиентОтменилToolStripMenuItem"
-        Me.КлиентОтменилToolStripMenuItem.Size = New System.Drawing.Size(178, 22)
-        Me.КлиентОтменилToolStripMenuItem.Text = "Клиент отменил"
-        '
-        'СделкаСостояласьToolStripMenuItem
-        '
-        Me.СделкаСостояласьToolStripMenuItem.Name = "СделкаСостояласьToolStripMenuItem"
-        Me.СделкаСостояласьToolStripMenuItem.Size = New System.Drawing.Size(178, 22)
-        Me.СделкаСостояласьToolStripMenuItem.Text = "Сделка состоялась"
+        Me.НеАктульноToolStripMenuItem.Name = "НеАктульноToolStripMenuItem"
+        Me.НеАктульноToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.НеАктульноToolStripMenuItem.Text = "Груз закрыт"
         '
         'УдлаитьРейсИзСпискаToolStripMenuItem
         '
@@ -712,7 +705,7 @@ Partial Class Журнал
         Me.GroupBox4.Controls.Add(Me.ComboBox4)
         Me.GroupBox4.Controls.Add(Me.Button18)
         Me.GroupBox4.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.GroupBox4.Location = New System.Drawing.Point(783, 553)
+        Me.GroupBox4.Location = New System.Drawing.Point(939, 553)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.Size = New System.Drawing.Size(284, 56)
         Me.GroupBox4.TabIndex = 19
@@ -727,12 +720,128 @@ Partial Class Журнал
         Me.ComboBox4.Size = New System.Drawing.Size(166, 23)
         Me.ComboBox4.TabIndex = 11
         '
+        'GroupBox12
+        '
+        Me.GroupBox12.BackColor = System.Drawing.Color.White
+        Me.GroupBox12.Location = New System.Drawing.Point(1001, 12)
+        Me.GroupBox12.Name = "GroupBox12"
+        Me.GroupBox12.Size = New System.Drawing.Size(10, 68)
+        Me.GroupBox12.TabIndex = 7
+        Me.GroupBox12.TabStop = False
+        '
+        'ContextMenuStrip3
+        '
+        Me.ContextMenuStrip3.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem5})
+        Me.ContextMenuStrip3.Name = "ContextMenuStrip2"
+        Me.ContextMenuStrip3.Size = New System.Drawing.Size(153, 26)
+        '
+        'ToolStripMenuItem5
+        '
+        Me.ToolStripMenuItem5.Name = "ToolStripMenuItem5"
+        Me.ToolStripMenuItem5.Size = New System.Drawing.Size(152, 22)
+        Me.ToolStripMenuItem5.Text = "Даты загрузок"
+        '
+        'GroupBox13
+        '
+        Me.GroupBox13.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox13.Controls.Add(Me.TextBox3)
+        Me.GroupBox13.Controls.Add(Me.Button20)
+        Me.GroupBox13.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.GroupBox13.Location = New System.Drawing.Point(939, 615)
+        Me.GroupBox13.Name = "GroupBox13"
+        Me.GroupBox13.Size = New System.Drawing.Size(284, 56)
+        Me.GroupBox13.TabIndex = 20
+        Me.GroupBox13.TabStop = False
+        Me.GroupBox13.Text = "Отоброзит таблицу место загрузки"
+        '
+        'TextBox3
+        '
+        Me.TextBox3.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TextBox3.Location = New System.Drawing.Point(11, 22)
+        Me.TextBox3.Name = "TextBox3"
+        Me.TextBox3.Size = New System.Drawing.Size(166, 23)
+        Me.TextBox3.TabIndex = 26
+        '
+        'Button20
+        '
+        Me.Button20.BackColor = System.Drawing.Color.Gainsboro
+        Me.Button20.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.Button20.Location = New System.Drawing.Point(183, 22)
+        Me.Button20.Name = "Button20"
+        Me.Button20.Size = New System.Drawing.Size(91, 26)
+        Me.Button20.TabIndex = 10
+        Me.Button20.Text = "Отобразить"
+        Me.Button20.UseVisualStyleBackColor = False
+        '
+        'Grid1
+        '
+        Me.Grid1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Grid1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.Grid1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
+        Me.Grid1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.Grid1.Location = New System.Drawing.Point(6, 53)
+        Me.Grid1.Name = "Grid1"
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Grid1.RowsDefaultCellStyle = DataGridViewCellStyle5
+        Me.Grid1.Size = New System.Drawing.Size(678, 270)
+        Me.Grid1.TabIndex = 11
+        '
+        'Grid4
+        '
+        Me.Grid4.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Grid4.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.Grid4.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells
+        Me.Grid4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.Grid4.Location = New System.Drawing.Point(5, 53)
+        Me.Grid4.Name = "Grid4"
+        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Grid4.RowsDefaultCellStyle = DataGridViewCellStyle6
+        Me.Grid4.Size = New System.Drawing.Size(678, 270)
+        Me.Grid4.TabIndex = 16
+        '
+        'Grid3
+        '
+        Me.Grid3.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Grid3.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.Grid3.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
+        Me.Grid3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.Grid3.Location = New System.Drawing.Point(6, 53)
+        Me.Grid3.Name = "Grid3"
+        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Grid3.RowsDefaultCellStyle = DataGridViewCellStyle7
+        Me.Grid3.Size = New System.Drawing.Size(678, 270)
+        Me.Grid3.TabIndex = 12
+        '
+        'Grid2
+        '
+        Me.Grid2.AllowUserToAddRows = False
+        Me.Grid2.AllowUserToDeleteRows = False
+        Me.Grid2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Grid2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.Grid2.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
+        Me.Grid2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.Grid2.Location = New System.Drawing.Point(12, 553)
+        Me.Grid2.Name = "Grid2"
+        Me.Grid2.ReadOnly = True
+        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Grid2.RowsDefaultCellStyle = DataGridViewCellStyle8
+        Me.Grid2.Size = New System.Drawing.Size(917, 137)
+        Me.Grid2.TabIndex = 13
+        '
         'Журнал
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 18.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.DarkKhaki
-        Me.ClientSize = New System.Drawing.Size(1078, 658)
+        Me.ClientSize = New System.Drawing.Size(1234, 698)
+        Me.Controls.Add(Me.GroupBox13)
+        Me.Controls.Add(Me.GroupBox12)
         Me.Controls.Add(Me.GroupBox4)
         Me.Controls.Add(Me.Button7)
         Me.Controls.Add(Me.Button5)
@@ -745,6 +854,7 @@ Partial Class Журнал
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.ListBox1)
         Me.Controls.Add(Me.GroupBox1)
+        Me.DoubleBuffered = True
         Me.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(4)
@@ -763,14 +873,17 @@ Partial Class Журнал
         Me.GroupBox9.PerformLayout()
         Me.GroupBox8.ResumeLayout(False)
         Me.GroupBox8.PerformLayout()
+        Me.ContextMenuStrip1.ResumeLayout(False)
+        Me.GroupBox10.ResumeLayout(False)
+        Me.ContextMenuStrip2.ResumeLayout(False)
+        Me.GroupBox4.ResumeLayout(False)
+        Me.ContextMenuStrip3.ResumeLayout(False)
+        Me.GroupBox13.ResumeLayout(False)
+        Me.GroupBox13.PerformLayout()
         CType(Me.Grid1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Grid4, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Grid3, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.ContextMenuStrip1.ResumeLayout(False)
-        Me.GroupBox10.ResumeLayout(False)
         CType(Me.Grid2, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.ContextMenuStrip2.ResumeLayout(False)
-        Me.GroupBox4.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -829,12 +942,21 @@ Partial Class Журнал
     Friend WithEvents Button17 As Button
     Friend WithEvents ContextMenuStrip2 As ContextMenuStrip
     Friend WithEvents СделкаToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents КлиентсамЗакрылToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents КлиентОтменилToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents СделкаСостояласьToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents УдлаитьРейсИзСпискаToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents Button18 As Button
     Friend WithEvents GroupBox4 As GroupBox
     Friend WithEvents ComboBox4 As ComboBox
     Friend WithEvents ДобавитьСобытиеВКалендарьToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents Button19 As Button
+    Friend WithEvents GroupBox12 As GroupBox
+    Friend WithEvents CheckBox5 As CheckBox
+    Friend WithEvents CheckBox4 As CheckBox
+    Friend WithEvents CheckBox6 As CheckBox
+    Friend WithEvents ContextMenuStrip3 As ContextMenuStrip
+    Friend WithEvents ToolStripMenuItem5 As ToolStripMenuItem
+    Friend WithEvents АктуальноToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents GroupBox13 As GroupBox
+    Friend WithEvents TextBox3 As TextBox
+    Friend WithEvents Button20 As Button
+    Friend WithEvents НеАктульноToolStripMenuItem As ToolStripMenuItem
 End Class

@@ -183,7 +183,7 @@ Public Class ГотовыйОтчет
                         collection1.Add(g)
                     Next
 
-                    ExcelTable(collection1)
+                    ExcelTableAsync(collection1, ComboBox1.Text & " _ " & ComboBox2.Text)
                     Me.Cursor = Cursors.Default
                     Return
                 End If
@@ -635,7 +635,7 @@ Public Class ГотовыйОтчет
 
 
 
-        ExcelTable(КоллекцияГотовая)
+        ExcelTableAsync(КоллекцияГотовая, ComboBox1.Text & " _ " & ComboBox2.Text)
         UpdList1()
         Me.Cursor = Cursors.Default
         CheckBox1.Checked = False
@@ -648,11 +648,43 @@ Public Class ГотовыйОтчет
 
 
     End Sub
+    Private Property mosR As New Stopwatch
+    Private Sub Prgsbr(d As Boolean)
+        If d = True Then
+            mosR.Start()
+            Do While mosR.IsRunning = True
+                If mosR.Elapsed.TotalSeconds >= 60 Then
+                    mosR.Stop()
+                End If
+                ProgressBar1.Value = Math.Round(mosR.Elapsed.TotalSeconds)
+            Loop
+        Else
+            mosR.Stop()
+        End If
 
-    Private Sub ExcelTable(ByVal ListClient As List(Of GridReport))
+    End Sub
+    Private Async Sub ExcelTableAsync(ByVal ListClient As List(Of GridReport), ByVal NameSheet As String)
 
-        Me.Cursor = Cursors.WaitCursor
+        ProgressBar1.Value = 0
+        ProgressBar1.Maximum = 60
+        ProgressBar1.Step = 1
 
+        'Dim progress As New Progress(Of Integer)(Function(percent) ProgressBar1.Value = percent)
+
+        Dim m As String = Await Task.Run(Function() ExcelTable(ListClient, NameSheet))
+        If m IsNot Nothing Then
+            ProgressBar1.Value = 60
+            Process.Start(m)
+            ProgressBar1.Value = 0
+        End If
+
+    End Sub
+
+    Private Function ExcelTable(ListClient As List(Of GridReport), NamSheet As String)  'progress As IProgress(Of Integer)
+        'Dim stopw As New Stopwatch
+        'stopw.Start()
+        'Me.Cursor = Cursors.WaitCursor
+        ProgressBar1.BeginInvoke(New MethodInvoker(Sub() Prgsbr(True)))
         Dim op As New ПутьЗапускаПрограммы
         Dim Pathвремянка2 = op.ВремянкаДляРесурса()
 
@@ -672,11 +704,15 @@ Public Class ГотовыйОтчет
 
         ecx.wb = ecx.Excel2.Workbooks.Add(FileВремянка2)
         ecx.ws = CType(ecx.wb.Sheets.Add(After:=ecx.wb.ActiveSheet), Excel.Worksheet)
-        ecx.ws.Name = ComboBox1.Text & " _ " & ComboBox2.Text
+        ecx.ws.Name = NamSheet
 
         'ecx.ws = ecx.wb.Worksheets.Add(ComboBox1.Text & " _ " & ComboBox2.Text)
         'ecx.ws.Activate()
         ecx.Excel2.Visible = False
+
+        'Progress.Report(10)
+
+        'ProgressBar1.Invoke(New Action(Sub() Prgsbr(stopw.)))
 
         With ecx.ws
 
@@ -731,6 +767,9 @@ Public Class ГотовыйОтчет
             .Range("g2").HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter
             .Range("g2").VerticalAlignment = Excel.XlHAlign.xlHAlignCenter
 
+            'Progress.Report(20)
+            'ProgressBar1.Invoke(New Action(Sub() Prgsbr(20)))
+
             .Cells(2, 9) = "Курс"
             .Range("i2").HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter
             .Range("i2").VerticalAlignment = Excel.XlHAlign.xlHAlignCenter
@@ -770,6 +809,9 @@ Public Class ГотовыйОтчет
             .Range("m1").VerticalAlignment = Excel.XlHAlign.xlHAlignCenter
 
             .Range(Cell1:="q1", Cell2:="q2").Merge()
+
+            'ProgressBar1.BeginInvoke(New MethodInvoker(Sub() Prgsbr(30)))
+
             With .Range("q1")
                 .Value = "комиссия за перевод"
                 .HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter
@@ -814,6 +856,7 @@ Public Class ГотовыйОтчет
             '.Range(Cell1:="A" & (dt.Rows.Count + 4), Cell2:="J" & (dt.Rows.Count + 4)).Borders.Weight = Microsoft.Office.Interop.Excel.XlBorderWeight.xlThick
             ''.Range(Cell1:="A" & (4), Cell2:="J" & (4)).Borders.Weight = Microsoft.Office.Interop.Excel.XlBorderWeight.xlThick
         End With
+        ' ProgressBar1.Invoke(New Action(Sub() Prgsbr(40)))
         Dim AllSum As Double
         Dim Zp As Double
 
@@ -838,6 +881,7 @@ Public Class ГотовыйОтчет
                 .VerticalAlignment = Excel.XlHAlign.xlHAlignCenter
             End With
 
+            'ProgressBar1.Invoke(New Action(Sub() Prgsbr(50)))
 
             With ecx.ws.Range("b" & 4 + n)
                 .Value = ListClient(n).Заказчик.ToString
@@ -863,6 +907,7 @@ Public Class ГотовыйОтчет
                 .VerticalAlignment = Excel.XlHAlign.xlHAlignCenter
             End With
 
+            'ProgressBar1.Invoke(New Action(Sub() Prgsbr(60)))
 
             With ecx.ws.Range("f" & 4 + n)
                 .Value = ListClient(n).ДатаВыгрузки.ToString
@@ -906,6 +951,8 @@ Public Class ГотовыйОтчет
                 .VerticalAlignment = Excel.XlHAlign.xlHAlignCenter
             End With
 
+            'ProgressBar1.Invoke(New Action(Sub() Prgsbr(70)))
+
             With ecx.ws.Range("l" & 4 + n)
                 .Value = ListClient(n).Перевозчик.ToString
                 .ColumnWidth = 25
@@ -938,7 +985,7 @@ Public Class ГотовыйОтчет
                 .VerticalAlignment = Excel.XlHAlign.xlHAlignCenter
             End With
 
-
+            'ProgressBar1.Invoke(New Action(Sub() Prgsbr(80)))
 
 
             ecx.ws.Range("q" & 4 + n).Value = ListClient(n).Комиссия
@@ -961,6 +1008,9 @@ Public Class ГотовыйОтчет
 
             AllSum += ListClient(n).Дельта
         Next
+
+        'ProgressBar1.Invoke(New Action(Sub() Prgsbr(90)))
+
         With ecx.ws
             .Range("V5").Value = AllSum
             .Range("V9").Value = AllSum * 40 / 100
@@ -981,6 +1031,8 @@ Public Class ГотовыйОтчет
             Next
         End With
 
+
+
         'альбомная ориентация страницы
         ecx.ws.PageSetup.Orientation = Excel.XlPageOrientation.xlPortrait
 
@@ -998,20 +1050,26 @@ Public Class ГотовыйОтчет
         ecx.wb.Close()
         ecx.Excel2.Quit()
 
+
+
         releaseobject(ecx.ws)
         releaseobject(ecx.wb)
         releaseobject(ecx.Excel2)
 
-        Me.Cursor = Cursors.Default
+        'Me.Cursor = Cursors.Default
 
-        Process.Start(Путь)
+        'Process.Start(Путь)
+
+        'Dim mhj = ProgressBar1.EndInvoke(Nothing)
+        If mosR.IsRunning = True Then
+            mosR.Stop()
+        End If
 
 
+        Return Путь
 
 
-
-
-    End Sub
+    End Function
     Private Sub releaseobject(ByVal obj As Object)
         Try
             Runtime.InteropServices.Marshal.ReleaseComObject(obj)
@@ -1133,7 +1191,7 @@ Public Class ГотовыйОтчет
                         collection1.Add(g)
                     Next
 
-                    ExcelTable(collection1)
+                    ExcelTableAsync(collection1, ListSelect)
                     Me.Cursor = Cursors.Default
 
                 End If

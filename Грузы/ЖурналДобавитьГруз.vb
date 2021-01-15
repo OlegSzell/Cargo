@@ -106,9 +106,10 @@
         Dim f = AllClass.Клиент.OrderBy(Function(x) x.НазваниеОрганизации).Select(Function(x) New IDNaz With {.Naz = x.НазваниеОрганизации}).Distinct.ToList()
         Dim f1 = AllClass.ЖурналКлиентГруз.OrderBy(Function(x) x.Клиент).Where(Function(x) x.Экспедитор = Экспедитор).Select(Function(x) New IDNaz With {.Naz = x.Клиент}).Distinct.ToList()
         Dim f4 = AllClass.ЖурналКлиентСписок.OrderBy(Function(x) x.Клиент).Select(Function(x) New IDNaz With {.Naz = x.Клиент}).Distinct.ToList()
-        Dim f2 = f1.Select(Function(x) x.Naz).ToList().Union(f.Select(Function(x) x.Naz).ToList())
-        Dim f5 = f2.OrderBy(Function(x) x).Select(Function(x) x).ToList().Union(f4.OrderBy(Function(x) x).Select(Function(x) x.Naz).ToList())
-        For Each b In f5
+        Dim f2 = f1.Select(Function(x) x.Naz).ToList().Union(f.Select(Function(x) x.Naz).ToList()).ToList()
+        Dim f5 = f2.Union(f4.Select(Function(x) x.Naz)).ToList()
+        Dim f6 = f5.OrderBy(Function(x) x).ToList()
+        For Each b In f6
             Dim f3 As New IDNaz With {.Naz = b}
             com1All.Add(f3)
         Next
@@ -740,5 +741,11 @@
 
         Grid2All.RemoveAt(DGVsender.CurrentRow.Index)
         bsGrid2.ResetBindings(False)
+    End Sub
+
+    Private Sub Grid1_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles Grid1.CellEndEdit
+        If e.ColumnIndex = 1 Then
+            Grid1All.ElementAt(e.RowIndex).Наименование = Grid1All.ElementAt(e.RowIndex).Наименование & " - (" & Now.ToLongTimeString & ")"
+        End If
     End Sub
 End Class
