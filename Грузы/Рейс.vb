@@ -2360,6 +2360,7 @@ Public Class Рейс
     Private interVal As Long = 60000
     Public timer3 As Timer
     Private interVal3 As Long = 60000
+
     Dim bolp As Boolean = False
     Private Sub UpdListForTime(ByVal Год As Integer)
 
@@ -2374,11 +2375,22 @@ Public Class Рейс
         SumClientStart = ff.Rows(0).Item(0)
         SumPerevozStart = ff1.Rows(0).Item(0)
 
+        Using db As New dbAllDataContext()
+            Dim f = (From x In db.Календарь_Даты
+                     Where x.Дата = Now
+                     Select x).FirstOrDefault()
+            If f IsNot Nothing Then
+                КаленДаты = f
+            End If
+        End Using
+
 
         timer3 = New Timer(New TimerCallback(Sub() КонтрольОбновленияБазыМетод()), Nothing, 0, interVal3)
 
 
     End Sub
+
+
     Private SumClientStart As Long = Nothing
     Private SumPerevozStart As Long = Nothing
     Private SumClientActual As Long = Nothing

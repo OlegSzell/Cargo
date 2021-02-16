@@ -589,6 +589,12 @@
     <Compile Include="Календарь.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="КалендарьВсплывФорма.Designer.vb">
+      <DependentUpon>КалендарьВсплывФорма.vb</DependentUpon>
+    </Compile>
+    <Compile Include="КалендарьВсплывФорма.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="КалендарьМодалноеОкно.Designer.vb">
       <DependentUpon>КалендарьМодалноеОкно.vb</DependentUpon>
     </Compile>
@@ -958,6 +964,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Календарь.resx">
       <DependentUpon>Календарь.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="КалендарьВсплывФорма.resx">
+      <DependentUpon>КалендарьВсплывФорма.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="КалендарьМодалноеОкно.resx">
       <DependentUpon>КалендарьМодалноеОкно.vb</DependentUpon>

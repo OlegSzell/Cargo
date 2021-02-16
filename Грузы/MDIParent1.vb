@@ -2,6 +2,7 @@
 Imports System.Threading
 Imports System.Net
 Imports System.Reflection
+Imports Timer = System.Threading.Timer
 'Imports System.Reflection
 
 Public Class MDIParent1
@@ -218,7 +219,155 @@ Public Class MDIParent1
 
     '    Dim m = f
     'End Sub
+    Public timer4 As Timer
+    Private interVal4 As Long = 3600000
 
+    Private Sub КонтрольОбновленияБазы()
+
+        Using db As New dbAllDataContext()
+            Dim f = (From x In db.Календарь_Даты
+                     Where x.Дата = Now
+                     Select x).FirstOrDefault()
+            If f IsNot Nothing Then
+                КаленДаты = f
+            End If
+        End Using
+
+        timer4 = New Timer(New TimerCallback(Sub() НапоминаниеКалендарь()), Nothing, 0, interVal4)
+
+    End Sub
+
+    Private Sub НапоминаниеКалендарь()
+        If КаленДаты Is Nothing Then
+            timer4.Dispose()
+            Return
+        End If
+        If Экспедитор = "Олег" Then
+            Dim m = Now.Hour
+            If m >= "8" And m < "9" Then
+                Dim ms = КаленДаты._8_00
+                If ms IsNot Nothing Then
+                    Dim m1 As New КалендарьВсплывФорма("8.00 - 9.00", ms)
+                    m1.ShowDialog()
+
+                End If
+            End If
+
+            If m >= "9" And m < "10" Then
+                Dim ms = КаленДаты._9_00
+                If ms IsNot Nothing Then
+                    Dim m1 As New КалендарьВсплывФорма("9.00 - 10.00", ms)
+                    m1.ShowDialog()
+                End If
+            End If
+
+            If m >= "10" And m < "11" Then
+                Dim ms = КаленДаты._10_00
+                If ms IsNot Nothing Then
+                    Dim m1 As New КалендарьВсплывФорма("10.00 - 11.00", ms)
+                    m1.ShowDialog()
+                End If
+            End If
+
+            If m >= "11" And m < "12" Then
+                Dim ms = КаленДаты._11_00
+                If ms IsNot Nothing Then
+                    Dim m1 As New КалендарьВсплывФорма("11.00 - 12.00", ms)
+                    m1.ShowDialog()
+                End If
+            End If
+
+            If m >= "12" And m < "13" Then
+                Dim ms = КаленДаты._12_00
+                If ms IsNot Nothing Then
+                    Dim m1 As New КалендарьВсплывФорма("12.00 - 13.00", ms)
+                    m1.ShowDialog()
+                End If
+            End If
+
+            If m >= "13" And m < "14" Then
+                Dim ms = КаленДаты._13_00
+                If ms IsNot Nothing Then
+                    Dim m1 As New КалендарьВсплывФорма("13.00 - 14.00", ms)
+                    m1.ShowDialog()
+                End If
+            End If
+
+            If m >= "14" And m < "15" Then
+                Dim ms = КаленДаты._14_00
+                If ms IsNot Nothing Then
+                    Dim m1 As New КалендарьВсплывФорма("14.00 - 15.00", ms)
+                    m1.ShowDialog()
+                End If
+            End If
+
+            If m >= "15" And m < "16" Then
+                Dim ms = КаленДаты._15_00
+                If ms IsNot Nothing Then
+                    Dim m1 As New КалендарьВсплывФорма("15.00 - 16.00", ms)
+                    m1.ShowDialog()
+                End If
+            End If
+
+            If m >= "16" And m < "17" Then
+                Dim ms = КаленДаты._16_00
+                If ms IsNot Nothing Then
+                    Dim m1 As New КалендарьВсплывФорма("16.00 - 17.00", ms)
+                    m1.ShowDialog()
+                End If
+            End If
+
+            If m >= "17" And m < "18" Then
+                Dim ms = КаленДаты._17_00
+                If ms IsNot Nothing Then
+                    Dim m1 As New КалендарьВсплывФорма("17.00 - 18.00", ms)
+                    m1.ShowDialog()
+                End If
+            End If
+
+            If m >= "18" And m < "19" Then
+                Dim ms = КаленДаты._18_00
+                If ms IsNot Nothing Then
+                    Dim m1 As New КалендарьВсплывФорма("18.00 - 19.00", ms)
+                    m1.ShowDialog()
+                End If
+            End If
+
+            If m >= "19" And m < "20" Then
+                Dim ms = КаленДаты._19_00
+                If ms IsNot Nothing Then
+                    Dim m1 As New КалендарьВсплывФорма("19.00 - 20.00", ms)
+                    m1.ShowDialog()
+                End If
+            End If
+
+            If m >= "20" And m < "21" Then
+                Dim ms = КаленДаты._20_00
+                If ms IsNot Nothing Then
+                    Dim m1 As New КалендарьВсплывФорма("20.00 - 21.00", ms)
+                    m1.ShowDialog()
+                End If
+            End If
+
+            If m >= "21" And m < "22" Then
+                Dim ms = КаленДаты._21_00
+                If ms IsNot Nothing Then
+                    Dim m1 As New КалендарьВсплывФорма("21.00 - 22.00", ms)
+                    m1.ShowDialog()
+                End If
+            End If
+
+            If m >= "22" And m < "23" Then
+                Dim ms = КаленДаты._22_00
+                If ms IsNot Nothing Then
+                    Dim m1 As New КалендарьВсплывФорма("22.00 - 23.00", ms)
+                    m1.ShowDialog()
+                End If
+            End If
+
+        End If
+
+    End Sub
     Private Sub MDIParent1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         'getLoc()
@@ -241,7 +390,7 @@ Public Class MDIParent1
             ФинанасыTool.Enabled = True
         End If
 
-
+        КонтрольОбновленияБазы()
         Getst()
         КалендарьНапоминаниеAsync()
         Reys()

@@ -39,6 +39,7 @@ Module Module1
     Public Procenty20 As String = "False"
     Public КалендарьПовтор As Boolean = False
     Public EmailPass As EmailTb = Nothing
+    Public КаленДаты As Календарь_Даты = Nothing
 
 
 
