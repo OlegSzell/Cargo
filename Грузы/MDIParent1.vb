@@ -1,6 +1,8 @@
 ﻿Imports System.Windows.Forms
 Imports System.Threading
 Imports System.Net
+Imports System.Reflection
+'Imports System.Reflection
 
 Public Class MDIParent1
 
@@ -211,10 +213,15 @@ Public Class MDIParent1
         mo.ОплатыПерAll()
         mo.РейсыПеревозчикаAll()
     End Sub
+    'Private Sub getLoc()
+    '    Dim f = Assembly.GetExecutingAssembly().Location
+
+    '    Dim m = f
+    'End Sub
 
     Private Sub MDIParent1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-
+        'getLoc()
 
 
         Me.Cursor = Cursors.WaitCursor
@@ -306,7 +313,7 @@ Public Class MDIParent1
         f.ShowDialog()
     End Sub
 
-    Private Sub ТранспортToolStripMenuItem_Click(sender As Object, e As EventArgs) 
+    Private Sub ТранспортToolStripMenuItem_Click(sender As Object, e As EventArgs)
 
     End Sub
 
@@ -502,12 +509,20 @@ Public Class MDIParent1
     End Sub
 
     Private Sub ФинанасыTool_Click(sender As Object, e As EventArgs) Handles ФинанасыTool.Click
-        Dim f As New Финансы
-        f.ShowDialog()
+        If Экспедитор = "Олег" Then
+            Dim f As New Финансы
+            f.Show()
+        End If
+
     End Sub
 
     Private Sub СводнаяОплатToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles СводнаяОплатToolStripMenuItem.Click
         Dim f As New Сводная
+        f.Show()
+    End Sub
+
+    Private Sub RadioToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RadioToolStripMenuItem.Click
+        Dim f As New Radio
         f.Show()
     End Sub
 End Class

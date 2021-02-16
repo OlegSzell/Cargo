@@ -54,16 +54,22 @@ Public Class Grid2ЖурналClass
     Public Property Номер As Integer
     Public Property Клиент As String
     Public Property Дата As Date
+    Public Property Страны As String
     Public Property ДатаЗагрузки As String
-    Public Property Mаршрут As String
+    Public Property Города As String
     Public Property Груз As String
+    Public Property Состояние As String
+    Public Property Ставка As String
+    Public Property Инфо As String
+
+
     Public Property МаршрутList As List(Of String)
     Public Property КодЖурналГруз As Integer
     Public Property СтранаПогрузки As String
     Public Property СтранаВыгрузки As String
     Public Property ВсплывПримеч As String
-    Public Property Состояние As String
     Public Property IdКодЖурнДаты As Integer
+
 
 End Class
 Public Class Com2ЖурналДобавитьГрузClass

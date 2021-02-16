@@ -566,9 +566,25 @@ Public Class Рейс
     '        MsgBox(ex.StackTrace)
     '    End Try
     'End Sub
-
+    Private Async Sub EmalSetAsync()
+        Await Task.Run(Sub() EmalSet())
+    End Sub
+    Private Sub EmalSet()
+        Using db As New dbAllDataContext()
+            Dim f = (From x In db.EmailTb
+                     Select x).FirstOrDefault()
+            If f IsNot Nothing Then
+                EmailPass = f
+            End If
+        End Using
+    End Sub
 
     Private Sub Рейс_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+
+
+        КонтрольОбновленияБазы()
+
         UpdListForTime(Now.Year)
         'proper()
         'ПредExcelAsync()
@@ -609,6 +625,8 @@ Public Class Рейс
         MaskedTextBox1.Text = Now.ToShortDateString
         comdjx1 = ComboBox1.Text
 
+
+        EmalSetAsync()
 
 
 
@@ -821,25 +839,21 @@ Public Class Рейс
             mo.РейсыКлиентаAll()
         Loop
 
-        Dim f = AllClass.РейсыКлиента.Count()
-        Dim f1 As Integer
 
         Do While AllClass.РейсыПеревозчика Is Nothing
             mo.РейсыПеревозчикаAll()
         Loop
 
-        Dim f2 = AllClass.РейсыПеревозчика.Count
-        Dim f3 As Integer
-        Using db As New dbAllDataContext()
-            f1 = db.РейсыКлиента.Count()
-            f3 = db.РейсыПеревозчика.Count()
-            If Not f1 = f Then
-                mo.РейсыКлиентаAll()
-            End If
-            If Not f2 = f3 Then
-                mo.РейсыПеревозчикаAll()
-            End If
-        End Using
+        If Not SumClientStart = SumClientActual Then
+            mo.РейсыКлиентаAll()
+            SumClientStart = SumClientActual
+        End If
+        If Not SumPerevozStart = SumPerevozActual Then
+            mo.РейсыПеревозчикаAll()
+            SumPerevozStart = SumPerevozActual
+        End If
+
+
 
 
         Dim rowzak As РейсыКлиента
@@ -958,6 +972,7 @@ Public Class Рейс
             Dim f As ПутиДоков = ListBox1.SelectedItem
             Try
                 НомРес = CType(Strings.Left(f.Путь, 3), Integer)
+                Label15.Text = НомРес
                 ПутьРейса = f.Путь
                 ПутьПолный = f.ПолныйПуть
                 list1selПуть = f
@@ -1559,14 +1574,9 @@ Public Class Рейс
 
 
     End Sub
-    Private Sub UpddateНовыйКлиент()
-        Dim mo As New AllUpd
-        mo.РейсыПеревозчикаAll()
-        mo.РейсыКлиентаAll()
-    End Sub
+
     Private Async Sub НовыйРейсСохранениеБазаAsync(ByVal cm4 As IDNaz)
         Await Task.Run(Sub() НовыйРейсСохранениеБаза(cm4))
-        Await Task.Run(Sub() UpddateНовыйКлиент())
     End Sub
     Public Class ДогПодрCXlass
         Public Property ДогПор As String
@@ -1628,7 +1638,7 @@ Public Class Рейс
 
     End Function
     Private Sub НовыйРейсСохранениеБаза(ByVal cm4 As IDNaz)
-
+        Dim mo As New AllUpd
         Dim k = ComB13A()
 
         Using db As New dbAllDataContext()
@@ -1713,9 +1723,17 @@ Public Class Рейс
             db.SubmitChanges()
 
         End Using
-
+        mo.РейсыПеревозчикаAll()
+        mo.РейсыКлиентаAll()
+    End Sub
+    Private Async Sub InsertEmailAsync(d As String)
+        Await Task.Run(Sub() InsertEmail(d))
     End Sub
 
+    Private Sub InsertEmail(d As String)
+        Dim NewEmail As New SendEmail
+        NewEmail.insert(d)
+    End Sub
 
 
     Private Sub НовыйРейс(Optional ByVal SelYear As String = Nothing)
@@ -1746,6 +1764,13 @@ Public Class Рейс
 
         PutPolnStroka = "Z:\RICKMANS\" & ya & "\" & СлРейс & " " & ComboBox3.Text & " " & СлПорРейсКл & " - " & ComboBox4.Text & " " & СлПорРейсПер & ".xlsm"
         PutCorStroka = СлРейс & " " & ComboBox3.Text & " " & СлПорРейсКл & " - " & ComboBox4.Text & " " & СлПорРейсПер & ".xlsm"
+
+
+        Dim strT As String = PutCorStroka & vbCrLf & "Ставка клиента :" & arrtbox("TextBox1") & " " & arrtcom("ComboBox5") & vbCrLf &
+            "Ставка перевозчика :" & arrtbox("TextBox2") & " " & arrtcom("ComboBox6") & vbCrLf & "Груз :" & Trim(arrtRichbox("RichTextBox7")) & vbCrLf &
+             "Маршрут :" & Trim(arrtRichbox("RichTextBox10")) & vbCrLf & "Время создания :" & Now
+
+        InsertEmailAsync(strT)
 
         NewPutForListInNewRejs = New ПутиДоков With {.Путь = PutCorStroka, .ПолныйПуть = PutPolnStroka} 'переменная хранить пути для листбокс добавления
 
@@ -2209,9 +2234,25 @@ Public Class Рейс
 
 
         End If
+
+        'email
+        Dim strT As String = ПутьРейса & vbCrLf & "Ставка клиента :" & arrtbox("TextBox1") & " " & arrtcom("ComboBox5") & vbCrLf &
+            "Ставка перевозчика :" & arrtbox("TextBox2") & " " & arrtcom("ComboBox6") & vbCrLf & "Груз :" & Trim(arrtRichbox("RichTextBox7")) & vbCrLf &
+             "Маршрут :" & Trim(arrtRichbox("RichTextBox10")) & vbCrLf & "Время создания :" & Now
+
+        UpdateEmailAsync(strT)
+
         СлРейс = НомРес
         ДокиОбновление()
 
+    End Sub
+    Private Async Sub UpdateEmailAsync(d As String)
+        Await Task.Run(Sub() UpdateEmail(d))
+    End Sub
+
+    Private Sub UpdateEmail(d As String)
+        Dim NewEmail As New SendEmail
+        NewEmail.update(d)
     End Sub
 
     Private Sub Button7_Click(sender As Object, e As EventArgs)
@@ -2317,10 +2358,39 @@ Public Class Рейс
     End Sub
     Public timer2 As Timer
     Private interVal As Long = 60000
+    Public timer3 As Timer
+    Private interVal3 As Long = 60000
     Dim bolp As Boolean = False
     Private Sub UpdListForTime(ByVal Год As Integer)
 
         timer2 = New Timer(New TimerCallback(Sub() UpdListForTimeMetod(Год)), Nothing, 0, interVal)
+
+
+    End Sub
+    Private Sub КонтрольОбновленияБазы()
+        Dim ff = Selects3(StrSql:="select CHECKSUM_AGG(BINARY_CHECKSUM(*)) FROM РейсыКлиента WITH (NOLOCK)")
+        Dim ff1 = Selects3(StrSql:="select CHECKSUM_AGG(BINARY_CHECKSUM(*)) FROM РейсыПеревозчика WITH (NOLOCK)")
+
+        SumClientStart = ff.Rows(0).Item(0)
+        SumPerevozStart = ff1.Rows(0).Item(0)
+
+
+        timer3 = New Timer(New TimerCallback(Sub() КонтрольОбновленияБазыМетод()), Nothing, 0, interVal3)
+
+
+    End Sub
+    Private SumClientStart As Long = Nothing
+    Private SumPerevozStart As Long = Nothing
+    Private SumClientActual As Long = Nothing
+    Private SumPerevozActual As Long = Nothing
+    Private Sub КонтрольОбновленияБазыМетод()
+
+        Dim ff = Selects3(StrSql:="select CHECKSUM_AGG(BINARY_CHECKSUM(*)) FROM РейсыКлиента WITH (NOLOCK)")
+        Dim ff1 = Selects3(StrSql:="select CHECKSUM_AGG(BINARY_CHECKSUM(*)) FROM РейсыПеревозчика WITH (NOLOCK)")
+
+        SumClientActual = ff.Rows(0).Item(0)
+        SumPerevozActual = ff1.Rows(0).Item(0)
+
 
 
     End Sub
@@ -2535,11 +2605,13 @@ Public Class Рейс
             Exit Sub
         End If
         Dim f As New ДопФорма(НомРес, TextBox1.Text)
-        'timer2.Change(Timeout.Infinite, Timeout.Infinite)  'остановка таймера
+
         f.ShowDialog()
-        'UpdListForTime(ComboBox1.Text)  'запуск таймера
+
         If f.ОбнвлExcel = True Then
-            ДокиОбновлениеAsync(f.Num, ComboBox3.Text, ComboBox4.Text, ComboBox1.Text)
+            Cursor = Cursors.WaitCursor
+            ДокиОбновление(f.Num, ComboBox3.Text, ComboBox4.Text, ComboBox1.Text)
+            Cursor = Cursors.Default
             'ДокиОбновление(f.Num)
         End If
     End Sub
@@ -2935,6 +3007,7 @@ Public Class Рейс
         Dim k = f.newPt
         If lst1all Is Nothing Then Return
         If k Is Nothing Then Return
+        Label15.Text = Strings.Left(k.Путь, 3)
         lst1all.Remove(list1selПуть) 'удаляем старый путь
         lst1all.Add(k) 'добавляем новый путь
         Dim f2 = lst1all.OrderBy(Function(x) x.Путь).ToList()
@@ -2947,6 +3020,14 @@ Public Class Рейс
         ListBox1.SelectedItem = lst1all.Last
         ListBox1.EndUpdate()
     End Sub
+    Private Async Sub DeleteEmailAsync(d As String)
+        Await Task.Run(Sub() DeleteEmail(d))
+    End Sub
+
+    Private Sub DeleteEmail(d As String)
+        Dim NewEmail As New SendEmail
+        NewEmail.delete(d)
+    End Sub
 
     Private Sub УдалитьToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles УдалитьToolStripMenuItem.Click
         If MessageBox.Show("Удалить " & НомРес & " Рейс?", Рик, MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.No Then
@@ -2954,6 +3035,12 @@ Public Class Рейс
         End If
 
         Diction()
+
+        Dim strT As String = ПутьРейса & vbCrLf & "Ставка клиента :" & arrtbox("TextBox1") & " " & arrtcom("ComboBox5") & vbCrLf &
+            "Ставка перевозчика :" & arrtbox("TextBox2") & " " & arrtcom("ComboBox6") & vbCrLf & "Груз :" & Trim(arrtRichbox("RichTextBox7")) & vbCrLf &
+             "Маршрут :" & Trim(arrtRichbox("RichTextBox10")) & vbCrLf & "Время создания :" & Now
+
+        DeleteEmailAsync(strT)
 
         Using db As New dbAllDataContext()
             Dim f = db.РейсыПеревозчика.Where(Function(x) x.НомерРейса = НомРес).Select(Function(x) x).FirstOrDefault()
@@ -2988,6 +3075,8 @@ Public Class Рейс
         Else
             MessageBox.Show("Рейс не найден!", Рик)
         End If
+
+        Label15.Text = "?"
         ClearDictionAsync()
         Очистка()
         ПерегрЛист1()
@@ -3028,6 +3117,7 @@ Public Class Рейс
 
         Button2.BackColor = Color.LightBlue
         Button7.BackColor = Color.LightBlue
+        Label15.Text = "?"
         Me.Cursor = Cursors.Default
 
     End Sub
@@ -3249,6 +3339,7 @@ Public Class Рейс
             Dim Res As DialogResult = MessageBox.Show("Выберите 'Да'- если, хотите заменить данные этого рейса" & vbCrLf & " Выберите 'Нет'- если, хотите создать новый рейс" & vbCrLf & "Выберите 'Отмена'- если, хотите выйти", Рик, MessageBoxButtons.YesNoCancel)
             If Res = DialogResult.No Then
                 Diction()
+                Label15.Text = "?"
                 ПредExcelAsync()
                 НовыйРейсГлавная()
             End If

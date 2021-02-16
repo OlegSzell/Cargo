@@ -63,6 +63,7 @@ Partial Class Календарь
         Me.Grid2.Location = New System.Drawing.Point(8, 311)
         Me.Grid2.Margin = New System.Windows.Forms.Padding(4)
         Me.Grid2.Name = "Grid2"
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.Grid2.RowsDefaultCellStyle = DataGridViewCellStyle1
         Me.Grid2.Size = New System.Drawing.Size(1516, 300)

@@ -43,7 +43,7 @@ Partial Class ЖурналДопФормаВыбора
         Me.Grid1.ReadOnly = True
         DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.Grid1.RowsDefaultCellStyle = DataGridViewCellStyle1
-        Me.Grid1.Size = New System.Drawing.Size(871, 212)
+        Me.Grid1.Size = New System.Drawing.Size(1148, 301)
         Me.Grid1.TabIndex = 0
         '
         'ListBox1
@@ -51,10 +51,10 @@ Partial Class ЖурналДопФормаВыбора
         Me.ListBox1.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.ListBox1.FormattingEnabled = True
         Me.ListBox1.ItemHeight = 18
-        Me.ListBox1.Location = New System.Drawing.Point(0, 220)
+        Me.ListBox1.Location = New System.Drawing.Point(0, 312)
         Me.ListBox1.Margin = New System.Windows.Forms.Padding(4)
         Me.ListBox1.Name = "ListBox1"
-        Me.ListBox1.Size = New System.Drawing.Size(871, 220)
+        Me.ListBox1.Size = New System.Drawing.Size(1148, 274)
         Me.ListBox1.TabIndex = 1
         '
         'ЖурналДопФормаВыбора
@@ -62,7 +62,7 @@ Partial Class ЖурналДопФормаВыбора
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 18.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.DarkKhaki
-        Me.ClientSize = New System.Drawing.Size(871, 440)
+        Me.ClientSize = New System.Drawing.Size(1148, 586)
         Me.Controls.Add(Me.ListBox1)
         Me.Controls.Add(Me.Grid1)
         Me.DoubleBuffered = True

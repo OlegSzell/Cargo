@@ -41,14 +41,22 @@ Public Class ЖурналКлиентДатыТаблица
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+
+        GRD.Clear()
         GRD.AddRange(Grid1all)
         Close()
+
+
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+
+        GRD.Clear()
         GRD.AddRange(Grid1all)
         UpdAsync(Grid1all)
         MessageBox.Show("Данные приняты!", Рик)
+
+
     End Sub
     Private Async Sub UpdAsync(ByVal d As List(Of Grid1Class))
         Await Task.Run(Sub() Upd(d))
@@ -98,6 +106,25 @@ Public Class ЖурналКлиентДатыТаблица
         If Grid1all.ElementAt(e.RowIndex).Номер Is Nothing Then
             Grid1all.ElementAt(e.RowIndex).Номер = e.RowIndex + 1
         End If
+        If Grid1all.ElementAt(e.RowIndex).IDЖурналКлиентДаты = 0 Then
+            Dim msd = Grid1all.ElementAt(e.RowIndex)
+            Using db As New dbAllDataContext()
+                Dim f2 As New ЖурналКлиентДаты
+                With f2
+                    .IDЖурналКлиентГруз = ID
+                    .ДатаЗагрузки = msd.ДатаЗагрузки
+                    .ДатаДоставки = msd.ДатаВыгрузки
+                    .ДопУсловия = msd.ДопУсловия
+                    .Ставка = msd.Ставка
+                    .Состояние = msd.Состояние
+                End With
+                db.ЖурналКлиентДаты.InsertOnSubmit(f2)
+                db.SubmitChanges()
+                Grid1all.ElementAt(e.RowIndex).IDЖурналКлиентДаты = f2.ID
+            End Using
+        End If
+
+
     End Sub
 
     Public Class Grid1Class

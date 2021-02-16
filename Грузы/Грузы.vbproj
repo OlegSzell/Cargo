@@ -19,7 +19,7 @@
     <TargetFrameworkProfile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <PublishUrl>B:\_РАБОЧАЯ ПАПКА\Рикманс Сохраненные изменения Visual Studio\VS\</PublishUrl>
+    <PublishUrl>B:\_РАБОЧАЯ ПАПКА\Рикманс Сохраненные изменения Visual Studio\VS64\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Web</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
@@ -29,15 +29,15 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>http://2trans.by/VS/</InstallUrl>
-    <UpdateUrl>http://2trans.by/VS/</UpdateUrl>
+    <InstallUrl>http://2trans.by/VS64/</InstallUrl>
+    <UpdateUrl>http://2trans.by/VS64/</UpdateUrl>
     <ProductName>Экспедиция</ProductName>
     <PublisherName>Рикманс</PublisherName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <TrustUrlParameters>true</TrustUrlParameters>
-    <ApplicationRevision>159</ApplicationRevision>
+    <ApplicationRevision>187</ApplicationRevision>
     <ApplicationVersion>1.2.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -121,17 +121,26 @@
     <Reference Include="adodb, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.6.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>..\packages\BouncyCastle.1.8.6.1\lib\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
     <Reference Include="ClosedXML, Version=0.95.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ClosedXML.0.95.3\lib\net46\ClosedXML.dll</HintPath>
     </Reference>
     <Reference Include="DocumentFormat.OpenXml, Version=2.11.3.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
       <HintPath>..\packages\DocumentFormat.OpenXml.2.11.3\lib\net46\DocumentFormat.OpenXml.dll</HintPath>
     </Reference>
+    <Reference Include="EASendMail, Version=7.7.0.6, Culture=neutral, PublicKeyToken=88adb80ecd66540b, processorArchitecture=MSIL">
+      <HintPath>..\packages\EASendMail.7.7.0.6\lib\net461\EASendMail.dll</HintPath>
+    </Reference>
     <Reference Include="ExcelNumberFormat, Version=1.1.0.0, Culture=neutral, PublicKeyToken=23c6f5d73be07eca, processorArchitecture=MSIL">
       <HintPath>..\packages\ExcelNumberFormat.1.1.0\lib\net20\ExcelNumberFormat.dll</HintPath>
     </Reference>
     <Reference Include="HtmlAgilityPack, Version=1.11.28.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
       <HintPath>..\packages\HtmlAgilityPack.1.11.28\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.2, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.13.2\lib\itextsharp.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.1\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
@@ -333,6 +342,13 @@
     <Compile Include="NbRbClassNew.vb" />
     <Compile Include="OnPropertyChangedClass.vb" />
     <Compile Include="PublicClass.vb" />
+    <Compile Include="Radio.Designer.vb">
+      <DependentUpon>Radio.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Radio.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SendEmail.vb" />
     <Compile Include="Skype.Designer.vb">
       <DependentUpon>Skype.vb</DependentUpon>
     </Compile>
@@ -501,10 +517,22 @@
     <Compile Include="ЖурналВсплывДанныеОбщиеДляГрид2.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ЖурналВсплывИнфо.Designer.vb">
+      <DependentUpon>ЖурналВсплывИнфо.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ЖурналВсплывИнфо.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ЖурналДобавитьГруз.Designer.vb">
       <DependentUpon>ЖурналДобавитьГруз.vb</DependentUpon>
     </Compile>
     <Compile Include="ЖурналДобавитьГруз.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ЖурналДобавитьГрузДопДанные.Designer.vb">
+      <DependentUpon>ЖурналДобавитьГрузДопДанные.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ЖурналДобавитьГрузДопДанные.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ЖурналДопФормаВыбора.Designer.vb">
@@ -794,13 +822,18 @@
   <ItemGroup>
     <EmbeddedResource Include="ExcelAddToDatabase.resx">
       <DependentUpon>ExcelAddToDatabase.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Image.resx">
       <DependentUpon>Image.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="MDIParent1.resx">
       <DependentUpon>MDIParent1.vb</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Radio.resx">
+      <DependentUpon>Radio.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Skype.resx">
       <DependentUpon>Skype.vb</DependentUpon>
@@ -889,8 +922,14 @@
     <EmbeddedResource Include="ЖурналВсплывДанныеОбщиеДляГрид2.resx">
       <DependentUpon>ЖурналВсплывДанныеОбщиеДляГрид2.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ЖурналВсплывИнфо.resx">
+      <DependentUpon>ЖурналВсплывИнфо.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ЖурналДобавитьГруз.resx">
       <DependentUpon>ЖурналДобавитьГруз.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ЖурналДобавитьГрузДопДанные.resx">
+      <DependentUpon>ЖурналДобавитьГрузДопДанные.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ЖурналДопФормаВыбора.resx">
       <DependentUpon>ЖурналДопФормаВыбора.vb</DependentUpon>
@@ -1092,10 +1131,55 @@
       <WrapperTool>aximp</WrapperTool>
       <Isolated>False</Isolated>
     </COMReference>
+    <COMReference Include="MediaPlayer">
+      <Guid>{22D6F304-B0F6-11D0-94AB-0080C74C7E95}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
     <COMReference Include="SHDocVw">
       <Guid>{EAB22AC0-30C1-11CF-A7EB-0000C05BAE0B}</Guid>
       <VersionMajor>1</VersionMajor>
       <VersionMinor>1</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="stdole">
+      <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="WMPDXMLib">
+      <Guid>{73F0DD5C-D071-46B6-A8BF-897C84EAAC49}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="WMPLauncher">
+      <Guid>{5CB42160-CD7C-4806-9367-1C4A65153F4A}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="WMPLib">
+      <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
       <Lcid>0</Lcid>
       <WrapperTool>tlbimp</WrapperTool>
       <Isolated>False</Isolated>

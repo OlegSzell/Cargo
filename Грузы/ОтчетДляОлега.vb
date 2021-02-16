@@ -1,10 +1,16 @@
 ﻿Imports System.IO
-
+Imports System.Text
+Imports iTextSharp.text.pdf
+Imports iTextSharp.text.pdf.parser
 
 Public Class ОтчетДляОлега
     Dim WordsScan As New List(Of String)()
     Dim dt2 As New DataTable
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Private com2 As New List(Of IDNaz)
+    Private bscom2 As New BindingSource
+    Private ВыпискаВыборка As New List(Of Выписка)
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs)
 
         Dim filePath As String = "c:\Users\Oleg\Desktop\3.xml"
         DataSet.ReadXml(filePath)
@@ -13,7 +19,7 @@ Public Class ОтчетДляОлега
 
     End Sub
 
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+    Private Sub Button2_Click(sender As Object, e As EventArgs)
 
 
         Dim swXML As New System.IO.StringWriter()
@@ -22,7 +28,7 @@ Public Class ОтчетДляОлега
 
     End Sub
 
-    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+    Private Sub Button3_Click(sender As Object, e As EventArgs)
         'чтение из файла
         Using fstream As FileStream = File.OpenRead("c:\Users\Oleg\Desktop\сентябрь.txt")
             'преобразуем строку в байты
@@ -117,6 +123,73 @@ Public Class ОтчетДляОлега
 
 
     End Sub
+    Private Sub AddInBase(d As List(Of String))
+        Dim datY As Integer
+        Dim datM As Integer
+        Dim ManthName As String
+        Try
+            datY = CDate(Replace(d(0), "/", ".")).Year
+            datM = CDate(Replace(d(0), "/", ".")).Month
+            ManthName = MonthName(datM)
+        Catch ex As Exception
+            MessageBox.Show("Что пошло нетак с файлом txt!", Рик)
+            Return
+        End Try
+        Using db As New dbAllDataContext()
+            Dim f = (From x In db.Выписка
+                     Where x.Год = datY And x.МесяцЧислом = datM
+                     Select x).ToList()
+
+            If f IsNot Nothing Then
+                If f.Count > 0 Then
+                    If MessageBox.Show("Заменить данные?", Рик, MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.No Then
+                        Return
+                    Else
+                        db.Выписка.DeleteAllOnSubmit(f)
+                        db.SubmitChanges()
+                    End If
+                End If
+            End If
+
+
+            Dim oborРасход As Double = 0
+            Dim obor1Приход As Double = 0
+            Dim lst As New List(Of Выписка)
+            For mc As Integer = 0 To d.Count - 1 Step 9
+                If d(mc).Contains("Обороты") Then
+                    oborРасход = CDbl(Replace(Trim(d(mc + 1)), ".", ","))
+                    obor1Приход = CDbl(Replace(Trim(d(mc + 2)), ".", ","))
+                    Continue For
+                End If
+                Dim m As New Выписка With {.Год = datY, .Месяц = ManthName, .МесяцЧислом = datM, .ДатаОперации = Replace(d(mc), "/", "."), .Расход = d(mc + 5),
+                    .Приход = d(mc + 6), .Организация = d(mc + 7), .НазначениеПлатежа = d(mc + 8)}
+                lst.Add(m)
+            Next
+            Dim dbRashod As Double = 0
+            Dim dbPrichod As Double = 0
+            For Each b In lst
+                dbRashod += Math.Round(CDbl(Replace(Trim(b.Расход), ".", ",")), 2)
+                dbPrichod += Math.Round(CDbl(Replace(Trim(b.Приход), ".", ",")), 2)
+            Next
+            If oborРасход = Not dbRashod Then
+                MessageBox.Show("Не сходится расход!", Рик)
+                Return
+            End If
+            If obor1Приход = Not dbPrichod Then
+                MessageBox.Show("Не сходится приход!", Рик)
+                Return
+            End If
+
+            db.Выписка.InsertAllOnSubmit(lst)
+            db.SubmitChanges()
+
+
+        End Using
+
+
+
+
+    End Sub
     Private Sub Txt()
 
 
@@ -153,6 +226,8 @@ Public Class ОтчетДляОлега
                     _list.Add(Massiv(x1))
                 End If
             Next
+
+            AddInBase(_list)
             Dim f As Integer = _list.Count
 
             Dim dtable As New DataTable
@@ -240,6 +315,16 @@ Public Class ОтчетДляОлега
 
         Grid2s(Grid1)
     End Sub
+    Private Class Grid1Class
+        Public Property Номер As Integer
+        Public Property Дата As String
+        Public Property Организация As String
+        Public Property Основание_платежа As String
+        Public Property Приход As String
+        Public Property Расход As String
+
+
+    End Class
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
         Txt()
@@ -524,7 +609,192 @@ xlworksheet1.Cells(i + 1, 4).Value, xlworksheet1.Cells(i + 1, 5).Value, xlworksh
         dt2.Columns.Add("Наименование")
         dt2.Columns.Add("Сумма")
 
+        bscom2.DataSource = com2
+        ComboBox2.DataSource = bscom2
+        ComboBox2.DisplayMember = "Naz"
 
+
+        If ВыпискаВыборка IsNot Nothing Then
+            ВыпискаВыборка.Clear()
+        End If
+
+
+
+        Dim com1 As New List(Of String)
+        Using db As New dbAllDataContext()
+            Dim f = (From x In db.Выписка
+                     Select x).ToList()
+            ВыпискаВыборка.AddRange(f)
+            If f IsNot Nothing Then
+                If f.Count > 0 Then
+                    Dim ea = f.OrderBy(Function(x) x.Год).Select(Function(x) x.Год).Distinct().ToList()
+
+
+                    ComboBox1.Items.Clear()
+                    For Each b In ea
+                        ComboBox1.Items.Add(b)
+                    Next
+
+
+
+                End If
+            End If
+        End Using
+        ComboBox2.Text = String.Empty
+
+    End Sub
+
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+        Dim pathopfd As String
+        Dim opfd As OpenFileDialog
+        opfd = OpenFileDialog1
+        opfd.InitialDirectory = "C:\Users\Oleg\Desktop\ОтчетОлег\"
+        opfd.Filter = "PDF Files(*.PDF)|*.PDF|All Files(*.*)|*.*"
+        opfd.Title = "Выберите файл pdf"
+        opfd.FileName = "pdf"
+        If opfd.ShowDialog() = DialogResult.OK Then
+            pathopfd = opfd.FileName.ToString
+            Dim strText As String = String.Empty
+            Dim strText1 As String
+            Try
+                Dim reader As PdfReader = New PdfReader(pathopfd)
+
+                For page As Integer = 1 To reader.NumberOfPages
+                    Dim its As ITextExtractionStrategy = New LocationTextExtractionStrategy()
+                    Dim s As String = PdfTextExtractor.GetTextFromPage(reader, page, its)
+                    s = Encoding.UTF8.GetString(ASCIIEncoding.Convert(Encoding.[Default], Encoding.UTF8, Encoding.[Default].GetBytes(s)))
+                    strText += s
+                Next
+                strText1 = Replace(strText, "  ", "")
+                reader.Close()
+            Catch ex As Exception
+                MessageBox.Show(ex.Message)
+            End Try
+            'RichTextBox1.Text = strText1
+        End If
+    End Sub
+
+    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+
+        Dim ms As New List(Of String), ms1 As New List(Of String), ms2 As New List(Of String)
+        Dim pathopfd As String = String.Empty
+        Dim opfd As OpenFileDialog
+        opfd = OpenFileDialog1
+        opfd.InitialDirectory = "C:\Users\Oleg\Desktop\ОтчетОлег\"
+        opfd.Filter = "PDF Files(*.docx)|*.docx|All Files(*.*)|*.*"
+        opfd.Title = "Выберите файл docx"
+        opfd.FileName = "docx"
+        If opfd.ShowDialog() = DialogResult.OK Then
+            pathopfd = opfd.FileName.ToString
+            Dim strText As String = String.Empty
+        End If
+        Dim word As New Microsoft.Office.Interop.Word.Application
+        Dim missing As Object = Type.Missing
+        Dim doc As Microsoft.Office.Interop.Word.Document = word.Documents.Open(pathopfd, missing, missing, missing, missing, missing, missing, missing, missing, missing, missing, missing, missing, missing, missing, missing)
+
+        'doc = word.Documents.Open(pathopfd, missing, missing, missing, missing, missing, missing, missing, missing, missing, missing, missing, missing, missing, missing, missing)
+        Dim dt As New DataTable
+        Dim dr As DataRow
+        dr = dt.NewRow
+        Dim sb As New StringBuilder
+        sb.Append("<table border='1'><tr>")
+        sb.Append("</tr>")
+        For Each tableRow As Microsoft.Office.Interop.Word.Row In word.Application.ActiveDocument.Tables(3).Rows
+            sb.Append("<tr>")
+            For i As Integer = 1 To tableRow.Cells.Count
+                sb.Append("<td>" & tableRow.Cells(i).Range.Text.Replace("\r\a", "").Trim() & "</td>")
+
+            Next
+            sb.Append("</tr>")
+        Next
+        sb.Append("</table>")
+        'RichTextBox1.Text = sb.ToString
+        doc.Close(missing, missing, missing)
+        word.Application.Quit()
+
+
+        'Dim wordApp As Microsoft.Office.Interop.Word.Application = New Microsoft.Office.Interop.Word.Application()
+        'Dim filename As Object = pathopfd
+        'Dim missing As Object = Type.Missing
+        'Dim doc As Microsoft.Office.Interop.Word.Document = wordApp.Documents.Open(filename, missing, missing, missing, missing, missing, missing, missing, missing, missing, missing, missing, missing, missing, missing, missing)
+        'Dim table As Microsoft.Office.Interop.Word.Table = doc.Tables(3)
+
+
+        'For i As Integer = 1 To table.Rows.Count - 1
+        '    ms.Add(table.Cell(i, 0).Range.Text)
+        '    ms1.Add(table.Cell(i, 1).Range.Text)
+        '    ms2.Add(table.Cell(i, 2).Range.Text)
+        'Next
+
+        'doc.Close(missing, missing, missing)
+        'Runtime.InteropServices.Marshal.ReleaseComObject(wordApp)
+
+
+    End Sub
+
+    Private Sub ComboBox2_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles ComboBox2.SelectionChangeCommitted
+        Dim Год = ComboBox1.Text
+        Dim f As IDNaz = ComboBox2.SelectedItem
+        If Год = String.Empty Then
+            MessageBox.Show("Выберите год!", Рик)
+            Return
+        End If
+        Dim f1 As New List(Of Grid1Class)
+
+        f1 = (From x In ВыпискаВыборка
+              Order By x.ДатаОперации
+              Where x.Год = Год And x.МесяцЧислом = f.ID
+              Select New Grid1Class With {.Дата = x.ДатаОперации, .Организация = x.Организация, .Основание_платежа = x.НазначениеПлатежа, .Приход = x.Приход, .Расход = x.Расход}).ToList()
+
+        Dim prih As Double = Nothing, rash As Double = Nothing
+        If f1 IsNot Nothing Then
+            If f1.Count > 0 Then
+                Dim i As Integer = 1
+                For Each b In f1
+                    b.Номер = i
+                    i += 1
+                    prih += CDbl(Replace(b.Приход, ".", ","))
+                    rash += CDbl(Replace(b.Расход, ".", ","))
+                Next
+                Dim f2 As New Grid1Class With {.Организация = "- ИТОГО - ", .Приход = Math.Round(prih, 2), .Расход = Math.Round(rash, 2)}
+                f1.Add(f2)
+                Grid1.BeginInvoke(New MethodInvoker(Sub() grd1(f1))) 'поток параллельно с контролами
+
+
+            End If
+        End If
+
+    End Sub
+    Private Sub grd1(d As List(Of Grid1Class))
+        Dim mf As New BindingSource
+        mf.DataSource = d
+        Grid1.DataSource = mf
+        GridView(Grid1)
+        Grid1.Columns(0).Width = 60
+        Grid1.Columns(1).Width = 80
+        Grid1.Columns(4).Width = 90
+        Grid1.Columns(5).Width = 90
+        mf.ResetBindings(False)
+    End Sub
+
+    Private Sub ComboBox1_SelectedValueChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedValueChanged
+
+        If com2 IsNot Nothing Then
+            com2.Clear()
+        End If
+
+
+        Dim es1 = (From x In ВыпискаВыборка
+                   Where x.Год = ComboBox1.Text
+                   Group x By Keys = New With {Key x.Месяц, Key x.МесяцЧислом}
+                 Into Group
+                   Select New IDNaz With {.ID = Keys.МесяцЧислом, .Naz = Keys.Месяц}).OrderBy(Function(x) x.ID).ToList()
+
+        If es1 IsNot Nothing Then
+            com2.AddRange(es1)
+            bscom2.ResetBindings(False)
+        End If
+        ComboBox2.Text = String.Empty
 
     End Sub
 End Class

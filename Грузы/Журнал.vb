@@ -157,16 +157,16 @@ Public Class Журнал
         com3All = New List(Of IDNaz)
         bscom3 = New BindingSource
         bscom3.DataSource = com3All
-        ComboBox3.DataSource = bscom3
-        ComboBox3.DisplayMember = "Naz"
-        ComboBox3.Text = String.Empty
+        'ComboBox3.DataSource = bscom3
+        'ComboBox3.DisplayMember = "Naz"
+        'ComboBox3.Text = String.Empty
 
-        com4All = New List(Of IDNaz)
-        bscom4 = New BindingSource
-        bscom4.DataSource = com4All
-        ComboBox4.DataSource = bscom4
-        ComboBox4.DisplayMember = "Naz"
-        ComboBox4.Text = String.Empty
+        'com4All = New List(Of IDNaz)
+        'bscom4 = New BindingSource
+        'bscom4.DataSource = com4All
+        'ComboBox4.DataSource = bscom4
+        'ComboBox4.DisplayMember = "Naz"
+        'ComboBox4.Text = String.Empty
 
 
         com2All = New List(Of IDNaz)
@@ -186,9 +186,9 @@ Public Class Журнал
         listbox1All = New List(Of String)
         bslistbox1 = New BindingSource
         bslistbox1.DataSource = listbox1All
-        ListBox1.DataSource = bslistbox1
+        'ListBox1.DataSource = bslistbox1
 
-        ComboBox4.BeginInvoke(New MethodInvoker(Sub() Com4metod())) 'поток параллельно с контролами
+        'ComboBox4.BeginInvoke(New MethodInvoker(Sub() Com4metod())) 'поток параллельно с контролами
 
         grdasync()
 
@@ -210,7 +210,7 @@ Public Class Журнал
             com4All.Add(n)
         Next
         bscom4.ResetBindings(False)
-        ComboBox4.Text = String.Empty
+        'ComboBox4.Text = String.Empty
     End Sub
     Private Sub БезУчетаДат()
         Dim mo As New AllUpd
@@ -285,8 +285,12 @@ Public Class Журнал
     Private Sub Журнал_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Grid2.BeginInvoke(New Action(Sub() Grid2Met()))
         Grid2Met()
+
         Loaded()
 
+        grdasync()
+
+        ComboBox1.BeginInvoke(New MethodInvoker(Sub() Osnowa())) 'поток параллельно с контролами
 
     End Sub
     Private Sub Osnowa()
@@ -397,7 +401,7 @@ Public Class Журнал
                 com3All.Add(f)
             Next
             bscom3.ResetBindings(False)
-            ComboBox3.Text = String.Empty
+            'ComboBox3.Text = String.Empty
         End If
 
 
@@ -425,7 +429,7 @@ Public Class Журнал
         Dim f = (From x In AllClass.ЖурналДата
                  Join y In AllClass.ЖурналКлиентГруз On x.Код Equals y.КодЖурналДата
                  Join z In AllClass.ЖурналКлиентМаршрут On y.Код Equals z.КодЖурналКлиентГруз
-                 Where y.Экспедитор = Экспедитор And Not y.ОтоброжатьВТаблицеЖурнала = "False"
+                 Where y.Экспедитор = Экспедитор
                  Order By x.Дата Descending
                  Select x, y, z).ToList
 
@@ -434,7 +438,7 @@ Public Class Журнал
                       Into Group
                   Select New Grid2ЖурналClass With {.Клиент = Keys.Клиент, .СтранаПогрузки = Group(0).z.СтранаПогрузки, .СтранаВыгрузки = Group(0).z.СтранаВыгрузки, .КодЖурналГруз = Group(0).y.Код, .Дата = Keys.Дата, .ДатаЗагрузки = IIf(Keys.ДатаЗагрузки Is Nothing, Nothing, Keys.ДатаЗагрузки), .Груз = Keys.НаименованиеГруза, .ВсплывПримеч = Group(0).y.ДополнитИнформация, .Состояние = Group(0).y.РезультатРаботы,
                      .МаршрутList = (From p In Group
-                                     Select "( " & p.z.СтранаПогрузки & " ) " & p.z.ГородПогрузки & " - " & "( " & p.z.СтранаВыгрузки & " ) " & p.z.ГородВыгрузки).ToList()}).ToList()
+                                     Select "(" & p.z.СтранаПогрузки & ") " & p.z.ГородПогрузки & " - " & "(" & p.z.СтранаВыгрузки & ") " & p.z.ГородВыгрузки).ToList()}).ToList()
 
 
 
@@ -445,42 +449,36 @@ Public Class Журнал
         For Each b In f1
             Dim k As String = Nothing
             For Each b1 In b.МаршрутList
+                b1 = Replace(b1, "Беларусь", "РБ")
                 If k Is Nothing Then
+
                     k = b1
                 Else
                     k = k & vbCrLf & b1
                 End If
 
             Next
+
+
+
+
             Dim f3 As New Grid2ЖурналClass
-            Dim f4 = AllClass.ЖурналКлиентДаты.Where(Function(x) x.IDЖурналКлиентГруз = b.КодЖурналГруз And IIf(x.Состояние IsNot Nothing, x.Состояние?.ToUpper.Contains("АКТУАЛЬНО"), Nothing)).ToList()
+            Dim f4 = (From x In AllClass.ЖурналКлиентГруз
+                      Join y In AllClass.ЖурналКлиентДаты On x.Код Equals y.IDЖурналКлиентГруз
+                      Where x.Код = b.КодЖурналГруз And y.Состояние?.ToUpper.Contains("АКТУАЛЬНО".ToUpper)
+                      Select y).ToList()
 
             If f4 IsNot Nothing Then
                 If f4.Count > 0 Then
                     For Each b2 In f4
                         f3 = New Grid2ЖурналClass With {.Дата = b.Дата, .ДатаЗагрузки = "Загр.-" & b2.ДатаЗагрузки & vbCrLf & "Выгр.-" & b2.ДатаДоставки,
-                    .Клиент = b.Клиент, .Mаршрут = k, .Груз = b.Груз, .КодЖурналГруз = b.КодЖурналГруз, .ВсплывПримеч = b2.ДопУсловия,
-                    .Состояние = b2.Состояние, .IdКодЖурнДаты = b2.ID}
+                    .Клиент = b.Клиент, .Страны = k, .Груз = b.Груз, .КодЖурналГруз = b.КодЖурналГруз, .ВсплывПримеч = b2.ДопУсловия,
+                    .Состояние = b2.Состояние, .Города = b2.ДопУсловия, .IdКодЖурнДаты = b2.ID, .Инфо = "i", .Ставка = b2.Ставка}
 
                         Grid2all.Add(f3)
                     Next
-                Else
-                    f3 = New Grid2ЖурналClass With {.Дата = b.Дата, .ДатаЗагрузки = "Загр.-" & b.ДатаЗагрузки & vbCrLf & "Выгр.-",
-              .Клиент = b.Клиент, .Mаршрут = k, .Груз = b.Груз, .КодЖурналГруз = b.КодЖурналГруз, .ВсплывПримеч = b.ВсплывПримеч,
-              .Состояние = b.Состояние}
-                    Grid2all.Add(f3)
-
                 End If
-            Else
-                f3 = New Grid2ЖурналClass With {.Дата = b.Дата, .ДатаЗагрузки = "Загр.-" & b.ДатаЗагрузки & vbCrLf & "Выгр.-",
-               .Клиент = b.Клиент, .Mаршрут = k, .Груз = b.Груз, .КодЖурналГруз = b.КодЖурналГруз, .ВсплывПримеч = b.ВсплывПримеч,
-               .Состояние = b.Состояние}
-
-                Grid2all.Add(f3)
-
             End If
-
-
         Next
 
         Dim mf = Grid2all.OrderBy(Function(x) x.Клиент).ToList()
@@ -502,16 +500,24 @@ Public Class Журнал
         GridView(Grid2)
         Grid2.Columns(0).Width = 30
         Grid2.Columns(1).Width = 80
+        Grid2.Columns(2).Width = 80
         Grid2.Columns(3).Width = 100
         Grid2.Columns(0).HeaderText = "№"
-        Grid2.Columns(2).Width = 80
-        Grid2.Columns(10).Width = 120
+        Grid2.Columns(4).Width = 80
+        Grid2.Columns(5).Width = 120
+        Grid2.Columns(7).Width = 80
+        Grid2.Columns(8).Width = 120
+        Grid2.Columns(9).Width = 50
 
-        Grid2.Columns(6).Visible = False
-        Grid2.Columns(7).Visible = False
-        Grid2.Columns(8).Visible = False
-        Grid2.Columns(9).Visible = False
+
+        Grid2.Columns(2).Visible = False
+        Grid2.Columns(10).Visible = False
         Grid2.Columns(11).Visible = False
+        Grid2.Columns(12).Visible = False
+        Grid2.Columns(13).Visible = False
+        Grid2.Columns(14).Visible = False
+
+        Grid2.Columns(12).Width = 50
 
 
 
@@ -523,7 +529,7 @@ Public Class Журнал
         Dim f As New ЖурналДобавитьГруз
         f.ShowDialog()
         If f.Flag = True Then
-            Loaded()
+            'Loaded()
         Else
             grd2DataAsync()
         End If
@@ -658,7 +664,7 @@ Public Class Журнал
         End If
 
 
-        ListBox1.BeginUpdate()
+        'ListBox1.BeginUpdate()
         'ListBox1.DrawMode = DrawMode.OwnerDrawFixed
         If f2 Is Nothing Then Return
 
@@ -705,7 +711,7 @@ Public Class Журнал
 
         bslistbox1.ResetBindings(False)
 
-        ListBox1.EndUpdate()
+        'ListBox1.EndUpdate()
 
         If Grid1all IsNot Nothing Then
             Grid1all.Clear()
@@ -725,6 +731,8 @@ Public Class Журнал
                 b.ДопИнформация = b.ДопИнформация & vbCrLf & "Skype +"
             End If
         Next
+
+
 
         If f3 IsNot Nothing Then
             If f3.Count > 0 Then
@@ -899,6 +907,10 @@ Public Class Журнал
             Dim id = Grid1AddToBase(f, f5.КодГруза)
             f.КодЖурналПеревозчик = id
             Grid1all.Add(f)
+            Dim clo As New List(Of Grid1ЖурналClass)
+            clo.AddRange(Grid1all)
+            Grid1all.Clear()
+            Grid1all.AddRange(clo.OrderBy(Function(x) x.Перевозчик).ToList())
             Dim i As Integer = 1
             For Each b In Grid1all
                 b.Номер = i
@@ -1087,6 +1099,33 @@ Public Class Журнал
             End If
         End If
     End Sub
+    Private Sub btn9Seach(txt As String)
+        If Grid2all IsNot Nothing Then
+            Dim m As New List(Of Grid2ЖурналClass)
+            For Each b In Grid2all
+                Dim var = String.Join(",", (b.ВсплывПримеч, b.Города, b.Груз, b.ДатаЗагрузки, b.Клиент, b.Состояние, b.Ставка, b.Страны))
+                If var.ToUpper.Contains(txt.ToUpper) Then
+                    m.Add(b)
+                End If
+
+            Next
+            If m IsNot Nothing Then
+                Dim ms As New ЖурналДопФормаВыбора(m)
+                ms.ShowDialog()
+
+                '    Dim f11 = ms.Sel
+                '    If f11 IsNot Nothing Then
+                '        Dim kj As Integer = 0
+                '        For Each b In Grid2all
+                '            If b. = f11 Then
+
+                '            End If
+                '        Next
+                '        Grid2all.ElementA(f11)
+                '    End If
+            End If
+        End If
+    End Sub
 
     Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
         If String.IsNullOrEmpty(TextBox1.Text) Then
@@ -1094,63 +1133,68 @@ Public Class Журнал
             Return
         End If
         Dim txt1 As String = TextBox1.Text
-        Dim f3 As New List(Of ForSeachtxt1)
-        If comALLS IsNot Nothing Then
+
+        btn9Seach(TextBox1.Text)
+        'Exit Sub
+
+
+        'Dim f3 As New List(Of ForSeachtxt1)
+        'If comALLS IsNot Nothing Then
 
 
 
-            If comALLS.Count > 0 Then
-                For Each b In comALLS
+        '            If comALLS.Count > 0 Then
+        '                For Each b In comALLS
 
-                    Dim lstt As String = Nothing
-                    For Each b1 In b.Lst
-                        Dim var2 = String.Join(",", b1.ГородВыгрузки, b1.ГородВыгрузки, b1.ДополнитИнформация, b1.КвадратВыгрузки, b1.КвадратПогрузки, b1.Клиент, b1.Ставка, b1.СтранаВыгрузки,
-b1.СтранаПогрузки, b1.ТаможняНазначения, b1.ТаможняОтправления)
-                        lstt &= var2
-                    Next
+        '                    Dim lstt As String = Nothing
+        '                    For Each b1 In b.Lst
+        '                        Dim var2 = String.Join(",", b1.ГородВыгрузки, b1.ГородВыгрузки, b1.ДополнитИнформация, b1.КвадратВыгрузки, b1.КвадратПогрузки, b1.Клиент, b1.Ставка, b1.СтранаВыгрузки,
+        'b1.СтранаПогрузки, b1.ТаможняНазначения, b1.ТаможняОтправления)
+        '                        lstt &= var2
+        '                    Next
 
-                    Dim var = String.Join(",", (b.ADR, b.EX, b.Высота, b.Вес, b.ГородВыгрузки, b.ГородПогрузки, b.ДатаВыгрузки, b.ДатаЗагрузки, b.Длина, b.ДополнитИнформация, b.ДополнитИнформация1, b.КвадратВыгрузки, lstt,
-                                          b.КвадратПогрузки, b.КонтЛицо, b.КонтТелефон, b.Наименование, b.Обьем, b.Организации, b.ПаллетыШтук, b.РазмерПаллет, b.СписокДат, b.Ставка, b.СтранаВыгрузки, b.СтранаПогрузки, b.ТаможняНазначения, b.ТаможняОтправления,
-                                          b.ТипАвто, b.ТипПогрузки, b.Ширина))
+        '                    Dim var = String.Join(",", (b.ADR, b.EX, b.Высота, b.Вес, b.ГородВыгрузки, b.ГородПогрузки, b.ДатаВыгрузки, b.ДатаЗагрузки, b.Длина, b.ДополнитИнформация, b.ДополнитИнформация1, b.КвадратВыгрузки, lstt,
+        '                                          b.КвадратПогрузки, b.КонтЛицо, b.КонтТелефон, b.Наименование, b.Обьем, b.Организации, b.ПаллетыШтук, b.РазмерПаллет, b.СписокДат, b.Ставка, b.СтранаВыгрузки, b.СтранаПогрузки, b.ТаможняНазначения, b.ТаможняОтправления,
+        '                                          b.ТипАвто, b.ТипПогрузки, b.Ширина))
 
-                    If var.ToUpper.Contains(txt1.ToUpper) Then
-                        Dim ml As New ForSeachtxt1 With {.Данные = b, .Строка = var}
-                        f3.Add(ml)
-                    End If
-                Next
-
-
-            End If
-        End If
+        '                    If var.ToUpper.Contains(txt1.ToUpper) Then
+        '                        Dim ml As New ForSeachtxt1 With {.Данные = b, .Строка = var}
+        '                        f3.Add(ml)
+        '                    End If
+        '                Next
 
 
-        If f3 IsNot Nothing Then
-            If f3.Count > 0 Then
-                Dim f9 As New ЖурналДопФормаВыбора(f3)
-                f9.ShowDialog()
-                Dim f11 = f9.Sel
-                If f11 IsNot Nothing Then
-                    Dim mo As New AllUpd
-                    Do While AllClass.ЖурналДата Is Nothing
-                        mo.ЖурналДатаAll()
-                    Loop
-                    Do While AllClass.ЖурналКлиентГруз Is Nothing
-                        mo.ЖурналКлиентГрузAll()
-                    Loop
-                    Dim f12 = (From x In AllClass.ЖурналДата
-                               Join y In AllClass.ЖурналКлиентГруз On x.Код Equals y.КодЖурналДата
-                               Join z In AllClass.ЖурналКлиентМаршрут On y.Код Equals z.КодЖурналКлиентГруз
-                               Where y.Код = f11.КодЖурналГруз
-                               Select x, y, z).FirstOrDefault()
+        '            End If
+        '        End If
 
 
-                    ComboBox1.Text = f12.x.Дата
-                    ComboBox2.Text = f12.y.Клиент
-                    ComboBox5.Text = f12.x.Дата & ": " & f12.y.НаименованиеГруза & " (" & f12.z.СтранаПогрузки & " - " & f12.z.СтранаВыгрузки & ")"
-                    comb5Sel()
-                End If
-            End If
-        End If
+        '        If f3 IsNot Nothing Then
+        '            If f3.Count > 0 Then
+        '                Dim f9 As New ЖурналДопФормаВыбора(f3)
+        '                f9.ShowDialog()
+        '                Dim f11 = f9.Sel
+        '                If f11 IsNot Nothing Then
+        '                    Dim mo As New AllUpd
+        '                    Do While AllClass.ЖурналДата Is Nothing
+        '                        mo.ЖурналДатаAll()
+        '                    Loop
+        '                    Do While AllClass.ЖурналКлиентГруз Is Nothing
+        '                        mo.ЖурналКлиентГрузAll()
+        '                    Loop
+        '                    Dim f12 = (From x In AllClass.ЖурналДата
+        '                               Join y In AllClass.ЖурналКлиентГруз On x.Код Equals y.КодЖурналДата
+        '                               Join z In AllClass.ЖурналКлиентМаршрут On y.Код Equals z.КодЖурналКлиентГруз
+        '                               Where y.Код = f11.КодЖурналГруз
+        '                               Select x, y, z).FirstOrDefault()
+
+
+        '                    ComboBox1.Text = f12.x.Дата
+        '                    ComboBox2.Text = f12.y.Клиент
+        '                    ComboBox5.Text = f12.x.Дата & ": " & f12.y.НаименованиеГруза & " (" & f12.z.СтранаПогрузки & " - " & f12.z.СтранаВыгрузки & ")"
+        '                    comb5Sel()
+        '                End If
+        '            End If
+        '        End If
 
 
 
@@ -1239,7 +1283,7 @@ b1.СтранаПогрузки, b1.ТаможняНазначения, b1.Та�
         mo.ЖурналКлиентГрузAll()
     End Sub
 
-    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+    Private Sub Button6_Click(sender As Object, e As EventArgs)
         Dim f1 As IDNaz = ComboBox1.SelectedItem
         Dim f2 As IDNaz = ComboBox2.SelectedItem
         Dim f5 As Com1ЖурналClass = ComboBox5.SelectedItem
@@ -1259,9 +1303,9 @@ b1.СтранаПогрузки, b1.ТаможняНазначения, b1.Та�
             Dim f8 = listbox1All.IndexOf(f7)
             f7 = "| РЕЗУЛЬТАТ: " & "КЛИЕНТ САМ ЗАКРЫЛ!" & "| ДАТА: " & Now.ToShortDateString
             listbox1All(f8) = f7
-            ListBox1.BeginUpdate()
+            'ListBox1.BeginUpdate()
             bslistbox1.ResetBindings(False)
-            ListBox1.EndUpdate()
+            'ListBox1.EndUpdate()
         End If
 
 
@@ -1269,7 +1313,7 @@ b1.СтранаПогрузки, b1.ТаможняНазначения, b1.Та�
 
     End Sub
 
-    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+    Private Sub Button5_Click(sender As Object, e As EventArgs)
         Dim f1 As IDNaz = ComboBox1.SelectedItem
         Dim f2 As IDNaz = ComboBox2.SelectedItem
         Dim f5 As Com1ЖурналClass = ComboBox5.SelectedItem
@@ -1288,13 +1332,13 @@ b1.СтранаПогрузки, b1.ТаможняНазначения, b1.Та�
             Dim f8 = listbox1All.IndexOf(f7)
             f7 = "| РЕЗУЛЬТАТ: " & "КЛИЕНТ ОТМЕНИЛ!" & "| ДАТА: " & Now.ToShortDateString
             listbox1All(f8) = f7
-            ListBox1.BeginUpdate()
+            'ListBox1.BeginUpdate()
             bslistbox1.ResetBindings(False)
-            ListBox1.EndUpdate()
+            'ListBox1.EndUpdate()
         End If
     End Sub
 
-    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
+    Private Sub Button7_Click(sender As Object, e As EventArgs)
         Dim f1 As IDNaz = ComboBox1.SelectedItem
         Dim f2 As IDNaz = ComboBox2.SelectedItem
         Dim f5 As Com1ЖурналClass = ComboBox5.SelectedItem
@@ -1313,9 +1357,9 @@ b1.СтранаПогрузки, b1.ТаможняНазначения, b1.Та�
             Dim f8 = listbox1All.IndexOf(f7)
             f7 = "| РЕЗУЛЬТАТ: " & "СДЕЛКА СОСТОЯЛАСЬ!" & "| ДАТА: " & Now.ToShortDateString
             listbox1All(f8) = f7
-            ListBox1.BeginUpdate()
+            'ListBox1.BeginUpdate()
             bslistbox1.ResetBindings(False)
-            ListBox1.EndUpdate()
+            'ListBox1.EndUpdate()
         End If
     End Sub
     Private Sub UpdЖурналПеревозчикиGrid1(ByVal d As Integer, ByVal Sob As Integer, ByVal txt As String)
@@ -1381,14 +1425,14 @@ b1.СтранаПогрузки, b1.ТаможняНазначения, b1.Та�
         End If
     End Sub
 
-    Private Sub ComboBox3_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles ComboBox3.SelectionChangeCommitted
-        Dim f As IDNaz = ComboBox3.SelectedItem
-        If ComboBox1.Text.Length > 0 And ComboBox2.Text.Length > 0 Then
-            Dim f1 As New ЖурналCombo3СводнаяПоКлиентам(f.Naz)
-            f1.ShowDialog()
-        End If
+    'Private Sub ComboBox3_SelectionChangeCommitted(sender As Object, e As EventArgs)
+    '    Dim f As IDNaz = ComboBox3.SelectedItem
+    '    If ComboBox1.Text.Length > 0 And ComboBox2.Text.Length > 0 Then
+    '        Dim f1 As New ЖурналCombo3СводнаяПоКлиентам(f.Naz)
+    '        f1.ShowDialog()
+    '    End If
 
-    End Sub
+    'End Sub
 
     Private Sub Button15_Click(sender As Object, e As EventArgs) Handles Button15.Click
         Dim f As New SkypeClientPredloj
@@ -1444,7 +1488,7 @@ b1.СтранаПогрузки, b1.ТаможняНазначения, b1.Та�
         Dim comb2x As IDNaz = ComboBox2.SelectedItem
         Dim comb5x As Com1ЖурналClass = ComboBox5.SelectedItem
         Dim m As String = Grid1Clic.Перевозчик & vbCrLf & Grid1Clic.Контакт & vbCrLf & " - авто для клиента - " _
-& vbCrLf & comb2x.Naz & " - груз - " & vbCrLf & comb5x.Наименование & vbCrLf & "(" & comb5x.Lst(0).СтранаПогрузки & ")" & vbCrLf & " - тип авто - " & vbCrLf & comb5x.ТипАвто
+& vbCrLf & comb2x.Naz
 
         My.Computer.Clipboard.SetText(m)
         MessageBox.Show("Данные в буфере")
@@ -1672,21 +1716,41 @@ b1.СтранаПогрузки, b1.ТаможняНазначения, b1.Та�
                           Join y In AllClass.ЖурналКлиентМаршрут On x.Код Equals y.КодЖурналКлиентГруз
                           Where x.Код = m1.ID
                           Select New Grid2ЖурналClass With {.ДатаЗагрузки = "Заг-" & m1.ДатаЗагрузки & vbCrLf & "Выг-" & m1.ДатаВыгрузки, .Груз = x.НаименованиеГруза,
-                             .Mаршрут = "( " & y.СтранаПогрузки & " ) " & y.ГородПогрузки & " - " & "( " & y.СтранаВыгрузки & " ) " & y.ГородВыгрузки,
+                             .Страны = "( " & y.СтранаПогрузки & " ) " & y.ГородПогрузки & " - " & "( " & y.СтранаВыгрузки & " ) " & y.ГородВыгрузки,
                              .ВсплывПримеч = y.ДополнитИнформация, .Дата = Now.Date, .Клиент = y.Клиент, .КодЖурналГруз = m1.ID, .Состояние = x.РезультатРаботы, .СтранаПогрузки = y.СтранаПогрузки,
-                             .СтранаВыгрузки = y.СтранаВыгрузки, .IdКодЖурнДаты = m1.IDЖурналКлиентДаты}).FirstOrDefault()
+                             .СтранаВыгрузки = y.СтранаВыгрузки, .IdКодЖурнДаты = m1.IDЖурналКлиентДаты, .Инфо = "i"}).FirstOrDefault()
 
                 If f2 IsNot Nothing Then
-                    Upd2Async(m1.ID)
-
                     Dim k As New List(Of Grid2ЖурналClass)
-                    k.AddRange(Grid2all)
-                    If Grid2all IsNot Nothing Then
-                        Grid2all.Clear()
-                    End If
-                    k.Add(f2)
+                    Dim lp = (From x In AllClass.ЖурналКлиентГруз
+                              Join y In AllClass.ЖурналКлиентДаты On x.Код Equals y.IDЖурналКлиентГруз
+                              Where x.Код = m1.ID And y?.Состояние?.ToUpper.Contains("Актуально".ToUpper)
+                              Select y).ToList()
+                    If lp IsNot Nothing Then
+                        For Each b In lp
+                            Dim mkg As New Grid2ЖурналClass With {.ДатаЗагрузки = "Заг-" & b.ДатаЗагрузки & vbCrLf & "Выг-" & b.ДатаДоставки, .Груз = f2.Груз,
+                                .Страны = f2.Страны, .ВсплывПримеч = b.ДопУсловия, .Дата = f2.Дата, .КодЖурналГруз = f2.КодЖурналГруз, .Состояние = b.Состояние, .СтранаПогрузки = f2.СтранаПогрузки,
+                                .СтранаВыгрузки = f2.СтранаВыгрузки, .Города = b.ДопУсловия, .IdКодЖурнДаты = f2.IdКодЖурнДаты, .Инфо = f2.Инфо, .Клиент = f2.Клиент}
+                            k.Add(mkg)
+                        Next
+                        k.AddRange(Grid2all)
+                        If Grid2all IsNot Nothing Then
+                            Grid2all.Clear()
+                        End If
 
-                    Grid2all.AddRange(k.OrderBy(Function(x) x.Дата).ToList())
+                    Else
+                        Upd2Async(m1.ID)
+
+                        k.AddRange(Grid2all)
+                        k.Add(f2)
+                        If Grid2all IsNot Nothing Then
+                            Grid2all.Clear()
+                        End If
+
+                    End If
+
+
+                    Grid2all.AddRange(k.OrderBy(Function(x) x.Клиент).ThenBy(Function(x) x.Дата).ToList())
                     Dim i As Integer = 1
                     For Each b In Grid2all
                         b.Номер = i
@@ -1733,6 +1797,10 @@ b1.СтранаПогрузки, b1.ТаможняНазначения, b1.Та�
             If f > 0 Then
                 Dim f1 As New ЖурналПеревозчикСобытияТаблица(f)
                 f1.ShowDialog()
+                If f1.Rez IsNot Nothing Then
+                    Grid1all.ElementAt(e.RowIndex).Состояние = f1.Rez
+                    bsgrid1.ResetBindings(False)
+                End If
             End If
         End If
     End Sub
@@ -1740,7 +1808,7 @@ b1.СтранаПогрузки, b1.ТаможняНазначения, b1.Та�
     Private Sub АктуальноToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles АктуальноToolStripMenuItem.Click
         Dim f As Grid2ЖурналClass = Grid2all.ElementAt(Grid2.CurrentRow.Index)
         If f IsNot Nothing Then
-            Dim ms As String = "Акуально!" & vbCrLf & Now.ToLongDateString
+            Dim ms As String = "Актуально!" & vbCrLf & Now
             UpdGrid2SelAsync(f.КодЖурналГруз, ms, f.IdКодЖурнДаты)
             MessageBox.Show("Данные приняты!", Рик)
             Grid2all.ElementAt(Grid2.CurrentRow.Index).Состояние = ms
@@ -1751,13 +1819,50 @@ b1.СтранаПогрузки, b1.ТаможняНазначения, b1.Та�
     Private Sub НеАктульноToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles НеАктульноToolStripMenuItem.Click
         Dim f As Grid2ЖурналClass = Grid2all.ElementAt(Grid2.CurrentRow.Index)
         If f IsNot Nothing Then
-            Dim ms As String = "Груз закрыт!" & vbCrLf & Now.ToLongDateString
+            Dim ms As String = "Груз закрыт!" & vbCrLf & Now
             UpdGrid2SelAsync(f.КодЖурналГруз, ms, f.IdКодЖурнДаты)
             MessageBox.Show("Данные приняты!", Рик)
             Grid2all.ElementAt(Grid2.CurrentRow.Index).Состояние = ms
             bsgrid2.ResetBindings(False)
+            'удаление
+            УдалитьРейсИзтаблицыAsync()
+            Grid2all.Remove(Grid2Clic)
+            bsgrid2.ResetBindings(False)
         End If
     End Sub
+
+    Private Sub Grid2_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles Grid2.CellContentClick
+        If e.RowIndex = -1 Then Return
+
+        If e.ColumnIndex = 9 Then
+            Dim m = Grid2all.ElementAt(e.RowIndex)
+            Dim f As New ЖурналВсплывИнфо(m)
+            f.Show()
+        End If
+    End Sub
+
+    Private Sub Button18_Click(sender As Object, e As EventArgs) Handles Button18.Click
+        grd2DataAsync()
+        Grids()
+    End Sub
+
+    Private Sub ComboBox3_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles ComboBox3.SelectionChangeCommitted
+        If ComboBox3.SelectedText.Length > 0 Then
+            If ComboBox3.SelectedIndex = 0 Then
+                ДобПер = 1
+                Dim f As New ДобавитьПеревозчика()
+                f.ShowDialog()
+            Else
+
+                Dim f1 As New ПоискПеревозчиков
+                f1.WindowState = FormWindowState.Normal
+                f1.StartPosition = FormStartPosition.CenterParent
+                f1.ShowDialog()
+
+            End If
+        End If
+    End Sub
+
 
 
 

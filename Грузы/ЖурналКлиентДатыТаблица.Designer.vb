@@ -43,13 +43,14 @@ Partial Class ЖурналКлиентДатыТаблица
         Me.Grid1.Name = "Grid1"
         DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.Grid1.RowsDefaultCellStyle = DataGridViewCellStyle1
-        Me.Grid1.Size = New System.Drawing.Size(1007, 294)
+        Me.Grid1.Size = New System.Drawing.Size(877, 342)
         Me.Grid1.TabIndex = 0
         '
         'Button1
         '
+        Me.Button1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Button1.BackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.Button1.Location = New System.Drawing.Point(914, 312)
+        Me.Button1.Location = New System.Drawing.Point(784, 360)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(105, 30)
         Me.Button1.TabIndex = 1
@@ -58,8 +59,9 @@ Partial Class ЖурналКлиентДатыТаблица
         '
         'Button2
         '
+        Me.Button2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Button2.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.Button2.Location = New System.Drawing.Point(803, 312)
+        Me.Button2.Location = New System.Drawing.Point(673, 360)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(105, 30)
         Me.Button2.TabIndex = 2
@@ -68,8 +70,9 @@ Partial Class ЖурналКлиентДатыТаблица
         '
         'Button3
         '
+        Me.Button3.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Button3.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.Button3.Location = New System.Drawing.Point(471, 312)
+        Me.Button3.Location = New System.Drawing.Point(341, 360)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(105, 30)
         Me.Button3.TabIndex = 3
@@ -81,7 +84,7 @@ Partial Class ЖурналКлиентДатыТаблица
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 18.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.DarkKhaki
-        Me.ClientSize = New System.Drawing.Size(1031, 351)
+        Me.ClientSize = New System.Drawing.Size(901, 399)
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button1)

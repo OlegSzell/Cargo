@@ -21,7 +21,14 @@
 
         Dim dat As String = Format(Da, "MM/dd/yyyy")
         Dim str As String = "https://www.nbrb.by/services/xmlexrates.aspx?ondate=" & dat
-        Dim xdoc As XDocument = XDocument.Load(str)
+        Dim xdoc As XDocument
+        Try
+            xdoc = XDocument.Load(str)
+        Catch ex As Exception
+            MessageBox.Show("Пробелма с данными из банка НБРБ!", Рик)
+            Return 0
+        End Try
+
         For Each x As XElement In xdoc.Element("DailyExRates").Elements("Currency")
             Dim md = x.Attribute("Id").Value
 

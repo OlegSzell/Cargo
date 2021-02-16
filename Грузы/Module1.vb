@@ -38,6 +38,8 @@ Module Module1
     Public dtТипАвтоAll As DataTable
     Public Procenty20 As String = "False"
     Public КалендарьПовтор As Boolean = False
+    Public EmailPass As EmailTb = Nothing
+
 
 
 

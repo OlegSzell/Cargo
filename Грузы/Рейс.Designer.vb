@@ -140,6 +140,8 @@ Partial Class Рейс
         Me.КлиентBindingSource2 = New System.Windows.Forms.BindingSource(Me.components)
         Me.КлиентBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.КлиентBindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.Label16 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.ToolStrip2.SuspendLayout()
@@ -1045,7 +1047,7 @@ Partial Class Рейс
         Me.ToolStrip1.Location = New System.Drawing.Point(244, 32)
         Me.ToolStrip1.Name = "ToolStrip1"
         Me.ToolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
-        Me.ToolStrip1.Size = New System.Drawing.Size(66, 25)
+        Me.ToolStrip1.Size = New System.Drawing.Size(35, 25)
         Me.ToolStrip1.TabIndex = 56
         Me.ToolStrip1.Text = "ToolStrip1"
         '
@@ -1158,11 +1160,34 @@ Partial Class Рейс
         '
         Me.КлиентBindingSource1.DataMember = "Клиент"
         '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Font = New System.Drawing.Font("Calibri", 14.25!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.Label15.ForeColor = System.Drawing.Color.Red
+        Me.Label15.Location = New System.Drawing.Point(495, 9)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(19, 23)
+        Me.Label15.TabIndex = 60
+        Me.Label15.Text = "?"
+        '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.Font = New System.Drawing.Font("Calibri", 11.25!, CType((System.Drawing.FontStyle.Italic Or System.Drawing.FontStyle.Underline), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.Label16.Location = New System.Drawing.Point(457, 12)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(41, 18)
+        Me.Label16.TabIndex = 61
+        Me.Label16.Text = "Рейс:"
+        '
         'Рейс
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 18.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1423, 803)
+        Me.Controls.Add(Me.Label16)
+        Me.Controls.Add(Me.Label15)
         Me.Controls.Add(Me.GroupBox13)
         Me.Controls.Add(Me.Button8)
         Me.Controls.Add(Me.ToolStrip1)
@@ -1353,4 +1378,6 @@ Partial Class Рейс
     Friend WithEvents СводнаяОплатToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ОплатаToolStripMenuItem1 As ToolStripSeparator
     Friend WithEvents ОплатаToolStripMenuItem2 As ToolStripMenuItem
+    Friend WithEvents Label15 As Label
+    Friend WithEvents Label16 As Label
 End Class

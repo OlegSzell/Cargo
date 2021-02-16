@@ -58,10 +58,11 @@ Partial Class MDIParent1
         Me.ОтчетToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ЧерныйСписокToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ПоискToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.СводнаяОплатToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StatusStrip = New System.Windows.Forms.StatusStrip()
         Me.ToolStripStatusLabel = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolTip = New System.Windows.Forms.ToolTip(Me.components)
-        Me.СводнаяОплатToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.RadioToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip.SuspendLayout()
         Me.StatusStrip.SuspendLayout()
         Me.SuspendLayout()
@@ -135,7 +136,7 @@ Partial Class MDIParent1
         '
         'КлиентToolStripMenuItem1
         '
-        Me.КлиентToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ПереговорыToolStripMenuItem, Me.НапоминаниеToolStripMenuItem, Me.СвободныйТранспортToolStripMenuItem, Me.ЛИToolStripMenuItem, Me.ОтчетToolStripMenuItem, Me.КалендарьToolStripMenuItem, Me.ЖурналToolStripMenuItem, Me.SQLDepToolStripMenuItem, Me.SkypeToolStripMenuItem, Me.ImageToolStripMenuItem, Me.БраузерToolStripMenuItem, Me.ФинанасыTool})
+        Me.КлиентToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ПереговорыToolStripMenuItem, Me.НапоминаниеToolStripMenuItem, Me.СвободныйТранспортToolStripMenuItem, Me.ЛИToolStripMenuItem, Me.ОтчетToolStripMenuItem, Me.КалендарьToolStripMenuItem, Me.ЖурналToolStripMenuItem, Me.SQLDepToolStripMenuItem, Me.SkypeToolStripMenuItem, Me.ImageToolStripMenuItem, Me.БраузерToolStripMenuItem, Me.ФинанасыTool, Me.RadioToolStripMenuItem})
         Me.КлиентToolStripMenuItem1.Name = "КлиентToolStripMenuItem1"
         Me.КлиентToolStripMenuItem1.Size = New System.Drawing.Size(88, 19)
         Me.КлиентToolStripMenuItem1.Text = "Переговоры"
@@ -223,7 +224,6 @@ Partial Class MDIParent1
         '
         'ФинанасыTool
         '
-        Me.ФинанасыTool.Enabled = False
         Me.ФинанасыTool.Name = "ФинанасыTool"
         Me.ФинанасыTool.Size = New System.Drawing.Size(198, 22)
         Me.ФинанасыTool.Text = "Финанасы"
@@ -278,6 +278,12 @@ Partial Class MDIParent1
         Me.ПоискToolStripMenuItem.Size = New System.Drawing.Size(54, 19)
         Me.ПоискToolStripMenuItem.Text = "Поиск"
         '
+        'СводнаяОплатToolStripMenuItem
+        '
+        Me.СводнаяОплатToolStripMenuItem.Name = "СводнаяОплатToolStripMenuItem"
+        Me.СводнаяОплатToolStripMenuItem.Size = New System.Drawing.Size(100, 19)
+        Me.СводнаяОплатToolStripMenuItem.Text = "Сводная оплат"
+        '
         'StatusStrip
         '
         Me.StatusStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel})
@@ -294,11 +300,11 @@ Partial Class MDIParent1
         Me.ToolStripStatusLabel.Size = New System.Drawing.Size(66, 17)
         Me.ToolStripStatusLabel.Text = "Состояние"
         '
-        'СводнаяОплатToolStripMenuItem
+        'RadioToolStripMenuItem
         '
-        Me.СводнаяОплатToolStripMenuItem.Name = "СводнаяОплатToolStripMenuItem"
-        Me.СводнаяОплатToolStripMenuItem.Size = New System.Drawing.Size(100, 19)
-        Me.СводнаяОплатToolStripMenuItem.Text = "Сводная оплат"
+        Me.RadioToolStripMenuItem.Name = "RadioToolStripMenuItem"
+        Me.RadioToolStripMenuItem.Size = New System.Drawing.Size(198, 22)
+        Me.RadioToolStripMenuItem.Text = "Radio"
         '
         'MDIParent1
         '
@@ -362,4 +368,5 @@ Partial Class MDIParent1
     Friend WithEvents БраузерToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ФинанасыTool As ToolStripMenuItem
     Friend WithEvents СводнаяОплатToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents RadioToolStripMenuItem As ToolStripMenuItem
 End Class

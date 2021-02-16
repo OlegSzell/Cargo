@@ -71,7 +71,7 @@ Partial Class ИзменПеревозчика
         '
         'TextBox10
         '
-        Me.TextBox10.Location = New System.Drawing.Point(197, 142)
+        Me.TextBox10.Location = New System.Drawing.Point(582, 203)
         Me.TextBox10.Margin = New System.Windows.Forms.Padding(4)
         Me.TextBox10.Name = "TextBox10"
         Me.TextBox10.Size = New System.Drawing.Size(103, 26)
@@ -80,7 +80,7 @@ Partial Class ИзменПеревозчика
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(101, 145)
+        Me.Label10.Location = New System.Drawing.Point(514, 203)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(61, 18)
         Me.Label10.TabIndex = 44
@@ -134,7 +134,7 @@ Partial Class ИзменПеревозчика
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(101, 174)
+        Me.Label5.Location = New System.Drawing.Point(306, 203)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(55, 18)
         Me.Label5.TabIndex = 38
@@ -142,7 +142,7 @@ Partial Class ИзменПеревозчика
         '
         'TextBox5
         '
-        Me.TextBox5.Location = New System.Drawing.Point(197, 174)
+        Me.TextBox5.Location = New System.Drawing.Point(368, 203)
         Me.TextBox5.Margin = New System.Windows.Forms.Padding(4)
         Me.TextBox5.Name = "TextBox5"
         Me.TextBox5.Size = New System.Drawing.Size(103, 26)
@@ -178,8 +178,9 @@ Partial Class ИзменПеревозчика
         '
         Me.TextBox3.Location = New System.Drawing.Point(197, 108)
         Me.TextBox3.Margin = New System.Windows.Forms.Padding(4)
+        Me.TextBox3.Multiline = True
         Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(354, 26)
+        Me.TextBox3.Size = New System.Drawing.Size(354, 87)
         Me.TextBox3.TabIndex = 33
         '
         'Label2
@@ -235,7 +236,7 @@ Partial Class ИзменПеревозчика
         'TextBox9
         '
         Me.TextBox9.Enabled = False
-        Me.TextBox9.Location = New System.Drawing.Point(654, 142)
+        Me.TextBox9.Location = New System.Drawing.Point(654, 150)
         Me.TextBox9.Margin = New System.Windows.Forms.Padding(4)
         Me.TextBox9.Name = "TextBox9"
         Me.TextBox9.Size = New System.Drawing.Size(158, 26)
@@ -244,7 +245,7 @@ Partial Class ИзменПеревозчика
         'Label12
         '
         Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(535, 150)
+        Me.Label12.Location = New System.Drawing.Point(698, 128)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(112, 18)
         Me.Label12.TabIndex = 52

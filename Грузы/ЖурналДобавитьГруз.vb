@@ -13,6 +13,7 @@
     Private AutoРегионы As AutoCompleteStringCollection
     Public ForGrid2журналс As Grid2ЖурналClass
     Public Flag As Boolean = False
+    Private Rezult As String = Nothing
 
     Private Sub AutoCompl()
         Dim mo As New AllUpd
@@ -140,8 +141,16 @@
         Grid1.Columns(11).HeaderText = "Тип авто"
         Grid1.Columns(12).HeaderText = "Доп информация"
         Grid1.Columns(0).Visible = False
-        Grid1.Columns(1).Width = "200"
-        Grid1.Columns(2).Width = "80"
+        Grid1.Columns(3).Visible = False
+        Grid1.Columns(4).Visible = False
+        Grid1.Columns(5).Visible = False
+        Grid1.Columns(6).Visible = False
+        Grid1.Columns(8).Visible = False
+        Grid1.Columns(9).Visible = False
+        Grid1.Columns(10).Visible = False
+        Grid1.Columns(12).Visible = False
+        Grid1.Columns(1).MinimumWidth = "200"
+        Grid1.Columns(2).MinimumWidth = "100"
         Grid1.Columns(2).HeaderText = "Вес (кг)"
 
 
@@ -195,6 +204,7 @@
             .Клиент = txt1
             .КонтактноеЛицо = TextBox2.Text
             .Телефон = TextBox3.Text
+            .ДопИнфо = Rezult
         End With
         Using db As New dbAllDataContext()
             db.ЖурналКлиентСписок.InsertOnSubmit(f)
@@ -203,6 +213,11 @@
 
         Dim f4 As New IDNaz With {.Naz = txt1}
         com1All.Add(f4)
+        Dim ms As New List(Of IDNaz)
+        ms.AddRange(com1All.OrderBy(Function(x) x.Naz).ToList())
+
+        com1All.Clear()
+        com1All.AddRange(ms)
         bscom1.ResetBindings(False)
         ComboBox1.Text = txt1
 
@@ -319,7 +334,7 @@
         ForGrid2журналс = New Grid2ЖурналClass
 
         Dim f As New Grid2ЖурналClass With {.Дата = CDate(Label2.Text), .ДатаЗагрузки = MaskedTextBox1.Text, .Клиент = Клиент,
-            .Mаршрут = marsh, .Груз = Grid1All(0).Наименование}
+            .Страны = marsh, .Груз = Grid1All(0).Наименование}
         If f IsNot Nothing Then
             ForGrid2журналс = f
         End If
@@ -373,7 +388,76 @@
         If Grid1All IsNot Nothing Then
             Grid1All.Clear()
         End If
+        If k IsNot Nothing Then
+            If k.Длина IsNot Nothing Then
+                If k.Длина.Length > 0 Then
+                    Grid1.Columns(4).Visible = True
+                End If
+            Else
+                Grid1.Columns(4).Visible = False
+            End If
+            If k.Высота IsNot Nothing Then
+                If k.Высота.Length > 0 Then
+                    Grid1.Columns(6).Visible = True
+                End If
+            Else
+                Grid1.Columns(6).Visible = False
+
+            End If
+
+            If k.Ширина IsNot Nothing Then
+                If k.Ширина.Length > 0 Then
+                    Grid1.Columns(5).Visible = True
+                End If
+            Else
+                Grid1.Columns(5).Visible = False
+            End If
+
+            If k.Обьем IsNot Nothing Then
+                If k.Обьем.Length > 0 Then
+                    Grid1.Columns(3).Visible = True
+                End If
+            Else
+                Grid1.Columns(3).Visible = False
+            End If
+
+            If k.ПаллетыШтук > 0 Then
+
+                Grid1.Columns(8).Visible = True
+            Else
+                Grid1.Columns(8).Visible = False
+
+            End If
+
+            If k.РазмерПаллет IsNot Nothing Then
+                If k.РазмерПаллет.Length > 0 Then
+                    Grid1.Columns(9).Visible = True
+                End If
+            Else
+                Grid1.Columns(9).Visible = False
+            End If
+
+            If k.ADR IsNot Nothing Then
+                If k.ADR.Length > 0 Then
+                    Grid1.Columns(10).Visible = True
+                End If
+            Else
+                Grid1.Columns(10).Visible = False
+            End If
+
+            If k.ДополнитИнформация IsNot Nothing Then
+                If k.ДополнитИнформация.Length > 0 Then
+                    Grid1.Columns(12).Visible = True
+                End If
+            Else
+                Grid1.Columns(12).Visible = False
+            End If
+
+
+        End If
+
         Grid1All.Add(k)
+
         bsGrid1.ResetBindings(False)
 
         If Grid2All IsNot Nothing Then
@@ -747,5 +831,76 @@
         If e.ColumnIndex = 1 Then
             Grid1All.ElementAt(e.RowIndex).Наименование = Grid1All.ElementAt(e.RowIndex).Наименование & " - (" & Now.ToLongTimeString & ")"
         End If
+    End Sub
+
+    Private Sub CheckBox2_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox2.CheckedChanged
+        'дЛина
+        If CheckBox2.Checked = True Then
+            Grid1.Columns(4).Visible = True
+        Else
+            Grid1.Columns(4).Visible = False
+        End If
+    End Sub
+
+    Private Sub CheckBox3_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox3.CheckedChanged
+        If CheckBox3.Checked = True Then
+            Grid1.Columns(5).Visible = True
+        Else
+            Grid1.Columns(5).Visible = False
+        End If
+    End Sub
+
+    Private Sub CheckBox4_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox4.CheckedChanged
+        If CheckBox4.Checked = True Then 'высота
+            Grid1.Columns(6).Visible = True
+        Else
+            Grid1.Columns(6).Visible = False
+        End If
+    End Sub
+
+    Private Sub CheckBox5_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox5.CheckedChanged
+        If CheckBox5.Checked = True Then
+            Grid1.Columns(3).Visible = True
+        Else
+            Grid1.Columns(3).Visible = False
+        End If
+    End Sub
+
+    Private Sub CheckBox6_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox6.CheckedChanged
+        If CheckBox6.Checked = True Then
+            Grid1.Columns(8).Visible = True
+        Else
+            Grid1.Columns(8).Visible = False
+        End If
+    End Sub
+
+    Private Sub CheckBox7_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox7.CheckedChanged
+        If CheckBox7.Checked = True Then
+            Grid1.Columns(9).Visible = True
+        Else
+            Grid1.Columns(9).Visible = False
+        End If
+    End Sub
+
+    Private Sub CheckBox8_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox8.CheckedChanged
+        If CheckBox8.Checked = True Then
+            Grid1.Columns(10).Visible = True
+        Else
+            Grid1.Columns(10).Visible = False
+        End If
+    End Sub
+
+    Private Sub CheckBox9_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox9.CheckedChanged
+        If CheckBox9.Checked = True Then
+            Grid1.Columns(12).Visible = True
+        Else
+            Grid1.Columns(12).Visible = False
+        End If
+    End Sub
+
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+        Dim f As New ЖурналДобавитьГрузДопДанные
+        f.ShowDialog()
+        Rezult = f.Rezult
     End Sub
 End Class

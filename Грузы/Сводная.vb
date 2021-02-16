@@ -8,6 +8,10 @@ Public Class Сводная
     Dim Grid1All As List(Of Grid1Class)
     Private bsGrid1 As New BindingSource
 
+    Dim xlapp As Microsoft.Office.Interop.Excel.Application
+    Dim xlworkbook As Microsoft.Office.Interop.Excel.Workbook
+    Dim xlworksheet As Microsoft.Office.Interop.Excel.Worksheet
+
 
     Sub New()
 
@@ -694,4 +698,97 @@ Public Class Сводная
         Com1sAsync(Trim(f), True)
         Cursor = Cursors.Default
     End Sub
+    Private Sub ExtrExcel()
+        If Grid1All Is Nothing Then
+            Return
+        End If
+
+        Me.Cursor = Cursors.WaitCursor
+
+        Dim Pathвремянка2 = "C:\Users\Public\Downloads"
+        If File.Exists(Pathвремянка2 & "\" & "Oplaty2.xlsx") Then
+            File.Delete(Pathвремянка2 & "\" & "Oplaty2.xlsx")
+        End If
+        If File.Exists(Pathвремянка2 & "\" & "Oplaty.xlsx") = False Then
+            'копируем из ресурсов в папку general
+            File.WriteAllBytes(Pathвремянка2 & "\" & "Oplaty.xlsx", My.Resources.Report)
+        Else
+            File.Delete(Pathвремянка2 & "\" & "Oplaty.xlsx")
+            File.WriteAllBytes(Pathвремянка2 & "\" & "Oplaty.xlsx", My.Resources.Report)
+        End If
+        Dim FileВремянка2 = Pathвремянка2 & "\" & "Oplaty.xlsx"
+
+
+
+        Dim i, j As Integer 'сохранение в эксель
+
+        Dim misvalue As Object = Reflection.Missing.Value
+        xlapp = New Microsoft.Office.Interop.Excel.Application
+        xlworkbook = xlapp.Workbooks.Add(FileВремянка2)
+        xlworksheet = xlworkbook.Sheets("Оплаты")
+
+
+        xlworksheet.Cells(2, 2) = Now
+
+
+        'Dim il As Integer = 1
+        'For Each b In Grid1All
+        '    xlworksheet.Cells(4 + il, 1) = b.Номер
+        '    xlworksheet.Cells(4 + il, 2) = b.Рейс
+        '    xlworksheet.Cells(4 + il, 3) = b.Клиент
+        '    xlworksheet.Cells(4 + il, 4) = b.СуммаИДатаОплКлиент
+        '    xlworksheet.Cells(4 + il, 5) = b.ДатаОплатыИСуммаПоступленияКлиент
+        '    xlworksheet.Cells(4 + il, 6) = b.ОстатокКлиент
+        '    xlworksheet.Cells(4 + il, 7) = b.Перевозчик
+        '    xlworksheet.Cells(4 + il, 8) = b.СуммаИДатаОплПеревозчик
+        '    xlworksheet.Cells(4 + il, 9) = b.ДатаОплатыИСуммаПоступленияПеревозчик
+        '    xlworksheet.Cells(4 + il, 10) = b.ОстатокПеревозчик
+        '    xlworksheet.Cells(4 + il, 11) = b.Дельта
+        '    il += 1
+        'Next
+
+
+
+        For i = 0 To Grid1.Rows.Count - 1
+            For j = 1 To Grid1.ColumnCount
+
+                xlworksheet.Cells(i + 5, j) = Grid1(j - 1, i).Value
+
+            Next
+        Next
+        xlworksheet.Range(Cell1:="A4", Cell2:="K" & Grid1.Rows.Count + 5).Cells.Borders.LineStyle = 1 'рисуем границы
+
+        xlworksheet.SaveAs("C:\Users\Public\Downloads\Oplaty2.xlsx")
+
+
+        xlworksheet.PrintOutEx()
+        xlworkbook.Close()
+        xlapp.Quit()
+        Me.Cursor = Cursors.Default
+        releaseobjectAsync(xlapp, xlworkbook, xlworksheet)
+
+
+
+
+    End Sub
+    Private Async Sub releaseobjectAsync(ByVal obj As Object, obj1 As Object, obj2 As Object)
+        Await Task.Run(Sub() releaseobject(obj))
+        Await Task.Run(Sub() releaseobject(obj1))
+        Await Task.Run(Sub() releaseobject(obj2))
+    End Sub
+    Private Sub releaseobject(ByVal obj As Object)
+        Try
+            Runtime.InteropServices.Marshal.ReleaseComObject(obj)
+            obj = Nothing
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+            obj = Nothing
+        Finally
+            GC.Collect()
+        End Try
+    End Sub
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        ExtrExcel()
+    End Sub
+
 End Class

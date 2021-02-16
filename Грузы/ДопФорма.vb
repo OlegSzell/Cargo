@@ -83,30 +83,80 @@ Public Class ДопФорма
 
 
     End Sub
+    Private Async Sub dbtn1InsertAsync(f As List(Of String), bol As Boolean)
+        Await Task.Run(Sub() dbtn1Insert(f, bol))
+    End Sub
+    Private Sub dbtn1Insert(f As List(Of String), bol As Boolean)
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        Me.Cursor = Cursors.WaitCursor
-        Dim mo As New AllUpd
         Using db As New dbAllDataContext()
             Dim var = db.РейсыКлиента.Where(Function(x) x.НомерРейса = Num).Select(Function(x) x).FirstOrDefault()
             If var IsNot Nothing Then
-                var.ПоИнотерр = TextBox3.Text
-                var.ПоТеррРБ = TextBox4.Text
-                var.ПоТеррРБПроц = TextBox1.Text
-                var.ПоИнотерПроц = TextBox2.Text
-                var.ДатаАкта = MaskedTextBox2.Text
-                var.НомерСМР = TextBox10.Text
-                var.ЗаявкаКлиента = TextBox6.Text
-                var.НомерЗаявки = TextBox5.Text
-                var.ДатаЗаявки = MaskedTextBox1.Text
+                var.ПоИнотерр = f(0)
+                var.ПоТеррРБ = f(1)
+                var.ПоТеррРБПроц = f(2)
+                var.ПоИнотерПроц = f(3)
+                var.ДатаАкта = f(4)
+                var.НомерСМР = f(5)
+                var.ЗаявкаКлиента = f(6)
+                var.НомерЗаявки = f(7)
+                var.ДатаЗаявки = f(8)
 
-                If TextBox7.Visible = True Then
-                    var.ОплатаПоКурсуКурс = TextBox7.Text
+                If bol = True Then
+                    var.ОплатаПоКурсуКурс = f(9)
                 End If
                 db.SubmitChanges()
-                mo.РейсыКлиентаAllAsync()
+                Dim mo As New AllUpd
+                mo.РейсыКлиентаAll()
             End If
         End Using
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+
+        Dim mdf As New List(Of String)
+        With mdf
+            .Add(TextBox3.Text)
+            .Add(TextBox4.Text)
+            .Add(TextBox1.Text)
+            .Add(TextBox2.Text)
+            .Add(MaskedTextBox2.Text)
+            .Add(TextBox10.Text)
+            .Add(TextBox6.Text)
+            .Add(TextBox5.Text)
+            .Add(MaskedTextBox1.Text)
+            .Add(TextBox7.Text)
+        End With
+        Dim bol As Boolean = False
+        If TextBox7.Visible = True Then
+            bol = True
+        End If
+
+        Me.Cursor = Cursors.WaitCursor
+
+        dbtn1InsertAsync(mdf, bol)
+
+
+        'Dim mo As New AllUpd
+        'Using db As New dbAllDataContext()
+        '    Dim var = db.РейсыКлиента.Where(Function(x) x.НомерРейса = Num).Select(Function(x) x).FirstOrDefault()
+        '    If var IsNot Nothing Then
+        '        var.ПоИнотерр = TextBox3.Text
+        '        var.ПоТеррРБ = TextBox4.Text
+        '        var.ПоТеррРБПроц = TextBox1.Text
+        '        var.ПоИнотерПроц = TextBox2.Text
+        '        var.ДатаАкта = MaskedTextBox2.Text
+        '        var.НомерСМР = TextBox10.Text
+        '        var.ЗаявкаКлиента = TextBox6.Text
+        '        var.НомерЗаявки = TextBox5.Text
+        '        var.ДатаЗаявки = MaskedTextBox1.Text
+
+        '        If TextBox7.Visible = True Then
+        '            var.ОплатаПоКурсуКурс = TextBox7.Text
+        '        End If
+        '        db.SubmitChanges()
+        '        mo.РейсыКлиентаAllAsync()
+        '    End If
+        'End Using
 
 
         MessageBox.Show("Данные внесены в базу!", Рик)

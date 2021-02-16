@@ -22,9 +22,9 @@
         End If
 
         If CheckBox1.Checked = True Then
-            Rez = "Актуально! " & vbCrLf & Now.ToLongDateString
+            Rez = "Актуально! " & vbCrLf & Now
         Else
-            Rez = "Закрыт груз! " & vbCrLf & Now.ToLongDateString
+            Rez = "Закрыт груз! " & vbCrLf & Now
         End If
 
         UpdAsync(Rez)

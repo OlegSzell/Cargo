@@ -44,6 +44,8 @@ Public Class Календарь
         GridView(Grid2)
         Grid2.Columns(0).Width = 60
         Grid2.SelectionMode = DataGridViewSelectionMode.CellSelect
+        'Grid2.CellBorderStyle = DataGridViewCellBorderStyle.SingleVertical
+
 
         bsgrid1.DataSource = grid1all
         Grid1.DataSource = bsgrid1
