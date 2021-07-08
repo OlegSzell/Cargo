@@ -108,7 +108,7 @@ Public Class ИзменитьНомерРейса
     End Sub
     Private Sub SaveDb(ByVal f As String)
         Dim mo As New AllUpd
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim f2 = db.РейсыКлиента.Where(Function(x) x.НомерРейса = Numb).FirstOrDefault()
             If f2 IsNot Nothing Then
                 f2.НомерРейса = f

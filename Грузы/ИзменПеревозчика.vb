@@ -118,7 +118,7 @@ Public Class ИзменПеревозчика
 
         Next
 
-        Using db As New dbAllDataContext
+        Using db As New dbAllDataContext(_cn3)
             Dim f = db.ПеревозчикиБаза.Where(Function(x) x.ID = cod.КодПеревозчика).FirstOrDefault()
             If f IsNot Nothing Then
                 With f

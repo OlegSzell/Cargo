@@ -77,7 +77,7 @@
     End Sub
     Private Sub addnew(ByVal lst As List(Of Grid1Class))
         Dim mo As New AllUpd
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim f = db.ЖурналПеревозчикСобытия.Where(Function(x) x.IDЖурналПеревозчик = ID).ToList()
             If f IsNot Nothing Then
                 db.ЖурналПеревозчикСобытия.DeleteAllOnSubmit(f)

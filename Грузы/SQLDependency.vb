@@ -5,8 +5,13 @@ Public Class SQLDependency2
     Dim queueName = "SELECT Маршрут FROM РейсыКлиента"
 
     Private Sub ExecuteWatchingQuery()
-        Using connection As SqlConnection = New SqlConnection(ConString)
+        Dim connection As SqlConnection
+
+        connection = New SqlConnection(ConString)
             connection.Open()
+
+
+
             Using command = New SqlCommand("SELECT Маршрут FROM РейсыКлиента", connection)
 
                 'Dim sqlDependency = New SqlDependency(command)
@@ -23,7 +28,7 @@ Public Class SQLDependency2
                     'End While
                 End Using
             End Using
-        End Using
+
     End Sub
     Private Sub OnDatabaseChange(ByVal sender As Object, ByVal e As SqlNotificationEventArgs)
         Try
@@ -47,13 +52,14 @@ Public Class SQLDependency2
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+
         SqlDependency.Stop(ConString)
         SqlDependency.Start(ConString)
         ExecuteWatchingQuery()
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        'Using db As New dbAllDataContext()
+        'Using db As New dbAllDataContext(_cn3)
         '    Dim f As New РейсыКлиента
         '    f.Маршрут = "ntntntntnt"
         '    db.РейсыКлиента.InsertOnSubmit(f)

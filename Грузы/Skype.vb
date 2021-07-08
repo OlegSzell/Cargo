@@ -55,7 +55,7 @@ Public Class Skype
 
 
     Private Sub UpdRich(ByVal Ric As String)
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim f = db.ЖурналПеревозчик.Where(Function(x) x.Код = Clas.КодЖурналПеревозчик).FirstOrDefault()
             If f IsNot Nothing Then
                 f.Skype = Ric

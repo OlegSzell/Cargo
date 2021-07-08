@@ -40,7 +40,7 @@ Public Class ExcelAddToDatabase
         Dim f8 As New List(Of ФайлыExcelВсе)
 
         Dim f7 As List(Of ФайлыExcelВсе)
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             f7 = db.ФайлыExcelВсе.Select(Function(x) x).ToList()
             'Dim f9 = db.ФайлыExcelВсе.Where(Function(x) x.ID > 147).Select(Function(x) x).ToList()
             'For Each b In f9
@@ -205,7 +205,7 @@ Public Class ExcelAddToDatabase
 
                     Next
 
-                    Using db As New dbAllDataContext()
+                    Using db As New dbAllDataContext(_cn3)
                         Dim f = db.ФайлыExcelВсе.Where(Function(x) x.Рейс = flinf.Name).Select(Function(x) x).FirstOrDefault
                         f.Перевозчик = kld
                         db.SubmitChanges()
@@ -222,7 +222,7 @@ Public Class ExcelAddToDatabase
 
 
         'If f8 IsNot Nothing Then
-        '    Using db As New dbAllDataContext()
+        '    Using db As New dbAllDataContext(_cn3)
         '        For Each b In f8
         '            db.ФайлыExcelВсе.InsertOnSubmit(b)
         '            db.SubmitChanges()

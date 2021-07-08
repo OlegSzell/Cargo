@@ -135,7 +135,7 @@ Public Class ОтчетДляОлега
             MessageBox.Show("Что пошло нетак с файлом txt!", Рик)
             Return
         End Try
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim f = (From x In db.Выписка
                      Where x.Год = datY And x.МесяцЧислом = datM
                      Select x).ToList()
@@ -621,7 +621,7 @@ xlworksheet1.Cells(i + 1, 4).Value, xlworksheet1.Cells(i + 1, 5).Value, xlworksh
 
 
         Dim com1 As New List(Of String)
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim f = (From x In db.Выписка
                      Select x).ToList()
             ВыпискаВыборка.AddRange(f)

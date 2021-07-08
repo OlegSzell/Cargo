@@ -34,7 +34,7 @@ Public Class ImageForm
         ReadImg()
     End Sub
     Private Sub ReadImg()
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim f = db.ПеревозчикиБаза.Where(Function(x) x.ID = IDp).FirstOrDefault()
             If f IsNot Nothing Then
                 If f.ФотоДанные IsNot Nothing Then
@@ -102,7 +102,7 @@ Public Class ImageForm
         'Dim bt = IO.File.ReadAllBytes(RichTextBox1.Text)
         Dim mo As New AllUpd
         If ФормаЗапуска = False Then
-            Using db As New dbAllDataContext()
+            Using db As New dbAllDataContext(_cn3)
                 Dim f = db.ПеревозчикиБаза.Where(Function(x) x.ID = IDp).FirstOrDefault()
                 If f IsNot Nothing Then
                     If fg.TabIndex = 0 Then
@@ -178,7 +178,7 @@ Public Class ImageForm
         'Dim bt = IO.File.ReadAllBytes(RichTextBox1.Text)
         Dim mo As New AllUpd
         If ФормаЗапуска = False Then
-            Using db As New dbAllDataContext()
+            Using db As New dbAllDataContext(_cn3)
                 Dim f = db.ПеревозчикиБаза.Where(Function(x) x.ID = IDp).FirstOrDefault()
                 If f IsNot Nothing Then
                     Dim k1 = imageToByteArray(returnImage)

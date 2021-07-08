@@ -55,6 +55,7 @@ Partial Class Рейс
         Me.ToolStripDropDownButton1 = New System.Windows.Forms.ToolStripDropDownButton()
         Me.ВодительToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Условия20ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.НачавшиесяСуткиобоюднаяОтветственностьToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Button5 = New System.Windows.Forms.Button()
         Me.ComboBox13 = New System.Windows.Forms.ComboBox()
@@ -137,11 +138,11 @@ Partial Class Рейс
         Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.GroupBox13 = New System.Windows.Forms.GroupBox()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.Label16 = New System.Windows.Forms.Label()
         Me.КлиентBindingSource2 = New System.Windows.Forms.BindingSource(Me.components)
         Me.КлиентBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.КлиентBindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
-        Me.Label15 = New System.Windows.Forms.Label()
-        Me.Label16 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.ToolStrip2.SuspendLayout()
@@ -461,7 +462,7 @@ Partial Class Рейс
         'ToolStripDropDownButton1
         '
         Me.ToolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripDropDownButton1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ВодительToolStripMenuItem, Me.Условия20ToolStripMenuItem})
+        Me.ToolStripDropDownButton1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ВодительToolStripMenuItem, Me.Условия20ToolStripMenuItem, Me.НачавшиесяСуткиобоюднаяОтветственностьToolStripMenuItem})
         Me.ToolStripDropDownButton1.Image = CType(resources.GetObject("ToolStripDropDownButton1.Image"), System.Drawing.Image)
         Me.ToolStripDropDownButton1.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.ToolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta
@@ -472,14 +473,20 @@ Partial Class Рейс
         'ВодительToolStripMenuItem
         '
         Me.ВодительToolStripMenuItem.Name = "ВодительToolStripMenuItem"
-        Me.ВодительToolStripMenuItem.Size = New System.Drawing.Size(145, 22)
+        Me.ВодительToolStripMenuItem.Size = New System.Drawing.Size(334, 22)
         Me.ВодительToolStripMenuItem.Text = "Водитель"
         '
         'Условия20ToolStripMenuItem
         '
         Me.Условия20ToolStripMenuItem.Name = "Условия20ToolStripMenuItem"
-        Me.Условия20ToolStripMenuItem.Size = New System.Drawing.Size(145, 22)
+        Me.Условия20ToolStripMenuItem.Size = New System.Drawing.Size(334, 22)
         Me.Условия20ToolStripMenuItem.Text = "Условия 20%"
+        '
+        'НачавшиесяСуткиобоюднаяОтветственностьToolStripMenuItem
+        '
+        Me.НачавшиесяСуткиобоюднаяОтветственностьToolStripMenuItem.Name = "НачавшиесяСуткиобоюднаяОтветственностьToolStripMenuItem"
+        Me.НачавшиесяСуткиобоюднаяОтветственностьToolStripMenuItem.Size = New System.Drawing.Size(334, 22)
+        Me.НачавшиесяСуткиобоюднаяОтветственностьToolStripMenuItem.Text = "Начавшиеся сутки(обоюдная ответственность)"
         '
         'Button2
         '
@@ -548,13 +555,13 @@ Partial Class Рейс
         '
         Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ПечатьToolStripMenuItem, Me.ДоговораToolStripMenuItem, Me.СчетактToolStripMenuItem, Me.ToolStripSeparator1, Me.РейсToolStripMenuItem, Me.ToolStripSeparator3, Me.ДокументыToolStripMenuItem, Me.ОплатаToolStripMenuItem1, Me.ОплатаToolStripMenuItem2})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(176, 154)
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(181, 176)
         '
         'ПечатьToolStripMenuItem
         '
         Me.ПечатьToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ПоручениеКлиентпечататьToolStripMenuItem1, Me.ПоручениеПеревозчикпечататьToolStripMenuItem1, Me.ОбапечататьToolStripMenuItem1, Me.ЛистокпечататьToolStripMenuItem1, Me.ОбаЛистокпечататьToolStripMenuItem1, Me.СчетToolStripMenuItem, Me.АктToolStripMenuItem})
         Me.ПечатьToolStripMenuItem.Name = "ПечатьToolStripMenuItem"
-        Me.ПечатьToolStripMenuItem.Size = New System.Drawing.Size(175, 22)
+        Me.ПечатьToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.ПечатьToolStripMenuItem.Text = "Печать"
         '
         'ПоручениеКлиентпечататьToolStripMenuItem1
@@ -573,7 +580,7 @@ Partial Class Рейс
         '
         Me.ОбапечататьToolStripMenuItem1.Name = "ОбапечататьToolStripMenuItem1"
         Me.ОбапечататьToolStripMenuItem1.Size = New System.Drawing.Size(262, 22)
-        Me.ОбапечататьToolStripMenuItem1.Text = "Оба (печатать)"
+        Me.ОбапечататьToolStripMenuItem1.Text = "Оба поручения (печатать)"
         '
         'ЛистокпечататьToolStripMenuItem1
         '
@@ -597,13 +604,13 @@ Partial Class Рейс
         'ToolStripMenuItem2
         '
         Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
-        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(80, 22)
+        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(180, 22)
         Me.ToolStripMenuItem2.Text = "1"
         '
         'ToolStripMenuItem3
         '
         Me.ToolStripMenuItem3.Name = "ToolStripMenuItem3"
-        Me.ToolStripMenuItem3.Size = New System.Drawing.Size(80, 22)
+        Me.ToolStripMenuItem3.Size = New System.Drawing.Size(180, 22)
         Me.ToolStripMenuItem3.Text = "2"
         '
         'АктToolStripMenuItem
@@ -629,7 +636,7 @@ Partial Class Рейс
         '
         Me.ДоговораToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.КлиентToolStripMenuItem, Me.ПеревозчикToolStripMenuItem})
         Me.ДоговораToolStripMenuItem.Name = "ДоговораToolStripMenuItem"
-        Me.ДоговораToolStripMenuItem.Size = New System.Drawing.Size(175, 22)
+        Me.ДоговораToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.ДоговораToolStripMenuItem.Text = "Договор"
         '
         'КлиентToolStripMenuItem
@@ -647,19 +654,19 @@ Partial Class Рейс
         'СчетактToolStripMenuItem
         '
         Me.СчетактToolStripMenuItem.Name = "СчетактToolStripMenuItem"
-        Me.СчетактToolStripMenuItem.Size = New System.Drawing.Size(175, 22)
+        Me.СчетактToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.СчетактToolStripMenuItem.Text = "Счет,акт."
         '
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(172, 6)
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(177, 6)
         '
         'РейсToolStripMenuItem
         '
         Me.РейсToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.СоздатьНовыйToolStripMenuItem, Me.ИзменитьДействующийToolStripMenuItem, Me.УдалитьToolStripMenuItem, Me.ToolStripSeparator2, Me.ИзменитьНомерРейсаToolStripMenuItem1})
         Me.РейсToolStripMenuItem.Name = "РейсToolStripMenuItem"
-        Me.РейсToolStripMenuItem.Size = New System.Drawing.Size(175, 22)
+        Me.РейсToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.РейсToolStripMenuItem.Text = "Рейс"
         '
         'СоздатьНовыйToolStripMenuItem
@@ -700,23 +707,23 @@ Partial Class Рейс
         'ToolStripSeparator3
         '
         Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
-        Me.ToolStripSeparator3.Size = New System.Drawing.Size(172, 6)
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(177, 6)
         '
         'ДокументыToolStripMenuItem
         '
         Me.ДокументыToolStripMenuItem.Name = "ДокументыToolStripMenuItem"
-        Me.ДокументыToolStripMenuItem.Size = New System.Drawing.Size(175, 22)
+        Me.ДокументыToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.ДокументыToolStripMenuItem.Text = "Документооборот"
         '
         'ОплатаToolStripMenuItem1
         '
         Me.ОплатаToolStripMenuItem1.Name = "ОплатаToolStripMenuItem1"
-        Me.ОплатаToolStripMenuItem1.Size = New System.Drawing.Size(172, 6)
+        Me.ОплатаToolStripMenuItem1.Size = New System.Drawing.Size(177, 6)
         '
         'ОплатаToolStripMenuItem2
         '
         Me.ОплатаToolStripMenuItem2.Name = "ОплатаToolStripMenuItem2"
-        Me.ОплатаToolStripMenuItem2.Size = New System.Drawing.Size(175, 22)
+        Me.ОплатаToolStripMenuItem2.Size = New System.Drawing.Size(180, 22)
         Me.ОплатаToolStripMenuItem2.Text = "Оплаты"
         '
         'Button1
@@ -1148,18 +1155,6 @@ Partial Class Рейс
         Me.GroupBox13.TabIndex = 59
         Me.GroupBox13.TabStop = False
         '
-        'КлиентBindingSource2
-        '
-        Me.КлиентBindingSource2.DataMember = "Клиент"
-        '
-        'КлиентBindingSource
-        '
-        Me.КлиентBindingSource.DataMember = "Клиент"
-        '
-        'КлиентBindingSource1
-        '
-        Me.КлиентBindingSource1.DataMember = "Клиент"
-        '
         'Label15
         '
         Me.Label15.AutoSize = True
@@ -1180,6 +1175,18 @@ Partial Class Рейс
         Me.Label16.Size = New System.Drawing.Size(41, 18)
         Me.Label16.TabIndex = 61
         Me.Label16.Text = "Рейс:"
+        '
+        'КлиентBindingSource2
+        '
+        Me.КлиентBindingSource2.DataMember = "Клиент"
+        '
+        'КлиентBindingSource
+        '
+        Me.КлиентBindingSource.DataMember = "Клиент"
+        '
+        'КлиентBindingSource1
+        '
+        Me.КлиентBindingSource1.DataMember = "Клиент"
         '
         'Рейс
         '
@@ -1380,4 +1387,5 @@ Partial Class Рейс
     Friend WithEvents ОплатаToolStripMenuItem2 As ToolStripMenuItem
     Friend WithEvents Label15 As Label
     Friend WithEvents Label16 As Label
+    Friend WithEvents НачавшиесяСуткиобоюднаяОтветственностьToolStripMenuItem As ToolStripMenuItem
 End Class

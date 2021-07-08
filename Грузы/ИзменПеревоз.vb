@@ -110,7 +110,7 @@ Public Class ИзменПеревоз
     End Sub
     Private Sub Upd()
         Dim mo As New AllUpd
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim f = db.ПеревозчикиБаза.Where(Function(x) x.ID = idtabl).FirstOrDefault()
             If f IsNot Nothing Then
                 With f

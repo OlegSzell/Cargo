@@ -243,7 +243,7 @@ Public Class Календарь
     '    Else
 
 
-    '        Using db As New dbAllDataContext()
+    '        Using db As New dbAllDataContext(_cn3)
     '            Dim var = db.Календарь_Даты.Where(Function(x) x.Дата >= d).OrderBy(Function(x) x.Дата).Select(Function(x) x).ToList
     '            'Dim var2 = db.Календарь_Даты.Where(Function(x) x.Дата = d).Select(Function(x) x).FirstOrDefault()
     '            If var.Count > 0 Then
@@ -375,7 +375,7 @@ Public Class Календарь
         Next
 
 
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim var = db.Календарь_Даты.Where(Function(x) x.Дата >= fdr And x.Дата <= fdr1).Select(Function(x) x).ToList()
             If var.Count > 0 Then
                 For Each col As DataColumn In f.Columns
@@ -587,7 +587,7 @@ Public Class Календарь
 
     End Sub
     'Private Sub InsertData()
-    '    Using db As New dbAllDataContext()
+    '    Using db As New dbAllDataContext(_cn3)
     '        Dim f = db.Календарь_Даты.Where(Function(x) x.Дата = Label2.Text).Select(Function(x) x).FirstOrDefault()
     '        If f IsNot Nothing Then
     '            Select Case ComboBox1.Text
@@ -648,7 +648,7 @@ Public Class Календарь
     '    End Using
     'End Sub
     'Private Sub Deletedata()
-    '    Using db As New dbAllDataContext()
+    '    Using db As New dbAllDataContext(_cn3)
     '        Dim f = db.Календарь_Даты.Where(Function(x) x.Дата = Label2.Text).Select(Function(x) x).FirstOrDefault()
     '        If f IsNot Nothing Then
     '            Select Case ComboBox1.Text
@@ -725,7 +725,7 @@ Public Class Календарь
     '    End If
 
     '    Me.Cursor = Cursors.WaitCursor
-    '    Using db As New dbAllDataContext()
+    '    Using db As New dbAllDataContext(_cn3)
     '        Dim var = db.Календарь_Даты.Where(Function(x) x.Дата = Label2.Text).Select(Function(x) x).FirstOrDefault()
     '        If var IsNot Nothing Then
     '            InsertData()
@@ -756,7 +756,7 @@ Public Class Календарь
     'Private Sub НапоминаниеAdd()
     '    If MaskedTextBox1.MaskCompleted = True And ComboBox2.Text <> "" Then
 
-    '        Using db As New dbAllDataContext()
+    '        Using db As New dbAllDataContext(_cn3)
     '            Dim f As New КалендарьНапоминание
     '            f.ДатаНапоминания = MaskedTextBox1.Text
     '            f.ВремяНапоминания = ComboBox2.Text
@@ -802,7 +802,7 @@ Public Class Календарь
     '    очистка()
     'End Sub
     'Private Sub НапоминаниеUpd()
-    '    Using db As New dbAllDataContext()
+    '    Using db As New dbAllDataContext(_cn3)
     '        Dim var = db.КалендарьНапоминание.Where(Function(x) x.ДатаНапоминания = CDate(Label2.Text) And x.ВремяНапоминания = ComboBox1.Text And x.Пользователь = Экспедитор).Select(Function(x) x).FirstOrDefault()
 
     '        If var IsNot Nothing Then
@@ -840,7 +840,7 @@ Public Class Календарь
 
     'Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs)
     '    If Label2.Text = "Дата" Or Label2.Text = "Время" Then Exit Sub
-    '    Using db As New dbAllDataContext()
+    '    Using db As New dbAllDataContext(_cn3)
     '        Dim var = db.Календарь_Даты.Where(Function(x) x.Дата = Label2.Text).Select(Function(x) x).FirstOrDefault()
     '        If var IsNot Nothing Then
     '            Select Case ComboBox1.Text
@@ -964,7 +964,7 @@ Public Class Календарь
         Else
             Grid2.Rows(eRow).Cells(eColumn).Style.BackColor = NewColor
             Grid2.Rows(eRow).Cells(eColumn).Style.ForeColor = Color.White
-            Using db As New dbAllDataContext
+            Using db As New dbAllDataContext(_cn3)
                 Dim dat As Date = CDate(Strings.Left(Grid2.Columns(eColumn).HeaderText, 10))
                 Dim tim As String = Grid2.Rows(eRow).Cells(0).Value.ToString
                 Dim var = db.Календарь_Даты.Where(Function(x) x.Дата = dat).Select(Function(x) x).FirstOrDefault()
@@ -1037,7 +1037,7 @@ Public Class Календарь
             dat1 = CDate(dat)
         End If
         Dim mo As New AllUpd
-        Using db As New dbAllDataContext
+        Using db As New dbAllDataContext(_cn3)
             Dim f = db.Календарь_Даты.Where(Function(x) CDate(x.Дата) = dat1).FirstOrDefault()
             If f IsNot Nothing Then
                 Select Case int
@@ -1326,7 +1326,7 @@ Public Class Календарь
     Public Sub РезультатAdd(ByVal d As Date, ByVal Val As String, ByVal times As Integer, ByVal insert As Boolean)
         Dim Valu = Val & vbCrLf & "( " & Now & " )"
         Dim mo As New AllUpd
-        Using db As New dbAllDataContext
+        Using db As New dbAllDataContext(_cn3)
             If insert = False Then
                 Dim f = (From x In db.Календарь_Даты
                          Join y In db.КалендарьРезультатЗвонка On x.ID Equals y.IDCalendar

@@ -4,14 +4,14 @@ Public Class SendEmail
     Public Sub insert(d As String)
         Dim oMail As New SmtpMail("TryIt")
         Dim oSmtp As New SmtpClient()
-        oMail.From = EmailPass.Addres
-        oMail.To = EmailPass.Addres
+        oMail.From = EmailPass(0).Addres
+        oMail.To = EmailPass(0).Addres
         oMail.Subject = "Создан новый рейс"
         oMail.TextBody = d
         Dim oServer As New SmtpServer("")
         oServer.Server = "smtp.yandex.ru"
-        oServer.User = EmailPass.Addres
-        oServer.Password = EmailPass.Pass
+        oServer.User = EmailPass(0).Addres
+        oServer.Password = EmailPass(0).Pass
         oServer.Port = 465
         oServer.ConnectType = SmtpConnectType.ConnectSSLAuto 'если требуется обязательно ssl
         Try
@@ -59,14 +59,14 @@ Public Class SendEmail
     Public Sub delete(d As String)
         Dim oMail As New SmtpMail("TryIt")
         Dim oSmtp As New SmtpClient()
-        oMail.From = EmailPass.Addres
-        oMail.To = EmailPass.Addres
+        oMail.From = EmailPass(0).Addres
+        oMail.To = EmailPass(0).Addres
         oMail.Subject = "Удален рейс"
         oMail.TextBody = d
         Dim oServer As New SmtpServer("")
         oServer.Server = "smtp.yandex.ru"
-        oServer.User = EmailPass.Addres
-        oServer.Password = EmailPass.Pass
+        oServer.User = EmailPass(0).Addres
+        oServer.Password = EmailPass(0).Pass
         oServer.Port = 465
         oServer.ConnectType = SmtpConnectType.ConnectSSLAuto 'если требуется обязательно ssl
         Try
@@ -79,14 +79,14 @@ Public Class SendEmail
     Public Sub update(d As String)
         Dim oMail As New SmtpMail("TryIt")
         Dim oSmtp As New SmtpClient()
-        oMail.From = EmailPass.Addres
-        oMail.To = EmailPass.Addres
+        oMail.From = EmailPass(0).Addres
+        oMail.To = EmailPass(0).Addres
         oMail.Subject = "Изменен рейс"
         oMail.TextBody = d
         Dim oServer As New SmtpServer("")
         oServer.Server = "smtp.yandex.ru"
-        oServer.User = EmailPass.Addres
-        oServer.Password = EmailPass.Pass
+        oServer.User = EmailPass(0).Addres
+        oServer.Password = EmailPass(0).Pass
         oServer.Port = 465
         oServer.ConnectType = SmtpConnectType.ConnectSSLAuto 'если требуется обязательно ssl
         Try

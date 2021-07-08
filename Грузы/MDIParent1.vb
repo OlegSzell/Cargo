@@ -3,6 +3,8 @@ Imports System.Threading
 Imports System.Net
 Imports System.Reflection
 Imports Timer = System.Threading.Timer
+Imports WMPLib
+Imports System.Configuration
 'Imports System.Reflection
 
 Public Class MDIParent1
@@ -159,7 +161,7 @@ Public Class MDIParent1
     End Sub
     Private Sub КалендарьНапоминание()
         Dim listes As New Dictionary(Of String, String)
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
 
             Dim var2 = db.КалендарьНапоминание.Where(Function(x) x.ДатаНапоминания = Now.Date And x.Пользователь = Экспедитор).Select(Function(x) x).ToList()
             If var2.Count > 0 Then
@@ -224,7 +226,7 @@ Public Class MDIParent1
 
     Private Sub КонтрольОбновленияБазы()
 
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim f = (From x In db.Календарь_Даты
                      Where x.Дата = Now
                      Select x).FirstOrDefault()
@@ -368,11 +370,26 @@ Public Class MDIParent1
         End If
 
     End Sub
+    Private Sub _проверкаСтрокиПодключения()
+        XXX = ConfigurationManager.ConnectionStrings("OleVnytr").ConnectionString  'внутренний
+        _cn3 = Global.Грузы.My.MySettings.Default.RickmansConnectionString   'внутренний
+        ConString = Global.Грузы.My.MySettings.Default.RickmansConnectionString  'внутренний
+        Try
+            Using db As New dbAllDataContext(_cn3)
+                Dim f = db.Пароли.FirstOrDefault()
+
+            End Using
+        Catch ex As Exception
+            XXX = ConfigurationManager.ConnectionStrings("OleVneshn").ConnectionString  'внутренний
+            _cn3 = Global.Грузы.My.MySettings.Default.RickmansConnectionString1
+            ConString = Global.Грузы.My.MySettings.Default.RickmansConnectionString1
+        End Try
+    End Sub
     Private Sub MDIParent1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         'getLoc()
 
-
+        _проверкаСтрокиПодключения()
         Me.Cursor = Cursors.WaitCursor
         'ALL()
 
@@ -513,7 +530,7 @@ Public Class MDIParent1
 
     Public Function Провер() As List(Of ПереговорыКлиент)
         Dim var As List(Of ПереговорыКлиент)
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             var = db.ПереговорыКлиент.Where(Function(x) x.ДатаНапоминания = Now.Date And x.Экспедитор = Экспедитор).Select(Function(x) x).ToList()
 
         End Using
@@ -670,8 +687,22 @@ Public Class MDIParent1
         f.Show()
     End Sub
 
-    Private Sub RadioToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RadioToolStripMenuItem.Click
+
+
+    Private Sub StartToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StartToolStripMenuItem.Click
         Dim f As New Radio
         f.Show()
+    End Sub
+
+    Private Sub StopToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StopToolStripMenuItem.Click
+
+        Frec(0).controls.stop()
+
+
+        'Dim f = Process.GetProcessesByName("wmplayer")
+        'If f.Length > 0 Then
+        '    f(f.Length - 1).Kill()
+        'End If
+
     End Sub
 End Class

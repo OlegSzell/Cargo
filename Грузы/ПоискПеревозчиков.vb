@@ -455,7 +455,7 @@ Public Class ПоискПеревозчиков
         Await Task.Run(Sub() Dell(d))
     End Sub
     Private Sub Dell(ByVal d As Grid1Class)
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim f = db.ПеревозчикиБаза.Where(Function(x) x.ID = d.IDПеревоз).FirstOrDefault()
             If f IsNot Nothing Then
                 db.ПеревозчикиБаза.DeleteOnSubmit(f)

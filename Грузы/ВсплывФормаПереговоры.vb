@@ -44,7 +44,7 @@
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         Try
-            Using db As New dbAllDataContext()
+            Using db As New dbAllDataContext(_cn3)
                 Dim var = db.ПереговорыКлиент.Where(Function(x) x.Код = f).Select(Function(x) x).FirstOrDefault()
                 If var IsNot Nothing Then
                     var.ТекстНапоминания = RichTextBox2.Text

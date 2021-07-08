@@ -311,7 +311,7 @@ Public Class Отчет
             End If
             If f.УсловияОплаты = "БанкПоДок" Or f.УсловияОплаты = "БанкПоВыг" Then
                 Dim dt = AddWorkDays(MaskedTextBox2.Text, d)
-                Using db As New dbAllDataContext()
+                Using db As New dbAllDataContext(_cn3)
                     Dim f4 = db.РейсыКлиента.Where(Function(x) x.НомерРейса = НомРейса).Select(Function(x) x).FirstOrDefault()
                     If f4 IsNot Nothing Then
                         With f4
@@ -324,7 +324,7 @@ Public Class Отчет
                 End Using
             Else
                 Dim ml = CDate(MaskedTextBox2.Text).AddDays(d)
-                Using db As New dbAllDataContext()
+                Using db As New dbAllDataContext(_cn3)
                     Dim f4 = db.РейсыКлиента.Where(Function(x) x.НомерРейса = НомРейса).Select(Function(x) x).FirstOrDefault()
                     If f4 IsNot Nothing Then
                         With f4
@@ -497,7 +497,7 @@ Public Class Отчет
             End If
             If f.УсловияОплаты = "БанкПоДок" Or f.УсловияОплаты = "БанкПоВыг" Then
                 Dim dt = AddWorkDays(MaskedTextBox1.Text, d)
-                Using db As New dbAllDataContext()
+                Using db As New dbAllDataContext(_cn3)
                     Dim f4 = db.РейсыПеревозчика.Where(Function(x) x.НомерРейса = НомРейса).Select(Function(x) x).FirstOrDefault()
                     If f4 IsNot Nothing Then
                         With f4
@@ -510,7 +510,7 @@ Public Class Отчет
                 End Using
             Else
                 Dim ml = CDate(MaskedTextBox1.Text).AddDays(d)
-                Using db As New dbAllDataContext()
+                Using db As New dbAllDataContext(_cn3)
                     Dim f4 = db.РейсыПеревозчика.Where(Function(x) x.НомерРейса = НомРейса).Select(Function(x) x).FirstOrDefault()
                     If f4 IsNot Nothing Then
                         With f4

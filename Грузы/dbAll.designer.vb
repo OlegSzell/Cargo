@@ -23,7 +23,7 @@ Imports System.Reflection
 
 
 <Global.System.Data.Linq.Mapping.DatabaseAttribute(Name:="Rickmans")>  _
-Partial Public Class dbAllDataContext
+Partial Public Class DbAllDataContext
 	Inherits System.Data.Linq.DataContext
 	
 	Private Shared mappingSource As System.Data.Linq.Mapping.MappingSource = New AttributeMappingSource()
@@ -31,6 +31,12 @@ Partial Public Class dbAllDataContext
   #Region "Определения метода расширяемости"
   Partial Private Sub OnCreated()
   End Sub
+  Partial Private Sub InsertEmailTb(instance As EmailTb)
+    End Sub
+  Partial Private Sub UpdateEmailTb(instance As EmailTb)
+    End Sub
+  Partial Private Sub DeleteEmailTb(instance As EmailTb)
+    End Sub
   Partial Private Sub InsertSkypeКлиентПредложение(instance As SkypeКлиентПредложение)
     End Sub
   Partial Private Sub UpdateSkypeКлиентПредложение(instance As SkypeКлиентПредложение)
@@ -55,6 +61,12 @@ Partial Public Class dbAllDataContext
     End Sub
   Partial Private Sub DeleteВсеРейсы(instance As ВсеРейсы)
     End Sub
+  Partial Private Sub InsertВыписка(instance As Выписка)
+    End Sub
+  Partial Private Sub UpdateВыписка(instance As Выписка)
+    End Sub
+  Partial Private Sub DeleteВыписка(instance As Выписка)
+    End Sub
   Partial Private Sub InsertГрузыКлиентов(instance As ГрузыКлиентов)
     End Sub
   Partial Private Sub UpdateГрузыКлиентов(instance As ГрузыКлиентов)
@@ -73,17 +85,35 @@ Partial Public Class dbAllDataContext
     End Sub
   Partial Private Sub DeleteЖурналКлиентГруз(instance As ЖурналКлиентГруз)
     End Sub
+  Partial Private Sub InsertЖурналКлиентДаты(instance As ЖурналКлиентДаты)
+    End Sub
+  Partial Private Sub UpdateЖурналКлиентДаты(instance As ЖурналКлиентДаты)
+    End Sub
+  Partial Private Sub DeleteЖурналКлиентДаты(instance As ЖурналКлиентДаты)
+    End Sub
   Partial Private Sub InsertЖурналКлиентМаршрут(instance As ЖурналКлиентМаршрут)
     End Sub
   Partial Private Sub UpdateЖурналКлиентМаршрут(instance As ЖурналКлиентМаршрут)
     End Sub
   Partial Private Sub DeleteЖурналКлиентМаршрут(instance As ЖурналКлиентМаршрут)
     End Sub
+  Partial Private Sub InsertЖурналКлиентСписок(instance As ЖурналКлиентСписок)
+    End Sub
+  Partial Private Sub UpdateЖурналКлиентСписок(instance As ЖурналКлиентСписок)
+    End Sub
+  Partial Private Sub DeleteЖурналКлиентСписок(instance As ЖурналКлиентСписок)
+    End Sub
   Partial Private Sub InsertЖурналПеревозчик(instance As ЖурналПеревозчик)
     End Sub
   Partial Private Sub UpdateЖурналПеревозчик(instance As ЖурналПеревозчик)
     End Sub
   Partial Private Sub DeleteЖурналПеревозчик(instance As ЖурналПеревозчик)
+    End Sub
+  Partial Private Sub InsertЖурналПеревозчикСобытия(instance As ЖурналПеревозчикСобытия)
+    End Sub
+  Partial Private Sub UpdateЖурналПеревозчикСобытия(instance As ЖурналПеревозчикСобытия)
+    End Sub
+  Partial Private Sub DeleteЖурналПеревозчикСобытия(instance As ЖурналПеревозчикСобытия)
     End Sub
   Partial Private Sub InsertИтогГрузПеревоз(instance As ИтогГрузПеревоз)
     End Sub
@@ -199,11 +229,29 @@ Partial Public Class dbAllDataContext
     End Sub
   Partial Private Sub DeleteРегионыРоссии(instance As РегионыРоссии)
     End Sub
+  Partial Private Sub InsertРейсыКлиента(instance As РейсыКлиента)
+    End Sub
+  Partial Private Sub UpdateРейсыКлиента(instance As РейсыКлиента)
+    End Sub
+  Partial Private Sub DeleteРейсыКлиента(instance As РейсыКлиента)
+    End Sub
   Partial Private Sub InsertРейсыПеревозчика(instance As РейсыПеревозчика)
     End Sub
   Partial Private Sub UpdateРейсыПеревозчика(instance As РейсыПеревозчика)
     End Sub
   Partial Private Sub DeleteРейсыПеревозчика(instance As РейсыПеревозчика)
+    End Sub
+  Partial Private Sub InsertСводнаяОплаты(instance As СводнаяОплаты)
+    End Sub
+  Partial Private Sub UpdateСводнаяОплаты(instance As СводнаяОплаты)
+    End Sub
+  Partial Private Sub DeleteСводнаяОплаты(instance As СводнаяОплаты)
+    End Sub
+  Partial Private Sub InsertСводнаяОплатыТаблицы(instance As СводнаяОплатыТаблицы)
+    End Sub
+  Partial Private Sub UpdateСводнаяОплатыТаблицы(instance As СводнаяОплатыТаблицы)
+    End Sub
+  Partial Private Sub DeleteСводнаяОплатыТаблицы(instance As СводнаяОплатыТаблицы)
     End Sub
   Partial Private Sub InsertСтрана(instance As Страна)
     End Sub
@@ -229,65 +277,17 @@ Partial Public Class dbAllDataContext
     End Sub
   Partial Private Sub DeleteФормаСобств(instance As ФормаСобств)
     End Sub
-  Partial Private Sub InsertЖурналКлиентДаты(instance As ЖурналКлиентДаты)
-    End Sub
-  Partial Private Sub UpdateЖурналКлиентДаты(instance As ЖурналКлиентДаты)
-    End Sub
-  Partial Private Sub DeleteЖурналКлиентДаты(instance As ЖурналКлиентДаты)
-    End Sub
-  Partial Private Sub InsertРейсыКлиента(instance As РейсыКлиента)
-    End Sub
-  Partial Private Sub UpdateРейсыКлиента(instance As РейсыКлиента)
-    End Sub
-  Partial Private Sub DeleteРейсыКлиента(instance As РейсыКлиента)
-    End Sub
   Partial Private Sub InsertЧерныйСписок(instance As ЧерныйСписок)
     End Sub
   Partial Private Sub UpdateЧерныйСписок(instance As ЧерныйСписок)
     End Sub
   Partial Private Sub DeleteЧерныйСписок(instance As ЧерныйСписок)
     End Sub
-  Partial Private Sub InsertСводнаяОплатыТаблицы(instance As СводнаяОплатыТаблицы)
-    End Sub
-  Partial Private Sub UpdateСводнаяОплатыТаблицы(instance As СводнаяОплатыТаблицы)
-    End Sub
-  Partial Private Sub DeleteСводнаяОплатыТаблицы(instance As СводнаяОплатыТаблицы)
-    End Sub
-  Partial Private Sub InsertСводнаяОплаты(instance As СводнаяОплаты)
-    End Sub
-  Partial Private Sub UpdateСводнаяОплаты(instance As СводнаяОплаты)
-    End Sub
-  Partial Private Sub DeleteСводнаяОплаты(instance As СводнаяОплаты)
-    End Sub
-  Partial Private Sub InsertЖурналПеревозчикСобытия(instance As ЖурналПеревозчикСобытия)
-    End Sub
-  Partial Private Sub UpdateЖурналПеревозчикСобытия(instance As ЖурналПеревозчикСобытия)
-    End Sub
-  Partial Private Sub DeleteЖурналПеревозчикСобытия(instance As ЖурналПеревозчикСобытия)
-    End Sub
-  Partial Private Sub InsertВыписка(instance As Выписка)
-    End Sub
-  Partial Private Sub UpdateВыписка(instance As Выписка)
-    End Sub
-  Partial Private Sub DeleteВыписка(instance As Выписка)
-    End Sub
-  Partial Private Sub InsertЖурналКлиентСписок(instance As ЖурналКлиентСписок)
-    End Sub
-  Partial Private Sub UpdateЖурналКлиентСписок(instance As ЖурналКлиентСписок)
-    End Sub
-  Partial Private Sub DeleteЖурналКлиентСписок(instance As ЖурналКлиентСписок)
-    End Sub
-  Partial Private Sub InsertEmailTb(instance As EmailTb)
-    End Sub
-  Partial Private Sub UpdateEmailTb(instance As EmailTb)
-    End Sub
-  Partial Private Sub DeleteEmailTb(instance As EmailTb)
-    End Sub
   #End Region
 	
 	Public Sub New()
-		MyBase.New(Global.Грузы.My.MySettings.Default.RickmansConnectionString, mappingSource)
-		OnCreated
+		MyBase.New(Global.Грузы.My.MySettings.Default.RickmansConnectionString1, mappingSource)
+		OnCreated()
 	End Sub
 	
 	Public Sub New(ByVal connection As String)
@@ -309,6 +309,12 @@ Partial Public Class dbAllDataContext
 		MyBase.New(connection, mappingSource)
 		OnCreated
 	End Sub
+	
+	Public ReadOnly Property EmailTb() As System.Data.Linq.Table(Of EmailTb)
+		Get
+			Return Me.GetTable(Of EmailTb)
+		End Get
+	End Property
 	
 	Public ReadOnly Property SkypeКлиентПредложение() As System.Data.Linq.Table(Of SkypeКлиентПредложение)
 		Get
@@ -334,6 +340,12 @@ Partial Public Class dbAllDataContext
 		End Get
 	End Property
 	
+	Public ReadOnly Property Выписка() As System.Data.Linq.Table(Of Выписка)
+		Get
+			Return Me.GetTable(Of Выписка)
+		End Get
+	End Property
+	
 	Public ReadOnly Property ГрузыКлиентов() As System.Data.Linq.Table(Of ГрузыКлиентов)
 		Get
 			Return Me.GetTable(Of ГрузыКлиентов)
@@ -352,15 +364,33 @@ Partial Public Class dbAllDataContext
 		End Get
 	End Property
 	
+	Public ReadOnly Property ЖурналКлиентДаты() As System.Data.Linq.Table(Of ЖурналКлиентДаты)
+		Get
+			Return Me.GetTable(Of ЖурналКлиентДаты)
+		End Get
+	End Property
+	
 	Public ReadOnly Property ЖурналКлиентМаршрут() As System.Data.Linq.Table(Of ЖурналКлиентМаршрут)
 		Get
 			Return Me.GetTable(Of ЖурналКлиентМаршрут)
 		End Get
 	End Property
 	
+	Public ReadOnly Property ЖурналКлиентСписок() As System.Data.Linq.Table(Of ЖурналКлиентСписок)
+		Get
+			Return Me.GetTable(Of ЖурналКлиентСписок)
+		End Get
+	End Property
+	
 	Public ReadOnly Property ЖурналПеревозчик() As System.Data.Linq.Table(Of ЖурналПеревозчик)
 		Get
 			Return Me.GetTable(Of ЖурналПеревозчик)
+		End Get
+	End Property
+	
+	Public ReadOnly Property ЖурналПеревозчикСобытия() As System.Data.Linq.Table(Of ЖурналПеревозчикСобытия)
+		Get
+			Return Me.GetTable(Of ЖурналПеревозчикСобытия)
 		End Get
 	End Property
 	
@@ -478,9 +508,27 @@ Partial Public Class dbAllDataContext
 		End Get
 	End Property
 	
+	Public ReadOnly Property РейсыКлиента() As System.Data.Linq.Table(Of РейсыКлиента)
+		Get
+			Return Me.GetTable(Of РейсыКлиента)
+		End Get
+	End Property
+	
 	Public ReadOnly Property РейсыПеревозчика() As System.Data.Linq.Table(Of РейсыПеревозчика)
 		Get
 			Return Me.GetTable(Of РейсыПеревозчика)
+		End Get
+	End Property
+	
+	Public ReadOnly Property СводнаяОплаты() As System.Data.Linq.Table(Of СводнаяОплаты)
+		Get
+			Return Me.GetTable(Of СводнаяОплаты)
+		End Get
+	End Property
+	
+	Public ReadOnly Property СводнаяОплатыТаблицы() As System.Data.Linq.Table(Of СводнаяОплатыТаблицы)
+		Get
+			Return Me.GetTable(Of СводнаяОплатыТаблицы)
 		End Get
 	End Property
 	
@@ -508,59 +556,117 @@ Partial Public Class dbAllDataContext
 		End Get
 	End Property
 	
-	Public ReadOnly Property ЖурналКлиентДаты() As System.Data.Linq.Table(Of ЖурналКлиентДаты)
-		Get
-			Return Me.GetTable(Of ЖурналКлиентДаты)
-		End Get
-	End Property
-	
-	Public ReadOnly Property РейсыКлиента() As System.Data.Linq.Table(Of РейсыКлиента)
-		Get
-			Return Me.GetTable(Of РейсыКлиента)
-		End Get
-	End Property
-	
 	Public ReadOnly Property ЧерныйСписок() As System.Data.Linq.Table(Of ЧерныйСписок)
 		Get
 			Return Me.GetTable(Of ЧерныйСписок)
 		End Get
 	End Property
+End Class
+
+<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.EmailTb")>  _
+Partial Public Class EmailTb
+	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
 	
-	Public ReadOnly Property СводнаяОплатыТаблицы() As System.Data.Linq.Table(Of СводнаяОплатыТаблицы)
+	Private Shared emptyChangingEventArgs As PropertyChangingEventArgs = New PropertyChangingEventArgs(String.Empty)
+	
+	Private _ID As Integer
+	
+	Private _Addres As String
+	
+	Private _Pass As String
+	
+    #Region "Определения метода расширяемости"
+    Partial Private Sub OnLoaded()
+    End Sub
+    Partial Private Sub OnValidate(action As System.Data.Linq.ChangeAction)
+    End Sub
+    Partial Private Sub OnCreated()
+    End Sub
+    Partial Private Sub OnIDChanging(value As Integer)
+    End Sub
+    Partial Private Sub OnIDChanged()
+    End Sub
+    Partial Private Sub OnAddresChanging(value As String)
+    End Sub
+    Partial Private Sub OnAddresChanged()
+    End Sub
+    Partial Private Sub OnPassChanging(value As String)
+    End Sub
+    Partial Private Sub OnPassChanged()
+    End Sub
+    #End Region
+	
+	Public Sub New()
+		MyBase.New
+		OnCreated
+	End Sub
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ID", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true)>  _
+	Public Property ID() As Integer
 		Get
-			Return Me.GetTable(Of СводнаяОплатыТаблицы)
+			Return Me._ID
 		End Get
+		Set
+			If ((Me._ID = value)  _
+						= false) Then
+				Me.OnIDChanging(value)
+				Me.SendPropertyChanging
+				Me._ID = value
+				Me.SendPropertyChanged("ID")
+				Me.OnIDChanged
+			End If
+		End Set
 	End Property
 	
-	Public ReadOnly Property СводнаяОплаты() As System.Data.Linq.Table(Of СводнаяОплаты)
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Addres", DbType:="NVarChar(50)")>  _
+	Public Property Addres() As String
 		Get
-			Return Me.GetTable(Of СводнаяОплаты)
+			Return Me._Addres
 		End Get
+		Set
+			If (String.Equals(Me._Addres, value) = false) Then
+				Me.OnAddresChanging(value)
+				Me.SendPropertyChanging
+				Me._Addres = value
+				Me.SendPropertyChanged("Addres")
+				Me.OnAddresChanged
+			End If
+		End Set
 	End Property
 	
-	Public ReadOnly Property ЖурналПеревозчикСобытия() As System.Data.Linq.Table(Of ЖурналПеревозчикСобытия)
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Pass", DbType:="NVarChar(50)")>  _
+	Public Property Pass() As String
 		Get
-			Return Me.GetTable(Of ЖурналПеревозчикСобытия)
+			Return Me._Pass
 		End Get
+		Set
+			If (String.Equals(Me._Pass, value) = false) Then
+				Me.OnPassChanging(value)
+				Me.SendPropertyChanging
+				Me._Pass = value
+				Me.SendPropertyChanged("Pass")
+				Me.OnPassChanged
+			End If
+		End Set
 	End Property
 	
-	Public ReadOnly Property Выписка() As System.Data.Linq.Table(Of Выписка)
-		Get
-			Return Me.GetTable(Of Выписка)
-		End Get
-	End Property
+	Public Event PropertyChanging As PropertyChangingEventHandler Implements System.ComponentModel.INotifyPropertyChanging.PropertyChanging
 	
-	Public ReadOnly Property ЖурналКлиентСписок() As System.Data.Linq.Table(Of ЖурналКлиентСписок)
-		Get
-			Return Me.GetTable(Of ЖурналКлиентСписок)
-		End Get
-	End Property
+	Public Event PropertyChanged As PropertyChangedEventHandler Implements System.ComponentModel.INotifyPropertyChanged.PropertyChanged
 	
-	Public ReadOnly Property EmailTb() As System.Data.Linq.Table(Of EmailTb)
-		Get
-			Return Me.GetTable(Of EmailTb)
-		End Get
-	End Property
+	Protected Overridable Sub SendPropertyChanging()
+		If ((Me.PropertyChangingEvent Is Nothing)  _
+					= false) Then
+			RaiseEvent PropertyChanging(Me, emptyChangingEventArgs)
+		End If
+	End Sub
+	
+	Protected Overridable Sub SendPropertyChanged(ByVal propertyName As [String])
+		If ((Me.PropertyChangedEvent Is Nothing)  _
+					= false) Then
+			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
+		End If
+	End Sub
 End Class
 
 <Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.SkypeКлиентПредложение")>  _
@@ -1537,6 +1643,266 @@ Partial Public Class ВсеРейсы
 	End Sub
 End Class
 
+<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.Выписка")>  _
+Partial Public Class Выписка
+	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
+	
+	Private Shared emptyChangingEventArgs As PropertyChangingEventArgs = New PropertyChangingEventArgs(String.Empty)
+	
+	Private _ID As Integer
+	
+	Private _Год As String
+	
+	Private _Месяц As String
+	
+	Private _МесяцЧислом As String
+	
+	Private _ДатаОперации As String
+	
+	Private _Расход As String
+	
+	Private _Приход As String
+	
+	Private _Организация As String
+	
+	Private _НазначениеПлатежа As String
+	
+	Private _Примечание As String
+	
+    #Region "Определения метода расширяемости"
+    Partial Private Sub OnLoaded()
+    End Sub
+    Partial Private Sub OnValidate(action As System.Data.Linq.ChangeAction)
+    End Sub
+    Partial Private Sub OnCreated()
+    End Sub
+    Partial Private Sub OnIDChanging(value As Integer)
+    End Sub
+    Partial Private Sub OnIDChanged()
+    End Sub
+    Partial Private Sub OnГодChanging(value As String)
+    End Sub
+    Partial Private Sub OnГодChanged()
+    End Sub
+    Partial Private Sub OnМесяцChanging(value As String)
+    End Sub
+    Partial Private Sub OnМесяцChanged()
+    End Sub
+    Partial Private Sub OnМесяцЧисломChanging(value As String)
+    End Sub
+    Partial Private Sub OnМесяцЧисломChanged()
+    End Sub
+    Partial Private Sub OnДатаОперацииChanging(value As String)
+    End Sub
+    Partial Private Sub OnДатаОперацииChanged()
+    End Sub
+    Partial Private Sub OnРасходChanging(value As String)
+    End Sub
+    Partial Private Sub OnРасходChanged()
+    End Sub
+    Partial Private Sub OnПриходChanging(value As String)
+    End Sub
+    Partial Private Sub OnПриходChanged()
+    End Sub
+    Partial Private Sub OnОрганизацияChanging(value As String)
+    End Sub
+    Partial Private Sub OnОрганизацияChanged()
+    End Sub
+    Partial Private Sub OnНазначениеПлатежаChanging(value As String)
+    End Sub
+    Partial Private Sub OnНазначениеПлатежаChanged()
+    End Sub
+    Partial Private Sub OnПримечаниеChanging(value As String)
+    End Sub
+    Partial Private Sub OnПримечаниеChanged()
+    End Sub
+    #End Region
+	
+	Public Sub New()
+		MyBase.New
+		OnCreated
+	End Sub
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ID", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true)>  _
+	Public Property ID() As Integer
+		Get
+			Return Me._ID
+		End Get
+		Set
+			If ((Me._ID = value)  _
+						= false) Then
+				Me.OnIDChanging(value)
+				Me.SendPropertyChanging
+				Me._ID = value
+				Me.SendPropertyChanged("ID")
+				Me.OnIDChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Год", DbType:="NVarChar(50)")>  _
+	Public Property Год() As String
+		Get
+			Return Me._Год
+		End Get
+		Set
+			If (String.Equals(Me._Год, value) = false) Then
+				Me.OnГодChanging(value)
+				Me.SendPropertyChanging
+				Me._Год = value
+				Me.SendPropertyChanged("Год")
+				Me.OnГодChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Месяц", DbType:="NVarChar(50)")>  _
+	Public Property Месяц() As String
+		Get
+			Return Me._Месяц
+		End Get
+		Set
+			If (String.Equals(Me._Месяц, value) = false) Then
+				Me.OnМесяцChanging(value)
+				Me.SendPropertyChanging
+				Me._Месяц = value
+				Me.SendPropertyChanged("Месяц")
+				Me.OnМесяцChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_МесяцЧислом", DbType:="NVarChar(50)")>  _
+	Public Property МесяцЧислом() As String
+		Get
+			Return Me._МесяцЧислом
+		End Get
+		Set
+			If (String.Equals(Me._МесяцЧислом, value) = false) Then
+				Me.OnМесяцЧисломChanging(value)
+				Me.SendPropertyChanging
+				Me._МесяцЧислом = value
+				Me.SendPropertyChanged("МесяцЧислом")
+				Me.OnМесяцЧисломChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ДатаОперации", DbType:="NVarChar(50)")>  _
+	Public Property ДатаОперации() As String
+		Get
+			Return Me._ДатаОперации
+		End Get
+		Set
+			If (String.Equals(Me._ДатаОперации, value) = false) Then
+				Me.OnДатаОперацииChanging(value)
+				Me.SendPropertyChanging
+				Me._ДатаОперации = value
+				Me.SendPropertyChanged("ДатаОперации")
+				Me.OnДатаОперацииChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Расход", DbType:="NVarChar(50)")>  _
+	Public Property Расход() As String
+		Get
+			Return Me._Расход
+		End Get
+		Set
+			If (String.Equals(Me._Расход, value) = false) Then
+				Me.OnРасходChanging(value)
+				Me.SendPropertyChanging
+				Me._Расход = value
+				Me.SendPropertyChanged("Расход")
+				Me.OnРасходChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Приход", DbType:="NVarChar(50)")>  _
+	Public Property Приход() As String
+		Get
+			Return Me._Приход
+		End Get
+		Set
+			If (String.Equals(Me._Приход, value) = false) Then
+				Me.OnПриходChanging(value)
+				Me.SendPropertyChanging
+				Me._Приход = value
+				Me.SendPropertyChanged("Приход")
+				Me.OnПриходChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Организация", DbType:="NVarChar(MAX)")>  _
+	Public Property Организация() As String
+		Get
+			Return Me._Организация
+		End Get
+		Set
+			If (String.Equals(Me._Организация, value) = false) Then
+				Me.OnОрганизацияChanging(value)
+				Me.SendPropertyChanging
+				Me._Организация = value
+				Me.SendPropertyChanged("Организация")
+				Me.OnОрганизацияChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_НазначениеПлатежа", DbType:="NVarChar(MAX)")>  _
+	Public Property НазначениеПлатежа() As String
+		Get
+			Return Me._НазначениеПлатежа
+		End Get
+		Set
+			If (String.Equals(Me._НазначениеПлатежа, value) = false) Then
+				Me.OnНазначениеПлатежаChanging(value)
+				Me.SendPropertyChanging
+				Me._НазначениеПлатежа = value
+				Me.SendPropertyChanged("НазначениеПлатежа")
+				Me.OnНазначениеПлатежаChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Примечание", DbType:="NVarChar(250)")>  _
+	Public Property Примечание() As String
+		Get
+			Return Me._Примечание
+		End Get
+		Set
+			If (String.Equals(Me._Примечание, value) = false) Then
+				Me.OnПримечаниеChanging(value)
+				Me.SendPropertyChanging
+				Me._Примечание = value
+				Me.SendPropertyChanged("Примечание")
+				Me.OnПримечаниеChanged
+			End If
+		End Set
+	End Property
+	
+	Public Event PropertyChanging As PropertyChangingEventHandler Implements System.ComponentModel.INotifyPropertyChanging.PropertyChanging
+	
+	Public Event PropertyChanged As PropertyChangedEventHandler Implements System.ComponentModel.INotifyPropertyChanged.PropertyChanged
+	
+	Protected Overridable Sub SendPropertyChanging()
+		If ((Me.PropertyChangingEvent Is Nothing)  _
+					= false) Then
+			RaiseEvent PropertyChanging(Me, emptyChangingEventArgs)
+		End If
+	End Sub
+	
+	Protected Overridable Sub SendPropertyChanged(ByVal propertyName As [String])
+		If ((Me.PropertyChangedEvent Is Nothing)  _
+					= false) Then
+			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
+		End If
+	End Sub
+End Class
+
 <Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.ГрузыКлиентов")>  _
 Partial Public Class ГрузыКлиентов
 	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
@@ -2086,11 +2452,11 @@ Partial Public Class ЖурналКлиентГруз
 	
 	Private _ОтоброжатьВТаблицеЖурнала As String
 	
+	Private _ЖурналКлиентДаты As EntitySet(Of ЖурналКлиентДаты)
+	
 	Private _ЖурналКлиентМаршрут As EntitySet(Of ЖурналКлиентМаршрут)
 	
 	Private _ЖурналПеревозчик As EntitySet(Of ЖурналПеревозчик)
-	
-	Private _ЖурналКлиентДаты As EntitySet(Of ЖурналКлиентДаты)
 	
 	Private _ЖурналДата As EntityRef(Of ЖурналДата)
 	
@@ -2189,9 +2555,9 @@ Partial Public Class ЖурналКлиентГруз
 	
 	Public Sub New()
 		MyBase.New
+		Me._ЖурналКлиентДаты = New EntitySet(Of ЖурналКлиентДаты)(AddressOf Me.attach_ЖурналКлиентДаты, AddressOf Me.detach_ЖурналКлиентДаты)
 		Me._ЖурналКлиентМаршрут = New EntitySet(Of ЖурналКлиентМаршрут)(AddressOf Me.attach_ЖурналКлиентМаршрут, AddressOf Me.detach_ЖурналКлиентМаршрут)
 		Me._ЖурналПеревозчик = New EntitySet(Of ЖурналПеревозчик)(AddressOf Me.attach_ЖурналПеревозчик, AddressOf Me.detach_ЖурналПеревозчик)
-		Me._ЖурналКлиентДаты = New EntitySet(Of ЖурналКлиентДаты)(AddressOf Me.attach_ЖурналКлиентДаты, AddressOf Me.detach_ЖурналКлиентДаты)
 		Me._ЖурналДата = CType(Nothing, EntityRef(Of ЖурналДата))
 		OnCreated
 	End Sub
@@ -2536,6 +2902,16 @@ Partial Public Class ЖурналКлиентГруз
 		End Set
 	End Property
 	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="ЖурналКлиентГруз_ЖурналКлиентДаты", Storage:="_ЖурналКлиентДаты", ThisKey:="Код", OtherKey:="IDЖурналКлиентГруз")>  _
+	Public Property ЖурналКлиентДаты() As EntitySet(Of ЖурналКлиентДаты)
+		Get
+			Return Me._ЖурналКлиентДаты
+		End Get
+		Set
+			Me._ЖурналКлиентДаты.Assign(value)
+		End Set
+	End Property
+	
 	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="ЖурналКлиентГруз_ЖурналКлиентМаршрут", Storage:="_ЖурналКлиентМаршрут", ThisKey:="Код", OtherKey:="КодЖурналКлиентГруз")>  _
 	Public Property ЖурналКлиентМаршрут() As EntitySet(Of ЖурналКлиентМаршрут)
 		Get
@@ -2553,16 +2929,6 @@ Partial Public Class ЖурналКлиентГруз
 		End Get
 		Set
 			Me._ЖурналПеревозчик.Assign(value)
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="ЖурналКлиентГруз_ЖурналКлиентДаты", Storage:="_ЖурналКлиентДаты", ThisKey:="Код", OtherKey:="IDЖурналКлиентГруз")>  _
-	Public Property ЖурналКлиентДаты() As EntitySet(Of ЖурналКлиентДаты)
-		Get
-			Return Me._ЖурналКлиентДаты
-		End Get
-		Set
-			Me._ЖурналКлиентДаты.Assign(value)
 		End Set
 	End Property
 	
@@ -2612,6 +2978,16 @@ Partial Public Class ЖурналКлиентГруз
 		End If
 	End Sub
 	
+	Private Sub attach_ЖурналКлиентДаты(ByVal entity As ЖурналКлиентДаты)
+		Me.SendPropertyChanging
+		entity.ЖурналКлиентГруз = Me
+	End Sub
+	
+	Private Sub detach_ЖурналКлиентДаты(ByVal entity As ЖурналКлиентДаты)
+		Me.SendPropertyChanging
+		entity.ЖурналКлиентГруз = Nothing
+	End Sub
+	
 	Private Sub attach_ЖурналКлиентМаршрут(ByVal entity As ЖурналКлиентМаршрут)
 		Me.SendPropertyChanging
 		entity.ЖурналКлиентГруз = Me
@@ -2631,15 +3007,233 @@ Partial Public Class ЖурналКлиентГруз
 		Me.SendPropertyChanging
 		entity.ЖурналКлиентГруз = Nothing
 	End Sub
+End Class
+
+<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.ЖурналКлиентДаты")>  _
+Partial Public Class ЖурналКлиентДаты
+	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
 	
-	Private Sub attach_ЖурналКлиентДаты(ByVal entity As ЖурналКлиентДаты)
-		Me.SendPropertyChanging
-		entity.ЖурналКлиентГруз = Me
+	Private Shared emptyChangingEventArgs As PropertyChangingEventArgs = New PropertyChangingEventArgs(String.Empty)
+	
+	Private _ID As Integer
+	
+	Private _IDЖурналКлиентГруз As System.Nullable(Of Integer)
+	
+	Private _ДатаЗагрузки As String
+	
+	Private _ДатаДоставки As String
+	
+	Private _Ставка As String
+	
+	Private _ДопУсловия As String
+	
+	Private _Состояние As String
+	
+	Private _ЖурналКлиентГруз As EntityRef(Of ЖурналКлиентГруз)
+	
+    #Region "Определения метода расширяемости"
+    Partial Private Sub OnLoaded()
+    End Sub
+    Partial Private Sub OnValidate(action As System.Data.Linq.ChangeAction)
+    End Sub
+    Partial Private Sub OnCreated()
+    End Sub
+    Partial Private Sub OnIDChanging(value As Integer)
+    End Sub
+    Partial Private Sub OnIDChanged()
+    End Sub
+    Partial Private Sub OnIDЖурналКлиентГрузChanging(value As System.Nullable(Of Integer))
+    End Sub
+    Partial Private Sub OnIDЖурналКлиентГрузChanged()
+    End Sub
+    Partial Private Sub OnДатаЗагрузкиChanging(value As String)
+    End Sub
+    Partial Private Sub OnДатаЗагрузкиChanged()
+    End Sub
+    Partial Private Sub OnДатаДоставкиChanging(value As String)
+    End Sub
+    Partial Private Sub OnДатаДоставкиChanged()
+    End Sub
+    Partial Private Sub OnСтавкаChanging(value As String)
+    End Sub
+    Partial Private Sub OnСтавкаChanged()
+    End Sub
+    Partial Private Sub OnДопУсловияChanging(value As String)
+    End Sub
+    Partial Private Sub OnДопУсловияChanged()
+    End Sub
+    Partial Private Sub OnСостояниеChanging(value As String)
+    End Sub
+    Partial Private Sub OnСостояниеChanged()
+    End Sub
+    #End Region
+	
+	Public Sub New()
+		MyBase.New
+		Me._ЖурналКлиентГруз = CType(Nothing, EntityRef(Of ЖурналКлиентГруз))
+		OnCreated
 	End Sub
 	
-	Private Sub detach_ЖурналКлиентДаты(ByVal entity As ЖурналКлиентДаты)
-		Me.SendPropertyChanging
-		entity.ЖурналКлиентГруз = Nothing
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ID", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true)>  _
+	Public Property ID() As Integer
+		Get
+			Return Me._ID
+		End Get
+		Set
+			If ((Me._ID = value)  _
+						= false) Then
+				Me.OnIDChanging(value)
+				Me.SendPropertyChanging
+				Me._ID = value
+				Me.SendPropertyChanged("ID")
+				Me.OnIDChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IDЖурналКлиентГруз", DbType:="Int")>  _
+	Public Property IDЖурналКлиентГруз() As System.Nullable(Of Integer)
+		Get
+			Return Me._IDЖурналКлиентГруз
+		End Get
+		Set
+			If (Me._IDЖурналКлиентГруз.Equals(value) = false) Then
+				If Me._ЖурналКлиентГруз.HasLoadedOrAssignedValue Then
+					Throw New System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException()
+				End If
+				Me.OnIDЖурналКлиентГрузChanging(value)
+				Me.SendPropertyChanging
+				Me._IDЖурналКлиентГруз = value
+				Me.SendPropertyChanged("IDЖурналКлиентГруз")
+				Me.OnIDЖурналКлиентГрузChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ДатаЗагрузки", DbType:="NVarChar(250)")>  _
+	Public Property ДатаЗагрузки() As String
+		Get
+			Return Me._ДатаЗагрузки
+		End Get
+		Set
+			If (String.Equals(Me._ДатаЗагрузки, value) = false) Then
+				Me.OnДатаЗагрузкиChanging(value)
+				Me.SendPropertyChanging
+				Me._ДатаЗагрузки = value
+				Me.SendPropertyChanged("ДатаЗагрузки")
+				Me.OnДатаЗагрузкиChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ДатаДоставки", DbType:="NVarChar(250)")>  _
+	Public Property ДатаДоставки() As String
+		Get
+			Return Me._ДатаДоставки
+		End Get
+		Set
+			If (String.Equals(Me._ДатаДоставки, value) = false) Then
+				Me.OnДатаДоставкиChanging(value)
+				Me.SendPropertyChanging
+				Me._ДатаДоставки = value
+				Me.SendPropertyChanged("ДатаДоставки")
+				Me.OnДатаДоставкиChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Ставка", DbType:="NVarChar(250)")>  _
+	Public Property Ставка() As String
+		Get
+			Return Me._Ставка
+		End Get
+		Set
+			If (String.Equals(Me._Ставка, value) = false) Then
+				Me.OnСтавкаChanging(value)
+				Me.SendPropertyChanging
+				Me._Ставка = value
+				Me.SendPropertyChanged("Ставка")
+				Me.OnСтавкаChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ДопУсловия", DbType:="NVarChar(MAX)")>  _
+	Public Property ДопУсловия() As String
+		Get
+			Return Me._ДопУсловия
+		End Get
+		Set
+			If (String.Equals(Me._ДопУсловия, value) = false) Then
+				Me.OnДопУсловияChanging(value)
+				Me.SendPropertyChanging
+				Me._ДопУсловия = value
+				Me.SendPropertyChanged("ДопУсловия")
+				Me.OnДопУсловияChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Состояние", DbType:="NVarChar(250)")>  _
+	Public Property Состояние() As String
+		Get
+			Return Me._Состояние
+		End Get
+		Set
+			If (String.Equals(Me._Состояние, value) = false) Then
+				Me.OnСостояниеChanging(value)
+				Me.SendPropertyChanging
+				Me._Состояние = value
+				Me.SendPropertyChanged("Состояние")
+				Me.OnСостояниеChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="ЖурналКлиентГруз_ЖурналКлиентДаты", Storage:="_ЖурналКлиентГруз", ThisKey:="IDЖурналКлиентГруз", OtherKey:="Код", IsForeignKey:=true, DeleteRule:="CASCADE")>  _
+	Public Property ЖурналКлиентГруз() As ЖурналКлиентГруз
+		Get
+			Return Me._ЖурналКлиентГруз.Entity
+		End Get
+		Set
+			Dim previousValue As ЖурналКлиентГруз = Me._ЖурналКлиентГруз.Entity
+			If ((Object.Equals(previousValue, value) = false)  _
+						OrElse (Me._ЖурналКлиентГруз.HasLoadedOrAssignedValue = false)) Then
+				Me.SendPropertyChanging
+				If ((previousValue Is Nothing)  _
+							= false) Then
+					Me._ЖурналКлиентГруз.Entity = Nothing
+					previousValue.ЖурналКлиентДаты.Remove(Me)
+				End If
+				Me._ЖурналКлиентГруз.Entity = value
+				If ((value Is Nothing)  _
+							= false) Then
+					value.ЖурналКлиентДаты.Add(Me)
+					Me._IDЖурналКлиентГруз = value.Код
+				Else
+					Me._IDЖурналКлиентГруз = CType(Nothing, Nullable(Of Integer))
+				End If
+				Me.SendPropertyChanged("ЖурналКлиентГруз")
+			End If
+		End Set
+	End Property
+	
+	Public Event PropertyChanging As PropertyChangingEventHandler Implements System.ComponentModel.INotifyPropertyChanging.PropertyChanging
+	
+	Public Event PropertyChanged As PropertyChangedEventHandler Implements System.ComponentModel.INotifyPropertyChanged.PropertyChanged
+	
+	Protected Overridable Sub SendPropertyChanging()
+		If ((Me.PropertyChangingEvent Is Nothing)  _
+					= false) Then
+			RaiseEvent PropertyChanging(Me, emptyChangingEventArgs)
+		End If
+	End Sub
+	
+	Protected Overridable Sub SendPropertyChanged(ByVal propertyName As [String])
+		If ((Me.PropertyChangedEvent Is Nothing)  _
+					= false) Then
+			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
+		End If
 	End Sub
 End Class
 
@@ -3047,6 +3641,156 @@ Partial Public Class ЖурналКлиентМаршрут
 	End Sub
 End Class
 
+<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.ЖурналКлиентСписок")>  _
+Partial Public Class ЖурналКлиентСписок
+	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
+	
+	Private Shared emptyChangingEventArgs As PropertyChangingEventArgs = New PropertyChangingEventArgs(String.Empty)
+	
+	Private _Код As Integer
+	
+	Private _Клиент As String
+	
+	Private _КонтактноеЛицо As String
+	
+	Private _Телефон As String
+	
+	Private _ДопИнфо As String
+	
+    #Region "Определения метода расширяемости"
+    Partial Private Sub OnLoaded()
+    End Sub
+    Partial Private Sub OnValidate(action As System.Data.Linq.ChangeAction)
+    End Sub
+    Partial Private Sub OnCreated()
+    End Sub
+    Partial Private Sub OnКодChanging(value As Integer)
+    End Sub
+    Partial Private Sub OnКодChanged()
+    End Sub
+    Partial Private Sub OnКлиентChanging(value As String)
+    End Sub
+    Partial Private Sub OnКлиентChanged()
+    End Sub
+    Partial Private Sub OnКонтактноеЛицоChanging(value As String)
+    End Sub
+    Partial Private Sub OnКонтактноеЛицоChanged()
+    End Sub
+    Partial Private Sub OnТелефонChanging(value As String)
+    End Sub
+    Partial Private Sub OnТелефонChanged()
+    End Sub
+    Partial Private Sub OnДопИнфоChanging(value As String)
+    End Sub
+    Partial Private Sub OnДопИнфоChanged()
+    End Sub
+    #End Region
+	
+	Public Sub New()
+		MyBase.New
+		OnCreated
+	End Sub
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Код", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true)>  _
+	Public Property Код() As Integer
+		Get
+			Return Me._Код
+		End Get
+		Set
+			If ((Me._Код = value)  _
+						= false) Then
+				Me.OnКодChanging(value)
+				Me.SendPropertyChanging
+				Me._Код = value
+				Me.SendPropertyChanged("Код")
+				Me.OnКодChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Клиент", DbType:="NVarChar(250)")>  _
+	Public Property Клиент() As String
+		Get
+			Return Me._Клиент
+		End Get
+		Set
+			If (String.Equals(Me._Клиент, value) = false) Then
+				Me.OnКлиентChanging(value)
+				Me.SendPropertyChanging
+				Me._Клиент = value
+				Me.SendPropertyChanged("Клиент")
+				Me.OnКлиентChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_КонтактноеЛицо", DbType:="NVarChar(250)")>  _
+	Public Property КонтактноеЛицо() As String
+		Get
+			Return Me._КонтактноеЛицо
+		End Get
+		Set
+			If (String.Equals(Me._КонтактноеЛицо, value) = false) Then
+				Me.OnКонтактноеЛицоChanging(value)
+				Me.SendPropertyChanging
+				Me._КонтактноеЛицо = value
+				Me.SendPropertyChanged("КонтактноеЛицо")
+				Me.OnКонтактноеЛицоChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Телефон", DbType:="NVarChar(50)")>  _
+	Public Property Телефон() As String
+		Get
+			Return Me._Телефон
+		End Get
+		Set
+			If (String.Equals(Me._Телефон, value) = false) Then
+				Me.OnТелефонChanging(value)
+				Me.SendPropertyChanging
+				Me._Телефон = value
+				Me.SendPropertyChanged("Телефон")
+				Me.OnТелефонChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ДопИнфо", DbType:="NVarChar(MAX)")>  _
+	Public Property ДопИнфо() As String
+		Get
+			Return Me._ДопИнфо
+		End Get
+		Set
+			If (String.Equals(Me._ДопИнфо, value) = false) Then
+				Me.OnДопИнфоChanging(value)
+				Me.SendPropertyChanging
+				Me._ДопИнфо = value
+				Me.SendPropertyChanged("ДопИнфо")
+				Me.OnДопИнфоChanged
+			End If
+		End Set
+	End Property
+	
+	Public Event PropertyChanging As PropertyChangingEventHandler Implements System.ComponentModel.INotifyPropertyChanging.PropertyChanging
+	
+	Public Event PropertyChanged As PropertyChangedEventHandler Implements System.ComponentModel.INotifyPropertyChanged.PropertyChanged
+	
+	Protected Overridable Sub SendPropertyChanging()
+		If ((Me.PropertyChangingEvent Is Nothing)  _
+					= false) Then
+			RaiseEvent PropertyChanging(Me, emptyChangingEventArgs)
+		End If
+	End Sub
+	
+	Protected Overridable Sub SendPropertyChanged(ByVal propertyName As [String])
+		If ((Me.PropertyChangedEvent Is Nothing)  _
+					= false) Then
+			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
+		End If
+	End Sub
+End Class
+
 <Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.ЖурналПеревозчик")>  _
 Partial Public Class ЖурналПеревозчик
 	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
@@ -3383,6 +4127,190 @@ Partial Public Class ЖурналПеревозчик
 	Private Sub detach_ЖурналПеревозчикСобытия(ByVal entity As ЖурналПеревозчикСобытия)
 		Me.SendPropertyChanging
 		entity.ЖурналПеревозчик = Nothing
+	End Sub
+End Class
+
+<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.ЖурналПеревозчикСобытия")>  _
+Partial Public Class ЖурналПеревозчикСобытия
+	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
+	
+	Private Shared emptyChangingEventArgs As PropertyChangingEventArgs = New PropertyChangingEventArgs(String.Empty)
+	
+	Private _ID As Integer
+	
+	Private _IDЖурналПеревозчик As System.Nullable(Of Integer)
+	
+	Private _Дата As System.Nullable(Of Date)
+	
+	Private _Маршрут As String
+	
+	Private _Событие As String
+	
+	Private _ЖурналПеревозчик As EntityRef(Of ЖурналПеревозчик)
+	
+    #Region "Определения метода расширяемости"
+    Partial Private Sub OnLoaded()
+    End Sub
+    Partial Private Sub OnValidate(action As System.Data.Linq.ChangeAction)
+    End Sub
+    Partial Private Sub OnCreated()
+    End Sub
+    Partial Private Sub OnIDChanging(value As Integer)
+    End Sub
+    Partial Private Sub OnIDChanged()
+    End Sub
+    Partial Private Sub OnIDЖурналПеревозчикChanging(value As System.Nullable(Of Integer))
+    End Sub
+    Partial Private Sub OnIDЖурналПеревозчикChanged()
+    End Sub
+    Partial Private Sub OnДатаChanging(value As System.Nullable(Of Date))
+    End Sub
+    Partial Private Sub OnДатаChanged()
+    End Sub
+    Partial Private Sub OnМаршрутChanging(value As String)
+    End Sub
+    Partial Private Sub OnМаршрутChanged()
+    End Sub
+    Partial Private Sub OnСобытиеChanging(value As String)
+    End Sub
+    Partial Private Sub OnСобытиеChanged()
+    End Sub
+    #End Region
+	
+	Public Sub New()
+		MyBase.New
+		Me._ЖурналПеревозчик = CType(Nothing, EntityRef(Of ЖурналПеревозчик))
+		OnCreated
+	End Sub
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ID", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true)>  _
+	Public Property ID() As Integer
+		Get
+			Return Me._ID
+		End Get
+		Set
+			If ((Me._ID = value)  _
+						= false) Then
+				Me.OnIDChanging(value)
+				Me.SendPropertyChanging
+				Me._ID = value
+				Me.SendPropertyChanged("ID")
+				Me.OnIDChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IDЖурналПеревозчик", DbType:="Int")>  _
+	Public Property IDЖурналПеревозчик() As System.Nullable(Of Integer)
+		Get
+			Return Me._IDЖурналПеревозчик
+		End Get
+		Set
+			If (Me._IDЖурналПеревозчик.Equals(value) = false) Then
+				If Me._ЖурналПеревозчик.HasLoadedOrAssignedValue Then
+					Throw New System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException()
+				End If
+				Me.OnIDЖурналПеревозчикChanging(value)
+				Me.SendPropertyChanging
+				Me._IDЖурналПеревозчик = value
+				Me.SendPropertyChanged("IDЖурналПеревозчик")
+				Me.OnIDЖурналПеревозчикChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Дата", DbType:="DateTime")>  _
+	Public Property Дата() As System.Nullable(Of Date)
+		Get
+			Return Me._Дата
+		End Get
+		Set
+			If (Me._Дата.Equals(value) = false) Then
+				Me.OnДатаChanging(value)
+				Me.SendPropertyChanging
+				Me._Дата = value
+				Me.SendPropertyChanged("Дата")
+				Me.OnДатаChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Маршрут", DbType:="NVarChar(MAX)")>  _
+	Public Property Маршрут() As String
+		Get
+			Return Me._Маршрут
+		End Get
+		Set
+			If (String.Equals(Me._Маршрут, value) = false) Then
+				Me.OnМаршрутChanging(value)
+				Me.SendPropertyChanging
+				Me._Маршрут = value
+				Me.SendPropertyChanged("Маршрут")
+				Me.OnМаршрутChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Событие", DbType:="NVarChar(MAX)")>  _
+	Public Property Событие() As String
+		Get
+			Return Me._Событие
+		End Get
+		Set
+			If (String.Equals(Me._Событие, value) = false) Then
+				Me.OnСобытиеChanging(value)
+				Me.SendPropertyChanging
+				Me._Событие = value
+				Me.SendPropertyChanged("Событие")
+				Me.OnСобытиеChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="ЖурналПеревозчик_ЖурналПеревозчикСобытия", Storage:="_ЖурналПеревозчик", ThisKey:="IDЖурналПеревозчик", OtherKey:="Код", IsForeignKey:=true, DeleteRule:="CASCADE")>  _
+	Public Property ЖурналПеревозчик() As ЖурналПеревозчик
+		Get
+			Return Me._ЖурналПеревозчик.Entity
+		End Get
+		Set
+			Dim previousValue As ЖурналПеревозчик = Me._ЖурналПеревозчик.Entity
+			If ((Object.Equals(previousValue, value) = false)  _
+						OrElse (Me._ЖурналПеревозчик.HasLoadedOrAssignedValue = false)) Then
+				Me.SendPropertyChanging
+				If ((previousValue Is Nothing)  _
+							= false) Then
+					Me._ЖурналПеревозчик.Entity = Nothing
+					previousValue.ЖурналПеревозчикСобытия.Remove(Me)
+				End If
+				Me._ЖурналПеревозчик.Entity = value
+				If ((value Is Nothing)  _
+							= false) Then
+					value.ЖурналПеревозчикСобытия.Add(Me)
+					Me._IDЖурналПеревозчик = value.Код
+				Else
+					Me._IDЖурналПеревозчик = CType(Nothing, Nullable(Of Integer))
+				End If
+				Me.SendPropertyChanged("ЖурналПеревозчик")
+			End If
+		End Set
+	End Property
+	
+	Public Event PropertyChanging As PropertyChangingEventHandler Implements System.ComponentModel.INotifyPropertyChanging.PropertyChanging
+	
+	Public Event PropertyChanged As PropertyChangedEventHandler Implements System.ComponentModel.INotifyPropertyChanged.PropertyChanged
+	
+	Protected Overridable Sub SendPropertyChanging()
+		If ((Me.PropertyChangingEvent Is Nothing)  _
+					= false) Then
+			RaiseEvent PropertyChanging(Me, emptyChangingEventArgs)
+		End If
+	End Sub
+	
+	Protected Overridable Sub SendPropertyChanged(ByVal propertyName As [String])
+		If ((Me.PropertyChangedEvent Is Nothing)  _
+					= false) Then
+			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
+		End If
 	End Sub
 End Class
 
@@ -9187,1878 +10115,6 @@ Partial Public Class РегионыРоссии
 	End Sub
 End Class
 
-<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.РейсыПеревозчика")>  _
-Partial Public Class РейсыПеревозчика
-	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
-	
-	Private Shared emptyChangingEventArgs As PropertyChangingEventArgs = New PropertyChangingEventArgs(String.Empty)
-	
-	Private _Код As Integer
-	
-	Private _НазвОрганизации As String
-	
-	Private _НомерРейса As System.Nullable(Of Integer)
-	
-	Private _КоличРейсов As System.Nullable(Of Integer)
-	
-	Private _Маршрут As String
-	
-	Private _ДатаПодачиПодЗагрузку As String
-	
-	Private _ВремяПодачи As String
-	
-	Private _ДатаПодачиПодРастаможку As String
-	
-	Private _ВремяПодачиВыгРаст As String
-	
-	Private _ТочныйАдресЗагрузки As String
-	
-	Private _АдресЗатаможки As String
-	
-	Private _НаименованиеГруза As String
-	
-	Private _ТипТрСредства As String
-	
-	Private _НомерАвтомобиля As String
-	
-	Private _Водитель As String
-	
-	Private _ТочнАдресРаста As String
-	
-	Private _ТочнАдресРазгр As String
-	
-	Private _СтоимостьФрахта As String
-	
-	Private _Валюта As String
-	
-	Private _ВалютаПлатежа As String
-	
-	Private _СрокОплаты As String
-	
-	Private _ДопУсловия As String
-	
-	Private _ДогПор As String
-	
-	Private _ДогПорЭксп As String
-	
-	Private _ДатаПоручения As String
-	
-	Private _ПорЭксп As String
-	
-	Private _ПоИнотерр As String
-	
-	Private _ПоТеррРБ As String
-	
-	Private _ДатаАкта As String
-	
-	Private _НомерСМР As String
-	
-	Private _УсловияОплаты As String
-	
-	Private _ДатаПолученияДоков As System.Nullable(Of Date)
-	
-	Private _ДатаОплаты As System.Nullable(Of Date)
-	
-	Private _ОстатокОплаты As String
-	
-	Private _РазмерШтрафаЗаСрыв As String
-	
-	Private _Предоплата As String
-	
-	Private _СрывЗагр20Проц As String
-	
-	Private _Экспедитор As String
-	
-	Private _ДатаСоздания As System.Nullable(Of Date)
-	
-	Private _ОплатыПер As EntitySet(Of ОплатыПер)
-	
-	Private _Перевозчики As EntityRef(Of Перевозчики)
-	
-    #Region "Определения метода расширяемости"
-    Partial Private Sub OnLoaded()
-    End Sub
-    Partial Private Sub OnValidate(action As System.Data.Linq.ChangeAction)
-    End Sub
-    Partial Private Sub OnCreated()
-    End Sub
-    Partial Private Sub OnКодChanging(value As Integer)
-    End Sub
-    Partial Private Sub OnКодChanged()
-    End Sub
-    Partial Private Sub OnНазвОрганизацииChanging(value As String)
-    End Sub
-    Partial Private Sub OnНазвОрганизацииChanged()
-    End Sub
-    Partial Private Sub OnНомерРейсаChanging(value As System.Nullable(Of Integer))
-    End Sub
-    Partial Private Sub OnНомерРейсаChanged()
-    End Sub
-    Partial Private Sub OnКоличРейсовChanging(value As System.Nullable(Of Integer))
-    End Sub
-    Partial Private Sub OnКоличРейсовChanged()
-    End Sub
-    Partial Private Sub OnМаршрутChanging(value As String)
-    End Sub
-    Partial Private Sub OnМаршрутChanged()
-    End Sub
-    Partial Private Sub OnДатаПодачиПодЗагрузкуChanging(value As String)
-    End Sub
-    Partial Private Sub OnДатаПодачиПодЗагрузкуChanged()
-    End Sub
-    Partial Private Sub OnВремяПодачиChanging(value As String)
-    End Sub
-    Partial Private Sub OnВремяПодачиChanged()
-    End Sub
-    Partial Private Sub OnДатаПодачиПодРастаможкуChanging(value As String)
-    End Sub
-    Partial Private Sub OnДатаПодачиПодРастаможкуChanged()
-    End Sub
-    Partial Private Sub OnВремяПодачиВыгРастChanging(value As String)
-    End Sub
-    Partial Private Sub OnВремяПодачиВыгРастChanged()
-    End Sub
-    Partial Private Sub OnТочныйАдресЗагрузкиChanging(value As String)
-    End Sub
-    Partial Private Sub OnТочныйАдресЗагрузкиChanged()
-    End Sub
-    Partial Private Sub OnАдресЗатаможкиChanging(value As String)
-    End Sub
-    Partial Private Sub OnАдресЗатаможкиChanged()
-    End Sub
-    Partial Private Sub OnНаименованиеГрузаChanging(value As String)
-    End Sub
-    Partial Private Sub OnНаименованиеГрузаChanged()
-    End Sub
-    Partial Private Sub OnТипТрСредстваChanging(value As String)
-    End Sub
-    Partial Private Sub OnТипТрСредстваChanged()
-    End Sub
-    Partial Private Sub OnНомерАвтомобиляChanging(value As String)
-    End Sub
-    Partial Private Sub OnНомерАвтомобиляChanged()
-    End Sub
-    Partial Private Sub OnВодительChanging(value As String)
-    End Sub
-    Partial Private Sub OnВодительChanged()
-    End Sub
-    Partial Private Sub OnТочнАдресРастаChanging(value As String)
-    End Sub
-    Partial Private Sub OnТочнАдресРастаChanged()
-    End Sub
-    Partial Private Sub OnТочнАдресРазгрChanging(value As String)
-    End Sub
-    Partial Private Sub OnТочнАдресРазгрChanged()
-    End Sub
-    Partial Private Sub OnСтоимостьФрахтаChanging(value As String)
-    End Sub
-    Partial Private Sub OnСтоимостьФрахтаChanged()
-    End Sub
-    Partial Private Sub OnВалютаChanging(value As String)
-    End Sub
-    Partial Private Sub OnВалютаChanged()
-    End Sub
-    Partial Private Sub OnВалютаПлатежаChanging(value As String)
-    End Sub
-    Partial Private Sub OnВалютаПлатежаChanged()
-    End Sub
-    Partial Private Sub OnСрокОплатыChanging(value As String)
-    End Sub
-    Partial Private Sub OnСрокОплатыChanged()
-    End Sub
-    Partial Private Sub OnДопУсловияChanging(value As String)
-    End Sub
-    Partial Private Sub OnДопУсловияChanged()
-    End Sub
-    Partial Private Sub OnДогПорChanging(value As String)
-    End Sub
-    Partial Private Sub OnДогПорChanged()
-    End Sub
-    Partial Private Sub OnДогПорЭкспChanging(value As String)
-    End Sub
-    Partial Private Sub OnДогПорЭкспChanged()
-    End Sub
-    Partial Private Sub OnДатаПорученияChanging(value As String)
-    End Sub
-    Partial Private Sub OnДатаПорученияChanged()
-    End Sub
-    Partial Private Sub OnПорЭкспChanging(value As String)
-    End Sub
-    Partial Private Sub OnПорЭкспChanged()
-    End Sub
-    Partial Private Sub OnПоИнотеррChanging(value As String)
-    End Sub
-    Partial Private Sub OnПоИнотеррChanged()
-    End Sub
-    Partial Private Sub OnПоТеррРБChanging(value As String)
-    End Sub
-    Partial Private Sub OnПоТеррРБChanged()
-    End Sub
-    Partial Private Sub OnДатаАктаChanging(value As String)
-    End Sub
-    Partial Private Sub OnДатаАктаChanged()
-    End Sub
-    Partial Private Sub OnНомерСМРChanging(value As String)
-    End Sub
-    Partial Private Sub OnНомерСМРChanged()
-    End Sub
-    Partial Private Sub OnУсловияОплатыChanging(value As String)
-    End Sub
-    Partial Private Sub OnУсловияОплатыChanged()
-    End Sub
-    Partial Private Sub OnДатаПолученияДоковChanging(value As System.Nullable(Of Date))
-    End Sub
-    Partial Private Sub OnДатаПолученияДоковChanged()
-    End Sub
-    Partial Private Sub OnДатаОплатыChanging(value As System.Nullable(Of Date))
-    End Sub
-    Partial Private Sub OnДатаОплатыChanged()
-    End Sub
-    Partial Private Sub OnОстатокОплатыChanging(value As String)
-    End Sub
-    Partial Private Sub OnОстатокОплатыChanged()
-    End Sub
-    Partial Private Sub OnРазмерШтрафаЗаСрывChanging(value As String)
-    End Sub
-    Partial Private Sub OnРазмерШтрафаЗаСрывChanged()
-    End Sub
-    Partial Private Sub OnПредоплатаChanging(value As String)
-    End Sub
-    Partial Private Sub OnПредоплатаChanged()
-    End Sub
-    Partial Private Sub OnСрывЗагр20ПроцChanging(value As String)
-    End Sub
-    Partial Private Sub OnСрывЗагр20ПроцChanged()
-    End Sub
-    Partial Private Sub OnЭкспедиторChanging(value As String)
-    End Sub
-    Partial Private Sub OnЭкспедиторChanged()
-    End Sub
-    Partial Private Sub OnДатаСозданияChanging(value As System.Nullable(Of Date))
-    End Sub
-    Partial Private Sub OnДатаСозданияChanged()
-    End Sub
-    #End Region
-	
-	Public Sub New()
-		MyBase.New
-		Me._ОплатыПер = New EntitySet(Of ОплатыПер)(AddressOf Me.attach_ОплатыПер, AddressOf Me.detach_ОплатыПер)
-		Me._Перевозчики = CType(Nothing, EntityRef(Of Перевозчики))
-		OnCreated
-	End Sub
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Код", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true)>  _
-	Public Property Код() As Integer
-		Get
-			Return Me._Код
-		End Get
-		Set
-			If ((Me._Код = value)  _
-						= false) Then
-				Me.OnКодChanging(value)
-				Me.SendPropertyChanging
-				Me._Код = value
-				Me.SendPropertyChanged("Код")
-				Me.OnКодChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_НазвОрганизации", DbType:="NVarChar(255)")>  _
-	Public Property НазвОрганизации() As String
-		Get
-			Return Me._НазвОрганизации
-		End Get
-		Set
-			If (String.Equals(Me._НазвОрганизации, value) = false) Then
-				If Me._Перевозчики.HasLoadedOrAssignedValue Then
-					Throw New System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException()
-				End If
-				Me.OnНазвОрганизацииChanging(value)
-				Me.SendPropertyChanging
-				Me._НазвОрганизации = value
-				Me.SendPropertyChanged("НазвОрганизации")
-				Me.OnНазвОрганизацииChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_НомерРейса", DbType:="Int")>  _
-	Public Property НомерРейса() As System.Nullable(Of Integer)
-		Get
-			Return Me._НомерРейса
-		End Get
-		Set
-			If (Me._НомерРейса.Equals(value) = false) Then
-				Me.OnНомерРейсаChanging(value)
-				Me.SendPropertyChanging
-				Me._НомерРейса = value
-				Me.SendPropertyChanged("НомерРейса")
-				Me.OnНомерРейсаChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_КоличРейсов", DbType:="Int")>  _
-	Public Property КоличРейсов() As System.Nullable(Of Integer)
-		Get
-			Return Me._КоличРейсов
-		End Get
-		Set
-			If (Me._КоличРейсов.Equals(value) = false) Then
-				Me.OnКоличРейсовChanging(value)
-				Me.SendPropertyChanging
-				Me._КоличРейсов = value
-				Me.SendPropertyChanged("КоличРейсов")
-				Me.OnКоличРейсовChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Маршрут", DbType:="NVarChar(255)")>  _
-	Public Property Маршрут() As String
-		Get
-			Return Me._Маршрут
-		End Get
-		Set
-			If (String.Equals(Me._Маршрут, value) = false) Then
-				Me.OnМаршрутChanging(value)
-				Me.SendPropertyChanging
-				Me._Маршрут = value
-				Me.SendPropertyChanged("Маршрут")
-				Me.OnМаршрутChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ДатаПодачиПодЗагрузку", DbType:="NVarChar(255)")>  _
-	Public Property ДатаПодачиПодЗагрузку() As String
-		Get
-			Return Me._ДатаПодачиПодЗагрузку
-		End Get
-		Set
-			If (String.Equals(Me._ДатаПодачиПодЗагрузку, value) = false) Then
-				Me.OnДатаПодачиПодЗагрузкуChanging(value)
-				Me.SendPropertyChanging
-				Me._ДатаПодачиПодЗагрузку = value
-				Me.SendPropertyChanged("ДатаПодачиПодЗагрузку")
-				Me.OnДатаПодачиПодЗагрузкуChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ВремяПодачи", DbType:="NVarChar(255)")>  _
-	Public Property ВремяПодачи() As String
-		Get
-			Return Me._ВремяПодачи
-		End Get
-		Set
-			If (String.Equals(Me._ВремяПодачи, value) = false) Then
-				Me.OnВремяПодачиChanging(value)
-				Me.SendPropertyChanging
-				Me._ВремяПодачи = value
-				Me.SendPropertyChanged("ВремяПодачи")
-				Me.OnВремяПодачиChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ДатаПодачиПодРастаможку", DbType:="NVarChar(255)")>  _
-	Public Property ДатаПодачиПодРастаможку() As String
-		Get
-			Return Me._ДатаПодачиПодРастаможку
-		End Get
-		Set
-			If (String.Equals(Me._ДатаПодачиПодРастаможку, value) = false) Then
-				Me.OnДатаПодачиПодРастаможкуChanging(value)
-				Me.SendPropertyChanging
-				Me._ДатаПодачиПодРастаможку = value
-				Me.SendPropertyChanged("ДатаПодачиПодРастаможку")
-				Me.OnДатаПодачиПодРастаможкуChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ВремяПодачиВыгРаст", DbType:="NVarChar(255)")>  _
-	Public Property ВремяПодачиВыгРаст() As String
-		Get
-			Return Me._ВремяПодачиВыгРаст
-		End Get
-		Set
-			If (String.Equals(Me._ВремяПодачиВыгРаст, value) = false) Then
-				Me.OnВремяПодачиВыгРастChanging(value)
-				Me.SendPropertyChanging
-				Me._ВремяПодачиВыгРаст = value
-				Me.SendPropertyChanged("ВремяПодачиВыгРаст")
-				Me.OnВремяПодачиВыгРастChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ТочныйАдресЗагрузки", DbType:="NVarChar(MAX)")>  _
-	Public Property ТочныйАдресЗагрузки() As String
-		Get
-			Return Me._ТочныйАдресЗагрузки
-		End Get
-		Set
-			If (String.Equals(Me._ТочныйАдресЗагрузки, value) = false) Then
-				Me.OnТочныйАдресЗагрузкиChanging(value)
-				Me.SendPropertyChanging
-				Me._ТочныйАдресЗагрузки = value
-				Me.SendPropertyChanged("ТочныйАдресЗагрузки")
-				Me.OnТочныйАдресЗагрузкиChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_АдресЗатаможки", DbType:="NVarChar(255)")>  _
-	Public Property АдресЗатаможки() As String
-		Get
-			Return Me._АдресЗатаможки
-		End Get
-		Set
-			If (String.Equals(Me._АдресЗатаможки, value) = false) Then
-				Me.OnАдресЗатаможкиChanging(value)
-				Me.SendPropertyChanging
-				Me._АдресЗатаможки = value
-				Me.SendPropertyChanged("АдресЗатаможки")
-				Me.OnАдресЗатаможкиChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_НаименованиеГруза", DbType:="NVarChar(MAX)")>  _
-	Public Property НаименованиеГруза() As String
-		Get
-			Return Me._НаименованиеГруза
-		End Get
-		Set
-			If (String.Equals(Me._НаименованиеГруза, value) = false) Then
-				Me.OnНаименованиеГрузаChanging(value)
-				Me.SendPropertyChanging
-				Me._НаименованиеГруза = value
-				Me.SendPropertyChanged("НаименованиеГруза")
-				Me.OnНаименованиеГрузаChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ТипТрСредства", DbType:="NVarChar(255)")>  _
-	Public Property ТипТрСредства() As String
-		Get
-			Return Me._ТипТрСредства
-		End Get
-		Set
-			If (String.Equals(Me._ТипТрСредства, value) = false) Then
-				Me.OnТипТрСредстваChanging(value)
-				Me.SendPropertyChanging
-				Me._ТипТрСредства = value
-				Me.SendPropertyChanged("ТипТрСредства")
-				Me.OnТипТрСредстваChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_НомерАвтомобиля", DbType:="NVarChar(255)")>  _
-	Public Property НомерАвтомобиля() As String
-		Get
-			Return Me._НомерАвтомобиля
-		End Get
-		Set
-			If (String.Equals(Me._НомерАвтомобиля, value) = false) Then
-				Me.OnНомерАвтомобиляChanging(value)
-				Me.SendPropertyChanging
-				Me._НомерАвтомобиля = value
-				Me.SendPropertyChanged("НомерАвтомобиля")
-				Me.OnНомерАвтомобиляChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Водитель", DbType:="NVarChar(255)")>  _
-	Public Property Водитель() As String
-		Get
-			Return Me._Водитель
-		End Get
-		Set
-			If (String.Equals(Me._Водитель, value) = false) Then
-				Me.OnВодительChanging(value)
-				Me.SendPropertyChanging
-				Me._Водитель = value
-				Me.SendPropertyChanged("Водитель")
-				Me.OnВодительChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ТочнАдресРаста", DbType:="NVarChar(MAX)")>  _
-	Public Property ТочнАдресРаста() As String
-		Get
-			Return Me._ТочнАдресРаста
-		End Get
-		Set
-			If (String.Equals(Me._ТочнАдресРаста, value) = false) Then
-				Me.OnТочнАдресРастаChanging(value)
-				Me.SendPropertyChanging
-				Me._ТочнАдресРаста = value
-				Me.SendPropertyChanged("ТочнАдресРаста")
-				Me.OnТочнАдресРастаChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ТочнАдресРазгр", DbType:="NVarChar(MAX)")>  _
-	Public Property ТочнАдресРазгр() As String
-		Get
-			Return Me._ТочнАдресРазгр
-		End Get
-		Set
-			If (String.Equals(Me._ТочнАдресРазгр, value) = false) Then
-				Me.OnТочнАдресРазгрChanging(value)
-				Me.SendPropertyChanging
-				Me._ТочнАдресРазгр = value
-				Me.SendPropertyChanged("ТочнАдресРазгр")
-				Me.OnТочнАдресРазгрChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_СтоимостьФрахта", DbType:="NVarChar(255)")>  _
-	Public Property СтоимостьФрахта() As String
-		Get
-			Return Me._СтоимостьФрахта
-		End Get
-		Set
-			If (String.Equals(Me._СтоимостьФрахта, value) = false) Then
-				Me.OnСтоимостьФрахтаChanging(value)
-				Me.SendPropertyChanging
-				Me._СтоимостьФрахта = value
-				Me.SendPropertyChanged("СтоимостьФрахта")
-				Me.OnСтоимостьФрахтаChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Валюта", DbType:="NVarChar(255)")>  _
-	Public Property Валюта() As String
-		Get
-			Return Me._Валюта
-		End Get
-		Set
-			If (String.Equals(Me._Валюта, value) = false) Then
-				Me.OnВалютаChanging(value)
-				Me.SendPropertyChanging
-				Me._Валюта = value
-				Me.SendPropertyChanged("Валюта")
-				Me.OnВалютаChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ВалютаПлатежа", DbType:="NVarChar(255)")>  _
-	Public Property ВалютаПлатежа() As String
-		Get
-			Return Me._ВалютаПлатежа
-		End Get
-		Set
-			If (String.Equals(Me._ВалютаПлатежа, value) = false) Then
-				Me.OnВалютаПлатежаChanging(value)
-				Me.SendPropertyChanging
-				Me._ВалютаПлатежа = value
-				Me.SendPropertyChanged("ВалютаПлатежа")
-				Me.OnВалютаПлатежаChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_СрокОплаты", DbType:="NVarChar(255)")>  _
-	Public Property СрокОплаты() As String
-		Get
-			Return Me._СрокОплаты
-		End Get
-		Set
-			If (String.Equals(Me._СрокОплаты, value) = false) Then
-				Me.OnСрокОплатыChanging(value)
-				Me.SendPropertyChanging
-				Me._СрокОплаты = value
-				Me.SendPropertyChanged("СрокОплаты")
-				Me.OnСрокОплатыChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ДопУсловия", DbType:="NVarChar(MAX)")>  _
-	Public Property ДопУсловия() As String
-		Get
-			Return Me._ДопУсловия
-		End Get
-		Set
-			If (String.Equals(Me._ДопУсловия, value) = false) Then
-				Me.OnДопУсловияChanging(value)
-				Me.SendPropertyChanging
-				Me._ДопУсловия = value
-				Me.SendPropertyChanged("ДопУсловия")
-				Me.OnДопУсловияChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ДогПор", DbType:="NVarChar(255)")>  _
-	Public Property ДогПор() As String
-		Get
-			Return Me._ДогПор
-		End Get
-		Set
-			If (String.Equals(Me._ДогПор, value) = false) Then
-				Me.OnДогПорChanging(value)
-				Me.SendPropertyChanging
-				Me._ДогПор = value
-				Me.SendPropertyChanged("ДогПор")
-				Me.OnДогПорChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ДогПорЭксп", DbType:="NVarChar(255)")>  _
-	Public Property ДогПорЭксп() As String
-		Get
-			Return Me._ДогПорЭксп
-		End Get
-		Set
-			If (String.Equals(Me._ДогПорЭксп, value) = false) Then
-				Me.OnДогПорЭкспChanging(value)
-				Me.SendPropertyChanging
-				Me._ДогПорЭксп = value
-				Me.SendPropertyChanged("ДогПорЭксп")
-				Me.OnДогПорЭкспChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ДатаПоручения", DbType:="NVarChar(255)")>  _
-	Public Property ДатаПоручения() As String
-		Get
-			Return Me._ДатаПоручения
-		End Get
-		Set
-			If (String.Equals(Me._ДатаПоручения, value) = false) Then
-				Me.OnДатаПорученияChanging(value)
-				Me.SendPropertyChanging
-				Me._ДатаПоручения = value
-				Me.SendPropertyChanged("ДатаПоручения")
-				Me.OnДатаПорученияChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ПорЭксп", DbType:="NVarChar(255)")>  _
-	Public Property ПорЭксп() As String
-		Get
-			Return Me._ПорЭксп
-		End Get
-		Set
-			If (String.Equals(Me._ПорЭксп, value) = false) Then
-				Me.OnПорЭкспChanging(value)
-				Me.SendPropertyChanging
-				Me._ПорЭксп = value
-				Me.SendPropertyChanged("ПорЭксп")
-				Me.OnПорЭкспChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ПоИнотерр", DbType:="NVarChar(255)")>  _
-	Public Property ПоИнотерр() As String
-		Get
-			Return Me._ПоИнотерр
-		End Get
-		Set
-			If (String.Equals(Me._ПоИнотерр, value) = false) Then
-				Me.OnПоИнотеррChanging(value)
-				Me.SendPropertyChanging
-				Me._ПоИнотерр = value
-				Me.SendPropertyChanged("ПоИнотерр")
-				Me.OnПоИнотеррChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ПоТеррРБ", DbType:="NVarChar(255)")>  _
-	Public Property ПоТеррРБ() As String
-		Get
-			Return Me._ПоТеррРБ
-		End Get
-		Set
-			If (String.Equals(Me._ПоТеррРБ, value) = false) Then
-				Me.OnПоТеррРБChanging(value)
-				Me.SendPropertyChanging
-				Me._ПоТеррРБ = value
-				Me.SendPropertyChanged("ПоТеррРБ")
-				Me.OnПоТеррРБChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ДатаАкта", DbType:="NVarChar(255)")>  _
-	Public Property ДатаАкта() As String
-		Get
-			Return Me._ДатаАкта
-		End Get
-		Set
-			If (String.Equals(Me._ДатаАкта, value) = false) Then
-				Me.OnДатаАктаChanging(value)
-				Me.SendPropertyChanging
-				Me._ДатаАкта = value
-				Me.SendPropertyChanged("ДатаАкта")
-				Me.OnДатаАктаChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_НомерСМР", DbType:="NVarChar(255)")>  _
-	Public Property НомерСМР() As String
-		Get
-			Return Me._НомерСМР
-		End Get
-		Set
-			If (String.Equals(Me._НомерСМР, value) = false) Then
-				Me.OnНомерСМРChanging(value)
-				Me.SendPropertyChanging
-				Me._НомерСМР = value
-				Me.SendPropertyChanged("НомерСМР")
-				Me.OnНомерСМРChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_УсловияОплаты", DbType:="NVarChar(255)")>  _
-	Public Property УсловияОплаты() As String
-		Get
-			Return Me._УсловияОплаты
-		End Get
-		Set
-			If (String.Equals(Me._УсловияОплаты, value) = false) Then
-				Me.OnУсловияОплатыChanging(value)
-				Me.SendPropertyChanging
-				Me._УсловияОплаты = value
-				Me.SendPropertyChanged("УсловияОплаты")
-				Me.OnУсловияОплатыChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ДатаПолученияДоков", DbType:="DateTime")>  _
-	Public Property ДатаПолученияДоков() As System.Nullable(Of Date)
-		Get
-			Return Me._ДатаПолученияДоков
-		End Get
-		Set
-			If (Me._ДатаПолученияДоков.Equals(value) = false) Then
-				Me.OnДатаПолученияДоковChanging(value)
-				Me.SendPropertyChanging
-				Me._ДатаПолученияДоков = value
-				Me.SendPropertyChanged("ДатаПолученияДоков")
-				Me.OnДатаПолученияДоковChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ДатаОплаты", DbType:="DateTime")>  _
-	Public Property ДатаОплаты() As System.Nullable(Of Date)
-		Get
-			Return Me._ДатаОплаты
-		End Get
-		Set
-			If (Me._ДатаОплаты.Equals(value) = false) Then
-				Me.OnДатаОплатыChanging(value)
-				Me.SendPropertyChanging
-				Me._ДатаОплаты = value
-				Me.SendPropertyChanged("ДатаОплаты")
-				Me.OnДатаОплатыChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ОстатокОплаты", DbType:="NVarChar(255)")>  _
-	Public Property ОстатокОплаты() As String
-		Get
-			Return Me._ОстатокОплаты
-		End Get
-		Set
-			If (String.Equals(Me._ОстатокОплаты, value) = false) Then
-				Me.OnОстатокОплатыChanging(value)
-				Me.SendPropertyChanging
-				Me._ОстатокОплаты = value
-				Me.SendPropertyChanged("ОстатокОплаты")
-				Me.OnОстатокОплатыChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_РазмерШтрафаЗаСрыв", DbType:="NVarChar(255)")>  _
-	Public Property РазмерШтрафаЗаСрыв() As String
-		Get
-			Return Me._РазмерШтрафаЗаСрыв
-		End Get
-		Set
-			If (String.Equals(Me._РазмерШтрафаЗаСрыв, value) = false) Then
-				Me.OnРазмерШтрафаЗаСрывChanging(value)
-				Me.SendPropertyChanging
-				Me._РазмерШтрафаЗаСрыв = value
-				Me.SendPropertyChanged("РазмерШтрафаЗаСрыв")
-				Me.OnРазмерШтрафаЗаСрывChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Предоплата", DbType:="NVarChar(MAX)")>  _
-	Public Property Предоплата() As String
-		Get
-			Return Me._Предоплата
-		End Get
-		Set
-			If (String.Equals(Me._Предоплата, value) = false) Then
-				Me.OnПредоплатаChanging(value)
-				Me.SendPropertyChanging
-				Me._Предоплата = value
-				Me.SendPropertyChanged("Предоплата")
-				Me.OnПредоплатаChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_СрывЗагр20Проц", DbType:="NVarChar(50)")>  _
-	Public Property СрывЗагр20Проц() As String
-		Get
-			Return Me._СрывЗагр20Проц
-		End Get
-		Set
-			If (String.Equals(Me._СрывЗагр20Проц, value) = false) Then
-				Me.OnСрывЗагр20ПроцChanging(value)
-				Me.SendPropertyChanging
-				Me._СрывЗагр20Проц = value
-				Me.SendPropertyChanged("СрывЗагр20Проц")
-				Me.OnСрывЗагр20ПроцChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Экспедитор", DbType:="NVarChar(255)")>  _
-	Public Property Экспедитор() As String
-		Get
-			Return Me._Экспедитор
-		End Get
-		Set
-			If (String.Equals(Me._Экспедитор, value) = false) Then
-				Me.OnЭкспедиторChanging(value)
-				Me.SendPropertyChanging
-				Me._Экспедитор = value
-				Me.SendPropertyChanged("Экспедитор")
-				Me.OnЭкспедиторChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ДатаСоздания", DbType:="DateTime")>  _
-	Public Property ДатаСоздания() As System.Nullable(Of Date)
-		Get
-			Return Me._ДатаСоздания
-		End Get
-		Set
-			If (Me._ДатаСоздания.Equals(value) = false) Then
-				Me.OnДатаСозданияChanging(value)
-				Me.SendPropertyChanging
-				Me._ДатаСоздания = value
-				Me.SendPropertyChanged("ДатаСоздания")
-				Me.OnДатаСозданияChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="РейсыПеревозчика_ОплатыПер", Storage:="_ОплатыПер", ThisKey:="Код", OtherKey:="IDПер")>  _
-	Public Property ОплатыПер() As EntitySet(Of ОплатыПер)
-		Get
-			Return Me._ОплатыПер
-		End Get
-		Set
-			Me._ОплатыПер.Assign(value)
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="Перевозчики_РейсыПеревозчика", Storage:="_Перевозчики", ThisKey:="НазвОрганизации", OtherKey:="Названиеорганизации", IsForeignKey:=true, DeleteRule:="CASCADE")>  _
-	Public Property Перевозчики() As Перевозчики
-		Get
-			Return Me._Перевозчики.Entity
-		End Get
-		Set
-			Dim previousValue As Перевозчики = Me._Перевозчики.Entity
-			If ((Object.Equals(previousValue, value) = false)  _
-						OrElse (Me._Перевозчики.HasLoadedOrAssignedValue = false)) Then
-				Me.SendPropertyChanging
-				If ((previousValue Is Nothing)  _
-							= false) Then
-					Me._Перевозчики.Entity = Nothing
-					previousValue.РейсыПеревозчика.Remove(Me)
-				End If
-				Me._Перевозчики.Entity = value
-				If ((value Is Nothing)  _
-							= false) Then
-					value.РейсыПеревозчика.Add(Me)
-					Me._НазвОрганизации = value.Названиеорганизации
-				Else
-					Me._НазвОрганизации = CType(Nothing, String)
-				End If
-				Me.SendPropertyChanged("Перевозчики")
-			End If
-		End Set
-	End Property
-	
-	Public Event PropertyChanging As PropertyChangingEventHandler Implements System.ComponentModel.INotifyPropertyChanging.PropertyChanging
-	
-	Public Event PropertyChanged As PropertyChangedEventHandler Implements System.ComponentModel.INotifyPropertyChanged.PropertyChanged
-	
-	Protected Overridable Sub SendPropertyChanging()
-		If ((Me.PropertyChangingEvent Is Nothing)  _
-					= false) Then
-			RaiseEvent PropertyChanging(Me, emptyChangingEventArgs)
-		End If
-	End Sub
-	
-	Protected Overridable Sub SendPropertyChanged(ByVal propertyName As [String])
-		If ((Me.PropertyChangedEvent Is Nothing)  _
-					= false) Then
-			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
-		End If
-	End Sub
-	
-	Private Sub attach_ОплатыПер(ByVal entity As ОплатыПер)
-		Me.SendPropertyChanging
-		entity.РейсыПеревозчика = Me
-	End Sub
-	
-	Private Sub detach_ОплатыПер(ByVal entity As ОплатыПер)
-		Me.SendPropertyChanging
-		entity.РейсыПеревозчика = Nothing
-	End Sub
-End Class
-
-<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.Страна")>  _
-Partial Public Class Страна
-	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
-	
-	Private Shared emptyChangingEventArgs As PropertyChangingEventArgs = New PropertyChangingEventArgs(String.Empty)
-	
-	Private _Код As Integer
-	
-	Private _Страна As String
-	
-	Private _РегионыРоссии As EntitySet(Of РегионыРоссии)
-	
-    #Region "Определения метода расширяемости"
-    Partial Private Sub OnLoaded()
-    End Sub
-    Partial Private Sub OnValidate(action As System.Data.Linq.ChangeAction)
-    End Sub
-    Partial Private Sub OnCreated()
-    End Sub
-    Partial Private Sub OnКодChanging(value As Integer)
-    End Sub
-    Partial Private Sub OnКодChanged()
-    End Sub
-    Partial Private Sub OnСтранаChanging(value As String)
-    End Sub
-    Partial Private Sub OnСтранаChanged()
-    End Sub
-    #End Region
-	
-	Public Sub New()
-		MyBase.New
-		Me._РегионыРоссии = New EntitySet(Of РегионыРоссии)(AddressOf Me.attach_РегионыРоссии, AddressOf Me.detach_РегионыРоссии)
-		OnCreated
-	End Sub
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Код", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true)>  _
-	Public Property Код() As Integer
-		Get
-			Return Me._Код
-		End Get
-		Set
-			If ((Me._Код = value)  _
-						= false) Then
-				Me.OnКодChanging(value)
-				Me.SendPropertyChanging
-				Me._Код = value
-				Me.SendPropertyChanged("Код")
-				Me.OnКодChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Страна", DbType:="NVarChar(30)")>  _
-	Public Property Страна() As String
-		Get
-			Return Me._Страна
-		End Get
-		Set
-			If (String.Equals(Me._Страна, value) = false) Then
-				Me.OnСтранаChanging(value)
-				Me.SendPropertyChanging
-				Me._Страна = value
-				Me.SendPropertyChanged("Страна")
-				Me.OnСтранаChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="Страна_РегионыРоссии", Storage:="_РегионыРоссии", ThisKey:="Код", OtherKey:="Страны")>  _
-	Public Property РегионыРоссии() As EntitySet(Of РегионыРоссии)
-		Get
-			Return Me._РегионыРоссии
-		End Get
-		Set
-			Me._РегионыРоссии.Assign(value)
-		End Set
-	End Property
-	
-	Public Event PropertyChanging As PropertyChangingEventHandler Implements System.ComponentModel.INotifyPropertyChanging.PropertyChanging
-	
-	Public Event PropertyChanged As PropertyChangedEventHandler Implements System.ComponentModel.INotifyPropertyChanged.PropertyChanged
-	
-	Protected Overridable Sub SendPropertyChanging()
-		If ((Me.PropertyChangingEvent Is Nothing)  _
-					= false) Then
-			RaiseEvent PropertyChanging(Me, emptyChangingEventArgs)
-		End If
-	End Sub
-	
-	Protected Overridable Sub SendPropertyChanged(ByVal propertyName As [String])
-		If ((Me.PropertyChangedEvent Is Nothing)  _
-					= false) Then
-			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
-		End If
-	End Sub
-	
-	Private Sub attach_РегионыРоссии(ByVal entity As РегионыРоссии)
-		Me.SendPropertyChanging
-		entity.Страна = Me
-	End Sub
-	
-	Private Sub detach_РегионыРоссии(ByVal entity As РегионыРоссии)
-		Me.SendPropertyChanging
-		entity.Страна = Nothing
-	End Sub
-End Class
-
-<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.ТипАвто")>  _
-Partial Public Class ТипАвто
-	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
-	
-	Private Shared emptyChangingEventArgs As PropertyChangingEventArgs = New PropertyChangingEventArgs(String.Empty)
-	
-	Private _Код As Integer
-	
-	Private _ТипАвто As String
-	
-    #Region "Определения метода расширяемости"
-    Partial Private Sub OnLoaded()
-    End Sub
-    Partial Private Sub OnValidate(action As System.Data.Linq.ChangeAction)
-    End Sub
-    Partial Private Sub OnCreated()
-    End Sub
-    Partial Private Sub OnКодChanging(value As Integer)
-    End Sub
-    Partial Private Sub OnКодChanged()
-    End Sub
-    Partial Private Sub OnТипАвтоChanging(value As String)
-    End Sub
-    Partial Private Sub OnТипАвтоChanged()
-    End Sub
-    #End Region
-	
-	Public Sub New()
-		MyBase.New
-		OnCreated
-	End Sub
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Код", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true)>  _
-	Public Property Код() As Integer
-		Get
-			Return Me._Код
-		End Get
-		Set
-			If ((Me._Код = value)  _
-						= false) Then
-				Me.OnКодChanging(value)
-				Me.SendPropertyChanging
-				Me._Код = value
-				Me.SendPropertyChanged("Код")
-				Me.OnКодChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ТипАвто", DbType:="NVarChar(100)")>  _
-	Public Property ТипАвто() As String
-		Get
-			Return Me._ТипАвто
-		End Get
-		Set
-			If (String.Equals(Me._ТипАвто, value) = false) Then
-				Me.OnТипАвтоChanging(value)
-				Me.SendPropertyChanging
-				Me._ТипАвто = value
-				Me.SendPropertyChanged("ТипАвто")
-				Me.OnТипАвтоChanged
-			End If
-		End Set
-	End Property
-	
-	Public Event PropertyChanging As PropertyChangingEventHandler Implements System.ComponentModel.INotifyPropertyChanging.PropertyChanging
-	
-	Public Event PropertyChanged As PropertyChangedEventHandler Implements System.ComponentModel.INotifyPropertyChanged.PropertyChanged
-	
-	Protected Overridable Sub SendPropertyChanging()
-		If ((Me.PropertyChangingEvent Is Nothing)  _
-					= false) Then
-			RaiseEvent PropertyChanging(Me, emptyChangingEventArgs)
-		End If
-	End Sub
-	
-	Protected Overridable Sub SendPropertyChanged(ByVal propertyName As [String])
-		If ((Me.PropertyChangedEvent Is Nothing)  _
-					= false) Then
-			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
-		End If
-	End Sub
-End Class
-
-<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.ФайлыExcelВсе")>  _
-Partial Public Class ФайлыExcelВсе
-	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
-	
-	Private Shared emptyChangingEventArgs As PropertyChangingEventArgs = New PropertyChangingEventArgs(String.Empty)
-	
-	Private _ID As Integer
-	
-	Private _Клиент As String
-	
-	Private _Телефон As String
-	
-	Private _Маршрут As String
-	
-	Private _ДатаЗагрузки As String
-	
-	Private _АдресЗагрузки As String
-	
-	Private _АдресЗатаможки As String
-	
-	Private _Груз As String
-	
-	Private _Авто As String
-	
-	Private _ДатаПодРастаможку As String
-	
-	Private _АдресРастаможки As String
-	
-	Private _АдресВыгрузки As String
-	
-	Private _ДопУсловия As String
-	
-	Private _ДатаПоручения As String
-	
-	Private _Рейс As String
-	
-	Private _Перевозчик As String
-	
-    #Region "Определения метода расширяемости"
-    Partial Private Sub OnLoaded()
-    End Sub
-    Partial Private Sub OnValidate(action As System.Data.Linq.ChangeAction)
-    End Sub
-    Partial Private Sub OnCreated()
-    End Sub
-    Partial Private Sub OnIDChanging(value As Integer)
-    End Sub
-    Partial Private Sub OnIDChanged()
-    End Sub
-    Partial Private Sub OnКлиентChanging(value As String)
-    End Sub
-    Partial Private Sub OnКлиентChanged()
-    End Sub
-    Partial Private Sub OnТелефонChanging(value As String)
-    End Sub
-    Partial Private Sub OnТелефонChanged()
-    End Sub
-    Partial Private Sub OnМаршрутChanging(value As String)
-    End Sub
-    Partial Private Sub OnМаршрутChanged()
-    End Sub
-    Partial Private Sub OnДатаЗагрузкиChanging(value As String)
-    End Sub
-    Partial Private Sub OnДатаЗагрузкиChanged()
-    End Sub
-    Partial Private Sub OnАдресЗагрузкиChanging(value As String)
-    End Sub
-    Partial Private Sub OnАдресЗагрузкиChanged()
-    End Sub
-    Partial Private Sub OnАдресЗатаможкиChanging(value As String)
-    End Sub
-    Partial Private Sub OnАдресЗатаможкиChanged()
-    End Sub
-    Partial Private Sub OnГрузChanging(value As String)
-    End Sub
-    Partial Private Sub OnГрузChanged()
-    End Sub
-    Partial Private Sub OnАвтоChanging(value As String)
-    End Sub
-    Partial Private Sub OnАвтоChanged()
-    End Sub
-    Partial Private Sub OnДатаПодРастаможкуChanging(value As String)
-    End Sub
-    Partial Private Sub OnДатаПодРастаможкуChanged()
-    End Sub
-    Partial Private Sub OnАдресРастаможкиChanging(value As String)
-    End Sub
-    Partial Private Sub OnАдресРастаможкиChanged()
-    End Sub
-    Partial Private Sub OnАдресВыгрузкиChanging(value As String)
-    End Sub
-    Partial Private Sub OnАдресВыгрузкиChanged()
-    End Sub
-    Partial Private Sub OnДопУсловияChanging(value As String)
-    End Sub
-    Partial Private Sub OnДопУсловияChanged()
-    End Sub
-    Partial Private Sub OnДатаПорученияChanging(value As String)
-    End Sub
-    Partial Private Sub OnДатаПорученияChanged()
-    End Sub
-    Partial Private Sub OnРейсChanging(value As String)
-    End Sub
-    Partial Private Sub OnРейсChanged()
-    End Sub
-    Partial Private Sub OnПеревозчикChanging(value As String)
-    End Sub
-    Partial Private Sub OnПеревозчикChanged()
-    End Sub
-    #End Region
-	
-	Public Sub New()
-		MyBase.New
-		OnCreated
-	End Sub
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ID", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true)>  _
-	Public Property ID() As Integer
-		Get
-			Return Me._ID
-		End Get
-		Set
-			If ((Me._ID = value)  _
-						= false) Then
-				Me.OnIDChanging(value)
-				Me.SendPropertyChanging
-				Me._ID = value
-				Me.SendPropertyChanged("ID")
-				Me.OnIDChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Клиент", DbType:="NVarChar(MAX)")>  _
-	Public Property Клиент() As String
-		Get
-			Return Me._Клиент
-		End Get
-		Set
-			If (String.Equals(Me._Клиент, value) = false) Then
-				Me.OnКлиентChanging(value)
-				Me.SendPropertyChanging
-				Me._Клиент = value
-				Me.SendPropertyChanged("Клиент")
-				Me.OnКлиентChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Телефон", DbType:="NVarChar(MAX)")>  _
-	Public Property Телефон() As String
-		Get
-			Return Me._Телефон
-		End Get
-		Set
-			If (String.Equals(Me._Телефон, value) = false) Then
-				Me.OnТелефонChanging(value)
-				Me.SendPropertyChanging
-				Me._Телефон = value
-				Me.SendPropertyChanged("Телефон")
-				Me.OnТелефонChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Маршрут", DbType:="NVarChar(MAX)")>  _
-	Public Property Маршрут() As String
-		Get
-			Return Me._Маршрут
-		End Get
-		Set
-			If (String.Equals(Me._Маршрут, value) = false) Then
-				Me.OnМаршрутChanging(value)
-				Me.SendPropertyChanging
-				Me._Маршрут = value
-				Me.SendPropertyChanged("Маршрут")
-				Me.OnМаршрутChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ДатаЗагрузки", DbType:="NVarChar(MAX)")>  _
-	Public Property ДатаЗагрузки() As String
-		Get
-			Return Me._ДатаЗагрузки
-		End Get
-		Set
-			If (String.Equals(Me._ДатаЗагрузки, value) = false) Then
-				Me.OnДатаЗагрузкиChanging(value)
-				Me.SendPropertyChanging
-				Me._ДатаЗагрузки = value
-				Me.SendPropertyChanged("ДатаЗагрузки")
-				Me.OnДатаЗагрузкиChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_АдресЗагрузки", DbType:="NVarChar(MAX)")>  _
-	Public Property АдресЗагрузки() As String
-		Get
-			Return Me._АдресЗагрузки
-		End Get
-		Set
-			If (String.Equals(Me._АдресЗагрузки, value) = false) Then
-				Me.OnАдресЗагрузкиChanging(value)
-				Me.SendPropertyChanging
-				Me._АдресЗагрузки = value
-				Me.SendPropertyChanged("АдресЗагрузки")
-				Me.OnАдресЗагрузкиChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_АдресЗатаможки", DbType:="NVarChar(MAX)")>  _
-	Public Property АдресЗатаможки() As String
-		Get
-			Return Me._АдресЗатаможки
-		End Get
-		Set
-			If (String.Equals(Me._АдресЗатаможки, value) = false) Then
-				Me.OnАдресЗатаможкиChanging(value)
-				Me.SendPropertyChanging
-				Me._АдресЗатаможки = value
-				Me.SendPropertyChanged("АдресЗатаможки")
-				Me.OnАдресЗатаможкиChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Груз", DbType:="NVarChar(MAX)")>  _
-	Public Property Груз() As String
-		Get
-			Return Me._Груз
-		End Get
-		Set
-			If (String.Equals(Me._Груз, value) = false) Then
-				Me.OnГрузChanging(value)
-				Me.SendPropertyChanging
-				Me._Груз = value
-				Me.SendPropertyChanged("Груз")
-				Me.OnГрузChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Авто", DbType:="NVarChar(MAX)")>  _
-	Public Property Авто() As String
-		Get
-			Return Me._Авто
-		End Get
-		Set
-			If (String.Equals(Me._Авто, value) = false) Then
-				Me.OnАвтоChanging(value)
-				Me.SendPropertyChanging
-				Me._Авто = value
-				Me.SendPropertyChanged("Авто")
-				Me.OnАвтоChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ДатаПодРастаможку", DbType:="NVarChar(MAX)")>  _
-	Public Property ДатаПодРастаможку() As String
-		Get
-			Return Me._ДатаПодРастаможку
-		End Get
-		Set
-			If (String.Equals(Me._ДатаПодРастаможку, value) = false) Then
-				Me.OnДатаПодРастаможкуChanging(value)
-				Me.SendPropertyChanging
-				Me._ДатаПодРастаможку = value
-				Me.SendPropertyChanged("ДатаПодРастаможку")
-				Me.OnДатаПодРастаможкуChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_АдресРастаможки", DbType:="NVarChar(MAX)")>  _
-	Public Property АдресРастаможки() As String
-		Get
-			Return Me._АдресРастаможки
-		End Get
-		Set
-			If (String.Equals(Me._АдресРастаможки, value) = false) Then
-				Me.OnАдресРастаможкиChanging(value)
-				Me.SendPropertyChanging
-				Me._АдресРастаможки = value
-				Me.SendPropertyChanged("АдресРастаможки")
-				Me.OnАдресРастаможкиChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_АдресВыгрузки", DbType:="NVarChar(MAX)")>  _
-	Public Property АдресВыгрузки() As String
-		Get
-			Return Me._АдресВыгрузки
-		End Get
-		Set
-			If (String.Equals(Me._АдресВыгрузки, value) = false) Then
-				Me.OnАдресВыгрузкиChanging(value)
-				Me.SendPropertyChanging
-				Me._АдресВыгрузки = value
-				Me.SendPropertyChanged("АдресВыгрузки")
-				Me.OnАдресВыгрузкиChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ДопУсловия", DbType:="NVarChar(MAX)")>  _
-	Public Property ДопУсловия() As String
-		Get
-			Return Me._ДопУсловия
-		End Get
-		Set
-			If (String.Equals(Me._ДопУсловия, value) = false) Then
-				Me.OnДопУсловияChanging(value)
-				Me.SendPropertyChanging
-				Me._ДопУсловия = value
-				Me.SendPropertyChanged("ДопУсловия")
-				Me.OnДопУсловияChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ДатаПоручения", DbType:="NVarChar(MAX)")>  _
-	Public Property ДатаПоручения() As String
-		Get
-			Return Me._ДатаПоручения
-		End Get
-		Set
-			If (String.Equals(Me._ДатаПоручения, value) = false) Then
-				Me.OnДатаПорученияChanging(value)
-				Me.SendPropertyChanging
-				Me._ДатаПоручения = value
-				Me.SendPropertyChanged("ДатаПоручения")
-				Me.OnДатаПорученияChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Рейс", DbType:="NVarChar(MAX)")>  _
-	Public Property Рейс() As String
-		Get
-			Return Me._Рейс
-		End Get
-		Set
-			If (String.Equals(Me._Рейс, value) = false) Then
-				Me.OnРейсChanging(value)
-				Me.SendPropertyChanging
-				Me._Рейс = value
-				Me.SendPropertyChanged("Рейс")
-				Me.OnРейсChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Перевозчик", DbType:="NVarChar(MAX)")>  _
-	Public Property Перевозчик() As String
-		Get
-			Return Me._Перевозчик
-		End Get
-		Set
-			If (String.Equals(Me._Перевозчик, value) = false) Then
-				Me.OnПеревозчикChanging(value)
-				Me.SendPropertyChanging
-				Me._Перевозчик = value
-				Me.SendPropertyChanged("Перевозчик")
-				Me.OnПеревозчикChanged
-			End If
-		End Set
-	End Property
-	
-	Public Event PropertyChanging As PropertyChangingEventHandler Implements System.ComponentModel.INotifyPropertyChanging.PropertyChanging
-	
-	Public Event PropertyChanged As PropertyChangedEventHandler Implements System.ComponentModel.INotifyPropertyChanged.PropertyChanged
-	
-	Protected Overridable Sub SendPropertyChanging()
-		If ((Me.PropertyChangingEvent Is Nothing)  _
-					= false) Then
-			RaiseEvent PropertyChanging(Me, emptyChangingEventArgs)
-		End If
-	End Sub
-	
-	Protected Overridable Sub SendPropertyChanged(ByVal propertyName As [String])
-		If ((Me.PropertyChangedEvent Is Nothing)  _
-					= false) Then
-			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
-		End If
-	End Sub
-End Class
-
-<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.ФормаСобств")>  _
-Partial Public Class ФормаСобств
-	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
-	
-	Private Shared emptyChangingEventArgs As PropertyChangingEventArgs = New PropertyChangingEventArgs(String.Empty)
-	
-	Private _Код As Integer
-	
-	Private _ПолноеНазвание As String
-	
-	Private _Сокращенное As String
-	
-    #Region "Определения метода расширяемости"
-    Partial Private Sub OnLoaded()
-    End Sub
-    Partial Private Sub OnValidate(action As System.Data.Linq.ChangeAction)
-    End Sub
-    Partial Private Sub OnCreated()
-    End Sub
-    Partial Private Sub OnКодChanging(value As Integer)
-    End Sub
-    Partial Private Sub OnКодChanged()
-    End Sub
-    Partial Private Sub OnПолноеНазваниеChanging(value As String)
-    End Sub
-    Partial Private Sub OnПолноеНазваниеChanged()
-    End Sub
-    Partial Private Sub OnСокращенноеChanging(value As String)
-    End Sub
-    Partial Private Sub OnСокращенноеChanged()
-    End Sub
-    #End Region
-	
-	Public Sub New()
-		MyBase.New
-		OnCreated
-	End Sub
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Код", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true)>  _
-	Public Property Код() As Integer
-		Get
-			Return Me._Код
-		End Get
-		Set
-			If ((Me._Код = value)  _
-						= false) Then
-				Me.OnКодChanging(value)
-				Me.SendPropertyChanging
-				Me._Код = value
-				Me.SendPropertyChanged("Код")
-				Me.OnКодChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ПолноеНазвание", DbType:="NVarChar(255)")>  _
-	Public Property ПолноеНазвание() As String
-		Get
-			Return Me._ПолноеНазвание
-		End Get
-		Set
-			If (String.Equals(Me._ПолноеНазвание, value) = false) Then
-				Me.OnПолноеНазваниеChanging(value)
-				Me.SendPropertyChanging
-				Me._ПолноеНазвание = value
-				Me.SendPropertyChanged("ПолноеНазвание")
-				Me.OnПолноеНазваниеChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Сокращенное", DbType:="NVarChar(255)")>  _
-	Public Property Сокращенное() As String
-		Get
-			Return Me._Сокращенное
-		End Get
-		Set
-			If (String.Equals(Me._Сокращенное, value) = false) Then
-				Me.OnСокращенноеChanging(value)
-				Me.SendPropertyChanging
-				Me._Сокращенное = value
-				Me.SendPropertyChanged("Сокращенное")
-				Me.OnСокращенноеChanged
-			End If
-		End Set
-	End Property
-	
-	Public Event PropertyChanging As PropertyChangingEventHandler Implements System.ComponentModel.INotifyPropertyChanging.PropertyChanging
-	
-	Public Event PropertyChanged As PropertyChangedEventHandler Implements System.ComponentModel.INotifyPropertyChanged.PropertyChanged
-	
-	Protected Overridable Sub SendPropertyChanging()
-		If ((Me.PropertyChangingEvent Is Nothing)  _
-					= false) Then
-			RaiseEvent PropertyChanging(Me, emptyChangingEventArgs)
-		End If
-	End Sub
-	
-	Protected Overridable Sub SendPropertyChanged(ByVal propertyName As [String])
-		If ((Me.PropertyChangedEvent Is Nothing)  _
-					= false) Then
-			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
-		End If
-	End Sub
-End Class
-
-<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.ЖурналКлиентДаты")>  _
-Partial Public Class ЖурналКлиентДаты
-	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
-	
-	Private Shared emptyChangingEventArgs As PropertyChangingEventArgs = New PropertyChangingEventArgs(String.Empty)
-	
-	Private _ID As Integer
-	
-	Private _IDЖурналКлиентГруз As System.Nullable(Of Integer)
-	
-	Private _ДатаЗагрузки As String
-	
-	Private _ДатаДоставки As String
-	
-	Private _Ставка As String
-	
-	Private _ДопУсловия As String
-	
-	Private _Состояние As String
-	
-	Private _ЖурналКлиентГруз As EntityRef(Of ЖурналКлиентГруз)
-	
-    #Region "Определения метода расширяемости"
-    Partial Private Sub OnLoaded()
-    End Sub
-    Partial Private Sub OnValidate(action As System.Data.Linq.ChangeAction)
-    End Sub
-    Partial Private Sub OnCreated()
-    End Sub
-    Partial Private Sub OnIDChanging(value As Integer)
-    End Sub
-    Partial Private Sub OnIDChanged()
-    End Sub
-    Partial Private Sub OnIDЖурналКлиентГрузChanging(value As System.Nullable(Of Integer))
-    End Sub
-    Partial Private Sub OnIDЖурналКлиентГрузChanged()
-    End Sub
-    Partial Private Sub OnДатаЗагрузкиChanging(value As String)
-    End Sub
-    Partial Private Sub OnДатаЗагрузкиChanged()
-    End Sub
-    Partial Private Sub OnДатаДоставкиChanging(value As String)
-    End Sub
-    Partial Private Sub OnДатаДоставкиChanged()
-    End Sub
-    Partial Private Sub OnСтавкаChanging(value As String)
-    End Sub
-    Partial Private Sub OnСтавкаChanged()
-    End Sub
-    Partial Private Sub OnДопУсловияChanging(value As String)
-    End Sub
-    Partial Private Sub OnДопУсловияChanged()
-    End Sub
-    Partial Private Sub OnСостояниеChanging(value As String)
-    End Sub
-    Partial Private Sub OnСостояниеChanged()
-    End Sub
-    #End Region
-	
-	Public Sub New()
-		MyBase.New
-		Me._ЖурналКлиентГруз = CType(Nothing, EntityRef(Of ЖурналКлиентГруз))
-		OnCreated
-	End Sub
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ID", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true)>  _
-	Public Property ID() As Integer
-		Get
-			Return Me._ID
-		End Get
-		Set
-			If ((Me._ID = value)  _
-						= false) Then
-				Me.OnIDChanging(value)
-				Me.SendPropertyChanging
-				Me._ID = value
-				Me.SendPropertyChanged("ID")
-				Me.OnIDChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IDЖурналКлиентГруз", DbType:="Int")>  _
-	Public Property IDЖурналКлиентГруз() As System.Nullable(Of Integer)
-		Get
-			Return Me._IDЖурналКлиентГруз
-		End Get
-		Set
-			If (Me._IDЖурналКлиентГруз.Equals(value) = false) Then
-				If Me._ЖурналКлиентГруз.HasLoadedOrAssignedValue Then
-					Throw New System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException()
-				End If
-				Me.OnIDЖурналКлиентГрузChanging(value)
-				Me.SendPropertyChanging
-				Me._IDЖурналКлиентГруз = value
-				Me.SendPropertyChanged("IDЖурналКлиентГруз")
-				Me.OnIDЖурналКлиентГрузChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ДатаЗагрузки", DbType:="NVarChar(250)")>  _
-	Public Property ДатаЗагрузки() As String
-		Get
-			Return Me._ДатаЗагрузки
-		End Get
-		Set
-			If (String.Equals(Me._ДатаЗагрузки, value) = false) Then
-				Me.OnДатаЗагрузкиChanging(value)
-				Me.SendPropertyChanging
-				Me._ДатаЗагрузки = value
-				Me.SendPropertyChanged("ДатаЗагрузки")
-				Me.OnДатаЗагрузкиChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ДатаДоставки", DbType:="NVarChar(250)")>  _
-	Public Property ДатаДоставки() As String
-		Get
-			Return Me._ДатаДоставки
-		End Get
-		Set
-			If (String.Equals(Me._ДатаДоставки, value) = false) Then
-				Me.OnДатаДоставкиChanging(value)
-				Me.SendPropertyChanging
-				Me._ДатаДоставки = value
-				Me.SendPropertyChanged("ДатаДоставки")
-				Me.OnДатаДоставкиChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Ставка", DbType:="NVarChar(250)")>  _
-	Public Property Ставка() As String
-		Get
-			Return Me._Ставка
-		End Get
-		Set
-			If (String.Equals(Me._Ставка, value) = false) Then
-				Me.OnСтавкаChanging(value)
-				Me.SendPropertyChanging
-				Me._Ставка = value
-				Me.SendPropertyChanged("Ставка")
-				Me.OnСтавкаChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ДопУсловия", DbType:="NVarChar(MAX)")>  _
-	Public Property ДопУсловия() As String
-		Get
-			Return Me._ДопУсловия
-		End Get
-		Set
-			If (String.Equals(Me._ДопУсловия, value) = false) Then
-				Me.OnДопУсловияChanging(value)
-				Me.SendPropertyChanging
-				Me._ДопУсловия = value
-				Me.SendPropertyChanged("ДопУсловия")
-				Me.OnДопУсловияChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Состояние", DbType:="NVarChar(250)")>  _
-	Public Property Состояние() As String
-		Get
-			Return Me._Состояние
-		End Get
-		Set
-			If (String.Equals(Me._Состояние, value) = false) Then
-				Me.OnСостояниеChanging(value)
-				Me.SendPropertyChanging
-				Me._Состояние = value
-				Me.SendPropertyChanged("Состояние")
-				Me.OnСостояниеChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="ЖурналКлиентГруз_ЖурналКлиентДаты", Storage:="_ЖурналКлиентГруз", ThisKey:="IDЖурналКлиентГруз", OtherKey:="Код", IsForeignKey:=true, DeleteRule:="CASCADE")>  _
-	Public Property ЖурналКлиентГруз() As ЖурналКлиентГруз
-		Get
-			Return Me._ЖурналКлиентГруз.Entity
-		End Get
-		Set
-			Dim previousValue As ЖурналКлиентГруз = Me._ЖурналКлиентГруз.Entity
-			If ((Object.Equals(previousValue, value) = false)  _
-						OrElse (Me._ЖурналКлиентГруз.HasLoadedOrAssignedValue = false)) Then
-				Me.SendPropertyChanging
-				If ((previousValue Is Nothing)  _
-							= false) Then
-					Me._ЖурналКлиентГруз.Entity = Nothing
-					previousValue.ЖурналКлиентДаты.Remove(Me)
-				End If
-				Me._ЖурналКлиентГруз.Entity = value
-				If ((value Is Nothing)  _
-							= false) Then
-					value.ЖурналКлиентДаты.Add(Me)
-					Me._IDЖурналКлиентГруз = value.Код
-				Else
-					Me._IDЖурналКлиентГруз = CType(Nothing, Nullable(Of Integer))
-				End If
-				Me.SendPropertyChanged("ЖурналКлиентГруз")
-			End If
-		End Set
-	End Property
-	
-	Public Event PropertyChanging As PropertyChangingEventHandler Implements System.ComponentModel.INotifyPropertyChanging.PropertyChanging
-	
-	Public Event PropertyChanged As PropertyChangedEventHandler Implements System.ComponentModel.INotifyPropertyChanged.PropertyChanged
-	
-	Protected Overridable Sub SendPropertyChanging()
-		If ((Me.PropertyChangingEvent Is Nothing)  _
-					= false) Then
-			RaiseEvent PropertyChanging(Me, emptyChangingEventArgs)
-		End If
-	End Sub
-	
-	Protected Overridable Sub SendPropertyChanged(ByVal propertyName As [String])
-		If ((Me.PropertyChangedEvent Is Nothing)  _
-					= false) Then
-			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
-		End If
-	End Sub
-End Class
-
 <Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.РейсыКлиента")>  _
 Partial Public Class РейсыКлиента
 	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
@@ -12168,17 +11224,95 @@ Partial Public Class РейсыКлиента
 	End Sub
 End Class
 
-<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.ЧерныйСписок")>  _
-Partial Public Class ЧерныйСписок
+<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.РейсыПеревозчика")>  _
+Partial Public Class РейсыПеревозчика
 	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
 	
 	Private Shared emptyChangingEventArgs As PropertyChangingEventArgs = New PropertyChangingEventArgs(String.Empty)
 	
 	Private _Код As Integer
 	
-	Private _Организация As String
+	Private _НазвОрганизации As String
 	
-	Private _Примечание As String
+	Private _НомерРейса As System.Nullable(Of Integer)
+	
+	Private _КоличРейсов As System.Nullable(Of Integer)
+	
+	Private _Маршрут As String
+	
+	Private _ДатаПодачиПодЗагрузку As String
+	
+	Private _ВремяПодачи As String
+	
+	Private _ДатаПодачиПодРастаможку As String
+	
+	Private _ВремяПодачиВыгРаст As String
+	
+	Private _ТочныйАдресЗагрузки As String
+	
+	Private _АдресЗатаможки As String
+	
+	Private _НаименованиеГруза As String
+	
+	Private _ТипТрСредства As String
+	
+	Private _НомерАвтомобиля As String
+	
+	Private _Водитель As String
+	
+	Private _ТочнАдресРаста As String
+	
+	Private _ТочнАдресРазгр As String
+	
+	Private _СтоимостьФрахта As String
+	
+	Private _Валюта As String
+	
+	Private _ВалютаПлатежа As String
+	
+	Private _СрокОплаты As String
+	
+	Private _ДопУсловия As String
+	
+	Private _ДогПор As String
+	
+	Private _ДогПорЭксп As String
+	
+	Private _ДатаПоручения As String
+	
+	Private _ПорЭксп As String
+	
+	Private _ПоИнотерр As String
+	
+	Private _ПоТеррРБ As String
+	
+	Private _ДатаАкта As String
+	
+	Private _НомерСМР As String
+	
+	Private _УсловияОплаты As String
+	
+	Private _ДатаПолученияДоков As System.Nullable(Of Date)
+	
+	Private _ДатаОплаты As System.Nullable(Of Date)
+	
+	Private _ОстатокОплаты As String
+	
+	Private _РазмерШтрафаЗаСрыв As String
+	
+	Private _Предоплата As String
+	
+	Private _СрывЗагр20Проц As String
+	
+	Private _Экспедитор As String
+	
+	Private _ДатаСоздания As System.Nullable(Of Date)
+	
+	Private _НачавшиесяСуткиПункт8 As String
+	
+	Private _ОплатыПер As EntitySet(Of ОплатыПер)
+	
+	Private _Перевозчики As EntityRef(Of Перевозчики)
 	
     #Region "Определения метода расширяемости"
     Partial Private Sub OnLoaded()
@@ -12191,18 +11325,168 @@ Partial Public Class ЧерныйСписок
     End Sub
     Partial Private Sub OnКодChanged()
     End Sub
-    Partial Private Sub OnОрганизацияChanging(value As String)
+    Partial Private Sub OnНазвОрганизацииChanging(value As String)
     End Sub
-    Partial Private Sub OnОрганизацияChanged()
+    Partial Private Sub OnНазвОрганизацииChanged()
     End Sub
-    Partial Private Sub OnПримечаниеChanging(value As String)
+    Partial Private Sub OnНомерРейсаChanging(value As System.Nullable(Of Integer))
     End Sub
-    Partial Private Sub OnПримечаниеChanged()
+    Partial Private Sub OnНомерРейсаChanged()
+    End Sub
+    Partial Private Sub OnКоличРейсовChanging(value As System.Nullable(Of Integer))
+    End Sub
+    Partial Private Sub OnКоличРейсовChanged()
+    End Sub
+    Partial Private Sub OnМаршрутChanging(value As String)
+    End Sub
+    Partial Private Sub OnМаршрутChanged()
+    End Sub
+    Partial Private Sub OnДатаПодачиПодЗагрузкуChanging(value As String)
+    End Sub
+    Partial Private Sub OnДатаПодачиПодЗагрузкуChanged()
+    End Sub
+    Partial Private Sub OnВремяПодачиChanging(value As String)
+    End Sub
+    Partial Private Sub OnВремяПодачиChanged()
+    End Sub
+    Partial Private Sub OnДатаПодачиПодРастаможкуChanging(value As String)
+    End Sub
+    Partial Private Sub OnДатаПодачиПодРастаможкуChanged()
+    End Sub
+    Partial Private Sub OnВремяПодачиВыгРастChanging(value As String)
+    End Sub
+    Partial Private Sub OnВремяПодачиВыгРастChanged()
+    End Sub
+    Partial Private Sub OnТочныйАдресЗагрузкиChanging(value As String)
+    End Sub
+    Partial Private Sub OnТочныйАдресЗагрузкиChanged()
+    End Sub
+    Partial Private Sub OnАдресЗатаможкиChanging(value As String)
+    End Sub
+    Partial Private Sub OnАдресЗатаможкиChanged()
+    End Sub
+    Partial Private Sub OnНаименованиеГрузаChanging(value As String)
+    End Sub
+    Partial Private Sub OnНаименованиеГрузаChanged()
+    End Sub
+    Partial Private Sub OnТипТрСредстваChanging(value As String)
+    End Sub
+    Partial Private Sub OnТипТрСредстваChanged()
+    End Sub
+    Partial Private Sub OnНомерАвтомобиляChanging(value As String)
+    End Sub
+    Partial Private Sub OnНомерАвтомобиляChanged()
+    End Sub
+    Partial Private Sub OnВодительChanging(value As String)
+    End Sub
+    Partial Private Sub OnВодительChanged()
+    End Sub
+    Partial Private Sub OnТочнАдресРастаChanging(value As String)
+    End Sub
+    Partial Private Sub OnТочнАдресРастаChanged()
+    End Sub
+    Partial Private Sub OnТочнАдресРазгрChanging(value As String)
+    End Sub
+    Partial Private Sub OnТочнАдресРазгрChanged()
+    End Sub
+    Partial Private Sub OnСтоимостьФрахтаChanging(value As String)
+    End Sub
+    Partial Private Sub OnСтоимостьФрахтаChanged()
+    End Sub
+    Partial Private Sub OnВалютаChanging(value As String)
+    End Sub
+    Partial Private Sub OnВалютаChanged()
+    End Sub
+    Partial Private Sub OnВалютаПлатежаChanging(value As String)
+    End Sub
+    Partial Private Sub OnВалютаПлатежаChanged()
+    End Sub
+    Partial Private Sub OnСрокОплатыChanging(value As String)
+    End Sub
+    Partial Private Sub OnСрокОплатыChanged()
+    End Sub
+    Partial Private Sub OnДопУсловияChanging(value As String)
+    End Sub
+    Partial Private Sub OnДопУсловияChanged()
+    End Sub
+    Partial Private Sub OnДогПорChanging(value As String)
+    End Sub
+    Partial Private Sub OnДогПорChanged()
+    End Sub
+    Partial Private Sub OnДогПорЭкспChanging(value As String)
+    End Sub
+    Partial Private Sub OnДогПорЭкспChanged()
+    End Sub
+    Partial Private Sub OnДатаПорученияChanging(value As String)
+    End Sub
+    Partial Private Sub OnДатаПорученияChanged()
+    End Sub
+    Partial Private Sub OnПорЭкспChanging(value As String)
+    End Sub
+    Partial Private Sub OnПорЭкспChanged()
+    End Sub
+    Partial Private Sub OnПоИнотеррChanging(value As String)
+    End Sub
+    Partial Private Sub OnПоИнотеррChanged()
+    End Sub
+    Partial Private Sub OnПоТеррРБChanging(value As String)
+    End Sub
+    Partial Private Sub OnПоТеррРБChanged()
+    End Sub
+    Partial Private Sub OnДатаАктаChanging(value As String)
+    End Sub
+    Partial Private Sub OnДатаАктаChanged()
+    End Sub
+    Partial Private Sub OnНомерСМРChanging(value As String)
+    End Sub
+    Partial Private Sub OnНомерСМРChanged()
+    End Sub
+    Partial Private Sub OnУсловияОплатыChanging(value As String)
+    End Sub
+    Partial Private Sub OnУсловияОплатыChanged()
+    End Sub
+    Partial Private Sub OnДатаПолученияДоковChanging(value As System.Nullable(Of Date))
+    End Sub
+    Partial Private Sub OnДатаПолученияДоковChanged()
+    End Sub
+    Partial Private Sub OnДатаОплатыChanging(value As System.Nullable(Of Date))
+    End Sub
+    Partial Private Sub OnДатаОплатыChanged()
+    End Sub
+    Partial Private Sub OnОстатокОплатыChanging(value As String)
+    End Sub
+    Partial Private Sub OnОстатокОплатыChanged()
+    End Sub
+    Partial Private Sub OnРазмерШтрафаЗаСрывChanging(value As String)
+    End Sub
+    Partial Private Sub OnРазмерШтрафаЗаСрывChanged()
+    End Sub
+    Partial Private Sub OnПредоплатаChanging(value As String)
+    End Sub
+    Partial Private Sub OnПредоплатаChanged()
+    End Sub
+    Partial Private Sub OnСрывЗагр20ПроцChanging(value As String)
+    End Sub
+    Partial Private Sub OnСрывЗагр20ПроцChanged()
+    End Sub
+    Partial Private Sub OnЭкспедиторChanging(value As String)
+    End Sub
+    Partial Private Sub OnЭкспедиторChanged()
+    End Sub
+    Partial Private Sub OnДатаСозданияChanging(value As System.Nullable(Of Date))
+    End Sub
+    Partial Private Sub OnДатаСозданияChanged()
+    End Sub
+    Partial Private Sub OnНачавшиесяСуткиПункт8Changing(value As String)
+    End Sub
+    Partial Private Sub OnНачавшиесяСуткиПункт8Changed()
     End Sub
     #End Region
 	
 	Public Sub New()
 		MyBase.New
+		Me._ОплатыПер = New EntitySet(Of ОплатыПер)(AddressOf Me.attach_ОплатыПер, AddressOf Me.detach_ОплатыПер)
+		Me._Перевозчики = CType(Nothing, EntityRef(Of Перевозчики))
 		OnCreated
 	End Sub
 	
@@ -12223,34 +11507,667 @@ Partial Public Class ЧерныйСписок
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Организация", DbType:="NVarChar(255)")>  _
-	Public Property Организация() As String
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_НазвОрганизации", DbType:="NVarChar(255)")>  _
+	Public Property НазвОрганизации() As String
 		Get
-			Return Me._Организация
+			Return Me._НазвОрганизации
 		End Get
 		Set
-			If (String.Equals(Me._Организация, value) = false) Then
-				Me.OnОрганизацияChanging(value)
+			If (String.Equals(Me._НазвОрганизации, value) = false) Then
+				If Me._Перевозчики.HasLoadedOrAssignedValue Then
+					Throw New System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException()
+				End If
+				Me.OnНазвОрганизацииChanging(value)
 				Me.SendPropertyChanging
-				Me._Организация = value
-				Me.SendPropertyChanged("Организация")
-				Me.OnОрганизацияChanged
+				Me._НазвОрганизации = value
+				Me.SendPropertyChanged("НазвОрганизации")
+				Me.OnНазвОрганизацииChanged
 			End If
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Примечание", DbType:="NVarChar(255)")>  _
-	Public Property Примечание() As String
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_НомерРейса", DbType:="Int")>  _
+	Public Property НомерРейса() As System.Nullable(Of Integer)
 		Get
-			Return Me._Примечание
+			Return Me._НомерРейса
 		End Get
 		Set
-			If (String.Equals(Me._Примечание, value) = false) Then
-				Me.OnПримечаниеChanging(value)
+			If (Me._НомерРейса.Equals(value) = false) Then
+				Me.OnНомерРейсаChanging(value)
 				Me.SendPropertyChanging
-				Me._Примечание = value
-				Me.SendPropertyChanged("Примечание")
-				Me.OnПримечаниеChanged
+				Me._НомерРейса = value
+				Me.SendPropertyChanged("НомерРейса")
+				Me.OnНомерРейсаChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_КоличРейсов", DbType:="Int")>  _
+	Public Property КоличРейсов() As System.Nullable(Of Integer)
+		Get
+			Return Me._КоличРейсов
+		End Get
+		Set
+			If (Me._КоличРейсов.Equals(value) = false) Then
+				Me.OnКоличРейсовChanging(value)
+				Me.SendPropertyChanging
+				Me._КоличРейсов = value
+				Me.SendPropertyChanged("КоличРейсов")
+				Me.OnКоличРейсовChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Маршрут", DbType:="NVarChar(255)")>  _
+	Public Property Маршрут() As String
+		Get
+			Return Me._Маршрут
+		End Get
+		Set
+			If (String.Equals(Me._Маршрут, value) = false) Then
+				Me.OnМаршрутChanging(value)
+				Me.SendPropertyChanging
+				Me._Маршрут = value
+				Me.SendPropertyChanged("Маршрут")
+				Me.OnМаршрутChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ДатаПодачиПодЗагрузку", DbType:="NVarChar(255)")>  _
+	Public Property ДатаПодачиПодЗагрузку() As String
+		Get
+			Return Me._ДатаПодачиПодЗагрузку
+		End Get
+		Set
+			If (String.Equals(Me._ДатаПодачиПодЗагрузку, value) = false) Then
+				Me.OnДатаПодачиПодЗагрузкуChanging(value)
+				Me.SendPropertyChanging
+				Me._ДатаПодачиПодЗагрузку = value
+				Me.SendPropertyChanged("ДатаПодачиПодЗагрузку")
+				Me.OnДатаПодачиПодЗагрузкуChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ВремяПодачи", DbType:="NVarChar(255)")>  _
+	Public Property ВремяПодачи() As String
+		Get
+			Return Me._ВремяПодачи
+		End Get
+		Set
+			If (String.Equals(Me._ВремяПодачи, value) = false) Then
+				Me.OnВремяПодачиChanging(value)
+				Me.SendPropertyChanging
+				Me._ВремяПодачи = value
+				Me.SendPropertyChanged("ВремяПодачи")
+				Me.OnВремяПодачиChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ДатаПодачиПодРастаможку", DbType:="NVarChar(255)")>  _
+	Public Property ДатаПодачиПодРастаможку() As String
+		Get
+			Return Me._ДатаПодачиПодРастаможку
+		End Get
+		Set
+			If (String.Equals(Me._ДатаПодачиПодРастаможку, value) = false) Then
+				Me.OnДатаПодачиПодРастаможкуChanging(value)
+				Me.SendPropertyChanging
+				Me._ДатаПодачиПодРастаможку = value
+				Me.SendPropertyChanged("ДатаПодачиПодРастаможку")
+				Me.OnДатаПодачиПодРастаможкуChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ВремяПодачиВыгРаст", DbType:="NVarChar(255)")>  _
+	Public Property ВремяПодачиВыгРаст() As String
+		Get
+			Return Me._ВремяПодачиВыгРаст
+		End Get
+		Set
+			If (String.Equals(Me._ВремяПодачиВыгРаст, value) = false) Then
+				Me.OnВремяПодачиВыгРастChanging(value)
+				Me.SendPropertyChanging
+				Me._ВремяПодачиВыгРаст = value
+				Me.SendPropertyChanged("ВремяПодачиВыгРаст")
+				Me.OnВремяПодачиВыгРастChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ТочныйАдресЗагрузки", DbType:="NVarChar(MAX)")>  _
+	Public Property ТочныйАдресЗагрузки() As String
+		Get
+			Return Me._ТочныйАдресЗагрузки
+		End Get
+		Set
+			If (String.Equals(Me._ТочныйАдресЗагрузки, value) = false) Then
+				Me.OnТочныйАдресЗагрузкиChanging(value)
+				Me.SendPropertyChanging
+				Me._ТочныйАдресЗагрузки = value
+				Me.SendPropertyChanged("ТочныйАдресЗагрузки")
+				Me.OnТочныйАдресЗагрузкиChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_АдресЗатаможки", DbType:="NVarChar(255)")>  _
+	Public Property АдресЗатаможки() As String
+		Get
+			Return Me._АдресЗатаможки
+		End Get
+		Set
+			If (String.Equals(Me._АдресЗатаможки, value) = false) Then
+				Me.OnАдресЗатаможкиChanging(value)
+				Me.SendPropertyChanging
+				Me._АдресЗатаможки = value
+				Me.SendPropertyChanged("АдресЗатаможки")
+				Me.OnАдресЗатаможкиChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_НаименованиеГруза", DbType:="NVarChar(MAX)")>  _
+	Public Property НаименованиеГруза() As String
+		Get
+			Return Me._НаименованиеГруза
+		End Get
+		Set
+			If (String.Equals(Me._НаименованиеГруза, value) = false) Then
+				Me.OnНаименованиеГрузаChanging(value)
+				Me.SendPropertyChanging
+				Me._НаименованиеГруза = value
+				Me.SendPropertyChanged("НаименованиеГруза")
+				Me.OnНаименованиеГрузаChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ТипТрСредства", DbType:="NVarChar(255)")>  _
+	Public Property ТипТрСредства() As String
+		Get
+			Return Me._ТипТрСредства
+		End Get
+		Set
+			If (String.Equals(Me._ТипТрСредства, value) = false) Then
+				Me.OnТипТрСредстваChanging(value)
+				Me.SendPropertyChanging
+				Me._ТипТрСредства = value
+				Me.SendPropertyChanged("ТипТрСредства")
+				Me.OnТипТрСредстваChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_НомерАвтомобиля", DbType:="NVarChar(255)")>  _
+	Public Property НомерАвтомобиля() As String
+		Get
+			Return Me._НомерАвтомобиля
+		End Get
+		Set
+			If (String.Equals(Me._НомерАвтомобиля, value) = false) Then
+				Me.OnНомерАвтомобиляChanging(value)
+				Me.SendPropertyChanging
+				Me._НомерАвтомобиля = value
+				Me.SendPropertyChanged("НомерАвтомобиля")
+				Me.OnНомерАвтомобиляChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Водитель", DbType:="NVarChar(255)")>  _
+	Public Property Водитель() As String
+		Get
+			Return Me._Водитель
+		End Get
+		Set
+			If (String.Equals(Me._Водитель, value) = false) Then
+				Me.OnВодительChanging(value)
+				Me.SendPropertyChanging
+				Me._Водитель = value
+				Me.SendPropertyChanged("Водитель")
+				Me.OnВодительChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ТочнАдресРаста", DbType:="NVarChar(MAX)")>  _
+	Public Property ТочнАдресРаста() As String
+		Get
+			Return Me._ТочнАдресРаста
+		End Get
+		Set
+			If (String.Equals(Me._ТочнАдресРаста, value) = false) Then
+				Me.OnТочнАдресРастаChanging(value)
+				Me.SendPropertyChanging
+				Me._ТочнАдресРаста = value
+				Me.SendPropertyChanged("ТочнАдресРаста")
+				Me.OnТочнАдресРастаChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ТочнАдресРазгр", DbType:="NVarChar(MAX)")>  _
+	Public Property ТочнАдресРазгр() As String
+		Get
+			Return Me._ТочнАдресРазгр
+		End Get
+		Set
+			If (String.Equals(Me._ТочнАдресРазгр, value) = false) Then
+				Me.OnТочнАдресРазгрChanging(value)
+				Me.SendPropertyChanging
+				Me._ТочнАдресРазгр = value
+				Me.SendPropertyChanged("ТочнАдресРазгр")
+				Me.OnТочнАдресРазгрChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_СтоимостьФрахта", DbType:="NVarChar(255)")>  _
+	Public Property СтоимостьФрахта() As String
+		Get
+			Return Me._СтоимостьФрахта
+		End Get
+		Set
+			If (String.Equals(Me._СтоимостьФрахта, value) = false) Then
+				Me.OnСтоимостьФрахтаChanging(value)
+				Me.SendPropertyChanging
+				Me._СтоимостьФрахта = value
+				Me.SendPropertyChanged("СтоимостьФрахта")
+				Me.OnСтоимостьФрахтаChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Валюта", DbType:="NVarChar(255)")>  _
+	Public Property Валюта() As String
+		Get
+			Return Me._Валюта
+		End Get
+		Set
+			If (String.Equals(Me._Валюта, value) = false) Then
+				Me.OnВалютаChanging(value)
+				Me.SendPropertyChanging
+				Me._Валюта = value
+				Me.SendPropertyChanged("Валюта")
+				Me.OnВалютаChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ВалютаПлатежа", DbType:="NVarChar(255)")>  _
+	Public Property ВалютаПлатежа() As String
+		Get
+			Return Me._ВалютаПлатежа
+		End Get
+		Set
+			If (String.Equals(Me._ВалютаПлатежа, value) = false) Then
+				Me.OnВалютаПлатежаChanging(value)
+				Me.SendPropertyChanging
+				Me._ВалютаПлатежа = value
+				Me.SendPropertyChanged("ВалютаПлатежа")
+				Me.OnВалютаПлатежаChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_СрокОплаты", DbType:="NVarChar(255)")>  _
+	Public Property СрокОплаты() As String
+		Get
+			Return Me._СрокОплаты
+		End Get
+		Set
+			If (String.Equals(Me._СрокОплаты, value) = false) Then
+				Me.OnСрокОплатыChanging(value)
+				Me.SendPropertyChanging
+				Me._СрокОплаты = value
+				Me.SendPropertyChanged("СрокОплаты")
+				Me.OnСрокОплатыChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ДопУсловия", DbType:="NVarChar(MAX)")>  _
+	Public Property ДопУсловия() As String
+		Get
+			Return Me._ДопУсловия
+		End Get
+		Set
+			If (String.Equals(Me._ДопУсловия, value) = false) Then
+				Me.OnДопУсловияChanging(value)
+				Me.SendPropertyChanging
+				Me._ДопУсловия = value
+				Me.SendPropertyChanged("ДопУсловия")
+				Me.OnДопУсловияChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ДогПор", DbType:="NVarChar(255)")>  _
+	Public Property ДогПор() As String
+		Get
+			Return Me._ДогПор
+		End Get
+		Set
+			If (String.Equals(Me._ДогПор, value) = false) Then
+				Me.OnДогПорChanging(value)
+				Me.SendPropertyChanging
+				Me._ДогПор = value
+				Me.SendPropertyChanged("ДогПор")
+				Me.OnДогПорChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ДогПорЭксп", DbType:="NVarChar(255)")>  _
+	Public Property ДогПорЭксп() As String
+		Get
+			Return Me._ДогПорЭксп
+		End Get
+		Set
+			If (String.Equals(Me._ДогПорЭксп, value) = false) Then
+				Me.OnДогПорЭкспChanging(value)
+				Me.SendPropertyChanging
+				Me._ДогПорЭксп = value
+				Me.SendPropertyChanged("ДогПорЭксп")
+				Me.OnДогПорЭкспChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ДатаПоручения", DbType:="NVarChar(255)")>  _
+	Public Property ДатаПоручения() As String
+		Get
+			Return Me._ДатаПоручения
+		End Get
+		Set
+			If (String.Equals(Me._ДатаПоручения, value) = false) Then
+				Me.OnДатаПорученияChanging(value)
+				Me.SendPropertyChanging
+				Me._ДатаПоручения = value
+				Me.SendPropertyChanged("ДатаПоручения")
+				Me.OnДатаПорученияChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ПорЭксп", DbType:="NVarChar(255)")>  _
+	Public Property ПорЭксп() As String
+		Get
+			Return Me._ПорЭксп
+		End Get
+		Set
+			If (String.Equals(Me._ПорЭксп, value) = false) Then
+				Me.OnПорЭкспChanging(value)
+				Me.SendPropertyChanging
+				Me._ПорЭксп = value
+				Me.SendPropertyChanged("ПорЭксп")
+				Me.OnПорЭкспChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ПоИнотерр", DbType:="NVarChar(255)")>  _
+	Public Property ПоИнотерр() As String
+		Get
+			Return Me._ПоИнотерр
+		End Get
+		Set
+			If (String.Equals(Me._ПоИнотерр, value) = false) Then
+				Me.OnПоИнотеррChanging(value)
+				Me.SendPropertyChanging
+				Me._ПоИнотерр = value
+				Me.SendPropertyChanged("ПоИнотерр")
+				Me.OnПоИнотеррChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ПоТеррРБ", DbType:="NVarChar(255)")>  _
+	Public Property ПоТеррРБ() As String
+		Get
+			Return Me._ПоТеррРБ
+		End Get
+		Set
+			If (String.Equals(Me._ПоТеррРБ, value) = false) Then
+				Me.OnПоТеррРБChanging(value)
+				Me.SendPropertyChanging
+				Me._ПоТеррРБ = value
+				Me.SendPropertyChanged("ПоТеррРБ")
+				Me.OnПоТеррРБChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ДатаАкта", DbType:="NVarChar(255)")>  _
+	Public Property ДатаАкта() As String
+		Get
+			Return Me._ДатаАкта
+		End Get
+		Set
+			If (String.Equals(Me._ДатаАкта, value) = false) Then
+				Me.OnДатаАктаChanging(value)
+				Me.SendPropertyChanging
+				Me._ДатаАкта = value
+				Me.SendPropertyChanged("ДатаАкта")
+				Me.OnДатаАктаChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_НомерСМР", DbType:="NVarChar(255)")>  _
+	Public Property НомерСМР() As String
+		Get
+			Return Me._НомерСМР
+		End Get
+		Set
+			If (String.Equals(Me._НомерСМР, value) = false) Then
+				Me.OnНомерСМРChanging(value)
+				Me.SendPropertyChanging
+				Me._НомерСМР = value
+				Me.SendPropertyChanged("НомерСМР")
+				Me.OnНомерСМРChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_УсловияОплаты", DbType:="NVarChar(255)")>  _
+	Public Property УсловияОплаты() As String
+		Get
+			Return Me._УсловияОплаты
+		End Get
+		Set
+			If (String.Equals(Me._УсловияОплаты, value) = false) Then
+				Me.OnУсловияОплатыChanging(value)
+				Me.SendPropertyChanging
+				Me._УсловияОплаты = value
+				Me.SendPropertyChanged("УсловияОплаты")
+				Me.OnУсловияОплатыChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ДатаПолученияДоков", DbType:="DateTime")>  _
+	Public Property ДатаПолученияДоков() As System.Nullable(Of Date)
+		Get
+			Return Me._ДатаПолученияДоков
+		End Get
+		Set
+			If (Me._ДатаПолученияДоков.Equals(value) = false) Then
+				Me.OnДатаПолученияДоковChanging(value)
+				Me.SendPropertyChanging
+				Me._ДатаПолученияДоков = value
+				Me.SendPropertyChanged("ДатаПолученияДоков")
+				Me.OnДатаПолученияДоковChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ДатаОплаты", DbType:="DateTime")>  _
+	Public Property ДатаОплаты() As System.Nullable(Of Date)
+		Get
+			Return Me._ДатаОплаты
+		End Get
+		Set
+			If (Me._ДатаОплаты.Equals(value) = false) Then
+				Me.OnДатаОплатыChanging(value)
+				Me.SendPropertyChanging
+				Me._ДатаОплаты = value
+				Me.SendPropertyChanged("ДатаОплаты")
+				Me.OnДатаОплатыChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ОстатокОплаты", DbType:="NVarChar(255)")>  _
+	Public Property ОстатокОплаты() As String
+		Get
+			Return Me._ОстатокОплаты
+		End Get
+		Set
+			If (String.Equals(Me._ОстатокОплаты, value) = false) Then
+				Me.OnОстатокОплатыChanging(value)
+				Me.SendPropertyChanging
+				Me._ОстатокОплаты = value
+				Me.SendPropertyChanged("ОстатокОплаты")
+				Me.OnОстатокОплатыChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_РазмерШтрафаЗаСрыв", DbType:="NVarChar(255)")>  _
+	Public Property РазмерШтрафаЗаСрыв() As String
+		Get
+			Return Me._РазмерШтрафаЗаСрыв
+		End Get
+		Set
+			If (String.Equals(Me._РазмерШтрафаЗаСрыв, value) = false) Then
+				Me.OnРазмерШтрафаЗаСрывChanging(value)
+				Me.SendPropertyChanging
+				Me._РазмерШтрафаЗаСрыв = value
+				Me.SendPropertyChanged("РазмерШтрафаЗаСрыв")
+				Me.OnРазмерШтрафаЗаСрывChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Предоплата", DbType:="NVarChar(MAX)")>  _
+	Public Property Предоплата() As String
+		Get
+			Return Me._Предоплата
+		End Get
+		Set
+			If (String.Equals(Me._Предоплата, value) = false) Then
+				Me.OnПредоплатаChanging(value)
+				Me.SendPropertyChanging
+				Me._Предоплата = value
+				Me.SendPropertyChanged("Предоплата")
+				Me.OnПредоплатаChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_СрывЗагр20Проц", DbType:="NVarChar(50)")>  _
+	Public Property СрывЗагр20Проц() As String
+		Get
+			Return Me._СрывЗагр20Проц
+		End Get
+		Set
+			If (String.Equals(Me._СрывЗагр20Проц, value) = false) Then
+				Me.OnСрывЗагр20ПроцChanging(value)
+				Me.SendPropertyChanging
+				Me._СрывЗагр20Проц = value
+				Me.SendPropertyChanged("СрывЗагр20Проц")
+				Me.OnСрывЗагр20ПроцChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Экспедитор", DbType:="NVarChar(255)")>  _
+	Public Property Экспедитор() As String
+		Get
+			Return Me._Экспедитор
+		End Get
+		Set
+			If (String.Equals(Me._Экспедитор, value) = false) Then
+				Me.OnЭкспедиторChanging(value)
+				Me.SendPropertyChanging
+				Me._Экспедитор = value
+				Me.SendPropertyChanged("Экспедитор")
+				Me.OnЭкспедиторChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ДатаСоздания", DbType:="DateTime")>  _
+	Public Property ДатаСоздания() As System.Nullable(Of Date)
+		Get
+			Return Me._ДатаСоздания
+		End Get
+		Set
+			If (Me._ДатаСоздания.Equals(value) = false) Then
+				Me.OnДатаСозданияChanging(value)
+				Me.SendPropertyChanging
+				Me._ДатаСоздания = value
+				Me.SendPropertyChanged("ДатаСоздания")
+				Me.OnДатаСозданияChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_НачавшиесяСуткиПункт8", DbType:="NVarChar(MAX)")>  _
+	Public Property НачавшиесяСуткиПункт8() As String
+		Get
+			Return Me._НачавшиесяСуткиПункт8
+		End Get
+		Set
+			If (String.Equals(Me._НачавшиесяСуткиПункт8, value) = false) Then
+				Me.OnНачавшиесяСуткиПункт8Changing(value)
+				Me.SendPropertyChanging
+				Me._НачавшиесяСуткиПункт8 = value
+				Me.SendPropertyChanged("НачавшиесяСуткиПункт8")
+				Me.OnНачавшиесяСуткиПункт8Changed
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="РейсыПеревозчика_ОплатыПер", Storage:="_ОплатыПер", ThisKey:="Код", OtherKey:="IDПер")>  _
+	Public Property ОплатыПер() As EntitySet(Of ОплатыПер)
+		Get
+			Return Me._ОплатыПер
+		End Get
+		Set
+			Me._ОплатыПер.Assign(value)
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="Перевозчики_РейсыПеревозчика", Storage:="_Перевозчики", ThisKey:="НазвОрганизации", OtherKey:="Названиеорганизации", IsForeignKey:=true, DeleteRule:="CASCADE")>  _
+	Public Property Перевозчики() As Перевозчики
+		Get
+			Return Me._Перевозчики.Entity
+		End Get
+		Set
+			Dim previousValue As Перевозчики = Me._Перевозчики.Entity
+			If ((Object.Equals(previousValue, value) = false)  _
+						OrElse (Me._Перевозчики.HasLoadedOrAssignedValue = false)) Then
+				Me.SendPropertyChanging
+				If ((previousValue Is Nothing)  _
+							= false) Then
+					Me._Перевозчики.Entity = Nothing
+					previousValue.РейсыПеревозчика.Remove(Me)
+				End If
+				Me._Перевозчики.Entity = value
+				If ((value Is Nothing)  _
+							= false) Then
+					value.РейсыПеревозчика.Add(Me)
+					Me._НазвОрганизации = value.Названиеорганизации
+				Else
+					Me._НазвОрганизации = CType(Nothing, String)
+				End If
+				Me.SendPropertyChanged("Перевозчики")
 			End If
 		End Set
 	End Property
@@ -12271,6 +12188,167 @@ Partial Public Class ЧерныйСписок
 					= false) Then
 			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
 		End If
+	End Sub
+	
+	Private Sub attach_ОплатыПер(ByVal entity As ОплатыПер)
+		Me.SendPropertyChanging
+		entity.РейсыПеревозчика = Me
+	End Sub
+	
+	Private Sub detach_ОплатыПер(ByVal entity As ОплатыПер)
+		Me.SendPropertyChanging
+		entity.РейсыПеревозчика = Nothing
+	End Sub
+End Class
+
+<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.СводнаяОплаты")>  _
+Partial Public Class СводнаяОплаты
+	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
+	
+	Private Shared emptyChangingEventArgs As PropertyChangingEventArgs = New PropertyChangingEventArgs(String.Empty)
+	
+	Private _ID As Integer
+	
+	Private _Год As String
+	
+	Private _Дата_Изменения As String
+	
+	Private _Состояние As String
+	
+	Private _СводнаяОплатыТаблицы As EntitySet(Of СводнаяОплатыТаблицы)
+	
+    #Region "Определения метода расширяемости"
+    Partial Private Sub OnLoaded()
+    End Sub
+    Partial Private Sub OnValidate(action As System.Data.Linq.ChangeAction)
+    End Sub
+    Partial Private Sub OnCreated()
+    End Sub
+    Partial Private Sub OnIDChanging(value As Integer)
+    End Sub
+    Partial Private Sub OnIDChanged()
+    End Sub
+    Partial Private Sub OnГодChanging(value As String)
+    End Sub
+    Partial Private Sub OnГодChanged()
+    End Sub
+    Partial Private Sub OnДата_ИзмененияChanging(value As String)
+    End Sub
+    Partial Private Sub OnДата_ИзмененияChanged()
+    End Sub
+    Partial Private Sub OnСостояниеChanging(value As String)
+    End Sub
+    Partial Private Sub OnСостояниеChanged()
+    End Sub
+    #End Region
+	
+	Public Sub New()
+		MyBase.New
+		Me._СводнаяОплатыТаблицы = New EntitySet(Of СводнаяОплатыТаблицы)(AddressOf Me.attach_СводнаяОплатыТаблицы, AddressOf Me.detach_СводнаяОплатыТаблицы)
+		OnCreated
+	End Sub
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ID", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true)>  _
+	Public Property ID() As Integer
+		Get
+			Return Me._ID
+		End Get
+		Set
+			If ((Me._ID = value)  _
+						= false) Then
+				Me.OnIDChanging(value)
+				Me.SendPropertyChanging
+				Me._ID = value
+				Me.SendPropertyChanged("ID")
+				Me.OnIDChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Год", DbType:="NVarChar(50)")>  _
+	Public Property Год() As String
+		Get
+			Return Me._Год
+		End Get
+		Set
+			If (String.Equals(Me._Год, value) = false) Then
+				Me.OnГодChanging(value)
+				Me.SendPropertyChanging
+				Me._Год = value
+				Me.SendPropertyChanged("Год")
+				Me.OnГодChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Дата_Изменения", DbType:="NVarChar(250)")>  _
+	Public Property Дата_Изменения() As String
+		Get
+			Return Me._Дата_Изменения
+		End Get
+		Set
+			If (String.Equals(Me._Дата_Изменения, value) = false) Then
+				Me.OnДата_ИзмененияChanging(value)
+				Me.SendPropertyChanging
+				Me._Дата_Изменения = value
+				Me.SendPropertyChanged("Дата_Изменения")
+				Me.OnДата_ИзмененияChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Состояние", DbType:="NVarChar(50)")>  _
+	Public Property Состояние() As String
+		Get
+			Return Me._Состояние
+		End Get
+		Set
+			If (String.Equals(Me._Состояние, value) = false) Then
+				Me.OnСостояниеChanging(value)
+				Me.SendPropertyChanging
+				Me._Состояние = value
+				Me.SendPropertyChanged("Состояние")
+				Me.OnСостояниеChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="СводнаяОплаты_СводнаяОплатыТаблицы", Storage:="_СводнаяОплатыТаблицы", ThisKey:="ID", OtherKey:="IDСоднаяОлпаты")>  _
+	Public Property СводнаяОплатыТаблицы() As EntitySet(Of СводнаяОплатыТаблицы)
+		Get
+			Return Me._СводнаяОплатыТаблицы
+		End Get
+		Set
+			Me._СводнаяОплатыТаблицы.Assign(value)
+		End Set
+	End Property
+	
+	Public Event PropertyChanging As PropertyChangingEventHandler Implements System.ComponentModel.INotifyPropertyChanging.PropertyChanging
+	
+	Public Event PropertyChanged As PropertyChangedEventHandler Implements System.ComponentModel.INotifyPropertyChanged.PropertyChanged
+	
+	Protected Overridable Sub SendPropertyChanging()
+		If ((Me.PropertyChangingEvent Is Nothing)  _
+					= false) Then
+			RaiseEvent PropertyChanging(Me, emptyChangingEventArgs)
+		End If
+	End Sub
+	
+	Protected Overridable Sub SendPropertyChanged(ByVal propertyName As [String])
+		If ((Me.PropertyChangedEvent Is Nothing)  _
+					= false) Then
+			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
+		End If
+	End Sub
+	
+	Private Sub attach_СводнаяОплатыТаблицы(ByVal entity As СводнаяОплатыТаблицы)
+		Me.SendPropertyChanging
+		entity.СводнаяОплаты = Me
+	End Sub
+	
+	Private Sub detach_СводнаяОплатыТаблицы(ByVal entity As СводнаяОплатыТаблицы)
+		Me.SendPropertyChanging
+		entity.СводнаяОплаты = Nothing
 	End Sub
 End Class
 
@@ -12634,616 +12712,17 @@ Partial Public Class СводнаяОплатыТаблицы
 	End Sub
 End Class
 
-<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.СводнаяОплаты")>  _
-Partial Public Class СводнаяОплаты
-	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
-	
-	Private Shared emptyChangingEventArgs As PropertyChangingEventArgs = New PropertyChangingEventArgs(String.Empty)
-	
-	Private _ID As Integer
-	
-	Private _Год As String
-	
-	Private _Дата_Изменения As String
-	
-	Private _Состояние As String
-	
-	Private _СводнаяОплатыТаблицы As EntitySet(Of СводнаяОплатыТаблицы)
-	
-    #Region "Определения метода расширяемости"
-    Partial Private Sub OnLoaded()
-    End Sub
-    Partial Private Sub OnValidate(action As System.Data.Linq.ChangeAction)
-    End Sub
-    Partial Private Sub OnCreated()
-    End Sub
-    Partial Private Sub OnIDChanging(value As Integer)
-    End Sub
-    Partial Private Sub OnIDChanged()
-    End Sub
-    Partial Private Sub OnГодChanging(value As String)
-    End Sub
-    Partial Private Sub OnГодChanged()
-    End Sub
-    Partial Private Sub OnДата_ИзмененияChanging(value As String)
-    End Sub
-    Partial Private Sub OnДата_ИзмененияChanged()
-    End Sub
-    Partial Private Sub OnСостояниеChanging(value As String)
-    End Sub
-    Partial Private Sub OnСостояниеChanged()
-    End Sub
-    #End Region
-	
-	Public Sub New()
-		MyBase.New
-		Me._СводнаяОплатыТаблицы = New EntitySet(Of СводнаяОплатыТаблицы)(AddressOf Me.attach_СводнаяОплатыТаблицы, AddressOf Me.detach_СводнаяОплатыТаблицы)
-		OnCreated
-	End Sub
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ID", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true)>  _
-	Public Property ID() As Integer
-		Get
-			Return Me._ID
-		End Get
-		Set
-			If ((Me._ID = value)  _
-						= false) Then
-				Me.OnIDChanging(value)
-				Me.SendPropertyChanging
-				Me._ID = value
-				Me.SendPropertyChanged("ID")
-				Me.OnIDChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Год", DbType:="NVarChar(50)")>  _
-	Public Property Год() As String
-		Get
-			Return Me._Год
-		End Get
-		Set
-			If (String.Equals(Me._Год, value) = false) Then
-				Me.OnГодChanging(value)
-				Me.SendPropertyChanging
-				Me._Год = value
-				Me.SendPropertyChanged("Год")
-				Me.OnГодChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Дата_Изменения", DbType:="NVarChar(250)")>  _
-	Public Property Дата_Изменения() As String
-		Get
-			Return Me._Дата_Изменения
-		End Get
-		Set
-			If (String.Equals(Me._Дата_Изменения, value) = false) Then
-				Me.OnДата_ИзмененияChanging(value)
-				Me.SendPropertyChanging
-				Me._Дата_Изменения = value
-				Me.SendPropertyChanged("Дата_Изменения")
-				Me.OnДата_ИзмененияChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Состояние", DbType:="NVarChar(50)")>  _
-	Public Property Состояние() As String
-		Get
-			Return Me._Состояние
-		End Get
-		Set
-			If (String.Equals(Me._Состояние, value) = false) Then
-				Me.OnСостояниеChanging(value)
-				Me.SendPropertyChanging
-				Me._Состояние = value
-				Me.SendPropertyChanged("Состояние")
-				Me.OnСостояниеChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="СводнаяОплаты_СводнаяОплатыТаблицы", Storage:="_СводнаяОплатыТаблицы", ThisKey:="ID", OtherKey:="IDСоднаяОлпаты")>  _
-	Public Property СводнаяОплатыТаблицы() As EntitySet(Of СводнаяОплатыТаблицы)
-		Get
-			Return Me._СводнаяОплатыТаблицы
-		End Get
-		Set
-			Me._СводнаяОплатыТаблицы.Assign(value)
-		End Set
-	End Property
-	
-	Public Event PropertyChanging As PropertyChangingEventHandler Implements System.ComponentModel.INotifyPropertyChanging.PropertyChanging
-	
-	Public Event PropertyChanged As PropertyChangedEventHandler Implements System.ComponentModel.INotifyPropertyChanged.PropertyChanged
-	
-	Protected Overridable Sub SendPropertyChanging()
-		If ((Me.PropertyChangingEvent Is Nothing)  _
-					= false) Then
-			RaiseEvent PropertyChanging(Me, emptyChangingEventArgs)
-		End If
-	End Sub
-	
-	Protected Overridable Sub SendPropertyChanged(ByVal propertyName As [String])
-		If ((Me.PropertyChangedEvent Is Nothing)  _
-					= false) Then
-			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
-		End If
-	End Sub
-	
-	Private Sub attach_СводнаяОплатыТаблицы(ByVal entity As СводнаяОплатыТаблицы)
-		Me.SendPropertyChanging
-		entity.СводнаяОплаты = Me
-	End Sub
-	
-	Private Sub detach_СводнаяОплатыТаблицы(ByVal entity As СводнаяОплатыТаблицы)
-		Me.SendPropertyChanging
-		entity.СводнаяОплаты = Nothing
-	End Sub
-End Class
-
-<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.ЖурналПеревозчикСобытия")>  _
-Partial Public Class ЖурналПеревозчикСобытия
-	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
-	
-	Private Shared emptyChangingEventArgs As PropertyChangingEventArgs = New PropertyChangingEventArgs(String.Empty)
-	
-	Private _ID As Integer
-	
-	Private _IDЖурналПеревозчик As System.Nullable(Of Integer)
-	
-	Private _Дата As System.Nullable(Of Date)
-	
-	Private _Маршрут As String
-	
-	Private _Событие As String
-	
-	Private _ЖурналПеревозчик As EntityRef(Of ЖурналПеревозчик)
-	
-    #Region "Определения метода расширяемости"
-    Partial Private Sub OnLoaded()
-    End Sub
-    Partial Private Sub OnValidate(action As System.Data.Linq.ChangeAction)
-    End Sub
-    Partial Private Sub OnCreated()
-    End Sub
-    Partial Private Sub OnIDChanging(value As Integer)
-    End Sub
-    Partial Private Sub OnIDChanged()
-    End Sub
-    Partial Private Sub OnIDЖурналПеревозчикChanging(value As System.Nullable(Of Integer))
-    End Sub
-    Partial Private Sub OnIDЖурналПеревозчикChanged()
-    End Sub
-    Partial Private Sub OnДатаChanging(value As System.Nullable(Of Date))
-    End Sub
-    Partial Private Sub OnДатаChanged()
-    End Sub
-    Partial Private Sub OnМаршрутChanging(value As String)
-    End Sub
-    Partial Private Sub OnМаршрутChanged()
-    End Sub
-    Partial Private Sub OnСобытиеChanging(value As String)
-    End Sub
-    Partial Private Sub OnСобытиеChanged()
-    End Sub
-    #End Region
-	
-	Public Sub New()
-		MyBase.New
-		Me._ЖурналПеревозчик = CType(Nothing, EntityRef(Of ЖурналПеревозчик))
-		OnCreated
-	End Sub
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ID", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true)>  _
-	Public Property ID() As Integer
-		Get
-			Return Me._ID
-		End Get
-		Set
-			If ((Me._ID = value)  _
-						= false) Then
-				Me.OnIDChanging(value)
-				Me.SendPropertyChanging
-				Me._ID = value
-				Me.SendPropertyChanged("ID")
-				Me.OnIDChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IDЖурналПеревозчик", DbType:="Int")>  _
-	Public Property IDЖурналПеревозчик() As System.Nullable(Of Integer)
-		Get
-			Return Me._IDЖурналПеревозчик
-		End Get
-		Set
-			If (Me._IDЖурналПеревозчик.Equals(value) = false) Then
-				If Me._ЖурналПеревозчик.HasLoadedOrAssignedValue Then
-					Throw New System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException()
-				End If
-				Me.OnIDЖурналПеревозчикChanging(value)
-				Me.SendPropertyChanging
-				Me._IDЖурналПеревозчик = value
-				Me.SendPropertyChanged("IDЖурналПеревозчик")
-				Me.OnIDЖурналПеревозчикChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Дата", DbType:="DateTime")>  _
-	Public Property Дата() As System.Nullable(Of Date)
-		Get
-			Return Me._Дата
-		End Get
-		Set
-			If (Me._Дата.Equals(value) = false) Then
-				Me.OnДатаChanging(value)
-				Me.SendPropertyChanging
-				Me._Дата = value
-				Me.SendPropertyChanged("Дата")
-				Me.OnДатаChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Маршрут", DbType:="NVarChar(MAX)")>  _
-	Public Property Маршрут() As String
-		Get
-			Return Me._Маршрут
-		End Get
-		Set
-			If (String.Equals(Me._Маршрут, value) = false) Then
-				Me.OnМаршрутChanging(value)
-				Me.SendPropertyChanging
-				Me._Маршрут = value
-				Me.SendPropertyChanged("Маршрут")
-				Me.OnМаршрутChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Событие", DbType:="NVarChar(MAX)")>  _
-	Public Property Событие() As String
-		Get
-			Return Me._Событие
-		End Get
-		Set
-			If (String.Equals(Me._Событие, value) = false) Then
-				Me.OnСобытиеChanging(value)
-				Me.SendPropertyChanging
-				Me._Событие = value
-				Me.SendPropertyChanged("Событие")
-				Me.OnСобытиеChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="ЖурналПеревозчик_ЖурналПеревозчикСобытия", Storage:="_ЖурналПеревозчик", ThisKey:="IDЖурналПеревозчик", OtherKey:="Код", IsForeignKey:=true, DeleteRule:="CASCADE")>  _
-	Public Property ЖурналПеревозчик() As ЖурналПеревозчик
-		Get
-			Return Me._ЖурналПеревозчик.Entity
-		End Get
-		Set
-			Dim previousValue As ЖурналПеревозчик = Me._ЖурналПеревозчик.Entity
-			If ((Object.Equals(previousValue, value) = false)  _
-						OrElse (Me._ЖурналПеревозчик.HasLoadedOrAssignedValue = false)) Then
-				Me.SendPropertyChanging
-				If ((previousValue Is Nothing)  _
-							= false) Then
-					Me._ЖурналПеревозчик.Entity = Nothing
-					previousValue.ЖурналПеревозчикСобытия.Remove(Me)
-				End If
-				Me._ЖурналПеревозчик.Entity = value
-				If ((value Is Nothing)  _
-							= false) Then
-					value.ЖурналПеревозчикСобытия.Add(Me)
-					Me._IDЖурналПеревозчик = value.Код
-				Else
-					Me._IDЖурналПеревозчик = CType(Nothing, Nullable(Of Integer))
-				End If
-				Me.SendPropertyChanged("ЖурналПеревозчик")
-			End If
-		End Set
-	End Property
-	
-	Public Event PropertyChanging As PropertyChangingEventHandler Implements System.ComponentModel.INotifyPropertyChanging.PropertyChanging
-	
-	Public Event PropertyChanged As PropertyChangedEventHandler Implements System.ComponentModel.INotifyPropertyChanged.PropertyChanged
-	
-	Protected Overridable Sub SendPropertyChanging()
-		If ((Me.PropertyChangingEvent Is Nothing)  _
-					= false) Then
-			RaiseEvent PropertyChanging(Me, emptyChangingEventArgs)
-		End If
-	End Sub
-	
-	Protected Overridable Sub SendPropertyChanged(ByVal propertyName As [String])
-		If ((Me.PropertyChangedEvent Is Nothing)  _
-					= false) Then
-			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
-		End If
-	End Sub
-End Class
-
-<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.Выписка")>  _
-Partial Public Class Выписка
-	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
-	
-	Private Shared emptyChangingEventArgs As PropertyChangingEventArgs = New PropertyChangingEventArgs(String.Empty)
-	
-	Private _ID As Integer
-	
-	Private _Год As String
-	
-	Private _Месяц As String
-	
-	Private _МесяцЧислом As String
-	
-	Private _ДатаОперации As String
-	
-	Private _Расход As String
-	
-	Private _Приход As String
-	
-	Private _Организация As String
-	
-	Private _НазначениеПлатежа As String
-	
-	Private _Примечание As String
-	
-    #Region "Определения метода расширяемости"
-    Partial Private Sub OnLoaded()
-    End Sub
-    Partial Private Sub OnValidate(action As System.Data.Linq.ChangeAction)
-    End Sub
-    Partial Private Sub OnCreated()
-    End Sub
-    Partial Private Sub OnIDChanging(value As Integer)
-    End Sub
-    Partial Private Sub OnIDChanged()
-    End Sub
-    Partial Private Sub OnГодChanging(value As String)
-    End Sub
-    Partial Private Sub OnГодChanged()
-    End Sub
-    Partial Private Sub OnМесяцChanging(value As String)
-    End Sub
-    Partial Private Sub OnМесяцChanged()
-    End Sub
-    Partial Private Sub OnМесяцЧисломChanging(value As String)
-    End Sub
-    Partial Private Sub OnМесяцЧисломChanged()
-    End Sub
-    Partial Private Sub OnДатаОперацииChanging(value As String)
-    End Sub
-    Partial Private Sub OnДатаОперацииChanged()
-    End Sub
-    Partial Private Sub OnРасходChanging(value As String)
-    End Sub
-    Partial Private Sub OnРасходChanged()
-    End Sub
-    Partial Private Sub OnПриходChanging(value As String)
-    End Sub
-    Partial Private Sub OnПриходChanged()
-    End Sub
-    Partial Private Sub OnОрганизацияChanging(value As String)
-    End Sub
-    Partial Private Sub OnОрганизацияChanged()
-    End Sub
-    Partial Private Sub OnНазначениеПлатежаChanging(value As String)
-    End Sub
-    Partial Private Sub OnНазначениеПлатежаChanged()
-    End Sub
-    Partial Private Sub OnПримечаниеChanging(value As String)
-    End Sub
-    Partial Private Sub OnПримечаниеChanged()
-    End Sub
-    #End Region
-	
-	Public Sub New()
-		MyBase.New
-		OnCreated
-	End Sub
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ID", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true)>  _
-	Public Property ID() As Integer
-		Get
-			Return Me._ID
-		End Get
-		Set
-			If ((Me._ID = value)  _
-						= false) Then
-				Me.OnIDChanging(value)
-				Me.SendPropertyChanging
-				Me._ID = value
-				Me.SendPropertyChanged("ID")
-				Me.OnIDChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Год", DbType:="NVarChar(50)")>  _
-	Public Property Год() As String
-		Get
-			Return Me._Год
-		End Get
-		Set
-			If (String.Equals(Me._Год, value) = false) Then
-				Me.OnГодChanging(value)
-				Me.SendPropertyChanging
-				Me._Год = value
-				Me.SendPropertyChanged("Год")
-				Me.OnГодChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Месяц", DbType:="NVarChar(50)")>  _
-	Public Property Месяц() As String
-		Get
-			Return Me._Месяц
-		End Get
-		Set
-			If (String.Equals(Me._Месяц, value) = false) Then
-				Me.OnМесяцChanging(value)
-				Me.SendPropertyChanging
-				Me._Месяц = value
-				Me.SendPropertyChanged("Месяц")
-				Me.OnМесяцChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_МесяцЧислом", DbType:="NVarChar(50)")>  _
-	Public Property МесяцЧислом() As String
-		Get
-			Return Me._МесяцЧислом
-		End Get
-		Set
-			If (String.Equals(Me._МесяцЧислом, value) = false) Then
-				Me.OnМесяцЧисломChanging(value)
-				Me.SendPropertyChanging
-				Me._МесяцЧислом = value
-				Me.SendPropertyChanged("МесяцЧислом")
-				Me.OnМесяцЧисломChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ДатаОперации", DbType:="NVarChar(50)")>  _
-	Public Property ДатаОперации() As String
-		Get
-			Return Me._ДатаОперации
-		End Get
-		Set
-			If (String.Equals(Me._ДатаОперации, value) = false) Then
-				Me.OnДатаОперацииChanging(value)
-				Me.SendPropertyChanging
-				Me._ДатаОперации = value
-				Me.SendPropertyChanged("ДатаОперации")
-				Me.OnДатаОперацииChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Расход", DbType:="NVarChar(50)")>  _
-	Public Property Расход() As String
-		Get
-			Return Me._Расход
-		End Get
-		Set
-			If (String.Equals(Me._Расход, value) = false) Then
-				Me.OnРасходChanging(value)
-				Me.SendPropertyChanging
-				Me._Расход = value
-				Me.SendPropertyChanged("Расход")
-				Me.OnРасходChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Приход", DbType:="NVarChar(50)")>  _
-	Public Property Приход() As String
-		Get
-			Return Me._Приход
-		End Get
-		Set
-			If (String.Equals(Me._Приход, value) = false) Then
-				Me.OnПриходChanging(value)
-				Me.SendPropertyChanging
-				Me._Приход = value
-				Me.SendPropertyChanged("Приход")
-				Me.OnПриходChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Организация", DbType:="NVarChar(MAX)")>  _
-	Public Property Организация() As String
-		Get
-			Return Me._Организация
-		End Get
-		Set
-			If (String.Equals(Me._Организация, value) = false) Then
-				Me.OnОрганизацияChanging(value)
-				Me.SendPropertyChanging
-				Me._Организация = value
-				Me.SendPropertyChanged("Организация")
-				Me.OnОрганизацияChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_НазначениеПлатежа", DbType:="NVarChar(MAX)")>  _
-	Public Property НазначениеПлатежа() As String
-		Get
-			Return Me._НазначениеПлатежа
-		End Get
-		Set
-			If (String.Equals(Me._НазначениеПлатежа, value) = false) Then
-				Me.OnНазначениеПлатежаChanging(value)
-				Me.SendPropertyChanging
-				Me._НазначениеПлатежа = value
-				Me.SendPropertyChanged("НазначениеПлатежа")
-				Me.OnНазначениеПлатежаChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Примечание", DbType:="NVarChar(250)")>  _
-	Public Property Примечание() As String
-		Get
-			Return Me._Примечание
-		End Get
-		Set
-			If (String.Equals(Me._Примечание, value) = false) Then
-				Me.OnПримечаниеChanging(value)
-				Me.SendPropertyChanging
-				Me._Примечание = value
-				Me.SendPropertyChanged("Примечание")
-				Me.OnПримечаниеChanged
-			End If
-		End Set
-	End Property
-	
-	Public Event PropertyChanging As PropertyChangingEventHandler Implements System.ComponentModel.INotifyPropertyChanging.PropertyChanging
-	
-	Public Event PropertyChanged As PropertyChangedEventHandler Implements System.ComponentModel.INotifyPropertyChanged.PropertyChanged
-	
-	Protected Overridable Sub SendPropertyChanging()
-		If ((Me.PropertyChangingEvent Is Nothing)  _
-					= false) Then
-			RaiseEvent PropertyChanging(Me, emptyChangingEventArgs)
-		End If
-	End Sub
-	
-	Protected Overridable Sub SendPropertyChanged(ByVal propertyName As [String])
-		If ((Me.PropertyChangedEvent Is Nothing)  _
-					= false) Then
-			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
-		End If
-	End Sub
-End Class
-
-<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.ЖурналКлиентСписок")>  _
-Partial Public Class ЖурналКлиентСписок
+<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.Страна")>  _
+Partial Public Class Страна
 	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
 	
 	Private Shared emptyChangingEventArgs As PropertyChangingEventArgs = New PropertyChangingEventArgs(String.Empty)
 	
 	Private _Код As Integer
 	
-	Private _Клиент As String
+	Private _Страна As String
 	
-	Private _КонтактноеЛицо As String
-	
-	Private _Телефон As String
-	
-	Private _ДопИнфо As String
+	Private _РегионыРоссии As EntitySet(Of РегионыРоссии)
 	
     #Region "Определения метода расширяемости"
     Partial Private Sub OnLoaded()
@@ -13256,21 +12735,114 @@ Partial Public Class ЖурналКлиентСписок
     End Sub
     Partial Private Sub OnКодChanged()
     End Sub
-    Partial Private Sub OnКлиентChanging(value As String)
+    Partial Private Sub OnСтранаChanging(value As String)
     End Sub
-    Partial Private Sub OnКлиентChanged()
+    Partial Private Sub OnСтранаChanged()
     End Sub
-    Partial Private Sub OnКонтактноеЛицоChanging(value As String)
+    #End Region
+	
+	Public Sub New()
+		MyBase.New
+		Me._РегионыРоссии = New EntitySet(Of РегионыРоссии)(AddressOf Me.attach_РегионыРоссии, AddressOf Me.detach_РегионыРоссии)
+		OnCreated
+	End Sub
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Код", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true)>  _
+	Public Property Код() As Integer
+		Get
+			Return Me._Код
+		End Get
+		Set
+			If ((Me._Код = value)  _
+						= false) Then
+				Me.OnКодChanging(value)
+				Me.SendPropertyChanging
+				Me._Код = value
+				Me.SendPropertyChanged("Код")
+				Me.OnКодChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Страна", DbType:="NVarChar(30)")>  _
+	Public Property Страна() As String
+		Get
+			Return Me._Страна
+		End Get
+		Set
+			If (String.Equals(Me._Страна, value) = false) Then
+				Me.OnСтранаChanging(value)
+				Me.SendPropertyChanging
+				Me._Страна = value
+				Me.SendPropertyChanged("Страна")
+				Me.OnСтранаChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="Страна_РегионыРоссии", Storage:="_РегионыРоссии", ThisKey:="Код", OtherKey:="Страны")>  _
+	Public Property РегионыРоссии() As EntitySet(Of РегионыРоссии)
+		Get
+			Return Me._РегионыРоссии
+		End Get
+		Set
+			Me._РегионыРоссии.Assign(value)
+		End Set
+	End Property
+	
+	Public Event PropertyChanging As PropertyChangingEventHandler Implements System.ComponentModel.INotifyPropertyChanging.PropertyChanging
+	
+	Public Event PropertyChanged As PropertyChangedEventHandler Implements System.ComponentModel.INotifyPropertyChanged.PropertyChanged
+	
+	Protected Overridable Sub SendPropertyChanging()
+		If ((Me.PropertyChangingEvent Is Nothing)  _
+					= false) Then
+			RaiseEvent PropertyChanging(Me, emptyChangingEventArgs)
+		End If
+	End Sub
+	
+	Protected Overridable Sub SendPropertyChanged(ByVal propertyName As [String])
+		If ((Me.PropertyChangedEvent Is Nothing)  _
+					= false) Then
+			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
+		End If
+	End Sub
+	
+	Private Sub attach_РегионыРоссии(ByVal entity As РегионыРоссии)
+		Me.SendPropertyChanging
+		entity.Страна = Me
+	End Sub
+	
+	Private Sub detach_РегионыРоссии(ByVal entity As РегионыРоссии)
+		Me.SendPropertyChanging
+		entity.Страна = Nothing
+	End Sub
+End Class
+
+<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.ТипАвто")>  _
+Partial Public Class ТипАвто
+	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
+	
+	Private Shared emptyChangingEventArgs As PropertyChangingEventArgs = New PropertyChangingEventArgs(String.Empty)
+	
+	Private _Код As Integer
+	
+	Private _ТипАвто As String
+	
+    #Region "Определения метода расширяемости"
+    Partial Private Sub OnLoaded()
     End Sub
-    Partial Private Sub OnКонтактноеЛицоChanged()
+    Partial Private Sub OnValidate(action As System.Data.Linq.ChangeAction)
     End Sub
-    Partial Private Sub OnТелефонChanging(value As String)
+    Partial Private Sub OnCreated()
     End Sub
-    Partial Private Sub OnТелефонChanged()
+    Partial Private Sub OnКодChanging(value As Integer)
     End Sub
-    Partial Private Sub OnДопИнфоChanging(value As String)
+    Partial Private Sub OnКодChanged()
     End Sub
-    Partial Private Sub OnДопИнфоChanged()
+    Partial Private Sub OnТипАвтоChanging(value As String)
+    End Sub
+    Partial Private Sub OnТипАвтоChanged()
     End Sub
     #End Region
 	
@@ -13296,66 +12868,18 @@ Partial Public Class ЖурналКлиентСписок
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Клиент", DbType:="NVarChar(250)")>  _
-	Public Property Клиент() As String
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ТипАвто", DbType:="NVarChar(100)")>  _
+	Public Property ТипАвто() As String
 		Get
-			Return Me._Клиент
+			Return Me._ТипАвто
 		End Get
 		Set
-			If (String.Equals(Me._Клиент, value) = false) Then
-				Me.OnКлиентChanging(value)
+			If (String.Equals(Me._ТипАвто, value) = false) Then
+				Me.OnТипАвтоChanging(value)
 				Me.SendPropertyChanging
-				Me._Клиент = value
-				Me.SendPropertyChanged("Клиент")
-				Me.OnКлиентChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_КонтактноеЛицо", DbType:="NVarChar(250)")>  _
-	Public Property КонтактноеЛицо() As String
-		Get
-			Return Me._КонтактноеЛицо
-		End Get
-		Set
-			If (String.Equals(Me._КонтактноеЛицо, value) = false) Then
-				Me.OnКонтактноеЛицоChanging(value)
-				Me.SendPropertyChanging
-				Me._КонтактноеЛицо = value
-				Me.SendPropertyChanged("КонтактноеЛицо")
-				Me.OnКонтактноеЛицоChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Телефон", DbType:="NVarChar(50)")>  _
-	Public Property Телефон() As String
-		Get
-			Return Me._Телефон
-		End Get
-		Set
-			If (String.Equals(Me._Телефон, value) = false) Then
-				Me.OnТелефонChanging(value)
-				Me.SendPropertyChanging
-				Me._Телефон = value
-				Me.SendPropertyChanged("Телефон")
-				Me.OnТелефонChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ДопИнфо", DbType:="NVarChar(MAX)")>  _
-	Public Property ДопИнфо() As String
-		Get
-			Return Me._ДопИнфо
-		End Get
-		Set
-			If (String.Equals(Me._ДопИнфо, value) = false) Then
-				Me.OnДопИнфоChanging(value)
-				Me.SendPropertyChanging
-				Me._ДопИнфо = value
-				Me.SendPropertyChanged("ДопИнфо")
-				Me.OnДопИнфоChanged
+				Me._ТипАвто = value
+				Me.SendPropertyChanged("ТипАвто")
+				Me.OnТипАвтоChanged
 			End If
 		End Set
 	End Property
@@ -13379,17 +12903,43 @@ Partial Public Class ЖурналКлиентСписок
 	End Sub
 End Class
 
-<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.EmailTb")>  _
-Partial Public Class EmailTb
+<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.ФайлыExcelВсе")>  _
+Partial Public Class ФайлыExcelВсе
 	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
 	
 	Private Shared emptyChangingEventArgs As PropertyChangingEventArgs = New PropertyChangingEventArgs(String.Empty)
 	
 	Private _ID As Integer
 	
-	Private _Addres As String
+	Private _Клиент As String
 	
-	Private _Pass As String
+	Private _Телефон As String
+	
+	Private _Маршрут As String
+	
+	Private _ДатаЗагрузки As String
+	
+	Private _АдресЗагрузки As String
+	
+	Private _АдресЗатаможки As String
+	
+	Private _Груз As String
+	
+	Private _Авто As String
+	
+	Private _ДатаПодРастаможку As String
+	
+	Private _АдресРастаможки As String
+	
+	Private _АдресВыгрузки As String
+	
+	Private _ДопУсловия As String
+	
+	Private _ДатаПоручения As String
+	
+	Private _Рейс As String
+	
+	Private _Перевозчик As String
 	
     #Region "Определения метода расширяемости"
     Partial Private Sub OnLoaded()
@@ -13402,13 +12952,65 @@ Partial Public Class EmailTb
     End Sub
     Partial Private Sub OnIDChanged()
     End Sub
-    Partial Private Sub OnAddresChanging(value As String)
+    Partial Private Sub OnКлиентChanging(value As String)
     End Sub
-    Partial Private Sub OnAddresChanged()
+    Partial Private Sub OnКлиентChanged()
     End Sub
-    Partial Private Sub OnPassChanging(value As String)
+    Partial Private Sub OnТелефонChanging(value As String)
     End Sub
-    Partial Private Sub OnPassChanged()
+    Partial Private Sub OnТелефонChanged()
+    End Sub
+    Partial Private Sub OnМаршрутChanging(value As String)
+    End Sub
+    Partial Private Sub OnМаршрутChanged()
+    End Sub
+    Partial Private Sub OnДатаЗагрузкиChanging(value As String)
+    End Sub
+    Partial Private Sub OnДатаЗагрузкиChanged()
+    End Sub
+    Partial Private Sub OnАдресЗагрузкиChanging(value As String)
+    End Sub
+    Partial Private Sub OnАдресЗагрузкиChanged()
+    End Sub
+    Partial Private Sub OnАдресЗатаможкиChanging(value As String)
+    End Sub
+    Partial Private Sub OnАдресЗатаможкиChanged()
+    End Sub
+    Partial Private Sub OnГрузChanging(value As String)
+    End Sub
+    Partial Private Sub OnГрузChanged()
+    End Sub
+    Partial Private Sub OnАвтоChanging(value As String)
+    End Sub
+    Partial Private Sub OnАвтоChanged()
+    End Sub
+    Partial Private Sub OnДатаПодРастаможкуChanging(value As String)
+    End Sub
+    Partial Private Sub OnДатаПодРастаможкуChanged()
+    End Sub
+    Partial Private Sub OnАдресРастаможкиChanging(value As String)
+    End Sub
+    Partial Private Sub OnАдресРастаможкиChanged()
+    End Sub
+    Partial Private Sub OnАдресВыгрузкиChanging(value As String)
+    End Sub
+    Partial Private Sub OnАдресВыгрузкиChanged()
+    End Sub
+    Partial Private Sub OnДопУсловияChanging(value As String)
+    End Sub
+    Partial Private Sub OnДопУсловияChanged()
+    End Sub
+    Partial Private Sub OnДатаПорученияChanging(value As String)
+    End Sub
+    Partial Private Sub OnДатаПорученияChanged()
+    End Sub
+    Partial Private Sub OnРейсChanging(value As String)
+    End Sub
+    Partial Private Sub OnРейсChanged()
+    End Sub
+    Partial Private Sub OnПеревозчикChanging(value As String)
+    End Sub
+    Partial Private Sub OnПеревозчикChanged()
     End Sub
     #End Region
 	
@@ -13434,34 +13036,454 @@ Partial Public Class EmailTb
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Addres", DbType:="NVarChar(50)")>  _
-	Public Property Addres() As String
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Клиент", DbType:="NVarChar(MAX)")>  _
+	Public Property Клиент() As String
 		Get
-			Return Me._Addres
+			Return Me._Клиент
 		End Get
 		Set
-			If (String.Equals(Me._Addres, value) = false) Then
-				Me.OnAddresChanging(value)
+			If (String.Equals(Me._Клиент, value) = false) Then
+				Me.OnКлиентChanging(value)
 				Me.SendPropertyChanging
-				Me._Addres = value
-				Me.SendPropertyChanged("Addres")
-				Me.OnAddresChanged
+				Me._Клиент = value
+				Me.SendPropertyChanged("Клиент")
+				Me.OnКлиентChanged
 			End If
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Pass", DbType:="NVarChar(50)")>  _
-	Public Property Pass() As String
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Телефон", DbType:="NVarChar(MAX)")>  _
+	Public Property Телефон() As String
 		Get
-			Return Me._Pass
+			Return Me._Телефон
 		End Get
 		Set
-			If (String.Equals(Me._Pass, value) = false) Then
-				Me.OnPassChanging(value)
+			If (String.Equals(Me._Телефон, value) = false) Then
+				Me.OnТелефонChanging(value)
 				Me.SendPropertyChanging
-				Me._Pass = value
-				Me.SendPropertyChanged("Pass")
-				Me.OnPassChanged
+				Me._Телефон = value
+				Me.SendPropertyChanged("Телефон")
+				Me.OnТелефонChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Маршрут", DbType:="NVarChar(MAX)")>  _
+	Public Property Маршрут() As String
+		Get
+			Return Me._Маршрут
+		End Get
+		Set
+			If (String.Equals(Me._Маршрут, value) = false) Then
+				Me.OnМаршрутChanging(value)
+				Me.SendPropertyChanging
+				Me._Маршрут = value
+				Me.SendPropertyChanged("Маршрут")
+				Me.OnМаршрутChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ДатаЗагрузки", DbType:="NVarChar(MAX)")>  _
+	Public Property ДатаЗагрузки() As String
+		Get
+			Return Me._ДатаЗагрузки
+		End Get
+		Set
+			If (String.Equals(Me._ДатаЗагрузки, value) = false) Then
+				Me.OnДатаЗагрузкиChanging(value)
+				Me.SendPropertyChanging
+				Me._ДатаЗагрузки = value
+				Me.SendPropertyChanged("ДатаЗагрузки")
+				Me.OnДатаЗагрузкиChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_АдресЗагрузки", DbType:="NVarChar(MAX)")>  _
+	Public Property АдресЗагрузки() As String
+		Get
+			Return Me._АдресЗагрузки
+		End Get
+		Set
+			If (String.Equals(Me._АдресЗагрузки, value) = false) Then
+				Me.OnАдресЗагрузкиChanging(value)
+				Me.SendPropertyChanging
+				Me._АдресЗагрузки = value
+				Me.SendPropertyChanged("АдресЗагрузки")
+				Me.OnАдресЗагрузкиChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_АдресЗатаможки", DbType:="NVarChar(MAX)")>  _
+	Public Property АдресЗатаможки() As String
+		Get
+			Return Me._АдресЗатаможки
+		End Get
+		Set
+			If (String.Equals(Me._АдресЗатаможки, value) = false) Then
+				Me.OnАдресЗатаможкиChanging(value)
+				Me.SendPropertyChanging
+				Me._АдресЗатаможки = value
+				Me.SendPropertyChanged("АдресЗатаможки")
+				Me.OnАдресЗатаможкиChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Груз", DbType:="NVarChar(MAX)")>  _
+	Public Property Груз() As String
+		Get
+			Return Me._Груз
+		End Get
+		Set
+			If (String.Equals(Me._Груз, value) = false) Then
+				Me.OnГрузChanging(value)
+				Me.SendPropertyChanging
+				Me._Груз = value
+				Me.SendPropertyChanged("Груз")
+				Me.OnГрузChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Авто", DbType:="NVarChar(MAX)")>  _
+	Public Property Авто() As String
+		Get
+			Return Me._Авто
+		End Get
+		Set
+			If (String.Equals(Me._Авто, value) = false) Then
+				Me.OnАвтоChanging(value)
+				Me.SendPropertyChanging
+				Me._Авто = value
+				Me.SendPropertyChanged("Авто")
+				Me.OnАвтоChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ДатаПодРастаможку", DbType:="NVarChar(MAX)")>  _
+	Public Property ДатаПодРастаможку() As String
+		Get
+			Return Me._ДатаПодРастаможку
+		End Get
+		Set
+			If (String.Equals(Me._ДатаПодРастаможку, value) = false) Then
+				Me.OnДатаПодРастаможкуChanging(value)
+				Me.SendPropertyChanging
+				Me._ДатаПодРастаможку = value
+				Me.SendPropertyChanged("ДатаПодРастаможку")
+				Me.OnДатаПодРастаможкуChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_АдресРастаможки", DbType:="NVarChar(MAX)")>  _
+	Public Property АдресРастаможки() As String
+		Get
+			Return Me._АдресРастаможки
+		End Get
+		Set
+			If (String.Equals(Me._АдресРастаможки, value) = false) Then
+				Me.OnАдресРастаможкиChanging(value)
+				Me.SendPropertyChanging
+				Me._АдресРастаможки = value
+				Me.SendPropertyChanged("АдресРастаможки")
+				Me.OnАдресРастаможкиChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_АдресВыгрузки", DbType:="NVarChar(MAX)")>  _
+	Public Property АдресВыгрузки() As String
+		Get
+			Return Me._АдресВыгрузки
+		End Get
+		Set
+			If (String.Equals(Me._АдресВыгрузки, value) = false) Then
+				Me.OnАдресВыгрузкиChanging(value)
+				Me.SendPropertyChanging
+				Me._АдресВыгрузки = value
+				Me.SendPropertyChanged("АдресВыгрузки")
+				Me.OnАдресВыгрузкиChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ДопУсловия", DbType:="NVarChar(MAX)")>  _
+	Public Property ДопУсловия() As String
+		Get
+			Return Me._ДопУсловия
+		End Get
+		Set
+			If (String.Equals(Me._ДопУсловия, value) = false) Then
+				Me.OnДопУсловияChanging(value)
+				Me.SendPropertyChanging
+				Me._ДопУсловия = value
+				Me.SendPropertyChanged("ДопУсловия")
+				Me.OnДопУсловияChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ДатаПоручения", DbType:="NVarChar(MAX)")>  _
+	Public Property ДатаПоручения() As String
+		Get
+			Return Me._ДатаПоручения
+		End Get
+		Set
+			If (String.Equals(Me._ДатаПоручения, value) = false) Then
+				Me.OnДатаПорученияChanging(value)
+				Me.SendPropertyChanging
+				Me._ДатаПоручения = value
+				Me.SendPropertyChanged("ДатаПоручения")
+				Me.OnДатаПорученияChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Рейс", DbType:="NVarChar(MAX)")>  _
+	Public Property Рейс() As String
+		Get
+			Return Me._Рейс
+		End Get
+		Set
+			If (String.Equals(Me._Рейс, value) = false) Then
+				Me.OnРейсChanging(value)
+				Me.SendPropertyChanging
+				Me._Рейс = value
+				Me.SendPropertyChanged("Рейс")
+				Me.OnРейсChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Перевозчик", DbType:="NVarChar(MAX)")>  _
+	Public Property Перевозчик() As String
+		Get
+			Return Me._Перевозчик
+		End Get
+		Set
+			If (String.Equals(Me._Перевозчик, value) = false) Then
+				Me.OnПеревозчикChanging(value)
+				Me.SendPropertyChanging
+				Me._Перевозчик = value
+				Me.SendPropertyChanged("Перевозчик")
+				Me.OnПеревозчикChanged
+			End If
+		End Set
+	End Property
+	
+	Public Event PropertyChanging As PropertyChangingEventHandler Implements System.ComponentModel.INotifyPropertyChanging.PropertyChanging
+	
+	Public Event PropertyChanged As PropertyChangedEventHandler Implements System.ComponentModel.INotifyPropertyChanged.PropertyChanged
+	
+	Protected Overridable Sub SendPropertyChanging()
+		If ((Me.PropertyChangingEvent Is Nothing)  _
+					= false) Then
+			RaiseEvent PropertyChanging(Me, emptyChangingEventArgs)
+		End If
+	End Sub
+	
+	Protected Overridable Sub SendPropertyChanged(ByVal propertyName As [String])
+		If ((Me.PropertyChangedEvent Is Nothing)  _
+					= false) Then
+			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
+		End If
+	End Sub
+End Class
+
+<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.ФормаСобств")>  _
+Partial Public Class ФормаСобств
+	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
+	
+	Private Shared emptyChangingEventArgs As PropertyChangingEventArgs = New PropertyChangingEventArgs(String.Empty)
+	
+	Private _Код As Integer
+	
+	Private _ПолноеНазвание As String
+	
+	Private _Сокращенное As String
+	
+    #Region "Определения метода расширяемости"
+    Partial Private Sub OnLoaded()
+    End Sub
+    Partial Private Sub OnValidate(action As System.Data.Linq.ChangeAction)
+    End Sub
+    Partial Private Sub OnCreated()
+    End Sub
+    Partial Private Sub OnКодChanging(value As Integer)
+    End Sub
+    Partial Private Sub OnКодChanged()
+    End Sub
+    Partial Private Sub OnПолноеНазваниеChanging(value As String)
+    End Sub
+    Partial Private Sub OnПолноеНазваниеChanged()
+    End Sub
+    Partial Private Sub OnСокращенноеChanging(value As String)
+    End Sub
+    Partial Private Sub OnСокращенноеChanged()
+    End Sub
+    #End Region
+	
+	Public Sub New()
+		MyBase.New
+		OnCreated
+	End Sub
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Код", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true)>  _
+	Public Property Код() As Integer
+		Get
+			Return Me._Код
+		End Get
+		Set
+			If ((Me._Код = value)  _
+						= false) Then
+				Me.OnКодChanging(value)
+				Me.SendPropertyChanging
+				Me._Код = value
+				Me.SendPropertyChanged("Код")
+				Me.OnКодChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ПолноеНазвание", DbType:="NVarChar(255)")>  _
+	Public Property ПолноеНазвание() As String
+		Get
+			Return Me._ПолноеНазвание
+		End Get
+		Set
+			If (String.Equals(Me._ПолноеНазвание, value) = false) Then
+				Me.OnПолноеНазваниеChanging(value)
+				Me.SendPropertyChanging
+				Me._ПолноеНазвание = value
+				Me.SendPropertyChanged("ПолноеНазвание")
+				Me.OnПолноеНазваниеChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Сокращенное", DbType:="NVarChar(255)")>  _
+	Public Property Сокращенное() As String
+		Get
+			Return Me._Сокращенное
+		End Get
+		Set
+			If (String.Equals(Me._Сокращенное, value) = false) Then
+				Me.OnСокращенноеChanging(value)
+				Me.SendPropertyChanging
+				Me._Сокращенное = value
+				Me.SendPropertyChanged("Сокращенное")
+				Me.OnСокращенноеChanged
+			End If
+		End Set
+	End Property
+	
+	Public Event PropertyChanging As PropertyChangingEventHandler Implements System.ComponentModel.INotifyPropertyChanging.PropertyChanging
+	
+	Public Event PropertyChanged As PropertyChangedEventHandler Implements System.ComponentModel.INotifyPropertyChanged.PropertyChanged
+	
+	Protected Overridable Sub SendPropertyChanging()
+		If ((Me.PropertyChangingEvent Is Nothing)  _
+					= false) Then
+			RaiseEvent PropertyChanging(Me, emptyChangingEventArgs)
+		End If
+	End Sub
+	
+	Protected Overridable Sub SendPropertyChanged(ByVal propertyName As [String])
+		If ((Me.PropertyChangedEvent Is Nothing)  _
+					= false) Then
+			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
+		End If
+	End Sub
+End Class
+
+<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.ЧерныйСписок")>  _
+Partial Public Class ЧерныйСписок
+	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
+	
+	Private Shared emptyChangingEventArgs As PropertyChangingEventArgs = New PropertyChangingEventArgs(String.Empty)
+	
+	Private _Код As Integer
+	
+	Private _Организация As String
+	
+	Private _Примечание As String
+	
+    #Region "Определения метода расширяемости"
+    Partial Private Sub OnLoaded()
+    End Sub
+    Partial Private Sub OnValidate(action As System.Data.Linq.ChangeAction)
+    End Sub
+    Partial Private Sub OnCreated()
+    End Sub
+    Partial Private Sub OnКодChanging(value As Integer)
+    End Sub
+    Partial Private Sub OnКодChanged()
+    End Sub
+    Partial Private Sub OnОрганизацияChanging(value As String)
+    End Sub
+    Partial Private Sub OnОрганизацияChanged()
+    End Sub
+    Partial Private Sub OnПримечаниеChanging(value As String)
+    End Sub
+    Partial Private Sub OnПримечаниеChanged()
+    End Sub
+    #End Region
+	
+	Public Sub New()
+		MyBase.New
+		OnCreated
+	End Sub
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Код", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true)>  _
+	Public Property Код() As Integer
+		Get
+			Return Me._Код
+		End Get
+		Set
+			If ((Me._Код = value)  _
+						= false) Then
+				Me.OnКодChanging(value)
+				Me.SendPropertyChanging
+				Me._Код = value
+				Me.SendPropertyChanged("Код")
+				Me.OnКодChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Организация", DbType:="NVarChar(255)")>  _
+	Public Property Организация() As String
+		Get
+			Return Me._Организация
+		End Get
+		Set
+			If (String.Equals(Me._Организация, value) = false) Then
+				Me.OnОрганизацияChanging(value)
+				Me.SendPropertyChanging
+				Me._Организация = value
+				Me.SendPropertyChanged("Организация")
+				Me.OnОрганизацияChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Примечание", DbType:="NVarChar(255)")>  _
+	Public Property Примечание() As String
+		Get
+			Return Me._Примечание
+		End Get
+		Set
+			If (String.Equals(Me._Примечание, value) = false) Then
+				Me.OnПримечаниеChanging(value)
+				Me.SendPropertyChanging
+				Me._Примечание = value
+				Me.SendPropertyChanged("Примечание")
+				Me.OnПримечаниеChanged
 			End If
 		End Set
 	End Property

@@ -64,7 +64,7 @@ Public Class ПорНомер
             End If
         End If
         Dim mo As New AllUpd
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             If GroupBox2.Enabled = True Then
                 Dim strsql As String
                 If RichTextBox1.Text = "" Or RichTextBox2.Text = "" Then

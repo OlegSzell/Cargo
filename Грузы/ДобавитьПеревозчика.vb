@@ -153,7 +153,7 @@ Public Class ДобавитьПеревозчика
             country2 = ""
         End If
 
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim f1 = db.ПеревозчикиБаза.Where(Function(x) x.Наименование_фирмы = ComboBox1.Text).FirstOrDefault()
             If f1 IsNot Nothing Then
 

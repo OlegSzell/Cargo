@@ -23,7 +23,7 @@ Public Class ДобЧернСписок
         rch2 = Trim(TextBox1.Text)
         Dim mo As New AllUpd
         If D = True Then
-            Using db As New dbAllDataContext
+            Using db As New dbAllDataContext(_cn3)
                 Dim f = db.ЧерныйСписок.Where(Function(x) x.Код = Fd.Код).FirstOrDefault()
                 If f IsNot Nothing Then
                     f.Примечание = rch2
@@ -37,7 +37,7 @@ Public Class ДобЧернСписок
             'Updates3(strsql2)
             MessageBox.Show("Данные обновлены!", Рик)
         Else
-            Using db As New dbAllDataContext()
+            Using db As New dbAllDataContext(_cn3)
                 Dim f As New ЧерныйСписок
                 f.Организация = rch1
                 f.Примечание = rch2

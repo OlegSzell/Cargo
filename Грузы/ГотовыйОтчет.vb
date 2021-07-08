@@ -44,7 +44,7 @@ Public Class ГотовыйОтчет
 
         'ListBox1.Items.Clear()
 
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim f = (From x In db.ОтчетРаботыСотрудника
                      Order By x.Год
                      Select x).ToList()
@@ -76,7 +76,7 @@ Public Class ГотовыйОтчет
     Private Sub UpdList1()
         LS2.Clear()
 
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim f = (From x In db.ОтчетРаботыСотрудника
                      Order By x.Год
                      Select x).ToList()
@@ -579,7 +579,7 @@ Public Class ГотовыйОтчет
         Next
 
         'Добавляем отчет в базу или обновляем
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim fb = (From x In db.ОтчетРаботыСотрудника
                       Where x.Год = ComboBox1.Text And x.Месяц = ComboBox2.Text
                       Select x).FirstOrDefault()
@@ -1176,7 +1176,7 @@ Public Class ГотовыйОтчет
             ComboBox1.Text = String.Empty
             ComboBox2.Text = String.Empty
 
-            Using db As New dbAllDataContext()
+            Using db As New dbAllDataContext(_cn3)
                 Dim fb = (From x In db.ОтчетРаботыСотрудника
                           Join y In db.ОтчетРаботыСотрудникаСводная On x.ID Equals y.IDОтчетРабСотрудн
                           Where x.ID = CDbl(Strings.Left(ListSelect, 3))

@@ -175,7 +175,7 @@ Public Class ДокументыОтправкаПриходДаты
     End Sub
     Private Sub Deletes(ByVal Who As String)
         If Who = "Per" Then
-            Using db As New dbAllDataContext()
+            Using db As New dbAllDataContext(_cn3)
                 Dim f = db.РейсыПеревозчика.Where(Function(x) x.НомерРейса = НомРейса).FirstOrDefault()
                 If f IsNot Nothing Then
                     f.ДатаПолученияДоков = Nothing
@@ -186,7 +186,7 @@ Public Class ДокументыОтправкаПриходДаты
                 End If
             End Using
         Else
-            Using db As New dbAllDataContext()
+            Using db As New dbAllDataContext(_cn3)
                 Dim f = db.РейсыКлиента.Where(Function(x) x.НомерРейса = НомРейса).FirstOrDefault()
                 If f IsNot Nothing Then
                     f.ДатаОтправкиДоков = Nothing
@@ -204,7 +204,7 @@ Public Class ДокументыОтправкаПриходДаты
         Await Task.Run(Sub() UpdDokiDate(ОТправка, Oplata))
     End Sub
     Private Sub UpdDokiDate(ByVal ОТправка As Date, Oplata As Date)
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim f = db.РейсыКлиента.Where(Function(x) x.НомерРейса = НомРейса).FirstOrDefault()
             If f IsNot Nothing Then
                 f.ДатаОтправкиДоков = ОТправка
@@ -221,7 +221,7 @@ Public Class ДокументыОтправкаПриходДаты
         Await Task.Run(Sub() UpdDokiDatePer(ОТправка, Oplata))
     End Sub
     Private Sub UpdDokiDatePer(ByVal ОТправка As Date, Oplata As Date)
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim f = db.РейсыПеревозчика.Where(Function(x) x.НомерРейса = НомРейса).FirstOrDefault()
             If f IsNot Nothing Then
                 f.ДатаПолученияДоков = ОТправка

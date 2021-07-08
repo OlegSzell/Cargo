@@ -58,7 +58,7 @@ Public Class Пароль
 
                 MessageBox.Show("Пароль НЕ принят! Повторите")
                 clicks += 1
-                Using db As New dbAllDataContext()
+                Using db As New dbAllDataContext(_cn3)
                     Dim f7 = db.Пароли.Where(Function(x) x.Логин = ComboBox1.Text).Select(Function(x) x).FirstOrDefault()
                     If f7 IsNot Nothing Then
 
@@ -81,7 +81,7 @@ Public Class Пароль
                 TextBox1.Text = String.Empty
 
                 If clicks = 3 Then
-                    Using db As New dbAllDataContext()
+                    Using db As New dbAllDataContext(_cn3)
                         Dim f5 = db.Пароли.Where(Function(x) x.Логин = ComboBox1.Text).Select(Function(x) x).FirstOrDefault()
                         If f5 IsNot Nothing Then
                             f5.Блокировка = "True"
@@ -97,7 +97,7 @@ Public Class Пароль
             MessageBox.Show("Пароль НЕ принят! Повторите")
 
             clicks += 1
-            Using db As New dbAllDataContext()
+            Using db As New dbAllDataContext(_cn3)
                 Dim f7 = db.Пароли.Where(Function(x) x.Логин = ComboBox1.Text).Select(Function(x) x).FirstOrDefault()
                 If f7 IsNot Nothing Then
 
@@ -120,7 +120,7 @@ Public Class Пароль
             TextBox1.Text = String.Empty
             If clicks = 3 Then
 
-                Using db As New dbAllDataContext()
+                Using db As New dbAllDataContext(_cn3)
                     Dim f5 = db.Пароли.Where(Function(x) x.Логин = ComboBox1.Text).Select(Function(x) x).FirstOrDefault()
                     If f5 IsNot Nothing Then
                         f5.Блокировка = "True"
@@ -155,7 +155,7 @@ Public Class Пароль
             Return
         End If
 
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim f As New Пароли
             f.Логин = ComboBox1.Text
             f.Парол = TextBox1.Text

@@ -11,9 +11,12 @@ Public Class ПеревозВПутиДоб
 VALUES(" & IDПеревоза & ", '" & NameПеревоза & "', '" & MaskedTextBox1.Text & "','" & RichTextBox1.Text & "','" & TextBox5.Text & "')"
         Dim conn As New SqlConnection
         conn.ConnectionString = ConString
+
         If conn.State = ConnectionState.Closed Then
             conn.Open()
         End If
+
+
         Dim c As New SqlCommand
         c.Connection = conn
         c.CommandText = strsql

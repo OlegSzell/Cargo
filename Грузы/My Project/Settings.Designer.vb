@@ -57,19 +57,19 @@ Namespace My
         <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.ConnectionString),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=178.172.195.159,52891;Initial Catalog=Rickmans;Persist Security Info="& _ 
-            "True;User ID=Rickmans;Password=Zf6VpP37Ol")>  _
-        Public ReadOnly Property RickmansConnectionString3() As String
+         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=194.158.211.31,52891;Initial Catalog=Rickmans;Persist Security Info=T"& _ 
+            "rue;User ID=Rickmans;Password=Zf6VpP37Ol")>  _
+        Public ReadOnly Property RickmansConnectionString1() As String
             Get
-                Return CType(Me("RickmansConnectionString3"),String)
+                Return CType(Me("RickmansConnectionString1"),String)
             End Get
         End Property
         
         <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.ConnectionString),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=178.172.195.159,52891;Initial Catalog=Rickmans;Persist Security Info="& _ 
-            "True;User ID=sa;Password=ArRP660LwHD$bf~qXGKxq2FOk7PaPhZK|2WA")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=srv\sqlexpress;Initial Catalog=Rickmans;Persist Security Info=True;Us"& _ 
+            "er ID=Rickmans;Password=Zf6VpP37Ol")>  _
         Public ReadOnly Property RickmansConnectionString() As String
             Get
                 Return CType(Me("RickmansConnectionString"),String)

@@ -88,7 +88,7 @@
     End Sub
     Private Sub add(ByVal d As String)
         Dim mo As New AllUpd
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim f2 As New SkypeПеревозчикПредложение
             f2.Перевозчик = d
             f2.Экспедитор = Экспедитор
@@ -120,7 +120,7 @@
     Private Sub AddNew(ByVal com1 As String, ByVal rch2 As String)
         Dim mo As New AllUpd
 
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim f = db.SkypeПеревозчикПредложение.Where(Function(x) x.Перевозчик = com1 And x.Дата = Now.ToShortDateString And x.Экспедитор = Экспедитор).FirstOrDefault()
             If f IsNot Nothing Then
                 If f.Время IsNot Nothing Then

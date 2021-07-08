@@ -4,6 +4,7 @@ Public Class ДопФорма
     Public Num As Integer
     Private txt1 As String
     Public ОбнвлExcel As Boolean = False
+    Public ДатаАкта As Date = Nothing
     Sub New(ByVal _num As Integer, ByVal _txt1 As String)
         Num = _num
         txt1 = _txt1
@@ -88,7 +89,7 @@ Public Class ДопФорма
     End Sub
     Private Sub dbtn1Insert(f As List(Of String), bol As Boolean)
 
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim var = db.РейсыКлиента.Where(Function(x) x.НомерРейса = Num).Select(Function(x) x).FirstOrDefault()
             If var IsNot Nothing Then
                 var.ПоИнотерр = f(0)
@@ -135,9 +136,13 @@ Public Class ДопФорма
 
         dbtn1InsertAsync(mdf, bol)
 
+        If MaskedTextBox2.MaskCompleted = True Then
+            ДатаАкта = CDate(MaskedTextBox2.Text)
+        End If
+
 
         'Dim mo As New AllUpd
-        'Using db As New dbAllDataContext()
+        'Using db As New dbAllDataContext(_cn3)
         '    Dim var = db.РейсыКлиента.Where(Function(x) x.НомерРейса = Num).Select(Function(x) x).FirstOrDefault()
         '    If var IsNot Nothing Then
         '        var.ПоИнотерр = TextBox3.Text

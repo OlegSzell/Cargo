@@ -186,7 +186,7 @@ BY>B
         'ds.Tables("Сохранение").Rows.Add(dsNewRow)
         'da.Update(ds, "Сохранение")
 
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim var As New ГрузыКлиентов
             var.Организация = ComboBox1.Text
             var.Дата = TextBox8.Text
@@ -522,7 +522,7 @@ Where Страна.Страна = '" & ComboBox2.Text & "'")
 
         Dim sf As String = ListBox1.SelectedItem
         Dim sf2 As String = ListBox2.SelectedItem
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim var = (From x In db.ГрузыКлиентов
                        Where x.Организация = ComboBox1.Text And x.Дата = sf And x.Груз = sf2
                        Select x).FirstOrDefault()

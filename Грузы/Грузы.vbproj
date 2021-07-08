@@ -37,7 +37,7 @@
     <WebPage>publish.htm</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <TrustUrlParameters>true</TrustUrlParameters>
-    <ApplicationRevision>187</ApplicationRevision>
+    <ApplicationRevision>222</ApplicationRevision>
     <ApplicationVersion>1.2.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -77,10 +77,11 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>C822A55AD44D5255C802C07094D1E79CB91AE69B</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>65A8EE3E1DF63783CFBC54C7E93C96880460BEBA</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>Грузы_1_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>
+    </ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -311,10 +312,10 @@
     <Compile Include="AllClass.vb" />
     <Compile Include="AllUpd.vb" />
     <Compile Include="AppEFC.vb" />
-    <Compile Include="dbAll.designer.vb">
+    <Compile Include="DbAll.designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>dbAll.dbml</DependentUpon>
+      <DependentUpon>DbAll.dbml</DependentUpon>
     </Compile>
     <Compile Include="DoubleBuferGrid.vb">
       <SubType>Component</SubType>
@@ -338,6 +339,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Module1.vb" />
+    <Compile Include="MySendMail.vb" />
     <Compile Include="NbrbApiModel.vb" />
     <Compile Include="NbRbClassNew.vb" />
     <Compile Include="OnPropertyChangedClass.vb" />
@@ -617,6 +619,12 @@
       <DependentUpon>Напоминание.vb</DependentUpon>
     </Compile>
     <Compile Include="Напоминание.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="НачавшиесяСутки.Designer.vb">
+      <DependentUpon>НачавшиесяСутки.vb</DependentUpon>
+    </Compile>
+    <Compile Include="НачавшиесяСутки.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="НовыйКлиент.Designer.vb">
@@ -980,6 +988,9 @@
     <EmbeddedResource Include="Напоминание.resx">
       <DependentUpon>Напоминание.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="НачавшиесяСутки.resx">
+      <DependentUpon>НачавшиесяСутки.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="НовыйКлиент.resx">
       <DependentUpon>НовыйКлиент.vb</DependentUpon>
     </EmbeddedResource>
@@ -1084,13 +1095,13 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="dbAll.dbml">
+    <None Include="DbAll.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>dbAll.designer.vb</LastGenOutput>
+      <LastGenOutput>DbAll.designer.vb</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="dbAll.dbml.layout">
-      <DependentUpon>dbAll.dbml</DependentUpon>
+    <None Include="DbAll.dbml.layout">
+      <DependentUpon>DbAll.dbml</DependentUpon>
     </None>
     <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">

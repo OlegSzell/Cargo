@@ -6,7 +6,7 @@
     Private Доп As String
     Sub New(_D As Grid2ЖурналClass)
         D = _D
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim ms = (From x In db.ЖурналКлиентДаты
                       Where x.ID = D.IdКодЖурнДаты
                       Select New With {.загр = x.ДатаЗагрузки, .выгр = x.ДатаДоставки, .ct = x.Ставка, .dop = x.ДопУсловия}).FirstOrDefault()
@@ -71,7 +71,7 @@
         Await Task.Run(Sub() txt1Upd(dg, txt))
     End Sub
     Private Sub txt1Upd(dg As String, txt As String)
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim f = db.ЖурналКлиентДаты.Where(Function(x) x.ID = D.IdКодЖурнДаты).FirstOrDefault()
             If f IsNot Nothing Then
                 Select Case txt

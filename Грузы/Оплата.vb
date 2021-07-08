@@ -114,52 +114,9 @@ Public Class Оплата
 
 
 
-        '        Dim strsql As String = "SELECT РейсыПеревозчика.НомерРейса, ОплатыПер.Рейс, ОплатыПер.ДатаОплаты, ОплатыПер.Сумма
-        'FROM РейсыПеревозчика INNER JOIN ОплатыПер ON РейсыПеревозчика.Код = ОплатыПер.IDПер
-        'WHERE РейсыПеревозчика.НомерРейса=" & NomerRejsa & ""
-        '        Dim ds As DataTable = Selects3(strsql)
-
-        '        If errds = 1 Then
-        '            f = True 'использовать insert
-        '            Exit Sub
-        '        Else
-        '            СтрокиВходящие = ds.Rows.Count
-        ' ЗаполнОплаты(ds)
-        '        End If
 
     End Sub
-    'Private Sub ЗаполнОплаты(ByVal ds As DataTable)
 
-    '    For i As Integer = 1 To ds.Rows.Count
-    '        Select Case i
-    '            Case 1
-    '                CheckBox1.Checked = True
-    '            Case 2
-    '                CheckBox2.Checked = True
-    '            Case 3
-    '                CheckBox3.Checked = True
-    '            Case 4
-    '                CheckBox4.Checked = True
-    '            Case 5
-    '                CheckBox5.Checked = True
-    '            Case 6
-    '                CheckBox6.Checked = True
-    '            Case 7
-    '                CheckBox7.Checked = True
-    '            Case 8
-    '                CheckBox8.Checked = True
-    '        End Select
-
-    '        Controls("TextBox" & i).Text = ds.Rows(i - 1).Item(3).ToString
-    '        Controls("MaskedTextBox" & i).Text = ds.Rows(i - 1).Item(2).ToString
-    '        If ds.Rows(i - 1).Item(3).ToString.Contains(".") Then
-    '            ds.Rows(i - 1).Item(3) = Replace(ds.Rows(i - 1).Item(3).ToString, ".", ",")
-    '        End If
-    '        ostatok += CDbl(ds.Rows(i - 1).Item(3).ToString)
-    '    Next
-
-
-    'End Sub
     Private Sub Историяклиент()
 
         Dim mo As New AllUpd
@@ -191,30 +148,21 @@ Public Class Оплата
 
             End If
         End If
-
-
-
-        '        Dim strsql As String = "SELECT РейсыКлиента.НомерРейса, ОплатыКлиент.Рейс, ОплатыКлиент.ДатаОплаты, ОплатыКлиент.Сумма
-        'FROM РейсыКлиента INNER JOIN ОплатыКлиент ON РейсыКлиента.Код = ОплатыКлиент.IDКлиента
-        'WHERE РейсыКлиента.НомерРейса =" & NomerRejsa & ""
-        '        Dim ds As DataTable = Selects3(strsql)
-
-        '        If errds = 1 Then
-        '            Exit Sub
-        '            f = True 'использовать insert
-        '        Else
-        '            СтрокиВходящие = ds.Rows.Count
-        '            'ЗаполнОплаты(ds)
-        'End If
     End Sub
 
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+
         Dim opl = grid1sel.Select(Function(x) x.Сумма).Sum
+
         Label3.Text = CType(opl, String)
+
         Dim ost = CDbl(Replace(lst.СтоимостьФрахта, ".", ",")) - opl
+
         Label24.Text = CType(ost, String)
+
         ostt = CType(ost, String)
+
         Flag = True
 
         Dim mo As New AllUpd
@@ -227,8 +175,11 @@ Public Class Оплата
             Next
 
             'удаляем старые и вставляем новые
-            Using db As New dbAllDataContext()
-                Dim f7 = db.ОплатыПер.Where(Function(x) x.Рейс = lst.НомерРейса And x.IDПер = lst.Код).Select(Function(x) x).ToList()
+            Using db As New dbAllDataContext(_cn3)
+                Dim f7 = (From x In db.ОплатыПер
+                          Where x.Рейс = lst.НомерРейса And x.IDПер = lst.Код
+                          Select x).ToList()
+
                 If f7 IsNot Nothing Then
                     If f7.Count > 0 Then
                         db.ОплатыПер.DeleteAllOnSubmit(f7)
@@ -261,7 +212,7 @@ Public Class Оплата
 
             mo.ОплатыПерAllAsync()
             If ostt = "0" Then
-                Using db As New dbAllDataContext()
+                Using db As New dbAllDataContext(_cn3)
                     Dim f8 = db.РейсыПеревозчика.Where(Function(x) x.Код = lst.Код).Select(Function(x) x).FirstOrDefault()
                     If f8 IsNot Nothing Then
                         f8.ОстатокОплаты = 0
@@ -272,18 +223,27 @@ Public Class Оплата
                 End Using
             End If
 
+            Dim subj As String = "Рейс: " & Label2.Text & vbCrLf & "Фрахт: " & Label23.Text & vbCrLf & "Валюта: " & Label5.Text & vbCrLf _
+            & "Оплачено: " & Label3.Text & vbCrLf & "Остаток: " & Label24.Text & vbCrLf & "Пользователь: " & Environment.MachineName
+            Dim mail As New MySendMail(subj, "Оплаты перевозчику")
+            mail.Mail()
+
+
             MessageBox.Show("Данные приняты!", Рик)
 
         Else 'клиент
-                'это данные для вставки в таблицу
-                Dim f1 As New List(Of ОплатыКлиент)
+            'это данные для вставки в таблицу
+            Dim f1 As New List(Of ОплатыКлиент)
             For Each b In grid1sel
                 Dim f2 As New ОплатыКлиент With {.IDКлиента = lst.Код, .Рейс = lst.НомерРейса, .ДатаОплаты = b.Дата, .Сумма = b.Сумма}
                 f1.Add(f2)
             Next
 
-            Using db As New dbAllDataContext()
-                Dim f = db.ОплатыКлиент.Where(Function(x) x.Рейс = lst.НомерРейса And x.IDКлиента = lst.Код).Select(Function(x) x).ToList()
+            Using db As New dbAllDataContext(_cn3)
+                Dim f = (From x In db.ОплатыКлиент
+                         Where x.Рейс = lst.НомерРейса And x.IDКлиента = lst.Код
+                         Select x).ToList()
+
                 If f IsNot Nothing Then
                     If f.Count > 0 Then
                         db.ОплатыКлиент.DeleteAllOnSubmit(f)
@@ -315,8 +275,10 @@ Public Class Оплата
             End Using
             mo.ОплатыКлиентAllAsync()
             If ostt = "0" Then
-                Using db As New dbAllDataContext()
-                    Dim f8 = db.РейсыКлиента.Where(Function(x) x.Код = lst.Код).Select(Function(x) x).FirstOrDefault()
+                Using db As New dbAllDataContext(_cn3)
+                    Dim f8 = (From x In db.РейсыКлиента
+                              Where x.Код = lst.Код
+                              Select x).FirstOrDefault()
                     If f8 IsNot Nothing Then
                         f8.ОстатокОплаты = 0
                         db.SubmitChanges()
@@ -325,6 +287,15 @@ Public Class Оплата
 
                 End Using
             End If
+
+
+
+
+            Dim subj As String = "Рейс: " & Label2.Text & vbCrLf & "Фрахт: " & Label23.Text & vbCrLf & "Валюта: " & Label5.Text & vbCrLf _
+            & "Оплачено: " & Label3.Text & vbCrLf & "Остаток: " & Label24.Text & vbCrLf & "Пользователь: " & Environment.MachineName
+            Dim mail As New MySendMail(subj, "Оплаты от клиента")
+            mail.Mail()
+
 
             MessageBox.Show("Данные приняты!", Рик)
         End If

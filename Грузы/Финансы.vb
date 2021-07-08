@@ -151,7 +151,7 @@
 
             m = AllClass.ОплатыКлиент.Where(Function(x) x.Рейс = b.НомерРейса And x.ДатаОплаты <= CDate(Dat)).ToList()
             sum = AllClass.ОплатыКлиент.Where(Function(x) x.Рейс = b.НомерРейса).Sum(Function(x) x.Сумма)
-            If b.НомерРейса = 591 Then
+            If b.НомерРейса = 599 Then
                 Dim mfdv As Integer = 0
             End If
 
@@ -202,6 +202,19 @@
                 If CType(b.СтоимостьФрахта, Double) = summa Then
                     m1.ОстатокКлиент = "0"
                 End If
+
+                If m.Count = 0 Then
+                    Dim курс2 As Double = Nothing
+                    Dim mR2 As New NbRbClassNew()
+                    курс2 = Replace(mR2.Курс(Dat, валюта), ".", ",")
+
+                    'делим сумму прихода на курс получаем в валюте
+
+                    m1.ОстатокКлиент = Math.Round(b.СтоимостьФрахта * курс2, 2)
+
+                End If
+
+
             End If
 
 
@@ -263,7 +276,8 @@
                     Dim mR1 As New NbRbClassNew() 'для примерного расчет остатка по курсу на сегодня
                     Dim курс = Replace(mR1.Курс(Now, валюта), ".", ",")
                     Dim ost = CType(perRe.СтоимостьФрахта, Double) - summa
-                    m1.ОстатокПеревозчик = ost & "(" & валюта & ")" & vbCrLf & (Math.Round(ost * курс, 2))
+                    m1.ОстатокПеревозчик = Math.Round(ost * курс, 2)
+                    'm1.ОстатокПеревозчик = ost & "(" & валюта & ")" & vbCrLf & (Math.Round(ost * курс, 2))
                 End If
             End If
 
@@ -319,19 +333,10 @@
 
         Dim mk As Double = 0, ml As Double = 0, txt6 As Double = 0, txt1 As Double = 0
         Dim i As Integer = 1
-        'For Each b In grd2
-        '    If CType(b.Дельта, Double) > 0 Then
-        '        txt6 += CType(b.Дельта, Double)
-        '    Else
-        '        txt6 += 100
-        '    End If
 
-        '    mk = CType(mk, Double) + CType(b.СуммаОплатКлиента, Double)
-        '    ml = CType(ml, Double) + CType(b.СуммаОплатПеревозчику, Double)
-        '    b.Номер = i
-        '    Grid1all_2.Add(b)
-        '    i += 1
-        'Next
+
+
+
         Dim OplMy As Double = 0
         Dim Ubtk As Double = 0
         Dim RaschOst As Double = 0
@@ -342,22 +347,29 @@
                 txt6 += 100
             End If
 
-            If CDbl(b.ОстатокПеревозчик) > 0 And CDbl(b.ОстатокКлиент) = 0 Then
-                Ubtk += CDbl(b.ОстатокПеревозчик)
-            ElseIf CDbl(b.ОстатокПеревозчик) > 0 And CDbl(b.ОстатокКлиент) > 0 Then 'если клиент не оплатил и мы перевозчику что то оплатили
-                If CDbl(b.СуммаОплатКлиента) = 0 Then 'если клиент вообще не оплатил а мы оплатили частично перевозчику
-                    OplMy += CDbl(b.СуммаОплатПеревозчику)
-                ElseIf CDbl(b.СуммаОплатКлиента) > 0 And CDbl(b.ОстатокКлиент) > 0 Then 'частично оплатил клиент и частично полатили перевозчику
-                    Ubtk += (CDbl(b.СуммаОплатКлиента) - CDbl(b.СуммаОплатПеревозчику))
+            Dim pOst = CDbl(Replace(b.ОстатокПеревозчик, ".", ","))
+            Dim sOpl = CDbl(Replace(b.СуммаОплатПеревозчику, ".", ","))
+            Dim sOplClient = CDbl(Replace(b.СуммаОплатКлиента, ".", ","))
+            Dim pOstClient = CDbl(Replace(b.ОстатокКлиент, ".", ","))
+
+
+
+            If pOst > 0 And pOstClient = 0 Then
+                Ubtk += pOst
+            ElseIf pOst > 0 And pOstClient > 0 Then 'если клиент не оплатил и мы перевозчику что то оплатили
+                If sOplClient = 0 Then 'если клиент вообще не оплатил а мы оплатили частично перевозчику
+                    OplMy += sOpl
+                ElseIf sOplClient > 0 And pOstClient > 0 Then 'частично оплатил клиент и частично полатили перевозчику
+                    Ubtk += (sOplClient - sOpl)
                 End If
-            ElseIf CDbl(b.ОстатокПеревозчик) = 0 And CDbl(b.ОстатокКлиент) > 0 Then 'если мы полностью оплатили перевозчику , а клиент либо вообще не оплатил или оплатил частично
-                If CDbl(b.СуммаОплатКлиента) = 0 Then 'если клиент вообще не оплатил а мы оплатили частично перевозчику
-                    OplMy += CDbl(b.СуммаОплатПеревозчику)
-                ElseIf CDbl(b.ОстатокКлиент) > 0 And CDbl(b.СуммаОплатКлиента) > 0 Then 'частично оплатил клиент и частично полатили перевозчику
-                    Ubtk += (CDbl(b.СуммаОплатКлиента) - CDbl(b.СуммаОплатПеревозчику))
+            ElseIf pOst = 0 And pOstClient > 0 Then 'если мы полностью оплатили перевозчику , а клиент либо вообще не оплатил или оплатил частично
+                If sOplClient = 0 Then 'если клиент вообще не оплатил а мы оплатили частично перевозчику
+                    OplMy += sOpl
+                ElseIf pOstClient > 0 And sOplClient > 0 Then 'частично оплатил клиент и частично полатили перевозчику
+                    Ubtk += (sOplClient - sOpl)
                 End If
-            ElseIf CDbl(b.ОстатокПеревозчик) = 0 And b.ОстатокКлиент = String.Empty Then
-                OplMy += CDbl(b.СуммаОплатПеревозчику)
+            ElseIf pOst = 0 And b.ОстатокКлиент = String.Empty Then
+                OplMy += sOpl
 
             End If
 

@@ -25,7 +25,7 @@
         End If
 
         Dim Num As Integer = CType(TextBox2.Text, Integer)
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
 
 
             If ОтКогоИзмен = 1 Then
@@ -63,7 +63,7 @@
         End Using
     End Sub
     Private Sub ИзменПорНомерКлиента2_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             If ОтКогоИзмен = 1 Then
                 Dim f = db.РейсыКлиента.Where(Function(x) x.НомерРейса = НомРес).Select(Function(x) x.КоличРейсов).FirstOrDefault()
                 If f IsNot Nothing Then

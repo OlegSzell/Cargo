@@ -62,7 +62,7 @@ Public Class ЖурналКлиентДатыТаблица
         Await Task.Run(Sub() Upd(d))
     End Sub
     Private Sub Upd(ByVal d As List(Of Grid1Class))
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             For Each b In d
                 If b.IDЖурналКлиентДаты > 0 Then
                     Dim f2 = db.ЖурналКлиентДаты.Where(Function(x) x.IDЖурналКлиентГруз = b.ID And x.ID = b.IDЖурналКлиентДаты).FirstOrDefault()
@@ -108,7 +108,7 @@ Public Class ЖурналКлиентДатыТаблица
         End If
         If Grid1all.ElementAt(e.RowIndex).IDЖурналКлиентДаты = 0 Then
             Dim msd = Grid1all.ElementAt(e.RowIndex)
-            Using db As New dbAllDataContext()
+            Using db As New dbAllDataContext(_cn3)
                 Dim f2 As New ЖурналКлиентДаты
                 With f2
                     .IDЖурналКлиентГруз = ID
@@ -158,7 +158,7 @@ Public Class ЖурналКлиентДатыТаблица
     End Sub
     Private Sub Del(f As List(Of Grid1Class))
         Dim mo As New AllUpd
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             For Each b In f
                 Dim m = db.ЖурналКлиентДаты.Where(Function(x) x.ID = b.IDЖурналКлиентДаты).FirstOrDefault()
                 If m IsNot Nothing Then

@@ -5,7 +5,7 @@
     End Sub
 
     Public Sub ОплатыПерAll()
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim m = db.ОплатыПер.Select(Function(x) x).ToList()
             If m.Count > 0 Then
                 ОплатыПер = New List(Of ОплатыПер)
@@ -21,7 +21,7 @@
     End Sub
 
     Public Sub ОтчетРаботыСотрудникаAll()
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim m = db.ОтчетРаботыСотрудника.Select(Function(x) x).ToList()
             If m.Count > 0 Then
                 ОтчетРаботыСотрудника = New List(Of ОтчетРаботыСотрудника)
@@ -38,7 +38,7 @@
     End Sub
 
     Public Sub ОтчетРаботыСотрудникаСводнаяAll()
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim m = db.ОтчетРаботыСотрудникаСводная.Select(Function(x) x).ToList()
             If m.Count > 0 Then
                 ОтчетРаботыСотрудникаСводная = New List(Of ОтчетРаботыСотрудникаСводная)
@@ -55,7 +55,7 @@
     End Sub
 
     Public Sub ОплатыКлиентAll()
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim m = db.ОплатыКлиент.Select(Function(x) x).ToList()
             If m.Count > 0 Then
                 ОплатыКлиент = New List(Of ОплатыКлиент)
@@ -72,7 +72,7 @@
     End Sub
 
     Public Sub РейсыПеревозчикаAll()
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim m = db.РейсыПеревозчика.Select(Function(x) x).ToList()
             If m.Count > 0 Then
                 РейсыПеревозчика = New List(Of РейсыПеревозчика)
@@ -89,7 +89,7 @@
     End Sub
 
     Public Sub ПеревозчикиAll()
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim m = db.Перевозчики.Select(Function(x) x).ToList()
             If m.Count > 0 Then
                 Перевозчики = New List(Of Перевозчики)
@@ -106,7 +106,7 @@
     End Sub
 
     Public Sub ФормаСобствAll()
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim m = db.ФормаСобств.Select(Function(x) x).ToList()
             If m.Count > 0 Then
                 ФормаСобств = New List(Of ФормаСобств)
@@ -123,7 +123,7 @@
     End Sub
 
     Public Sub РейсыКлиентаAll()
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim m = db.РейсыКлиента.Select(Function(x) x).ToList()
             If m.Count > 0 Then
                 РейсыКлиента = New List(Of РейсыКлиента)
@@ -140,7 +140,7 @@
     End Sub
 
     Public Sub КлиентAll()
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim m = db.Клиент.Select(Function(x) x).ToList()
             If m.Count > 0 Then
                 Клиент = New List(Of Клиент)
@@ -157,7 +157,7 @@
     End Sub
 
     Public Sub ТипАвтоAll()
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim m = db.ТипАвто.Select(Function(x) x).ToList()
             If m.Count > 0 Then
                 ТипАвто = New List(Of ТипАвто)
@@ -174,7 +174,7 @@
     End Sub
 
     Public Sub ГрузыКлиентовAll()
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim m = db.ГрузыКлиентов.Select(Function(x) x).ToList()
             If m.Count > 0 Then
                 ГрузыКлиентов = New List(Of ГрузыКлиентов)
@@ -191,7 +191,7 @@
     End Sub
 
     Public Sub Календарь_ДатыAll()
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim m = db.Календарь_Даты.Select(Function(x) x).ToList()
             If m.Count > 0 Then
                 Календарь_Даты = New List(Of Календарь_Даты)
@@ -208,7 +208,7 @@
     End Sub
 
     Public Sub ПереговорыКлиентAll()
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim m = db.ПереговорыКлиент.Select(Function(x) x).ToList()
             If m.Count > 0 Then
                 ПереговорыКлиент = New List(Of ПереговорыКлиент)
@@ -225,7 +225,7 @@
     End Sub
 
     Public Sub КалендарьНапоминаниеAll()
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim m = db.КалендарьНапоминание.Select(Function(x) x).ToList()
             If m.Count > 0 Then
                 КалендарьНапоминание = New List(Of КалендарьНапоминание)
@@ -240,9 +240,16 @@
         Await Task.Run(Sub() ПаролиAll())
     End Sub
 
+
+    <Obsolete>
     Public Sub ПаролиAll()
-        Using db As New dbAllDataContext()
-            Dim m = db.Пароли.Select(Function(x) x).ToList()
+
+
+
+        Using db As New dbAllDataContext(_cn3)
+
+            Dim m = (From x In db.Пароли
+                     Select x).ToList()
             If m.Count > 0 Then
                 Пароли = New List(Of Пароли)
                 Пароли = m
@@ -257,7 +264,7 @@
     End Sub
 
     Public Sub ЖурналДатаAll()
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim m = db.ЖурналДата.Select(Function(x) x).ToList()
             If m.Count > 0 Then
                 ЖурналДата = New List(Of ЖурналДата)
@@ -273,7 +280,7 @@
     End Sub
 
     Public Sub ЖурналКлиентГрузAll()
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim m = db.ЖурналКлиентГруз.Select(Function(x) x).ToList()
             If m.Count > 0 Then
                 ЖурналКлиентГруз = New List(Of ЖурналКлиентГруз)
@@ -289,7 +296,7 @@
     End Sub
 
     Public Sub ЖурналКлиентМаршрутAll()
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim m = db.ЖурналКлиентМаршрут.Select(Function(x) x).ToList()
             If m.Count > 0 Then
                 ЖурналКлиентМаршрут = New List(Of ЖурналКлиентМаршрут)
@@ -305,7 +312,7 @@
     End Sub
 
     Public Sub ЖурналКлиентСписокAll()
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim m = db.ЖурналКлиентСписок.Select(Function(x) x).ToList()
             If m.Count > 0 Then
                 ЖурналКлиентСписок = New List(Of ЖурналКлиентСписок)
@@ -321,7 +328,7 @@
     End Sub
 
     Public Sub СтранаAll()
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim m = db.Страна.Select(Function(x) x).ToList()
             If m.Count > 0 Then
                 Страна = New List(Of Страна)
@@ -337,7 +344,7 @@
     End Sub
 
     Public Sub РегионыРоссииAll()
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim m = db.РегионыРоссии.Select(Function(x) x).ToList()
             If m.Count > 0 Then
                 РегионыРоссии = New List(Of РегионыРоссии)
@@ -352,7 +359,7 @@
         Await Task.Run(Sub() ЖурналПеревозчикAll())
     End Sub
     Public Sub ЖурналПеревозчикAll()
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim m = db.ЖурналПеревозчик.Select(Function(x) x).ToList()
             If m.Count > 0 Then
                 ЖурналПеревозчик = New List(Of ЖурналПеревозчик)
@@ -367,7 +374,7 @@
         Await Task.Run(Sub() ПеревозчикиБазаAll())
     End Sub
     Public Sub ПеревозчикиБазаAll()
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim m = db.ПеревозчикиБаза.Select(Function(x) x).ToList()
             If m.Count > 0 Then
                 ПеревозчикиБаза = New List(Of ПеревозчикиБаза)
@@ -382,7 +389,7 @@
         Await Task.Run(Sub() ФайлыExcelВсеAll())
     End Sub
     Public Sub ФайлыExcelВсеAll()
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim m = db.ФайлыExcelВсе.Select(Function(x) x).ToList()
             If m.Count > 0 Then
                 ФайлыExcelВсе = New List(Of ФайлыExcelВсе)
@@ -398,7 +405,7 @@
         Await Task.Run(Sub() ПаролиВводAll())
     End Sub
     Public Sub ПаролиВводAll()
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim m = db.ПаролиВвод.Select(Function(x) x).ToList()
             If m.Count > 0 Then
                 ПаролиВвод = New List(Of ПаролиВвод)
@@ -414,7 +421,7 @@
         Await Task.Run(Sub() SkypeКлиентПредложениеAll())
     End Sub
     Public Sub SkypeКлиентПредложениеAll()
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim m = db.SkypeКлиентПредложение.Select(Function(x) x).ToList()
             If m.Count > 0 Then
                 SkypeКлиентПредложение = New List(Of SkypeКлиентПредложение)
@@ -430,7 +437,7 @@
         Await Task.Run(Sub() SkypeПеревозчикПредложениеAll())
     End Sub
     Public Sub SkypeПеревозчикПредложениеAll()
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim m = db.SkypeПеревозчикПредложение.Select(Function(x) x).ToList()
             If m.Count > 0 Then
                 SkypeПеревозчикПредложение = New List(Of SkypeПеревозчикПредложение)
@@ -445,7 +452,7 @@
         Await Task.Run(Sub() КалендарьРезультатЗвонкаAll())
     End Sub
     Public Sub КалендарьРезультатЗвонкаAll()
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim m = db.КалендарьРезультатЗвонка.Select(Function(x) x).ToList()
             If m.Count > 0 Then
                 КалендарьРезультатЗвонка = New List(Of КалендарьРезультатЗвонка)
@@ -461,7 +468,7 @@
         Await Task.Run(Sub() ЖурналКлиентДатыAll())
     End Sub
     Public Sub ЖурналКлиентДатыAll()
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim m = db.ЖурналКлиентДаты.Select(Function(x) x).ToList()
             If m.Count > 0 Then
                 ЖурналКлиентДаты = New List(Of ЖурналКлиентДаты)
@@ -476,7 +483,7 @@
         Await Task.Run(Sub() ЖурналПеревозчикСобытияAll())
     End Sub
     Public Sub ЖурналПеревозчикСобытияAll()
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim m = db.ЖурналПеревозчикСобытия.Select(Function(x) x).ToList()
             If m.Count > 0 Then
                 ЖурналПеревозчикСобытия = New List(Of ЖурналПеревозчикСобытия)
@@ -492,7 +499,7 @@
         Await Task.Run(Sub() ЧерныйСписокAll())
     End Sub
     Public Sub ЧерныйСписокAll()
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim m = db.ЧерныйСписок.Select(Function(x) x).ToList()
             If m.Count > 0 Then
                 ЧерныйСписок = New List(Of ЧерныйСписок)
@@ -508,7 +515,7 @@
         Await Task.Run(Sub() СводнаяОплатыAll())
     End Sub
     Public Sub СводнаяОплатыAll()
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim m = db.СводнаяОплаты.Select(Function(x) x).ToList()
             If m.Count > 0 Then
                 СводнаяОплаты = New List(Of СводнаяОплаты)
@@ -524,7 +531,7 @@
         Await Task.Run(Sub() СводнаяОплатыТаблицыAll())
     End Sub
     Public Sub СводнаяОплатыТаблицыAll()
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim m = db.СводнаяОплатыТаблицы.Select(Function(x) x).ToList()
             If m.Count > 0 Then
                 СводнаяОплатыТаблицы = New List(Of СводнаяОплатыТаблицы)

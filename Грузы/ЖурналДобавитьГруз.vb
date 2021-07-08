@@ -206,7 +206,7 @@
             .Телефон = TextBox3.Text
             .ДопИнфо = Rezult
         End With
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             db.ЖурналКлиентСписок.InsertOnSubmit(f)
             db.SubmitChanges()
         End Using
@@ -247,7 +247,7 @@
 
         Dim f7 As New ЖурналДата
         Dim f As IDNaz = ComboBox1.SelectedItem
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim f1 = db.ЖурналДата.Where(Function(x) x.Дата = Label2.Text).Select(Function(x) x).FirstOrDefault()
             If f1 Is Nothing Then
                 Dim f2 As New ЖурналДата
@@ -663,7 +663,7 @@
 
         Dim f7 As New ЖурналДата
         Dim f As IDNaz = ComboBox1.SelectedItem
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim f5 = (From x In db.ЖурналКлиентГруз
                       Join y In db.ЖурналКлиентМаршрут On x.Код Equals y.КодЖурналКлиентГруз
                       Where x.Код = com2sell.КодЖурнГруз And x.Экспедитор = Экспедитор
@@ -795,7 +795,7 @@
         Await Task.Run(Sub() DelГруз(d))
     End Sub
     Private Sub DelГруз(ByVal d As Integer)
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim f = db.ЖурналКлиентГруз.Where(Function(x) x.Код = d).FirstOrDefault()
             If f IsNot Nothing Then
                 db.ЖурналКлиентГруз.DeleteOnSubmit(f)

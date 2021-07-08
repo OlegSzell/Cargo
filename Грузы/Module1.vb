@@ -1,6 +1,8 @@
 ﻿Imports System.Data.OleDb
 Imports System.Threading
 Imports System.Data.SqlClient
+Imports WMPLib
+
 Module Module1
     Public conn As OleDbConnection
     Public conn3 As SqlConnection
@@ -11,10 +13,14 @@ Module Module1
     Public IDПеревоза, ОтКогоИзмен As Integer
     Public Экспедитор, NameПеревоза As String
     'Public ConString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=U:\Офис\Рикманс\ДанныеРикманс.accdb; Persist Security Info=False;"
-    Public ConString1 As String = "Data Source=45.14.50.13\723\SQLEXPRESS,1433;Network Library=DBMSSOCN;Initial Catalog=Rickmans;User ID=userOleg;Password=Zf6VpP37Ol"
+    'Public ConString1 As String = "Data Source=45.14.50.13\723\SQLEXPRESS,1433;Network Library=DBMSSOCN;Initial Catalog=Rickmans;User ID=userOleg;Password=Zf6VpP37Ol"
     ' Public ConString As String = "Data Source=45.14.50.142\2749\SQLEXPRESS,1433;Network Library=DBMSSOCN;Initial Catalog=Rickmans;User ID=userOleg1;Password=Zf6VpP37Ol"
     'Public ConString As String = "Data Source=178.124.211.175,52891;Initial Catalog=Rickmans;Persist Security Info=True;User ID=Rickmans;Password=Zf6VpP37Ol"
-    Public ConString As String = "Data Source=178.172.195.159,52891;Initial Catalog=Rickmans;Persist Security Info=True;User ID=Rickmans;Password=Zf6VpP37Ol"
+    'Public ConString As String = "Data Source=194.158.211.31,52891;Initial Catalog=Rickmans;Persist Security Info=True;User ID=Rickmans;Password=Zf6VpP37Ol"
+    'Public ConString1 As String = "Data Source=srv\sqlexpress;Initial Catalog=Rickmans;Persist Security Info=True;User ID=Rickmans;Password=Zf6VpP37Ol"
+    'Public ConString1 As String = "Data Source=192.168.0.250\sqlexpress;Initial Catalog=Rickmans;Persist Security Info=True;User ID=Rickmans;Password=Zf6VpP37Ol"
+    Public XXX As String
+    Public ConString As String
     Public ДобПер, ОбнПер As Integer
     Public Рик As String = "ООО Рикманс"
     Public Files3 As List(Of ПутиДоков)
@@ -38,8 +44,11 @@ Module Module1
     Public dtТипАвтоAll As DataTable
     Public Procenty20 As String = "False"
     Public КалендарьПовтор As Boolean = False
-    Public EmailPass As EmailTb = Nothing
+    Public EmailPass As New List(Of EmailTb)
     Public КаленДаты As Календарь_Даты = Nothing
+    Public Frec As New List(Of Object)
+    Public _cn3 As String = String.Empty
+
 
 
 
@@ -95,7 +104,8 @@ Module Module1
     '    End Try
     'End Sub
     Public Sub Updates3(ByVal stroka As String)
-        Dim conn4 As New SqlConnection(ConString)
+        Dim conn4 As SqlConnection
+        conn4 = New SqlConnection(ConString)
         If conn4.State = ConnectionState.Closed Then
             conn4.Open()
         End If
@@ -132,12 +142,17 @@ Module Module1
     End Function
     Public Function Selects3(ByVal StrSql As String) As DataTable
         errds = 0
-        Dim conn3 As New SqlConnection(ConString)
-        If conn3.State = ConnectionState.Closed Then
-            conn3.Open()
-        End If
 
-        Dim c As New SqlCommand(StrSql, conn3)
+        Dim conn3
+        conn3 = New SqlConnection(ConString)
+            If conn3.State = ConnectionState.Closed Then
+                conn3.Open()
+            End If
+
+
+
+
+            Dim c As New SqlCommand(StrSql, conn3)
 
         Dim dst As New DataTable
 
@@ -161,10 +176,14 @@ Module Module1
     End Function
     Public Function Selects3(ByVal StrSql As String, ByVal Par As List(Of Date)) As DataTable
         errds = 0
-        Dim conn3 As New SqlConnection(ConString)
+        Dim conn3
+
+        conn3 = New SqlConnection(ConString)
         If conn3.State = ConnectionState.Closed Then
             conn3.Open()
         End If
+
+
         Dim c As New SqlCommand(StrSql, conn3)
 
         If Par.Count > 0 Then

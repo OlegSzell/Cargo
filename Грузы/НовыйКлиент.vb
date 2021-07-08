@@ -89,7 +89,7 @@ Public Class НовыйКлиент
         End If
         bscom1.ResetBindings(False)
 
-        'Using db As New dbAllDataContext
+        'Using db As New dbAllDataContext(_cn3)
         '    Dim var = db.Клиент.OrderBy(Function(x) x.НазваниеОрганизации).Select(Function(x) x.НазваниеОрганизации).ToList()
         '    If var.Count > 0 Then
         '        For Each r In var
@@ -231,7 +231,7 @@ Public Class НовыйКлиент
 
         If ds IsNot Nothing Then
             Dim nom2 As String = Nothing
-            Using db As New dbAllDataContext
+            Using db As New dbAllDataContext(_cn3)
                 Dim f = db.Клиент.Where(Function(x) x.НазваниеОрганизации = RichTextBox1.Text).Select(Function(x) x).FirstOrDefault()
                 With f
                     .Форма_собственности = ComboBox1.Text
@@ -248,10 +248,11 @@ Public Class НовыйКлиент
                     .ФИОРуководителя = Trim(RichTextBox12.Text)
                     .ФИОРодПадеж = Trim(RichTextBox11.Text)
                     .ДолжРодПадеж = Trim(RichTextBox14.Text)
-                    .Дата = MaskedTextBox1.Text
+                    '.Дата = MaskedTextBox1.Text
                     If CheckBox5.Checked = True Then
                         nom2 = НомерДог()
                         .Договор = nom2
+                        .Дата = MaskedTextBox1.Text
                     End If
                 End With
                 db.SubmitChanges()
@@ -274,9 +275,10 @@ Public Class НовыйКлиент
                 .ФИОРуководителя = Trim(RichTextBox12.Text)
                 .ФИОРодПадеж = Trim(RichTextBox11.Text)
                 .ДолжРодПадеж = Trim(RichTextBox14.Text)
-                .Дата = MaskedTextBox1.Text
+
                 If CheckBox5.Checked = True Then
                     .Договор = nom2
+                    .Дата = MaskedTextBox1.Text
                 End If
             End With
             bslistbx1.ResetBindings(False)
@@ -297,9 +299,10 @@ Public Class НовыйКлиент
                 .ФИОРуководителя = Trim(RichTextBox12.Text)
                 .ФИОРодПадеж = Trim(RichTextBox11.Text)
                 .ДолжРодПадеж = Trim(RichTextBox14.Text)
-                .Дата = MaskedTextBox1.Text
+
                 If CheckBox5.Checked = True Then
                     .Договор = nom2
+                    .Дата = MaskedTextBox1.Text
                 End If
 
             End With
@@ -308,7 +311,7 @@ Public Class НовыйКлиент
 
         Else
             Dim dog As String = НомерДог()
-            Using db As New dbAllDataContext()
+            Using db As New dbAllDataContext(_cn3)
                 Dim f As New Клиент
 
                 With f
@@ -393,17 +396,7 @@ Public Class НовыйКлиент
             MessageBox.Show("Данные внесены!", Рик)
         End If
 
-
-
-
         Me.Cursor = Cursors.Default
-
-
-
-
-
-
-
 
     End Sub
     Private Function НомерДог()
@@ -643,7 +636,7 @@ Public Class НовыйКлиент
                 Return
             End If
 
-            Using db As New dbAllDataContext()
+            Using db As New dbAllDataContext(_cn3)
                 'Dim f = КодДляУдал
                 Dim f = db.Клиент.Where(Function(x) x.НазваниеОрганизации = КодДляУдал.НазваниеОрганизации).Select(Function(x) x).FirstOrDefault()
                 If f IsNot Nothing Then

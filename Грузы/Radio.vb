@@ -1,8 +1,10 @@
-﻿Imports WMPDXMLib
+﻿Imports System.ComponentModel
+Imports WMPDXMLib
 Imports WMPLib
 
 Public Class Radio
-    Dim f As New WindowsMediaPlayer
+    Public f As New WindowsMediaPlayer
+    Public Frec As WindowsMediaPlayer
     Private Sub Radio_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
 
@@ -99,5 +101,18 @@ Public Class Radio
         End If
         f.URL = "http://zaycevfm.cdnvideo.ru/ZaycevFM_pop_128.mp3"
         f.controls.play()
+    End Sub
+
+    Private Sub Button10_Click(sender As Object, e As EventArgs) Handles Button10.Click
+        If f.status.Contains("Воспроизведение") Then
+            f.controls.stop()
+            f = New WindowsMediaPlayer
+        End If
+        f.URL = "https://radiotoolkit.com/spdeep320.m3u"
+        f.controls.play()
+    End Sub
+
+    Private Sub Radio_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+        f.controls.stop()
     End Sub
 End Class

@@ -50,6 +50,9 @@ Partial Class MDIParent1
         Me.ImageToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.БраузерToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ФинанасыTool = New System.Windows.Forms.ToolStripMenuItem()
+        Me.RadioToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.StartToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.StopToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.РейсToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.СоздатьToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ПечатьToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -62,7 +65,6 @@ Partial Class MDIParent1
         Me.StatusStrip = New System.Windows.Forms.StatusStrip()
         Me.ToolStripStatusLabel = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolTip = New System.Windows.Forms.ToolTip(Me.components)
-        Me.RadioToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip.SuspendLayout()
         Me.StatusStrip.SuspendLayout()
         Me.SuspendLayout()
@@ -228,6 +230,25 @@ Partial Class MDIParent1
         Me.ФинанасыTool.Size = New System.Drawing.Size(198, 22)
         Me.ФинанасыTool.Text = "Финанасы"
         '
+        'RadioToolStripMenuItem
+        '
+        Me.RadioToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.StartToolStripMenuItem, Me.StopToolStripMenuItem})
+        Me.RadioToolStripMenuItem.Name = "RadioToolStripMenuItem"
+        Me.RadioToolStripMenuItem.Size = New System.Drawing.Size(198, 22)
+        Me.RadioToolStripMenuItem.Text = "Radio"
+        '
+        'StartToolStripMenuItem
+        '
+        Me.StartToolStripMenuItem.Name = "StartToolStripMenuItem"
+        Me.StartToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.StartToolStripMenuItem.Text = "Start"
+        '
+        'StopToolStripMenuItem
+        '
+        Me.StopToolStripMenuItem.Name = "StopToolStripMenuItem"
+        Me.StopToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.StopToolStripMenuItem.Text = "Stop"
+        '
         'РейсToolStripMenuItem
         '
         Me.РейсToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.СоздатьToolStripMenuItem, Me.ПечатьToolStripMenuItem, Me.ОтчетToolStripMenuItem1})
@@ -300,12 +321,6 @@ Partial Class MDIParent1
         Me.ToolStripStatusLabel.Size = New System.Drawing.Size(66, 17)
         Me.ToolStripStatusLabel.Text = "Состояние"
         '
-        'RadioToolStripMenuItem
-        '
-        Me.RadioToolStripMenuItem.Name = "RadioToolStripMenuItem"
-        Me.RadioToolStripMenuItem.Size = New System.Drawing.Size(198, 22)
-        Me.RadioToolStripMenuItem.Text = "Radio"
-        '
         'MDIParent1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 17.0!)
@@ -369,4 +384,6 @@ Partial Class MDIParent1
     Friend WithEvents ФинанасыTool As ToolStripMenuItem
     Friend WithEvents СводнаяОплатToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents RadioToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents StartToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents StopToolStripMenuItem As ToolStripMenuItem
 End Class

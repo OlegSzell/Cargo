@@ -76,7 +76,7 @@ Public Class НовыйПеревоз
         'ComboBox4.Items.Clear()
         'ComboBox4.AutoCompleteCustomSource.Clear()
         'ListBox1.Items.Clear()
-        'Using db As New dbAllDataContext
+        'Using db As New dbAllDataContext(_cn3)
         '    Dim var = db.Перевозчики.OrderBy(Function(x) x.Названиеорганизации).Select(Function(x) x.Названиеорганизации).ToList
         '    If var.Count > 0 Then
         '        For Each k In var
@@ -321,7 +321,7 @@ Public Class НовыйПеревоз
         Dim mo As New AllUpd
 
         Dim naz As String = RichTextBox1.Text
-        Using db As New dbAllDataContext
+        Using db As New dbAllDataContext(_cn3)
             Dim f1 = db.Перевозчики.Where(Function(x) x.Названиеорганизации = naz).Select(Function(x) x).FirstOrDefault()
 
             Dim f As String
@@ -353,10 +353,11 @@ Public Class НовыйПеревоз
                     .ФИОРодпадеж = Trim(RichTextBox11.Text)
                     .ДолжРодПадеж = Trim(RichTextBox14.Text)
                     .ПерЭкспедитор = f
-                    .Дата = MaskedTextBox1.Text
+
                     If CheckBox3.Checked = True Then
                         nom2 = НомерДог(i)
                         .Договор = nom2
+                        .Дата = MaskedTextBox1.Text
                     End If
                 End With
                 db.SubmitChanges()
@@ -382,9 +383,10 @@ Public Class НовыйПеревоз
                         .ФИОРодпадеж = Trim(RichTextBox11.Text)
                         .ДолжРодПадеж = Trim(RichTextBox14.Text)
                         .ПерЭкспедитор = f
-                        .Дата = MaskedTextBox1.Text
+
                         If CheckBox3.Checked = True Then
                             .Договор = nom2
+                            .Дата = MaskedTextBox1.Text
                         End If
                     End With
 
@@ -409,9 +411,10 @@ Public Class НовыйПеревоз
                     .ФИОРодпадеж = Trim(RichTextBox11.Text)
                     .ДолжРодПадеж = Trim(RichTextBox14.Text)
                     .ПерЭкспедитор = f
-                    .Дата = MaskedTextBox1.Text
+
                     If CheckBox3.Checked = True Then
                         .Договор = nom2
+                        .Дата = MaskedTextBox1.Text
                     End If
                 End With
                 bscom4all.ResetBindings(False)
@@ -731,7 +734,7 @@ Public Class НовыйПеревоз
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         If MessageBox.Show("Удалить перевозчика " & КодДляУдал.Названиеорганизации & " ?", Рик, MessageBoxButtons.OKCancel, MessageBoxIcon.Question) = DialogResult.OK Then
             Dim mo As New AllUpd
-            Using db As New dbAllDataContext()
+            Using db As New dbAllDataContext(_cn3)
                 Dim f = db.Перевозчики.Where(Function(x) x.Названиеорганизации = КодДляУдал.Названиеорганизации).Select(Function(x) x).FirstOrDefault()
                 If f IsNot Nothing Then
                     db.Перевозчики.DeleteOnSubmit(f)

@@ -929,7 +929,7 @@ Public Class Журнал
 
     'End Sub
     Private Function Grid1AddToBase(ByVal d As Grid1ЖурналClass, ByVal d1 As Integer) As Integer
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim f As New ЖурналПеревозчик
             With f
                 .Дата = d.Дата
@@ -1219,7 +1219,7 @@ Public Class Журнал
     Private Sub Grid1_UserDeletingRow(sender As Object, e As DataGridViewRowCancelEventArgs) Handles Grid1.UserDeletingRow
         Dim f As Grid1ЖурналClass = Grid1all.ElementAt(e.Row.Index)
         Dim f5 As Com1ЖурналClass = ComboBox5.SelectedItem
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim f1 = db.ЖурналПеревозчик.Where(Function(x) x.КодЖурналКлиентГруз = f5.КодГруза And x.Кодперевозчик = f.КодПеревозчика).Select(Function(x) x).FirstOrDefault()
             If f1 IsNot Nothing Then
                 db.ЖурналПеревозчик.DeleteOnSubmit(f1)
@@ -1274,7 +1274,7 @@ Public Class Журнал
     End Sub
     Private Sub addРезульт(ByVal d As Integer, ByVal rezult As String)
         Dim mo As New AllUpd
-        Using db As New dbAllDataContext
+        Using db As New dbAllDataContext(_cn3)
             Dim f = db.ЖурналКлиентГруз.Where(Function(x) x.Код = d).FirstOrDefault()
             f.РезультатРаботы = rezult
             f.ДатаРезультата = Now.ToShortDateString
@@ -1364,7 +1364,7 @@ Public Class Журнал
     End Sub
     Private Sub UpdЖурналПеревозчикиGrid1(ByVal d As Integer, ByVal Sob As Integer, ByVal txt As String)
         Dim mo As New AllUpd
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim f = db.ЖурналПеревозчик.Where(Function(x) x.Код = d).FirstOrDefault()
             If f IsNot Nothing Then
                 Select Case Sob
@@ -1472,7 +1472,7 @@ Public Class Журнал
     End Sub
     Private Sub УдалитьРейсИзтаблицы()
         Dim mo As New AllUpd
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim f = db.ЖурналКлиентГруз.Where(Function(x) x.Код = Grid2Clic.КодЖурналГруз).FirstOrDefault()
             If f IsNot Nothing Then
                 f.ОтоброжатьВТаблицеЖурнала = "False"
@@ -1503,7 +1503,7 @@ Public Class Журнал
     End Sub
     Private Sub UpdGrid2Sel(ByVal id As Integer, ByVal txt As String, Optional IDЖурКлдаты As Integer = 0)
         Dim mo As New AllUpd
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             If IDЖурКлдаты = 0 Then
                 Dim f = db.ЖурналКлиентГруз.Where(Function(x) x.Код = id).FirstOrDefault()
                 If f IsNot Nothing Then
@@ -1780,7 +1780,7 @@ Public Class Журнал
         Await Task.Run(Sub() Upd2(d))
     End Sub
     Private Sub Upd2(ByVal d As Integer)
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim f7 = db.ЖурналКлиентГруз.Where(Function(x) x.Код = d).FirstOrDefault()
             If f7 IsNot Nothing Then
                 f7.ОтоброжатьВТаблицеЖурнала = "True"

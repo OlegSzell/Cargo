@@ -124,7 +124,7 @@ Public Class Сводная
 
         Dim f1 As New List(Of СводнаяОплатыТаблицы)
 
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             f1 = (From x In db.СводнаяОплаты
                   Join y In db.СводнаяОплатыТаблицы On x.ID Equals y.IDСоднаяОлпаты
                   Where x.Год = f And x.Состояние = "Нет изменения"
@@ -150,7 +150,7 @@ Public Class Сводная
 
 
 
-            If f1 IsNot Nothing Then
+        If f1 IsNot Nothing Then
             If f1.Count > 0 Then
                 If Grid1All IsNot Nothing Then
                     Grid1All.Clear()
@@ -161,6 +161,9 @@ Public Class Сводная
                         .ДатаОплатыИСуммаПоступленияКлиент = b.ДатаОплатыИСуммаПоступленияКлиент, .ДатаОплатыИСуммаПоступленияПеревозчик = b.ДатаОплатыИСуммаПоступленияПеревозчик,
                         .ОстатокПеревозчик = b.ОстатокПеревозчик, .Перевозчик = b.Перевозчик, .СуммаИДатаОплКлиент = b.СуммаИДатаОплКлиент, .СуммаИДатаОплПеревозчик = b.СуммаИДатаОплПеревозчик}
                     Grid1All.Add(b1)
+                    'If b.Рейс = 722 Then
+                    '    Dim mfg As String = String.Empty
+                    'End If
                 Next
                 Grid1.BeginInvoke(New MethodInvoker(Sub() grid1Upd()))
             Else
@@ -241,16 +244,12 @@ Public Class Сводная
             mo.РейсыПеревозчикаAll()
         Loop
 
-        Do While AllClass.ОплатыКлиент Is Nothing
-            mo.ОплатыКлиентAll()
-        Loop
+
+        mo.ОплатыКлиентAll()
+        mo.ОплатыПерAll()
 
 
-        Do While AllClass.ОплатыПер Is Nothing
-            mo.ОплатыПерAll()
-        Loop
-
-        Do While AllClass.СводнаяОплаты Is Nothing
+            Do While AllClass.СводнаяОплаты Is Nothing
             mo.СводнаяОплатыAll()
         Loop
 
@@ -413,7 +412,7 @@ Public Class Сводная
     Private Sub UpdC(f As String, grd1 As List(Of Grid1Class))
 
         Dim mo As New AllUpd
-        Using db As New dbAllDataContext
+        Using db As New dbAllDataContext(_cn3)
             Dim idYear = db.СводнаяОплаты.Where(Function(x) x.Год = f).Select(Function(x) x).FirstOrDefault()
             If idYear IsNot Nothing Then  'если год  внесен в базу
 

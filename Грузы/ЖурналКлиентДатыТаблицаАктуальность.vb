@@ -37,7 +37,7 @@
         Await Task.Run(Sub() Upd(rs))
     End Sub
     Private Sub Upd(ByVal rs As String)
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim f = db.ЖурналКлиентДаты.Where(Function(x) x.ID = ID).FirstOrDefault
             If f IsNot Nothing Then
                 f.Состояние = rs

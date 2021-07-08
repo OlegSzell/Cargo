@@ -26,9 +26,12 @@ Public Class РабочаяФормаМодал
 " & IDГруз & ", '" & TextBox1.Text & "','" & TextBox2.Text & "')"
             Dim conn As New SqlConnection
             conn.ConnectionString = ConString
+
             If conn.State = ConnectionState.Closed Then
                 conn.Open()
             End If
+
+
             Dim c As New SqlCommand
             c.Connection = conn
             c.CommandText = strsql

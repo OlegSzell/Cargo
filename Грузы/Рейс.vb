@@ -74,6 +74,7 @@ Public Class Рейс
     Private NewListDynamFlag As Boolean = False
     Private listbxDyn As ListBox
     Private ClicnewLstDyn As Boolean = False
+    Private ОбоюднОтветсвенность As String = Nothing
 
     'для SqlDependency
     'Dim conn7c7 As New SqlConnection(ConString)
@@ -164,7 +165,7 @@ Public Class Рейс
             mo.ТипАвтоAll()
         Loop
         Try
-            'Using db As New dbAllDataContext
+            'Using db As New dbAllDataContext(_cn3)
             Dim mk = AllClass.ТипАвто.OrderBy(Function(x) x.ТипАвто).Select(Function(x) New IDNaz With {.Naz = x.ТипАвто}).ToList()
             If mk IsNot Nothing Then
                 com11all.AddRange(mk)
@@ -323,7 +324,7 @@ Public Class Рейс
     'End Try
 
     'Next
-    Private Function GetProp(Of T)(ByVal f As T) As PropertyInfo()
+    Private Function GetProp(Of T)(ByVal f As T) As PropertyInfo()  'перебор по столбцам строки, класса
         Dim type As Type = f.[GetType]()
         Dim properties As PropertyInfo() = type.GetProperties()
         If properties IsNot Nothing Then
@@ -397,6 +398,7 @@ Public Class Рейс
             End Try
 
         Next
+
         '/
         Dim f1 = PerStrokaForDoc
         ''перебор свойств класса количество
@@ -445,6 +447,14 @@ Public Class Рейс
             End Try
 
         Next
+
+        ''если с клиентом не договор поручение, догпорэксп или поручение с экспедицией то ставим данные договора транспортной экспедиции
+        'If ClStrokaForDoc.ДогПор = 1 Or ClStrokaForDoc.ДогПорЭксп = 1 Or ClStrokaForDoc.ПорЭксп = 1 Then
+        '    xlworksheet.Cells(4, 4) = String.Empty
+        'Else
+        '    xlworksheet.Cells(4, 4) = "к договору транспортной экспедиции № " & f2.Договор & " от " & f2.Дата
+        'End If
+
 
 
         '/
@@ -570,10 +580,10 @@ Public Class Рейс
         Await Task.Run(Sub() EmalSet())
     End Sub
     Private Sub EmalSet()
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim f = (From x In db.EmailTb
-                     Select x).FirstOrDefault()
-            If f IsNot Nothing Then
+                     Select x).ToList()
+            If f.Count > 0 Then
                 EmailPass = f
             End If
         End Using
@@ -869,7 +879,7 @@ Public Class Рейс
                   Select x).FirstOrDefault()
 
 
-        'Using db As New dbAllDataContext()
+        'Using db As New dbAllDataContext(_cn3)
         '    rowzak = db.РейсыКлиента.Where(Function(x) x.НомерРейса = НомРес).Select(Function(x) x).FirstOrDefault()
         '    rowper = db.РейсыПеревозчика.Where(Function(x) x.НомерРейса = НомРес).Select(Function(x) x).FirstOrDefault()
         'End Using
@@ -1641,7 +1651,7 @@ Public Class Рейс
         Dim mo As New AllUpd
         Dim k = ComB13A()
 
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim f1 As New РейсыПеревозчика
             With f1
                 .НазвОрганизации = cm4.Naz
@@ -1684,7 +1694,7 @@ Public Class Рейс
         Dim k1 = ComB12A()
         ComB5()
 
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim var As New РейсыКлиента
             var.НазвОрганизации = arrtcom("ComboBox3")
             var.НомерРейса = СлРейс
@@ -1770,7 +1780,9 @@ Public Class Рейс
             "Ставка перевозчика :" & arrtbox("TextBox2") & " " & arrtcom("ComboBox6") & vbCrLf & "Груз :" & Trim(arrtRichbox("RichTextBox7")) & vbCrLf &
              "Маршрут :" & Trim(arrtRichbox("RichTextBox10")) & vbCrLf & "Время создания :" & Now
 
-        InsertEmailAsync(strT)
+        Dim mail As New MySendMail(strT, "Создан новый рейс") 'отправка письма
+        mail.Mail()
+        'InsertEmailAsync(strT)
 
         NewPutForListInNewRejs = New ПутиДоков With {.Путь = PutCorStroka, .ПолныйПуть = PutPolnStroka} 'переменная хранить пути для листбокс добавления
 
@@ -1815,6 +1827,7 @@ Public Class Рейс
             .СрывЗагр20Проц = Procenty20
             .ДатаСоздания = Now
             .Экспедитор = Экспедитор
+            .НачавшиесяСуткиПункт8 = ОбоюднОтветсвенность
         End With
 
         PerStrokaForDoc = f1
@@ -2039,7 +2052,7 @@ Public Class Рейс
 
         'Dim ds As DataRow() = РейсыКлиента(НомРес)
         Dim ds As String
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             ds = db.РейсыКлиента.Where(Function(x) x.НомерРейса = НомРес).Select(Function(x) x.НазвОрганизации).FirstOrDefault()
             If ds Is Nothing Then Exit Sub
         End Using
@@ -2053,7 +2066,7 @@ Public Class Рейс
             ComB5()
             ComB12()
 
-            Using db As New dbAllDataContext()
+            Using db As New dbAllDataContext(_cn3)
                 Dim f = db.РейсыКлиента.Where(Function(x) x.НомерРейса = НомРес).Select(Function(x) x).FirstOrDefault()
                 If f IsNot Nothing Then
                     With f
@@ -2095,7 +2108,7 @@ Public Class Рейс
         Else 'если действующий клиент
             ComB5()
             ComB12()
-            Using db As New dbAllDataContext()
+            Using db As New dbAllDataContext(_cn3)
                 Dim f = db.РейсыКлиента.Where(Function(x) x.НомерРейса = НомРес).Select(Function(x) x).FirstOrDefault()
                 If f IsNot Nothing Then
                     With f
@@ -2137,7 +2150,7 @@ Public Class Рейс
 
 
         Dim ds1 As РейсыПеревозчика
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             ds1 = (From x In db.РейсыПеревозчика
                    Where x.НомерРейса = НомРес
                    Select x).FirstOrDefault()
@@ -2156,7 +2169,7 @@ Public Class Рейс
             ПровСледРейсПер()
             If Отмена = 1 Then Exit Sub
             ComB13()
-            Using db As New dbAllDataContext()
+            Using db As New dbAllDataContext(_cn3)
                 Dim f = db.РейсыПеревозчика.Where(Function(x) x.НомерРейса = НомРес).Select(Function(x) x).FirstOrDefault()
                 If f IsNot Nothing Then
                     With f
@@ -2188,6 +2201,7 @@ Public Class Рейс
                         .РазмерШтрафаЗаСрыв = ШтрафПер
                         .Предоплата = ЧастичнаяОплатаПеревозчик
                         .СрывЗагр20Проц = Procenty20
+                        .НачавшиесяСуткиПункт8 = ОбоюднОтветсвенность
                     End With
                     db.SubmitChanges()
                     mo.РейсыПеревозчикаAllAsync()
@@ -2198,7 +2212,7 @@ Public Class Рейс
         Else  'если действущий перевозчик
             ComB13()
 
-            Using db As New dbAllDataContext()
+            Using db As New dbAllDataContext(_cn3)
                 Dim f = db.РейсыПеревозчика.Where(Function(x) x.НомерРейса = НомРес).Select(Function(x) x).FirstOrDefault()
                 With f
                     .Маршрут = Trim(RichTextBox10.Text)
@@ -2227,6 +2241,7 @@ Public Class Рейс
                     .РазмерШтрафаЗаСрыв = ШтрафПер
                     .Предоплата = ЧастичнаяОплатаПеревозчик
                     .СрывЗагр20Проц = Procenty20
+                    .НачавшиесяСуткиПункт8 = ОбоюднОтветсвенность
                 End With
                 db.SubmitChanges()
                 mo.РейсыПеревозчикаAllAsync()
@@ -2240,19 +2255,25 @@ Public Class Рейс
             "Ставка перевозчика :" & arrtbox("TextBox2") & " " & arrtcom("ComboBox6") & vbCrLf & "Груз :" & Trim(arrtRichbox("RichTextBox7")) & vbCrLf &
              "Маршрут :" & Trim(arrtRichbox("RichTextBox10")) & vbCrLf & "Время создания :" & Now
 
-        UpdateEmailAsync(strT)
+        'UpdateEmailAsync(strT, "Изменен рейс")
+        Dim mail As New MySendMail(strT, "Изменен рейс")
+        mail.Mail()
 
         СлРейс = НомРес
         ДокиОбновление()
 
     End Sub
-    Private Async Sub UpdateEmailAsync(d As String)
-        Await Task.Run(Sub() UpdateEmail(d))
+    Private Async Sub UpdateEmailAsync(d As String, obj As String)
+        Await Task.Run(Sub() UpdateEmail(d, obj))
     End Sub
 
-    Private Sub UpdateEmail(d As String)
-        Dim NewEmail As New SendEmail
-        NewEmail.update(d)
+    Private Sub UpdateEmail(d As String, obj As String)
+        Dim mail As New MySendMail(d, obj)
+        mail.Mail()
+
+
+        'Dim NewEmail As New SendEmail
+        'NewEmail.update(d)
     End Sub
 
     Private Sub Button7_Click(sender As Object, e As EventArgs)
@@ -2375,7 +2396,7 @@ Public Class Рейс
         SumClientStart = ff.Rows(0).Item(0)
         SumPerevozStart = ff1.Rows(0).Item(0)
 
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim f = (From x In db.Календарь_Даты
                      Where x.Дата = Now
                      Select x).FirstOrDefault()
@@ -2622,7 +2643,7 @@ Public Class Рейс
 
         If f.ОбнвлExcel = True Then
             Cursor = Cursors.WaitCursor
-            ДокиОбновление(f.Num, ComboBox3.Text, ComboBox4.Text, ComboBox1.Text)
+            ДокиОбновление(f.Num, ComboBox3.Text, ComboBox4.Text, ComboBox1.Text, f.ДатаАкта)
             Cursor = Cursors.Default
             'ДокиОбновление(f.Num)
         End If
@@ -2815,7 +2836,7 @@ Public Class Рейс
     Private Async Sub ДокиОбновлениеAsync(Optional ByVal Num As Integer = 0, Optional com3s As String = Nothing, Optional com4s As String = Nothing, Optional com1s As String = Nothing)
         Await Task.Run(Sub() ДокиОбновление(Num, com3s, com4s, com1s))
     End Sub
-    Public Sub ДокиОбновление(Optional ByVal Num As Integer = 0, Optional com3s As String = Nothing, Optional com4s As String = Nothing, Optional com1s As String = Nothing)
+    Public Sub ДокиОбновление(Optional ByVal Num As Integer = 0, Optional com3s As String = Nothing, Optional com4s As String = Nothing, Optional com1s As String = Nothing, Optional ДатаАкта As Date = Nothing)
         If Num > 0 Then
             СлРейс = Num
         End If
@@ -2826,11 +2847,20 @@ Public Class Рейс
 
         Dim mo As New AllUpd
 
+        Do While AllClass.РейсыКлиента Is Nothing
+            Dim mo5 As New AllUpd
+            mo5.РейсыКлиентаAll()
+        Loop
+
+
+        Dim zayvkaClienta = (From x In AllClass.РейсыКлиента
+                             Where x?.НомерРейса = Num
+                             Select x).FirstOrDefault()
 
         Dim xlapp As Microsoft.Office.Interop.Excel.Application
         xlapp = New Microsoft.Office.Interop.Excel.Application
 
-        Dim XXX = "Provider='SQLOLEDB';Data Source=178.172.195.159,52891;Network Library=DBMSSOCN;Initial Catalog=Rickmans;User ID=Rickmans;Password=Zf6VpP37Ol"
+        'Dim XXX = "Provider='SQLOLEDB';Data Source=178.172.195.159,52891;Network Library=DBMSSOCN;Initial Catalog=Rickmans;User ID=Rickmans;Password=Zf6VpP37Ol"
 
         Dim CON As New ADODB.Connection
         Dim RS As New ADODB.Recordset
@@ -2874,12 +2904,65 @@ Public Class Рейс
         xlapp.Workbooks(ПутьРейса).Worksheets("ЗАК").Range("L6").CopyFromRecordset(RS1)
         xlapp.Workbooks(ПутьРейса).Worksheets("ЗАК").Range("L4").CopyFromRecordset(RS2)
         xlapp.Workbooks(ПутьРейса).Worksheets("ЗАК").Range("L5").CopyFromRecordset(RS3)
-        xlapp.Workbooks(ПутьРейса).Close(True)
+
+        If CDate(MaskedTextBox1.Text) < CDate("17.02.2021") Then  'смена управляющего на директора
+
+            Dim kp = "Управляющий: ИП Шелягович О.Н."
+            Dim kp1 = "ООО ""Рикманс""  в лице управляющего:" & vbCrLf & "ИП Шелягович О.Н. и"
+            xlapp.Workbooks(ПутьРейса).Worksheets("ЗАК").Range("B34") = kp
+            xlapp.Workbooks(ПутьРейса).Worksheets("СФ").Range("A22") = kp
+            If Not ДатаАкта = Nothing Then
+                If ДатаАкта < CDate("17.02.2021") Then
+                    xlapp.Workbooks(ПутьРейса).Worksheets("АКТ").Range("A31") = kp
+                    xlapp.Workbooks(ПутьРейса).Worksheets("АКТ").Range("K3") = kp1
+                Else
+                    Dim kp2 = "Директор: Шелягович О.Н."
+                    Dim kp3 = "ООО ""Рикманс""  в лице директора:" & vbCrLf & "Шелягович О.Н. и"
+                    xlapp.Workbooks(ПутьРейса).Worksheets("АКТ").Range("A31") = kp2
+                    xlapp.Workbooks(ПутьРейса).Worksheets("АКТ").Range("K3") = kp3
+                End If
+            Else
+                xlapp.Workbooks(ПутьРейса).Worksheets("АКТ").Range("A31") = kp
+                xlapp.Workbooks(ПутьРейса).Worksheets("АКТ").Range("K3") = kp1
+            End If
+
+
+            xlapp.Workbooks(ПутьРейса).Worksheets("ПЕР").Range("B41") = kp
+        Else
+
+            Dim kp = "Директор: Шелягович О.Н."
+            Dim kp1 = "ООО ""Рикманс""  в лице директора:" & vbCrLf & "Шелягович О.Н. и"
+            xlapp.Workbooks(ПутьРейса).Worksheets("ЗАК").Range("B34") = kp
+            xlapp.Workbooks(ПутьРейса).Worksheets("СФ").Range("A22") = kp
+            xlapp.Workbooks(ПутьРейса).Worksheets("АКТ").Range("A31") = kp
+            xlapp.Workbooks(ПутьРейса).Worksheets("АКТ").Range("K3") = kp1
+            xlapp.Workbooks(ПутьРейса).Worksheets("ПЕР").Range("B41") = kp
+        End If
+
+
+        If zayvkaClienta IsNot Nothing Then 'если договор разовый или договор заявка клиента
+
+            If zayvkaClienta.ЗаявкаКлиента.Length > 0 Then
+                xlapp.Workbooks(ПутьРейса).Worksheets("СФ").Range("A5") = "Номер " & LCase(zayvkaClienta.ЗаявкаКлиента)
+                xlapp.Workbooks(ПутьРейса).Worksheets("СФ").Range("E5") = zayvkaClienta.НомерЗаявки
+
+                xlapp.Workbooks(ПутьРейса).Worksheets("СФ").Range("G5") = "Дата " & LCase(zayvkaClienta.ЗаявкаКлиента)
+                xlapp.Workbooks(ПутьРейса).Worksheets("СФ").Range("J5") = zayvkaClienta.ДатаЗаявки
+
+                xlapp.Workbooks(ПутьРейса).Worksheets("ЗАК").Range("D4") = "к " & LCase(zayvkaClienta.ЗаявкаКлиента) & " № (" & zayvkaClienta.НомерЗаявки & ") от " & zayvkaClienta.ДатаЗаявки & "г."
+
+            End If
+        End If
+
+
+
+
+            xlapp.Workbooks(ПутьРейса).Close(True)
 
 
         Dim КоличРейсЗак As Integer
         Dim КоличРейсПер As Integer
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             КоличРейсЗак = db.РейсыКлиента.Where(Function(x) x.НомерРейса = СлРейс).Select(Function(x) x.КоличРейсов).FirstOrDefault()
             КоличРейсПер = db.РейсыПеревозчика.Where(Function(x) x.НомерРейса = СлРейс).Select(Function(x) x.КоличРейсов).FirstOrDefault()
         End Using
@@ -2969,7 +3052,7 @@ Public Class Рейс
 
         Diction()
 
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim f = db.РейсыПеревозчика.Where(Function(x) x.НомерРейса = НомРес).Select(Function(x) x).FirstOrDefault()
             If f IsNot Nothing Then
                 db.РейсыПеревозчика.DeleteOnSubmit(f)
@@ -3051,10 +3134,11 @@ Public Class Рейс
         Dim strT As String = ПутьРейса & vbCrLf & "Ставка клиента :" & arrtbox("TextBox1") & " " & arrtcom("ComboBox5") & vbCrLf &
             "Ставка перевозчика :" & arrtbox("TextBox2") & " " & arrtcom("ComboBox6") & vbCrLf & "Груз :" & Trim(arrtRichbox("RichTextBox7")) & vbCrLf &
              "Маршрут :" & Trim(arrtRichbox("RichTextBox10")) & vbCrLf & "Время создания :" & Now
+        Dim mail As New MySendMail(strT, "Удален рейс")
+        mail.Mail()
+        'DeleteEmailAsync(strT)
 
-        DeleteEmailAsync(strT)
-
-        Using db As New dbAllDataContext()
+        Using db As New dbAllDataContext(_cn3)
             Dim f = db.РейсыПеревозчика.Where(Function(x) x.НомерРейса = НомРес).Select(Function(x) x).FirstOrDefault()
             If f IsNot Nothing Then
                 db.РейсыПеревозчика.DeleteOnSubmit(f)
@@ -3338,6 +3422,14 @@ Public Class Рейс
         Dim f As New Сводная
         f.ShowDialog()
     End Sub
+
+    Private Sub НачавшиесяСуткиобоюднаяОтветственностьToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles НачавшиесяСуткиобоюднаяОтветственностьToolStripMenuItem.Click
+        Dim f As New НачавшиесяСутки
+        f.ShowDialog()
+        ОбоюднОтветсвенность = f.Rez
+    End Sub
+
+
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
