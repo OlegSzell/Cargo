@@ -1,10 +1,12 @@
 ﻿Imports System.ComponentModel
 Imports System.IO
 Imports System.Threading
+Imports ClosedXML.Excel
 
 Public Class Сводная
     Dim com1 As New List(Of String)
     Private bscom1 As New BindingSource
+
     Dim Grid1All As List(Of Grid1Class)
     Private bsGrid1 As New BindingSource
 
@@ -718,53 +720,97 @@ Public Class Сводная
         Dim FileВремянка2 = Pathвремянка2 & "\" & "Oplaty.xlsx"
 
 
-
-        Dim i, j As Integer 'сохранение в эксель
-
-        Dim misvalue As Object = Reflection.Missing.Value
-        xlapp = New Microsoft.Office.Interop.Excel.Application
-        xlworkbook = xlapp.Workbooks.Add(FileВремянка2)
-        xlworksheet = xlworkbook.Sheets("Оплаты")
+        Dim wb As New XLWorkbook(FileВремянка2)
+        Dim wc = wb.Worksheet("Оплаты")
 
 
-        xlworksheet.Cells(2, 2) = Now
+        wc.Cell(2, 2).Value = Now.ToShortDateString
 
-
-        'Dim il As Integer = 1
-        'For Each b In Grid1All
-        '    xlworksheet.Cells(4 + il, 1) = b.Номер
-        '    xlworksheet.Cells(4 + il, 2) = b.Рейс
-        '    xlworksheet.Cells(4 + il, 3) = b.Клиент
-        '    xlworksheet.Cells(4 + il, 4) = b.СуммаИДатаОплКлиент
-        '    xlworksheet.Cells(4 + il, 5) = b.ДатаОплатыИСуммаПоступленияКлиент
-        '    xlworksheet.Cells(4 + il, 6) = b.ОстатокКлиент
-        '    xlworksheet.Cells(4 + il, 7) = b.Перевозчик
-        '    xlworksheet.Cells(4 + il, 8) = b.СуммаИДатаОплПеревозчик
-        '    xlworksheet.Cells(4 + il, 9) = b.ДатаОплатыИСуммаПоступленияПеревозчик
-        '    xlworksheet.Cells(4 + il, 10) = b.ОстатокПеревозчик
-        '    xlworksheet.Cells(4 + il, 11) = b.Дельта
-        '    il += 1
-        'Next
-
-
-
-        For i = 0 To Grid1.Rows.Count - 1
-            For j = 1 To Grid1.ColumnCount
-
-                xlworksheet.Cells(i + 5, j) = Grid1(j - 1, i).Value
-
-            Next
+        Dim il As Integer = 1
+        For Each b In Grid1All
+            With wc
+                .Cell(4 + il, 1).Value = b.Номер
+                .Cell(4 + il, 2).Value = b.Рейс
+                .Cell(4 + il, 3).Value = b.Клиент
+                .Cell(4 + il, 4).Value = b.СуммаИДатаОплКлиент
+                .Cell(4 + il, 5).Value = b.ДатаОплатыИСуммаПоступленияКлиент
+                .Cell(4 + il, 6).Value = b.ОстатокКлиент
+                .Cell(4 + il, 7).Value = b.Перевозчик
+                .Cell(4 + il, 8).Value = b.СуммаИДатаОплПеревозчик
+                .Cell(4 + il, 9).Value = b.ДатаОплатыИСуммаПоступленияПеревозчик
+                .Cell(4 + il, 10).Value = b.ОстатокПеревозчик
+                .Cell(4 + il, 11).Value = b.Дельта
+                il += 1
+            End With
         Next
-        xlworksheet.Range(Cell1:="A4", Cell2:="K" & Grid1.Rows.Count + 5).Cells.Borders.LineStyle = 1 'рисуем границы
 
-        xlworksheet.SaveAs("C:\Users\Public\Downloads\Oplaty2.xlsx")
+        Dim rngTable = wc.Range("A4:K" & Grid1All.Count + 5)
+        rngTable.Style.Border.RightBorder = XLBorderStyleValues.Thin
+        rngTable.Style.Border.BottomBorder = XLBorderStyleValues.Thin
 
 
-        xlworksheet.PrintOutEx()
-        xlworkbook.Close()
-        xlapp.Quit()
-        Me.Cursor = Cursors.Default
-        releaseobjectAsync(xlapp, xlworkbook, xlworksheet)
+        Try
+            Using db As New FileStream("Excel4.xlsx", FileMode.Create)
+                wb.SaveAs(db)
+            End Using
+            Me.Cursor = Cursors.Default
+            Process.Start(IO.Path.Combine(Application.StartupPath, "Excel4.xlsx"))
+        Catch ex As Exception
+            MessageBox.Show("Закройте ранее созданный экземпляр Excel", Рик)
+            Me.Cursor = Cursors.Default
+        End Try
+
+
+
+
+
+
+        'Dim i, j As Integer 'сохранение в эксель
+
+        'Dim misvalue As Object = Reflection.Missing.Value
+        'xlapp = New Microsoft.Office.Interop.Excel.Application
+        'xlworkbook = xlapp.Workbooks.Add(FileВремянка2)
+        'xlworksheet = xlworkbook.Sheets("Оплаты")
+
+
+        'xlworksheet.Cells(2, 2) = Now
+
+
+        ''Dim il As Integer = 1
+        ''For Each b In Grid1All
+        ''    xlworksheet.Cells(4 + il, 1) = b.Номер
+        ''    xlworksheet.Cells(4 + il, 2) = b.Рейс
+        ''    xlworksheet.Cells(4 + il, 3) = b.Клиент
+        ''    xlworksheet.Cells(4 + il, 4) = b.СуммаИДатаОплКлиент
+        ''    xlworksheet.Cells(4 + il, 5) = b.ДатаОплатыИСуммаПоступленияКлиент
+        ''    xlworksheet.Cells(4 + il, 6) = b.ОстатокКлиент
+        ''    xlworksheet.Cells(4 + il, 7) = b.Перевозчик
+        ''    xlworksheet.Cells(4 + il, 8) = b.СуммаИДатаОплПеревозчик
+        ''    xlworksheet.Cells(4 + il, 9) = b.ДатаОплатыИСуммаПоступленияПеревозчик
+        ''    xlworksheet.Cells(4 + il, 10) = b.ОстатокПеревозчик
+        ''    xlworksheet.Cells(4 + il, 11) = b.Дельта
+        ''    il += 1
+        ''Next
+
+
+
+        'For i = 0 To Grid1.Rows.Count - 1
+        '    For j = 1 To Grid1.ColumnCount
+
+        '        xlworksheet.Cells(i + 5, j) = Grid1(j - 1, i).Value
+
+        '    Next
+        'Next
+        'xlworksheet.Range(Cell1:="A4", Cell2:="K" & Grid1.Rows.Count + 5).Cells.Borders.LineStyle = 1 'рисуем границы
+
+        'xlworksheet.SaveAs("C:\Users\Public\Downloads\Oplaty2.xlsx")
+
+
+        'xlworksheet.PrintOutEx()
+        'xlworkbook.Close()
+        'xlapp.Quit()
+        'Me.Cursor = Cursors.Default
+        'releaseobjectAsync(xlapp, xlworkbook, xlworksheet)
 
 
 
