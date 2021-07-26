@@ -66,7 +66,7 @@ Public Class ПорНомер
         Dim mo As New AllUpd
         Using db As New dbAllDataContext(_cn3)
             If GroupBox2.Enabled = True Then
-                Dim strsql As String
+                Dim strsql As String = String.Empty
                 If RichTextBox1.Text = "" Or RichTextBox2.Text = "" Then
                     MessageBox.Show("Заполните Должность и фамилию руководителя!", Рик)
                     Exit Sub

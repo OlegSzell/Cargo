@@ -332,7 +332,7 @@ Public Class ПоискВРейсах
     End Sub
     Private Sub ПоискПомаршрутуВариант1()
         Dim _Excel As New Microsoft.Office.Interop.Excel.Application
-        Dim Лист As Microsoft.Office.Interop.Excel.Worksheet
+        Dim Лист As New Microsoft.Office.Interop.Excel.Worksheet
         Dim Книга As Microsoft.Office.Interop.Excel.Workbook
         _Excel.Visible = False
 
@@ -359,8 +359,8 @@ Public Class ПоискВРейсах
     End Sub
     Private Sub ПоискПоМаршруту()
         Dim xlapp1 As Application
-        Dim xlworkbook1 As Microsoft.Office.Interop.Excel.Workbook
-        Dim xlworksheet1 As Microsoft.Office.Interop.Excel.Worksheet
+        Dim xlworkbook1 As New Microsoft.Office.Interop.Excel.Workbook
+        Dim xlworksheet1 As New Microsoft.Office.Interop.Excel.Worksheet
         'Dim misvalue As Object = Reflection.Missing.Value
 
 

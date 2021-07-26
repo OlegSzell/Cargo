@@ -24,6 +24,21 @@ Public Class ГотовыйОтчет
             OnPropertyChanged("LS1")
         End Set
     End Property
+    Public Class Grid1Class
+        Public Property Номер As Integer
+        Public Property номер_Рейса As Integer
+        Public Property Клиент As String
+        Public Property Перевозчик As String
+        Public Property маршрут As String
+        Public Property дата_Загрузки As String
+        Public Property ставка_Клиента As String
+        Public Property ставка_Перевозчика As String
+        Public Property дельта As String
+
+    End Class
+
+    Private grd1 As New List(Of Grid1Class)
+    Private bsgrd1 As New BindingSource
 
     Dim LS2 As New List(Of String)
     Dim bs As New BindingSource
@@ -41,6 +56,7 @@ Public Class ГотовыйОтчет
         Next
 
         ComboBox2.DisplayMember = "Text"
+        ComboBox2.ValueMember = "Id"
 
         'ListBox1.Items.Clear()
 
@@ -68,8 +84,11 @@ Public Class ГотовыйОтчет
             ListBox1.DataSource = bs
         End Using
 
-
-
+        bsgrd1.DataSource = grd1
+        Grid1.DataSource = bsgrd1
+        GridView(Grid1)
+        Grid1.Columns(0).Width = 80
+        Grid1.Columns(1).Width = 90
 
 
     End Sub
@@ -858,7 +877,7 @@ Public Class ГотовыйОтчет
         End With
         ' ProgressBar1.Invoke(New Action(Sub() Prgsbr(40)))
         Dim AllSum As Double
-        Dim Zp As Double
+
 
         'ecx.ws.Range("A1:" & "V" & ListClient.Count + 5).Columns.AutoFit()
 
@@ -1197,6 +1216,71 @@ Public Class ГотовыйОтчет
                 End If
             End Using
         End If
+    End Sub
+
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+        If ComboBox1.Text.Length = 0 Or ComboBox2.Text.Length = 0 Then
+            Return
+        End If
+
+        Do While AllClass.РейсыПеревозчика Is Nothing
+            Dim mo As New AllUpd
+            mo.РейсыПеревозчикаAll()
+        Loop
+
+        Dim comb = ComboBox2.SelectedIndex + 1
+        Dim sum As Double = 0
+
+        Dim m = CDate("01." & comb & "." & ComboBox1.Text)
+        Dim m2 = CDate(DateTime.DaysInMonth(ComboBox1.Text, comb) & "." & comb & "." & ComboBox1.Text)
+
+
+        If grd1.Count > 0 Then
+            grd1.Clear()
+        End If
+        Dim f3 As New List(Of Grid1Class)
+
+
+        Using db As New DbAllDataContext(_cn3)
+            Dim f = (From x In db.РейсыКлиента
+                     Order By x.НомерРейса
+                     Where x.ДатаСоздания >= m And x.ДатаСоздания <= m2
+                     Select x).ToList()
+
+            For Each b In f
+                Try
+                    Dim f2 = CDate(b.ДатаПодачиПодЗагрузку)
+                    If m <= f2 And m2 >= f2 Then
+                        f3.Add(New Grid1Class With {.дата_Загрузки = b.ДатаПодачиПодЗагрузку, .Клиент = b.НазвОрганизации,
+                               .маршрут = b.Маршрут, .номер_Рейса = b.НомерРейса, .ставка_Клиента = b.СтоимостьФрахта, .Перевозчик = (From x In AllClass.РейсыПеревозчика
+                                                                                                                                      Where x.НомерРейса = b.НомерРейса
+                                                                                                                                      Select x.НазвОрганизации).FirstOrDefault(), .ставка_Перевозчика = (From x In AllClass.РейсыПеревозчика
+                                                                                                                                                                                                         Where x.НомерРейса = b.НомерРейса
+                                                                                                                                                                                                         Select x.СтоимостьФрахта).FirstOrDefault(), .дельта = Math.Round(CType(Replace(.ставка_Клиента, ".", ",") - Replace(.ставка_Перевозчика, ".", ","), Double), 2)})
+                    End If
+                Catch ex As Exception
+                    f3.Add(New Grid1Class With {.дата_Загрузки = b.ДатаПодачиПодЗагрузку, .Клиент = b.НазвОрганизации,
+                               .маршрут = b.Маршрут, .номер_Рейса = b.НомерРейса, .ставка_Клиента = b.СтоимостьФрахта, .Перевозчик = (From x In AllClass.РейсыПеревозчика
+                                                                                                                                      Where x.НомерРейса = b.НомерРейса
+                                                                                                                                      Select x.НазвОрганизации).FirstOrDefault(), .ставка_Перевозчика = (From x In AllClass.РейсыПеревозчика
+                                                                                                                                                                                                         Where x.НомерРейса = b.НомерРейса
+                                                                                                                                                                                                         Select x.СтоимостьФрахта).FirstOrDefault(), .дельта = Math.Round(CType(Replace(.ставка_Клиента, ".", ",") - Replace(.ставка_Перевозчика, ".", ","), Double), 2)})
+                End Try
+            Next
+
+
+            Dim i As Integer = 1
+            For Each b In f3
+                b.Номер = i
+                i += 1
+                sum += CDbl(b.дельта)
+                grd1.Add(b)
+            Next
+        End Using
+
+        Dim mk As New Grid1Class With {.Клиент = "Итого", .дельта = sum}
+        grd1.Add(mk)
+        bsgrd1.ResetBindings(False)
     End Sub
 End Class
 Public Class MonthItem

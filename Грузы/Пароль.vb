@@ -36,7 +36,9 @@ Public Class Пароль
         Do While AllClass.Пароли Is Nothing
             mo.ПаролиAll()
         Loop
-        Dim f = AllClass.Пароли.Where(Function(x) x.Логин = ComboBox1.Text).Select(Function(x) x).FirstOrDefault()
+        Dim f = (From x In AllClass.Пароли
+                 Where x.Логин = ComboBox1.Text
+                 Select x).FirstOrDefault()
 
         'Dim ds1 As DataTable = Selects3(StrSql:="SELECT Парол FROM Пароли WHERE Логин='" & ComboBox1.Text & "'")
         Dim par As String = TextBox1.Text

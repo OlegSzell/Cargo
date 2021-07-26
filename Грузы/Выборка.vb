@@ -23,7 +23,7 @@ Public Class Выборка
     Public Sub Refreshgrid()
 
         Dim Организ As String = ComboBox1.Text
-        Dim StrSql As String
+        Dim StrSql As String = String.Empty
 
         Dim времянач As String = Format(DateTimePicker1.Value, "MM\/dd\/yyyy")
         Dim времякон As String = DateTime.Now.ToString("MM\/dd\/yyyy")
@@ -305,7 +305,7 @@ From ГрузыКлиентов Where Груз Like '%" & TextBox2.Text & "%' OR
             РабочаяФормаСостояние.TextBox2.Text = Grid1.CurrentRow.Cells("Груз").Value
             'Dim ds As DataTable = Selects3(StrSql:="SELECT ОрганизКонтакт FROM ГрузыКлиентов WHERE Организация='" & Grid1.CurrentRow.Cells("Организация").Value & "'")
             Dim ds As DataTable = Selects3(StrSql:="SELECT ОрганизКонтакт FROM ГрузыКлиентов WHERE Организация='" & Grid1.CurrentRow.Cells("Организация").Value & "'")
-            Dim b As String
+            Dim b As String = String.Empty
             For Each d As DataRow In ds.Rows
                 If Not IsDBNull(d.Item(0)) Or d.Item(0).ToString <> "" Then
                     b = d.Item(0).ToString

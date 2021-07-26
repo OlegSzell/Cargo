@@ -316,7 +316,7 @@ Public Class Оплата
             dbl += CDbl(ds.Rows(i).Item(4).ToString)
         Next
         'Label24.Text = Math.Round(CDbl(Отчет.datatbl.Rows(0).Item(2).ToString) - dbl, 2) & " " & Отчет.datatbl.Rows(0).Item(3).ToString
-        Dim strsql1 As String
+        'Dim strsql1 As String
 
         'If кто = "Перевозчик" Then
         '    strsql1 = "UPDATE РейсыПеревозчика SET ОстатокОплаты='" & CType(Math.Round(CDbl(Отчет.datatbl.Rows(0).Item(2).ToString) - dbl, 2), String) & "' WHERE Код=" & Отчет.datatbl.Rows(0).Item(0) & ""

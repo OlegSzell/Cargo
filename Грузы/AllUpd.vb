@@ -240,8 +240,6 @@
         Await Task.Run(Sub() ПаролиAll())
     End Sub
 
-
-    <Obsolete>
     Public Sub ПаролиAll()
 
 

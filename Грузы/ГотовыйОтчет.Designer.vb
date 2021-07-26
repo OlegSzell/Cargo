@@ -32,13 +32,13 @@ Partial Class ГотовыйОтчет
         Me.ListBox1 = New System.Windows.Forms.ListBox()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.Button2 = New System.Windows.Forms.Button()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Grid1 = New Грузы.DoubleBuferGrid()
         Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
+        Me.Button4 = New System.Windows.Forms.Button()
+        Me.Label4 = New System.Windows.Forms.Label()
         CType(Me.Grid1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -107,24 +107,6 @@ Partial Class ГотовыйОтчет
         Me.Button2.Text = "Открыть XML"
         Me.Button2.UseVisualStyleBackColor = True
         '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(455, 15)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(61, 18)
-        Me.Label3.TabIndex = 8
-        Me.Label3.Text = "Период:"
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(522, 15)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(16, 18)
-        Me.Label4.TabIndex = 9
-        Me.Label4.Text = "С"
-        '
         'CheckBox1
         '
         Me.CheckBox1.AutoSize = True
@@ -178,17 +160,37 @@ Partial Class ГотовыйОтчет
         Me.ProgressBar1.Size = New System.Drawing.Size(320, 23)
         Me.ProgressBar1.TabIndex = 13
         '
+        'Button4
+        '
+        Me.Button4.BackColor = System.Drawing.Color.Silver
+        Me.Button4.Location = New System.Drawing.Point(39, 124)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(119, 31)
+        Me.Button4.TabIndex = 14
+        Me.Button4.Text = "Рейсы"
+        Me.Button4.UseVisualStyleBackColor = False
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(702, 15)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(48, 18)
+        Me.Label4.TabIndex = 15
+        Me.Label4.Text = "Label4"
+        '
         'ГотовыйОтчет
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 18.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackColor = System.Drawing.Color.DarkKhaki
         Me.ClientSize = New System.Drawing.Size(1082, 543)
+        Me.Controls.Add(Me.Label4)
+        Me.Controls.Add(Me.Button4)
         Me.Controls.Add(Me.ProgressBar1)
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.CheckBox1)
-        Me.Controls.Add(Me.Label4)
-        Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Grid1)
         Me.Controls.Add(Me.ListBox1)
@@ -219,10 +221,10 @@ Partial Class ГотовыйОтчет
     Friend WithEvents Grid1 As DoubleBuferGrid
     Friend WithEvents OpenFileDialog1 As OpenFileDialog
     Friend WithEvents Button2 As Button
-    Friend WithEvents Label3 As Label
-    Friend WithEvents Label4 As Label
     Friend WithEvents CheckBox1 As CheckBox
     Friend WithEvents Label5 As Label
     Friend WithEvents Button3 As Button
     Friend WithEvents ProgressBar1 As ProgressBar
+    Friend WithEvents Button4 As Button
+    Friend WithEvents Label4 As Label
 End Class

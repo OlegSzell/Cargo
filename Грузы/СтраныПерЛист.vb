@@ -23,7 +23,7 @@ Public Class СтраныПерЛист
 
             Exit Sub
         End If
-        Dim country As String
+        Dim country As String = String.Empty
         Dim i As Integer
         For i = 0 To ListBox1.SelectedItems.Count - 1
             country = ListBox1.SelectedItems(i).ToString & ", " & country

@@ -35,7 +35,7 @@ Public Class ДобавитьПеревозчика
     End Sub
     Private Sub comb2()
         'Dim ds As DataTable
-        Dim StrSql As String
+        Dim StrSql As String = String.Empty
         If ComboBox2.InvokeRequired Then
             Me.Invoke(New comb22(AddressOf comb2))
         Else
@@ -136,13 +136,13 @@ Public Class ДобавитьПеревозчика
             Exit Sub
         End If
 
-        Dim country As String
+        Dim country As String = String.Empty
         Dim i As Integer
         For i = 0 To ListBox1.SelectedItems.Count - 1
             country = ListBox1.SelectedItems(i).ToString & ", " & country
         Next
         country = Strings.Left(country, country.Length - 2)
-        Dim country2 As String
+        Dim country2 As String = String.Empty
         Dim i2 As Integer
         If Not ListBox2.SelectedIndex = -1 Then
             For i2 = 0 To ListBox2.SelectedItems.Count - 1

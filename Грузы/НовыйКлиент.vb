@@ -414,7 +414,7 @@ Public Class НовыйКлиент
 
 
         Dim расч As New List(Of String)() From {RichTextBox6.Text, RichTextBox5.Text, RichTextBox4.Text, RichTextBox9.Text}
-        Dim готрасч As String
+        Dim готрасч As String = String.Empty
         For i As Integer = 0 To расч.Count - 1
             If расч(i) <> "" Then
                 готрасч = готрасч & ", IBAN - " & расч(i)

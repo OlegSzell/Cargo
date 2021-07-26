@@ -160,7 +160,7 @@ Public Class ПечатьРейсы
         If CheckBox1.Checked = True Or CheckBox2.Checked = True Or CheckBox3.Checked = True Or CheckBox4.Checked = True Or CheckBox7.Checked = True Then
             Dim xlapp As Microsoft.Office.Interop.Excel.Application
             Dim xlworkbook As Microsoft.Office.Interop.Excel.Workbook
-            Dim xlworksheet As Microsoft.Office.Interop.Excel.Worksheet
+            Dim xlworksheet As New Microsoft.Office.Interop.Excel.Worksheet
             'Dim misvalue As Object = Reflection.Missing.Value
             xlapp = New Microsoft.Office.Interop.Excel.Application With {
                 .Visible = False

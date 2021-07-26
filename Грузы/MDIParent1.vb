@@ -626,13 +626,43 @@ Public Class MDIParent1
         End If
 
     End Sub
+    Private Property Colc As Integer = 0
 
     Private Sub ОтчетToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ОтчетToolStripMenuItem1.Click
         If ActiveMdiChild IsNot Nothing Then
             ActiveMdiChild.Close()
         End If
-        Dim f As New ГотовыйОтчет
-        f.Show()
+
+        If Colc >= 3 Then Return
+
+        Dim str = InputBox("Введите текст:")
+        Colc += 1
+        If str.Length > 0 Then
+            Dim f2 As String
+            Using db As New DbAllDataContext(_cn3)
+                f2 = (From x In db.Пароли
+                      Where x.Код = 4
+                      Select x.Парол).FirstOrDefault()
+            End Using
+            If f2 = str Then
+                Colc = 0
+                Dim f As New ГотовыйОтчет
+                f.Show()
+            Else
+                If Colc = 1 Then
+                    MessageBox.Show("Осталось две попытки!", Рик)
+
+                ElseIf Colc = 2 Then
+                    MessageBox.Show("Осталось одна попытка!", Рик)
+
+                Else
+                    MessageBox.Show("Вы заблокированы!", Рик)
+
+                End If
+            End If
+        End If
+
+
 
     End Sub
 
