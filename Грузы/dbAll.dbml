@@ -1,12 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Rickmans" Class="DbAllDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=srv\sqlexpress;Initial Catalog=Rickmans;Persist Security Info=True;User ID=sa" SettingsObjectName="Грузы.My.MySettings" SettingsPropertyName="RickmansConnectionString2" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.EmailTb" Member="EmailTb">
-    <Type Name="EmailTb">
-      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Addres" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="Pass" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-    </Type>
-  </Table>
+  <Connection Mode="AppSettings" ConnectionString="Data Source=SRV\SQLEXPRESS;Initial Catalog=Rickmans;User ID=Rickmans" SettingsObjectName="Грузы.My.MySettings" SettingsPropertyName="RickmansConnectionString3" Provider="System.Data.SqlClient" />
   <Table Name="dbo.SkypeКлиентПредложение" Member="SkypeКлиентПредложение">
     <Type Name="SkypeКлиентПредложение">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -668,6 +661,15 @@
       <Column Name="Код" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Организация" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="Примечание" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.EmailTb" Member="EmailTb">
+    <Type Name="EmailTb">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Addres" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Pass" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="NameComp" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="PassHas" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
     </Type>
   </Table>
 </Database>

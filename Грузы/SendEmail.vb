@@ -96,5 +96,25 @@ Public Class SendEmail
             MessageBox.Show("Ошибка передачи " & ex.ToString)
         End Try
     End Sub
+    Public Sub SendRnb(d As String, _to As String)
+        Dim oMail As New SmtpMail("TryIt")
+        Dim oSmtp As New SmtpClient()
+        oMail.From = EmailPass(0).Addres
+        oMail.To = _to
+        oMail.Subject = "Введите данные в поле 'Подтверждения'"
+        oMail.TextBody = d
+        Dim oServer As New SmtpServer("")
+        oServer.Server = "smtp.yandex.ru"
+        oServer.User = EmailPass(0).Addres
+        oServer.Password = EmailPass(0).Pass
+        oServer.Port = 465
+        oServer.ConnectType = SmtpConnectType.ConnectSSLAuto 'если требуется обязательно ssl
+        Try
+            oSmtp.SendMail(oServer, oMail)
+            'MessageBox.Show("Письмо отправлено!", Рик)
+        Catch ex As Exception
+            MessageBox.Show("Ошибка передачи " & ex.ToString)
+        End Try
+    End Sub
 
 End Class

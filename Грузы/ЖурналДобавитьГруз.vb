@@ -247,6 +247,7 @@
 
         Dim f7 As New ЖурналДата
         Dim f As IDNaz = ComboBox1.SelectedItem
+
         Using db As New dbAllDataContext(_cn3)
             Dim f1 = db.ЖурналДата.Where(Function(x) x.Дата = Label2.Text).Select(Function(x) x).FirstOrDefault()
             If f1 Is Nothing Then
@@ -288,9 +289,11 @@
             db.ЖурналКлиентГруз.InsertOnSubmit(f3)
             db.SubmitChanges()
 
-            Dim f4 As New List(Of ЖурналКлиентМаршрут)
+
+
             For Each b In Grid2All
                 Dim f5 As New ЖурналКлиентМаршрут
+                Dim f6 As New ЖурналКлиентДаты
                 With f5
                     .КодЖурналКлиентГруз = f3.Код
                     .Клиент = f.Naz
@@ -305,12 +308,22 @@
                     .Ставка = b.Ставка
                     .EX = b.EX
                     .ДополнитИнформация = b.ДополнитИнформация
+                    .Экспедитор = Экспедитор
+                    With f6
+                        .IDЖурналКлиентГруз = f3.Код
+                        .ДатаЗагрузки = MaskedTextBox1.Text
+                        .ДатаДоставки = MaskedTextBox2.Text
+                        .Ставка = b.Ставка
+                        .ДопУсловия = b.ДополнитИнформация
+                        .Состояние = "Актуально! " & DateTime.Now.ToShortDateString
+                    End With
 
                 End With
-                f4.Add(f5)
+                db.ЖурналКлиентМаршрут.InsertOnSubmit(f5)
+                db.ЖурналКлиентДаты.InsertOnSubmit(f6)
+                db.SubmitChanges()
             Next
-            db.ЖурналКлиентМаршрут.InsertAllOnSubmit(f4)
-            db.SubmitChanges()
+
         End Using
         Dim mo As New AllUpd
         mo.ЖурналДатаAllAsync()
@@ -698,9 +711,11 @@
                 End If
 
 
-                Dim f8 As New List(Of ЖурналКлиентМаршрут) 'добавляем новые данные
+
                 For Each b In Grid2All
                     Dim f9 As New ЖурналКлиентМаршрут
+                    Dim f11 As New ЖурналКлиентДаты
+
                     With f9
                         .КодЖурналКлиентГруз = com2sell.КодЖурнГруз
                         .Клиент = f.Naz
@@ -715,12 +730,23 @@
                         .Ставка = b.Ставка
                         .EX = b.EX
                         .ДополнитИнформация = b.ДополнитИнформация
+                        .Экспедитор = Экспедитор
+
+                        With f11
+                            .IDЖурналКлиентГруз = com2sell.КодЖурнГруз
+                            .ДатаЗагрузки = MaskedTextBox1.Text
+                            .ДатаДоставки = MaskedTextBox2.Text
+                            .Ставка = b.Ставка
+                            .ДопУсловия = b.ДополнитИнформация
+                            .Состояние = "Актуально! " & DateTime.Now.ToShortDateString
+                        End With
 
                     End With
-                    f8.Add(f9)
+                    db.ЖурналКлиентДаты.InsertOnSubmit(f11)
+                    db.ЖурналКлиентМаршрут.InsertOnSubmit(f9)
+                    db.SubmitChanges()
                 Next
-                db.ЖурналКлиентМаршрут.InsertAllOnSubmit(f8)
-                db.SubmitChanges()
+
             End If
         End Using
         mo.ЖурналКлиентГрузAll()

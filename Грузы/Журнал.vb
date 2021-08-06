@@ -139,6 +139,7 @@ Public Class Журнал
     Private Sub Loaded()
         Me.MdiParent = MDIParent1
         Label1.Text = Now.Date
+
         ПредзагрузкаAsync()
 
         grd2DataAsync()
@@ -330,6 +331,7 @@ Public Class Журнал
                               Join y In AllClass.ЖурналКлиентМаршрут On x.Код Equals y.КодЖурналКлиентГруз
                               Join z In AllClass.ЖурналДата On z.Код Equals x.КодЖурналДата
                               Where x.Экспедитор = Экспедитор
+                              Order By x.ДатаЗагрузки Descending
                               Select x, y, z).ToList())
                   Group b By Keys = New With {Key b.x.Код, Key b.z.Дата,
                      Key .P = b.z.Дата & ": " & IIf(b.x.НаименованиеГруза Is Nothing, String.Empty, b.x.НаименованиеГруза) & ". Место загрузки: " & b.y.ГородПогрузки & " (" & b.y.СтранаПогрузки & " - " & b.y.СтранаВыгрузки & ")", Key b.x.Клиент}
@@ -407,45 +409,52 @@ Public Class Журнал
 
     End Sub
     Private Async Sub grd2DataAsync()
+
         Await Task.Run(Sub() grd2Data())
         bsgrid2.ResetBindings(False)
     End Sub
     Private Sub grd2Data()
-        Dim mo As New AllUpd
-        Do While AllClass.ЖурналДата Is Nothing
-            mo.ЖурналДатаAll()
-        Loop
-        Do While AllClass.ЖурналКлиентГруз Is Nothing
-            mo.ЖурналКлиентГрузAll()
-        Loop
-        Do While AllClass.ЖурналКлиентМаршрут Is Nothing
-            mo.ЖурналКлиентМаршрутAll()
-        Loop
 
-        Do While AllClass.ЖурналКлиентДаты Is Nothing
-            mo.ЖурналКлиентДатыAll()
-        Loop
+        Dim f1 As New List(Of Grid2ЖурналClass)
 
-        Dim f = (From x In AllClass.ЖурналДата
-                 Join y In AllClass.ЖурналКлиентГруз On x.Код Equals y.КодЖурналДата
-                 Join z In AllClass.ЖурналКлиентМаршрут On y.Код Equals z.КодЖурналКлиентГруз
-                 Where y.Экспедитор = Экспедитор
-                 Order By x.Дата Descending
-                 Select x, y, z).ToList
+        Using db As New DbAllDataContext(_cn3)
+            'Dim f = From x In db.ЖурналДата
+            '        Join y In db.ЖурналКлиентГруз On x.Код Equals y.КодЖурналДата
+            '        Join z In db.ЖурналКлиентМаршрут On y.Код Equals z.КодЖурналКлиентГруз
+            '        Where y.Экспедитор = Экспедитор
+            '        Order By x.Дата Descending
+            '        Select x, y, z
 
-        Dim f1 = (From x In f
+            f1 = (From x In ((From x In db.ЖурналДата
+                              Join y In db.ЖурналКлиентГруз On x.Код Equals y.КодЖурналДата
+                              Join z In db.ЖурналКлиентМаршрут On y.Код Equals z.КодЖурналКлиентГруз
+                              Where y.Экспедитор = Экспедитор
+                              Order By x.Дата Descending
+                              Select x, y, z).ToList)
                   Group x By Keys = New With {Key x.y.Клиент, Key x.x.Дата, Key x.y.ДатаЗагрузки, Key x.y.НаименованиеГруза}
-                      Into Group
+                          Into Group
                   Select New Grid2ЖурналClass With {.Клиент = Keys.Клиент, .СтранаПогрузки = Group(0).z.СтранаПогрузки, .СтранаВыгрузки = Group(0).z.СтранаВыгрузки, .КодЖурналГруз = Group(0).y.Код, .Дата = Keys.Дата, .ДатаЗагрузки = IIf(Keys.ДатаЗагрузки Is Nothing, Nothing, Keys.ДатаЗагрузки), .Груз = Keys.НаименованиеГруза, .ВсплывПримеч = Group(0).y.ДополнитИнформация, .Состояние = Group(0).y.РезультатРаботы,
-                     .МаршрутList = (From p In Group
-                                     Select "(" & p.z.СтранаПогрузки & ") " & p.z.ГородПогрузки & " - " & "(" & p.z.СтранаВыгрузки & ") " & p.z.ГородВыгрузки).ToList()}).ToList()
+                         .МаршрутList = (From p In Group
+                                         Select "(" & p.z.СтранаПогрузки & ") " & p.z.ГородПогрузки & " - " & "(" & p.z.СтранаВыгрузки & ") " & p.z.ГородВыгрузки).ToList()}).ToList()
+
+
+        End Using
+
+        Dim Rd As New List(Of ЖурналКлиентДаты)
+
+        Using db As New DbAllDataContext(_cn3)
+            Rd = (From x In db.ЖурналКлиентДаты
+                  Where x.Состояние IsNot Nothing
+                  Select x).ToList()
+        End Using
+
+
+        Dim mf1 As New List(Of Grid2ЖурналClass)
 
 
 
-        If Grid2all IsNot Nothing Then
-            Grid2all.Clear()
-        End If
-        Dim i As Integer = 1
+
+
         For Each b In f1
             Dim k As String = Nothing
             For Each b1 In b.МаршрутList
@@ -460,35 +469,39 @@ Public Class Журнал
             Next
 
 
+            Dim f4 = (From x In Rd
+                      Where x.IDЖурналКлиентГруз = b.КодЖурналГруз And x.Состояние.ToUpper.Contains("АКТУАЛЬНО".ToUpper)
+                      Select x).ToList()
 
 
-            Dim f3 As New Grid2ЖурналClass
-            Dim f4 = (From x In AllClass.ЖурналКлиентГруз
-                      Join y In AllClass.ЖурналКлиентДаты On x.Код Equals y.IDЖурналКлиентГруз
-                      Where x.Код = b.КодЖурналГруз And y.Состояние?.ToUpper.Contains("АКТУАЛЬНО".ToUpper)
-                      Select y).ToList()
 
-            If f4 IsNot Nothing Then
-                If f4.Count > 0 Then
-                    For Each b2 In f4
-                        f3 = New Grid2ЖурналClass With {.Дата = b.Дата, .ДатаЗагрузки = "Загр.-" & b2.ДатаЗагрузки & vbCrLf & "Выгр.-" & b2.ДатаДоставки,
+
+            For Each b2 In (From x In Rd
+                            Where x.IDЖурналКлиентГруз = b.КодЖурналГруз And x.Состояние.ToUpper.Contains("АКТУАЛЬНО".ToUpper)
+                            Select x).ToList()
+
+                Dim f3 As New Grid2ЖурналClass With {.Дата = b.Дата, .ДатаЗагрузки = "Загр.-" & b2.ДатаЗагрузки & vbCrLf & "Выгр.-" & b2.ДатаДоставки,
                     .Клиент = b.Клиент, .Страны = k, .Груз = b.Груз, .КодЖурналГруз = b.КодЖурналГруз, .ВсплывПримеч = b2.ДопУсловия,
                     .Состояние = b2.Состояние, .Города = b2.ДопУсловия, .IdКодЖурнДаты = b2.ID, .Инфо = "i", .Ставка = b2.Ставка}
 
-                        Grid2all.Add(f3)
-                    Next
-                End If
-            End If
+                mf1.Add(f3)
+
+            Next
+
         Next
 
-        Dim mf = Grid2all.OrderBy(Function(x) x.Клиент).ToList()
-        Grid2all.Clear()
 
-        For Each t In mf
+        If Grid2all IsNot Nothing Then
+            Grid2all.Clear()
+        End If
+
+        Dim i As Integer = 1
+        For Each t In mf1.OrderBy(Function(x) x.ДатаЗагрузки)
             t.Номер = i
             Grid2all.Add(t)
             i += 1
         Next
+
     End Sub
     'Private Async Sub Grid2MetAsync()
     '    Await Task.Run(Sub() Grid2Met())
@@ -497,6 +510,7 @@ Public Class Журнал
 
         bsgrid2.DataSource = Grid2all
         Grid2.DataSource = bsgrid2
+
         GridView(Grid2)
         Grid2.Columns(0).Width = 30
         Grid2.Columns(1).Width = 80
@@ -576,7 +590,9 @@ Public Class Журнал
     End Sub
 
     Private Sub ComboBox1_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles ComboBox1.SelectionChangeCommitted
+
         Dim f2 As IDNaz = ComboBox1.SelectedItem
+
         If CheckBox6.Checked = True Then Return
         Dim f = comALLS.Where(Function(x) x.СписокДат = f2.Naz).Select(Function(x) x.Организации).Distinct.ToList()
         If com2All IsNot Nothing Then
@@ -1562,7 +1578,10 @@ Public Class Журнал
         If e.Button = MouseButtons.Right Then
             ContextMenuStrip2.Show(MousePosition, ToolStripDropDownDirection.Right)
             Dim k = TryCast(sender, DataGridView)
-            Grid2Clic = Grid2all.ElementAt(k.CurrentCell.RowIndex)
+            If k.CurrentCell IsNot Nothing Then
+                Grid2Clic = Grid2all.ElementAt(k.CurrentCell.RowIndex)
+            End If
+
         End If
     End Sub
 

@@ -240,13 +240,13 @@ Partial Class MDIParent1
         'StartToolStripMenuItem
         '
         Me.StartToolStripMenuItem.Name = "StartToolStripMenuItem"
-        Me.StartToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.StartToolStripMenuItem.Size = New System.Drawing.Size(98, 22)
         Me.StartToolStripMenuItem.Text = "Start"
         '
         'StopToolStripMenuItem
         '
         Me.StopToolStripMenuItem.Name = "StopToolStripMenuItem"
-        Me.StopToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.StopToolStripMenuItem.Size = New System.Drawing.Size(98, 22)
         Me.StopToolStripMenuItem.Text = "Stop"
         '
         'РейсToolStripMenuItem

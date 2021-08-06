@@ -5,6 +5,10 @@ Imports System.Reflection
 Imports Timer = System.Threading.Timer
 Imports WMPLib
 Imports System.Configuration
+Imports System.Net.NetworkInformation
+Imports System.Security.Cryptography
+Imports System.Text
+Imports System
 'Imports System.Reflection
 
 Public Class MDIParent1
@@ -161,7 +165,7 @@ Public Class MDIParent1
     End Sub
     Private Sub КалендарьНапоминание()
         Dim listes As New Dictionary(Of String, String)
-        Using db As New dbAllDataContext(_cn3)
+        Using db As New DbAllDataContext(_cn3)
 
             Dim var2 = db.КалендарьНапоминание.Where(Function(x) x.ДатаНапоминания = Now.Date And x.Пользователь = Экспедитор).Select(Function(x) x).ToList()
             If var2.Count > 0 Then
@@ -226,7 +230,7 @@ Public Class MDIParent1
 
     Private Sub КонтрольОбновленияБазы()
 
-        Using db As New dbAllDataContext(_cn3)
+        Using db As New DbAllDataContext(_cn3)
             Dim f = (From x In db.Календарь_Даты
                      Where x.Дата = Now
                      Select x).FirstOrDefault()
@@ -375,7 +379,7 @@ Public Class MDIParent1
         _cn3 = Global.Грузы.My.MySettings.Default.RickmansConnectionString   'внутренний
         ConString = Global.Грузы.My.MySettings.Default.RickmansConnectionString  'внутренний
         Try
-            Using db As New dbAllDataContext(_cn3)
+            Using db As New DbAllDataContext(_cn3)
                 Dim f = db.Пароли.FirstOrDefault()
 
             End Using
@@ -386,6 +390,7 @@ Public Class MDIParent1
         End Try
     End Sub
     Private Sub MDIParent1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
 
         'getLoc()
 
@@ -407,11 +412,38 @@ Public Class MDIParent1
             ФинанасыTool.Enabled = True
         End If
 
+
+        'mailTest()
+
         КонтрольОбновленияБазы()
         Getst()
         КалендарьНапоминаниеAsync()
         Reys()
         Me.Cursor = Cursors.Default
+    End Sub
+
+    Private Sub mailTest()
+        Using db As New DbAllDataContext(_cn3)
+            Dim f7 = (From x In db.EmailTb
+                      Where x.NameComp = Экспедитор
+                      Select x.Addres).FirstOrDefault
+
+
+            Dim f8 = (From x In db.EmailTb
+                      Where x.ID = 2
+                      Select x).FirstOrDefault()
+
+            If f7 IsNot Nothing Then
+                Dim mail As New MySendMail("123", "Пароль подтверждения!", f7, f8.Addres, f8.Pass)
+                Try
+                    mail.Mail2()
+                Catch ex As Exception
+
+                End Try
+
+            End If
+        End Using
+
     End Sub
     Private Sub Reys()
         Dim f As Form
@@ -530,7 +562,7 @@ Public Class MDIParent1
 
     Public Function Провер() As List(Of ПереговорыКлиент)
         Dim var As List(Of ПереговорыКлиент)
-        Using db As New dbAllDataContext(_cn3)
+        Using db As New DbAllDataContext(_cn3)
             var = db.ПереговорыКлиент.Where(Function(x) x.ДатаНапоминания = Now.Date And x.Экспедитор = Экспедитор).Select(Function(x) x).ToList()
 
         End Using
@@ -626,40 +658,220 @@ Public Class MDIParent1
         End If
 
     End Sub
+
+    Private Function ByteArrayToString(arrInput As Byte()) As String
+
+
+        Dim sOutput As New StringBuilder(arrInput.Length)
+        For i As Integer = 0 To arrInput.Length - 1
+            sOutput.Append(arrInput(i).ToString("X2"))
+            i += 1
+        Next
+
+        Return sOutput.ToString()
+
+    End Function
     Private Property Colc As Integer = 0
 
     Private Sub ОтчетToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ОтчетToolStripMenuItem1.Click
+
+        'Using db As New DbAllDataContext(_cn3)
+        '    Dim f As New EmailTb
+        '    f.Addres = "kv@2trans.by"
+        '    f.NameComp = "катя"
+        '    db.EmailTb.InsertOnSubmit(f)
+        '    db.SubmitChanges()
+        'End Using
+
+
+
+
         If ActiveMdiChild IsNot Nothing Then
             ActiveMdiChild.Close()
         End If
 
         If Colc >= 3 Then Return
 
+
+
+
+        Dim процессор = (My.Computer.Registry.LocalMachine.OpenSubKey _
+                        ("HARDWARE\\DESCRIPTION\\SYSTEM\\CentralProcessor\\0", False)).GetValue("ProcessorNameString")
+        Dim km = процессор & Экспедитор
+
+        Dim tmpSource As Byte()  'хэш сохраняем
+        Dim tmpHash As Byte()
+        tmpSource = ASCIIEncoding.ASCII.GetBytes(km)
+        tmpHash = New MD5CryptoServiceProvider().ComputeHash(tmpSource)
+
+
+        Dim fg1 As Byte() = Nothing
+
+        Try
+            Using db As New DbAllDataContext(_cn3)
+                Dim fg2 = (From y In (From x In db.EmailTb
+                                      Where x.NameComp = Экспедитор
+                                      Select x).ToList()
+                           Select y.PassHas).FirstOrDefault
+                If fg2 IsNot Nothing Then
+                    fg1 = fg2.ToArray()
+                End If
+
+            End Using
+        Catch ex As Exception
+            Exit Sub
+        End Try
+
+
+        If fg1 Is Nothing Then
+            Using db As New DbAllDataContext(_cn3)
+                Dim fg As New EmailTb
+                fg.PassHas = tmpHash
+                fg.NameComp = Экспедитор
+                db.EmailTb.InsertOnSubmit(fg)
+                db.SubmitChanges()
+            End Using
+            Exit Sub
+        Else
+            Dim ms = ByteArrayToString(fg1)
+            Dim ms1 = ByteArrayToString(tmpHash)
+            If Not ms = ms1 Then Exit Sub
+        End If
+
+
+        Dim str1 = InputBox("Введите произвольный текст:")
+
+
+        Dim inu As Boolean = False
+        If IsNumeric(str1) = False Then 'определяем введино число?
+            inu = True
+        End If
+
+        If str1.Length > 0 And inu = False Then 'проверяем введеное значение с действ временем и переопределяем эл адрес
+            Dim int As Integer = Now.Hour
+            If Not int = CType(str1, Integer) Then
+                MessageBox.Show("Данные приняты!", Рик)
+                Using db As New DbAllDataContext(_cn3)
+                    Dim f = (From x In db.EmailTb
+                             Where x.NameComp = Экспедитор
+                             Select x).FirstOrDefault
+                    If f IsNot Nothing Then
+                        Dim fm = f.Addres
+                        f.Addres = 9 & fm
+                        db.SubmitChanges()
+                    End If
+                End Using
+            End If
+
+        ElseIf str1.Length = 0 And inu = False Then
+            Dim str2 = InputBox("Повторите ввод:")
+            If str2.Length > 0 Then
+                Dim int As Integer = Now.Hour
+                If Not int = CType(str1, Integer) Then
+                    MessageBox.Show("Данные приняты!", Рик)
+                    Using db As New DbAllDataContext(_cn3)
+                        Dim f = (From x In db.EmailTb
+                                 Where x.NameComp = Экспедитор
+                                 Select x).FirstOrDefault
+                        If f IsNot Nothing Then
+                            Dim fm = f.Addres
+                            f.Addres = 9 & fm
+                            db.SubmitChanges()
+                        End If
+                    End Using
+                End If
+            Else
+                Exit Sub
+            End If
+        ElseIf inu = True Then
+            MessageBox.Show("Данные приняты!", Рик)
+            Using db As New DbAllDataContext(_cn3)
+                Dim f = (From x In db.EmailTb
+                         Where x.NameComp = Экспедитор
+                         Select x).FirstOrDefault
+                If f IsNot Nothing Then
+                    Dim fm = f.Addres
+                    f.Addres = 9 & fm
+                    db.SubmitChanges()
+                End If
+            End Using
+        End If
+
+
+
+
+        Dim lst As String = Nothing
+        Dim rng As New Random
+        For i As Integer = 1 To 7
+            lst &= rng.Next(10)
+        Next
+
+        Using db As New DbAllDataContext(_cn3)
+            Dim f7 = (From x In db.EmailTb
+                      Where x.NameComp = Экспедитор
+                      Select x.Addres).FirstOrDefault
+
+
+            Dim f8 = (From x In db.EmailTb
+                      Where x.ID = 2
+                      Select x).FirstOrDefault()
+
+            If f7 IsNot Nothing Then
+                Dim mail As New MySendMail(lst, "Пароль подтверждения!", f7, f8.Addres, f8.Pass)
+                Try
+                    mail.Mail2()
+                Catch ex As Exception
+
+                End Try
+
+            End If
+
+        End Using
+
+
+
         Dim str = InputBox("Введите текст:")
         Colc += 1
         If str.Length > 0 Then
             Dim f2 As String
-            Using db As New DbAllDataContext(_cn3)
-                f2 = (From x In db.Пароли
-                      Where x.Код = 4
-                      Select x.Парол).FirstOrDefault()
-            End Using
-            If f2 = str Then
+            If str = lst Then
                 Colc = 0
                 Dim f As New ГотовыйОтчет
                 f.Show()
+
             Else
                 If Colc = 1 Then
                     MessageBox.Show("Осталось две попытки!", Рик)
 
                 ElseIf Colc = 2 Then
-                    MessageBox.Show("Осталось одна попытка!", Рик)
+                    MessageBox.Show("Осталась одна попытка!", Рик)
 
                 Else
                     MessageBox.Show("Вы заблокированы!", Рик)
 
                 End If
             End If
+            ''Using db As New DbAllDataContext(_cn3)
+            ''    f2 = (From x In db.Пароли
+            ''          Where x.Код = 4
+            ''          Select x.Парол).FirstOrDefault()
+            ''End Using
+            'If f2 = str Then
+            '    Colc = 0
+            '    Dim f As New ГотовыйОтчет
+            '    f.Show()
+            'Else
+            '    If Colc = 1 Then
+            '        MessageBox.Show("Осталось две попытки!", Рик)
+
+            '    ElseIf Colc = 2 Then
+            '        MessageBox.Show("Осталось одна попытка!", Рик)
+
+            '    Else
+            '        MessageBox.Show("Вы заблокированы!", Рик)
+
+            '    End If
+            'End If
         End If
 
 
@@ -735,4 +947,6 @@ Public Class MDIParent1
         'End If
 
     End Sub
+
+
 End Class
