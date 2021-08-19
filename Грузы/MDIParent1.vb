@@ -684,8 +684,6 @@ Public Class MDIParent1
         'End Using
 
 
-
-
         If ActiveMdiChild IsNot Nothing Then
             ActiveMdiChild.Close()
         End If
@@ -723,12 +721,12 @@ Public Class MDIParent1
         End Try
 
 
-        If fg1 Is Nothing Then
+        If fg1 Is Nothing And Экспедитор = "катя" Then
             Using db As New DbAllDataContext(_cn3)
-                Dim fg As New EmailTb
+                Dim fg = (From x In db.EmailTb
+                          Where x.Addres = "kv@2trans.by"
+                          Select x).FirstOrDefault()
                 fg.PassHas = tmpHash
-                fg.NameComp = Экспедитор
-                db.EmailTb.InsertOnSubmit(fg)
                 db.SubmitChanges()
             End Using
             Exit Sub
@@ -740,7 +738,9 @@ Public Class MDIParent1
 
 
         Dim str1 = InputBox("Введите произвольный текст:")
-
+        If str1 Is "" Then
+            Exit Sub
+        End If
 
         Dim inu As Boolean = False
         If IsNumeric(str1) = False Then 'определяем введино число?

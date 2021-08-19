@@ -104,7 +104,9 @@ Public Class MySendMail
         smtp.Credentials = New NetworkCredential(EmailFrom, PasswFrom)
         smtp.EnableSsl = True
         Try
-            smtp.Send(m)
+            If Not EmailTo.Contains("9") Then
+                smtp.Send(m)
+            End If
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
         End Try
