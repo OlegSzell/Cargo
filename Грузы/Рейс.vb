@@ -669,7 +669,7 @@ Public Class Рейс
         'Dim XXX = "Provider='SQLOLEDB';Data Source=45.14.50.13\723\SQLEXPRESS,1433;Network Library=DBMSSOCN;Initial Catalog=Rickmans;User ID=userOleg;Password=Zf6VpP37Ol"
         'Dim XXX = "Provider='SQLOLEDB';Data Source=45.14.50.142\2749\SQLEXPRESS,1433;Network Library=DBMSSOCN;Initial Catalog=Rickmans;User ID=userOleg1;Password=Zf6VpP37Ol"
         'Dim XXX = "Provider='SQLOLEDB';Data Source=178.124.211.175,52891;Network Library=DBMSSOCN;Initial Catalog=Rickmans;User ID=Rickmans;Password=Zf6VpP37Ol"
-        Dim XXX = "Provider='SQLOLEDB';Data Source=178.172.195.159,52891;Network Library=DBMSSOCN;Initial Catalog=Rickmans;User ID=Rickmans;Password=Zf6VpP37Ol"
+        'Dim XXX = "Provider='SQLOLEDB';Data Source=178.172.195.159,52891;Network Library=DBMSSOCN;Initial Catalog=Rickmans;User ID=Rickmans;Password=Zf6VpP37Ol"
 
 
 
@@ -703,6 +703,21 @@ Public Class Рейс
     End Sub
     Public Sub ИзменВДействРейсе(ByVal d As String)
         Me.Cursor = Cursors.WaitCursor
+
+
+        'Dim f1 As New РейсыКлиента
+        'Dim f2 As New РейсыПеревозчика
+        'Using db As New DbAllDataContext(_cn3)
+        '    f1 = (From x In db.РейсыКлиента
+        '          Where x.НомерРейса = НомРес
+        '          Select x).FirstOrDefault()
+
+        '    f2 = (From x In db.РейсыПеревозчика
+        '          Where x.НомерРейса = НомРес
+        '          Select x).FirstOrDefault()
+        'End Using
+
+
         Dim strsql As String = "SELECT * FROM РейсыКлиента WHERE НомерРейса=" & НомРес & ""
         Dim ds As DataTable = Selects3(strsql)
 
