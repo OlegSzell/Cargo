@@ -1279,6 +1279,66 @@ Public Class ГотовыйОтчет
             Next
         End Using
 
+        Grid1.Columns(5).HeaderText = "Дата загрузки"
+
+        Dim mk As New Grid1Class With {.Клиент = "Итого", .дельта = sum}
+        grd1.Add(mk)
+        bsgrd1.ResetBindings(False)
+    End Sub
+
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+
+        If ComboBox1.Text.Length = 0 Or ComboBox2.Text.Length = 0 Then
+            Return
+        End If
+
+
+        Dim mo As New AllUpd
+        mo.РейсыПеревозчикаAll()
+
+
+        Dim comb = ComboBox2.SelectedIndex + 1
+        Dim sum As Double = 0
+
+        Dim m = CDate("01." & comb & "." & ComboBox1.Text)
+        Dim m2 = CDate(DateTime.DaysInMonth(ComboBox1.Text, comb) & "." & comb & "." & ComboBox1.Text)
+
+
+        If grd1.Count > 0 Then
+            grd1.Clear()
+        End If
+        Dim f3 As New List(Of Grid1Class)
+
+
+        Using db As New DbAllDataContext(_cn3)
+            Dim f = (From x In db.РейсыКлиента
+                     Order By x.НомерРейса
+                     Where x.ДатаОплаты >= m And x.ДатаОплаты <= m2
+                     Select x).ToList()
+
+            For Each b In f
+
+                f3.Add(New Grid1Class With {.дата_Загрузки = b.ДатаОплаты, .Клиент = b.НазвОрганизации,
+                               .маршрут = b.Маршрут, .номер_Рейса = b.НомерРейса, .ставка_Клиента = b.СтоимостьФрахта, .Перевозчик = (From x In AllClass.РейсыПеревозчика
+                                                                                                                                      Where x.НомерРейса = b.НомерРейса
+                                                                                                                                      Select x.НазвОрганизации).FirstOrDefault(), .ставка_Перевозчика = (From x In AllClass.РейсыПеревозчика
+                                                                                                                                                                                                         Where x.НомерРейса = b.НомерРейса
+                                                                                                                                                                                                         Select x.СтоимостьФрахта).FirstOrDefault(), .дельта = Math.Round(CType(Replace(.ставка_Клиента, ".", ",") - Replace(.ставка_Перевозчика, ".", ","), Double), 2)})
+
+            Next
+
+
+            Dim i As Integer = 1
+            For Each b In f3
+                b.Номер = i
+                i += 1
+                sum += CDbl(b.дельта)
+                grd1.Add(b)
+            Next
+        End Using
+
+
+        Grid1.Columns(5).HeaderText = "Дата оплаты"
         Dim mk As New Grid1Class With {.Клиент = "Итого", .дельта = sum}
         grd1.Add(mk)
         bsgrd1.ResetBindings(False)

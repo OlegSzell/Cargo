@@ -289,6 +289,20 @@ Public Class НовыйПеревоз
             .Item("ПЭ12").Range.Text = РасчетнСчет(d)
 
 
+            If Now > CDate("10.10.2021") Then
+                .Item("ПЭ13").Range.Text = FaceNew
+                .Item("ПЭ14").Range.Text = OsnNew
+                .Item("ПЭ15").Range.Text = DoljNews
+                .Item("ПЭ16").Range.Text = NameNews
+                '.Item("ПЭ17").Range.Text = TypeNews
+
+                'Else
+                '    .Item("ПЭ13").Range.Text = FaceOld
+                '    .Item("ПЭ14").Range.Text = OsnOld
+                '    .Item("ПЭ15").Range.Text = DoljOld
+                '    .Item("ПЭ16").Range.Text = NameOld
+            End If
+
         End With
 
 
@@ -308,7 +322,15 @@ Public Class НовыйПеревоз
 
         oWordDoc.Close(True)
         oWord.Quit(True)
-        ПечатьДоков(СохрЗак, CType(ComboBox3.Text, Integer))
+
+        If MessageBox.Show("Печатать договор?", Рик, MessageBoxButtons.OKCancel, MessageBoxIcon.Question) = DialogResult.OK Then
+            ПечатьДоков(СохрЗак, CType(ComboBox3.Text, Integer))
+        End If
+
+
+
+
+
 
     End Sub
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
@@ -563,6 +585,20 @@ Public Class НовыйПеревоз
             .Item("П8").Range.Text = RichTextBox13.Text
             .Item("П9").Range.Text = ФИОКорРук(RichTextBox12.Text, False)
             .Item("П11").Range.Text = РасчетнСчет(d)
+
+            If Now > CDate("10.10.2021") Then
+                .Item("П16").Range.Text = FaceNew
+                .Item("П17").Range.Text = OsnNew
+                .Item("П18").Range.Text = DoljNews
+                .Item("П19").Range.Text = NameNews
+                '.Item("П20").Range.Text = TypeNews
+
+                'Else
+                '    .Item("П16").Range.Text = FaceOld
+                '    .Item("П17").Range.Text = OsnOld
+                '    .Item("П18").Range.Text = DoljOld
+                '    .Item("П19").Range.Text = NameOld
+            End If
 
             'If CheckBox3.Checked = False And CheckBox2.Checked = False Then
             '    .Item("Кл12").Range.Text = ""

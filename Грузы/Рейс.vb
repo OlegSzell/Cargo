@@ -2920,39 +2920,41 @@ Public Class Рейс
         xlapp.Workbooks(ПутьРейса).Worksheets("ЗАК").Range("L4").CopyFromRecordset(RS2)
         xlapp.Workbooks(ПутьРейса).Worksheets("ЗАК").Range("L5").CopyFromRecordset(RS3)
 
-        If CDate(MaskedTextBox1.Text) < CDate("17.02.2021") Then  'смена управляющего на директора
 
-            Dim kp = "Управляющий: ИП Шелягович О.Н."
-            Dim kp1 = "ООО ""Рикманс""  в лице управляющего:" & vbCrLf & "ИП Шелягович О.Н. и"
-            xlapp.Workbooks(ПутьРейса).Worksheets("ЗАК").Range("B34") = kp
-            xlapp.Workbooks(ПутьРейса).Worksheets("СФ").Range("A22") = kp
-            If Not ДатаАкта = Nothing Then
-                If ДатаАкта < CDate("17.02.2021") Then
-                    xlapp.Workbooks(ПутьРейса).Worksheets("АКТ").Range("A31") = kp
-                    xlapp.Workbooks(ПутьРейса).Worksheets("АКТ").Range("K3") = kp1
-                Else
-                    Dim kp2 = "Директор: Шелягович О.Н."
-                    Dim kp3 = "ООО ""Рикманс""  в лице директора:" & vbCrLf & "Шелягович О.Н. и"
-                    xlapp.Workbooks(ПутьРейса).Worksheets("АКТ").Range("A31") = kp2
-                    xlapp.Workbooks(ПутьРейса).Worksheets("АКТ").Range("K3") = kp3
-                End If
-            Else
-                xlapp.Workbooks(ПутьРейса).Worksheets("АКТ").Range("A31") = kp
-                xlapp.Workbooks(ПутьРейса).Worksheets("АКТ").Range("K3") = kp1
-            End If
+        'смена управляющего на директора
+        'If CDate(MaskedTextBox1.Text) < CDate("17.02.2021") Then  
+
+        '    Dim kp = "Управляющий: ИП Шелягович О.Н."
+        '    Dim kp1 = "ООО ""Рикманс""  в лице управляющего:" & vbCrLf & "ИП Шелягович О.Н. и"
+        '    xlapp.Workbooks(ПутьРейса).Worksheets("ЗАК").Range("B34") = kp
+        '    xlapp.Workbooks(ПутьРейса).Worksheets("СФ").Range("A22") = kp
+        '    If Not ДатаАкта = Nothing Then
+        '        If ДатаАкта < CDate("17.02.2021") Then
+        '            xlapp.Workbooks(ПутьРейса).Worksheets("АКТ").Range("A31") = kp
+        '            xlapp.Workbooks(ПутьРейса).Worksheets("АКТ").Range("K3") = kp1
+        '        Else
+        '            Dim kp2 = "Директор: Шелягович О.Н."
+        '            Dim kp3 = "ООО ""Рикманс""  в лице директора:" & vbCrLf & "Шелягович О.Н. и"
+        '            xlapp.Workbooks(ПутьРейса).Worksheets("АКТ").Range("A31") = kp2
+        '            xlapp.Workbooks(ПутьРейса).Worksheets("АКТ").Range("K3") = kp3
+        '        End If
+        '    Else
+        '        xlapp.Workbooks(ПутьРейса).Worksheets("АКТ").Range("A31") = kp
+        '        xlapp.Workbooks(ПутьРейса).Worksheets("АКТ").Range("K3") = kp1
+        '    End If
 
 
-            xlapp.Workbooks(ПутьРейса).Worksheets("ПЕР").Range("B41") = kp
-        Else
+        '    xlapp.Workbooks(ПутьРейса).Worksheets("ПЕР").Range("B41") = kp
+        'Else
 
-            Dim kp = "Директор: Шелягович О.Н."
-            Dim kp1 = "ООО ""Рикманс""  в лице директора:" & vbCrLf & "Шелягович О.Н. и"
-            xlapp.Workbooks(ПутьРейса).Worksheets("ЗАК").Range("B34") = kp
-            xlapp.Workbooks(ПутьРейса).Worksheets("СФ").Range("A22") = kp
-            xlapp.Workbooks(ПутьРейса).Worksheets("АКТ").Range("A31") = kp
-            xlapp.Workbooks(ПутьРейса).Worksheets("АКТ").Range("K3") = kp1
-            xlapp.Workbooks(ПутьРейса).Worksheets("ПЕР").Range("B41") = kp
-        End If
+        '    Dim kp = "Директор: Шелягович О.Н."
+        '    Dim kp1 = "ООО ""Рикманс""  в лице директора:" & vbCrLf & "Шелягович О.Н. и"
+        '    xlapp.Workbooks(ПутьРейса).Worksheets("ЗАК").Range("B34") = kp
+        '    xlapp.Workbooks(ПутьРейса).Worksheets("СФ").Range("A22") = kp
+        '    xlapp.Workbooks(ПутьРейса).Worksheets("АКТ").Range("A31") = kp
+        '    xlapp.Workbooks(ПутьРейса).Worksheets("АКТ").Range("K3") = kp1
+        '    xlapp.Workbooks(ПутьРейса).Worksheets("ПЕР").Range("B41") = kp
+        'End If
 
 
         If zayvkaClienta IsNot Nothing Then 'если договор разовый или договор заявка клиента

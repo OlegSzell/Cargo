@@ -48,6 +48,16 @@ Module Module1
     Public КаленДаты As Календарь_Даты = Nothing
     Public Frec As New List(Of Object)
     Public _cn3 As String = String.Empty
+    Public NameOld As String = "Шелягович О.Н."
+    Public DoljOld As String = "Директор"
+    Public NameNews As String = "Вареник Ю.В."
+    Public DoljNews As String = "Главный бухгалтер"
+    Public TypeNews As String = "(действ. на осн. довер. №1 от 01.10.2021г)"
+    Public FaceOld As String = "директора Шеляговича Олега Николаевича."
+    Public OsnOld As String = "Устава"
+    Public FaceNew As String = "главного бухгалтера Вареник Юлии Владимировны."
+    Public OsnNew As String = "Доверенности №1 от 01.10.2021г."
+
 
 
 

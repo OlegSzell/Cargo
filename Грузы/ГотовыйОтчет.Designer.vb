@@ -39,6 +39,7 @@ Partial Class ГотовыйОтчет
         Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
         Me.Button4 = New System.Windows.Forms.Button()
         Me.Label4 = New System.Windows.Forms.Label()
+        Me.Button5 = New System.Windows.Forms.Button()
         CType(Me.Grid1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -89,7 +90,7 @@ Partial Class ГотовыйОтчет
         '
         Me.ListBox1.FormattingEnabled = True
         Me.ListBox1.ItemHeight = 18
-        Me.ListBox1.Location = New System.Drawing.Point(12, 208)
+        Me.ListBox1.Location = New System.Drawing.Point(12, 241)
         Me.ListBox1.Name = "ListBox1"
         Me.ListBox1.Size = New System.Drawing.Size(320, 220)
         Me.ListBox1.TabIndex = 5
@@ -120,7 +121,7 @@ Partial Class ГотовыйОтчет
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(9, 187)
+        Me.Label5.Location = New System.Drawing.Point(9, 220)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(111, 18)
         Me.Label5.TabIndex = 11
@@ -128,7 +129,7 @@ Partial Class ГотовыйОтчет
         '
         'Button3
         '
-        Me.Button3.Location = New System.Drawing.Point(213, 442)
+        Me.Button3.Location = New System.Drawing.Point(213, 475)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(119, 31)
         Me.Button3.TabIndex = 12
@@ -150,12 +151,12 @@ Partial Class ГотовыйОтчет
         Me.Grid1.ReadOnly = True
         DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.Grid1.RowsDefaultCellStyle = DataGridViewCellStyle1
-        Me.Grid1.Size = New System.Drawing.Size(705, 485)
+        Me.Grid1.Size = New System.Drawing.Size(705, 507)
         Me.Grid1.TabIndex = 6
         '
         'ProgressBar1
         '
-        Me.ProgressBar1.Location = New System.Drawing.Point(12, 497)
+        Me.ProgressBar1.Location = New System.Drawing.Point(12, 530)
         Me.ProgressBar1.Name = "ProgressBar1"
         Me.ProgressBar1.Size = New System.Drawing.Size(320, 23)
         Me.ProgressBar1.TabIndex = 13
@@ -163,7 +164,7 @@ Partial Class ГотовыйОтчет
         'Button4
         '
         Me.Button4.BackColor = System.Drawing.Color.Silver
-        Me.Button4.Location = New System.Drawing.Point(39, 124)
+        Me.Button4.Location = New System.Drawing.Point(12, 124)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(119, 31)
         Me.Button4.TabIndex = 14
@@ -179,12 +180,23 @@ Partial Class ГотовыйОтчет
         Me.Label4.TabIndex = 15
         Me.Label4.Text = "Label4"
         '
+        'Button5
+        '
+        Me.Button5.BackColor = System.Drawing.Color.Silver
+        Me.Button5.Location = New System.Drawing.Point(12, 161)
+        Me.Button5.Name = "Button5"
+        Me.Button5.Size = New System.Drawing.Size(119, 31)
+        Me.Button5.TabIndex = 16
+        Me.Button5.Text = "План оплат"
+        Me.Button5.UseVisualStyleBackColor = False
+        '
         'ГотовыйОтчет
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 18.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.DarkKhaki
-        Me.ClientSize = New System.Drawing.Size(1082, 543)
+        Me.ClientSize = New System.Drawing.Size(1082, 565)
+        Me.Controls.Add(Me.Button5)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Button4)
         Me.Controls.Add(Me.ProgressBar1)
@@ -227,4 +239,5 @@ Partial Class ГотовыйОтчет
     Friend WithEvents ProgressBar1 As ProgressBar
     Friend WithEvents Button4 As Button
     Friend WithEvents Label4 As Label
+    Friend WithEvents Button5 As Button
 End Class

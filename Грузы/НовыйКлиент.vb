@@ -481,6 +481,20 @@ Public Class НовыйКлиент
                 .Item("Кл13").Range.Text = "500 000 российских рублей."
             End If
 
+            If Now > CDate("10.10.2021") Then
+                .Item("Кл16").Range.Text = DoljNews
+                .Item("Кл17").Range.Text = NameNews
+                '.Item("Кл18").Range.Text = TypeNews
+                .Item("Кл19").Range.Text = FaceNew
+                .Item("Кл20").Range.Text = OsnNew
+
+                'Else
+                '    .Item("Кл16").Range.Text = DoljOld
+                '    .Item("Кл17").Range.Text = NameOld
+                '    .Item("Кл19").Range.Text = FaceOld
+                '    .Item("Кл20").Range.Text = OsnOld
+            End If
+
         End With
 
         Dim NumdeReysa As String = ds.Договор
