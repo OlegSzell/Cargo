@@ -2068,7 +2068,9 @@ Public Class Рейс
         'Dim ds As DataRow() = РейсыКлиента(НомРес)
         Dim ds As String
         Using db As New dbAllDataContext(_cn3)
-            ds = db.РейсыКлиента.Where(Function(x) x.НомерРейса = НомРес).Select(Function(x) x.НазвОрганизации).FirstOrDefault()
+            ds = (From x In db.РейсыКлиента
+                  Where x.НомерРейса = НомРес
+                  Select x.НазвОрганизации).FirstOrDefault()
             If ds Is Nothing Then Exit Sub
         End Using
 

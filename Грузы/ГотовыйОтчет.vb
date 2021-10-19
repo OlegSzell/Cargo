@@ -45,7 +45,7 @@ Public Class ГотовыйОтчет
     Private Sub ГотовыйОтчет_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.MdiParent = MDIParent1
 
-        Dim dat() As String = {Now.Year - 2, Now.Year - 1, Now.Year}
+        Dim dat() As String = {Now.Year - 2, Now.Year - 1, Now.Year, Now.Year + 1}
         ComboBox1.Items.Clear()
         ComboBox1.Items.AddRange(dat)
         ComboBox2.Items.Clear()
