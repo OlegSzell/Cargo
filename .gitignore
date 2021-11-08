@@ -338,3 +338,11 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+
+# My Exception
+Settings.Designer.vb
+Resources.resx
+App.config
+AppEFC.vb
+Module1.vb
+Settings.settings 
